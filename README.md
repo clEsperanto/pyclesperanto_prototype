@@ -25,7 +25,7 @@ from clesperanto import create
 from clesperanto import addImageAndScalar
 ```
 
-You can then push image to the GPU and create memory there:
+You can then push an image to the GPU and create memory there:
 ```python
 # push an array to the GPU
 flip = push(np.array([2, 4, 6, 8, 10, 12, 14, 16, 18, 20]))
@@ -34,7 +34,7 @@ flip = push(np.array([2, 4, 6, 8, 10, 12, 14, 16, 18, 20]))
 flop = create((10,))
 ```
 
-And then you can call method in the GPU without the need for learning OpenCL:
+And then you can call methods in the GPU without the need for learning OpenCL:
 
 ```python
 # add a constant to all pixels
