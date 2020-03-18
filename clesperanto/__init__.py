@@ -115,14 +115,14 @@ def execute(anchor, opencl_kernel_filename, kernel_name, global_size, parameters
                 defines = defines + '\n#define WRITE_' + key + '_IMAGE(a,b,c) write_buffer' + str(dimensions) + 'd' + typeId + '(GET_IMAGE_WIDTH(a),GET_IMAGE_HEIGHT(a),GET_IMAGE_DEPTH(a),a,b,c)'
 
             else:
-                print("other types than float32 aren't supported yet for images/buffers/arrays")
+                raise TypeError('other types than float32 aren`t supported yet for images/buffers/arrays')
         else:
             if (isinstance(value, int) ):
                 arguments.append(np.array([value], np.int))
             elif (isinstance(value, float)):
                 arguments.append(np.array([value], np.float32))
             else:
-                print("other types than float and int aren't supported yet for parameters")
+                raise TypeError('other types than float and int aren`t supported yet for parameters')
 
 
     defines = defines + '\n'
