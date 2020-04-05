@@ -105,15 +105,15 @@ def execute(anchor, opencl_kernel_filename, kernel_name, global_size, parameters
 
                 # positions (dimensionality) handling
                 if (value.ndim < 3):
-                    defines = defines + '\n#define POS_imagename_TYPE int2'
+                    defines = defines + '\n#define POS_' + key + '_TYPE int2'
                     if (value.ndim == 1):
-                        defines = defines + '\n#define POS_imagename_INSTANCE(pos0,pos1,pos2,pos3) (int2)(pos0, 0)'
+                        defines = defines + '\n#define POS_' + key + '_INSTANCE(pos0,pos1,pos2,pos3) (int2)(pos0, 0)'
                     else:
-                        defines = defines + '\n#define POS_imagename_INSTANCE(pos0,pos1,pos2,pos3) (int2)(pos0, pos1)'
+                        defines = defines + '\n#define POS_' + key + '_INSTANCE(pos0,pos1,pos2,pos3) (int2)(pos0, pos1)'
 
                 else:
-                    defines = defines + '\n#define POS_imagename_TYPE int4'
-                    defines = defines + '\n#define POS_imagename_INSTANCE(pos0,pos1,pos2,pos3) (int4)(pos0, pos1, pos2, 0)'
+                    defines = defines + '\n#define POS_' + key + '_TYPE int4'
+                    defines = defines + '\n#define POS_' + key + '_INSTANCE(pos0,pos1,pos2,pos3) (int4)(pos0, pos1, pos2, 0)'
 
                 # read/write images
                 dimensions = 3
