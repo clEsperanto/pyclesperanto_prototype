@@ -15,6 +15,15 @@ def addImageAndScalar(input, output, scalar):
     };
     execute(__file__, 'add_image_and_scalar_2d_x.cl', 'add_image_and_scalar_2d', output.shape, parameters);
 
+
+def multiplyMatrix(input1, input2, output):
+    parameters = {
+        "src1":input1,
+        "src2":input2,
+        "dst_matrix":output
+    };
+    execute(__file__, "multiply_matrix_x.cl", "multiply_matrix", output.shape, parameters);
+
 ########################################################################################################################
 ## Core methods
 
