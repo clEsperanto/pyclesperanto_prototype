@@ -1,19 +1,17 @@
 import numpy as np
-from clesperanto import push
-from clesperanto import create
-from clesperanto import addImageAndScalar
+import clesperanto as cle
 
 # push an array to the GPU
-flip = push(np.array([2, 4, 6, 8, 10, 12, 14, 16, 18, 20]))
+flip = cle.push(np.array([2, 4, 6, 8, 10, 12, 14, 16, 18, 20]))
 
 # print input
 print(flip)
 
 # create memory for the output
-flop = create((10,))
+flop = cle.create((10,))
 
 # add a constant to all pixels
-addImageAndScalar(flip, flop, 100.0)
+cle.add_image_and_scalar(flip, flop, 100.0)
 
 # print result
 print(flop)
@@ -32,11 +30,11 @@ b_np.shape = (1024, 1024)
 
 # push data to GPU
 start = time()
-gpu_a = push(a_np)
-gpu_b = push(b_np)
+gpu_a = cle.push(a_np)
+gpu_b = cle.push(b_np)
 
 # allocate memory for result on GPU
-gpu_c = create((1024, 1024))
+gpu_c = cle.create((1024, 1024))
 print('push+alloc time', (time() - start) * 1000)
 
 # multiply matrix onGPU

@@ -3,17 +3,78 @@ from gputools import OCLProgram, OCLArray
 import pyopencl
 import os
 
-
 ########################################################################################################################
 ## methods API; potentially auto-generatable
 
-def addImageAndScalar(input, output, scalar):
+def radius_to_kernel_size(radius):
+    return radius * 2 + 1;
+
+def maximum_sphere(input, output, radius_x, radius_y, radius_z=0):
+    kernel_size_x = radius_to_kernel_size(radius_x);
+    kernel_size_y = radius_to_kernel_size(radius_y);
+    kernel_size_z = radius_to_kernel_size(radius_z);
+
+    parameters = {
+        "src":input,
+        "dst":output,
+        "Nx":kernel_size_x,
+        "Ny":kernel_size_y
+    };
+
+    if (len(output.shape) == 2):
+        execute(__file__, 'maximum_sphere_2d_x.cl', 'maximum_sphere_2d', output.shape, parameters);
+    else:
+        parameters.update({"Nz":kernel_size_z});
+        execute(__file__, 'maximum_sphere_3d_x.cl', 'maximum_sphere_3d', output.shape, parameters);
+
+def minimum_sphere(input, output, radius_x, radius_y, radius_z=0):
+    kernel_size_x = radius_to_kernel_size(radius_x);
+    kernel_size_y = radius_to_kernel_size(radius_y);
+    kernel_size_z = radius_to_kernel_size(radius_z);
+
+    parameters = {
+        "src":input,
+        "dst":output,
+        "Nx":kernel_size_x,
+        "Ny":kernel_size_y
+    };
+
+    if (len(output.shape) == 2):
+        execute(__file__, 'minimum_sphere_2d_x.cl', 'minimum_sphere_2d', output.shape, parameters);
+    else:
+        parameters.update({"Nz":kernel_size_z});
+        execute(__file__, 'minimum_sphere_3d_x.cl', 'minimum_sphere_3d', output.shape, parameters);
+
+def top_hat_sphere(input, output, radius_x, radius_y, radius_z=0):
+    temp1 = create(input.shape);
+    temp2 = create(input.shape);
+    minimum_sphere(input, temp1, radius_x, radius_y, radius_z);
+    maximum_sphere(temp1, temp2, radius_x, radius_y, radius_z);
+    add_images_weighted(input, temp2, output, 1, -1);
+
+def add_image_and_scalar(input, output, scalar):
     parameters = {
         "src":input,
         "dst":output,
         "scalar":scalar
     };
-    execute(__file__, 'add_image_and_scalar_2d_x.cl', 'add_image_and_scalar_2d', output.shape, parameters);
+    if (len(output.shape) == 2):
+        execute(__file__, 'add_image_and_scalar_2d_x.cl', 'add_image_and_scalar_2d', output.shape, parameters);
+    else:
+        execute(__file__, 'add_image_and_scalar_3d_x.cl', 'add_image_and_scalar_3d', output.shape, parameters);
+
+def add_images_weighted(input1, input2, output, weight1, weight2):
+    parameters = {
+        "src":input1,
+        "src1":input2,
+        "dst":output,
+        "factor":weight1,
+        "factor1":weight2
+    };
+    if (len(output.shape) == 2):
+        execute(__file__, 'add_images_weighted_2d_x.cl', 'add_images_weighted_2d', output.shape, parameters);
+    else:
+        execute(__file__, 'add_images_weighted_3d_x.cl', 'add_images_weighted_3d', output.shape, parameters);
 
 
 def multiplyMatrix(input1, input2, output):
@@ -23,6 +84,12 @@ def multiplyMatrix(input1, input2, output):
         "dst_matrix":output
     };
     execute(__file__, "multiply_matrix_x.cl", "multiply_matrix", output.shape, parameters);
+
+
+
+
+
+
 
 ########################################################################################################################
 ## Core methods
@@ -50,6 +117,9 @@ def create(dimensions):
     :return: OCLArray, potentially with random values
     '''
     return OCLArray.empty(dimensions, np.float32)
+
+def pull(oclarray):
+    return np.asarray(oclarray);
 
 def execute(anchor, opencl_kernel_filename, kernel_name, global_size, parameters):
     '''
