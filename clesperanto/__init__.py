@@ -119,7 +119,7 @@ def create(dimensions):
     return OCLArray.empty(dimensions, np.float32)
 
 def pull(oclarray):
-    return np.asarray(oclarray);
+    return oclarray.get();
 
 def execute(anchor, opencl_kernel_filename, kernel_name, global_size, parameters):
     '''

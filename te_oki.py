@@ -15,10 +15,18 @@ background_subtracted_fly = cle.create(cle_fly.shape)
 # subtract background
 cle.top_hat_sphere(cle_fly, background_subtracted_fly, 0, 15, 15)
 
+result = cle.pull(background_subtracted_fly);
+print(result)
 # show results
-with napari.gui_qt():
-    viewer = napari.Viewer()
-    viewer.add_image(fly)
+# with napari.gui_qt():
+#    viewer = napari.Viewer()
+#    viewer.add_image(, contrast_limits=(0,500));
+
+
+
+
+
+
 
 
 
