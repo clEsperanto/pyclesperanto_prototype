@@ -17,14 +17,14 @@ def maximum_sphere(input, output, radius_x, radius_y, radius_z=0):
     parameters = {
         "src":input,
         "dst":output,
-        "Nx":kernel_size_x,
-        "Ny":kernel_size_y
+        "Nx":int(kernel_size_x),
+        "Ny":int(kernel_size_y)
     };
 
     if (len(output.shape) == 2):
         execute(__file__, 'maximum_sphere_2d_x.cl', 'maximum_sphere_2d', output.shape, parameters);
     else:
-        parameters.update({"Nz":kernel_size_z});
+        parameters.update({"Nz":int(kernel_size_z)});
         execute(__file__, 'maximum_sphere_3d_x.cl', 'maximum_sphere_3d', output.shape, parameters);
 
 def minimum_sphere(input, output, radius_x, radius_y, radius_z=0):
@@ -35,22 +35,42 @@ def minimum_sphere(input, output, radius_x, radius_y, radius_z=0):
     parameters = {
         "src":input,
         "dst":output,
-        "Nx":kernel_size_x,
-        "Ny":kernel_size_y
+        "Nx":int(kernel_size_x),
+        "Ny":int(kernel_size_y)
     };
 
     if (len(output.shape) == 2):
         execute(__file__, 'minimum_sphere_2d_x.cl', 'minimum_sphere_2d', output.shape, parameters);
     else:
-        parameters.update({"Nz":kernel_size_z});
+        parameters.update({"Nz":int(kernel_size_z)});
         execute(__file__, 'minimum_sphere_3d_x.cl', 'minimum_sphere_3d', output.shape, parameters);
 
 def top_hat_sphere(input, output, radius_x, radius_y, radius_z=0):
     temp1 = create(input.shape);
     temp2 = create(input.shape);
+
+    print("input")
+    print(input)
     minimum_sphere(input, temp1, radius_x, radius_y, radius_z);
+    print("temp1")
+    print(temp1)
+
+
     maximum_sphere(temp1, temp2, radius_x, radius_y, radius_z);
+
+
     add_images_weighted(input, temp2, output, 1, -1);
+
+def set(output, scalar):
+    parameters = {
+        "dst":output,
+        "value":float(scalar)
+    }
+
+    if (len(output.shape) == 2):
+        execute(__file__, 'set_2d_x.cl', 'set_2d', output.shape, parameters);
+    else:
+        execute(__file__, 'set_3d_x.cl', 'set_3d', output.shape, parameters);
 
 def add_image_and_scalar(input, output, scalar):
     parameters = {
@@ -96,7 +116,7 @@ def multiplyMatrix(input1, input2, output):
 
 def push(nparray):
     '''
-    converts a numpy arrat to an OpenCL array
+    converts a numpy array to an OpenCL array
 
     This method does the same as the converters in CLIJ but is less flexible
     https://github.com/clij/clij-core/tree/master/src/main/java/net/haesleinhuepf/clij/converters/implementations
@@ -105,7 +125,24 @@ def push(nparray):
     :param nparray: input numpy array
     :return: opencl-array
     '''
-    return OCLArray.from_array(nparray.astype(np.float32))
+    #print("orig: ")
+    #print(nparray)
+
+    temp = nparray.astype(np.float32)
+    #print("tmep: ")
+    #print(temp)
+
+    if (len(temp.shape) == 2):
+        temp = np.swapaxes(temp, 0, 1)
+    else:
+        temp = np.swapaxes(temp, 0, 2)
+
+    return OCLArray.from_array(temp)
+
+def push_zyx(nparray):
+    temp = nparray.astype(np.float32)
+    return OCLArray.from_array(temp)
+
 
 def create(dimensions):
     '''
@@ -116,10 +153,28 @@ def create(dimensions):
     :param dimensions: size of the image
     :return: OCLArray, potentially with random values
     '''
+    if (len(dimensions) == 2):
+        dimensions = (dimensions[1], dimensions[0])
+    else:
+        dimensions = (dimensions[2], dimensions[1], dimensions[0])
+
     return OCLArray.empty(dimensions, np.float32)
 
 def pull(oclarray):
-    return oclarray.get();
+    temp = oclarray.get();
+
+    if (len(temp.shape) == 2):
+        temp = np.swapaxes(temp, 0, 1)
+    else:
+        temp = np.swapaxes(temp, 0, 2)
+
+    return temp
+
+
+def pull_zyx(oclarray):
+    temp = oclarray.get();
+    return temp
+
 
 def execute(anchor, opencl_kernel_filename, kernel_name, global_size, parameters):
     '''
@@ -163,14 +218,24 @@ def execute(anchor, opencl_kernel_filename, kernel_name, global_size, parameters
                 defines = defines + '\n#define IMAGE_' + key + '_PIXEL_TYPE float'
 
                 # image size handling
-                defines = defines + '\n#define IMAGE_SIZE_' + key + '_WIDTH ' + str(value.shape[0])
                 if (value.ndim > 2):
+                    print("dim3:")
+                    print(value.shape)
+                    defines = defines + '\n#define IMAGE_SIZE_' + key + '_WIDTH ' + str(value.shape[2])
                     defines = defines + '\n#define IMAGE_SIZE_' + key + '_HEIGHT ' + str(value.shape[1])
+                    defines = defines + '\n#define IMAGE_SIZE_' + key + '_DEPTH ' + str(value.shape[0])
+                    print(defines)
                 else:
-                    defines = defines + '\n#define IMAGE_SIZE_' + key + '_HEIGHT 1'
-                if (value.ndim > 2):
-                    defines = defines + '\n#define IMAGE_SIZE_' + key + '_DEPTH ' + str(value.shape[2])
-                else:
+                    if (value.ndim > 1):
+                        print("dim2")
+
+                        defines = defines + '\n#define IMAGE_SIZE_' + key + '_WIDTH ' + str(value.shape[1])
+                        defines = defines + '\n#define IMAGE_SIZE_' + key + '_HEIGHT ' + str(value.shape[0])
+                    else:
+                        print("dim1")
+                        defines = defines + '\n#define IMAGE_SIZE_' + key + '_WIDTH ' + str(value.shape[0])
+                        defines = defines + '\n#define IMAGE_SIZE_' + key + '_HEIGHT 1'
+
                     defines = defines + '\n#define IMAGE_SIZE_' + key + '_DEPTH 1'
 
                 # positions (dimensionality) handling
@@ -208,8 +273,18 @@ def execute(anchor, opencl_kernel_filename, kernel_name, global_size, parameters
     ocl_code = defines + ocl_code;
     # print(defines)
 
+
+    if (len(global_size) == 2):
+        global_size = (global_size[1], global_size[0])
+    else:
+        global_size = (global_size[2], global_size[1], global_size[0])
+
+    #print("global_size")
+    #print(global_size)
+
     prog = OCLProgram(src_str=ocl_code)
     prog.run_kernel(kernel_name, global_size, None, *arguments)
+
 
 
 ########################################################################################################################
