@@ -219,20 +219,20 @@ def execute(anchor, opencl_kernel_filename, kernel_name, global_size, parameters
 
                 # image size handling
                 if (value.ndim > 2):
-                    print("dim3:")
-                    print(value.shape)
+                    #print("dim3:")
+                    #print(value.shape)
                     defines = defines + '\n#define IMAGE_SIZE_' + key + '_WIDTH ' + str(value.shape[2])
                     defines = defines + '\n#define IMAGE_SIZE_' + key + '_HEIGHT ' + str(value.shape[1])
                     defines = defines + '\n#define IMAGE_SIZE_' + key + '_DEPTH ' + str(value.shape[0])
-                    print(defines)
+
                 else:
                     if (value.ndim > 1):
-                        print("dim2")
+                        #print("dim2")
 
                         defines = defines + '\n#define IMAGE_SIZE_' + key + '_WIDTH ' + str(value.shape[1])
                         defines = defines + '\n#define IMAGE_SIZE_' + key + '_HEIGHT ' + str(value.shape[0])
                     else:
-                        print("dim1")
+                        #print("dim1")
                         defines = defines + '\n#define IMAGE_SIZE_' + key + '_WIDTH ' + str(value.shape[0])
                         defines = defines + '\n#define IMAGE_SIZE_' + key + '_HEIGHT 1'
 
