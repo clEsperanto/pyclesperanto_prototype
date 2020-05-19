@@ -15,30 +15,35 @@ pip install pyopencl-2019.1.1+cl12-cp37-cp37m-win_amd64.whl
 pip install gputools
 ```
 
+### Troubleshooting installation
+If you receive an error like 
+```
+DLL load failed: The specified procedure could not be found.
+```
+Try downloading and installing a pyopencl with a lower cl version, e.g. cl12 : pyopencl-2020.1+cl12-cp37-cp37m-win_amd64
+
 ## Example code
 An example is available in [this script](https://github.com/clEsperanto/pyclesperanto_prototype/blob/master/cle_test.py). 
 Basically, you import the methods from clEsperanto you need:
 
 ```python
-from clesperanto import push
-from clesperanto import create
-from clesperanto import addImageAndScalar
+import clesperanto as cle
 ```
 
 You can then push an image to the GPU and create memory there:
 ```python
 # push an array to the GPU
-flip = push(np.array([2, 4, 6, 8, 10, 12, 14, 16, 18, 20]))
+flip = cle.push(np.array([2, 4, 6, 8, 10, 12, 14, 16, 18, 20]))
 
 # create memory for the output
-flop = create((10,))
+flop = cle.create((10,))
 ```
 
 And then you can call methods in the GPU without the need for learning OpenCL:
 
 ```python
 # add a constant to all pixels
-addImageAndScalar(flip, flop, 100.0)
+cle.add_image_and_scalar(flip, flop, 100.0)
 
 # print result
 print(flop)
