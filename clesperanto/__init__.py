@@ -129,15 +129,20 @@ def push(nparray):
     #print(nparray)
 
     temp = nparray.astype(np.float32)
-    #print("tmep: ")
-    #print(temp)
+    print("tmep: ")
+    print(temp)
 
     if (len(temp.shape) == 2):
         temp = np.swapaxes(temp, 0, 1)
     else:
         temp = np.swapaxes(temp, 0, 2)
 
-    return OCLArray.from_array(temp)
+    temp2 = OCLArray.from_array(temp)
+
+    print("temp2: ")
+    print(temp2)
+
+    return temp2
 
 def push_zyx(nparray):
     temp = nparray.astype(np.float32)
@@ -145,6 +150,7 @@ def push_zyx(nparray):
 
 
 def create(dimensions):
+
     '''
     Convenience method for creating images on the GPU. This method basicall does the same as in CLIJ:
 
@@ -153,10 +159,13 @@ def create(dimensions):
     :param dimensions: size of the image
     :return: OCLArray, potentially with random values
     '''
-    if (len(dimensions) == 2):
-        dimensions = (dimensions[1], dimensions[0])
+    if isinstance(dimensions, OCLArray):
+        dimensions = dimensions.shape
     else:
-        dimensions = (dimensions[2], dimensions[1], dimensions[0])
+        if (len(dimensions) == 2):
+            dimensions = (dimensions[1], dimensions[0])
+        else:
+            dimensions = (dimensions[2], dimensions[1], dimensions[0])
 
     return OCLArray.empty(dimensions, np.float32)
 
@@ -271,7 +280,7 @@ def execute(anchor, opencl_kernel_filename, kernel_name, global_size, parameters
 
     defines = defines + '\n'
     ocl_code = defines + ocl_code;
-    # print(defines)
+    print(defines)
 
 
     if (len(global_size) == 2):
@@ -279,8 +288,8 @@ def execute(anchor, opencl_kernel_filename, kernel_name, global_size, parameters
     else:
         global_size = (global_size[2], global_size[1], global_size[0])
 
-    #print("global_size")
-    #print(global_size)
+    print("global_size")
+    print(global_size)
 
     prog = OCLProgram(src_str=ocl_code)
     prog.run_kernel(kernel_name, global_size, None, *arguments)

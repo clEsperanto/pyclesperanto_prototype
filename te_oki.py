@@ -7,7 +7,32 @@ import numpy as np
 import napari
 
 
-test = cle.create((5,4,3))
+test = cle.push(np.asarray([
+[1, 1, 1],
+[1, 2, 1],
+[1, 1, 1]
+#    [1, 1, 1, 1, 1, 1, 1],
+#    [1, 1, 1, 1, 1, 1, 1],
+#    [1, 1, 1, 1, 1, 1, 1],
+#    [1, 1, 1, 2, 1, 1, 1],
+#    [1, 1, 1, 1, 1, 1, 1],
+#    [1, 1, 1, 1, 1, 1, 1],
+#    [1, 1, 1, 1, 1, 1, 1]
+]))
+
+test2 = cle.create(test)
+cle.set(test2, 4);
+
+cle.maximum_sphere(test, test2, 2, 2, 2)
+
+print(cle.pull(test))
+
+print(cle.pull(test2))
+
+
+
+
+# test = cle.create((5,4,3))
 cle.set(test, 5)
 #print(test)
 #print(cle.pull(test))
