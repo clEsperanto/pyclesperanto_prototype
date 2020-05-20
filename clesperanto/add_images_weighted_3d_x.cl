@@ -14,11 +14,10 @@ float factor1
 
   const int4 pos = (int4)(x,y,z,0);
 
-  // multiplying by 2 and dividing by 2 makes it run corrctly on AMD vega 56; this is a workaround until we find a better solution
-  const float value1 = 2.0 * factor * ((float)(READ_IMAGE(src, sampler, pos).x));
-  const float value2 = 2.0 * factor1 * ((float)(READ_IMAGE(src1, sampler, pos).x));
+  const float value1 = factor * ((float)(READ_IMAGE(src, sampler, pos).x));
+  const float value2 = factor1 * ((float)(READ_IMAGE(src1, sampler, pos).x));
 
-  float value = (value1 + value2) / 2.0;
+  float value = value1 + value2;
 
   WRITE_IMAGE (dst, pos, CONVERT_dst_PIXEL_TYPE( value));
 }
