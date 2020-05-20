@@ -15,8 +15,8 @@ def maximum_sphere(input, output, radius_x, radius_y, radius_z=0):
     kernel_size_z = radius_to_kernel_size(radius_z);
 
     parameters = {
-        "src":input,
         "dst":output,
+        "src":input,
         "Nx":int(kernel_size_x),
         "Ny":int(kernel_size_y)
     };
@@ -33,8 +33,8 @@ def minimum_sphere(input, output, radius_x, radius_y, radius_z=0):
     kernel_size_z = radius_to_kernel_size(radius_z);
 
     parameters = {
-        "src":input,
         "dst":output,
+        "src":input,
         "Nx":int(kernel_size_x),
         "Ny":int(kernel_size_y)
     };
@@ -49,16 +49,8 @@ def top_hat_sphere(input, output, radius_x, radius_y, radius_z=0):
     temp1 = create(input.shape);
     temp2 = create(input.shape);
 
-    print("input")
-    print(input)
     minimum_sphere(input, temp1, radius_x, radius_y, radius_z);
-    print("temp1")
-    print(temp1)
-
-
     maximum_sphere(temp1, temp2, radius_x, radius_y, radius_z);
-
-
     add_images_weighted(input, temp2, output, 1, -1);
 
 def set(output, scalar):
@@ -76,7 +68,7 @@ def add_image_and_scalar(input, output, scalar):
     parameters = {
         "src":input,
         "dst":output,
-        "scalar":scalar
+        "scalar":float(scalar)
     };
     if (len(output.shape) == 2):
         execute(__file__, 'add_image_and_scalar_2d_x.cl', 'add_image_and_scalar_2d', output.shape, parameters);
@@ -88,8 +80,8 @@ def add_images_weighted(input1, input2, output, weight1, weight2):
         "src":input1,
         "src1":input2,
         "dst":output,
-        "factor":weight1,
-        "factor1":weight2
+        "factor":float(weight1),
+        "factor1":float(weight2)
     };
     if (len(output.shape) == 2):
         execute(__file__, 'add_images_weighted_2d_x.cl', 'add_images_weighted_2d', output.shape, parameters);
@@ -97,11 +89,11 @@ def add_images_weighted(input1, input2, output, weight1, weight2):
         execute(__file__, 'add_images_weighted_3d_x.cl', 'add_images_weighted_3d', output.shape, parameters);
 
 
-def multiplyMatrix(input1, input2, output):
+def multiply_matrix(input1, input2, output):
     parameters = {
+        "dst_matrix":output,
         "src1":input1,
-        "src2":input2,
-        "dst_matrix":output
+        "src2":input2
     };
     execute(__file__, "multiply_matrix_x.cl", "multiply_matrix", output.shape, parameters);
 
@@ -125,8 +117,6 @@ def push(nparray):
     :param nparray: input numpy array
     :return: opencl-array
     '''
-    #print("orig: ")
-    #print(nparray)
 
     temp = nparray.astype(np.float32)
     print("tmep: ")
@@ -138,10 +128,6 @@ def push(nparray):
         temp = np.swapaxes(temp, 0, 2)
 
     temp2 = OCLArray.from_array(temp)
-
-    print("temp2: ")
-    print(temp2)
-
     return temp2
 
 def push_zyx(nparray):
@@ -292,7 +278,7 @@ def execute(anchor, opencl_kernel_filename, kernel_name, global_size, parameters
     print(global_size)
 
     prog = OCLProgram(src_str=ocl_code)
-    prog.run_kernel(kernel_name, global_size, None, *arguments)
+    prog.run_kernel(kernel_name, global_size, None, *arguments) # Todo: the order of the arguments matters; fix that
 
 
 

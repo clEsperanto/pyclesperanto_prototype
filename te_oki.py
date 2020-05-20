@@ -21,12 +21,21 @@ test = cle.push(np.asarray([
 ]))
 
 test2 = cle.create(test)
-cle.set(test2, 4);
+# cle.set(test2, 4);
 
-cle.maximum_sphere(test, test2, 2, 2, 2)
-
+print("A test")
 print(cle.pull(test))
 
+print("A test2")
+print(cle.pull(test2))
+
+
+cle.maximum_sphere(test, test2, 1, 1, 1)
+
+print("B test")
+print(cle.pull(test))
+
+print("B test2")
 print(cle.pull(test2))
 
 
@@ -43,7 +52,7 @@ assert (np.max(a) == 5)
 assert (np.mean(a) == 5)
 
 print ("ok")
-quit()
+# quit()
 
 # load data and allocate memory for result
 fly = imread(filename)
@@ -60,9 +69,9 @@ cle.top_hat_sphere(cle_fly, background_subtracted_fly, 15, 15, 0)
 result = cle.pull(background_subtracted_fly);
 print(result)
 # show results
-#with napari.gui_qt():
-#    viewer = napari.Viewer()
-#    viewer.add_image(result);
+with napari.gui_qt():
+    viewer = napari.Viewer()
+    viewer.add_image(result);
 
 
 
