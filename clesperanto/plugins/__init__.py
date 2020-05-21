@@ -6,6 +6,7 @@ from .binary_not import binary_not
 from .binary_or import binary_or
 from .convolve import convolve
 from .copy import copy
+from .copy_slice import copy_slice
 from .maximum_sphere import maximum_sphere
 from .minimum_sphere import minimum_sphere
 from .multiply_matrix import multiply_matrix
