@@ -99,7 +99,7 @@ def execute(anchor, opencl_kernel_filename, kernel_name, global_size, parameters
 
     defines = defines + '\n'
     ocl_code = defines + ocl_code;
-    print(defines)
+    #print(defines)
 
 
     if (len(global_size) == 2):
@@ -107,8 +107,8 @@ def execute(anchor, opencl_kernel_filename, kernel_name, global_size, parameters
     else:
         global_size = (global_size[2], global_size[1], global_size[0])
 
-    print("global_size")
-    print(global_size)
+    #print("global_size")
+    #print(global_size)
 
     prog = OCLProgram(src_str=ocl_code)
     prog.run_kernel(kernel_name, global_size, None, *arguments) # Todo: the order of the arguments matters; fix that
