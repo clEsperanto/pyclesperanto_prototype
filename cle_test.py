@@ -21,7 +21,6 @@ print(flop)
 
 # matrix multiplication
 from time import time
-from clesperanto import multiplyMatrix
 
 a_np = np.random.randn(1024 * 1024).astype(np.float32)
 b_np = np.random.randn(1024 * 1024).astype(np.float32)
@@ -39,11 +38,11 @@ print('push+alloc time', (time() - start) * 1000)
 
 # multiply matrix onGPU
 start = time()
-multiplyMatrix(gpu_a, gpu_b, gpu_c)
+cle.multiply_matrix(gpu_a, gpu_b, gpu_c)
 print('cle1 time', (time() - start) * 1000)
 
 start = time()
-multiplyMatrix(gpu_a, gpu_b, gpu_c)
+cle.multiply_matrix(gpu_a, gpu_b, gpu_c)
 print('cle2 time', (time() - start) * 1000)
 
 # multiply matrix on CPU
