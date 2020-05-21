@@ -6,7 +6,4 @@ def set(output, scalar):
         "value":float(scalar)
     }
 
-    if (len(output.shape) == 2):
-        execute(__file__, 'set_2d_x.cl', 'set_2d', output.shape, parameters);
-    else:
-        execute(__file__, 'set_3d_x.cl', 'set_3d', output.shape, parameters);
+    execute(__file__, 'set_' + str(len(output.shape)) + 'd_x.cl', 'set_' + str(len(output.shape)) + 'd', output.shape, parameters);

@@ -13,8 +13,6 @@ def maximum_sphere(input, output, radius_x, radius_y, radius_z=0):
         "Ny":int(kernel_size_y)
     };
 
-    if (len(output.shape) == 2):
-        execute(__file__, 'maximum_sphere_2d_x.cl', 'maximum_sphere_2d', output.shape, parameters);
-    else:
+    if (len(output.shape) == 3):
         parameters.update({"Nz":int(kernel_size_z)});
-        execute(__file__, 'maximum_sphere_3d_x.cl', 'maximum_sphere_3d', output.shape, parameters);
+    execute(__file__, 'maximum_sphere_' + str(len(output.shape)) + 'd_x.cl', 'maximum_sphere_' + str(len(output.shape)) + 'd', output.shape, parameters);
