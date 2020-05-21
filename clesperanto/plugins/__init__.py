@@ -4,6 +4,7 @@ from .add_image_and_scalar import add_image_and_scalar
 from .binary_and import binary_and
 from .binary_not import binary_not
 from .binary_or import binary_or
+from .binary_subtract import binary_subtract
 from .convolve import convolve
 from .copy import copy
 from .copy_slice import copy_slice
