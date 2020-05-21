@@ -8,14 +8,13 @@ def push(nparray):
     This method does the same as the converters in CLIJ but is less flexible
     https://github.com/clij/clij-core/tree/master/src/main/java/net/haesleinhuepf/clij/converters/implementations
 
-
     :param nparray: input numpy array
     :return: opencl-array
     '''
 
     temp = nparray.astype(np.float32)
-    print("tmep: ")
-    print(temp)
+    #print("tmep: ")
+    #print(temp)
 
     if (len(temp.shape) == 2):
         temp = np.swapaxes(temp, 0, 1)
