@@ -5,6 +5,7 @@ from .binary_and import binary_and
 from .binary_not import binary_not
 from .binary_or import binary_or
 from .binary_subtract import binary_subtract
+from .binary_xor import binary_xor
 from .convolve import convolve
 from .copy import copy
 from .copy_slice import copy_slice
@@ -13,3 +14,6 @@ from .minimum_sphere import minimum_sphere
 from .multiply_matrix import multiply_matrix
 from .set import set
 from .top_hat_sphere import top_hat_sphere
+
+
+
