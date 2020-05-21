@@ -4,6 +4,7 @@ from .add_image_and_scalar import add_image_and_scalar
 from .binary_and import binary_and
 from .binary_not import binary_not
 from .binary_or import binary_or
+from .convolve import convolve
 from .maximum_sphere import maximum_sphere
 from .minimum_sphere import minimum_sphere
 from .multiply_matrix import multiply_matrix
