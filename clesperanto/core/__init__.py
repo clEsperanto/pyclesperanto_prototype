@@ -6,3 +6,4 @@ from .pull import pull
 from .push import push
 from .push import push_zyx
 from .plugin_function import plugin_function
+from .types import Image
