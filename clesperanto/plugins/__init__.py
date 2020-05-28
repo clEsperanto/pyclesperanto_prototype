@@ -24,6 +24,7 @@ from .equal import equal
 from .equal_constant import equal_constant
 from .erode_box import erode_box
 from .erode_box_slice_by_slice import erode_box_slice_by_slice
+from .erode_sphere import erode_sphere
 
 from .maximum_sphere import maximum_sphere
 from .minimum_sphere import minimum_sphere
