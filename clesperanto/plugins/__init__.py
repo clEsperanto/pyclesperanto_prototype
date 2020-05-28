@@ -27,6 +27,7 @@ from .erode_box_slice_by_slice import erode_box_slice_by_slice
 from .erode_sphere import erode_sphere
 from .erode_sphere_slice_by_slice import erode_sphere_slice_by_slice
 from .exponential import exponential
+from .flip import flip
 
 from .maximum_sphere import maximum_sphere
 from .minimum_sphere import minimum_sphere
