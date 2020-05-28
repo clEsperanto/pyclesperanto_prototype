@@ -36,12 +36,11 @@ def plugin_function(
 
         default_counter = 0
         any_ocl_input = None
+
         for arg_counter, argument in enumerate(argument_specification.args):
             #print("---\nparsing argument " + argument)
             if (len(args) > arg_counter):
                 value = args[arg_counter]
-                #print("value")
-                #print(value)
             else:
                 value = None
 
@@ -58,36 +57,23 @@ def plugin_function(
             if (value is None):
                 if (type_annotation is Image):
                     # if not set and should be an image, create an image
-                    print("E " + argument)
                     # create a new output image with specified/default creator
                     target_arguments.update({argument: output_creator(any_ocl_input)})
                 else:
                     # if it's not set and should be something else than an image, hand over default values
                     if (len(defaults_values) > default_counter):
-                        print("I " + argument)
                         target_arguments.update({argument: defaults_values[default_counter]})
                         default_counter += 1
                     else:
-                        print("J " + argument + " to none")
                         target_arguments.update({argument: None})
 
         #print("Got arguments")
         #print(args)
-        print("Will pass arguments")
-        print(target_arguments)
+        #print("Will pass arguments")
+        #print(target_arguments)
 
         # execute function with determined arguments
         return function(**target_arguments)
 
 
     return worker_function
-
-
-
-
-
-
-
-
-
-
