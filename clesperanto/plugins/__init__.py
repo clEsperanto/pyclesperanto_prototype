@@ -19,6 +19,7 @@ from .dilate_sphere_slice_by_slice import dilate_sphere_slice_by_slice
 from .divide_images import divide_images
 from .draw_box import draw_box
 from .draw_sphere import draw_sphere
+from .draw_line import draw_line
 
 from .maximum_sphere import maximum_sphere
 from .minimum_sphere import minimum_sphere
