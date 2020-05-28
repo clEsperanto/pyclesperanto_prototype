@@ -17,6 +17,7 @@ from .dilate_box_slice_by_slice import dilate_box_slice_by_slice
 from .dilate_sphere import dilate_sphere
 from .dilate_sphere_slice_by_slice import dilate_sphere_slice_by_slice
 from .divide_images import divide_images
+from .draw_box import draw_box
 
 from .maximum_sphere import maximum_sphere
 from .minimum_sphere import minimum_sphere
