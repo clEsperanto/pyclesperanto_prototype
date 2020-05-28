@@ -34,10 +34,9 @@ def plugin_function(
 
         target_arguments = {} # empty dictionary to store parameters as we forward them
 
-        arg_counter = 0
         default_counter = 0
         any_ocl_input = None
-        for argument in argument_specification.args:
+        for arg_counter, argument in enumerate(argument_specification.args):
             #print("---\nparsing argument " + argument)
             if (len(args) > arg_counter):
                 value = args[arg_counter]
@@ -71,8 +70,6 @@ def plugin_function(
                     else:
                         print("J " + argument + " to none")
                         target_arguments.update({argument: None})
-
-            arg_counter += 1
 
         #print("Got arguments")
         #print(args)
