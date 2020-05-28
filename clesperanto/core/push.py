@@ -12,6 +12,9 @@ def push(nparray):
     :return: opencl-array
     '''
 
+    if (isinstance(nparray, OCLArray)):
+        return nparray
+
     temp = nparray.astype(np.float32)
     #print("tmep: ")
     #print(temp)
@@ -25,5 +28,8 @@ def push(nparray):
     return temp2
 
 def push_zyx(nparray):
+    if (isinstance(nparray, OCLArray)):
+        return nparray
+
     temp = nparray.astype(np.float32)
     return OCLArray.from_array(temp)
