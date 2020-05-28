@@ -21,6 +21,7 @@ from .draw_box import draw_box
 from .draw_sphere import draw_sphere
 from .draw_line import draw_line
 from .equal import equal
+from .equal_constant import equal_constant
 
 from .maximum_sphere import maximum_sphere
 from .minimum_sphere import minimum_sphere
