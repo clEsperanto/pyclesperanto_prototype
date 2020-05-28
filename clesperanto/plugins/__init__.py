@@ -14,6 +14,7 @@ from .copy import copy
 from .copy_slice import copy_slice
 from .dilate_box import dilate_box
 from .dilate_box_slice_by_slice import dilate_box_slice_by_slice
+from .dilate_sphere import dilate_sphere
 
 from .maximum_sphere import maximum_sphere
 from .minimum_sphere import minimum_sphere
