@@ -1,21 +1,21 @@
 import numpy as np
 from gputools import OCLArray
 
-def push(nparray):
+def push(any_array):
     '''
     converts a numpy array to an OpenCL array
 
     This method does the same as the converters in CLIJ but is less flexible
     https://github.com/clij/clij-core/tree/master/src/main/java/net/haesleinhuepf/clij/converters/implementations
 
-    :param nparray: input numpy array
+    :param any_array: input numpy array
     :return: opencl-array
     '''
 
-    if (isinstance(nparray, OCLArray)):
-        return nparray
+    if (isinstance(any_array, OCLArray)):
+        return any_array
 
-    temp = nparray.astype(np.float32)
+    temp = any_array.astype(np.float32)
     #print("tmep: ")
     #print(temp)
 
@@ -27,9 +27,9 @@ def push(nparray):
     temp2 = OCLArray.from_array(temp)
     return temp2
 
-def push_zyx(nparray):
-    if (isinstance(nparray, OCLArray)):
-        return nparray
+def push_zyx(any_array):
+    if (isinstance(any_array, OCLArray)):
+        return any_array
 
-    temp = nparray.astype(np.float32)
+    temp = any_array.astype(np.float32)
     return OCLArray.from_array(temp)
