@@ -31,6 +31,7 @@ from .execute_separable_kernel import execute_separable_kernel
 from .flip import flip
 from .gaussian_blur import gaussian_blur
 from .gradient_x import gradient_x
+from .gradient_y import gradient_y
 
 from .maximum_sphere import maximum_sphere
 from .minimum_sphere import minimum_sphere
