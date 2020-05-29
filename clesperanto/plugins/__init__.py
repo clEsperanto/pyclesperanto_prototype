@@ -40,6 +40,7 @@ from .greater_or_equal_constant import greater_or_equal_constant
 from .laplace_box import laplace_box
 from .laplace_diamond import laplace_diamond
 from .logarithm import logarithm
+from .mask import mask
 
 from .maximum_sphere import maximum_sphere
 from .minimum_sphere import minimum_sphere
