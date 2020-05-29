@@ -34,6 +34,7 @@ from .gradient_x import gradient_x
 from .gradient_y import gradient_y
 from .gradient_z import gradient_z
 from .greater import greater
+from .greater_constant import greater_constant
 
 from .maximum_sphere import maximum_sphere
 from .minimum_sphere import minimum_sphere
