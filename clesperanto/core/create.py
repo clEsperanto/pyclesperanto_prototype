@@ -23,4 +23,4 @@ def create(dimensions):
 
 
 def create_like(input:OCLArray):
-    return create(input.shape)
+    return OCLArray.empty(input.shape, np.float32)
