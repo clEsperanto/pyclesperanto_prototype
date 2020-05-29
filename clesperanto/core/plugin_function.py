@@ -6,7 +6,7 @@ from toolz import curry
 from gputools import OCLArray
 
 from .create import create_like
-from .types import Image, isImage
+from .types import Image, is_image
 from .push import push
 
 @curry
@@ -44,7 +44,7 @@ def plugin_function(
             else:
                 value = None
 
-            if (isImage(value)):
+            if (is_image(value)):
                 value = push(value)
                 # value is for sure OpenCL, we keep it in case we have to create another one of the same size
                 any_ocl_input = value
