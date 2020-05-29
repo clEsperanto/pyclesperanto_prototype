@@ -49,6 +49,7 @@ from .mean_box import mean_box
 from .mean_sphere import mean_sphere
 from .minimum_image_and_scalar import minimum_image_and_scalar
 from .minimum_images import minimum_images
+from .multiply_image_and_coordinate import multiply_image_and_coordinate
 
 from .maximum_sphere import maximum_sphere
 from .minimum_sphere import minimum_sphere
