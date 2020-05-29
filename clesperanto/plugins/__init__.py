@@ -55,6 +55,7 @@ from .multiply_image_and_scalar import multiply_image_and_scalar
 from .multiply_images import multiply_images
 from .not_equal import not_equal
 from .not_equal_constant import not_equal_constant
+from .paste import paste
 
 from .maximum_sphere import maximum_sphere
 from .minimum_sphere import minimum_sphere

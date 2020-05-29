@@ -1827,3 +1827,40 @@ a = cle.pull(result)
 b = cle.pull(reference)
 assert (np.array_equal(a, b))
 print ("ok not_equal_constant")
+
+
+
+
+
+
+
+
+
+test1 = cle.push_zyx(np.asarray([
+    [0, 0, 0],
+    [0, 0, 3],
+    [0, 0, 3]
+]))
+test2 = cle.push_zyx(np.asarray([
+    [1, 2],
+]))
+
+reference = cle.push_zyx(np.asarray([
+    [0, 0, 0],
+    [0, 0, 3],
+    [0, 1, 2]
+]))
+
+result = cle.create(test1)
+cle.copy(test1, result)
+cle.paste(test2, result, 1, 2, 0)
+
+a = cle.pull(result)
+b = cle.pull(reference)
+print(a)
+
+assert (np.array_equal(a, b))
+print ("ok paste")
+
+
+
