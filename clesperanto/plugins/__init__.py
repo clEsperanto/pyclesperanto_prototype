@@ -48,6 +48,8 @@ from .maximum_box import maximum_box
 from .mean_box import mean_box
 from .mean_sphere import mean_sphere
 
+from .minimum_images import minimum_images
+
 from .maximum_sphere import maximum_sphere
 from .minimum_sphere import minimum_sphere
 from .multiply_matrix import multiply_matrix
