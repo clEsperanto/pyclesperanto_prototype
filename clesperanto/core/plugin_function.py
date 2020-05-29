@@ -30,11 +30,7 @@ def plugin_function(
     def worker_function(*args, **kwargs):
         # determine argument spec and default values, values are given as args
         argument_specification = inspect.getfullargspec(function)
-        defaults_values = argument_specification.defaults
 
-        target_arguments = {} # empty dictionary to store parameters as we forward them
-
-        default_counter = 0
         any_ocl_input = None
 
         for arg_counter, argument in enumerate(argument_specification.args):
@@ -50,7 +46,16 @@ def plugin_function(
                 any_ocl_input = value
 
             # default: keep value
-            target_arguments.update({argument: value})
+            if (value is not None):
+                kwargs[argument] = value
+
+
+        # go through all arguments again and check if an image wasn't set
+        for argument in argument_specification.args:
+            if (kwargs.get(argument) is not None):
+                value = kwargs[argument]
+            else:
+                value = None
 
             # was the argument annotated?
             type_annotation = argument_specification.annotations.get(argument);
@@ -58,22 +63,15 @@ def plugin_function(
                 if (type_annotation is Image):
                     # if not set and should be an image, create an image
                     # create a new output image with specified/default creator
-                    target_arguments.update({argument: output_creator(any_ocl_input)})
-                else:
-                    # if it's not set and should be something else than an image, hand over default values
-                    if (len(defaults_values) > default_counter):
-                        target_arguments.update({argument: defaults_values[default_counter]})
-                        default_counter += 1
-                    else:
-                        target_arguments.update({argument: None})
+                    kwargs[argument] = output_creator(any_ocl_input)
 
         #print("Got arguments")
         #print(args)
         #print("Will pass arguments")
-        #print(target_arguments)
+        #print(kwargs)
 
         # execute function with determined arguments
-        return function(**target_arguments)
+        return function(**kwargs)
 
 
     return worker_function
