@@ -65,7 +65,7 @@ from .nonzero_minimum_diamond import nonzero_minimum_diamond
 from .not_equal import not_equal
 from .not_equal_constant import not_equal_constant
 from .paste import paste
-from .onlyzero_overwite_maximum_box import onlyzero_overwrite_maximum_box
+from .onlyzero_overwrite_maximum_box import onlyzero_overwrite_maximum_box
 
 from .maximum_sphere import maximum_sphere
 from .minimum_sphere import minimum_sphere
