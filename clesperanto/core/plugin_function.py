@@ -14,15 +14,27 @@ def plugin_function(
     function: Callable,
     output_creator: Callable = create_like
 ) -> Callable:
-    """Function decorator which ensures correct types and values of parameters
-        Given input parameters are either of type OCLArray (which the GPU understands) or are converted to this type
-        (see push function). If output parameters of type OCLArray are not set, an empty image is created and handed
-        over.
+    """Function decorator to ensure correct types and values of all parameters.
 
-    :param function: the function to be called on the GPU
-    :param output_creator: a function which can create an output OCLArray given an input OCLArray, optional
-        per default, we create output images of the same shape as input images
-    :return: return value of the executed function
+    The given input parameters are either of type OCLArray (which the GPU
+    understands) or are converted to this type (see push function). If output
+    parameters of type OCLArray are not set, an empty image is created and
+    handed over.
+
+    Parameters
+    ----------
+    function : callable
+        The function to be executed on the GPU.
+    output_creator : callable, optional
+        A function to create an output OCLArray given an input OCLArray. By
+        default, we create float32 output images of the same shape as input
+        images.
+
+    Returns
+    -------
+    worker_function : callable
+        The actual function call that will be executed, magically creating
+        output arguments of the correct type.
     """
 
 
