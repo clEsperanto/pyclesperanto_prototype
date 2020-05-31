@@ -2512,6 +2512,41 @@ print ("ok replace_intensity")
 
 
 
+
+
+result = cle.create((5, 5))
+
+reference = cle.push(np.asarray([
+    [3, 3, 3, 3, 3],
+    [3, 3, 3, 3, 3],
+    [3, 3, 3, 3, 3],
+    [3, 3, 3, 3, 3],
+    [3, 3, 3, 3, 3]
+]))
+
+result = cle.create(test1)
+cle.set(result, 3)
+
+print(result)
+
+a = cle.pull(result)
+b = cle.pull(reference)
+assert (np.allclose(a, b, 0.001))
+print ("ok set")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 test1 = cle.push_zyx(np.asarray([
     [0, 0, 0, 1],
     [0, 0, 3, 1],
