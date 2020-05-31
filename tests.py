@@ -1896,18 +1896,20 @@ print ("ok not_equal_constant")
 
 
 test1 = cle.push_zyx(np.asarray([
-    [0, 0, 0],
-    [0, 0, 3],
-    [0, 0, 3]
+    [0, 0, 0, 1],
+    [0, 0, 3, 1],
+    [0, 0, 3, 1],
+    [1, 1, 1, 1]
 ]))
 test2 = cle.push_zyx(np.asarray([
     [1, 2],
 ]))
 
 reference = cle.push_zyx(np.asarray([
-    [0, 0, 0],
-    [0, 0, 3],
-    [0, 1, 2]
+    [0, 0, 0, 1],
+    [0, 0, 3, 1],
+    [0, 1, 2, 1],
+    [1, 1, 1, 1]
 ]))
 
 result = cle.create(test1)
