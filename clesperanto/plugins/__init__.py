@@ -89,6 +89,7 @@ from .smaller_or_equal import smaller_or_equal
 from .smaller_or_equal_constant import smaller_or_equal_constant
 from .sobel import sobel
 from .standard_deviation_z_projection import standard_deviation_z_projection
+from .subtract_image_from_scalar import subtract_image_from_scalar
 from .sum_x_projection import sum_x_projection
 from .sum_y_projection import sum_y_projection
 from .sum_z_projection import sum_z_projection
