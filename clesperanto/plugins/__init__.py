@@ -77,12 +77,14 @@ from .minimum_sphere import minimum_sphere
 from .multiply_matrix import multiply_matrix
 from .set import set
 from .set_column import set_column
+from .set_image_borders import set_image_borders
 from .set_plane import set_plane
 from .set_ramp_x import set_ramp_x
 from .set_ramp_y import set_ramp_y
 from .set_ramp_z import set_ramp_z
 from .set_row import set_row
 from .set_nonzero_pixels_to_pixelindex import set_nonzero_pixels_to_pixelindex
+from .set_where_x_equals_y import set_where_x_equals_y
 from .set_where_x_greater_than_y import set_where_x_greater_than_y
 from .set_where_x_smaller_than_y import set_where_x_smaller_than_y
 from .smaller import smaller
