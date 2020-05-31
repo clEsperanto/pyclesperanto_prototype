@@ -54,7 +54,8 @@ def plugin_function(
 
             if is_image(value):
                 value = push(value)
-                # value is for sure OpenCL, we keep it in case we have to create another one of the same size
+                # value is now for sure OpenCL, we keep it in case we have to
+                # create another one of the same size
                 any_ocl_input = value
 
             # default: keep value
@@ -62,7 +63,8 @@ def plugin_function(
                 kwargs[argument] = value
 
 
-        # go through all arguments again and check if an image wasn't set
+        # go through all arguments again and check if an image wasn't set,
+        # in which case we create one.
         for argument in argument_specification.args:
             if kwargs.get(argument) is not None:
                 value = kwargs[argument]
