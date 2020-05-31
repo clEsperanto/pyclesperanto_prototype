@@ -9,6 +9,7 @@ from .create import create_like
 from .types import Image, is_image
 from .push import push
 
+
 @curry
 def plugin_function(
     function: Callable,
@@ -36,7 +37,6 @@ def plugin_function(
         The actual function call that will be executed, magically creating
         output arguments of the correct type.
     """
-
 
     @wraps(function)
     def worker_function(*args, **kwargs):
@@ -84,6 +84,5 @@ def plugin_function(
 
         # execute function with determined arguments
         return function(**kwargs)
-
 
     return worker_function
