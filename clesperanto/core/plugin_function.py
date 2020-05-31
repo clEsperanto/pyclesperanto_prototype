@@ -47,32 +47,32 @@ def plugin_function(
 
         for arg_counter, argument in enumerate(argument_specification.args):
             #print("---\nparsing argument " + argument)
-            if (len(args) > arg_counter):
+            if arg_counter < len(args):
                 value = args[arg_counter]
             else:
                 value = None
 
-            if (is_image(value)):
+            if is_image(value):
                 value = push(value)
                 # value is for sure OpenCL, we keep it in case we have to create another one of the same size
                 any_ocl_input = value
 
             # default: keep value
-            if (value is not None):
+            if value is not None:
                 kwargs[argument] = value
 
 
         # go through all arguments again and check if an image wasn't set
         for argument in argument_specification.args:
-            if (kwargs.get(argument) is not None):
+            if kwargs.get(argument) is not None:
                 value = kwargs[argument]
             else:
                 value = None
 
             # was the argument annotated?
             type_annotation = argument_specification.annotations.get(argument);
-            if (value is None):
-                if (type_annotation is Image):
+            if value is None:
+                if type_annotation is Image:
                     # if not set and should be an image, create an image
                     # create a new output image with specified/default creator
                     kwargs[argument] = output_creator(any_ocl_input)
