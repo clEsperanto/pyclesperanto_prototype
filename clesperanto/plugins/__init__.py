@@ -68,6 +68,7 @@ from .paste import paste
 from .onlyzero_overwrite_maximum_box import onlyzero_overwrite_maximum_box
 from .onlyzero_overwrite_maximum_diamond import onlyzero_overwrite_maximum_diamond
 from .power import power
+from .power_images import power_images
 
 from .maximum_sphere import maximum_sphere
 from .minimum_sphere import minimum_sphere
