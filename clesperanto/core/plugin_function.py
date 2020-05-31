@@ -66,14 +66,9 @@ def plugin_function(
         # go through all arguments again and check if an image wasn't set,
         # in which case we create one.
         for argument in argument_specification.args:
-            if kwargs.get(argument) is not None:
-                value = kwargs[argument]
-            else:
-                value = None
-
             # was the argument annotated?
             type_annotation = argument_specification.annotations.get(argument);
-            if value is None:
+            if argument not in kwargs:
                 if type_annotation is Image:
                     # if not set and should be an image, create an image
                     # create a new output image with specified/default creator
