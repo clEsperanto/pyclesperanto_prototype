@@ -50,6 +50,7 @@ from .maximum_y_projection import maximum_y_projection
 from .maximum_z_projection import maximum_z_projection
 from .mean_box import mean_box
 from .mean_sphere import mean_sphere
+from .mean_z_projection import mean_z_projection
 from .minimum_box import minimum_box
 from .minimum_image_and_scalar import minimum_image_and_scalar
 from .minimum_images import minimum_images
