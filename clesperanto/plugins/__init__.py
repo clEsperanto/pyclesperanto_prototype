@@ -96,6 +96,7 @@ from .sum_z_projection import sum_z_projection
 from .top_hat_sphere import top_hat_sphere
 from .transpose_xy import transpose_xy
 from .transpose_xz import transpose_xz
+from .transpose_yz import transpose_yz
 
 
 
