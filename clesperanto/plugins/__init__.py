@@ -87,6 +87,7 @@ from .smaller import smaller
 from .smaller_constant import smaller_constant
 from .smaller_or_equal import smaller_or_equal
 from .smaller_or_equal_constant import smaller_or_equal_constant
+from .sobel import sobel
 from .top_hat_sphere import top_hat_sphere
 
 

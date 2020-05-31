@@ -2926,8 +2926,8 @@ test1 = cle.push(np.asarray([
 reference = cle.push(np.asarray([
     [1, 1, 1, 1, 1],
     [1, 1, 1, 1, 1],
-    [1, 1, 1, 1, 1],
-    [1, 1, 0, 0, 1],
+    [1, 1, 1, 0, 1],
+    [1, 0, 0, 0, 1],
     [1, 1, 1, 1, 1]
 ]))
 
@@ -2940,3 +2940,33 @@ a = cle.pull(result)
 b = cle.pull(reference)
 assert (np.array_equal(a, b))
 print ("ok smaller_or_equal_constant")
+
+
+
+
+
+
+test1 = cle.push(np.asarray([
+    [0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0],
+    [0, 0, 1, 0, 0],
+    [0, 0, 1, 0, 0],
+    [0, 0, 0, 0, 0]
+]))
+
+reference = cle.push(np.asarray([
+    [0, 0, 0, 0, 0],
+    [0, 1.41, 2, 1.41, 0],
+    [0, 3.16, 2, 3.16, 0],
+    [0, 3.16, 2, 3.16, 0],
+    [0, 1.41, 2, 1.41, 0]
+]))
+
+result = cle.create(test1)
+cle.sobel(test1, result)
+a = cle.pull(result)
+print(a)
+
+b = cle.pull(reference)
+assert (np.allclose(a, b, 0.01))
+print ("ok sobel")
