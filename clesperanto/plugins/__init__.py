@@ -45,6 +45,7 @@ from .mask_label import mask_label
 from .maximum_image_and_scalar import maximum_image_and_scalar
 from .maximum_images import maximum_images
 from .maximum_box import maximum_box
+from .maximum_z_projection import maximum_z_projection
 from .mean_box import mean_box
 from .mean_sphere import mean_sphere
 from .minimum_box import minimum_box
