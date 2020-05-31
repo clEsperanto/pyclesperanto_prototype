@@ -83,6 +83,7 @@ from .set_ramp_y import set_ramp_y
 from .set_ramp_z import set_ramp_z
 from .set_row import set_row
 from .set_nonzero_pixels_to_pixelindex import set_nonzero_pixels_to_pixelindex
+from .set_where_x_greater_than_y import set_where_x_greater_than_y
 from .set_where_x_smaller_than_y import set_where_x_smaller_than_y
 from .smaller import smaller
 from .smaller_constant import smaller_constant
