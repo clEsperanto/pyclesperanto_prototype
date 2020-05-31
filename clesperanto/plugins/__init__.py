@@ -54,6 +54,7 @@ from .multiply_image_and_coordinate import multiply_image_and_coordinate
 from .multiply_image_and_scalar import multiply_image_and_scalar
 from .multiply_images import multiply_images
 from .nonzero_minimum_box import nonzero_minimum_box
+from .nonzero_minimum_diamond import nonzero_minimum_diamond
 from .not_equal import not_equal
 from .not_equal_constant import not_equal_constant
 from .paste import paste
