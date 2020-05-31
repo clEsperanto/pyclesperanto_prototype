@@ -83,6 +83,7 @@ from .set_ramp_y import set_ramp_y
 from .set_ramp_z import set_ramp_z
 from .set_row import set_row
 from .set_nonzero_pixels_to_pixelindex import set_nonzero_pixels_to_pixelindex
+from .smaller import smaller
 from .top_hat_sphere import top_hat_sphere
 
 
