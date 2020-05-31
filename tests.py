@@ -2608,6 +2608,44 @@ print ("ok set_plane")
 
 
 
+result = cle.push(np.asarray([
+    [
+        [0, 0, 0],
+        [3, 4, 3],
+        [3, 4, 3]
+    ],[
+        [3, 4, 3],
+        [3, 4, 3],
+        [3, 4, 3]
+    ]
+]))
+
+reference = cle.push(np.asarray([
+    [
+        [0, 0, 0],
+        [0, 0, 0],
+        [0, 0, 0]
+    ], [
+        [1, 1, 1],
+        [1, 1, 1],
+        [1, 1, 1]
+    ]
+]))
+
+cle.set_ramp_x(result)
+
+a = cle.pull(result)
+b = cle.pull(reference)
+
+print(b)
+
+assert (np.allclose(a, b, 0.001))
+print ("ok set_ramp_x")
+
+
+
+
+
 
 result = cle.push(np.asarray([
     [3, 3, 3, 3, 3],
