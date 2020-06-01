@@ -1,6 +1,10 @@
 from ..core import execute
 
 def binary_subtract (src1, src2, dst):
+    """
+    documentation placeholder
+    """
+
 
     parameters = {
         "dst": dst,

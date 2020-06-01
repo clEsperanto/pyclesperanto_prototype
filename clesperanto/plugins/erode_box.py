@@ -4,6 +4,10 @@ from ..core import execute
 
 
 def erode_box (src, dst):
+    """
+    documentation placeholder
+    """
+
 
     parameters = {
         "src":src,

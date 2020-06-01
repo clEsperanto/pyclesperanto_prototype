@@ -2,6 +2,10 @@ from ..core import execute
 
 
 def exponential (src, dst):
+    """
+    documentation placeholder
+    """
+
 
     parameters = {
         "src":src,

@@ -5,6 +5,11 @@ from ..plugins import add_images_weighted
 
 
 def top_hat_sphere(input, output, radius_x, radius_y, radius_z=0):
+    """
+    documentation placeholder
+    """
+
+
     temp1 = create(input.shape);
     temp2 = create(input.shape);
 

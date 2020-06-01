@@ -2,6 +2,10 @@ from ..core import execute
 
 
 def multiply_image_and_scalar (src, dst, scalar):
+    """
+    documentation placeholder
+    """
+
 
     parameters = {
         "src":src,

@@ -1,6 +1,10 @@
 from ..core import execute
 
 def nonzero_minimum_box (src, flag_dst, dst):
+    """
+    documentation placeholder
+    """
+
 
     parameters = {
         "dst": dst,

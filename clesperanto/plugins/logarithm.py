@@ -2,6 +2,10 @@ from ..core import execute
 
 
 def logarithm (src, dst):
+    """
+    documentation placeholder
+    """
+
 
     parameters = {
         "src":src,

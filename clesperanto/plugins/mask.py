@@ -2,6 +2,10 @@ from ..core import execute
 
 
 def mask (src, mask, dst):
+    """
+    documentation placeholder
+    """
+
 
     parameters = {
         "src":src,

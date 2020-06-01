@@ -2,6 +2,11 @@ from ..core import execute
 
 
 def add_image_and_scalar(input, output, scalar):
+    """
+    documentation placeholder
+    """
+
+
     parameters = {
         "src":input,
         "dst":output,

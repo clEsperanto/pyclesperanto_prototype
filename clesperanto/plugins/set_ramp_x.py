@@ -1,6 +1,11 @@
 from ..core import execute
 
 def set_ramp_x(output):
+    """
+    documentation placeholder
+    """
+
+
     parameters = {
         "dst":output
     }

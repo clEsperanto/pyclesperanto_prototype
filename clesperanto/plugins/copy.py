@@ -2,6 +2,10 @@ from ..core import execute
 
 
 def copy (src, dst):
+    """
+    documentation placeholder
+    """
+
 
     parameters = {
         "dst":dst,

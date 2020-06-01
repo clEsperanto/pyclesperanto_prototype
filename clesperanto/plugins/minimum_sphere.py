@@ -2,6 +2,11 @@ from ..core import radius_to_kernel_size
 from ..core import execute
 
 def minimum_sphere(input, output, radius_x, radius_y, radius_z=0):
+    """
+    documentation placeholder
+    """
+
+
     kernel_size_x = radius_to_kernel_size(radius_x);
     kernel_size_y = radius_to_kernel_size(radius_y);
     kernel_size_z = radius_to_kernel_size(radius_z);

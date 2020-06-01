@@ -1,6 +1,11 @@
 from ..core import execute
 
 def set_plane(output, plane, scalar):
+    """
+    documentation placeholder
+    """
+
+
     parameters = {
         "dst":output,
         "plane":int(plane),

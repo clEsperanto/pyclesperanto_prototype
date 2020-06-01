@@ -2,6 +2,10 @@ from ..core import radius_to_kernel_size
 from ..core import execute
 
 def multiply_image_and_coordinate(input, output, dimension):
+    """
+    documentation placeholder
+    """
+
 
     parameters = {
         "src":input,

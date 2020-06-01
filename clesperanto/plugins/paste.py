@@ -2,6 +2,10 @@ from ..core import execute
 
 
 def paste (src, dst, destination_x, destination_y, destination_z):
+    """
+    documentation placeholder
+    """
+
 
     parameters = {
         "dst":dst,

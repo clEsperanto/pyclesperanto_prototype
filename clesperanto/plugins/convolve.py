@@ -1,6 +1,10 @@
 from ..core import execute
 
 def convolve (src, kernelImage, dst):
+    """
+    documentation placeholder
+    """
+
 
     parameters = {
         "src":src,

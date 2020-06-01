@@ -4,6 +4,10 @@ from ..core import execute
 
 
 def dilate_sphere_slice_by_slice (src, dst):
+    """
+    documentation placeholder
+    """
+
 
     parameters = {
         "src":src,

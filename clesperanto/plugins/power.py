@@ -2,6 +2,10 @@ from ..core import execute
 
 
 def power (src, dst, exponent):
+    """
+    documentation placeholder
+    """
+
 
     parameters = {
         "src":src,

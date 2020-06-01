@@ -1,6 +1,11 @@
 from ..core import execute
 
 def set_where_x_smaller_than_y(output, scalar):
+    """
+    documentation placeholder
+    """
+
+
     parameters = {
         "dst":output,
         "value":float(scalar)

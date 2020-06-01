@@ -2,6 +2,11 @@ from ..core import execute
 
 
 def draw_sphere (dst, x, y, z, radius_x, radius_y, radius_z, value):
+    """
+    documentation placeholder
+    """
+
+
     if (len(dst.shape) == 2):
         parameters = {
             "dst": dst,

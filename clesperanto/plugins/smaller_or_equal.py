@@ -2,6 +2,10 @@ from ..core import execute
 
 
 def smaller_or_equal (src1, src2, dst):
+    """
+    documentation placeholder
+    """
+
 
     parameters = {
         "src1":src1,

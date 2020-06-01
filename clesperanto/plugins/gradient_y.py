@@ -1,6 +1,10 @@
 from ..core import execute
 
 def gradient_y (src, dst):
+    """
+    documentation placeholder
+    """
+
 
     parameters = {
         "dst":dst,

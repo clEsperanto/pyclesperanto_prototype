@@ -1,6 +1,10 @@
 from ..core import execute
 
 def binary_edge_detection (src, dst):
+    """
+    documentation placeholder
+    """
+
 
     parameters = {
         "dst": dst,

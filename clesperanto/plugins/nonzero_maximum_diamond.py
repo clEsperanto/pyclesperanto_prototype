@@ -1,6 +1,10 @@
 from ..core import execute
 
 def nonzero_maximum_diamond (src, flag_dst, dst):
+    """
+    documentation placeholder
+    """
+
 
     parameters = {
         "dst": dst,

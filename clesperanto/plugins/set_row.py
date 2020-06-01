@@ -1,6 +1,11 @@
 from ..core import execute
 
 def set_row(output, row, scalar):
+    """
+    documentation placeholder
+    """
+
+
     parameters = {
         "dst":output,
         "row":int(row),

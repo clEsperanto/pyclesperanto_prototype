@@ -2,6 +2,10 @@ from ..core import execute
 
 
 def replace_intensity(src, dst, value_to_replace, value_replacement):
+    """
+    documentation placeholder
+    """
+
 
     parameters = {
         "dst": dst,

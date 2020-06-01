@@ -2,6 +2,10 @@ from ..core import execute
 
 
 def mask_label (src, labelmap, dst, label_id):
+    """
+    documentation placeholder
+    """
+
 
     parameters = {
         "src":src,

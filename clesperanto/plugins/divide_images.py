@@ -2,6 +2,10 @@ from ..core import execute
 
 
 def divide_images (src, src1, dst):
+    """
+    documentation placeholder
+    """
+
 
     parameters = {
         "src":src,

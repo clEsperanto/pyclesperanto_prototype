@@ -2,6 +2,11 @@ from ..core import execute
 
 
 def multiply_matrix(input1, input2, output):
+    """
+    documentation placeholder
+    """
+
+
     parameters = {
         "dst_matrix":output,
         "src1":input1,

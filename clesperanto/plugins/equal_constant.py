@@ -2,6 +2,10 @@ from ..core import execute
 
 
 def equal_constant (src1, dst, scalar):
+    """
+    documentation placeholder
+    """
+
 
     parameters = {
         "src1":src1,

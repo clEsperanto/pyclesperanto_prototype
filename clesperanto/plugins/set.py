@@ -1,6 +1,11 @@
 from ..core import execute
 
 def set(output, scalar):
+    """
+    documentation placeholder
+    """
+
+
     parameters = {
         "dst":output,
         "value":float(scalar)

@@ -2,6 +2,10 @@ from ..core import radius_to_kernel_size
 from ..core import execute
 
 def maximum_y_projection(input, output):
+    """
+    documentation placeholder
+    """
+
 
     parameters = {
         "dst_max":output,

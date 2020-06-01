@@ -1,6 +1,11 @@
 from ..core import execute
 
 def set_column(output, column, scalar):
+    """
+    documentation placeholder
+    """
+
+
     parameters = {
         "dst":output,
         "column":int(column),

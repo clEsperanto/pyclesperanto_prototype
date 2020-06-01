@@ -2,6 +2,10 @@ from ..core import execute
 
 
 def binary_not (src1, dst):
+    """
+    documentation placeholder
+    """
+
 
     parameters = {
         "src1":src1,

@@ -2,6 +2,11 @@ from ..core import execute
 
 
 def subtract_image_from_scalar(input, output, scalar):
+    """
+    documentation placeholder
+    """
+
+
     parameters = {
         "src":input,
         "dst":output,

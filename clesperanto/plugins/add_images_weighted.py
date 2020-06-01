@@ -2,6 +2,11 @@
 from ..core import execute
 
 def add_images_weighted(input1, input2, output, weight1, weight2):
+    """
+    documentation placeholder
+    """
+
+
     parameters = {
         "src":input1,
         "src1":input2,

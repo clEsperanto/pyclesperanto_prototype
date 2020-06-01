@@ -2,6 +2,11 @@ from ..core import execute
 
 
 def draw_box (dst, x, y, z, width, height, depth, value):
+    """
+    documentation placeholder
+    """
+
+
     if (len(dst.shape) == 2):
         parameters = {
             "dst": dst,

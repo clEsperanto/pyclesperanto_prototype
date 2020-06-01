@@ -2,6 +2,10 @@ from ..core import execute
 
 
 def power_images (src1, src2, dst):
+    """
+    documentation placeholder
+    """
+
 
     parameters = {
         "dst": dst,

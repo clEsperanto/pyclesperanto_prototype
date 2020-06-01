@@ -2,6 +2,10 @@ from ..core import execute
 
 
 def replace_intensities(src, map, dst):
+    """
+    documentation placeholder
+    """
+
 
     parameters = {
         "dst": dst,

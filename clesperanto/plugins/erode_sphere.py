@@ -4,6 +4,10 @@ from ..core import execute
 
 
 def erode_sphere (src, dst):
+    """
+    documentation placeholder
+    """
+
 
     parameters = {
         "src":src,

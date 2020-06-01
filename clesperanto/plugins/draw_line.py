@@ -2,6 +2,11 @@ from ..core import execute
 
 
 def draw_line (dst, x1, y1, z1, x2, y2, z2, thickness, value):
+    """
+    documentation placeholder
+    """
+
+
     if (len(dst.shape) == 2):
         parameters = {
             "dst": dst,

@@ -2,6 +2,10 @@ from ..core import execute
 
 
 def copy_slice (src, dst, slice):
+    """
+    documentation placeholder
+    """
+
 
     parameters = {
         "dst":dst,

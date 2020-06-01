@@ -2,6 +2,10 @@ from ..core import execute
 
 
 def multiply_images (src1, src2, dst):
+    """
+    documentation placeholder
+    """
+
 
     parameters = {
         "src":src1,

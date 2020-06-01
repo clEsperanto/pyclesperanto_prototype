@@ -1,6 +1,11 @@
 from ..core import execute
 
 def set_where_x_equals_y(output, scalar):
+    """
+    documentation placeholder
+    """
+
+
     parameters = {
         "dst":output,
         "value":float(scalar)

@@ -1,6 +1,10 @@
 from ..core import execute
 
 def transpose_xy (src, dst):
+    """
+    documentation placeholder
+    """
+
 
     parameters = {
         "src":src,

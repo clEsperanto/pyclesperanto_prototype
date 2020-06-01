@@ -1,6 +1,10 @@
 from ..core import execute
 
 def laplace_diamond (src, dst):
+    """
+    documentation placeholder
+    """
+
 
     parameters = {
         "dst":dst,
