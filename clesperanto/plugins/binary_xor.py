@@ -1,6 +1,10 @@
 from ..core import execute
 
 def binary_xor (src1, src2, dst):
+    """
+    documentation placeholder
+    """
+
 
     parameters = {
         "src1":src1,

@@ -122,3 +122,4 @@ def __readFile(filename):
     with open(filename, 'r') as myfile:
         data = myfile.read()
     return data
+
