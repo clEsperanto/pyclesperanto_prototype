@@ -1,6 +1,11 @@
 from ..core import execute
 
 def absolute(src, dst):
+    """
+    Documentation placeholder
+    """
+
+
     parameters = {
         "src":src,
         "dst":dst
