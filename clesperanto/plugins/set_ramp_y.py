@@ -1,8 +1,20 @@
 from ..core import execute
 
 def set_ramp_y(output):
-    """
-    documentation placeholder
+    """Sets all pixel values to their Y coordinate
+
+    Available for: 2D, 3D
+
+    Parameters
+    ----------
+    (Image source)
+    todo: Better documentation will follow
+          In the meantime, read more: https://clij.github.io/clij2-docs/reference_setRampY
+
+
+    Returns
+    -------
+
     """
 
 

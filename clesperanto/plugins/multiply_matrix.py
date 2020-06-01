@@ -2,8 +2,20 @@ from ..core import execute
 
 
 def multiply_matrix(input1, input2, output):
-    """
-    documentation placeholder
+    """Multiplies two matrices with each other.
+
+    Available for: 2D
+
+    Parameters
+    ----------
+    (Image matrix1, Image matrix2, ByRef Image matrix_destination)
+    todo: Better documentation will follow
+          In the meantime, read more: https://clij.github.io/clij2-docs/reference_multiplyMatrix
+
+
+    Returns
+    -------
+
     """
 
 

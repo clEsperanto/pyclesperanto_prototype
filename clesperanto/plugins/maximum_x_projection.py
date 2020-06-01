@@ -2,8 +2,20 @@ from ..core import radius_to_kernel_size
 from ..core import execute
 
 def maximum_x_projection(input, output):
-    """
-    documentation placeholder
+    """Determines the maximum projection of an image along X.
+
+    Available for: 3D
+
+    Parameters
+    ----------
+    (Image source, ByRef Image destination_max)
+    todo: Better documentation will follow
+          In the meantime, read more: https://clij.github.io/clij2-docs/reference_maximumXProjection
+
+
+    Returns
+    -------
+
     """
 
 

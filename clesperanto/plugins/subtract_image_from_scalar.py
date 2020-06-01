@@ -2,8 +2,22 @@ from ..core import execute
 
 
 def subtract_image_from_scalar(input, output, scalar):
-    """
-    documentation placeholder
+    """Subtracts one image X from a scalar s pixel wise.
+    
+    <pre>f(x, s) = s - x</pre>
+
+    Available for: 2D, 3D
+
+    Parameters
+    ----------
+    (Image input, ByRef Image destination, Number scalar)
+    todo: Better documentation will follow
+          In the meantime, read more: https://clij.github.io/clij2-docs/reference_subtractImageFromScalar
+
+
+    Returns
+    -------
+
     """
 
 

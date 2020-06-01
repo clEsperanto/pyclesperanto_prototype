@@ -2,8 +2,21 @@ from ..core import execute
 
 
 def draw_box (dst, x, y, z, width, height, depth, value):
-    """
-    documentation placeholder
+    """Draws a box at a given start point with given size. 
+    All pixels other than in the box are untouched. Consider using `set(buffer, 0);` in advance.
+
+    Available for: 2D, 3D
+
+    Parameters
+    ----------
+    (ByRef Image destination, Number x, Number y, Number z, Number width, Number height, Number depth, Number value)
+    todo: Better documentation will follow
+          In the meantime, read more: https://clij.github.io/clij2-docs/reference_drawBox
+
+
+    Returns
+    -------
+
     """
 
 

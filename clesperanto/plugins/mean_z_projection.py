@@ -2,8 +2,20 @@ from ..core import radius_to_kernel_size
 from ..core import execute
 
 def mean_z_projection(input, output):
-    """
-    documentation placeholder
+    """Determines the mean average projection of an image along Z.
+
+    Available for: 3D
+
+    Parameters
+    ----------
+    (Image source, ByRef Image destination)
+    todo: Better documentation will follow
+          In the meantime, read more: https://clij.github.io/clij2-docs/reference_meanZProjection
+
+
+    Returns
+    -------
+
     """
 
 

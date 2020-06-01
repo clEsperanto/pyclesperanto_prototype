@@ -2,8 +2,20 @@ from ..core import radius_to_kernel_size
 from ..core import execute
 
 def multiply_image_and_coordinate(input, output, dimension):
-    """
-    documentation placeholder
+    """Multiplies all pixel intensities with the x, y or z coordinate, depending on specified dimension.
+
+    Available for: 2D, 3D
+
+    Parameters
+    ----------
+    (Image source, ByRef Image destination, Number dimension)
+    todo: Better documentation will follow
+          In the meantime, read more: https://clij.github.io/clij2-docs/reference_multiplyImageAndCoordinate
+
+
+    Returns
+    -------
+
     """
 
 

@@ -5,8 +5,20 @@ from ..plugins import add_images_weighted
 
 
 def top_hat_sphere(input, output, radius_x, radius_y, radius_z=0):
-    """
-    documentation placeholder
+    """Applies a top-hat filter for background subtraction to the input image.
+
+    Available for: 2D, 3D
+
+    Parameters
+    ----------
+    (Image input, ByRef Image destination, Number radiusX, Number radiusY, Number radiusZ)
+    todo: Better documentation will follow
+          In the meantime, read more: https://clij.github.io/clij2-docs/reference_topHatSphere
+
+
+    Returns
+    -------
+
     """
 
 

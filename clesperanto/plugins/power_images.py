@@ -2,8 +2,20 @@ from ..core import execute
 
 
 def power_images (src1, src2, dst):
-    """
-    documentation placeholder
+    """Calculates x to the power of y pixel wise of two images X and Y.
+
+    Available for: 2D, 3D
+
+    Parameters
+    ----------
+    (Image input, Image exponent, ByRef Image destination)
+    todo: Better documentation will follow
+          In the meantime, read more: https://clij.github.io/clij2-docs/reference_powerImages
+
+
+    Returns
+    -------
+
     """
 
 
