@@ -1,6 +1,7 @@
 from .absolute import absolute
 from .add_images_weighted import add_images_weighted
 from .add_image_and_scalar import add_image_and_scalar
+from .apply_threshold import apply_threshold
 from .binary_and import binary_and
 from .binary_and import binary_and as binary_intersection
 from .binary_edge_detection import binary_edge_detection
