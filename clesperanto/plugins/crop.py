@@ -1,6 +1,5 @@
 from ..core import execute
 
-
 def crop(input, output, startx, starty, startz=0):
     """Crops a given rectangle out of a given image
 

@@ -22,3 +22,4 @@ __kernel void crop_3d(
   const float out = READ_src_IMAGE(src,sampler,spos).x;
   WRITE_dst_IMAGE(dst,dpos, CONVERT_dst_PIXEL_TYPE(out));
 }
+

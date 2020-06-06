@@ -19,3 +19,4 @@ __kernel void crop_2d(
   WRITE_dst_IMAGE(dst, dpos, CONVERT_dst_PIXEL_TYPE(out));
 }
 
+
