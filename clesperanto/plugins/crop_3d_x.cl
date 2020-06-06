@@ -12,7 +12,6 @@ __kernel void crop_3d(
   const int dy = get_global_id(1);
   const int dz = get_global_id(2);
 
-
   const int sx = start_x + dx;
   const int sy = start_y + dy;
   const int sz = start_z + dz;

@@ -12,7 +12,6 @@ __kernel void crop_2d(
   const int sx = start_x + dx;
   const int sy = start_y + dy;
 
-
   const POS_dst_TYPE dpos = POS_dst_INSTANCE(dx, dy, 0, 0);
   const POS_src_TYPE spos = POS_src_INSTANCE(sx, sy, 0, 0);
 

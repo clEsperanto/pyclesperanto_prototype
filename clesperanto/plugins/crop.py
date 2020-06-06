@@ -13,10 +13,8 @@ def crop(input, output, startx, starty, startz=0):
           In the meantime, read more: 2D: https://clij.github.io/clij2-docs/reference_crop2D
                                       3D: https://clij.github.io/clij2-docs/reference_crop3D
 
-
     Returns
     -------
-
     """
 
     parameters = {
