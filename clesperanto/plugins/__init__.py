@@ -13,6 +13,7 @@ from .binary_xor import binary_xor
 from .convolve import convolve
 from .copy import copy
 from .copy_slice import copy_slice
+from .crop import crop
 from .dilate_box import dilate_box
 from .dilate_box_slice_by_slice import dilate_box_slice_by_slice
 from .dilate_sphere import dilate_sphere
