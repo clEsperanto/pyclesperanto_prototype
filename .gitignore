@@ -1,3 +1,10 @@
 */__pycache__/
 /.idea/
 *.pyc
+/pyclesperanto_pradeep.iml
+/benchmarking_NVIDIA_MX150.pdf
+/benchmarking_nvidia_rtx_2080_20200603.pdf
+/benchmarking.ipynb
+/clesperanto/plugins/apply_threshold.py
+/clesperanto/plugins/apply_threshold_2d.cl
+/clesperanto/plugins/apply_threshold_3d.cl
