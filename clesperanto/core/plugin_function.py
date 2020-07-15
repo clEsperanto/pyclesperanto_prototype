@@ -3,7 +3,7 @@ from typing import Any, Callable, Dict, Optional, Sequence, Set, Type, Union
 from functools import wraps
 from toolz import curry
 
-from gputools import OCLArray
+from ._pycl import OCLArray
 
 from .create import create_like
 from .types import Image, is_image

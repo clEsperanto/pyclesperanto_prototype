@@ -1,4 +1,4 @@
-from gputools import OCLArray
+from ._pycl import OCLArray
 import numpy as np
 
 def create(dimensions):
