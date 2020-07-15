@@ -15,6 +15,12 @@ pip install pyopencl-2019.1.1+cl12-cp37-cp37m-win_amd64.whl
 pip install gputools
 ```
 
+Afterwards, install pyclesperanto:
+
+```
+pip install pyclesperanto-prototype
+```
+
 ### Troubleshooting installation
 If you receive an error like 
 ```
