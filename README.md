@@ -41,10 +41,10 @@ You can then push an image to the GPU and create memory there:
 import numpy as np
 
 # push an array to the GPU
-flip = cle.push(np.array([2, 4, 6, 8, 10, 12, 14, 16, 18, 20]))
+flip = cle.push(np.array([[2, 4, 6, 8, 10, 12, 14, 16, 18, 20][]))
 
 # create memory for the output
-flop = cle.create((10,))
+flop = cle.create((10,1))
 ```
 
 And then you can call methods in the GPU without the need for learning OpenCL:
