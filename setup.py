@@ -18,11 +18,6 @@ setuptools.setup(
         "License :: OSI Approved :: BSD License",
         "Operating System :: OS Independent",
     ],
-    package_data={"pyclesperanto_prototype":
-                        ['tier0/*.cl',
-                         'tier1/*.cl',
-                         ],
-                    },
-    install_requires=["numpy", "pyopencl", "toolz"]
+    install_requires=["numpy", "pyopencl", "toolz"],
     python_requires='>=3.7',
 )
