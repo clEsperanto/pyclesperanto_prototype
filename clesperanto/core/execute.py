@@ -1,6 +1,6 @@
 
 import numpy as np
-from gputools import OCLProgram
+from ._pycl import OCLProgram
 import pyopencl
 import os
 
