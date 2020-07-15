@@ -1,5 +1,5 @@
 import numpy as np
-from gputools import OCLArray
+from ._pycl import OCLArray
 
 def push(any_array):
     '''
