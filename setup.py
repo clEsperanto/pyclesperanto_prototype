@@ -4,11 +4,11 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="pyclesperanto_prototype-haesleinhuepf", # Replace with your own username
-    version="0.0.1",
+    name="pyclesperanto_prototype", # Replace with your own username
+    version="0.0.2",
     author="haesleinhuepf",
     author_email="rhaase@mpi-cbg.de",
-    description="OpenCL GPU accelerated image processing",
+    description="OpenCL based GPU-accelerated image processing (an early prototype)",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/clEsperanto/pyclesperanto_prototype",
@@ -18,5 +18,10 @@ setuptools.setup(
         "License :: OSI Approved :: BSD License",
         "Operating System :: OS Independent",
     ],
-    python_requires='>=3.6',
+    package_data={"pyclesperanto_prototype":
+                        ['tier0/*.cl',
+                         'tier1/*.cl',
+                         ],
+                    },
+    python_requires='>=3.7',
 )
