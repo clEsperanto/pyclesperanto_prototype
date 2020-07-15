@@ -1,3 +1,6 @@
 */__pycache__/
 /.idea/
 *.pyc
+/build/
+/dist/
+/pyclesperanto_prototype_haesleinhuepf.egg-info/
