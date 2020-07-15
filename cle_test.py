@@ -1,5 +1,5 @@
 import numpy as np
-import clesperanto as cle
+import pyclesperanto_prototype as cle
 
 # push an array to the GPU
 flip = cle.push(np.array([2, 4, 6, 8, 10, 12, 14, 16, 18, 20]))

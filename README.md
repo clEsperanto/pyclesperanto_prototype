@@ -27,7 +27,7 @@ An example is available in [this script](https://github.com/clEsperanto/pyclespe
 Basically, you import the methods from clEsperanto you need:
 
 ```python
-import clesperanto as cle
+import pyclesperanto_prototype as cle
 ```
 
 You can then push an image to the GPU and create memory there:

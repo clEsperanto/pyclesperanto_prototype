@@ -2,7 +2,7 @@
 filename = "data/mini-t1-head.tif"
 
 from skimage.io import imread
-import clesperanto as cle
+import pyclesperanto_prototype as cle
 import numpy as np
 
 # load data and allocate memory for result
