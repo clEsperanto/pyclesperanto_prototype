@@ -2,7 +2,8 @@ import os
 import sys
 import numpy as np
 import pyopencl as cl
-
+from pyopencl import characterize
+from pyopencl import array
 
 from collections import namedtuple
 
@@ -124,7 +125,7 @@ cl_buffer_datatype_dict = {
 }
 
 
-if cl.characterize.has_double_support(get_gpu().device):
+if characterize.has_double_support(get_gpu().device):
     cl_buffer_datatype_dict[np.float64] = "double"
 
 
@@ -167,13 +168,13 @@ def _wrap_OCLArray(cls):
     def from_array(cls, arr, *args, **kwargs):
         assert_supported_ndarray_type(arr.dtype.type)
         queue = get_gpu().queue
-        return cl.array.to_device(queue, prepare(arr), *args, **kwargs)
+        return array.to_device(queue, prepare(arr), *args, **kwargs)
 
     @classmethod
     def empty(cls, shape, dtype=np.float32):
         assert_supported_ndarray_type(dtype)
         queue = get_gpu().queue
-        return cl.array.empty(queue, shape, dtype)
+        return array.empty(queue, shape, dtype)
 
     @classmethod
     def empty_like(cls, arr):
@@ -184,13 +185,13 @@ def _wrap_OCLArray(cls):
     def zeros(cls, shape, dtype=np.float32):
         assert_supported_ndarray_type(dtype)
         queue = get_gpu().queue
-        return cl.array.zeros(queue, shape, dtype)
+        return array.zeros(queue, shape, dtype)
 
     @classmethod
     def zeros_like(cls, arr):
         assert_supported_ndarray_type(arr.dtype.type)
         queue = get_gpu().queue
-        return cl.array.zeros(queue, arr.shape, arr.dtype.type)
+        return array.zeros(queue, arr.shape, arr.dtype.type)
 
     def copy_buffer(self, buf, **kwargs):
         queue = get_gpu().queue
@@ -231,15 +232,15 @@ def _wrap_OCLArray(cls):
     cls.__array__ = cls.get
 
     for f in ["sum", "max", "min", "dot", "vdot"]:
-        setattr(cls, f, wrap_module_func(cl.array, f))
+        setattr(cls, f, wrap_module_func(array, f))
 
-    for f in dir(cl.cl_math):
-        if callable(getattr(cl.cl_math, f)):
-            setattr(cls, f, wrap_module_func(cl.cl_math, f))
+    #for f in dir(cl_math):
+    #    if callable(getattr(cl.cl_math, f)):
+    #        setattr(cls, f, wrap_module_func(cl.cl_math, f))
 
     # cls.sum = sum
     cls.__name__ = str("OCLArray")
     return cls
 
 
-OCLArray = _wrap_OCLArray(cl.array.Array)
+OCLArray = _wrap_OCLArray(array.Array)
