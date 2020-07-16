@@ -6,7 +6,7 @@ import pyopencl as cl
 from . import LINUX, CI
 
 
-@pytest.mark.xfail(LINUX and CI, reason='INVALID_ARG_SIZE on CI', raises=cl.LogicError)
+@pytest.mark.xfail('LINUX and CI', reason='INVALID_ARG_SIZE on CI', raises=cl.LogicError)
 def test_maximum_box():
     test1 = cle.push(np.asarray([
         [0, 0, 0, 0, 0],
