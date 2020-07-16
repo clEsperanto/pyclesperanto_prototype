@@ -6,24 +6,24 @@ print(cle.cl_info())
 
 gpu_input = cle.push(np.asarray([
     [
-        [1, 2, 3],
-        [1, 6, 6],
-        [7, 8, 9]
+        [1, 0, 1],
+        [1, 0, 0],
+        [0, 0, 1]
     ]
 ]))
 gpu_output = cle.create_like(gpu_input)
 
 gpu_reference = cle.push(np.asarray([
     [
-        [1, 3, 6],
-        [1, 4, 4],
-        [2, 5, 7]
+        [1, 0, 2],
+        [1, 0, 0],
+        [0, 0, 3]
     ]
 ]))
 
 
 
-result = cle.close_index_gaps_in_label_map(gpu_input, gpu_output)
+result = cle.connected_components_labeling_box(gpu_input, gpu_output)
 
 a = cle.pull_zyx(gpu_output)
 b = cle.pull_zyx(gpu_reference)
