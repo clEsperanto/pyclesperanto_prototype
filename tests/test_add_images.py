@@ -1,4 +1,4 @@
-import clesperanto as cle
+import pyclesperanto_prototype as cle
 
 
 import numpy as np
