@@ -1,7 +1,10 @@
 import pyclesperanto_prototype as cle
 import numpy as np
+import pytest
+import pyopencl as cl
 
 
+@pytest.mark.xfail(raises=cl.RuntimeError)
 def test_nonzero_maximum_diamond():
     test = cle.push(np.asarray([
         [0, 0, 0, 0, 0],

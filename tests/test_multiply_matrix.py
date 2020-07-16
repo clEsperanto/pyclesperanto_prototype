@@ -1,17 +1,16 @@
 import numpy as np
-import clesperanto as cle
-import pyopencl as cl
+import pyclesperanto_prototype as cle
 import pytest
 
 
-@pytest.mark.parametrize("shape", 2 ** np.arange(10)[5:], ids=lambda x: f"{x}x{x}")
+@pytest.mark.parametrize("shape", 2 ** np.arange(10, 12), ids=lambda x: f"{x}x{x}")
 @pytest.mark.parametrize("target", ["cpu", "gpu"])
 def test_multiply_matrix(shape, benchmark, target):
     @benchmark
     def multiply():
         a_np = np.random.rand(shape, shape).astype("float32")
         b_np = np.random.rand(shape, shape).astype("float32")
-        if target == 'gpu':
+        if target == "gpu":
             # push arrays to GPU
             gpu_a = cle.push(a_np)
             gpu_b = cle.push(b_np)

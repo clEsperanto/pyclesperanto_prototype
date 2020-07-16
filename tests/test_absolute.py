@@ -24,5 +24,3 @@ def test_absolute1():
     gpu_b = cle.create(gpu_a)
     cle.absolute(gpu_a, gpu_b)
     assert np.all(cle.pull(gpu_b) == 1)
-
-test_absolute()
