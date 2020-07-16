@@ -30,7 +30,9 @@ class get_gpu:
         if reload or not cls._instance:
             device = get_best_device()
             context = cl.Context(devices=[device])
+            device.context = context
             queue = cl.CommandQueue(context)
+            device.queue = queue
             cls._instance = GPU(device, context, queue)
         return cls._instance
 
