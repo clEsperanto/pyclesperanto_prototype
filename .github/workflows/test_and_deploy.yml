@@ -9,20 +9,31 @@ jobs:
     name: ${{ matrix.platform }} ( ${{ matrix.python-version }})
     runs-on: ${{ matrix.platform }}
     strategy:
+      fail-fast: false
       matrix:
         python-version: [3.7, 3.8]
         platform: [ubuntu-latest, macos-latest, windows-latest]
     steps:
       - uses: actions/checkout@v2
-      - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v2
+      - name: Set up conda ${{ matrix.python-version }}
+        uses: goanpeca/setup-miniconda@v1
         with:
+          auto-update-conda: true
+          activate-environment: test
           python-version: ${{ matrix.python-version }}
+          channels: conda-forge
+      - name: Conda info
+        shell: bash -l {0}
+        run: conda info
       - name: Install dependencies
+        shell: bash -l {0}
         run: |
+          python --version
+          conda install -y pyopencl pocl
           python -m pip install --upgrade pip
-          python -m pip pip install setuptools tox tox-gh-actions
+          pip install setuptools wheel pytest pytest-cov tox tox-gh-actions tox-conda
       - name: Test with tox
+        shell: bash -l {0}
         run: tox
         env:
           PLATFORM: ${{ matrix.platform }}
