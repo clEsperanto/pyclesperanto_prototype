@@ -1,6 +1,11 @@
 import pyclesperanto_prototype as cle
 import numpy as np
+import pyopencl as cl
 
+from . import LINUX, CI
+
+
+@pytest.mark.xfail('LINUX and CI', reason='INVALID_ARG_SIZE on CI', raises=cl.LogicError)
 def test_maximum_sphere():
     test = cle.push(np.asarray([
         [1, 1, 1],
