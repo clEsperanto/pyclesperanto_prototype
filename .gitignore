@@ -139,11 +139,4 @@ cython_debug/
 
 .vscode/settings.json
 /.idea/
-<<<<<<< HEAD
-*.pyc
-/build/
-/dist/
-/pyclesperanto_prototype_haesleinhuepf.egg-info/
-=======
 .DS_STORE
->>>>>>> 390a2e657d7ce15b47907e56ee1801499441835e
