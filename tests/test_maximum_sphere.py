@@ -25,3 +25,17 @@ def test_maximum_sphere():
     assert (np.mean(a) == 5)
 
     print("ok maximum sphere")
+
+
+
+def test_maximum_sphere():
+    gpu_a = cle.push(np.asarray([[1, 1, 1], [1, 2, 1], [1, 1, 1]]))
+    gpu_b = cle.create(gpu_a)
+    cle.maximum_sphere(gpu_a, gpu_b, 1, 1, 1)
+
+    a = cle.pull(gpu_b)
+    assert np.min(a) == 1
+    assert np.max(a) == 2
+
+    cle.set(gpu_a, 5)
+    assert np.all(cle.pull(gpu_a) == 5)
