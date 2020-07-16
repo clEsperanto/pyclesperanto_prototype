@@ -96,7 +96,7 @@ def execute(anchor, opencl_kernel_filename, kernel_name, global_size, parameters
                 "key": key,
                 "pos_type": "int2" if value.ndim < 3 else "int4",
                 "pos": ["(pos0, 0)", "(pos0, pos1)", "(pos0, pos1, pos2, 0)"][ndim - 1],
-                "img_dims": 2 if ndim < 3 else 2,
+                "img_dims": 2 if ndim < 3 else 3,
                 "depth": depth,
                 "height": height,
                 "width": width,
