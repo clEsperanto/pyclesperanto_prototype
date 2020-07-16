@@ -1,1 +1,2 @@
+from .maximum_of_all_pixels import maximum_of_all_pixels
 from .top_hat_sphere import top_hat_sphere
