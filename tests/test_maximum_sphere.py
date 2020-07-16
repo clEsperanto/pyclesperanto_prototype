@@ -1,6 +1,7 @@
 import pyclesperanto_prototype as cle
 import numpy as np
 import pyopencl as cl
+import pytest
 
 from . import LINUX, CI
 
