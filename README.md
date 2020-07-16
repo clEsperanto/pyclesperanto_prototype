@@ -15,6 +15,12 @@ pip install pyopencl-2019.1.1+cl12-cp37-cp37m-win_amd64.whl
 pip install gputools
 ```
 
+Afterwards, install pyclesperanto:
+
+```
+pip install pyclesperanto-prototype
+```
+
 ### Troubleshooting installation
 If you receive an error like 
 ```
@@ -27,16 +33,18 @@ An example is available in [this script](https://github.com/clEsperanto/pyclespe
 Basically, you import the methods from clEsperanto you need:
 
 ```python
-import clesperanto as cle
+import pyclesperanto_prototype as cle
 ```
 
 You can then push an image to the GPU and create memory there:
 ```python
+import numpy as np
+
 # push an array to the GPU
-flip = cle.push(np.array([2, 4, 6, 8, 10, 12, 14, 16, 18, 20]))
+flip = cle.push(np.array([[2, 4, 6, 8, 10, 12, 14, 16, 18, 20][]))
 
 # create memory for the output
-flop = cle.create((10,))
+flop = cle.create((10,1))
 ```
 
 And then you can call methods in the GPU without the need for learning OpenCL:
