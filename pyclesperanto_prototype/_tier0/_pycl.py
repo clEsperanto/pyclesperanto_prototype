@@ -81,7 +81,7 @@ class OCLProgram(cl.Program):
             raise ValueError("empty src_str! ")
 
         if dev is None:
-            dev = get_gpu().device
+            dev = get_gpu()
 
         self._dev = dev
         self._kernel_dict = {}
