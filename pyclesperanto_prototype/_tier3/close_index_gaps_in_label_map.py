@@ -1,25 +1,30 @@
 import numpy as np
 from .._tier0 import pull
 from .._tier0 import push
+from .._tier0 import create
 from .._tier1 import replace_intensities
+from .._tier1 import set
+from .._tier2 import flag_existing_intensities
 from .._tier2 import maximum_of_all_pixels
+from .._tier2 import sum_reduction_x
+from .._tier2 import block_enumerate
 
-def close_index_gaps_in_label_map(input, output):
+
+def close_index_gaps_in_label_map(input, output, blocksize = 4096):
     max_label = maximum_of_all_pixels(input)
-    print(max_label)
 
-    new_indices = np.zeros([int(max_label) + 1, 1])
+    flagged_indices = create([int(max_label) + 1, 1])
+    set(flagged_indices, 0)
+    flag_existing_intensities(input, flagged_indices)
 
-    arr = pull(input)
+    # sum existing labels per blocks
+    block_sums = create([int((int(max_label) + 1) / blocksize) + 1, 1])
+    sum_reduction_x(flagged_indices, block_sums, blocksize)
 
-    count = 0
-    for x in np.nditer(arr):
-        key = int(x)
-        if (key > 0 and new_indices[key][0] == 0):
-            count += 1
-            new_indices[key][0] = count
+    # distribute new numbers
+    new_indices = create([int(max_label) + 1, 1])
+    block_enumerate(flagged_indices, block_sums, new_indices, blocksize)
 
-    new_indices_gpu = push(new_indices)
-    replace_intensities(input, new_indices_gpu, output)
+    replace_intensities(input, new_indices, output)
 
     return output

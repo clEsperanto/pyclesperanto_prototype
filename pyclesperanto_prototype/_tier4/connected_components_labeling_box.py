@@ -13,7 +13,6 @@ from .._tier0 import Image
 
 @plugin_function
 def connected_components_labeling_box(binary_input : Image, labelmap_output : Image = None):
-
     """
 
     :return:
@@ -40,12 +39,9 @@ def connected_components_labeling_box(binary_input : Image, labelmap_output : Im
         flag_value = pull(flag)[0][0][0]
         iteration_count += 1
 
-
     if (iteration_count % 2 == 0):
         close_index_gaps_in_label_map(temp1, labelmap_output)
     else:
         close_index_gaps_in_label_map(temp2, labelmap_output)
 
     return labelmap_output
-
-
