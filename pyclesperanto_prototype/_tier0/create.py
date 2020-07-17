@@ -22,7 +22,7 @@ def create(dimensions):
     return OCLArray.empty(dimensions, np.float32)
 
 
-def create_like(input:OCLArray):
+def create_like(input:OCLArray, input2:OCLArray = None):
     return OCLArray.empty(input.shape, np.float32)
 
 def create_pointlist_from_labelmap(input:OCLArray):
