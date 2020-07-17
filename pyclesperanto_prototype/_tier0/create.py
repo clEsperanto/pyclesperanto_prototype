@@ -24,3 +24,13 @@ def create(dimensions):
 
 def create_like(input:OCLArray):
     return OCLArray.empty(input.shape, np.float32)
+
+def create_pointlist_from_labelmap(input:OCLArray):
+    from .._tier2 import maximum_of_all_pixels
+    number_of_labels = int(maximum_of_all_pixels(input))
+    number_of_dimensions = len(input.shape)
+
+    print(number_of_labels)
+    print(number_of_dimensions)
+    return create([number_of_labels, number_of_dimensions])
+
