@@ -14,9 +14,9 @@ def test_close_index_gaps_in_label_maps():
 
     gpu_reference = cle.push(np.asarray([
         [
-            [1, 3, 6],
+            [1, 2, 3],
             [1, 4, 4],
-            [2, 5, 7]
+            [5, 6, 7]
         ]
     ]))
 
