@@ -30,7 +30,14 @@ def create_pointlist_from_labelmap(input:OCLArray):
     number_of_labels = int(maximum_of_all_pixels(input))
     number_of_dimensions = len(input.shape)
 
-    print(number_of_labels)
-    print(number_of_dimensions)
     return create([number_of_labels, number_of_dimensions])
+
+def create_matrix_from_pointlists(pointlist1:OCLArray, pointlist2:OCLArray):
+    width = pointlist1.shape[1]
+    height = pointlist2.shape[1]
+
+    print(width)
+    print(height)
+
+    return create([width, height])
 

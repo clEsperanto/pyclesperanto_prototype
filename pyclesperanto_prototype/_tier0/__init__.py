@@ -3,6 +3,7 @@ from .sigma_to_kernel_size import sigma_to_kernel_size
 from .create import create
 from .create import create_like
 from .create import create_pointlist_from_labelmap
+from .create import create_matrix_from_pointlists
 from .execute import execute
 from .pull import pull
 from .pull import pull_zyx

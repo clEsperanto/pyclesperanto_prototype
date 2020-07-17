@@ -5,7 +5,7 @@ from .._tier0 import plugin_function
 from .._tier0 import Image
 
 @plugin_function(output_creator=create_pointlist_from_labelmap)
-def labelled_spots_to_pointlist(label_map:Image, pointlist:Image = None):
+def labelled_spots_to_pointlist(label_map:Image, pointlist :Image = None):
 
     """
     documentation placeholder
