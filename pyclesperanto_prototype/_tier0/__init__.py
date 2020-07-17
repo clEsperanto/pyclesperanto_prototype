@@ -4,6 +4,8 @@ from .create import create
 from .create import create_like
 from .create import create_pointlist_from_labelmap
 from .create import create_matrix_from_pointlists
+from .create import create_square_matrix_from_pointlist
+from .create import create_square_matrix_from_labelmap
 from .execute import execute
 from .pull import pull
 from .pull import pull_zyx

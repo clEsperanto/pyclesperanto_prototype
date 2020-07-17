@@ -33,6 +33,7 @@ from .execute_separable_kernel import execute_separable_kernel
 from .flip import flip
 from .gaussian_blur import gaussian_blur
 from .generate_distance_matrix import generate_distance_matrix
+from .generate_touch_matrix import generate_touch_matrix
 from .gradient_x import gradient_x
 from .gradient_y import gradient_y
 from .gradient_z import gradient_z
