@@ -15,8 +15,6 @@ def touch_matrix_to_mesh (src_pointlist, src_touch_matrix, dst_mesh):
 
     dimensions = [1, 1, src_touch_matrix.shape[0]]
 
-    print(src_pointlist)
-
     execute(__file__, 'touch_matrix_to_mesh_3d_x.cl', 'touch_matrix_to_mesh_3d', dimensions, parameters)
 
     return dst_mesh
