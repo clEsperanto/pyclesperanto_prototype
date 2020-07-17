@@ -102,11 +102,11 @@ with napari.gui_qt():
 
     # use auto_call=True for instantaneous execution
     # can add sliders using QSlider, but need to show values
-    @magicgui(auto_call=True)#, call_button='Compute')
-    def clij_filter(input: Image, sigma = 2, threshold = 300) -> Image:
+    @magicgui(call_button='Compute')
+    def clij_filter(input: Image, sigma=2, threshold : float = 300) -> Image:
         if input:
             # push image to GPU memory and show it
-            gpu_input = cle.push_zyx(input)
+            gpu_input = cle.push_zyx(input.data)
 
             gpu_output = mesh_data(gpu_input, sigma, threshold)
 
