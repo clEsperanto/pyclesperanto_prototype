@@ -16,7 +16,7 @@ def maximum_of_all_pixels(input):
 
     if (len(dimensionality) == 3): # 3D image
 
-        temp = create([dimensionality[0], dimensionality[1]])
+        temp = create([dimensionality[2], dimensionality[1]])
 
         maximum_z_projection(input, temp)
 
@@ -26,7 +26,7 @@ def maximum_of_all_pixels(input):
 
     if (len(dimensionality) == 2): # 2D image (or projected 3D)
 
-        temp = create([dimensionality[0], 1])
+        temp = create([dimensionality[1], 1])
 
         maximum_y_projection(input, temp)
         input = temp
