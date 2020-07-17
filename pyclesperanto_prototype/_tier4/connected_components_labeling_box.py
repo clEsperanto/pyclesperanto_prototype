@@ -8,7 +8,11 @@ from .._tier3 import close_index_gaps_in_label_map
 
 import numpy as np
 
-def connected_components_labeling_box(binary_input, labelmap_output):
+from .._tier0 import plugin_function
+from .._tier0 import Image
+
+@plugin_function
+def connected_components_labeling_box(binary_input : Image, labelmap_output : Image = None):
 
     """
 
