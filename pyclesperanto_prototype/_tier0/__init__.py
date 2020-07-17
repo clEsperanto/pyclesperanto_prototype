@@ -16,3 +16,4 @@ from .push import push_zyx
 from .plugin_function import plugin_function
 from .types import Image
 from .cl_info import cl_info
+from ._pycl import get_gpu

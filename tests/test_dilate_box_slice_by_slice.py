@@ -1,7 +1,10 @@
 import pyclesperanto_prototype as cle
 import numpy as np
+import pytest
+import pyopencl as cl
 
 
+@pytest.mark.xfail(raises=cl.RuntimeError)
 def test_dilate_box_slice_by_slice():
     test = cle.push_zyx(np.asarray([
         [

@@ -1,16 +1,7 @@
-import numpy as np
-
 def pull(oclarray):
-    temp = oclarray.get();
-
-    if (len(temp.shape) == 2):
-        temp = np.swapaxes(temp, 0, 1)
-    else:
-        temp = np.swapaxes(temp, 0, 2)
-
-    return temp
+    """Pull array from GPU memory to device."""
+    return oclarray.get().T
 
 
 def pull_zyx(oclarray):
-    temp = oclarray.get();
-    return temp
+    return oclarray.get()
