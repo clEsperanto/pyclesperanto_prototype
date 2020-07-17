@@ -10,7 +10,6 @@ def test_connected_components_labeling_box():
             [0, 0, 1]
         ]
     ]))
-    gpu_output = cle.create_like(gpu_input)
 
     gpu_reference = cle.push(np.asarray([
         [
@@ -20,9 +19,7 @@ def test_connected_components_labeling_box():
         ]
     ]))
 
-
-
-    result = cle.connected_components_labeling_box(gpu_input, gpu_output)
+    gpu_output = cle.connected_components_labeling_box(gpu_input)
 
     a = cle.pull_zyx(gpu_output)
     b = cle.pull_zyx(gpu_reference)
