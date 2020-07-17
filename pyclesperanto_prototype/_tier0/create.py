@@ -51,3 +51,7 @@ def create_square_matrix_from_labelmap(labelmap: OCLArray):
 
     return create([width, width])
 
+def create_2d_xy(input):
+    return create([input.shape[2], input.shape[1]])
+
+
