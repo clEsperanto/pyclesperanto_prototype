@@ -1,7 +1,10 @@
-from .._tier0 import radius_to_kernel_size
 from .._tier0 import execute
+from .._tier0 import create_2d_xy
+from .._tier0 import plugin_function
+from .._tier0 import Image
 
-def maximum_z_projection(input, output):
+@plugin_function(output_creator=create_2d_xy)
+def maximum_z_projection(input :Image, output :Image = None):
     """Determines the maximum projection of an image along Z.
 
     Available for: 3D
@@ -22,6 +25,8 @@ def maximum_z_projection(input, output):
     parameters = {
         "dst_max":output,
         "src":input,
-    };
+    }
 
-    execute(__file__, 'maximum_z_projection_x.cl', 'maximum_z_projection', output.shape, parameters);
+    execute(__file__, 'maximum_z_projection_x.cl', 'maximum_z_projection', output.shape, parameters)
+
+    return output

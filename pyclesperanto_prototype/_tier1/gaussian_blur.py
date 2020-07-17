@@ -1,7 +1,11 @@
 from .._tier0 import sigma_to_kernel_size
+from .._tier0 import plugin_function
+from .._tier0 import Image
 from .execute_separable_kernel import execute_separable_kernel
 
-def gaussian_blur (src, dst, sigma_x, sigma_y, sigma_z):
+
+@plugin_function
+def gaussian_blur (src :Image, dst :Image = None, sigma_x :float=0, sigma_y :float=0, sigma_z :float=0):
     """
     documentation placeholder
     """
@@ -25,3 +29,5 @@ def gaussian_blur (src, dst, sigma_x, sigma_y, sigma_z):
         sigma_z,
         len(dst.shape)
     )
+
+    return dst

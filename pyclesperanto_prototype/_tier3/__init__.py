@@ -1,0 +1,2 @@
+from .close_index_gaps_in_label_map import close_index_gaps_in_label_map
+from .labelled_spots_to_pointlist import labelled_spots_to_pointlist

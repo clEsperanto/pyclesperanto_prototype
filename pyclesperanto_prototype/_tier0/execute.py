@@ -5,6 +5,7 @@ import numpy as np
 
 import pyopencl as cl
 from ._pycl import OCLProgram
+from ._pycl import get_gpu
 
 
 # should write a test to make sure kernels and filenames always match
@@ -96,7 +97,7 @@ def execute(anchor, opencl_kernel_filename, kernel_name, global_size, parameters
                 "key": key,
                 "pos_type": "int2" if value.ndim < 3 else "int4",
                 "pos": ["(pos0, 0)", "(pos0, pos1)", "(pos0, pos1, pos2, 0)"][ndim - 1],
-                "img_dims": 2 if ndim < 3 else 2,
+                "img_dims": 2 if ndim < 3 else 3,
                 "depth": depth,
                 "height": height,
                 "width": width,
@@ -112,10 +113,25 @@ def execute(anchor, opencl_kernel_filename, kernel_name, global_size, parameters
                 "other types than float and int aren`t supported yet for parameters"
             )
 
-    defines.append(get_ocl_source(anchor, opencl_kernel_filename))
-    ocl_code = "\n".join(defines)
+    cl_device = get_gpu()
 
-    prog = OCLProgram(src_str=ocl_code)
-    # Todo: the order of the arguments matters; fix that
+    program_cache_key = \
+        str(anchor) + "_" + \
+        str(opencl_kernel_filename) + "_" + \
+        str(kernel_name) + "_" + \
+        str(global_size) + "_" + \
+        str(parameters) + "_" + \
+        str(defines)
+
+    prog = cl_device.program_cache.get(program_cache_key)
+
+    if prog is None:
+        defines.append(get_ocl_source(anchor, opencl_kernel_filename))
+        ocl_code = "\n".join(defines)
+
+        prog = OCLProgram(src_str=ocl_code)
+        # Todo: the order of the arguments matters; fix that
+
+        get_gpu().program_cache[program_cache_key] = prog
 
     prog.run_kernel(kernel_name, tuple(global_size[::-1]), None, *arguments)

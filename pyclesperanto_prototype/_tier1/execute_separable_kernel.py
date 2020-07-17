@@ -1,6 +1,6 @@
 
 
-from pyclesperanto_prototype._tier0.create import create
+from pyclesperanto_prototype._tier0.create import create_like
 from pyclesperanto_prototype._tier1 import copy
 from pyclesperanto_prototype._tier0.execute import execute
 from .set import set
@@ -11,8 +11,8 @@ def execute_separable_kernel(src, dst, anchor, opencl_kernel_filename, kernel_na
     sigma = [sigma_x, sigma_y, sigma_z]
 
     # todo: ensure that temp1 and temp2 become of type float
-    temp1 = create(src.shape);
-    temp2 = create(src.shape);
+    temp1 = create_like(src);
+    temp2 = create_like(src);
 
     if (sigma[0] > 0) :
         param_src = src;

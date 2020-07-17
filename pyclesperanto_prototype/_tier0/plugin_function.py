@@ -72,7 +72,7 @@ def plugin_function(
                 if type_annotation is Image:
                     # if not set and should be an image, create an image
                     # create a new output image with specified/default creator
-                    kwargs[argument] = output_creator(any_ocl_input)
+                    kwargs[argument] = output_creator(*args)
 
         #print("Got arguments")
         #print(args)

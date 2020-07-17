@@ -7,7 +7,7 @@ from pyopencl import array
 
 from collections import namedtuple
 
-GPU = namedtuple("GPU", ("device", "context", "queue"))
+GPU = namedtuple("GPU", ("device", "context", "queue", "program_cache"))
 
 
 def get_best_device():
@@ -30,10 +30,13 @@ class get_gpu:
         if reload or not cls._instance:
             device = get_best_device()
             context = cl.Context(devices=[device])
+            device.context = context
             queue = cl.CommandQueue(context)
-            cls._instance = GPU(device, context, queue)
-        return cls._instance
+            device.queue = queue
+            program_cache = {}
+            cls._instance = GPU(device, context, queue, program_cache)
 
+        return cls._instance
 
 """ Below here, vendored from GPUtools
 Copyright (c) 2016, Martin Weigert

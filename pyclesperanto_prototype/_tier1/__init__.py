@@ -13,6 +13,7 @@ from .convolve import convolve
 from .copy import copy
 from .copy_slice import copy_slice
 from .crop import crop
+from .detect_maxima_box import detect_maxima_box
 from .dilate_box import dilate_box
 from .dilate_box_slice_by_slice import dilate_box_slice_by_slice
 from .dilate_sphere import dilate_sphere
@@ -31,6 +32,8 @@ from .exponential import exponential
 from .execute_separable_kernel import execute_separable_kernel
 from .flip import flip
 from .gaussian_blur import gaussian_blur
+from .generate_distance_matrix import generate_distance_matrix
+from .generate_touch_matrix import generate_touch_matrix
 from .gradient_x import gradient_x
 from .gradient_y import gradient_y
 from .gradient_z import gradient_z
@@ -72,7 +75,7 @@ from .power import power
 from .power_images import power_images
 from .replace_intensities import replace_intensities
 from .replace_intensity import replace_intensity
-
+from .touch_matrix_to_mesh import touch_matrix_to_mesh
 from .maximum_sphere import maximum_sphere
 from .minimum_sphere import minimum_sphere
 from .multiply_matrix import multiply_matrix

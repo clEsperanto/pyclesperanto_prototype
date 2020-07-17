@@ -1,7 +1,10 @@
 from .._tier0 import execute
 
+from .._tier0 import Image
+from .._tier0 import plugin_function
 
-def multiply_images (src1, src2, dst):
+@plugin_function
+def multiply_images (src1 : Image, src2 : Image, dst : Image = None):
     """Multiplies all pairs of pixel values x and y from two image X and Y.
     
     <pre>f(x, y) = x * y</pre>
@@ -29,3 +32,4 @@ def multiply_images (src1, src2, dst):
 
     execute(__file__, 'multiply_images_' + str(len(dst.shape)) + 'd_x.cl', 'multiply_images_' + str(len(dst.shape)) + 'd', dst.shape, parameters)
 
+    return dst
