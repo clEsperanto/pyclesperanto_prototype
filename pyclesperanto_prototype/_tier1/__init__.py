@@ -75,7 +75,7 @@ from .power import power
 from .power_images import power_images
 from .replace_intensities import replace_intensities
 from .replace_intensity import replace_intensity
-
+from .touch_matrix_to_mesh import touch_matrix_to_mesh
 from .maximum_sphere import maximum_sphere
 from .minimum_sphere import minimum_sphere
 from .multiply_matrix import multiply_matrix
