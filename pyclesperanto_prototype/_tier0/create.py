@@ -21,8 +21,9 @@ def create(dimensions):
     return OCLArray.empty(dimensions, np.float32)
 
 
-def create_like(input:OCLArray, input2:OCLArray = None):
-    return OCLArray.empty(input.shape, np.float32)
+def create_like(*args):
+    dimensions = args[0].shape
+    return create(dimensions)
 
 def create_pointlist_from_labelmap(input:OCLArray):
     from .._tier2 import maximum_of_all_pixels
