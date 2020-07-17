@@ -1,1 +1,1 @@
-recursive-include clesperanto *.cl
+recursive-include pyclesperanto_prototype *.cl
