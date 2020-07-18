@@ -52,7 +52,7 @@ def select_device(name: str = None, dev_type: str = None, score_key=None) -> Dev
     :param dev_type: {'cpu', 'gpu', or None}, defaults to None
     :type dev_type: str, optional
     :param score_key: scoring function, accepts device and returns int, defaults to None
-    :type score_key: [type], optional
+    :type score_key: callable, optional
     :return: The current GPU instance.
     :rtype: GPU
     """
@@ -75,7 +75,7 @@ def filter_devices(
     :param dev_type: {'cpu', 'gpu', or None}, defaults to None
     :type dev_type: str, optional
     :param score_key: scoring function, accepts device and returns int, defaults to None
-    :type score_key: [type], optional
+    :type score_key: callable, optional
     :return: list of devices
     :rtype: List[cl.Device]
     """
