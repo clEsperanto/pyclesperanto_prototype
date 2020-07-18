@@ -5,7 +5,6 @@ import numpy as np
 
 import pyopencl as cl
 from ._pycl import OCLProgram
-from ._pycl import get_gpu
 
 
 # should write a test to make sure kernels and filenames always match
@@ -36,6 +35,9 @@ def get_ocl_source(anchor, opencl_kernel_filename):
     kernel = (Path(anchor).parent / opencl_kernel_filename).read_text()
     return "\n".join([preamble(), kernel])
 
+@lru_cache(maxsize=128)
+def get_compiled_ocl_program(source):
+    return OCLProgram(src_str=source)
 
 IMAGE_HEADER = """
 #define CONVERT_{key}_PIXEL_TYPE clij_convert_float_sat
@@ -51,7 +53,7 @@ IMAGE_HEADER = """
 """
 
 
-def execute(anchor, opencl_kernel_filename, kernel_name, global_size, parameters):
+def execute(anchor, opencl_kernel_filename, kernel_name, global_size, parameters, prog : OCLProgram = None):
     """
     Convenience method for calling opencl kernel files
 
@@ -68,6 +70,8 @@ def execute(anchor, opencl_kernel_filename, kernel_name, global_size, parameters
                        right type
     :return:
     """
+    # import time
+    # time_stamp = time.time()
 
     defines = [
         "#define GET_IMAGE_WIDTH(image_key) IMAGE_SIZE_ ## image_key ## _WIDTH",
@@ -110,28 +114,20 @@ def execute(anchor, opencl_kernel_filename, kernel_name, global_size, parameters
             arguments.append(np.array([value], np.float32))
         else:
             raise TypeError(
-                "other types than float and int aren`t supported yet for parameters"
+                "other types than float and int aren`t supported yet for parameters " + str(value)
             )
 
-    cl_device = get_gpu()
-
-    program_cache_key = \
-        str(anchor) + "_" + \
-        str(opencl_kernel_filename) + "_" + \
-        str(kernel_name) + "_" + \
-        str(global_size) + "_" + \
-        str(parameters) + "_" + \
-        str(defines)
-
-    prog = cl_device.program_cache.get(program_cache_key)
-
+    # print("Assembling " + opencl_kernel_filename + " took " + str((time.time() - time_stamp) * 1000) + " ms")
     if prog is None:
+        # time_stamp = time.time()
+
         defines.append(get_ocl_source(anchor, opencl_kernel_filename))
         ocl_code = "\n".join(defines)
 
-        prog = OCLProgram(src_str=ocl_code)
+        prog = get_compiled_ocl_program(ocl_code)
         # Todo: the order of the arguments matters; fix that
-
-        get_gpu().program_cache[program_cache_key] = prog
+        # print("Compilation " + opencl_kernel_filename + " took " + str((time.time() - time_stamp) * 1000) + " ms")
 
     prog.run_kernel(kernel_name, tuple(global_size[::-1]), None, *arguments)
+
+    return prog
