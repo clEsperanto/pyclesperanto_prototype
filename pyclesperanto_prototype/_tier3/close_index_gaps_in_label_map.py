@@ -19,20 +19,13 @@ def close_index_gaps_in_label_map(input, output, blocksize = 4096):
     flag_existing_intensities(input, flagged_indices)
     set_column(flagged_indices, 0, 0) # background shouldn't be relabelled
 
-    print("flagged_indices")
-    print(flagged_indices)
-
     # sum existing labels per blocks
     block_sums = create([1, int((int(max_label) + 1) / blocksize) + 1])
     sum_reduction_x(flagged_indices, block_sums, blocksize)
-    print("block_sums")
-    print(block_sums)
 
     # distribute new numbers
     new_indices = create([1, int(max_label) + 1])
     block_enumerate(flagged_indices, block_sums, new_indices, blocksize)
-    print("new_indices")
-    print(new_indices)
 
     replace_intensities(input, new_indices, output)
 
