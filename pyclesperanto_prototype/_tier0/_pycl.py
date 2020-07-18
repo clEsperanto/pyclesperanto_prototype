@@ -8,6 +8,8 @@ from typing import Callable, List, Optional
 from functools import lru_cache
 
 
+# TODO: we should discuss whether this collection is actually the best thing to pass
+# around. might be better to work lower level with contexts...
 class Device:
     """Just a container for a device, context and queue."""
 
