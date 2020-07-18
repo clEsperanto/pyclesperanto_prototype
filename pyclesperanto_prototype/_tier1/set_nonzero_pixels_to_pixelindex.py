@@ -1,6 +1,6 @@
 from .._tier0 import execute
 
-def set_nonzero_pixels_to_pixelindex(input, output):
+def set_nonzero_pixels_to_pixelindex(input, output, offset=0):
     """
     documentation placeholder
     """
@@ -8,7 +8,8 @@ def set_nonzero_pixels_to_pixelindex(input, output):
 
     parameters = {
         "dst":output,
-        "src":input
+        "src":input,
+        "offset":int(offset)
     }
 
     execute(__file__, 'set_nonzero_pixels_to_pixelindex_x.cl', 'set_nonzero_pixels_to_pixelindex', output.shape, parameters);

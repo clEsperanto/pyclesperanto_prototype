@@ -3,7 +3,8 @@ __constant sampler_t sampler = CLK_NORMALIZED_COORDS_FALSE | CLK_ADDRESS_CLAMP_T
 __kernel void set_nonzero_pixels_to_pixelindex
 (
   IMAGE_dst_TYPE dst,
-  IMAGE_src_TYPE src
+  IMAGE_src_TYPE src,
+  int offset
 )
 {
   const int i = get_global_id(0);
@@ -17,7 +18,7 @@ __kernel void set_nonzero_pixels_to_pixelindex
   float pixelindex = i * h * d + j * d + k;
   float value = (float)(READ_src_IMAGE(src,sampler,POS_src_INSTANCE(i,j,k,0)).x);
   if (value != 0) {
-    WRITE_dst_IMAGE(dst, POS_dst_INSTANCE(i,j,k,0),pixelindex);
+    WRITE_dst_IMAGE(dst, POS_dst_INSTANCE(i,j,k,0),pixelindex + offset);
   } else {
     WRITE_dst_IMAGE(dst, POS_dst_INSTANCE(i,j,k,0), 0);
   }

@@ -16,13 +16,17 @@ def create(dimensions):
     dimensions = (
         dimensions.shape
         if isinstance(dimensions, OCLArray)
-        else tuple(dimensions[::-1])  # reverses a list/tuple
+        else tuple(dimensions)  # reverses a list/tuple
     )
     return OCLArray.empty(dimensions, np.float32)
 
 
 def create_like(*args):
-    dimensions = args[0].shape
+    dimensions = args[0]
+    if isinstance(dimensions, OCLArray):
+        dimensions = dimensions.shape
+    elif isinstance(dimensions, np.ndarray):
+        dimensions = dimensions.shape[::-1]
     return create(dimensions)
 
 def create_pointlist_from_labelmap(input:OCLArray):
@@ -30,7 +34,10 @@ def create_pointlist_from_labelmap(input:OCLArray):
     number_of_labels = int(maximum_of_all_pixels(input))
     number_of_dimensions = len(input.shape)
 
-    return create([number_of_labels, number_of_dimensions])
+    print(number_of_labels)
+    print(number_of_dimensions)
+
+    return create([number_of_dimensions, number_of_labels])
 
 def create_matrix_from_pointlists(pointlist1:OCLArray, pointlist2:OCLArray):
     width = pointlist1.shape[1] + 1

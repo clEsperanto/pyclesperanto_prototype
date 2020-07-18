@@ -23,7 +23,7 @@ def connected_components_labeling_box(binary_input : Image, labelmap_output : Im
 
     flag = push(np.asarray([[[0]]]))
 
-    set_nonzero_pixels_to_pixelindex(binary_input, temp1)
+    set_nonzero_pixels_to_pixelindex(binary_input, temp1, offset=1)
 
     set(temp2, 0)
 
@@ -37,6 +37,7 @@ def connected_components_labeling_box(binary_input : Image, labelmap_output : Im
         else:
             nonzero_minimum_box(temp2, flag, temp1)
         flag_value = pull(flag)[0][0][0]
+        set(flag, 0)
         iteration_count += 1
 
     if (iteration_count % 2 == 0):

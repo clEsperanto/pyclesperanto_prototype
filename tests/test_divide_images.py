@@ -34,6 +34,6 @@ def test_divide_images():
 
     a = cle.pull(result)
     b = cle.pull(reference)
-    assert (np.array_equal(a, b))
+    assert (np.allclose(a, b, 0.0001))
     print("ok divide_images")
 
