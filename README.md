@@ -28,8 +28,7 @@ DLL load failed: The specified procedure could not be found.
 Try downloading and installing a pyopencl with a lower cl version, e.g. cl12 : pyopencl-2020.1+cl12-cp37-cp37m-win_amd64
 
 ## Example code
-An example is available in [this script](https://github.com/clEsperanto/pyclesperanto_prototype/blob/master/cle_test.py). 
-Basically, you import the methods from clEsperanto you need:
+Basically, you import clEsperanto:
 
 ```python
 import pyclesperanto_prototype as cle
