@@ -15,6 +15,7 @@ def test_touch_matrix_to_mesh():
     ]))
 
     gpu_output = cle.create([5, 5])
+    cle.set(gpu_output, 0)
 
     gpu_reference = cle.push(np.asarray([
                     [0, 0, 0, 0, 0],
