@@ -1,1 +1,1 @@
-from .connected_components_labeling_box import connected_components_labeling_box
+from ._connected_components_labeling_box import connected_components_labeling_box
