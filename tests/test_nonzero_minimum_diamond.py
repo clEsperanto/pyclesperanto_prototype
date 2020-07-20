@@ -24,6 +24,10 @@ def test_nonzero_minimum_diamond():
 
     result = cle.create(test)
     flag = cle.create((1, 1, 1))
+
+    # as nonzero filters don't touch zero values, we need to initialize the result in advance
+    cle.set(result, 0);
+
     cle.nonzero_minimum_diamond(test, flag, result)
 
     print(result)
