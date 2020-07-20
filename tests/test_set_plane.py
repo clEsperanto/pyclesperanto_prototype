@@ -3,8 +3,7 @@ import numpy as np
 import pytest
 import pyopencl as cl
 
-
-@pytest.mark.xfail(raises=cl.RuntimeError)
+@pytest.mark.xfail('LINUX and CI', reason='INVALID_ARG_SIZE on CI', raises=cl.LogicError)
 def test_set_plane():
     result = cle.push(np.asarray([
         [

@@ -1,6 +1,11 @@
 import pyclesperanto_prototype as cle
 import numpy as np
+import pyopencl as cl
+import pytest
 
+from . import LINUX, CI
+
+@pytest.mark.xfail('LINUX and CI', reason='INVALID_ARG_SIZE on CI', raises=cl.LogicError)
 def test_connected_components_labeling_box():
     
     gpu_input = cle.push(np.asarray([
