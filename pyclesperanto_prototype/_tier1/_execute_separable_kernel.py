@@ -1,9 +1,9 @@
 
 
-from pyclesperanto_prototype._tier0.create import create_like
+from pyclesperanto_prototype._tier0._create import create_like
 from pyclesperanto_prototype._tier1 import copy
-from pyclesperanto_prototype._tier0.execute import execute
-from .set import set
+from pyclesperanto_prototype._tier0._execute import execute
+from ._set import set
 
 def execute_separable_kernel(src, dst, anchor, opencl_kernel_filename, kernel_name, kernel_size_x, kernel_size_y, kernel_size_z, sigma_x, sigma_y, sigma_z, dimensions) :
 

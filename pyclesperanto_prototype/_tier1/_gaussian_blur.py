@@ -1,7 +1,7 @@
 from .._tier0 import sigma_to_kernel_size
 from .._tier0 import plugin_function
 from .._tier0 import Image
-from .execute_separable_kernel import execute_separable_kernel
+from ._execute_separable_kernel import execute_separable_kernel
 
 
 @plugin_function
