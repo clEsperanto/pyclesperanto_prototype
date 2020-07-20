@@ -5,9 +5,9 @@ from toolz import curry
 
 from ._pycl import OCLArray
 
-from .create import create_like
-from .types import Image, is_image
-from .push import push
+from ._create import create_like
+from ._types import Image, is_image
+from ._push import push
 
 
 @curry

@@ -30,7 +30,7 @@ def preamble():
 #     return "\n".join([preamble(), kernel])
 
 
-@lru_cache(maxsize=128)
+# @lru_cache(maxsize=128)
 def get_ocl_source(anchor, opencl_kernel_filename):
     kernel = (Path(anchor).parent / opencl_kernel_filename).read_text()
     return "\n".join([preamble(), kernel])
