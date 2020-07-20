@@ -1,5 +1,5 @@
 import pyclesperanto_prototype as cle
-print(cle.get_gpu_name())
+print(cle.get_device().name)
 
 # load data
 from skimage.io import imread

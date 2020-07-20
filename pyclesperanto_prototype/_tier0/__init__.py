@@ -10,7 +10,6 @@ from ._create import (
     create_2d_xy,
 )
 from ._execute import execute
-from ._get_gpu_name import get_gpu_name
 from ._pull import pull
 from ._pull import pull_zyx
 from ._push import push
@@ -18,4 +17,4 @@ from ._push import push_zyx
 from ._plugin_function import plugin_function
 from ._types import Image
 from ._cl_info import cl_info
-from ._pycl import get_gpu
+from ._pycl import get_device, select_device, set_device_scoring_key
