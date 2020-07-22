@@ -4,39 +4,109 @@ import numpy as np
 import pyopencl as cl
 from pyopencl import characterize
 from pyopencl import array
-
-from collections import namedtuple
-
-GPU = namedtuple("GPU", ("device", "context", "queue", "program_cache"))
+from typing import Callable, List, Optional
+from functools import lru_cache
 
 
-def get_best_device():
-    return sorted(
-        [
-            device
-            for platform in cl.get_platforms()
-            for device in platform.get_devices()
-        ],
-        key=lambda x: x.type * 1e12 + x.get_info(cl.device_info.GLOBAL_MEM_SIZE),
-        reverse=True,
-    )[0]
+# TODO: we should discuss whether this collection is actually the best thing to pass
+# around. might be better to work lower level with contexts...
+class Device:
+    """Just a container for a device, context and queue."""
+
+    def __init__(self, device: cl.Device, context: cl.Context, queue: cl.CommandQueue):
+        self.device = device
+        self.context = context
+        self.queue = queue
+
+    def __repr__(self) -> str:
+        refs = self.context.reference_count
+        return f"<{self.name} on Platform: {self.device.platform.name} ({refs} refs)>"
+
+    @property
+    def name(self) -> str:
+        return self.device.name
 
 
-# singleton
-class get_gpu:
-    _instance = None
+def score_device(dev: cl.Device) -> float:
+    score = 4e12 if dev.type == cl.device_type.GPU else 2e12
+    score += dev.get_info(cl.device_info.GLOBAL_MEM_SIZE)
+    return score
 
-    def __new__(cls, reload=False):
-        if reload or not cls._instance:
-            device = get_best_device()
-            context = cl.Context(devices=[device])
-            device.context = context
-            queue = cl.CommandQueue(context)
-            device.queue = queue
-            program_cache = {}
-            cls._instance = GPU(device, context, queue, program_cache)
 
-        return cls._instance
+# container for singleton device
+class _current_device:
+    _instance: Optional[Device] = None
+    score_key: Callable[[cl.Device], float] = score_device
+
+
+def get_device() -> Device:
+    """Get the current device GPU class."""
+    return _current_device._instance or select_device()
+
+
+def select_device(name: str = None, dev_type: str = None, score_key=None) -> Device:
+    """Set current GPU device based on optional parameters.
+
+    :param name: First device that contains ``name`` will be returned, defaults to None
+    :type name: str, optional
+    :param dev_type: {'cpu', 'gpu', or None}, defaults to None
+    :type dev_type: str, optional
+    :param score_key: scoring function, accepts device and returns int, defaults to None
+    :type score_key: callable, optional
+    :return: The current GPU instance.
+    :rtype: GPU
+    """
+    device = filter_devices(name, dev_type, score_key)[-1]
+    if _current_device._instance and device == _current_device._instance.device:
+        return _current_device._instance
+    context = cl.Context(devices=[device])
+    queue = cl.CommandQueue(context)
+    _current_device._instance = Device(device, context, queue)
+    return _current_device._instance
+
+
+def filter_devices(
+    name: str = None, dev_type: str = None, score_key=None
+) -> List[cl.Device]:
+    """Filter devices based on various options
+
+    :param name: First device that contains ``name`` will be returned, defaults to None
+    :type name: str, optional
+    :param dev_type: {'cpu', 'gpu', or None}, defaults to None
+    :type dev_type: str, optional
+    :param score_key: scoring function, accepts device and returns int, defaults to None
+    :type score_key: callable, optional
+    :return: list of devices
+    :rtype: List[cl.Device]
+    """
+    devices = []
+    for platform in cl.get_platforms():
+        for device in platform.get_devices():
+            if name and name.lower() in device.name.lower():
+                return [device]
+            if dev_type is not None:
+                if isinstance(dev_type, str):
+                    if dev_type.lower() == "cpu":
+                        dev_type = cl.device_type.CPU
+                    elif dev_type.lower() == "gpu":
+                        dev_type = cl.device_type.GPU
+                if device.type != dev_type:
+                    continue
+            devices.append(device)
+    return sorted(devices, key=score_key or _current_device.score_key)
+
+
+def set_device_scoring_key(func: Callable[[cl.Device], int]) -> None:
+    if not callable(func):
+        raise TypeError(
+            "Scoring key must be a callable that takes a device and returns an int"
+        )
+    try:
+        filter_devices(score_key=func)
+    except Exception as e:
+        raise ValueError(f"Scoring algorithm invalid: {e}")
+    _current_device.score_key = func
+
 
 """ Below here, vendored from GPUtools
 Copyright (c) 2016, Martin Weigert
@@ -84,7 +154,7 @@ class OCLProgram(cl.Program):
             raise ValueError("empty src_str! ")
 
         if dev is None:
-            dev = get_gpu()
+            dev = get_device()
 
         self._dev = dev
         self._kernel_dict = {}
@@ -98,6 +168,11 @@ class OCLProgram(cl.Program):
         self._kernel_dict[name](
             self._dev.queue, global_size, local_size, *args, **kwargs
         )
+
+    @classmethod
+    @lru_cache(maxsize=128)
+    def from_source(cls, source):
+        return cls(src_str=source)
 
 
 cl_image_datatype_dict = {
@@ -128,7 +203,7 @@ cl_buffer_datatype_dict = {
 }
 
 
-if characterize.has_double_support(get_gpu().device):
+if characterize.has_double_support(get_device().device):
     cl_buffer_datatype_dict[np.float64] = "double"
 
 
@@ -170,13 +245,13 @@ def _wrap_OCLArray(cls):
     @classmethod
     def from_array(cls, arr, *args, **kwargs):
         assert_supported_ndarray_type(arr.dtype.type)
-        queue = get_gpu().queue
+        queue = get_device().queue
         return array.to_device(queue, prepare(arr), *args, **kwargs)
 
     @classmethod
     def empty(cls, shape, dtype=np.float32):
         assert_supported_ndarray_type(dtype)
-        queue = get_gpu().queue
+        queue = get_device().queue
         return array.empty(queue, shape, dtype)
 
     @classmethod
@@ -187,26 +262,26 @@ def _wrap_OCLArray(cls):
     @classmethod
     def zeros(cls, shape, dtype=np.float32):
         assert_supported_ndarray_type(dtype)
-        queue = get_gpu().queue
+        queue = get_device().queue
         return array.zeros(queue, shape, dtype)
 
     @classmethod
     def zeros_like(cls, arr):
         assert_supported_ndarray_type(arr.dtype.type)
-        queue = get_gpu().queue
+        queue = get_device().queue
         return array.zeros(queue, arr.shape, arr.dtype.type)
 
     def copy_buffer(self, buf, **kwargs):
-        queue = get_gpu().queue
+        queue = get_device().queue
         return cl.enqueue_copy(queue, self.data, buf.data, **kwargs)
 
     def write_array(self, arr, **kwargs):
         assert_supported_ndarray_type(arr.dtype.type)
-        queue = get_gpu().queue
+        queue = get_device().queue
         return cl.enqueue_copy(queue, self.data, prepare(arr), **kwargs)
 
     def copy_image(self, img, **kwargs):
-        queue = get_gpu().queue
+        queue = get_device().queue
         return cl.enqueue_copy(
             queue,
             self.data,
@@ -214,7 +289,7 @@ def _wrap_OCLArray(cls):
             offset=0,
             origin=(0,) * len(img.shape),
             region=img.shape,
-            **kwargs
+            **kwargs,
         )
 
     def wrap_module_func(mod, f):
@@ -237,7 +312,7 @@ def _wrap_OCLArray(cls):
     for f in ["sum", "max", "min", "dot", "vdot"]:
         setattr(cls, f, wrap_module_func(array, f))
 
-    #for f in dir(cl_math):
+    # for f in dir(cl_math):
     #    if callable(getattr(cl.cl_math, f)):
     #        setattr(cls, f, wrap_module_func(cl.cl_math, f))
 

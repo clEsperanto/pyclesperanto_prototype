@@ -1,5 +1,5 @@
 import pyopencl as cl
-from ._pycl import get_best_device
+from ._pycl import get_device
 
 
 def device_info(dev: cl.Device):
@@ -36,6 +36,6 @@ def cl_info():
             lines += ["\n"]
         lines += ["\n"]
 
-    lines += ["Best device: " + get_best_device().name]
+    lines += ["Current device: " + get_device().name]
 
     return "\n".join(lines)
