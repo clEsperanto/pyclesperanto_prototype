@@ -18,3 +18,4 @@ from ._plugin_function import plugin_function
 from ._types import Image
 from ._cl_info import cl_info
 from ._pycl import get_device, select_device, set_device_scoring_key
+from ._cl_image import create_image, empty_image_like, empty_image
