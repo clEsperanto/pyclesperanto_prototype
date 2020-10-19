@@ -50,7 +50,7 @@ IMAGE_HEADER = """
 """
 
 
-def execute(anchor, opencl_kernel_filename, kernel_name, global_size, parameters, prog : OCLProgram = None):
+def execute(anchor, opencl_kernel_filename, kernel_name, global_size, parameters, prog : OCLProgram = None, constants = None):
     """
     Convenience method for calling opencl kernel files
 
@@ -65,6 +65,11 @@ def execute(anchor, opencl_kernel_filename, kernel_name, global_size, parameters
                         destination image).
     :param parameters: dictionary containing parameters. Take care: They must be of the
                        right type
+    :param constants:  dictionary with names/values which will be added to the define
+                       statements. They are necessary, e.g. to create arrays of a given
+                       maximum size in OpenCL as variable array lengths are not
+                       supported.
+
     :return:
     """
     # import time
@@ -75,6 +80,10 @@ def execute(anchor, opencl_kernel_filename, kernel_name, global_size, parameters
         "#define GET_IMAGE_HEIGHT(image_key) IMAGE_SIZE_ ## image_key ## _HEIGHT",
         "#define GET_IMAGE_DEPTH(image_key) IMAGE_SIZE_ ## image_key ## _DEPTH",
     ]
+
+    if constants is not None:
+        for key, value in constants.items():
+            defines.append("#define " + str(key) + " " + str(value))
 
     arguments = []
 
