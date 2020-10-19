@@ -6,7 +6,6 @@ import pyopencl as cl
 
 #@pytest.mark.xfail(raises=cl.RuntimeError)
 def test_minimum_y_projection():
-    print('Hello world')
     test1 = cle.push(np.asarray([
         [
             [1, 0, 0, 0, 1],
