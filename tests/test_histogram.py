@@ -9,10 +9,7 @@ def test_histogram():
 
     ref_histogram = [1, 2, 3, 4, 2]
 
-    # todo: this line should not be necessary. cle.histogram should be able to create this with correct size itself
-    my_histogram = cle.push_zyx(np.asarray([0, 0, 0, 0, 0]))
-
-    my_histogram = cle.histogram(test, hist=my_histogram, num_bins = 5)
+    my_histogram = cle.histogram(test, num_bins = 5)
 
     print(my_histogram)
 
@@ -31,10 +28,7 @@ def test_histogram_3d():
 
     ref_histogram = [1, 2, 3, 4, 2]
 
-    # todo: this line should not be necessary. cle.histogram should be able to create this with correct size itself
-    my_histogram = cle.push_zyx(np.asarray([0, 0, 0, 0, 0]))
-
-    my_histogram = cle.histogram(test, hist=my_histogram, num_bins = 5)
+    my_histogram = cle.histogram(test, num_bins = 5)
 
     print(my_histogram)
 
@@ -56,10 +50,7 @@ def test_histogram_3d_2():
 
     ref_histogram = [1, 2, 3, 4, 2]
 
-    # todo: this line should not be necessary. cle.histogram should be able to create this with correct size itself
-    my_histogram = cle.push_zyx(np.asarray([0, 0, 0, 0, 0]))
-
-    my_histogram = cle.histogram(test, hist=my_histogram, num_bins = 5)
+    my_histogram = cle.histogram(test, num_bins = 5)
 
     print(my_histogram)
 
@@ -78,11 +69,9 @@ def test_histogram_against_scikit_image():
 
     gpu_image = cle.push(image)
 
-    gpu_hist = cle.create([1, 1, 256])
+    gpu_hist = cle.histogram(gpu_image, num_bins=256)
 
-    gpu_hist = cle.histogram(gpu_image, gpu_hist, num_bins=256)
+    print(str(cle.pull_zyx(gpu_hist)))
 
-    print(str(cle.pull_zyx(gpu_hist)[0]))
-
-    assert (np.allclose(hist, cle.pull_zyx(gpu_hist)[0]))
+    assert (np.allclose(hist, cle.pull_zyx(gpu_hist)))
 

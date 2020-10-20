@@ -60,3 +60,6 @@ def create_square_matrix_from_labelmap(labelmap: OCLArray):
 
 def create_2d_xy(input):
     return create([input.shape[2], input.shape[1]])
+
+def create_none(input):
+    return None

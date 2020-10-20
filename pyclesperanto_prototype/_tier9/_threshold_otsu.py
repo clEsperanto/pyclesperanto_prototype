@@ -22,11 +22,7 @@ def threshold_otsu(input : Image, binary_output : Image = None):
     bin_centers = np.arange(256) * range / (255)
 
     # Determine histogram on GPU
-
-    # this line should not be necessary; histogram should be able to build this image
-    gpu_hist = create([1, 1, 256])
-    hist = pull_zyx(histogram(input, gpu_hist, 256, minimum_intensity, maximum_intensity, False))[0]
-    hist = hist[0]
+    hist = pull_zyx(histogram(input, num_bins=256, minimum_intensity=minimum_intensity, maximum_intensity=maximum_intensity, determine_min_max=False))
 
     # determine threshold using scikit-image
     threshold = scikit_image_threshold_otsu(hist=(hist, bin_centers))

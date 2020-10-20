@@ -14,6 +14,7 @@
 #                           http://www.openclprogrammingguide.com
 from .._tier0 import execute
 from .._tier0 import create
+from .._tier0 import create_none
 from .._tier0 import pull
 from .._tier0 import plugin_function
 from .._tier0 import Image
@@ -22,7 +23,7 @@ from .._tier2 import maximum_of_all_pixels
 from .._tier1 import sum_z_projection
 from .._tier1 import copy_slice
 
-@plugin_function
+@plugin_function(output_creator=create_none)
 def histogram(image : Image, hist : Image = None, num_bins = 256, minimum_intensity : float = None, maximum_intensity : float = None, determine_min_max : bool = True):
     """
     documentation placeholder
@@ -74,7 +75,7 @@ def histogram(image : Image, hist : Image = None, num_bins = 256, minimum_intens
 
     # sum partial histograms
     if hist is None:
-        hist = create([1, 1, num_bins]) # todo: this line should not be necessary if plugin_type does its job
+        hist = create([num_bins])
 
     sum_z_projection(partial_histograms, hist)
 
