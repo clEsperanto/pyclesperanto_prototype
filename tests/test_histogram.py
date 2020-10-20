@@ -67,3 +67,22 @@ def test_histogram_3d_2():
     assert (np.allclose(a, ref_histogram))
     print ("ok histogram")
 
+def test_histogram_against_scikit_image():
+    from skimage.data import camera
+    image = camera()
+
+    from skimage import exposure
+    hist, bc = exposure.histogram(image.ravel(), 256, source_range='image')
+
+    print(str(hist))
+
+    gpu_image = cle.push(image)
+
+    gpu_hist = cle.create([1, 1, 256])
+
+    gpu_hist = cle.histogram(gpu_image, gpu_hist, num_bins=256)
+
+    print(str(cle.pull_zyx(gpu_hist)[0]))
+
+    assert (np.allclose(hist, cle.pull_zyx(gpu_hist)[0]))
+
