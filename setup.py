@@ -14,7 +14,7 @@ setuptools.setup(
     url="https://github.com/clEsperanto/pyclesperanto_prototype",
     packages=setuptools.find_packages(),
     include_package_data=True,
-    install_requires=["numpy", "pyopencl", "toolz"],
+    install_requires=["numpy", "pyopencl", "toolz", "scikit-image"],
     python_requires='>=3.7',
     classifiers=[
         "Programming Language :: Python :: 3",
