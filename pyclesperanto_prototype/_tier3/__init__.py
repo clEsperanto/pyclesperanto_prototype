@@ -1,5 +1,6 @@
 from ._close_index_gaps_in_label_map import close_index_gaps_in_label_map
 from ._get_bounding_box import get_bounding_box
+from ._get_center_of_mass import get_center_of_mass
 from ._get_jaccard_index import get_jaccard_index
 from ._histogram import histogram
 from ._labelled_spots_to_pointlist import labelled_spots_to_pointlist
