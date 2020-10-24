@@ -58,6 +58,8 @@ from ._mean_z_projection import mean_z_projection
 from ._minimum_box import minimum_box
 from ._minimum_image_and_scalar import minimum_image_and_scalar
 from ._minimum_images import minimum_images
+from ._minimum_x_projection import minimum_x_projection
+from ._minimum_y_projection import minimum_y_projection
 from ._minimum_z_projection import minimum_z_projection
 from ._multiply_image_and_coordinate import multiply_image_and_coordinate
 from ._multiply_image_and_scalar import multiply_image_and_scalar
