@@ -20,6 +20,8 @@ def create(dimensions):
     )
     return OCLArray.empty(dimensions, np.float32)
 
+def create_zyx(dimensions):
+    return create(dimensions[::-1])
 
 def create_like(*args):
     dimensions = args[0]
@@ -60,6 +62,9 @@ def create_square_matrix_from_labelmap(labelmap: OCLArray):
 
 def create_2d_xy(input):
     return create([input.shape[2], input.shape[1]])
+
+def create_2d_yx(input):
+    return create([input.shape[1], input.shape[2]])
 
 def create_none(input):
     return None

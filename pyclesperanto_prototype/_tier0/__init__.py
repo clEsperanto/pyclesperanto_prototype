@@ -2,12 +2,14 @@ from ._radius_to_kernel_size import radius_to_kernel_size
 from ._sigma_to_kernel_size import sigma_to_kernel_size
 from ._create import (
     create,
+    create_zyx,
     create_like,
     create_pointlist_from_labelmap,
     create_matrix_from_pointlists,
     create_square_matrix_from_pointlist,
     create_square_matrix_from_labelmap,
     create_2d_xy,
+    create_2d_yx,
     create_none,
 )
 from ._execute import execute
