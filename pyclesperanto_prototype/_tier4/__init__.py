@@ -1,1 +1,2 @@
 from ._connected_components_labeling_box import connected_components_labeling_box
+from ._get_sorensen_dice_coefficient import get_sorenson_dice_coefficient
