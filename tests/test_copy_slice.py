@@ -89,3 +89,33 @@ def test_copy_slice_to3d_with_one_slice_zyx():
     assert (np.min(a) == 2)
     assert (np.max(a) == 6)
     assert (np.mean(a) == 4)
+
+
+def test_copy_slice_mini_y():
+    np_input = np.asarray([[1], [2], [3], [4]])
+
+    gpu_input = cle.push_zyx(np_input)
+    gpu_output = cle.create((1, 4, 1))
+
+    cle.copy_slice(gpu_input, gpu_output, 0)
+    print(gpu_output)
+
+    a = cle.pull(gpu_output)
+    assert (np.min(a) == 1)
+    assert (np.max(a) == 4)
+    assert (np.mean(a) == 2.5)
+
+
+def test_copy_slice_mini_x():
+    np_input = np.asarray([[1, 2, 3, 4]])
+
+    gpu_input = cle.push_zyx(np_input)
+    gpu_output = cle.create((1, 1, 4))
+
+    cle.copy_slice(gpu_input, gpu_output, 0)
+    print(gpu_output)
+
+    a = cle.pull(gpu_output)
+    assert (np.min(a) == 1)
+    assert (np.max(a) == 4)
+    assert (np.mean(a) == 2.5)
