@@ -5,7 +5,7 @@ from .._tier0 import create
 from .._tier0 import Image
 
 @plugin_function(output_creator=create_none)
-def transpose_xy (src : Image , dst : Image = None):
+def transpose_xy(src : Image , dst : Image = None):
     """
     documentation placeholder
     """
