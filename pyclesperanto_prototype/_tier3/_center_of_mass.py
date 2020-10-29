@@ -8,7 +8,6 @@ def center_of_mass(image : Image):
 
     :return:
     """
-    # TODO: Rename this method to get_centroid
 
     temp = create_like(image)
 
