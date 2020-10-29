@@ -10,7 +10,7 @@ def test_minimum_of_masked_pixels_mini_x():
 
     result = cle.minimum_of_masked_pixels(gpu_input, gpu_mask)
     print(result)
-    assert (result == 1)
+    assert (result == 2)
 
 def test_minimum_of_masked_pixels_mini_y():
     np_input = np.asarray([[1], [2], [3], [4]])
@@ -21,7 +21,7 @@ def test_minimum_of_masked_pixels_mini_y():
 
     result = cle.minimum_of_masked_pixels(gpu_input, gpu_mask)
     print(result)
-    assert (result == 1)
+    assert (result == 2)
 
 def test_minimum_of_masked_pixels():
     np_input = np.asarray([
@@ -52,6 +52,11 @@ def test_minimum_of_masked_pixels():
 
     gpu_input = cle.push_zyx(np_input)
     gpu_mask = cle.push_zyx(np_mask)
+
+    print("gpu_input")
+    print(gpu_input)
+    print("gpu_mask")
+    print(gpu_mask)
 
     result = cle.minimum_of_masked_pixels(gpu_input, gpu_mask)
     print(result)
