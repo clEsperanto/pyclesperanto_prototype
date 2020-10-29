@@ -27,5 +27,3 @@ def test_dilate_box():
     a = cle.pull(result)
     b = cle.pull(reference)
     assert (np.array_equal(a, b))
-    print("ok dilate_box")
-

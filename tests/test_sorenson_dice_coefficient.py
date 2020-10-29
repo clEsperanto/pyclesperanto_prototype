@@ -16,7 +16,6 @@ def test_sorensen_dice_coefficient_2d():
     d = cle.sorenson_dice_coefficient(test1, test2)
 
     assert abs(d - 0.666) < 0.001
-    print("ok sorensen_dice_coefficient")
 
 def test_sorensen_dice_coefficient_3d():
     test1 = cle.push(np.asarray([
@@ -32,5 +31,3 @@ def test_sorensen_dice_coefficient_3d():
     d = cle.sorenson_dice_coefficient(test1, test2)
 
     assert abs(d - 0.666) < 0.001
-    print("ok sorensen_dice_coefficient")
-

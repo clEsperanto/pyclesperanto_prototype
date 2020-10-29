@@ -26,4 +26,3 @@ def test_sobel():
 
     b = cle.pull(reference)
     assert (np.allclose(a, b, 0.01))
-    print("ok sobel")

@@ -34,5 +34,4 @@ def test_grreater_or_equal():
     print(a)
 
     assert (np.array_equal(a, b))
-    print("ok greater_or_equal")
 

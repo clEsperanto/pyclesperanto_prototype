@@ -37,4 +37,3 @@ def test_touch_matrix_to_mesh():
 
 
     assert (np.array_equal(a, b))
-    print("ok touch_matrix_to_mesh")

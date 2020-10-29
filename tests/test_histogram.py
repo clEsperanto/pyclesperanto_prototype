@@ -20,7 +20,6 @@ def test_histogram():
 
     a = cle.pull(my_histogram)
     assert (np.allclose(a, ref_histogram))
-    print ("ok histogram")
 
 @pytest.mark.xfail('LINUX and CI', reason='INVALID_ARG_SIZE on CI', raises=cl.LogicError)
 def test_histogram_3d():
@@ -40,7 +39,6 @@ def test_histogram_3d():
 
     a = cle.pull(my_histogram)
     assert (np.allclose(a, ref_histogram))
-    print ("ok histogram")
 
 
 @pytest.mark.xfail('LINUX and CI', reason='INVALID_ARG_SIZE on CI', raises=cl.LogicError)
@@ -63,7 +61,6 @@ def test_histogram_3d_2():
 
     a = cle.pull(my_histogram)
     assert (np.allclose(a, ref_histogram))
-    print ("ok histogram")
 
 @pytest.mark.xfail('LINUX and CI', reason='INVALID_ARG_SIZE on CI', raises=cl.LogicError)
 def test_histogram_against_scikit_image():

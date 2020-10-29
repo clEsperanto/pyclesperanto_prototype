@@ -59,5 +59,4 @@ def test_erode_box_slice_by_slice():
     print(a)
 
     assert (np.array_equal(a, b))
-    print("ok erode_box_slice_by_slice")
 

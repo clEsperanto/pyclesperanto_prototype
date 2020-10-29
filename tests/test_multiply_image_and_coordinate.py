@@ -29,4 +29,3 @@ def test_multiply_image_and_coordinate():
     print(a)
 
     assert (np.array_equal(a, b))
-    print("ok multiply_image_and_coordinate")

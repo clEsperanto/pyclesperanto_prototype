@@ -34,5 +34,3 @@ def test_multiply_images():
     print(a)
 
     assert (np.array_equal(a, b))
-    print("ok multiply_images")
-

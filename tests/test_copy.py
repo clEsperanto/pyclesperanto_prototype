@@ -16,5 +16,4 @@ def test_copy():
     assert (np.min(a) == 0)
     assert (np.max(a) == 1)
     assert (np.mean(a) == 0.75)
-    print("ok copy")
 

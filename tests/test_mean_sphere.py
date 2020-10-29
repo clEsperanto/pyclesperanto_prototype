@@ -34,4 +34,4 @@ def test_mean_sphere():
     print(b)
 
     assert (np.allclose(a, b, 0.0001))
-    print("ok mean_sphere")
+

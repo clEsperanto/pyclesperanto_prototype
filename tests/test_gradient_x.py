@@ -27,5 +27,4 @@ def test_gradient_x():
     print(a)
 
     assert (np.array_equal(a, b))
-    print("ok gradient_x")
 

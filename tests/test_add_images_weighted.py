@@ -14,8 +14,6 @@ def test_add_images_weighted_missing_parameters():
     print(reference)
     assert(np.array_equal(result, reference))
 
-    print("with missing parameters ok")
-
 def test_add_images_weighted_none_output():
 
 
@@ -29,8 +27,6 @@ def test_add_images_weighted_none_output():
     print(result)
     print(reference)
     assert(np.array_equal(result, reference))
-
-    print("with None as output ok")
 
 def test_add_images_weighted_named_parameters():
 
@@ -46,8 +42,6 @@ def test_add_images_weighted_named_parameters():
     print(reference)
     assert(np.array_equal(result, reference))
 
-    print("with named parameters ok")
-
 def test_add_images_weighted_wrong_parameter_order():
 
     input1 = np.asarray([[1, 2, 3]])
@@ -61,8 +55,6 @@ def test_add_images_weighted_wrong_parameter_order():
     print(reference)
     assert(np.array_equal(result, reference))
 
-    print("with named parameters and missing parameters ok")
-
 def test_add_images_weighted_parameters_wrong_order_and_missing():
 
     input1 = np.asarray([[1, 2, 3]])
@@ -75,6 +67,3 @@ def test_add_images_weighted_parameters_wrong_order_and_missing():
     print(result)
     print(reference)
     assert(np.array_equal(result, reference))
-
-    print("with named parameters in wrong order and missing parameters ok")
-

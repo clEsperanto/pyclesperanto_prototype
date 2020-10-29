@@ -30,8 +30,6 @@ def test_maximum_sphere_1():
     assert (np.max(a) == 5)
     assert (np.mean(a) == 5)
 
-    print("ok maximum sphere")
-
 
 @pytest.mark.xfail('LINUX and CI', reason='INVALID_ARG_SIZE on CI', raises=cl.LogicError)
 def test_maximum_sphere_2():

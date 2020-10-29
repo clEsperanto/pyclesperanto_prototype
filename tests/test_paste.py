@@ -34,4 +34,3 @@ def test_paste():
     print(a)
 
     assert (np.array_equal(a, b))
-    print("ok paste")
