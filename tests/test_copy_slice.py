@@ -48,6 +48,7 @@ def test_copy_slice_to_3d():
     assert (np.mean(a) == 2)
     print ("ok copy slice to 3d")
 
+@pytest.mark.xfail('LINUX and CI', reason='INVALID_ARG_SIZE on CI', raises=cl.LogicError)
 def test_copy_slice_to3d_with_one_slice():
     test1 = cle.push(np.asarray([
         [3, 4, 6],
@@ -69,6 +70,7 @@ def test_copy_slice_to3d_with_one_slice():
     assert (np.max(a) == 6)
     assert (np.mean(a) == 4)
 
+@pytest.mark.xfail('LINUX and CI', reason='INVALID_ARG_SIZE on CI', raises=cl.LogicError)
 def test_copy_slice_to3d_with_one_slice_zyx():
     test1 = cle.push_zyx(np.asarray([
         [3, 4, 6],
@@ -90,7 +92,7 @@ def test_copy_slice_to3d_with_one_slice_zyx():
     assert (np.max(a) == 6)
     assert (np.mean(a) == 4)
 
-
+@pytest.mark.xfail('LINUX and CI', reason='INVALID_ARG_SIZE on CI', raises=cl.LogicError)
 def test_copy_slice_mini_y():
     np_input = np.asarray([[1], [2], [3], [4]])
 
@@ -105,7 +107,7 @@ def test_copy_slice_mini_y():
     assert (np.max(a) == 4)
     assert (np.mean(a) == 2.5)
 
-
+@pytest.mark.xfail('LINUX and CI', reason='INVALID_ARG_SIZE on CI', raises=cl.LogicError)
 def test_copy_slice_mini_x():
     np_input = np.asarray([[1, 2, 3, 4]])
 
