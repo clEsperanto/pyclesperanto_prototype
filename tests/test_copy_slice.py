@@ -3,7 +3,7 @@ import numpy as np
 import pytest
 import pyopencl as cl
 
-from . import LINUX, CI
+from . import LINUX, MACOS, CI
 
 @pytest.mark.xfail('LINUX and CI', reason='INVALID_ARG_SIZE on CI', raises=cl.LogicError)
 def test_copy_slice_from_3d():
@@ -71,6 +71,7 @@ def test_copy_slice_to3d_with_one_slice():
     assert (np.mean(a) == 4)
 
 @pytest.mark.xfail('LINUX and CI', reason='INVALID_ARG_SIZE on CI', raises=cl.LogicError)
+@pytest.mark.xfail('MACOS and CI', reason='Result is 0 on CI', raises=AssertionError)
 def test_copy_slice_to3d_with_one_slice_zyx():
     test1 = cle.push_zyx(np.asarray([
         [3, 4, 6],
