@@ -1,7 +1,7 @@
 from .._tier0 import Image
 from .._tier3 import jaccard_index
 
-def sorenson_dice_coefficient(src1 : Image, src2 : Image):
+def sorensen_dice_coefficient(src1 : Image, src2 : Image):
     """
 
     :param src1:
