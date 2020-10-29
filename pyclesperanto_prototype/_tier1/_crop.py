@@ -1,7 +1,11 @@
 from .._tier0 import execute
+from .._tier0 import create
+from .._tier0 import create_none
+from .._tier0 import plugin_function
+from .._tier0 import Image
 
-
-def crop(input, output, startx, starty, startz=0):
+@plugin_function(output_creator=create_none)
+def crop(input : Image, output : Image = None, startx : int = 0, starty : int = 0, startz : int = 0, width : int = 1, height : int = 1, depth : int = 1):
     """Crops a given rectangle out of a given image
 
     Available for: 2D, 3D
@@ -19,6 +23,9 @@ def crop(input, output, startx, starty, startz=0):
 
     """
 
+    if output is None:
+        output = create([depth, height, width])
+
     parameters = {
             "dst": output,
             "src": input,
@@ -30,3 +37,4 @@ def crop(input, output, startx, starty, startz=0):
         parameters.update({"start_z": int(startz)})
 
     execute(__file__, 'crop_' + str(len(output.shape)) + 'd_x.cl', 'crop_' + str(len(output.shape)) + 'd', output.shape, parameters)
+    return output

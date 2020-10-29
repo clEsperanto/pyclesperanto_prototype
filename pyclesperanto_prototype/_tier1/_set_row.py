@@ -1,6 +1,9 @@
 from .._tier0 import execute
+from .._tier0 import plugin_function
+from .._tier0 import Image
 
-def set_row(output, row, scalar):
+@plugin_function
+def set_row(output : Image, row : int = 0, scalar : float = 0):
     """Sets all pixel values x of a given row in X to a constant value v.
     
     <pre>f(x) = v</pre>
@@ -27,3 +30,4 @@ def set_row(output, row, scalar):
     }
 
     execute(__file__, 'set_row_' + str(len(output.shape)) + 'd_x.cl', 'set_row_' + str(len(output.shape)) + 'd', output.shape, parameters);
+    return output

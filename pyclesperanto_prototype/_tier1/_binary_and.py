@@ -1,6 +1,10 @@
 from .._tier0 import execute
 
-def binary_and (src1, src2, dst):
+from .._tier0 import plugin_function
+from .._tier0 import Image
+
+@plugin_function
+def binary_and(src1 : Image, src2 : Image, dst : Image = None):
     """Computes a binary image (containing pixel values 0 and 1) from two images X and Y by connecting pairs of
     pixels x and y with the binary AND operator &.
     All pixel values except 0 in the input images are interpreted as 1.
@@ -29,3 +33,4 @@ def binary_and (src1, src2, dst):
     }
 
     execute(__file__, 'binary_and_' + str(len(dst.shape)) + 'd_x.cl', 'binary_and_' + str(len(dst.shape)) + 'd', dst.shape, parameters)
+    return dst

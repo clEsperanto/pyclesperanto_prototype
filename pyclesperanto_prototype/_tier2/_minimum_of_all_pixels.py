@@ -1,7 +1,10 @@
 from .._tier0 import create
 from .._tier0 import pull
+from .._tier0 import plugin_function
+from .._tier0 import Image
 
-def minimum_of_all_pixels(input):
+@plugin_function
+def minimum_of_all_pixels(input : Image):
     from .._tier1 import minimum_x_projection
     from .._tier1 import minimum_y_projection
     from .._tier1 import minimum_z_projection

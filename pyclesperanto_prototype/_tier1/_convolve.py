@@ -1,6 +1,9 @@
 from .._tier0 import execute
+from .._tier0 import plugin_function
+from .._tier0 import Image
 
-def convolve (src, kernelImage, dst):
+@plugin_function
+def convolve(src : Image, kernel_image : Image, dst : Image = None):
     """Convolve the image with a given kernel image.
     
     It is recommended that the kernel image has an odd size in X, Y and Z.
@@ -22,8 +25,9 @@ def convolve (src, kernelImage, dst):
 
     parameters = {
         "src":src,
-        "kernelImage":kernelImage,
+        "kernelImage":kernel_image,
         "dst":dst
     }
 
     execute(__file__, 'convolve_' + str(len(dst.shape)) + 'd_x.cl', 'convolve_' + str(len(dst.shape)) + 'd', dst.shape, parameters)
+    return dst

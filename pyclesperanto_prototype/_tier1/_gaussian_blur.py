@@ -5,7 +5,7 @@ from ._execute_separable_kernel import execute_separable_kernel
 
 
 @plugin_function
-def gaussian_blur (src :Image, dst :Image = None, sigma_x :float=0, sigma_y :float=0, sigma_z :float=0):
+def gaussian_blur(src : Image, dst : Image = None, sigma_x : float = 0, sigma_y : float = 0, sigma_z : float = 0):
     """
     documentation placeholder
     """

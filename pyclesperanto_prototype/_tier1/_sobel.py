@@ -1,6 +1,9 @@
 from .._tier0 import execute
+from .._tier0 import plugin_function
+from .._tier0 import Image
 
-def sobel (src, dst):
+@plugin_function
+def sobel(src : Image, dst : Image = None):
     """Convolve the image with the Sobel kernel.
 
     Author(s): Ruth Whelan-Jeans, Robert Haase
@@ -26,3 +29,4 @@ def sobel (src, dst):
     }
 
     execute(__file__, 'sobel_' + str(len(dst.shape)) + 'd_x.cl', 'sobel_' + str(len(dst.shape)) + 'd', dst.shape, parameters)
+    return dst

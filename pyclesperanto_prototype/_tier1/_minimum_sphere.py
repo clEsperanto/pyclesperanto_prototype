@@ -1,7 +1,10 @@
 from .._tier0 import radius_to_kernel_size
 from .._tier0 import execute
+from .._tier0 import plugin_function
+from .._tier0 import Image
 
-def minimum_sphere(input, output, radius_x, radius_y, radius_z=0):
+@plugin_function
+def minimum_sphere(input : Image, output : Image = None, radius_x : float = 1, radius_y : float = 1, radius_z : float = 1):
     """
     documentation placeholder
     """
@@ -21,3 +24,4 @@ def minimum_sphere(input, output, radius_x, radius_y, radius_z=0):
     if (len(output.shape) == 3):
         parameters.update({"Nz":int(kernel_size_z)});
     execute(__file__, 'minimum_sphere_' + str(len(output.shape)) + 'd_x.cl', 'minimum_sphere_' + str(len(output.shape)) + 'd', output.shape, parameters);
+    return output

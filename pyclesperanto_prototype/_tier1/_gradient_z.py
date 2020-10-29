@@ -1,6 +1,10 @@
 from .._tier0 import execute
 
-def gradient_z (src, dst):
+from .._tier0 import plugin_function
+from .._tier0 import Image
+
+@plugin_function
+def gradient_z(src : Image, dst : Image = None):
     """Computes the gradient of gray values along Z. 
     
     Assuming a, b and c are three adjacent
@@ -27,3 +31,4 @@ def gradient_z (src, dst):
     }
 
     execute(__file__, 'gradient_z_3d_x.cl', 'gradient_z_3d', dst.shape, parameters)
+    return dst

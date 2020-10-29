@@ -3,7 +3,7 @@ from .._tier0 import Image
 from .._tier0 import plugin_function
 
 @plugin_function
-def mask (src : Image, mask : Image, dst : Image = None):
+def mask(src : Image, mask : Image, dst : Image = None):
     """Computes a masked image by applying a mask to an image. 
     
     All pixel values x of image X will be copied

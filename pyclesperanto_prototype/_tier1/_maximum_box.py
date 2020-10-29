@@ -1,7 +1,11 @@
 from .._tier0 import radius_to_kernel_size
 from ._execute_separable_kernel import execute_separable_kernel
 
-def maximum_box (src, dst, radius_x, radius_y, radius_z):
+from .._tier0 import plugin_function
+from .._tier0 import Image
+
+@plugin_function
+def maximum_box(src : Image, dst : Image = None, radius_x : int = 1, radius_y : int = 1, radius_z : int = 1):
     """
     documentation placeholder
     """
@@ -25,3 +29,4 @@ def maximum_box (src, dst, radius_x, radius_y, radius_z):
         radius_z,
         len(dst.shape)
     )
+    return dst

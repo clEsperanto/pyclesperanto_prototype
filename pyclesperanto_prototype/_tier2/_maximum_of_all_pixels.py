@@ -1,7 +1,10 @@
 from .._tier0 import create
 from .._tier0 import pull
+from .._tier0 import plugin_function
+from .._tier0 import Image
 
-def maximum_of_all_pixels(input):
+@plugin_function
+def maximum_of_all_pixels(input  : Image):
     from .._tier1 import maximum_x_projection
     from .._tier1 import maximum_y_projection
     from .._tier1 import maximum_z_projection

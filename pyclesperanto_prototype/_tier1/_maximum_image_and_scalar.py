@@ -1,7 +1,10 @@
 from .._tier0 import execute
 
+from .._tier0 import plugin_function
+from .._tier0 import Image
 
-def maximum_image_and_scalar (src, dst, scalar):
+@plugin_function
+def maximum_image_and_scalar(src : Image, dst : Image = None, scalar : float = 0):
     """Computes the maximum of a constant scalar s and each pixel value x in a given image X. 
     
     <pre>f(x, s) = max(x, s)</pre>
@@ -28,4 +31,4 @@ def maximum_image_and_scalar (src, dst, scalar):
     }
 
     execute(__file__, 'maximum_image_and_scalar_' + str(len(dst.shape)) + 'd_x.cl', 'maximum_image_and_scalar_' + str(len(dst.shape)) + 'd', dst.shape, parameters)
-
+    return dst

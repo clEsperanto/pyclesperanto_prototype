@@ -1,6 +1,9 @@
 from .._tier0 import execute
+from .._tier0 import plugin_function
+from .._tier0 import Image
 
-def set_ramp_y(output):
+@plugin_function
+def set_ramp_y(output : Image):
     """Sets all pixel values to their Y coordinate
 
     Available for: 2D, 3D
@@ -23,3 +26,4 @@ def set_ramp_y(output):
     }
 
     execute(__file__, 'set_ramp_y_' + str(len(output.shape)) + 'd_x.cl', 'set_ramp_y_' + str(len(output.shape)) + 'd', output.shape, parameters);
+    return output

@@ -1,7 +1,9 @@
 from .._tier0 import execute
+from .._tier0 import plugin_function
+from .._tier0 import Image
 
-
-def copy_slice (src, dst, slice):
+@plugin_function
+def copy_slice(src : Image, dst : Image = None, slice : int = 0):
     """This method has two purposes: 
     It copies a 2D image to a given slice z position in a 3D image stack or 
     It copies a given slice at position z in an image stack to a 2D image.
@@ -36,3 +38,4 @@ def copy_slice (src, dst, slice):
     else:
         execute(__file__, 'copy_slice_from_3d_x.cl', 'copy_slice_from_3d', dst.shape, parameters)
 
+    return dst

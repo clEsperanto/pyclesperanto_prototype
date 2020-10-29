@@ -1,7 +1,10 @@
 from .._tier0 import radius_to_kernel_size
 from .._tier0 import execute
+from .._tier0 import plugin_function
+from .._tier0 import Image
 
-def mean_sphere(input, output, radius_x, radius_y, radius_z=0):
+@plugin_function
+def mean_sphere(input : Image, output : Image = None, radius_x : float = 1, radius_y : float = 1, radius_z : float = 1):
     """
     documentation placeholder
     """

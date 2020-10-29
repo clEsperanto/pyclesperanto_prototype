@@ -1,7 +1,9 @@
 from .._tier0 import execute
+from .._tier0 import plugin_function
+from .._tier0 import Image
 
-
-def copy (src, dst):
+@plugin_function
+def copy(src : Image, dst : Image = None):
     """Copies an image.
     
     <pre>f(x) = x</pre>
@@ -27,3 +29,4 @@ def copy (src, dst):
     }
 
     execute(__file__, 'copy_' + str(len(dst.shape)) + 'd_x.cl', 'copy_' + str(len(dst.shape)) + 'd', dst.shape, parameters)
+    return dst

@@ -4,7 +4,7 @@ from .._tier0 import create_like
 from .._tier0 import plugin_function
 from .._tier0 import Image
 
-@plugin_function(output_creator=create_like)
+@plugin_function
 def add_images_weighted(input1:Image, input2:Image, output :Image = None, weight1:float=1, weight2:float=1):
     """Calculates the sum of pairs of pixels x and y from images X and Y weighted with factors a and b.
     

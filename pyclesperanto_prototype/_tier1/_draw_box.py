@@ -1,8 +1,10 @@
 from .._tier0 import execute
+from .._tier0 import plugin_function
+from .._tier0 import Image
 
-
-def draw_box (dst, x, y, z, width, height, depth, value):
-    """Draws a box at a given start point with given size. 
+@plugin_function
+def draw_box(dst: Image, x: int = 0, y: int = 0, z: int = 0, width: int = 1, height: int = 1, depth: int = 1, value : float = 1):
+    """Draws a box at a given start point with given size.
     All pixels other than in the box are untouched. Consider using `set(buffer, 0);` in advance.
 
     Available for: 2D, 3D
@@ -42,3 +44,4 @@ def draw_box (dst, x, y, z, width, height, depth, value):
         }
 
     execute(__file__, 'draw_box_' + str(len(dst.shape)) + 'd_x.cl', 'draw_box_' + str(len(dst.shape)) + 'd', dst.shape, parameters)
+    return dst

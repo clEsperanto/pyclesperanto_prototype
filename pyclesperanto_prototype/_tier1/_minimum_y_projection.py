@@ -1,7 +1,11 @@
 from .._tier0 import radius_to_kernel_size
 from .._tier0 import execute
+from .._tier0 import plugin_function
+from .._tier0 import Image
+from .._tier0 import create_2d_zx
 
-def minimum_y_projection(input, output):
+@plugin_function(output_creator=create_2d_zx)
+def minimum_y_projection(input : Image, output : Image = None):
     """Determines the minimum projection of an image along Y.
 
     Available for: 3D
@@ -25,3 +29,4 @@ def minimum_y_projection(input, output):
     }
 
     execute(__file__, 'minimum_y_projection_x.cl', 'minimum_y_projection', output.shape, parameters)
+    return output

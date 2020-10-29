@@ -1,7 +1,10 @@
 from .._tier0 import radius_to_kernel_size
 from .._tier0 import execute
+from .._tier0 import plugin_function
+from .._tier0 import Image
 
-def multiply_image_and_coordinate(input, output, dimension):
+@plugin_function
+def multiply_image_and_coordinate(input : Image, output : Image = None, dimension = 0):
     """Multiplies all pixel intensities with the x, y or z coordinate, depending on specified dimension.
 
     Available for: 2D, 3D
@@ -18,12 +21,11 @@ def multiply_image_and_coordinate(input, output, dimension):
 
     """
 
-
     parameters = {
         "src":input,
         "dst":output,
         "dimension":int(dimension)
-    };
+    }
 
-    execute(__file__, 'multiply_image_and_coordinate_' + str(len(output.shape)) + 'd_x.cl', 'multiply_image_and_coordinate_' + str(len(output.shape)) + 'd', output.shape, parameters);
-
+    execute(__file__, 'multiply_image_and_coordinate_' + str(len(output.shape)) + 'd_x.cl', 'multiply_image_and_coordinate_' + str(len(output.shape)) + 'd', output.shape, parameters)
+    return output

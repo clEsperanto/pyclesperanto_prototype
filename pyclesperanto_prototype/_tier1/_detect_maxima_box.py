@@ -3,7 +3,7 @@ from .._tier0 import plugin_function
 from .._tier0 import Image
 
 @plugin_function
-def detect_maxima_box (src :Image, dst :Image = None):
+def detect_maxima_box(src :Image, dst :Image = None):
     """
     documentation placeholder
     """

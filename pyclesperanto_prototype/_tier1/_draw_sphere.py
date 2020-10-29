@@ -1,7 +1,11 @@
 from .._tier0 import execute
 
 
-def draw_sphere (dst, x, y, z, radius_x, radius_y, radius_z, value):
+from .._tier0 import plugin_function
+from .._tier0 import Image
+
+@plugin_function
+def draw_sphere(dst : Image, x : float = 0, y : float = 0, z : float = 0, radius_x : float = 1, radius_y : float = 1, radius_z : float = 1, value : float = 1):
     """Draws a sphere around a given point with given radii in x, y and z (if 3D). 
     
      All pixels other than in the sphere are untouched. Consider using `set(buffer, 0);` in advance.
@@ -48,3 +52,4 @@ def draw_sphere (dst, x, y, z, radius_x, radius_y, radius_z, value):
         }
 
     execute(__file__, 'draw_sphere_' + str(len(dst.shape)) + 'd_x.cl', 'draw_sphere_' + str(len(dst.shape)) + 'd', dst.shape, parameters)
+    return dst

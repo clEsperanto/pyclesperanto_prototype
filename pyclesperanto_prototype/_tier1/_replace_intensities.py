@@ -1,7 +1,9 @@
 from .._tier0 import execute
+from .._tier0 import plugin_function
+from .._tier0 import Image
 
-
-def replace_intensities(src, map, dst):
+@plugin_function
+def replace_intensities(src : Image, map : Image, dst : Image = None):
     """Replaces integer intensities specified in a vector image. 
     
     The vector image must be 3D with size (m, 1, 1) where m corresponds to the maximum intensity in the original image. Assuming the vector image contains values (0, 1, 0, 2) means: 
@@ -33,4 +35,4 @@ def replace_intensities(src, map, dst):
     }
 
     execute(__file__, 'replace_intensities_x.cl', 'replace_intensities', dst.shape, parameters)
-
+    return dst

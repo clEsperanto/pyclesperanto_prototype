@@ -1,7 +1,9 @@
 from .._tier0 import execute
+from .._tier0 import plugin_function
+from .._tier0 import Image
 
-
-def exponential (src, dst):
+@plugin_function
+def exponential(src : Image, dst : Image = None):
     """Computes base exponential of all pixels values.
     
     f(x) = exp(x)
@@ -29,4 +31,4 @@ def exponential (src, dst):
     }
 
     execute(__file__, 'exponential_' + str(len(dst.shape)) + 'd_x.cl', 'exponential_' + str(len(dst.shape)) + 'd', dst.shape, parameters)
-
+    return dst

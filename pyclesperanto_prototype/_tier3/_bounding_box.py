@@ -1,9 +1,11 @@
-from .._tier0._types import Image
 from .._tier0 import create_like
 from .._tier1 import multiply_image_and_coordinate
 from .._tier2 import maximum_of_all_pixels
 from .._tier2 import minimum_of_masked_pixels
+from .._tier0 import plugin_function
+from .._tier0 import Image
 
+@plugin_function
 def bounding_box(binary_image : Image):
     """
       :param input:

@@ -1,6 +1,8 @@
-from .._tier0 import Image
 from .._tier3 import jaccard_index
+from .._tier0 import plugin_function
+from .._tier0 import Image
 
+@plugin_function
 def sorensen_dice_coefficient(src1 : Image, src2 : Image):
     """
 

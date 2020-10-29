@@ -1,6 +1,9 @@
 from .._tier0 import execute
+from .._tier0 import plugin_function
+from .._tier0 import Image
 
-def laplace_diamond (src, dst):
+@plugin_function
+def laplace_diamond(src : Image, dst : Image = None):
     """Applies the Laplace operator (Diamond neighborhood) to an image.
 
     Available for: 2D, 3D
@@ -24,3 +27,4 @@ def laplace_diamond (src, dst):
     }
 
     execute(__file__, 'laplace_diamond_' + str(len(dst.shape)) + 'd_x.cl', 'laplace_diamond_' + str(len(dst.shape)) + 'd', dst.shape, parameters)
+    return dst

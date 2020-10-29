@@ -1,7 +1,10 @@
 from .._tier0 import radius_to_kernel_size
 from ._execute_separable_kernel import execute_separable_kernel
+from .._tier0 import plugin_function
+from .._tier0 import Image
 
-def minimum_box (src, dst, radius_x, radius_y, radius_z):
+@plugin_function
+def minimum_box(src : Image, dst : Image = None, radius_x : float = 0, radius_y : float = 0, radius_z : float = 0):
     """
     documentation placeholder
     """
@@ -25,3 +28,4 @@ def minimum_box (src, dst, radius_x, radius_y, radius_z):
         radius_z,
         len(dst.shape)
     )
+    return dst

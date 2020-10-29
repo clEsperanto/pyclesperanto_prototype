@@ -7,6 +7,7 @@ from .._tier1 import transpose_xz
 from .._tier1 import transpose_yz
 from .._tier0 import pull
 from .._tier1 import copy_slice
+from .._tier0 import plugin_function
 
 def __minimum_of_masked_pixels_reduction(input : Image, input_mask : Image, output : Image, output_mask : Image):
     parameters = {
@@ -27,6 +28,7 @@ def _slice_to_stack(image : Image, stack : Image = None, num_slices = 1):
         copy_slice(image, stack, i)
     return stack
 
+@plugin_function
 def minimum_of_masked_pixels(input : Image, mask : Image):
     """
 

@@ -1,8 +1,11 @@
 from .._tier0 import execute
+from .._tier0 import plugin_function
+from .._tier0 import Image
 
 # todo: add a proper output-generator
 
-def touch_matrix_to_mesh (src_pointlist, src_touch_matrix, dst_mesh):
+@plugin_function
+def touch_matrix_to_mesh(src_pointlist  : Image, src_touch_matrix : Image, dst_mesh : Image):
     """
     docs
     """

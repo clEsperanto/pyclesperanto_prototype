@@ -1,6 +1,9 @@
 from .._tier0 import execute
+from .._tier0 import plugin_function
+from .._tier0 import Image
 
-def set(output, scalar):
+@plugin_function
+def set(output : Image, scalar : float = 0):
     """Sets all pixel values x of a given image X to a constant value v.
     
     <pre>f(x) = v</pre>
@@ -26,3 +29,4 @@ def set(output, scalar):
     }
 
     execute(__file__, 'set_' + str(len(output.shape)) + 'd_x.cl', 'set_' + str(len(output.shape)) + 'd', output.shape, parameters);
+    return output

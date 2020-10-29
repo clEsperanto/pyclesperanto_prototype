@@ -1,9 +1,9 @@
-
-
 from .._tier0 import execute
+from .._tier0 import plugin_function
+from .._tier0 import Image
 
-
-def erode_box_slice_by_slice (src, dst):
+@plugin_function
+def erode_box_slice_by_slice(src : Image, dst : Image = None):
     """Computes a binary image with pixel values 0 and 1 containing the binary erosion of a given input image. 
     
     The erosion takes the Moore-neighborhood (8 pixels in 2D and 26 pixels in 3d) into account.
@@ -35,4 +35,4 @@ def erode_box_slice_by_slice (src, dst):
     }
 
     execute(__file__, 'erode_box_slice_by_slice_' + str(len(dst.shape)) + 'd_x.cl', 'erode_box_slice_by_slice_' + str(len(dst.shape)) + 'd', dst.shape, parameters)
-
+    return dst

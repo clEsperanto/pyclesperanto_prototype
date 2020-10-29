@@ -1,7 +1,10 @@
 from .._tier0 import radius_to_kernel_size
 from .._tier0 import execute
+from .._tier0 import plugin_function
+from .._tier0 import Image
 
-def maximum_sphere(input, output, radius_x, radius_y, radius_z=0):
+@plugin_function
+def maximum_sphere(input : Image, output : Image = None, radius_x : float = 1, radius_y : float = 1, radius_z=0):
     """
     documentation placeholder
     """
@@ -21,3 +24,4 @@ def maximum_sphere(input, output, radius_x, radius_y, radius_z=0):
     if (len(output.shape) == 3):
         parameters.update({"Nz":int(kernel_size_z)});
     execute(__file__, 'maximum_sphere_' + str(len(output.shape)) + 'd_x.cl', 'maximum_sphere_' + str(len(output.shape)) + 'd', output.shape, parameters);
+    return output
