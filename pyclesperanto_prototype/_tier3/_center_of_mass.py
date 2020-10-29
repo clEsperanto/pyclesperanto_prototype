@@ -3,7 +3,7 @@ from .._tier0 import create_like
 from .._tier1 import multiply_image_and_coordinate
 from .._tier2 import sum_of_all_pixels
 
-def get_center_of_mass(image : Image):
+def center_of_mass(image : Image):
     """
 
     :return:

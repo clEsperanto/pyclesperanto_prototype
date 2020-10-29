@@ -2,7 +2,7 @@ import pyclesperanto_prototype as cle
 import numpy as np
 
 
-def test_get_sorenson_dice_coefficient_2d():
+def test_sorenson_dice_coefficient_2d():
     test1 = cle.push(np.asarray([
         [0, 0, 0, 0, 0],
         [0, 1, 1, 0, 0]
@@ -13,10 +13,10 @@ def test_get_sorenson_dice_coefficient_2d():
         [0, 1, 1, 0, 0]
     ]))
 
-    d = cle.get_sorenson_dice_coefficient(test1, test2)
+    d = cle.sorenson_dice_coefficient(test1, test2)
 
     assert abs(d - 0.666) < 0.001
-    print("ok get_sorenson_dice_coefficient")
+    print("ok sorenson_dice_coefficient")
 
 def test_get_sorenson_dice_coefficient_3d():
     test1 = cle.push(np.asarray([
@@ -29,8 +29,8 @@ def test_get_sorenson_dice_coefficient_3d():
         [[0, 1, 1], [0, 1, 0]]
     ]))
 
-    d = cle.get_sorenson_dice_coefficient(test1, test2)
+    d = cle.sorenson_dice_coefficient(test1, test2)
 
     assert abs(d - 0.666) < 0.001
-    print("ok get_sorenson_dice_coefficient")
+    print("ok sorenson_dice_coefficient")
 

@@ -2,7 +2,7 @@ import pyclesperanto_prototype as cle
 import numpy as np
 
 
-def test_get_jaccard_index_2d():
+def test_jaccard_index_2d():
     test1 = cle.push(np.asarray([
         [0, 0, 0, 0, 0],
         [0, 1, 1, 0, 0]
@@ -13,12 +13,12 @@ def test_get_jaccard_index_2d():
         [0, 1, 1, 0, 0]
     ]))
 
-    j = cle.get_jaccard_index(test1, test2)
+    j = cle.jaccard_index(test1, test2)
 
     assert j == 0.5
-    print("ok get_jaccard_index")
+    print("ok jaccard_index")
 
-def test_get_jaccard_index_3d():
+def test_accard_index_3d():
     test1 = cle.push(np.asarray([
         [[0, 0, 0], [0, 0, 0]],
         [[0, 1, 1], [0, 1, 0]]
@@ -29,8 +29,8 @@ def test_get_jaccard_index_3d():
         [[0, 1, 1], [0, 1, 0]]
     ]))
 
-    j = cle.get_jaccard_index(test1, test2)
+    j = cle.jaccard_index(test1, test2)
 
     assert j == 0.5
-    print("ok get_jaccard_index")
+    print("ok jaccard_index")
 

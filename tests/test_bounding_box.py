@@ -6,7 +6,7 @@ import pyopencl as cl
 from . import LINUX, CI
 
 # @pytest.mark.xfail('LINUX and CI', reason='INVALID_ARG_SIZE on CI', raises=cl.LogicError)
-def test_get_bounding_box_2d():
+def test_bounding_box_2d():
 
     test = cle.push(np.asarray([
         [0, 0, 0, 0, 0],
@@ -16,7 +16,7 @@ def test_get_bounding_box_2d():
         [0, 0, 0, 0, 0]
     ]))
 
-    bb = cle.get_bounding_box(test)
+    bb = cle.bounding_box(test)
     print(bb)
 
     assert bb[0] == 1
@@ -25,7 +25,7 @@ def test_get_bounding_box_2d():
     assert bb[3] == 2
     assert bb[4] == 2
 
-def test_get_bounding_box_3d():
+def test_bounding_box_3d():
 
     test = cle.push(np.asarray([[
         [0, 0, 0, 0, 0],
@@ -41,7 +41,7 @@ def test_get_bounding_box_3d():
         [0, 0, 0, 0, 0]
     ]]))
 
-    bb = cle.get_bounding_box(test)
+    bb = cle.bounding_box(test)
     print(bb)
 
     assert bb[0] == 0

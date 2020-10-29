@@ -4,7 +4,7 @@ from pyclesperanto_prototype._tier1 import binary_and
 from pyclesperanto_prototype._tier1 import binary_or
 from pyclesperanto_prototype._tier2 import sum_of_all_pixels
 
-def get_jaccard_index(src1 : Image, src2 : Image):
+def jaccard_index(src1 : Image, src2 : Image):
     """
 
     :param input:
