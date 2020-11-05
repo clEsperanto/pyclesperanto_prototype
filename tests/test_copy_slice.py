@@ -1,9 +1,5 @@
 import pyclesperanto_prototype as cle
 import numpy as np
-import pytest
-import pyopencl as cl
-
-from . import LINUX, MACOS, CI
 
 def test_copy_slice_from_3d():
 
