@@ -5,7 +5,6 @@ import pyopencl as cl
 
 from . import LINUX, MACOS, CI
 
-@pytest.mark.xfail('LINUX and CI', reason='INVALID_ARG_SIZE on CI', raises=cl.LogicError)
 def test_copy_slice_from_3d():
 
     test1 = cle.push(np.asarray([
@@ -30,7 +29,6 @@ def test_copy_slice_from_3d():
     print ("ok copy slice from 3d")
 
 
-@pytest.mark.xfail(reason="BUILD_PROGRAM_FAILURE")
 def test_copy_slice_to_3d():
     test1 = cle.push(np.asarray([
             [3, 4],
@@ -44,11 +42,10 @@ def test_copy_slice_to_3d():
     print(test2)
     a = cle.pull(test2)
     assert (np.min(a) == 0)
-    assert (np.max(a) == 4)
+    assert (np.max(a) == 5)
     assert (np.mean(a) == 2)
     print ("ok copy slice to 3d")
 
-@pytest.mark.xfail('LINUX and CI', reason='INVALID_ARG_SIZE on CI', raises=cl.LogicError)
 def test_copy_slice_to3d_with_one_slice():
     test1 = cle.push(np.asarray([
         [3, 4, 6],
@@ -70,8 +67,6 @@ def test_copy_slice_to3d_with_one_slice():
     assert (np.max(a) == 6)
     assert (np.mean(a) == 4)
 
-@pytest.mark.xfail('LINUX and CI', reason='INVALID_ARG_SIZE on CI', raises=cl.LogicError)
-@pytest.mark.xfail('MACOS and CI', reason='Result is 0 on CI', raises=AssertionError)
 def test_copy_slice_to3d_with_one_slice_zyx():
     test1 = cle.push_zyx(np.asarray([
         [3, 4, 6],
@@ -93,7 +88,6 @@ def test_copy_slice_to3d_with_one_slice_zyx():
     assert (np.max(a) == 6)
     assert (np.mean(a) == 4)
 
-@pytest.mark.xfail('LINUX and CI', reason='INVALID_ARG_SIZE on CI', raises=cl.LogicError)
 def test_copy_slice_mini_y():
     np_input = np.asarray([[1], [2], [3], [4]])
 
@@ -108,7 +102,6 @@ def test_copy_slice_mini_y():
     assert (np.max(a) == 4)
     assert (np.mean(a) == 2.5)
 
-@pytest.mark.xfail('LINUX and CI', reason='INVALID_ARG_SIZE on CI', raises=cl.LogicError)
 def test_copy_slice_mini_x():
     np_input = np.asarray([[1, 2, 3, 4]])
 
