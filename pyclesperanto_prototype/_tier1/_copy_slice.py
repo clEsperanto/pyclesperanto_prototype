@@ -32,7 +32,7 @@ def copy_slice (src, dst, slice):
     }
 
     if (len(dst.shape) == 3):
-        execute(__file__, 'copy_slice_to_3d_x.cl', 'copy_slice_to_3d', dst.shape, parameters)
+        execute(__file__, 'copy_slice_to_3d_x.cl', 'copy_slice_to_3d', [1, src.shape[0], src.shape[1]], parameters)
     else:
         execute(__file__, 'copy_slice_from_3d_x.cl', 'copy_slice_from_3d', dst.shape, parameters)
 
