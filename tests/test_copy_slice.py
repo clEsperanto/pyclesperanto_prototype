@@ -81,7 +81,7 @@ def test_copy_slice_to3d_with_one_slice_zyx():
     print(test1)
     print("shape test1 " + str(test1.shape))
 
-    test2 = cle.create_zyx((1, 3, 2))
+    test2 = cle.create((1, 2, 3))
     print("shape test2 " + str(test2.shape))
     print(test2)
 
