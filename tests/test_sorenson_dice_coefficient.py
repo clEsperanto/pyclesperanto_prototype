@@ -13,7 +13,7 @@ def test_sorensen_dice_coefficient_2d():
         [0, 1, 1, 0, 0]
     ]))
 
-    d = cle.sorenson_dice_coefficient(test1, test2)
+    d = cle.sorensen_dice_coefficient(test1, test2)
 
     assert abs(d - 0.666) < 0.001
 
@@ -28,6 +28,6 @@ def test_sorensen_dice_coefficient_3d():
         [[0, 1, 1], [0, 1, 0]]
     ]))
 
-    d = cle.sorenson_dice_coefficient(test1, test2)
+    d = cle.sorensen_dice_coefficient(test1, test2)
 
     assert abs(d - 0.666) < 0.001
