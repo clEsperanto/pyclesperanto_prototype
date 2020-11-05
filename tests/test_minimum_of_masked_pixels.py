@@ -1,11 +1,6 @@
 import pyclesperanto_prototype as cle
 import numpy as np
-import pytest
-import pyopencl as cl
 
-from . import LINUX, CI
-
-@pytest.mark.xfail('LINUX and CI', reason='INVALID_ARG_SIZE on CI', raises=cl.LogicError)
 def test_minimum_of_masked_pixels_mini_x():
     np_input = np.asarray([[1, 2, 3, 4]])
     np_mask = np.asarray([[0, 1, 1, 0]])
