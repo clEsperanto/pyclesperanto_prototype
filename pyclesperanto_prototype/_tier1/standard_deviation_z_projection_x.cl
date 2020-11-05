@@ -22,7 +22,8 @@ __kernel void standard_deviation_z_projection(
     float value = (float)(READ_src_IMAGE(src,sampler,POS_src_INSTANCE(x,y,z,0)).x) - mean;
     sum = sum + (value * value);
   }
-  float stdDev = sqrt((float2){sum / (count - 1), 0}).x;
+
+  float stdDev = sqrt((float)(sum / (count - 1)));
 
   WRITE_dst_IMAGE(dst,POS_dst_INSTANCE(x,y,0,0), CONVERT_dst_PIXEL_TYPE(stdDev));
 }
