@@ -20,7 +20,7 @@ def erode_sphere(src : Image, dst : Image = None):
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
-    >>> cle.erode_sphere(, source, , destination)
+    >>> cle.erode_sphere(source, destination)
     >>>     
     
     References

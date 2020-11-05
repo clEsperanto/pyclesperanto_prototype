@@ -21,7 +21,7 @@ def maximum_of_all_pixels(input  : Image):
         Examples
     --------
     >>> import pyclesperanto_prototype as cle
-    >>> cle.maximum_of_all_pixels(, source)
+    >>> cle.maximum_of_all_pixels(source)
     >>>     
     
     References

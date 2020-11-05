@@ -25,7 +25,7 @@ def erode_box_slice_by_slice(src : Image, dst : Image = None):
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
-    >>> cle.erode_box_slice_by_slice(, source, , destination)
+    >>> cle.erode_box_slice_by_slice(source, destination)
     >>>     
     
     References

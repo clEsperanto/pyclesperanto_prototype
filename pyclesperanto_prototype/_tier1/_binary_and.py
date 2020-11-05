@@ -27,7 +27,7 @@ def binary_and(src1 : Image, src2 : Image, dst : Image = None):
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
-    >>> cle.binary_and(, operand1, , operand2, , destination)
+    >>> cle.binary_and(operand1, operand2, destination)
     >>>     
     
     References

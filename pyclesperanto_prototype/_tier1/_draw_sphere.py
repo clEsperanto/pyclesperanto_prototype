@@ -27,7 +27,7 @@ def draw_sphere(dst : Image, x : float = 0, y : float = 0, z : float = 0, radius
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
-    >>> cle.draw_sphere(, destination, , x, , y, , z, , radius_x, , radius_y, , radius_z, , value)
+    >>> cle.draw_sphere(destination, x, y, z, radius_x, radius_y, radius_z, value)
     >>>     
     
     References

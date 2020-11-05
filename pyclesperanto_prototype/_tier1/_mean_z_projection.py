@@ -18,7 +18,7 @@ def mean_z_projection(input : Image, output : Image):
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
-    >>> cle.mean_z_projection(, source, , destination)
+    >>> cle.mean_z_projection(source, destination)
     >>>     
     
     References

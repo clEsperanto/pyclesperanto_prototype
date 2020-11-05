@@ -14,7 +14,7 @@ def onlyzero_overwrite_maximum_box (src, flag_dst, dst):
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
-    >>> cle.onlyzero_overwrite_maximum_box(, input, , destination)
+    >>> cle.onlyzero_overwrite_maximum_box(input, destination)
     >>>     
     
     References

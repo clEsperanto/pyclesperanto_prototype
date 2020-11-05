@@ -19,7 +19,7 @@ def replace_intensity(src : Image, dst : Image = None, value_to_replace : float 
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
-    >>> cle.replace_intensity(, input, , destination, , oldValue, , newValue)
+    >>> cle.replace_intensity(input, destination, oldValue, newValue)
     >>>     
     
     References

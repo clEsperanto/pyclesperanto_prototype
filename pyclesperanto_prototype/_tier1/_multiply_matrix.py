@@ -16,7 +16,7 @@ def multiply_matrix(input1, input2, output):
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
-    >>> cle.multiply_matrix(, matrix1, , matrix2, , matrix_destination)
+    >>> cle.multiply_matrix(matrix1, matrix2, matrix_destination)
     >>>     
     
     References

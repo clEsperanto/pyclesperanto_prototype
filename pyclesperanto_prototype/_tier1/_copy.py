@@ -19,7 +19,7 @@ def copy(src : Image, dst : Image = None):
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
-    >>> cle.copy(, source, , destination)
+    >>> cle.copy(source, destination)
     >>>     
     
     References

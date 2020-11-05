@@ -25,7 +25,7 @@ def equal_constant(src1 : Image, dst : Image = None, scalar : float = 0):
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
-    >>> cle.equal_constant(, source, , destination, , constant)
+    >>> cle.equal_constant(source, destination, constant)
     >>>     
     
     References

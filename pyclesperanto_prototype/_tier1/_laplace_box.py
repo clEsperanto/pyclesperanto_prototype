@@ -18,7 +18,7 @@ def laplace_box(src : Image, dst : Image = None):
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
-    >>> cle.laplace_box(, input, , destination)
+    >>> cle.laplace_box(input, destination)
     >>>     
     
     References

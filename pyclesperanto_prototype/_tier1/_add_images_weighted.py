@@ -30,7 +30,7 @@ def add_images_weighted(input1:Image, input2:Image, output :Image = None, weight
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
-    >>> cle.add_images_weighted(, summand1, , summand2, , destination, , factor1, , factor2)
+    >>> cle.add_images_weighted(summand1, summand2, destination, factor1, factor2)
     >>>     
     
     References

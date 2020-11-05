@@ -17,7 +17,7 @@ def laplace_diamond(src : Image, dst : Image = None):
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
-    >>> cle.laplace_diamond(, input, , destination)
+    >>> cle.laplace_diamond(input, destination)
     >>>     
     
     References

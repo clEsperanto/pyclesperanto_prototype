@@ -21,7 +21,7 @@ def exponential(src : Image, dst : Image = None):
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
-    >>> cle.exponential(, source, , destination)
+    >>> cle.exponential(source, destination)
     >>>     
     
     References

@@ -20,7 +20,7 @@ def dilate_sphere(src : Image, dst : Image = None):
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
-    >>> cle.dilate_sphere(, source, , destination)
+    >>> cle.dilate_sphere(source, destination)
     >>>     
     
     References

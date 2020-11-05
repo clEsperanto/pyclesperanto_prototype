@@ -21,7 +21,7 @@ def flip(src : Image, dst : Image = None, flip_x : bool = True, flip_y : bool = 
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
-    >>> cle.flip(, source, , destination, , flipX, , flipY, , flipZ)
+    >>> cle.flip(source, destination, flipX, flipY, flipZ)
     >>>     
     
     References

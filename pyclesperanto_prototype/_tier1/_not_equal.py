@@ -24,7 +24,7 @@ def not_equal(src1 : Image, src2 : Image, dst : Image = None):
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
-    >>> cle.not_equal(, source1, , source2, , destination)
+    >>> cle.not_equal(source1, source2, destination)
     >>>     
     
     References

@@ -22,7 +22,7 @@ def transpose_yz(src : Image , dst : Image = None):
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
-    >>> cle.transpose_yz(, input, , destination)
+    >>> cle.transpose_yz(input, destination)
     >>>     
     
     References

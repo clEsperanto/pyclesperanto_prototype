@@ -21,7 +21,7 @@ def binary_edge_detection(src : Image, dst : Image = None):
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
-    >>> cle.binary_edge_detection(, source, , destination)
+    >>> cle.binary_edge_detection(source, destination)
     >>>     
     
     References

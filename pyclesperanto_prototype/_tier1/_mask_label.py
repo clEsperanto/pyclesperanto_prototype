@@ -24,7 +24,7 @@ def mask_label(src : Image, labelmap : Image, dst : Image = None, label_id : int
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
-    >>> cle.mask_label(, source, , label_map, , destination, , label_index)
+    >>> cle.mask_label(source, label_map, destination, label_index)
     >>>     
     
     References

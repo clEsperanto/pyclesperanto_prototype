@@ -24,7 +24,7 @@ def add_image_and_scalar(input : Image, output : Image = None, scalar : float = 
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
-    >>> cle.add_image_and_scalar(, source, , destination, , scalar)
+    >>> cle.add_image_and_scalar(source, destination, scalar)
     >>>     
     
     References

@@ -24,7 +24,7 @@ def mean_box(src : Image, dst : Image = None, radius_x : float = 1, radius_y : f
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
-    >>> cle.mean_box(, source, , destination, , radiusX, , radiusY, , radiusZ)
+    >>> cle.mean_box(source, destination, radiusX, radiusY, radiusZ)
     >>>     
     
     References

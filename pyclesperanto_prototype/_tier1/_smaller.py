@@ -20,7 +20,7 @@ def smaller(src1 : Image, src2 : Image, dst : Image = None):
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
-    >>> cle.smaller(, source1, , source2, , destination)
+    >>> cle.smaller(source1, source2, destination)
     >>>     
     
     References

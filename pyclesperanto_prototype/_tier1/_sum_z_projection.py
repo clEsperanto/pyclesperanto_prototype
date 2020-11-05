@@ -18,7 +18,7 @@ def sum_z_projection(input : Image, output : Image = None):
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
-    >>> cle.sum_z_projection(, source, , destination_sum)
+    >>> cle.sum_z_projection(source, destination_sum)
     >>>     
     
     References

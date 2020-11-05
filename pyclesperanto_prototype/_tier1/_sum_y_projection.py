@@ -18,7 +18,7 @@ def sum_y_projection(input : Image, output : Image = None):
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
-    >>> cle.sum_y_projection(, source, , destination)
+    >>> cle.sum_y_projection(source, destination)
     >>>     
     
     References

@@ -19,7 +19,7 @@ def sum_x_projection(input : Image, output : Image = None):
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
-    >>> cle.sum_x_projection(, source, , destination)
+    >>> cle.sum_x_projection(source, destination)
     >>>     
     
     References

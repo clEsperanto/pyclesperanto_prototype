@@ -22,7 +22,7 @@ def absolute(src : Image, dst : Image = None):
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
-    >>> cle.absolute(, source, , destination)
+    >>> cle.absolute(source, destination)
     >>>     
     
     References

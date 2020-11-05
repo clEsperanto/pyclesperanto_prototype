@@ -24,7 +24,7 @@ def minimum_sphere(input : Image, output : Image = None, radius_x : float = 1, r
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
-    >>> cle.minimum_sphere(, source, , destination, , radiusX, , radiusY, , radiusZ)
+    >>> cle.minimum_sphere(source, destination, radiusX, radiusY, radiusZ)
     >>>     
     
     References

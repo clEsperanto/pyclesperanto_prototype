@@ -27,7 +27,7 @@ def crop(input : Image, output : Image = None, startx : int = 0, starty : int = 
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
-    >>> cle.crop(, source, , destination, , startX, , startY, , startZ, , width, , height, , depth)
+    >>> cle.crop(source, destination, startX, startY, startZ, width, height, depth)
     >>>     
     
     References

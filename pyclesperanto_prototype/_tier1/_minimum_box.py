@@ -24,7 +24,7 @@ def minimum_box(src : Image, dst : Image = None, radius_x : float = 0, radius_y 
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
-    >>> cle.minimum_box(, source, , destination, , radiusX, , radiusY, , radiusZ)
+    >>> cle.minimum_box(source, destination, radiusX, radiusY, radiusZ)
     >>>     
     
     References

@@ -22,7 +22,7 @@ def logarithm(src : Image, dst : Image = None):
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
-    >>> cle.logarithm(, source, , destination)
+    >>> cle.logarithm(source, destination)
     >>>     
     
     References

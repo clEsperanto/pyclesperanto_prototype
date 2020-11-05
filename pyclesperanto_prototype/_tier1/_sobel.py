@@ -19,7 +19,7 @@ def sobel(src : Image, dst : Image = None):
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
-    >>> cle.sobel(, source, , destination)
+    >>> cle.sobel(source, destination)
     >>>     
     
     References

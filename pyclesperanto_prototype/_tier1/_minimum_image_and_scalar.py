@@ -20,7 +20,7 @@ def minimum_image_and_scalar(src : Image, dst : Image = None, scalar : float = 0
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
-    >>> cle.minimum_image_and_scalar(, source, , destination, , scalar)
+    >>> cle.minimum_image_and_scalar(source, destination, scalar)
     >>>     
     
     References

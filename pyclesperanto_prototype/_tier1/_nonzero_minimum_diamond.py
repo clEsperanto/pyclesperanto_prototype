@@ -17,7 +17,7 @@ def nonzero_minimum_diamond (src, flag_dst, dst):
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
-    >>> cle.nonzero_minimum_diamond(, input, , destination)
+    >>> cle.nonzero_minimum_diamond(input, destination)
     >>>     
     
     References

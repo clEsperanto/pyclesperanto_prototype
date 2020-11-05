@@ -20,7 +20,7 @@ def paste (src : Image, dst : Image = None, destination_x : int = 0, destination
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
-    >>> cle.paste(, source, , destination, , destinationX, , destinationY, , destinationZ)
+    >>> cle.paste(source, destination, destinationX, destinationY, destinationZ)
     >>>     
     
     References

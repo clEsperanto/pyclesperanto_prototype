@@ -22,7 +22,7 @@ def not_equal_constant(src1 : Image, dst : Image = None, scalar : float = 0):
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
-    >>> cle.not_equal_constant(, source, , destination, , constant)
+    >>> cle.not_equal_constant(source, destination, constant)
     >>>     
     
     References

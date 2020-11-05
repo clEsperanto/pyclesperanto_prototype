@@ -14,7 +14,7 @@ def set_column(output : Image, column : int = 0, scalar : float = 0):
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
-    >>> cle.set_column(, source, , column_index, , value)
+    >>> cle.set_column(source, column_index, value)
     >>>     
     
     References

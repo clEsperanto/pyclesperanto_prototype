@@ -25,7 +25,7 @@ def binary_not(src1 : Image, dst : Image = None):
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
-    >>> cle.binary_not(, source, , destination)
+    >>> cle.binary_not(source, destination)
     >>>     
     
     References

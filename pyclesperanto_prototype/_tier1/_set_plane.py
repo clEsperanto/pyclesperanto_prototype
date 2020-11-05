@@ -13,7 +13,7 @@ def set_plane(output : Image, plane : int = 0, scalar : float = 0):
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
-    >>> cle.set_plane(, source, , plane_index, , value)
+    >>> cle.set_plane(source, plane_index, value)
     >>>     
     
     References

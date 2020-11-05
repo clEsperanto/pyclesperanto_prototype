@@ -12,7 +12,7 @@ def set_image_borders(output : Image, scalar : float = 0):
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
-    >>> cle.set_image_borders(, destination, , value)
+    >>> cle.set_image_borders(destination, value)
     >>>     
     
     References

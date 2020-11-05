@@ -24,7 +24,7 @@ def copy_slice(src : Image, dst : Image = None, slice : int = 0):
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
-    >>> cle.copy_slice(, source, , destination, , sliceIndex)
+    >>> cle.copy_slice(source, destination, sliceIndex)
     >>>     
     
     References

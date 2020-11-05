@@ -18,7 +18,7 @@ def power_images(src1 : Image, src2 : Image, dst : Image = None):
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
-    >>> cle.power_images(, input, , exponent, , destination)
+    >>> cle.power_images(input, exponent, destination)
     >>>     
     
     References

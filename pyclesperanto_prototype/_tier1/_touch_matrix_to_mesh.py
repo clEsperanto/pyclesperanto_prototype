@@ -25,7 +25,7 @@ def touch_matrix_to_mesh(src_pointlist  : Image, src_touch_matrix : Image, dst_m
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
-    >>> cle.touch_matrix_to_mesh(, pointlist, , touch_matrix, , mesh_destination)
+    >>> cle.touch_matrix_to_mesh(pointlist, touch_matrix, mesh_destination)
     >>>     
     
     References

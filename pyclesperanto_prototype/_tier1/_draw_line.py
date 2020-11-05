@@ -26,7 +26,7 @@ def draw_line(dst : Image, x1 : float = 0, y1 : float = 0, z1 : float = 0, x2 : 
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
-    >>> cle.draw_line(, destination, , x1, , y1, , z1, , x2, , y2, , z2, , thickness, , value)
+    >>> cle.draw_line(destination, x1, y1, z1, x2, y2, z2, thickness, value)
     >>>     
     
     References

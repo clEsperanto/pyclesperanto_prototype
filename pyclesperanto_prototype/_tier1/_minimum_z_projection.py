@@ -19,7 +19,7 @@ def minimum_z_projection(input : Image, output : Image = None):
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
-    >>> cle.minimum_z_projection(, source, , destination_sum)
+    >>> cle.minimum_z_projection(source, destination_sum)
     >>>     
     
     References

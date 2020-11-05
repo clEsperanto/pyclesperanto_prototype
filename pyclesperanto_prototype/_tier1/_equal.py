@@ -24,7 +24,7 @@ def equal(src1 : Image, src2 : Image, dst : Image = None):
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
-    >>> cle.equal(, source1, , source2, , destination)
+    >>> cle.equal(source1, source2, destination)
     >>>     
     
     References

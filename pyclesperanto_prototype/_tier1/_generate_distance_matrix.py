@@ -24,7 +24,7 @@ def generate_distance_matrix(pointlist1 :Image, pointlist2 :Image, distance_matr
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
-    >>> cle.generate_distance_matrix(, coordinate_list1, , coordinate_list2, , distance_matrix_destination)
+    >>> cle.generate_distance_matrix(coordinate_list1, coordinate_list2, distance_matrix_destination)
     >>>     
     
     References

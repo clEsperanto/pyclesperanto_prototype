@@ -23,7 +23,7 @@ def dilate_box(src : Image, dst : Image = None):
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
-    >>> cle.dilate_box(, source, , destination)
+    >>> cle.dilate_box(source, destination)
     >>>     
     
     References

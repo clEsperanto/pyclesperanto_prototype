@@ -22,7 +22,7 @@ def transpose_xz(src : Image , dst : Image = None):
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
-    >>> cle.transpose_xz(, input, , destination)
+    >>> cle.transpose_xz(input, destination)
     >>>     
     
     References

@@ -24,7 +24,7 @@ def maximum_sphere(input : Image, output : Image = None, radius_x : float = 1, r
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
-    >>> cle.maximum_sphere(, source, , destination, , radiusX, , radiusY, , radiusZ)
+    >>> cle.maximum_sphere(source, destination, radiusX, radiusY, radiusZ)
     >>>     
     
     References

@@ -20,7 +20,7 @@ def divide_images(src : Image, src1 : Image, dst : Image = None):
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
-    >>> cle.divide_images(, divident, , divisor, , destination)
+    >>> cle.divide_images(divident, divisor, destination)
     >>>     
     
     References

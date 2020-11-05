@@ -20,7 +20,7 @@ def power(src : Image, dst : Image = None, exponent : float = 1):
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
-    >>> cle.power(, source, , destination, , exponent)
+    >>> cle.power(source, destination, exponent)
     >>>     
     
     References

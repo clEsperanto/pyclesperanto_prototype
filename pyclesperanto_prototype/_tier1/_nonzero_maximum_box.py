@@ -18,7 +18,7 @@ def nonzero_maximum_box (src, flag_dst, dst):
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
-    >>> cle.nonzero_maximum_box(, input, , destination)
+    >>> cle.nonzero_maximum_box(input, destination)
     >>>     
     
     References

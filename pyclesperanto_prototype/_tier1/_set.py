@@ -14,7 +14,7 @@ def set(output : Image, scalar : float = 0):
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
-    >>> cle.set(, source, , value)
+    >>> cle.set(source, value)
     >>>     
     
     References

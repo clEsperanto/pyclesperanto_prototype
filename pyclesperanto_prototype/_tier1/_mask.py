@@ -24,7 +24,7 @@ def mask(src : Image, mask : Image, dst : Image = None):
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
-    >>> cle.mask(, source, , mask, , destination)
+    >>> cle.mask(source, mask, destination)
     >>>     
     
     References

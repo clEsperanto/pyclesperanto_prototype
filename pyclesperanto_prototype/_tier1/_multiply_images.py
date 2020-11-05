@@ -25,7 +25,7 @@ def multiply_images(src1 : Image, src2 : Image, dst : Image = None):
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
-    >>> cle.multiply_images(, factor1, , factor2, , destination)
+    >>> cle.multiply_images(factor1, factor2, destination)
     >>>     
     
     References

@@ -24,7 +24,7 @@ def mean_sphere(input : Image, output : Image = None, radius_x : float = 1, radi
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
-    >>> cle.mean_sphere(, source, , destination, , radiusX, , radiusY, , radiusZ)
+    >>> cle.mean_sphere(source, destination, radiusX, radiusY, radiusZ)
     >>>     
     
     References

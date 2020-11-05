@@ -25,7 +25,7 @@ def maximum_box(src : Image, dst : Image = None, radius_x : int = 1, radius_y : 
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
-    >>> cle.maximum_box(, source, , destination, , radiusX, , radiusY, , radiusZ)
+    >>> cle.maximum_box(source, destination, radiusX, radiusY, radiusZ)
     >>>     
     
     References

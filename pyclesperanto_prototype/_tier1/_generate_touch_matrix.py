@@ -21,7 +21,7 @@ def generate_touch_matrix(labelmap :Image, touch_matrix_output :Image = None):
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
-    >>> cle.generate_touch_matrix(, label_map, , touch_matrix_destination)
+    >>> cle.generate_touch_matrix(label_map, touch_matrix_destination)
     >>>     
     
     References

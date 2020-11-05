@@ -26,7 +26,7 @@ def gaussian_blur(src : Image, dst : Image = None, sigma_x : float = 0, sigma_y 
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
-    >>> cle.gaussian_blur(, source, , destination, , sigmaX, , sigmaY, , sigmaZ)
+    >>> cle.gaussian_blur(source, destination, sigmaX, sigmaY, sigmaZ)
     >>>     
     
     References

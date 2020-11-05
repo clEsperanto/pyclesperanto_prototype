@@ -21,7 +21,7 @@ def smaller_or_equal_constant(src1 : Image, dst : Image = None, scalar : float =
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
-    >>> cle.smaller_or_equal_constant(, source, , destination, , constant)
+    >>> cle.smaller_or_equal_constant(source, destination, constant)
     >>>     
     
     References

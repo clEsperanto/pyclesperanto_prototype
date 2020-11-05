@@ -29,7 +29,7 @@ def top_hat_sphere(input : Image, output : Image = None, radius_x : float = 1, r
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
-    >>> cle.top_hat_sphere(, input, , destination, , radiusX, , radiusY, , radiusZ)
+    >>> cle.top_hat_sphere(input, destination, radiusX, radiusY, radiusZ)
     >>>     
     
     References

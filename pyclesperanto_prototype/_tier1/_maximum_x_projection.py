@@ -18,7 +18,7 @@ def maximum_x_projection(input : Image, output : Image = None):
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
-    >>> cle.maximum_x_projection(, source, , destination_max)
+    >>> cle.maximum_x_projection(source, destination_max)
     >>>     
     
     References

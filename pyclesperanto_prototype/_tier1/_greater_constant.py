@@ -20,7 +20,7 @@ def greater_constant(src1 : Image, dst :Image = None, scalar :float = 0):
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
-    >>> cle.greater_constant(, source, , destination, , constant)
+    >>> cle.greater_constant(source, destination, constant)
     >>>     
     
     References

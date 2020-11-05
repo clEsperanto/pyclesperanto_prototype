@@ -20,7 +20,7 @@ def subtract_image_from_scalar(input : Image, output : Image = None, scalar : fl
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
-    >>> cle.subtract_image_from_scalar(, input, , destination, , scalar)
+    >>> cle.subtract_image_from_scalar(input, destination, scalar)
     >>>     
     
     References

@@ -23,7 +23,7 @@ def erode_box(src : Image, dst : Image = None):
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
-    >>> cle.erode_box(, source, , destination)
+    >>> cle.erode_box(source, destination)
     >>>     
     
     References

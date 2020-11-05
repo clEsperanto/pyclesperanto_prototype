@@ -24,7 +24,7 @@ def draw_box(dst: Image, x: int = 0, y: int = 0, z: int = 0, width: int = 1, hei
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
-    >>> cle.draw_box(, destination, , x, , y, , z, , width, , height, , depth, , value)
+    >>> cle.draw_box(destination, x, y, z, width, height, depth, value)
     >>>     
     
     References

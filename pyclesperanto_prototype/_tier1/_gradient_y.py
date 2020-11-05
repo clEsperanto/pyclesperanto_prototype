@@ -20,7 +20,7 @@ def gradient_y(src : Image, dst : Image = None):
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
-    >>> cle.gradient_y(, source, , destination)
+    >>> cle.gradient_y(source, destination)
     >>>     
     
     References

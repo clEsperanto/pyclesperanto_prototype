@@ -27,7 +27,7 @@ def binary_xor(src1 : Image, src2 : Image, dst : Image = None):
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
-    >>> cle.binary_xor(, operand1, , operand2, , destination)
+    >>> cle.binary_xor(operand1, operand2, destination)
     >>>     
     
     References

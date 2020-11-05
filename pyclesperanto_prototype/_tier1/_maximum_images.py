@@ -20,7 +20,7 @@ def maximum_images(src1 : Image, src2 : Image, dst : Image = None):
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
-    >>> cle.maximum_images(, source1, , source2, , destination)
+    >>> cle.maximum_images(source1, source2, destination)
     >>>     
     
     References

@@ -20,7 +20,7 @@ def minimum_images(src1 : Image, src2 : Image, dst : Image = None):
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
-    >>> cle.minimum_images(, source1, , source2, , destination)
+    >>> cle.minimum_images(source1, source2, destination)
     >>>     
     
     References

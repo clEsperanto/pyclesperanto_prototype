@@ -11,7 +11,7 @@ def set_ramp_x(output : Image):
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
-    >>> cle.set_ramp_x(, source)
+    >>> cle.set_ramp_x(source)
     >>>     
     
     References

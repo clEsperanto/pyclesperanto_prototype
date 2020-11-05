@@ -22,7 +22,7 @@ def erode_sphere_slice_by_slice(src : Image, dst : Image = None):
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
-    >>> cle.erode_sphere_slice_by_slice(, source, , destination)
+    >>> cle.erode_sphere_slice_by_slice(source, destination)
     >>>     
     
     References

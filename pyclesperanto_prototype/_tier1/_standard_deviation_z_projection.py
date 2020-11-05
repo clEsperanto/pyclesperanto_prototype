@@ -18,7 +18,7 @@ def standard_deviation_z_projection(input : Image, output : Image = None):
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
-    >>> cle.standard_deviation_z_projection(, source, , destination)
+    >>> cle.standard_deviation_z_projection(source, destination)
     >>>     
     
     References

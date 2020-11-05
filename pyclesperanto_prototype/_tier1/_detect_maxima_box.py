@@ -21,7 +21,7 @@ def detect_maxima_box(src :Image, dst :Image = None):
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
-    >>> cle.detect_maxima_box(, source, , destination, , radius)
+    >>> cle.detect_maxima_box(source, destination, radius)
     >>>     
     
     References

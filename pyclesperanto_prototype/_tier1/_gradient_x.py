@@ -21,7 +21,7 @@ def gradient_x(src : Image, dst : Image = None):
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
-    >>> cle.gradient_x(, source, , destination)
+    >>> cle.gradient_x(source, destination)
     >>>     
     
     References

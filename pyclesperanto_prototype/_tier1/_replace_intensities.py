@@ -25,7 +25,7 @@ def replace_intensities(src : Image, map : Image, dst : Image = None):
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
-    >>> cle.replace_intensities(, input, , new_values_vector, , destination)
+    >>> cle.replace_intensities(input, new_values_vector, destination)
     >>>     
     
     References

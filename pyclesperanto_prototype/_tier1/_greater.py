@@ -21,7 +21,7 @@ def greater(src1 : Image, src2 : Image, dst : Image = None):
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
-    >>> cle.greater(, source1, , source2, , destination)
+    >>> cle.greater(source1, source2, destination)
     >>>     
     
     References

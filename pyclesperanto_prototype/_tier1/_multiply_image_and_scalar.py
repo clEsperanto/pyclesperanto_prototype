@@ -24,7 +24,7 @@ def multiply_image_and_scalar(src : Image, dst : Image = None, scalar : None = 0
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
-    >>> cle.multiply_image_and_scalar(, source, , destination, , scalar)
+    >>> cle.multiply_image_and_scalar(source, destination, scalar)
     >>>     
     
     References

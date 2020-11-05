@@ -21,7 +21,7 @@ def gradient_z(src : Image, dst : Image = None):
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
-    >>> cle.gradient_z(, source, , destination)
+    >>> cle.gradient_z(source, destination)
     >>>     
     
     References

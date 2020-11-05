@@ -13,7 +13,7 @@ def set_row(output : Image, row : int = 0, scalar : float = 0):
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
-    >>> cle.set_row(, source, , row_index, , value)
+    >>> cle.set_row(source, row_index, value)
     >>>     
     
     References

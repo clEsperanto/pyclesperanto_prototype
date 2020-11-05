@@ -20,7 +20,7 @@ def convolve(src : Image, kernel_image : Image, dst : Image = None):
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
-    >>> cle.convolve(, source, , convolution_kernel, , destination)
+    >>> cle.convolve(source, convolution_kernel, destination)
     >>>     
     
     References

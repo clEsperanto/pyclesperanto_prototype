@@ -26,7 +26,7 @@ def connected_components_labeling_box(binary_input : Image, labelmap_output : Im
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
-    >>> cle.connected_components_labeling_box(, binary_input, , labeling_destination)
+    >>> cle.connected_components_labeling_box(binary_input, labeling_destination)
     >>>     
     
     References

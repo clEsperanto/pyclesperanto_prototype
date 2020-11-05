@@ -6,7 +6,7 @@ def pull(oclarray):
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
-    >>> cle.pull(, image)
+    >>> cle.pull(image)
     >>>     
     
     References

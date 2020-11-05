@@ -19,7 +19,7 @@ def multiply_image_and_coordinate(input : Image, output : Image = None, dimensio
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
-    >>> cle.multiply_image_and_coordinate(, source, , destination, , dimension)
+    >>> cle.multiply_image_and_coordinate(source, destination, dimension)
     >>>     
     
     References

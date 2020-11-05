@@ -14,7 +14,7 @@ def onlyzero_overwrite_maximum_diamond(src, flag_dst, dst):
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
-    >>> cle.onlyzero_overwrite_maximum_diamond(, input, , destination)
+    >>> cle.onlyzero_overwrite_maximum_diamond(input, destination)
     >>>     
     
     References

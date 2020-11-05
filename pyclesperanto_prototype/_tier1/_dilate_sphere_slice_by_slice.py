@@ -22,7 +22,7 @@ def dilate_sphere_slice_by_slice(src : Image, dst : Image = None):
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
-    >>> cle.dilate_sphere_slice_by_slice(, source, , destination)
+    >>> cle.dilate_sphere_slice_by_slice(source, destination)
     >>>     
     
     References
