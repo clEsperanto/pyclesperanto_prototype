@@ -24,5 +24,4 @@ def binary_subtract (src1, src2, dst):
         "src2":src2
     }
 
-    # TODO: Rename cl file and kernel function to fit to naming conventions. This needs to be done in clij2 as well.
-    execute(__file__, 'binarySubtract' + str(len(dst.shape)) + 'd_x.cl', 'binary_subtract_image' + str(len(dst.shape)) + 'd', dst.shape, parameters)
+    execute(__file__, 'binary_subtract_' + str(len(dst.shape)) + 'd_x.cl', 'binary_subtract_' + str(len(dst.shape)) + 'd', dst.shape, parameters)
