@@ -11,5 +11,4 @@ def set_where_x_smaller_than_y(output, scalar):
         "value":float(scalar)
     }
 
-    # todo: rename cl file to fit to naming conventions
-    execute(__file__, 'setWhereXsmallerThanY_' + str(len(output.shape)) + 'd_x.cl', 'set_where_x_smaller_than_y_' + str(len(output.shape)) + 'd', output.shape, parameters);
+    execute(__file__, 'set_where_x_smaller_than_y_' + str(len(output.shape)) + 'd_x.cl', 'set_where_x_smaller_than_y_' + str(len(output.shape)) + 'd', output.shape, parameters);

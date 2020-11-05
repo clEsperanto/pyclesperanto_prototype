@@ -8,7 +8,7 @@ __kernel void set_where_x_smaller_than_y_3d(
   const int y = get_global_id(1);
   const int z = get_global_id(2);
   if (x < y) {
-    WRITE_dst_IMAGE (dst, (int4)(x,y,z,0), CONVERT_dst_PIXEL_TYPE(value));
+    WRITE_IMAGE (dst, (int4)(x,y,z,0), CONVERT_dst_PIXEL_TYPE(value));
   }
 }
 
