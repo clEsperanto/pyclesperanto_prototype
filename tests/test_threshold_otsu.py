@@ -1,11 +1,4 @@
 
-
-import pytest
-import pyopencl as cl
-
-from . import LINUX, CI
-
-@pytest.mark.xfail('LINUX and CI', reason='INVALID_ARG_SIZE on CI', raises=cl.LogicError)
 def test_threshold_otsu_against_scikit_image():
 
     # threshold using skimage
