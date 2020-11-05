@@ -5,19 +5,26 @@ from .._tier0 import Image
 
 @plugin_function
 def multiply_image_and_coordinate(input : Image, output : Image = None, dimension = 0):
-    """Multiplies all pixel intensities with the x, y or z coordinate, depending on specified dimension.
-
-    Available for: 2D, 3D
-
-    Parameters
+    """Multiplies all pixel intensities with the x, y or z coordinate, depending on specified dimension.    Parameters
     ----------
-    (Image source, ByRef Image destination, Number dimension)
-    todo: Better documentation will follow
-          In the meantime, read more: https://clij.github.io/clij2-docs/reference_multiplyImageAndCoordinate
-
-
+    source : Image
+    destination : Image
+    dimension : Number
+    
+    
     Returns
     -------
+    destination
+
+    Examples
+    --------
+    >>> import pyclesperanto_prototype as cle
+    >>> cle.multiply_image_and_coordinate(, source, , destination, , dimension)
+    >>>     
+    
+    References
+    ----------
+    .. [1] https://clij.github.io/clij2-docs/reference_multiplyImageAndCoordinate    
 
     """
 

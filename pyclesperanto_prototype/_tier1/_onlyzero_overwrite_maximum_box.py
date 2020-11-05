@@ -1,19 +1,25 @@
 from .._tier0 import execute
 
 def onlyzero_overwrite_maximum_box (src, flag_dst, dst):
-    """Apply a local maximum filter to an image which only overwrites pixels with value 0.
-
-    Available for: 2D, 3D
-
-    Parameters
+    """Apply a local maximum filter to an image which only overwrites pixels with value 0.    Parameters
     ----------
-    (Image input, ByRef Image destination)
-    todo: Better documentation will follow
-          In the meantime, read more: https://clij.github.io/clij2-docs/reference_onlyzeroOverwriteMaximumBox
-
-
+    input : Image
+    destination : Image
+    
+    
     Returns
     -------
+    destination
+
+    Examples
+    --------
+    >>> import pyclesperanto_prototype as cle
+    >>> cle.onlyzero_overwrite_maximum_box(, input, , destination)
+    >>>     
+    
+    References
+    ----------
+    .. [1] https://clij.github.io/clij2-docs/reference_onlyzeroOverwriteMaximumBox    
 
     """
 

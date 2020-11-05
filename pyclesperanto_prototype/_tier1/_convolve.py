@@ -6,19 +6,26 @@ from .._tier0 import Image
 def convolve(src : Image, kernel_image : Image, dst : Image = None):
     """Convolve the image with a given kernel image.
     
-    It is recommended that the kernel image has an odd size in X, Y and Z.
-
-    Available for: 2D, 3D
-
-    Parameters
+    It is recommended that the kernel image has an odd size in X, Y and Z.    Parameters
     ----------
-    (Image source, Image convolution_kernel, Image destination)
-    todo: Better documentation will follow
-          In the meantime, read more: https://clij.github.io/clij2-docs/reference_convolve
-
-
+    source : Image
+    convolution_kernel : Image
+    destination : Image
+    
+    
     Returns
     -------
+    destination
+
+    Examples
+    --------
+    >>> import pyclesperanto_prototype as cle
+    >>> cle.convolve(, source, , convolution_kernel, , destination)
+    >>>     
+    
+    References
+    ----------
+    .. [1] https://clij.github.io/clij2-docs/reference_convolve    
 
     """
 

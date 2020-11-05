@@ -7,18 +7,29 @@ def multiply_image_and_scalar(src : Image, dst : Image = None, scalar : None = 0
     """Multiplies all pixels value x in a given image X with a constant scalar s.
     
     <pre>f(x, s) = x * s</pre>
-
-    Available for: 2D, 3D
-
+    
     Parameters
     ----------
-    (Image source, ByRef Image destination, Number scalar)
-    todo: Better documentation will follow
-          In the meantime, read more: https://clij.github.io/clij2-docs/reference_multiplyImageAndScalar
-
-
+    source : Image
+        The input image to be multiplied with a constant.
+    destination : Image
+        The output image where results are written into.
+    scalar : float
+        The number with which every pixel will be multiplied with.
+        
     Returns
     -------
+    destination
+
+    Examples
+    --------
+    >>> import pyclesperanto_prototype as cle
+    >>> cle.multiply_image_and_scalar(, source, , destination, , scalar)
+    >>>     
+    
+    References
+    ----------
+    .. [1] https://clij.github.io/clij2-docs/reference_multiplyImageAndScalar    
 
     """
 

@@ -9,10 +9,25 @@ def maximum_of_all_pixels(input  : Image):
     from .._tier1 import maximum_y_projection
     from .._tier1 import maximum_z_projection
 
-    """
+    """Determines the maximum of all pixels in a given image. 
+    
+    It will be stored in a new row of ImageJs
+    Results table in the column 'Max'.
+    
+    Parameters
+    ----------
+    source : Image
+        The image of which the maximum of all pixels or voxels will be determined.
+        Examples
+    --------
+    >>> import pyclesperanto_prototype as cle
+    >>> cle.maximum_of_all_pixels(, source)
+    >>>     
+    
+    References
+    ----------
+    .. [1] https://clij.github.io/clij2-docs/reference_maximumOfAllPixels    
 
-    :param input:
-    :return:
     """
 
     dimensionality = input.shape

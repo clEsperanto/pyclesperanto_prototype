@@ -5,18 +5,29 @@ from .._tier0 import Image
 @plugin_function
 def binary_subtract(src1 : Image, src2 : Image, dst : Image = None):
     """Subtracts one binary image from another.
-
-    Available for: 2D, 3D
-
+    
     Parameters
     ----------
-    (Image minuend, Image subtrahend, ByRef Image destination)
-    todo: Better documentation will follow
-          In the meantime, read more: https://clij.github.io/clij2-docs/reference_binarySubtract
-
-
+    minuend : Image
+        The first binary input image to be processed.
+    suubtrahend : Image
+        The second binary input image to be subtracted from the first.
+    destination : Image
+        The output image where results are written into.
+        
     Returns
     -------
+    destination
+
+    Examples
+    --------
+    >>> import pyclesperanto_prototype as cle
+    >>> cle.binary_subtract(, minuend, , subtrahend, , destination)
+    >>>     
+    
+    References
+    ----------
+    .. [1] https://clij.github.io/clij2-docs/reference_binarySubtract    
 
     """
 

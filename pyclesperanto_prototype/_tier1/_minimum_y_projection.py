@@ -6,19 +6,19 @@ from .._tier0 import create_2d_zx
 
 @plugin_function(output_creator=create_2d_zx)
 def minimum_y_projection(input : Image, output : Image = None):
-    """Determines the minimum projection of an image along Y.
-
-    Available for: 3D
-
-    Parameters
+    """Determines the minimum intensity projection of an image along Y.    Parameters
     ----------
-    (Image source, ByRef Image destination_sum)
-    todo: Better documentation will follow
-          In the meantime, read more: https://clij.github.io/clij2-docs/reference_minimumYProjection
-
-
+    source : Image
+    destination_sum : Image
+    
+    
     Returns
     -------
+    destination_sum
+
+    References
+    ----------
+    .. [1] https://clij.github.io/clij2-docs/reference_minimumYProjection    
 
     """
 

@@ -7,19 +7,25 @@ def gradient_y(src : Image, dst : Image = None):
     """Computes the gradient of gray values along Y. 
     
     Assuming a, b and c are three adjacent
-     pixels in Y direction. In the target image will be saved as: <pre>b' = c - a;</pre>
-
-    Available for: 2D, 3D
-
-    Parameters
+     pixels in Y direction. In the target image will be saved as: <pre>b' = c - a;</pre>    Parameters
     ----------
-    (Image source, ByRef Image destination)
-    todo: Better documentation will follow
-          In the meantime, read more: https://clij.github.io/clij2-docs/reference_gradientY
-
-
+    source : Image
+    destination : Image
+    
+    
     Returns
     -------
+    destination
+
+    Examples
+    --------
+    >>> import pyclesperanto_prototype as cle
+    >>> cle.gradient_y(, source, , destination)
+    >>>     
+    
+    References
+    ----------
+    .. [1] https://clij.github.io/clij2-docs/reference_gradientY    
 
     """
 

@@ -6,19 +6,26 @@ from .._tier0 import Image
 def smaller_constant(src1 : Image, dst : Image = None, scalar : float = 0):
     """Determines if two images A and B smaller pixel wise.
     
-    f(a, b) = 1 if a < b; 0 otherwise. 
-
-    Available for: 2D, 3D
-
-    Parameters
+    f(a, b) = 1 if a < b; 0 otherwise.     Parameters
     ----------
-    (Image source, ByRef Image destination, Number constant)
-    todo: Better documentation will follow
-          In the meantime, read more: https://clij.github.io/clij2-docs/reference_smallerConstant
-
-
+    source : Image
+    destination : Image
+    constant : Number
+    
+    
     Returns
     -------
+    destination
+
+    Examples
+    --------
+    >>> import pyclesperanto_prototype as cle
+    >>> cle.smaller_constant(, source, , destination, , constant)
+    >>>     
+    
+    References
+    ----------
+    .. [1] https://clij.github.io/clij2-docs/reference_smallerConstant    
 
     """
 

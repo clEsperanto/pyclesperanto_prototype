@@ -2,19 +2,26 @@ from .._tier0 import execute
 
 
 def multiply_matrix(input1, input2, output):
-    """Multiplies two matrices with each other.
-
-    Available for: 2D
-
-    Parameters
+    """Multiplies two matrices with each other.    Parameters
     ----------
-    (Image matrix1, Image matrix2, ByRef Image matrix_destination)
-    todo: Better documentation will follow
-          In the meantime, read more: https://clij.github.io/clij2-docs/reference_multiplyMatrix
-
-
+    matrix1 : Image
+    matrix2 : Image
+    matrix_destination : Image
+    
+    
     Returns
     -------
+    matrix_destination
+
+    Examples
+    --------
+    >>> import pyclesperanto_prototype as cle
+    >>> cle.multiply_matrix(, matrix1, , matrix2, , matrix_destination)
+    >>>     
+    
+    References
+    ----------
+    .. [1] https://clij.github.io/clij2-docs/reference_multiplyMatrix    
 
     """
 

@@ -6,8 +6,33 @@ from ._execute_separable_kernel import execute_separable_kernel
 
 @plugin_function
 def gaussian_blur(src : Image, dst : Image = None, sigma_x : float = 0, sigma_y : float = 0, sigma_z : float = 0):
-    """
-    documentation placeholder
+    """Computes the Gaussian blurred image of an image given two sigma values in X, Y and Z. 
+    
+    Thus, the filterkernel can have non-isotropic shape.
+    
+    The implementation is done separable. In case a sigma equals zero, the direction is not blurred.    Parameters
+    ----------
+    source : Image
+    destination : Image
+    sigmaX : Number
+    sigmaY : Number
+    sigmaZ : Number
+    
+    
+    Returns
+    -------
+    destination
+
+    Examples
+    --------
+    >>> import pyclesperanto_prototype as cle
+    >>> cle.gaussian_blur(, source, , destination, , sigmaX, , sigmaY, , sigmaZ)
+    >>>     
+    
+    References
+    ----------
+    .. [1] https://clij.github.io/clij2-docs/reference_gaussianBlur3D    
+
     """
 
 

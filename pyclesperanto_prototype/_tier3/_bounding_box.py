@@ -7,9 +7,16 @@ from .._tier0 import Image
 
 @plugin_function
 def bounding_box(binary_image : Image):
-    """
-      :param input:
-      :return:
+    """Determines the bounding box of all non-zero pixels in a binary image. 
+    
+    If called from macro, the positions will be stored in a new row of ImageJs Results table in the columns 'BoundingBoxX', 'BoundingBoxY', 'BoundingBoxZ', 'BoundingBoxWidth', 'BoundingBoxHeight' 'BoundingBoxDepth'.In case of 2D images Z and depth will be zero.    Parameters
+    ----------
+    source : Image
+    
+    References
+    ----------
+    .. [1] https://clij.github.io/clij2-docs/reference_boundingBox    
+
     """
 
     temp = create_like(binary_image)

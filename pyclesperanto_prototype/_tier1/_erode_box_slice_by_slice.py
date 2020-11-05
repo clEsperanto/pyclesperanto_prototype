@@ -12,19 +12,25 @@ def erode_box_slice_by_slice(src : Image, dst : Image = None):
     This method is comparable to the 'Erode' menu in ImageJ in case it is applied to a 2D image. The only
     difference is that the output image contains values 0 and 1 instead of 0 and 255.
     
-    This filter is applied slice by slice in 2D.
-
-    Available for: 3D
-
-    Parameters
+    This filter is applied slice by slice in 2D.    Parameters
     ----------
-    (Image source, ByRef Image destination)
-    todo: Better documentation will follow
-          In the meantime, read more: https://clij.github.io/clij2-docs/reference_erodeBoxSliceBySlice
-
-
+    source : Image
+    destination : Image
+    
+    
     Returns
     -------
+    destination
+
+    Examples
+    --------
+    >>> import pyclesperanto_prototype as cle
+    >>> cle.erode_box_slice_by_slice(, source, , destination)
+    >>>     
+    
+    References
+    ----------
+    .. [1] https://clij.github.io/clij2-docs/reference_erodeBoxSliceBySlice    
 
     """
 

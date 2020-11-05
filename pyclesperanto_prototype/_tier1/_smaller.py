@@ -6,19 +6,26 @@ from .._tier0 import Image
 def smaller(src1 : Image, src2 : Image, dst : Image = None):
     """Determines if two images A and B smaller pixel wise.
     
-    f(a, b) = 1 if a < b; 0 otherwise. 
-
-    Available for: 2D, 3D
-
-    Parameters
+    f(a, b) = 1 if a < b; 0 otherwise.     Parameters
     ----------
-    (Image source1, Image source2, ByRef Image destination)
-    todo: Better documentation will follow
-          In the meantime, read more: https://clij.github.io/clij2-docs/reference_smaller
-
-
+    source1 : Image
+    source2 : Image
+    destination : Image
+    
+    
     Returns
     -------
+    destination
+
+    Examples
+    --------
+    >>> import pyclesperanto_prototype as cle
+    >>> cle.smaller(, source1, , source2, , destination)
+    >>>     
+    
+    References
+    ----------
+    .. [1] https://clij.github.io/clij2-docs/reference_smaller    
 
     """
 

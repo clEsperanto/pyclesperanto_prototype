@@ -6,19 +6,28 @@ from .._tier0 import Image
 def not_equal_constant(src1 : Image, dst : Image = None, scalar : float = 0):
     """Determines if two images A and B equal pixel wise.
     
-    f(a, b) = 1 if a != b; 0 otherwise. 
-
-    Available for: 2D, 3D
-
-    Parameters
+    f(a, b) = 1 if a != b; 0 otherwise.Parameters
     ----------
-    (Image source, ByRef Image destination, Number constant)
-    todo: Better documentation will follow
-          In the meantime, read more: https://clij.github.io/clij2-docs/reference_notEqualConstant
-
-
+    source : Image
+        The image where every pixel is compared to the constant.
+    destination : Image
+        The resulting binary image where pixels will be 1 only if source1 and source2 equal in the given pixel.
+    constant : float
+        The constant where every pixel is compared to.
+        
     Returns
     -------
+    destination
+
+    Examples
+    --------
+    >>> import pyclesperanto_prototype as cle
+    >>> cle.not_equal_constant(, source, , destination, , constant)
+    >>>     
+    
+    References
+    ----------
+    .. [1] https://clij.github.io/clij2-docs/reference_notEqualConstant    
 
     """
 

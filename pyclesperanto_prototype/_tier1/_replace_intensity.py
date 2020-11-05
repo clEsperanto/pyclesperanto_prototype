@@ -4,19 +4,27 @@ from .._tier0 import Image
 
 @plugin_function
 def replace_intensity(src : Image, dst : Image = None, value_to_replace : float = 0, value_replacement : float = 1):
-    """Replaces a specific intensity in an image with a given new value.
-
-    Available for: 2D, 3D
-
-    Parameters
+    """Replaces a specific intensity in an image with a given new value.    Parameters
     ----------
-    (Image input, ByRef Image destination, Number oldValue, Number newValue)
-    todo: Better documentation will follow
-          In the meantime, read more: https://clij.github.io/clij2-docs/reference_replaceIntensity
-
-
+    input : Image
+    destination : Image
+    oldValue : Number
+    newValue : Number
+    
+    
     Returns
     -------
+    destination
+
+    Examples
+    --------
+    >>> import pyclesperanto_prototype as cle
+    >>> cle.replace_intensity(, input, , destination, , oldValue, , newValue)
+    >>>     
+    
+    References
+    ----------
+    .. [1] https://clij.github.io/clij2-docs/reference_replaceIntensity    
 
     """
 

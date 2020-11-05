@@ -6,8 +6,29 @@ from .._tier0 import Image
 
 @plugin_function(output_creator=create_none)
 def transpose_xy(src : Image , dst : Image = None):
-    """
-    documentation placeholder
+    """Transpose X and Y axes of an image.
+    
+    Parameters
+    ----------
+    input : Image
+        The input image.
+    destination : Image
+        The output image where results are written into.
+        
+    Returns
+    -------
+    destination
+
+    Examples
+    --------
+    >>> import pyclesperanto_prototype as cle
+    >>> cle.transpose_xy(, input, , destination)
+    >>>     
+    
+    References
+    ----------
+    .. [1] https://clij.github.io/clij2-docs/reference_transposeXY    
+
     """
 
     if dst is None:

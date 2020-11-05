@@ -4,8 +4,29 @@ from .._tier0 import Image
 
 @plugin_function
 def paste (src : Image, dst : Image = None, destination_x : int = 0, destination_y : int = 0, destination_z : int = 0):
-    """
-    documentation placeholder
+    """Pastes an image into another image at a given position.    Parameters
+    ----------
+    source : Image
+    destination : Image
+    destinationX : Number
+    destinationY : Number
+    destinationZ : Number
+    
+    
+    Returns
+    -------
+    destination
+
+    Examples
+    --------
+    >>> import pyclesperanto_prototype as cle
+    >>> cle.paste(, source, , destination, , destinationX, , destinationY, , destinationZ)
+    >>>     
+    
+    References
+    ----------
+    .. [1] https://clij.github.io/clij2-docs/reference_paste3D    
+
     """
 
 

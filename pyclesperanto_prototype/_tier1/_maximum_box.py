@@ -6,8 +6,32 @@ from .._tier0 import Image
 
 @plugin_function
 def maximum_box(src : Image, dst : Image = None, radius_x : int = 1, radius_y : int = 1, radius_z : int = 1):
-    """
-    documentation placeholder
+    """Computes the local maximum of a pixels cube neighborhood. 
+    
+    The cubes size is specified by 
+    its half-width, half-height and half-depth (radius).    Parameters
+    ----------
+    source : Image
+    destination : Image
+    radiusX : Number
+    radiusY : Number
+    radiusZ : Number
+    
+    
+    Returns
+    -------
+    destination
+
+    Examples
+    --------
+    >>> import pyclesperanto_prototype as cle
+    >>> cle.maximum_box(, source, , destination, , radiusX, , radiusY, , radiusZ)
+    >>>     
+    
+    References
+    ----------
+    .. [1] https://clij.github.io/clij2-docs/reference_maximum3DBox    
+
     """
 
 

@@ -4,21 +4,21 @@ from .._tier0 import Image
 
 @plugin_function
 def set_row(output : Image, row : int = 0, scalar : float = 0):
-    """Sets all pixel values x of a given row in X to a constant value v.
-    
-    <pre>f(x) = v</pre>
-
-    Available for: 2D, 3D
-
-    Parameters
+    """Sets all pixel values x of a given row in X to a constant value v.    Parameters
     ----------
-    (Image source, Number rowIndex, Number value)
-    todo: Better documentation will follow
-          In the meantime, read more: https://clij.github.io/clij2-docs/reference_setRow
-
-
-    Returns
-    -------
+    source : Image
+    row_index : Number
+    value : Number
+    
+    Examples
+    --------
+    >>> import pyclesperanto_prototype as cle
+    >>> cle.set_row(, source, , row_index, , value)
+    >>>     
+    
+    References
+    ----------
+    .. [1] https://clij.github.io/clij2-docs/reference_setRow    
 
     """
 

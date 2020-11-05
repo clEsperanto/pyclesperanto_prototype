@@ -8,18 +8,33 @@ from .._tier0 import Image
 @plugin_function
 def top_hat_sphere(input : Image, output : Image = None, radius_x : float = 1, radius_y : float = 1, radius_z : float = 1):
     """Applies a top-hat filter for background subtraction to the input image.
-
-    Available for: 2D, 3D
-
+    
     Parameters
     ----------
-    (Image input, ByRef Image destination, Number radiusX, Number radiusY, Number radiusZ)
-    todo: Better documentation will follow
-          In the meantime, read more: https://clij.github.io/clij2-docs/reference_topHatSphere
-
-
+    input : Image
+        The input image where the background is subtracted from.
+    destination : Image
+        The output image where results are written into.
+    radius_x : Image
+        Radius of the background determination region in X.
+    radius_y : Image
+        Radius of the background determination region in Y.
+    radius_z : Image
+        Radius of the background determination region in Z.
+        
     Returns
     -------
+    destination
+
+    Examples
+    --------
+    >>> import pyclesperanto_prototype as cle
+    >>> cle.top_hat_sphere(, input, , destination, , radiusX, , radiusY, , radiusZ)
+    >>>     
+    
+    References
+    ----------
+    .. [1] https://clij.github.io/clij2-docs/reference_topHatSphere    
 
     """
 

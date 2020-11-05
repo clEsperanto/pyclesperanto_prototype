@@ -11,19 +11,26 @@ def replace_intensities(src : Image, map : Image, dst : Image = None):
      * All pixels with value 1 get value 1
      * All pixels with value 2 get value 0
      * All pixels with value 3 get value 2
-    
-
-    Available for: 2D, 3D
-
-    Parameters
+        Parameters
     ----------
-    (Image input, Image new_values_vector, ByRef Image destination)
-    todo: Better documentation will follow
-          In the meantime, read more: https://clij.github.io/clij2-docs/reference_replaceIntensities
-
-
+    input : Image
+    new_values_vector : Image
+    destination : Image
+    
+    
     Returns
     -------
+    destination
+
+    Examples
+    --------
+    >>> import pyclesperanto_prototype as cle
+    >>> cle.replace_intensities(, input, , new_values_vector, , destination)
+    >>>     
+    
+    References
+    ----------
+    .. [1] https://clij.github.io/clij2-docs/reference_replaceIntensities    
 
     """
 

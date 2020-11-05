@@ -6,19 +6,26 @@ from .._tier0 import Image
 def minimum_images(src1 : Image, src2 : Image, dst : Image = None):
     """Computes the minimum of a pair of pixel values x, y from two given images X and Y.
     
-    <pre>f(x, y) = min(x, y)</pre>
-
-    Available for: 2D, 3D
-
-    Parameters
+    <pre>f(x, y) = min(x, y)</pre>    Parameters
     ----------
-    (Image source1, Image source2, ByRef Image destination)
-    todo: Better documentation will follow
-          In the meantime, read more: https://clij.github.io/clij2-docs/reference_minimumImages
-
-
+    source1 : Image
+    source2 : Image
+    destination : Image
+    
+    
     Returns
     -------
+    destination
+
+    Examples
+    --------
+    >>> import pyclesperanto_prototype as cle
+    >>> cle.minimum_images(, source1, , source2, , destination)
+    >>>     
+    
+    References
+    ----------
+    .. [1] https://clij.github.io/clij2-docs/reference_minimumImages    
 
     """
 

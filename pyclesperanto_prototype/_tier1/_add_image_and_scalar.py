@@ -7,18 +7,29 @@ def add_image_and_scalar(input : Image, output : Image = None, scalar : float = 
     """Adds a scalar value s to all pixels x of a given image X.
     
     <pre>f(x, s) = x + s</pre>
-
-    Available for: 2D, 3D
-
+    
     Parameters
     ----------
-    (Image source, ByRef Image destination, Number scalar)
-    todo: Better documentation will follow
-          In the meantime, read more: https://clij.github.io/clij2-docs/reference_addImageAndScalar
-
-
+    source : Image
+        The input image where scalare should be added.
+    destination : Image
+        The output image where results are written into.
+    scalar : float
+        The constant number which will be added to all pixels.
+        
     Returns
     -------
+    destination
+
+    Examples
+    --------
+    >>> import pyclesperanto_prototype as cle
+    >>> cle.add_image_and_scalar(, source, , destination, , scalar)
+    >>>     
+    
+    References
+    ----------
+    .. [1] https://clij.github.io/clij2-docs/reference_addImageAndScalar    
 
     """
 

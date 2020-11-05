@@ -5,8 +5,32 @@ from .._tier0 import Image
 
 @plugin_function
 def mean_box(src : Image, dst : Image = None, radius_x : float = 1, radius_y : float = 1, radius_z : float = 1):
-    """
-    documentation placeholder
+    """Computes the local mean average of a pixels cube neighborhood. 
+    
+    The cubes size is specified by 
+    its half-width, half-height and half-depth (radius).    Parameters
+    ----------
+    source : Image
+    destination : Image
+    radiusX : Number
+    radiusY : Number
+    radiusZ : Number
+    
+    
+    Returns
+    -------
+    destination
+
+    Examples
+    --------
+    >>> import pyclesperanto_prototype as cle
+    >>> cle.mean_box(, source, , destination, , radiusX, , radiusY, , radiusZ)
+    >>>     
+    
+    References
+    ----------
+    .. [1] https://clij.github.io/clij2-docs/reference_mean3DBox    
+
     """
 
 

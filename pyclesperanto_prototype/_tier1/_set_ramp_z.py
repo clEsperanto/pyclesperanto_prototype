@@ -4,19 +4,19 @@ from .._tier0 import Image
 
 @plugin_function
 def set_ramp_z(output : Image):
-    """Sets all pixel values to their Z coordinate
-
-    Available for: 2D, 3D
-
-    Parameters
+    """Sets all pixel values to their Z coordinate    Parameters
     ----------
-    (Image source)
-    todo: Better documentation will follow
-          In the meantime, read more: https://clij.github.io/clij2-docs/reference_setRampZ
-
-
-    Returns
-    -------
+    source : Image
+    
+    Examples
+    --------
+    >>> import pyclesperanto_prototype as cle
+    >>> cle.set_ramp_z(, source)
+    >>>     
+    
+    References
+    ----------
+    .. [1] https://clij.github.io/clij2-docs/reference_setRampZ    
 
     """
 

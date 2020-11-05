@@ -10,19 +10,26 @@ def copy_slice(src : Image, dst : Image = None, slice : int = 0):
     
     The first case is only available via ImageJ macro. If you are using it, it is recommended that the 
     target 3D image already pre-exists in GPU memory before calling this method. Otherwise, CLIJ create 
-    the image stack with z planes.
-
-    Available for: 3D -> 2D and 2D -> 3D
-
-    Parameters
+    the image stack with z planes.    Parameters
     ----------
-    (Image source, ByRef Image destination, Number sliceIndex)
-    todo: Better documentation will follow
-          In the meantime, read more: https://clij.github.io/clij2-docs/reference_copySlice
-
-
+    source : Image
+    destination : Image
+    sliceIndex : Number
+    
+    
     Returns
     -------
+    destination
+
+    Examples
+    --------
+    >>> import pyclesperanto_prototype as cle
+    >>> cle.copy_slice(, source, , destination, , sliceIndex)
+    >>>     
+    
+    References
+    ----------
+    .. [1] https://clij.github.io/clij2-docs/reference_copySlice    
 
     """
 

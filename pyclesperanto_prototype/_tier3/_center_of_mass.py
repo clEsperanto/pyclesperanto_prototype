@@ -6,9 +6,17 @@ from .._tier0 import Image
 
 @plugin_function
 def center_of_mass(image : Image):
-    """
+    """Determines the center of mass of an image or image stack. 
+    
+    It writes the result in the results table
+    in the columns MassX, MassY and MassZ.    Parameters
+    ----------
+    source : Image
+    
+    References
+    ----------
+    .. [1] https://clij.github.io/clij2-docs/reference_centerOfMass    
 
-    :return:
     """
 
     temp = create_like(image)

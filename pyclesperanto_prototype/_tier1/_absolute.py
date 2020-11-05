@@ -7,18 +7,27 @@ def absolute(src : Image, dst : Image = None):
     """Computes the absolute value of every individual pixel x in a given image.
     
     <pre>f(x) = |x| </pre>
-
-    Available for: 2D, 3D
-
+    
     Parameters
     ----------
-    (Image source, ByRef Image destination)
-    todo: Better documentation will follow
-          In the meantime, read more: https://clij.github.io/clij2-docs/reference_absolute
-
-
+    source : Image
+        The input image to be processed.
+    destination : Image
+        The output image where results are written into.
+        
     Returns
     -------
+    destination
+
+    Examples
+    --------
+    >>> import pyclesperanto_prototype as cle
+    >>> cle.absolute(, source, , destination)
+    >>>     
+    
+    References
+    ----------
+    .. [1] https://clij.github.io/clij2-docs/reference_absolute    
 
     """
 

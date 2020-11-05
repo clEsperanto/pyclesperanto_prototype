@@ -6,19 +6,25 @@ from .._tier0 import Image
 def copy(src : Image, dst : Image = None):
     """Copies an image.
     
-    <pre>f(x) = x</pre>
-
-    Available for: 2D, 3D
-
-    Parameters
+    <pre>f(x) = x</pre>    Parameters
     ----------
-    (Image source, ByRef Image destination)
-    todo: Better documentation will follow
-          In the meantime, read more: https://clij.github.io/clij2-docs/reference_copy
-
-
+    source : Image
+    destination : Image
+    
+    
     Returns
     -------
+    destination
+
+    Examples
+    --------
+    >>> import pyclesperanto_prototype as cle
+    >>> cle.copy(, source, , destination)
+    >>>     
+    
+    References
+    ----------
+    .. [1] https://clij.github.io/clij2-docs/reference_copy    
 
     """
 

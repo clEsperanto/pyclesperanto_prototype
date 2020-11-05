@@ -39,42 +39,27 @@ def threshold_otsu(input : Image, binary_output : Image = None):
 
 # This function lives here temporarily
 def scikit_image_threshold_otsu(image=None, nbins=256, *, hist=None):
-    """Return threshold value based on Otsu's method.
-    Either image or hist must be provided. In case hist is given, the actual
-    histogram of the image is ignored.
+    """The automatic thresholder utilizes the Otsu threshold method implemented in ImageJ using a histogram determined on 
+    the GPU to create binary images as similar as possible to ImageJ 'Apply Threshold' method.    Author(s): Robert Haase based on work by G. Landini and W. Rasband
+
+    License: The code for the automatic thresholding methods originates from https://github.com/imagej/imagej1/blob/master/ij/process/AutoThresholder.java
+
+Detailed documentation on the implemented methods can be found online: https://imagej.net/Auto_Threshold
 
     Parameters
     ----------
-    image : (N, M) ndarray, optional
-        Grayscale input image.
-    nbins : int, optional
-        Number of bins used to calculate histogram. This value is ignored for
-        integer arrays.
-    hist : (array, array)  tuple, optional
-        Histogram to determine the threshold from and a corresponding array
-        of bin center intensities. Alternatively, only the histogram can be
-        passed.
-
+    input : Image
+    destination : Image
+    
+    
     Returns
     -------
-    threshold : float
-        Upper threshold value. All pixels with an intensity higher than
-        this value are assumed to be foreground.
+    destination
 
     References
     ----------
-    .. [1] Wikipedia, https://en.wikipedia.org/wiki/Otsu's_Method
+    .. [1] https://clij.github.io/clij2-docs/reference_thresholdOtsu    
 
-    Examples
-    --------
-    >>> from skimage.data import camera
-    >>> image = camera()
-    >>> thresh = threshold_otsu(image)
-    >>> binary = image <= thresh
-
-    Notes
-    -----
-    The input image must be grayscale.
     """
     if image is None and hist is None:
         raise Exception("Either name or hist must be provided.")

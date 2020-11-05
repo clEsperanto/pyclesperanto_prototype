@@ -4,21 +4,28 @@ from .._tier0 import Image
 
 @plugin_function
 def divide_images(src : Image, src1 : Image, dst : Image = None):
-    """Divides two images X and Y by each other pixel wise.
+    """Divides two images X and Y by each other pixel wise. 
     
-    <pre>f(x, y) = x / y</pre>
-
-    Available for: 2D, 3D
-
-    Parameters
+    <pre>f(x, y) = x / y</pre>    Parameters
     ----------
-    (Image divident, Image divisor, ByRef Image destination)
-    todo: Better documentation will follow
-          In the meantime, read more: https://clij.github.io/clij2-docs/reference_divideImages
-
-
+    divident : Image
+    divisor : Image
+    destination : Image
+    
+    
     Returns
     -------
+    destination
+
+    Examples
+    --------
+    >>> import pyclesperanto_prototype as cle
+    >>> cle.divide_images(, divident, , divisor, , destination)
+    >>>     
+    
+    References
+    ----------
+    .. [1] https://clij.github.io/clij2-docs/reference_divideImages    
 
     """
 

@@ -10,19 +10,25 @@ def erode_box(src : Image, dst : Image = None):
     The pixels in the input image with pixel value not equal to 0 will be interpreted as 1.
     
     This method is comparable to the 'Erode' menu in ImageJ in case it is applied to a 2D image. The only
-    difference is that the output image contains values 0 and 1 instead of 0 and 255.
-
-    Available for: 2D, 3D
-
-    Parameters
+    difference is that the output image contains values 0 and 1 instead of 0 and 255.    Parameters
     ----------
-    (Image source, ByRef Image destination)
-    todo: Better documentation will follow
-          In the meantime, read more: https://clij.github.io/clij2-docs/reference_erodeBox
-
-
+    source : Image
+    destination : Image
+    
+    
     Returns
     -------
+    destination
+
+    Examples
+    --------
+    >>> import pyclesperanto_prototype as cle
+    >>> cle.erode_box(, source, , destination)
+    >>>     
+    
+    References
+    ----------
+    .. [1] https://clij.github.io/clij2-docs/reference_erodeBox    
 
     """
 

@@ -9,19 +9,27 @@ def mask_label(src : Image, labelmap : Image, dst : Image = None, label_id : int
     All pixel values x of image X will be copied
     to the destination image in case pixel value m at the same position in the label_map image has the right index value i.
     
-    f(x,m,i) = (x if (m == i); (0 otherwise))
-
-    Available for: 2D, 3D
-
-    Parameters
+    f(x,m,i) = (x if (m == i); (0 otherwise))    Parameters
     ----------
-    (Image source, Image label_map, ByRef Image destination, Number label_index)
-    todo: Better documentation will follow
-          In the meantime, read more: https://clij.github.io/clij2-docs/reference_maskLabel
-
-
+    source : Image
+    label_map : Image
+    destination : Image
+    label_index : Number
+    
+    
     Returns
     -------
+    destination
+
+    Examples
+    --------
+    >>> import pyclesperanto_prototype as cle
+    >>> cle.mask_label(, source, , label_map, , destination, , label_index)
+    >>>     
+    
+    References
+    ----------
+    .. [1] https://clij.github.io/clij2-docs/reference_maskLabel    
 
     """
 

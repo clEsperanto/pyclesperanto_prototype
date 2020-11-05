@@ -5,8 +5,32 @@ from .._tier0 import Image
 
 @plugin_function
 def maximum_sphere(input : Image, output : Image = None, radius_x : float = 1, radius_y : float = 1, radius_z=0):
-    """
-    documentation placeholder
+    """Computes the local maximum of a pixels spherical neighborhood. 
+    
+    The spheres size is specified by 
+    its half-width, half-height and half-depth (radius).    Parameters
+    ----------
+    source : Image
+    destination : Image
+    radiusX : Number
+    radiusY : Number
+    radiusZ : Number
+    
+    
+    Returns
+    -------
+    destination
+
+    Examples
+    --------
+    >>> import pyclesperanto_prototype as cle
+    >>> cle.maximum_sphere(, source, , destination, , radiusX, , radiusY, , radiusZ)
+    >>>     
+    
+    References
+    ----------
+    .. [1] https://clij.github.io/clij2-docs/reference_maximum3DSphere    
+
     """
 
 

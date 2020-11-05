@@ -10,18 +10,29 @@ def binary_and(src1 : Image, src2 : Image, dst : Image = None):
     All pixel values except 0 in the input images are interpreted as 1.
     
     <pre>f(x, y) = x & y</pre>
-
-    Available for: 2D, 3D
-
+    
     Parameters
     ----------
-    (Image operand1, Image operand2, ByRef Image destination)
-    todo: Better documentation will follow
-          In the meantime, read more: https://clij.github.io/clij2-docs/reference_binaryAnd
-
-
+    operand1 : Image
+        The first binary input image to be processed.
+    operand2 : Image
+        The second binary input image to be processed.
+    destination : Image
+        The output image where results are written into.
+        
     Returns
     -------
+    destination
+
+    Examples
+    --------
+    >>> import pyclesperanto_prototype as cle
+    >>> cle.binary_and(, operand1, , operand2, , destination)
+    >>>     
+    
+    References
+    ----------
+    .. [1] https://clij.github.io/clij2-docs/reference_binaryAnd    
 
     """
 

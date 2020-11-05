@@ -8,18 +8,29 @@ def multiply_images(src1 : Image, src2 : Image, dst : Image = None):
     """Multiplies all pairs of pixel values x and y from two image X and Y.
     
     <pre>f(x, y) = x * y</pre>
-
-    Available for: 2D, 3D
-
+    
     Parameters
     ----------
-    (Image factor1, Image factor2, ByRef Image destination)
-    todo: Better documentation will follow
-          In the meantime, read more: https://clij.github.io/clij2-docs/reference_multiplyImages
-
-
+    factor1 : Image
+        The first input image to be multiplied.
+    factor2 : Image
+        The second image to be multiplied.
+    destination : Image
+        The output image where results are written into.
+        
     Returns
     -------
+    destination
+
+    Examples
+    --------
+    >>> import pyclesperanto_prototype as cle
+    >>> cle.multiply_images(, factor1, , factor2, , destination)
+    >>>     
+    
+    References
+    ----------
+    .. [1] https://clij.github.io/clij2-docs/reference_multiplyImages    
 
     """
 

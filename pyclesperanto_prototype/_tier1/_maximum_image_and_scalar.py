@@ -7,19 +7,26 @@ from .._tier0 import Image
 def maximum_image_and_scalar(src : Image, dst : Image = None, scalar : float = 0):
     """Computes the maximum of a constant scalar s and each pixel value x in a given image X. 
     
-    <pre>f(x, s) = max(x, s)</pre>
-
-    Available for: 2D, 3D
-
-    Parameters
+    <pre>f(x, s) = max(x, s)</pre>    Parameters
     ----------
-    (Image source, ByRef Image destination, Number scalar)
-    todo: Better documentation will follow
-          In the meantime, read more: https://clij.github.io/clij2-docs/reference_maximumImageAndScalar
-
-
+    source : Image
+    destination : Image
+    scalar : Number
+    
+    
     Returns
     -------
+    destination
+
+    Examples
+    --------
+    >>> import pyclesperanto_prototype as cle
+    >>> cle.maximum_image_and_scalar(, source, , destination, , scalar)
+    >>>     
+    
+    References
+    ----------
+    .. [1] https://clij.github.io/clij2-docs/reference_maximumImageAndScalar    
 
     """
 

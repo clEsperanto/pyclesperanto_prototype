@@ -6,20 +6,33 @@ from .._tier0 import Image
 
 @plugin_function(output_creator=create_none)
 def crop(input : Image, output : Image = None, startx : int = 0, starty : int = 0, startz : int = 0, width : int = 1, height : int = 1, depth : int = 1):
-    """Crops a given rectangle out of a given image
-
-    Available for: 2D, 3D
-
-    Parameters
+    """Crops a given sub-stack out of a given image stack. 
+    
+    Note: If the destination image pre-exists already, it will be overwritten and keep it's dimensions.    Parameters
     ----------
-    (Image source, ByRef Image destination, Number scalar)
-    todo: Better documentation will follow
-          In the meantime, read more: 2D: https://clij.github.io/clij2-docs/reference_crop2D
-                                      3D: https://clij.github.io/clij2-docs/reference_crop3D
-
-
+    source : Image
+    destination : Image
+    startX : Number
+    startY : Number
+    startZ : Number
+    width : Number
+    height : Number
+    depth : Number
+    
+    
     Returns
     -------
+    destination
+
+    Examples
+    --------
+    >>> import pyclesperanto_prototype as cle
+    >>> cle.crop(, source, , destination, , startX, , startY, , startZ, , width, , height, , depth)
+    >>>     
+    
+    References
+    ----------
+    .. [1] https://clij.github.io/clij2-docs/reference_crop3D    
 
     """
 

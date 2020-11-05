@@ -8,19 +8,31 @@ from .._tier0 import Image
 def draw_sphere(dst : Image, x : float = 0, y : float = 0, z : float = 0, radius_x : float = 1, radius_y : float = 1, radius_z : float = 1, value : float = 1):
     """Draws a sphere around a given point with given radii in x, y and z (if 3D). 
     
-     All pixels other than in the sphere are untouched. Consider using `set(buffer, 0);` in advance.
-
-    Available for: 2D, 3D
-
-    Parameters
+     All pixels other than in the sphere are untouched. Consider using `set(buffer, 0);` in advance.    Parameters
     ----------
-    (ByRef Image destination, Number x, Number y, Number z, Number radius_x, Number radius_y, Number radius_z, Number value)
-    todo: Better documentation will follow
-          In the meantime, read more: https://clij.github.io/clij2-docs/reference_drawSphere
-
-
+    destination : Image
+    x : Number
+    y : Number
+    z : Number
+    radius_x : Number
+    radius_y : Number
+    radius_z : Number
+    value : Number
+    
+    
     Returns
     -------
+    destination
+
+    Examples
+    --------
+    >>> import pyclesperanto_prototype as cle
+    >>> cle.draw_sphere(, destination, , x, , y, , z, , radius_x, , radius_y, , radius_z, , value)
+    >>>     
+    
+    References
+    ----------
+    .. [1] https://clij.github.io/clij2-docs/reference_drawSphere    
 
     """
 

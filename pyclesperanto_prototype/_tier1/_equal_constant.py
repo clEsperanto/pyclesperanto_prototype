@@ -7,19 +7,30 @@ from .._tier0 import Image
 def equal_constant(src1 : Image, dst : Image = None, scalar : float = 0):
     """Determines if an image A and a constant b are equal.
     
-    <pre>f(a, b) = 1 if a == b; 0 otherwise.</pre> 
-
-    Available for: 2D, 3D
-
+    <pre>f(a, b) = 1 if a == b; 0 otherwise.</pre>
+    
     Parameters
     ----------
-    (Image source, ByRef Image destination, Number constant)
-    todo: Better documentation will follow
-          In the meantime, read more: https://clij.github.io/clij2-docs/reference_equalConstant
-
-
+    source : Image
+        The image where every pixel is compared to the constant.
+    destination : Image
+        The resulting binary image where pixels will be 1 only if source1 and source2 equal in the given pixel.
+    constant : float
+        The constant where every pixel is compared to.
+        
     Returns
     -------
+    destination
+
+    Examples
+    --------
+    >>> import pyclesperanto_prototype as cle
+    >>> cle.equal_constant(, source, , destination, , constant)
+    >>>     
+    
+    References
+    ----------
+    .. [1] https://clij.github.io/clij2-docs/reference_equalConstant    
 
     """
 

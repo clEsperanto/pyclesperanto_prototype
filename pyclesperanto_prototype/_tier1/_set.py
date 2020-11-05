@@ -6,19 +6,20 @@ from .._tier0 import Image
 def set(output : Image, scalar : float = 0):
     """Sets all pixel values x of a given image X to a constant value v.
     
-    <pre>f(x) = v</pre>
-
-    Available for: 2D, 3D
-
-    Parameters
+    <pre>f(x) = v</pre>    Parameters
     ----------
-    (Image source, Number value)
-    todo: Better documentation will follow
-          In the meantime, read more: https://clij.github.io/clij2-docs/reference_set
-
-
-    Returns
-    -------
+    source : Image
+    value : Number
+    
+    Examples
+    --------
+    >>> import pyclesperanto_prototype as cle
+    >>> cle.set(, source, , value)
+    >>>     
+    
+    References
+    ----------
+    .. [1] https://clij.github.io/clij2-docs/reference_set    
 
     """
 

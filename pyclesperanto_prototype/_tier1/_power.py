@@ -6,19 +6,26 @@ from .._tier0 import Image
 def power(src : Image, dst : Image = None, exponent : float = 1):
     """Computes all pixels value x to the power of a given exponent a.
     
-    <pre>f(x, a) = x ^ a</pre>
-
-    Available for: 2D, 3D
-
-    Parameters
+    <pre>f(x, a) = x ^ a</pre>    Parameters
     ----------
-    (Image source, ByRef Image destination, Number exponent)
-    todo: Better documentation will follow
-          In the meantime, read more: https://clij.github.io/clij2-docs/reference_power
-
-
+    source : Image
+    destination : Image
+    exponent : Number
+    
+    
     Returns
     -------
+    destination
+
+    Examples
+    --------
+    >>> import pyclesperanto_prototype as cle
+    >>> cle.power(, source, , destination, , exponent)
+    >>>     
+    
+    References
+    ----------
+    .. [1] https://clij.github.io/clij2-docs/reference_power    
 
     """
 

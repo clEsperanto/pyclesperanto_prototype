@@ -9,10 +9,19 @@ def sum_of_all_pixels(input : Image):
     from .._tier1 import sum_y_projection
     from .._tier1 import sum_z_projection
 
-    """
+    """Determines the sum of all pixels in a given image. 
+    
+    It will be stored in a new row of ImageJs
+    Results table in the column 'Sum'.
+    
+    Parameters
+    ----------
+    source : Image
+        The image of which all pixels or voxels will be summed.
+        References
+    ----------
+    .. [1] https://clij.github.io/clij2-docs/reference_sumOfAllPixels    
 
-    :param input:
-    :return:
     """
 
     dimensionality = input.shape

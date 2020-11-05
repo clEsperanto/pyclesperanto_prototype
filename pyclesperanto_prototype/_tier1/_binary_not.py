@@ -10,18 +10,27 @@ def binary_not(src1 : Image, dst : Image = None):
     All pixel values except 0 in the input image are interpreted as 1.
     
     <pre>f(x) = !x</pre>
-
-    Available for: 2D, 3D
-
+    
     Parameters
     ----------
-    (Image source, ByRef Image destination)
-    todo: Better documentation will follow
-          In the meantime, read more: https://clij.github.io/clij2-docs/reference_binaryNot
-
-
+    source : Image
+        The binary input image to be inverted.
+    destination : Image
+        The output image where results are written into.
+        
     Returns
     -------
+    destination
+
+    Examples
+    --------
+    >>> import pyclesperanto_prototype as cle
+    >>> cle.binary_not(, source, , destination)
+    >>>     
+    
+    References
+    ----------
+    .. [1] https://clij.github.io/clij2-docs/reference_binaryNot    
 
     """
 

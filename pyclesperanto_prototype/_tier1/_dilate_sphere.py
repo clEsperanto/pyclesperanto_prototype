@@ -7,19 +7,25 @@ def dilate_sphere(src : Image, dst : Image = None):
     """Computes a binary image with pixel values 0 and 1 containing the binary dilation of a given input image.
     
     The dilation takes the von-Neumann-neighborhood (4 pixels in 2D and 6 pixels in 3d) into account.
-    The pixels in the input image with pixel value not equal to 0 will be interpreted as 1.
-
-    Available for: 2D, 3D
-
-    Parameters
+    The pixels in the input image with pixel value not equal to 0 will be interpreted as 1.    Parameters
     ----------
-    (Image source, ByRef Image destination)
-    todo: Better documentation will follow
-          In the meantime, read more: https://clij.github.io/clij2-docs/reference_dilateSphere
-
-
+    source : Image
+    destination : Image
+    
+    
     Returns
     -------
+    destination
+
+    Examples
+    --------
+    >>> import pyclesperanto_prototype as cle
+    >>> cle.dilate_sphere(, source, , destination)
+    >>>     
+    
+    References
+    ----------
+    .. [1] https://clij.github.io/clij2-docs/reference_dilateSphere    
 
     """
 
