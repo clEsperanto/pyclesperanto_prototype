@@ -14,10 +14,11 @@ def equal_constant(src1 : Image, dst : Image = None, scalar : float = 0):
     source : Image
         The image where every pixel is compared to the constant.
     destination : Image
-        The resulting binary image where pixels will be 1 only if source1 and source2 equal in the given pixel.
+        The resulting binary image where pixels will be 1 only if source1 
+    and source2 equal in the given pixel.
     constant : float
         The constant where every pixel is compared to.
-        
+         
     Returns
     -------
     destination

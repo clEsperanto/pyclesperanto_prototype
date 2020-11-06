@@ -6,7 +6,9 @@ from .._tier0 import Image
 def convolve(src : Image, kernel_image : Image, dst : Image = None):
     """Convolve the image with a given kernel image.
     
-    It is recommended that the kernel image has an odd size in X, Y and Z.    Parameters
+    It is recommended that the kernel image has an odd size in X, Y and Z. 
+
+    Parameters
     ----------
     source : Image
     convolution_kernel : Image

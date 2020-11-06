@@ -4,7 +4,9 @@ from .._tier0 import Image
 
 @plugin_function
 def laplace_diamond(src : Image, dst : Image = None):
-    """Applies the Laplace operator (Diamond neighborhood) to an image.    Parameters
+    """Applies the Laplace operator (Diamond neighborhood) to an image. 
+
+    Parameters
     ----------
     input : Image
     destination : Image

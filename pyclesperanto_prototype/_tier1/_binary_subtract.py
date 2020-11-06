@@ -14,7 +14,7 @@ def binary_subtract(src1 : Image, src2 : Image, dst : Image = None):
         The second binary input image to be subtracted from the first.
     destination : Image
         The output image where results are written into.
-        
+         
     Returns
     -------
     destination

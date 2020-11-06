@@ -6,7 +6,9 @@ from .._tier0 import plugin_function
 def greater_constant(src1 : Image, dst :Image = None, scalar :float = 0):
     """Determines if two images A and B greater pixel wise. 
     
-    f(a, b) = 1 if a > b; 0 otherwise.     Parameters
+    f(a, b) = 1 if a > b; 0 otherwise. 
+
+    Parameters
     ----------
     source : Image
     destination : Image

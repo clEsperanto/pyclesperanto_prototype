@@ -2,7 +2,9 @@ from .._tier0 import execute
 
 
 def multiply_matrix(input1, input2, output):
-    """Multiplies two matrices with each other.    Parameters
+    """Multiplies two matrices with each other. 
+
+    Parameters
     ----------
     matrix1 : Image
     matrix2 : Image

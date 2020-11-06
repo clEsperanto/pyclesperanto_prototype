@@ -1,5 +1,8 @@
 def pull(oclarray):
-    """Copies an image specified by its name from GPU memory back to ImageJ and shows it.    Parameters
+    """Copies an image specified by its name from GPU memory back to ImageJ 
+    and shows it. 
+
+    Parameters
     ----------
     image : String
     

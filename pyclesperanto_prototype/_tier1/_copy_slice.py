@@ -8,9 +8,13 @@ def copy_slice(src : Image, dst : Image = None, slice : int = 0):
     It copies a 2D image to a given slice z position in a 3D image stack or 
     It copies a given slice at position z in an image stack to a 2D image.
     
-    The first case is only available via ImageJ macro. If you are using it, it is recommended that the 
-    target 3D image already pre-exists in GPU memory before calling this method. Otherwise, CLIJ create 
-    the image stack with z planes.    Parameters
+    The first case is only available via ImageJ macro. If you are using it, it 
+    is recommended that the 
+    target 3D image already pre-exists in GPU memory before calling this method. 
+    Otherwise, CLIJ create 
+    the image stack with z planes. 
+
+    Parameters
     ----------
     source : Image
     destination : Image

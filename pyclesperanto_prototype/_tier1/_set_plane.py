@@ -4,7 +4,9 @@ from .._tier0 import Image
 
 @plugin_function
 def set_plane(output : Image, plane : int = 0, scalar : float = 0):
-    """Sets all pixel values x of a given plane in X to a constant value v.    Parameters
+    """Sets all pixel values x of a given plane in X to a constant value v. 
+
+    Parameters
     ----------
     source : Image
     plane_index : Number

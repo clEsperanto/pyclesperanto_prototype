@@ -10,6 +10,32 @@ from .._tier3 import histogram
 
 @plugin_function
 def threshold_otsu(input : Image, binary_output : Image = None):
+    """The automatic thresholder utilizes the Otsu threshold method 
+    implemented in ImageJ using a histogram determined on 
+    the GPU to create binary images as similar as possible to ImageJ 'Apply 
+    Threshold' method.     Author(s): Robert Haase based on work by G. Landini and W. Rasband
+
+    License: The code for the automatic thresholding methods originates from https://github.com/imagej/imagej1/blob/master/ij/process/AutoThresholder.java
+
+Detailed documentation on the implemented methods can be found online: https://imagej.net/Auto_Threshold
+
+
+
+    Parameters
+    ----------
+    input : Image
+    destination : Image
+    
+    
+    Returns
+    -------
+    destination
+
+    References
+    ----------
+    .. [1] https://clij.github.io/clij2-docs/reference_thresholdOtsu    
+
+    """
 
     # build a bin-centers array for scikit-image
     minimum_intensity = minimum_of_all_pixels(input)
@@ -39,28 +65,7 @@ def threshold_otsu(input : Image, binary_output : Image = None):
 
 # This function lives here temporarily
 def scikit_image_threshold_otsu(image=None, nbins=256, *, hist=None):
-    """The automatic thresholder utilizes the Otsu threshold method implemented in ImageJ using a histogram determined on 
-    the GPU to create binary images as similar as possible to ImageJ 'Apply Threshold' method.    Author(s): Robert Haase based on work by G. Landini and W. Rasband
 
-    License: The code for the automatic thresholding methods originates from https://github.com/imagej/imagej1/blob/master/ij/process/AutoThresholder.java
-
-Detailed documentation on the implemented methods can be found online: https://imagej.net/Auto_Threshold
-
-    Parameters
-    ----------
-    input : Image
-    destination : Image
-    
-    
-    Returns
-    -------
-    destination
-
-    References
-    ----------
-    .. [1] https://clij.github.io/clij2-docs/reference_thresholdOtsu    
-
-    """
     if image is None and hist is None:
         raise Exception("Either name or hist must be provided.")
 
@@ -74,7 +79,7 @@ Detailed documentation on the implemented methods can be found online: https://i
         if image.ndim > 2 and image.shape[-1] in (3, 4):
             msg = "threshold_otsu is expected to work correctly only for " \
                   "grayscale images; image shape {0} looks like an RGB image"
-            warn(msg.format(image.shape))
+            print(msg.format(image.shape))
 
         # Check if the image is multi-colored or not
         first_pixel = image.ravel()[0]

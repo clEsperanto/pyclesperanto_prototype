@@ -14,7 +14,7 @@ def transpose_yz(src : Image , dst : Image = None):
         The input image.
     destination : Image
         The output image where results are written into.
-        
+         
     Returns
     -------
     destination

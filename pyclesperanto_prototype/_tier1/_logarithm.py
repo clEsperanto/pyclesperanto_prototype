@@ -7,7 +7,9 @@ from .._tier0 import Image
 def logarithm(src : Image, dst : Image = None):
     """Computes base e logarithm of all pixels values.
     
-    f(x) = log(x)    Author(s): Peter Haub, Robert Haase
+    f(x) = log(x)     Author(s): Peter Haub, Robert Haase
+
+
 
     Parameters
     ----------

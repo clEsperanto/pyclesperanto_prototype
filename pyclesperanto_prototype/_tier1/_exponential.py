@@ -6,7 +6,9 @@ from .._tier0 import Image
 def exponential(src : Image, dst : Image = None):
     """Computes base exponential of all pixels values.
     
-    f(x) = exp(x)    Author(s): Peter Haub, Robert Haase
+    f(x) = exp(x)     Author(s): Peter Haub, Robert Haase
+
+
 
     Parameters
     ----------

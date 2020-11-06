@@ -6,7 +6,9 @@ from .._tier0 import Image
 def copy(src : Image, dst : Image = None):
     """Copies an image.
     
-    <pre>f(x) = x</pre>    Parameters
+    <pre>f(x) = x</pre> 
+
+    Parameters
     ----------
     source : Image
     destination : Image

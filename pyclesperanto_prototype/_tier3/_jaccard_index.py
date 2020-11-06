@@ -8,9 +8,13 @@ def jaccard_index(src1 : Image, src2 : Image):
     """Determines the overlap of two binary images using the Jaccard index. 
     
     A value of 0 suggests no overlap, 1 means perfect overlap.
-    The resulting Jaccard index is saved to the results table in the 'Jaccard_Index' column.
-    Note that the Sorensen-Dice coefficient can be calculated from the Jaccard index j using this formula:
-    <pre>s = f(j) = 2 j / (j + 1)</pre>    Parameters
+    The resulting Jaccard index is saved to the results table in the 
+    'Jaccard_Index' column.
+    Note that the Sorensen-Dice coefficient can be calculated from the Jaccard 
+    index j using this formula:
+    <pre>s = f(j) = 2 j / (j + 1)</pre> 
+
+    Parameters
     ----------
     source1 : Image
     source2 : Image

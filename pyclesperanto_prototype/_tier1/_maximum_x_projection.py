@@ -5,7 +5,9 @@ from .._tier0 import create_2d_zy
 
 @plugin_function(output_creator=create_2d_zy)
 def maximum_x_projection(input : Image, output : Image = None):
-    """Determines the maximum intensity projection of an image along X.    Parameters
+    """Determines the maximum intensity projection of an image along X. 
+
+    Parameters
     ----------
     source : Image
     destination_max : Image

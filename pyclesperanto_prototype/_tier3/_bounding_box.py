@@ -9,7 +9,12 @@ from .._tier0 import Image
 def bounding_box(binary_image : Image):
     """Determines the bounding box of all non-zero pixels in a binary image. 
     
-    If called from macro, the positions will be stored in a new row of ImageJs Results table in the columns 'BoundingBoxX', 'BoundingBoxY', 'BoundingBoxZ', 'BoundingBoxWidth', 'BoundingBoxHeight' 'BoundingBoxDepth'.In case of 2D images Z and depth will be zero.    Parameters
+    If called from macro, the positions will be stored in a new row of ImageJs 
+    Results table in the columns 'BoundingBoxX', 'BoundingBoxY', 
+    'BoundingBoxZ', 'BoundingBoxWidth', 'BoundingBoxHeight' 
+    'BoundingBoxDepth'.In case of 2D images Z and depth will be zero. 
+
+    Parameters
     ----------
     source : Image
     

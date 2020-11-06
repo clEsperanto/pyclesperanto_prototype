@@ -4,7 +4,9 @@ from .._tier0 import Image
 
 @plugin_function
 def replace_intensity(src : Image, dst : Image = None, value_to_replace : float = 0, value_replacement : float = 1):
-    """Replaces a specific intensity in an image with a given new value.    Parameters
+    """Replaces a specific intensity in an image with a given new value. 
+
+    Parameters
     ----------
     input : Image
     destination : Image

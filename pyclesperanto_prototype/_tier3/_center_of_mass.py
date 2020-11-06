@@ -9,7 +9,9 @@ def center_of_mass(image : Image):
     """Determines the center of mass of an image or image stack. 
     
     It writes the result in the results table
-    in the columns MassX, MassY and MassZ.    Parameters
+    in the columns MassX, MassY and MassZ. 
+
+    Parameters
     ----------
     source : Image
     

@@ -5,7 +5,9 @@ from .._tier0 import Image
 
 @plugin_function
 def set_column(output : Image, column : int = 0, scalar : float = 0):
-    """Sets all pixel values x of a given column in X to a constant value v.    Parameters
+    """Sets all pixel values x of a given column in X to a constant value v. 
+
+    Parameters
     ----------
     source : Image
     column_index : Number

@@ -6,7 +6,9 @@ from .._tier0 import Image
 def divide_images(src : Image, src1 : Image, dst : Image = None):
     """Divides two images X and Y by each other pixel wise. 
     
-    <pre>f(x, y) = x / y</pre>    Parameters
+    <pre>f(x, y) = x / y</pre> 
+
+    Parameters
     ----------
     divident : Image
     divisor : Image

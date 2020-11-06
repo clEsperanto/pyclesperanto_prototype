@@ -18,7 +18,7 @@ def minimum_of_all_pixels(input : Image):
     ----------
     source : Image
         The image of which the minimum of all pixels or voxels will be determined.
-        References
+         References
     ----------
     .. [1] https://clij.github.io/clij2-docs/reference_minimumOfAllPixels    
 

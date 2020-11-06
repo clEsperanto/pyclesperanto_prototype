@@ -8,7 +8,9 @@ def minimum_sphere(input : Image, output : Image = None, radius_x : float = 1, r
     """Computes the local minimum of a pixels spherical neighborhood. 
     
     The spheres size is specified by 
-    its half-width, half-height and half-depth (radius).    Parameters
+    its half-width, half-height and half-depth (radius). 
+
+    Parameters
     ----------
     source : Image
     destination : Image

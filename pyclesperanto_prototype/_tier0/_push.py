@@ -3,7 +3,10 @@ from ._pycl import OCLArray
 
 
 def push(any_array):
-    """Copies an image specified by its name to GPU memory in order to process it there later.    Parameters
+    """Copies an image specified by its name to GPU memory in order to process 
+    it there later. 
+
+    Parameters
     ----------
     image : String
     

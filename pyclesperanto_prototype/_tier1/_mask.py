@@ -7,10 +7,13 @@ def mask(src : Image, mask : Image, dst : Image = None):
     """Computes a masked image by applying a binary mask to an image. 
     
     All pixel values x of image X will be copied
-    to the destination image in case pixel value m at the same position in the mask image is not equal to 
+    to the destination image in case pixel value m at the same position in the 
+    mask image is not equal to 
     zero.
     
-    <pre>f(x,m) = (x if (m != 0); (0 otherwise))</pre>    Parameters
+    <pre>f(x,m) = (x if (m != 0); (0 otherwise))</pre> 
+
+    Parameters
     ----------
     source : Image
     mask : Image

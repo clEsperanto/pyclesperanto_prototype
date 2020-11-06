@@ -5,7 +5,8 @@ from .._tier0 import Image
 
 @plugin_function
 def binary_and(src1 : Image, src2 : Image, dst : Image = None):
-    """Computes a binary image (containing pixel values 0 and 1) from two images X and Y by connecting pairs of
+    """Computes a binary image (containing pixel values 0 and 1) from two 
+    images X and Y by connecting pairs of
     pixels x and y with the binary AND operator &.
     All pixel values except 0 in the input images are interpreted as 1.
     
@@ -19,7 +20,7 @@ def binary_and(src1 : Image, src2 : Image, dst : Image = None):
         The second binary input image to be processed.
     destination : Image
         The output image where results are written into.
-        
+         
     Returns
     -------
     destination

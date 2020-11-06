@@ -8,7 +8,10 @@ def gradient_z(src : Image, dst : Image = None):
     """Computes the gradient of gray values along Z. 
     
     Assuming a, b and c are three adjacent
-     pixels in Z direction. In the target image will be saved as: <pre>b' = c - a;</pre>    Parameters
+     pixels in Z direction. In the target image will be saved as: <pre>b' = 
+    c - a;</pre> 
+
+    Parameters
     ----------
     source : Image
     destination : Image

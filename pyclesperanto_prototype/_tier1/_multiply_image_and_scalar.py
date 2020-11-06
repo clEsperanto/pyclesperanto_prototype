@@ -16,7 +16,7 @@ def multiply_image_and_scalar(src : Image, dst : Image = None, scalar : None = 0
         The output image where results are written into.
     scalar : float
         The number with which every pixel will be multiplied with.
-        
+         
     Returns
     -------
     destination

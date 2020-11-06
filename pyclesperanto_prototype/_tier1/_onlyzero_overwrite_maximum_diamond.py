@@ -1,7 +1,10 @@
 from .._tier0 import execute
 
 def onlyzero_overwrite_maximum_diamond(src, flag_dst, dst):
-    """Apply a local maximum filter to an image which only overwrites pixels with value 0.    Parameters
+    """Apply a local maximum filter to an image which only overwrites pixels 
+    with value 0. 
+
+    Parameters
     ----------
     input : Image
     destination : Image

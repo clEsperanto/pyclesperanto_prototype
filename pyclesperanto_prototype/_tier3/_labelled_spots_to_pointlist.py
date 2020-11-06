@@ -9,9 +9,13 @@ def labelled_spots_to_pointlist(label_map:Image, pointlist :Image = None):
 
     """Generates a coordinate list of points in a labelled spot image. 
     
-    Transforms a labelmap of spots (single pixels with values 1, 2, ..., n for n spots) as resulting 
+    Transforms a labelmap of spots (single pixels with values 1, 2, ..., n for n 
+    spots) as resulting 
     from connected components analysis in an image where every column contains d 
-    pixels (with d = dimensionality of the original image) with the coordinates of the maxima/minima.    Parameters
+    pixels (with d = dimensionality of the original image) with the coordinates of 
+    the maxima/minima. 
+
+    Parameters
     ----------
     input_labelled_spots : Image
     destination_pointlist : Image

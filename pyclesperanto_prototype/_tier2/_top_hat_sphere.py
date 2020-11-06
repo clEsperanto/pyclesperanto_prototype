@@ -21,7 +21,7 @@ def top_hat_sphere(input : Image, output : Image = None, radius_x : float = 1, r
         Radius of the background determination region in Y.
     radius_z : Image
         Radius of the background determination region in Z.
-        
+         
     Returns
     -------
     destination

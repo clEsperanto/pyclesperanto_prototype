@@ -7,7 +7,9 @@ from .._tier0 import Image
 def greater_or_equal_constant(src1 : Image, dst : Image = None, scalar : float = 0):
     """Determines if two images A and B greater or equal pixel wise. 
     
-    f(a, b) = 1 if a >= b; 0 otherwise.     Parameters
+    f(a, b) = 1 if a >= b; 0 otherwise. 
+
+    Parameters
     ----------
     source : Image
     destination : Image

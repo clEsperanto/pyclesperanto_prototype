@@ -4,7 +4,9 @@ from .._tier0 import Image
 
 @plugin_function
 def set_image_borders(output : Image, scalar : float = 0):
-    """Sets all pixel values at the image border to a given value.    Parameters
+    """Sets all pixel values at the image border to a given value. 
+
+    Parameters
     ----------
     destination : Image
     value : Number

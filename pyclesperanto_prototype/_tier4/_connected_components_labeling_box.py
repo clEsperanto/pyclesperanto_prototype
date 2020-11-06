@@ -13,7 +13,10 @@ from .._tier0 import Image
 
 @plugin_function
 def connected_components_labeling_box(binary_input : Image, labelmap_output : Image = None):
-    """Performs connected components analysis inspecting the box neighborhood of every pixel to a binary image and generates a label map.    Parameters
+    """Performs connected components analysis inspecting the box neighborhood 
+    of every pixel to a binary image and generates a label map. 
+
+    Parameters
     ----------
     binary_input : Image
     labeling_destination : Image

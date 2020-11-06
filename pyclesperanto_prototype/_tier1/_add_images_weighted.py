@@ -6,7 +6,8 @@ from .._tier0 import Image
 
 @plugin_function
 def add_images_weighted(input1:Image, input2:Image, output :Image = None, weight1:float=1, weight2:float=1):
-    """Calculates the sum of pairs of pixels x and y from images X and Y weighted with factors a and b.
+    """Calculates the sum of pairs of pixels x and y from images X and Y 
+    weighted with factors a and b.
     
     <pre>f(x, y, a, b) = x * a + y * b</pre>
     
@@ -19,10 +20,12 @@ def add_images_weighted(input1:Image, input2:Image, output :Image = None, weight
     destination : Image
         The output image where results are written into.
     factor1 : float
-        The constant number which will be multiplied with each pixel of summand1 before adding it.
+        The constant number which will be multiplied with each pixel of 
+    summand1 before adding it.
     factor2 : float
-        The constant number which will be multiplied with each pixel of summand2 before adding it.
-        
+        The constant number which will be multiplied with each pixel of 
+    summand2 before adding it.
+         
     Returns
     -------
     destination

@@ -9,7 +9,9 @@ def maximum_box(src : Image, dst : Image = None, radius_x : int = 1, radius_y : 
     """Computes the local maximum of a pixels cube neighborhood. 
     
     The cubes size is specified by 
-    its half-width, half-height and half-depth (radius).    Parameters
+    its half-width, half-height and half-depth (radius). 
+
+    Parameters
     ----------
     source : Image
     destination : Image

@@ -6,7 +6,9 @@ from .._tier0 import Image
 def set(output : Image, scalar : float = 0):
     """Sets all pixel values x of a given image X to a constant value v.
     
-    <pre>f(x) = v</pre>    Parameters
+    <pre>f(x) = v</pre> 
+
+    Parameters
     ----------
     source : Image
     value : Number

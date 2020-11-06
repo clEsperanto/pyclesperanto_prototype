@@ -17,7 +17,7 @@ def multiply_images(src1 : Image, src2 : Image, dst : Image = None):
         The second image to be multiplied.
     destination : Image
         The output image where results are written into.
-        
+         
     Returns
     -------
     destination

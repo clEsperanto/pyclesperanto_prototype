@@ -15,8 +15,9 @@ def not_equal(src1 : Image, src2 : Image, dst : Image = None):
     source2 : Image
         The second image to be compared with the first.
     destination : Image
-        The resulting binary image where pixels will be 1 only if source1 and source2 are not equal in the given pixel.
-        
+        The resulting binary image where pixels will be 1 only if source1 
+    and source2 are not equal in the given pixel.
+         
     Returns
     -------
     destination

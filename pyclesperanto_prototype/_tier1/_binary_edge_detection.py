@@ -4,7 +4,8 @@ from .._tier0 import Image
 
 @plugin_function
 def binary_edge_detection(src : Image, dst : Image = None):
-    """Determines pixels/voxels which are on the surface of binary objects and sets only them to 1 in the 
+    """Determines pixels/voxels which are on the surface of binary objects and 
+    sets only them to 1 in the 
     destination image. All other pixels are set to 0.
     
     Parameters
@@ -13,7 +14,7 @@ def binary_edge_detection(src : Image, dst : Image = None):
         The binary input image where edges will be searched.
     destination : Image
         The output image where edge pixels will be 1.
-        
+         
     Returns
     -------
     destination

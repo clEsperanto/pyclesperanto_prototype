@@ -6,8 +6,11 @@ from .._tier0 import Image
 def detect_maxima_box(src :Image, dst :Image = None):
     """Detects local maxima in a given square/cubic neighborhood. 
     
-    Pixels in the resulting image are set to 1 if there is no other pixel in a given radius which has a 
-    higher intensity, and to 0 otherwise.    Parameters
+    Pixels in the resulting image are set to 1 if there is no other pixel in a 
+    given radius which has a 
+    higher intensity, and to 0 otherwise. 
+
+    Parameters
     ----------
     source : Image
     destination : Image

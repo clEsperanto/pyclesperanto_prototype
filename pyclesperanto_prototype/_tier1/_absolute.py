@@ -14,7 +14,7 @@ def absolute(src : Image, dst : Image = None):
         The input image to be processed.
     destination : Image
         The output image where results are written into.
-        
+         
     Returns
     -------
     destination

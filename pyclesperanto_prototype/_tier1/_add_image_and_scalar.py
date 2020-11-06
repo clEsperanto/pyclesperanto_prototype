@@ -16,7 +16,7 @@ def add_image_and_scalar(input : Image, output : Image = None, scalar : float = 
         The output image where results are written into.
     scalar : float
         The constant number which will be added to all pixels.
-        
+         
     Returns
     -------
     destination

@@ -6,7 +6,9 @@ from .._tier0 import create_2d_zy
 
 @plugin_function(output_creator=create_2d_zy)
 def minimum_x_projection(input : Image, output : Image = None):
-    """Determines the minimum intensity projection of an image along Y.    Parameters
+    """Determines the minimum intensity projection of an image along Y. 
+
+    Parameters
     ----------
     source : Image
     destination_sum : Image

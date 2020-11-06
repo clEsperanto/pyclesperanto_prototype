@@ -4,10 +4,14 @@ from .._tier0 import Image
 
 @plugin_function
 def set_where_x_smaller_than_y(output : Image, scalar : float = 0):
-    """Sets all pixel values a of a given image A to a constant value v in case its coordinates x < y. 
+    """Sets all pixel values a of a given image A to a constant value v in 
+    case its coordinates x < y. 
     
     Otherwise the pixel is not overwritten.
-    If you want to initialize an identity transfrom matrix, set all pixels to 0 first.    Parameters
+    If you want to initialize an identity transfrom matrix, set all pixels to 
+    0 first. 
+
+    Parameters
     ----------
     source : Image
     value : Number

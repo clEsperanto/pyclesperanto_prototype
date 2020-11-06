@@ -4,7 +4,9 @@ from .._tier0 import Image
 
 @plugin_function
 def power_images(src1 : Image, src2 : Image, dst : Image = None):
-    """Calculates x to the power of y pixel wise of two images X and Y.    Parameters
+    """Calculates x to the power of y pixel wise of two images X and Y. 
+
+    Parameters
     ----------
     input : Image
     exponent : Image

@@ -4,7 +4,9 @@ from .._tier0 import Image
 
 @plugin_function
 def paste (src : Image, dst : Image = None, destination_x : int = 0, destination_y : int = 0, destination_z : int = 0):
-    """Pastes an image into another image at a given position.    Parameters
+    """Pastes an image into another image at a given position. 
+
+    Parameters
     ----------
     source : Image
     destination : Image

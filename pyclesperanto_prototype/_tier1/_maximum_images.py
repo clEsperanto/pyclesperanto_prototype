@@ -4,9 +4,12 @@ from .._tier0 import Image
 
 @plugin_function
 def maximum_images(src1 : Image, src2 : Image, dst : Image = None):
-    """Computes the maximum of a pair of pixel values x, y from two given images X and Y. 
+    """Computes the maximum of a pair of pixel values x, y from two given 
+    images X and Y. 
     
-    <pre>f(x, y) = max(x, y)</pre>    Parameters
+    <pre>f(x, y) = max(x, y)</pre> 
+
+    Parameters
     ----------
     source1 : Image
     source2 : Image

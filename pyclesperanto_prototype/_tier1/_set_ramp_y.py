@@ -4,7 +4,9 @@ from .._tier0 import Image
 
 @plugin_function
 def set_ramp_y(output : Image):
-    """Sets all pixel values to their Y coordinate    Parameters
+    """Sets all pixel values to their Y coordinate 
+
+    Parameters
     ----------
     source : Image
     

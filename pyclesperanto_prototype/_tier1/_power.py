@@ -6,7 +6,9 @@ from .._tier0 import Image
 def power(src : Image, dst : Image = None, exponent : float = 1):
     """Computes all pixels value x to the power of a given exponent a.
     
-    <pre>f(x, a) = x ^ a</pre>    Parameters
+    <pre>f(x, a) = x ^ a</pre> 
+
+    Parameters
     ----------
     source : Image
     destination : Image

@@ -5,7 +5,9 @@ from .._tier0 import create_2d_xy
 
 @plugin_function(output_creator=create_2d_xy)
 def sum_z_projection(input : Image, output : Image = None):
-    """Determines the sum intensity projection of an image along Z.    Parameters
+    """Determines the sum intensity projection of an image along Z. 
+
+    Parameters
     ----------
     source : Image
     destination_sum : Image

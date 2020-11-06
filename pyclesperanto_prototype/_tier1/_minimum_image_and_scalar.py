@@ -4,9 +4,12 @@ from .._tier0 import Image
 
 @plugin_function
 def minimum_image_and_scalar(src : Image, dst : Image = None, scalar : float = 0):
-    """Computes the minimum of a constant scalar s and each pixel value x in a given image X.
+    """Computes the minimum of a constant scalar s and each pixel value x in a 
+    given image X.
     
-    <pre>f(x, s) = min(x, s)</pre>    Parameters
+    <pre>f(x, s) = min(x, s)</pre> 
+
+    Parameters
     ----------
     source : Image
     destination : Image

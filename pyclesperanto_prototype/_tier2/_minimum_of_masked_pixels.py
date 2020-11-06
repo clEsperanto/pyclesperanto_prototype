@@ -32,7 +32,9 @@ def _slice_to_stack(image : Image, stack : Image = None, num_slices = 1):
 def minimum_of_masked_pixels(input : Image, mask : Image):
     """Determines the minimum intensity in a masked image. 
     
-    But only in pixels which have non-zero values in another mask image.    Parameters
+    But only in pixels which have non-zero values in another mask image. 
+
+    Parameters
     ----------
     source : Image
     mask : Image

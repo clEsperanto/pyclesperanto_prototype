@@ -4,7 +4,9 @@ from .._tier0 import Image
 
 @plugin_function
 def sobel(src : Image, dst : Image = None):
-    """Convolve the image with the Sobel kernel.    Author(s): Ruth Whelan-Jeans, Robert Haase
+    """Convolve the image with the Sobel kernel.     Author(s): Ruth Whelan-Jeans, Robert Haase
+
+
 
     Parameters
     ----------

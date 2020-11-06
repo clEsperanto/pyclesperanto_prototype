@@ -8,7 +8,9 @@ def mean_box(src : Image, dst : Image = None, radius_x : float = 1, radius_y : f
     """Computes the local mean average of a pixels cube neighborhood. 
     
     The cubes size is specified by 
-    its half-width, half-height and half-depth (radius).    Parameters
+    its half-width, half-height and half-depth (radius). 
+
+    Parameters
     ----------
     source : Image
     destination : Image

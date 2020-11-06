@@ -7,9 +7,12 @@ def mask_label(src : Image, labelmap : Image, dst : Image = None, label_id : int
     """Computes a masked image by applying a label mask to an image. 
     
     All pixel values x of image X will be copied
-    to the destination image in case pixel value m at the same position in the label_map image has the right index value i.
+    to the destination image in case pixel value m at the same position in the 
+    label_map image has the right index value i.
     
-    f(x,m,i) = (x if (m == i); (0 otherwise))    Parameters
+    f(x,m,i) = (x if (m == i); (0 otherwise)) 
+
+    Parameters
     ----------
     source : Image
     label_map : Image

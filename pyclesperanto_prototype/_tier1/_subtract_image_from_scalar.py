@@ -6,7 +6,9 @@ from .._tier0 import Image
 def subtract_image_from_scalar(input : Image, output : Image = None, scalar : float = 0):
     """Subtracts one image X from a scalar s pixel wise.
     
-    <pre>f(x, s) = s - x</pre>    Parameters
+    <pre>f(x, s) = s - x</pre> 
+
+    Parameters
     ----------
     input : Image
     destination : Image

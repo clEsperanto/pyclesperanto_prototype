@@ -5,9 +5,12 @@ from .._tier0 import Image
 
 @plugin_function
 def maximum_image_and_scalar(src : Image, dst : Image = None, scalar : float = 0):
-    """Computes the maximum of a constant scalar s and each pixel value x in a given image X. 
+    """Computes the maximum of a constant scalar s and each pixel value x in a 
+    given image X. 
     
-    <pre>f(x, s) = max(x, s)</pre>    Parameters
+    <pre>f(x, s) = max(x, s)</pre> 
+
+    Parameters
     ----------
     source : Image
     destination : Image

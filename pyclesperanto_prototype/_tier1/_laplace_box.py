@@ -5,7 +5,9 @@ from .._tier0 import Image
 
 @plugin_function
 def laplace_box(src : Image, dst : Image = None):
-    """Applies the Laplace operator (Box neighborhood) to an image.    Parameters
+    """Applies the Laplace operator (Box neighborhood) to an image. 
+
+    Parameters
     ----------
     input : Image
     destination : Image

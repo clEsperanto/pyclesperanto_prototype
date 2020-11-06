@@ -5,7 +5,10 @@ from .._tier0 import Image
 @plugin_function
 def draw_box(dst: Image, x: int = 0, y: int = 0, z: int = 0, width: int = 1, height: int = 1, depth: int = 1, value : float = 1):
     """Draws a box at a given start point with given size. 
-    All pixels other than in the box are untouched. Consider using `set(buffer, 0);` in advance.    Parameters
+    All pixels other than in the box are untouched. Consider using `set(buffer, 
+    0);` in advance. 
+
+    Parameters
     ----------
     destination : Image
     x : Number
