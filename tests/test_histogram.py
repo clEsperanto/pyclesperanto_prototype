@@ -1,11 +1,6 @@
 import pyclesperanto_prototype as cle
 import numpy as np
-import pytest
-import pyopencl as cl
 
-from . import LINUX, CI
-
-@pytest.mark.xfail('LINUX and CI', reason='INVALID_ARG_SIZE on CI', raises=cl.LogicError)
 def test_histogram():
     test = cle.push_zyx(np.asarray([
         [1, 2, 4, 4, 2, 3],
@@ -22,7 +17,6 @@ def test_histogram():
     assert (np.allclose(a, ref_histogram))
     print ("ok histogram")
 
-@pytest.mark.xfail('LINUX and CI', reason='INVALID_ARG_SIZE on CI', raises=cl.LogicError)
 def test_histogram_3d():
     test = cle.push_zyx(np.asarray([
         [
@@ -43,7 +37,6 @@ def test_histogram_3d():
     print ("ok histogram")
 
 
-@pytest.mark.xfail('LINUX and CI', reason='INVALID_ARG_SIZE on CI', raises=cl.LogicError)
 def test_histogram_3d_2():
     test = cle.push_zyx(np.asarray([
         [
@@ -65,7 +58,6 @@ def test_histogram_3d_2():
     assert (np.allclose(a, ref_histogram))
     print ("ok histogram")
 
-@pytest.mark.xfail('LINUX and CI', reason='INVALID_ARG_SIZE on CI', raises=cl.LogicError)
 def test_histogram_against_scikit_image():
     from skimage.data import camera
     image = camera()

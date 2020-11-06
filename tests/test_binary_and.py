@@ -1,7 +1,7 @@
 import pyclesperanto_prototype as cle
 import numpy as np
 
-def test_binary_and():
+def test_binary_and_1():
 
     test = cle.push(np.asarray([
         [1, 0],
@@ -26,7 +26,7 @@ def test_binary_and():
 
 
 
-def test_binary_and():
+def test_binary_and_2():
     a = np.asarray([[1, 0], [1, 0]])
     b = np.asarray([[1, 1], [0, 0]])
     gpu_a = cle.push(a)
