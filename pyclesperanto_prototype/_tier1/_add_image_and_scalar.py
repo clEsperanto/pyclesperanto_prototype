@@ -3,7 +3,7 @@ from .._tier0 import plugin_function
 from .._tier0 import Image
 
 @plugin_function
-def add_image_and_scalar(input : Image, output : Image = None, scalar : float = 1):
+def add_image_and_scalar(source : Image, destination : Image = None, scalar : float = 1):
     """Adds a scalar value s to all pixels x of a given image X.
     
     <pre>f(x, s) = x + s</pre>
@@ -35,10 +35,10 @@ def add_image_and_scalar(input : Image, output : Image = None, scalar : float = 
 
 
     parameters = {
-        "src":input,
-        "dst":output,
+        "src":source,
+        "dst":destination,
         "scalar":float(scalar)
     }
-    execute(__file__, 'add_image_and_scalar_' + str(len(output.shape)) + 'd_x.cl', 'add_image_and_scalar_' + str(len(output.shape)) + 'd', output.shape, parameters)
+    execute(__file__, 'add_image_and_scalar_' + str(len(destination.shape)) + 'd_x.cl', 'add_image_and_scalar_' + str(len(destination.shape)) + 'd', destination.shape, parameters)
 
-    return output
+    return destination

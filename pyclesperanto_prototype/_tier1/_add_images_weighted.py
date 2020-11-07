@@ -5,7 +5,7 @@ from .._tier0 import plugin_function
 from .._tier0 import Image
 
 @plugin_function
-def add_images_weighted(input1:Image, input2:Image, output :Image = None, weight1:float=1, weight2:float=1):
+def add_images_weighted(summand1:Image, summand2:Image, destination :Image = None, factor1:float=1, factor2:float=1):
     """Calculates the sum of pairs of pixels x and y from images X and Y 
     weighted with factors a and b.
     
@@ -43,13 +43,13 @@ def add_images_weighted(input1:Image, input2:Image, output :Image = None, weight
     """
 
     parameters = {
-        "src":input1,
-        "src1":input2,
-        "dst":output,
-        "factor":float(weight1),
-        "factor1":float(weight2)
+        "src":summand1,
+        "src1":summand2,
+        "dst":destination,
+        "factor":float(factor1),
+        "factor1":float(factor2)
     }
 
-    execute(__file__, 'add_images_weighted_' + str(len(output.shape)) + 'd_x.cl', 'add_images_weighted_' + str(len(output.shape)) + 'd', output.shape, parameters)
+    execute(__file__, 'add_images_weighted_' + str(len(destination.shape)) + 'd_x.cl', 'add_images_weighted_' + str(len(destination.shape)) + 'd', destination.shape, parameters)
 
-    return output
+    return destination

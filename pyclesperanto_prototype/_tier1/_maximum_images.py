@@ -3,7 +3,7 @@ from .._tier0 import plugin_function
 from .._tier0 import Image
 
 @plugin_function
-def maximum_images(src1 : Image, src2 : Image, dst : Image = None):
+def maximum_images(source1 : Image, source2 : Image, destination : Image = None):
     """Computes the maximum of a pair of pixel values x, y from two given 
     images X and Y. 
     
@@ -34,10 +34,10 @@ def maximum_images(src1 : Image, src2 : Image, dst : Image = None):
 
 
     parameters = {
-        "src":src1,
-        "src1":src2,
-        "dst": dst
+        "src":source1,
+        "src1":source2,
+        "dst": destination
     }
 
-    execute(__file__, 'maximum_images_' + str(len(dst.shape)) + 'd_x.cl', 'maximum_images_' + str(len(dst.shape)) + 'd', dst.shape, parameters)
-    return dst
+    execute(__file__, 'maximum_images_' + str(len(destination.shape)) + 'd_x.cl', 'maximum_images_' + str(len(destination.shape)) + 'd', destination.shape, parameters)
+    return destination

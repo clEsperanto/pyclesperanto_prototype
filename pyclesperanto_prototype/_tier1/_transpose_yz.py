@@ -5,7 +5,7 @@ from .._tier0 import create
 from .._tier0 import Image
 
 @plugin_function(output_creator=create_none)
-def transpose_yz(src : Image , dst : Image = None):
+def transpose_yz(input : Image, destination : Image = None):
     """Transpose Y and Z axes of an image.
     
     Parameters

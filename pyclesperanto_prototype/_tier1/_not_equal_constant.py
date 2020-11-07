@@ -3,7 +3,7 @@ from .._tier0 import plugin_function
 from .._tier0 import Image
 
 @plugin_function
-def not_equal_constant(src1 : Image, dst : Image = None, scalar : float = 0):
+def not_equal_constant(source : Image, destination : Image = None, constant : float = 0):
     """Determines if two images A and B equal pixel wise.
     
     f(a, b) = 1 if a != b; 0 otherwise.Parameters
@@ -34,10 +34,10 @@ def not_equal_constant(src1 : Image, dst : Image = None, scalar : float = 0):
 
 
     parameters = {
-        "src1":src1,
-        "scalar":float(scalar),
-        "dst":dst
+        "src1":source,
+        "scalar":float(constant),
+        "dst":destination
     }
 
-    execute(__file__, 'not_equal_constant_' + str(len(dst.shape)) + 'd_x.cl', 'not_equal_constant_' + str(len(dst.shape)) + 'd', dst.shape, parameters)
-    return dst
+    execute(__file__, 'not_equal_constant_' + str(len(destination.shape)) + 'd_x.cl', 'not_equal_constant_' + str(len(destination.shape)) + 'd', destination.shape, parameters)
+    return destination

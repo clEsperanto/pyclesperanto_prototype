@@ -3,7 +3,7 @@ from .._tier0 import plugin_function
 from .._tier0 import Image
 
 @plugin_function
-def set_image_borders(output : Image, scalar : float = 0):
+def set_image_borders(destination : Image, value : float = 0):
     """Sets all pixel values at the image border to a given value. 
 
     Parameters
@@ -25,9 +25,9 @@ def set_image_borders(output : Image, scalar : float = 0):
 
 
     parameters = {
-        "dst":output,
-        "value":float(scalar)
+        "dst":destination,
+        "value":float(value)
     }
 
-    execute(__file__, 'set_image_borders_' + str(len(output.shape)) + 'd_x.cl', 'set_image_borders_' + str(len(output.shape)) + 'd', output.shape, parameters);
-    return output
+    execute(__file__, 'set_image_borders_' + str(len(destination.shape)) + 'd_x.cl', 'set_image_borders_' + str(len(destination.shape)) + 'd', destination.shape, parameters);
+    return destination

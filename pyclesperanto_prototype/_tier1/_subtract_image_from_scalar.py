@@ -3,7 +3,7 @@ from .._tier0 import plugin_function
 from .._tier0 import Image
 
 @plugin_function
-def subtract_image_from_scalar(input : Image, output : Image = None, scalar : float = 0):
+def subtract_image_from_scalar(input : Image, destination : Image = None, scalar : float = 0):
     """Subtracts one image X from a scalar s pixel wise.
     
     <pre>f(x, s) = s - x</pre> 
@@ -34,8 +34,8 @@ def subtract_image_from_scalar(input : Image, output : Image = None, scalar : fl
 
     parameters = {
         "src":input,
-        "dst":output,
+        "dst":destination,
         "scalar":float(scalar)
     }
-    execute(__file__, 'subtract_image_from_scalar_' + str(len(output.shape)) + 'd_x.cl', 'subtract_image_from_scalar_' + str(len(output.shape)) + 'd', output.shape, parameters)
-    return output
+    execute(__file__, 'subtract_image_from_scalar_' + str(len(destination.shape)) + 'd_x.cl', 'subtract_image_from_scalar_' + str(len(destination.shape)) + 'd', destination.shape, parameters)
+    return destination

@@ -3,7 +3,7 @@ from .._tier0 import plugin_function
 from .._tier0 import Image
 
 @plugin_function
-def dilate_box(src : Image, dst : Image = None):
+def dilate_box(source : Image, destination : Image = None):
     """Computes a binary image with pixel values 0 and 1 containing the binary 
     dilation of a given input image.
     
@@ -40,9 +40,9 @@ def dilate_box(src : Image, dst : Image = None):
 
 
     parameters = {
-        "src":src,
-        "dst":dst
+        "src":source,
+        "dst":destination
     }
 
-    execute(__file__, 'dilate_box_' + str(len(dst.shape)) + 'd_x.cl', 'dilate_box_' + str(len(dst.shape)) + 'd', dst.shape, parameters)
-    return dst
+    execute(__file__, 'dilate_box_' + str(len(destination.shape)) + 'd_x.cl', 'dilate_box_' + str(len(destination.shape)) + 'd', destination.shape, parameters)
+    return destination

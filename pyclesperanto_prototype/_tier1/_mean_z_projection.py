@@ -4,7 +4,7 @@ from .._tier0 import Image
 from .._tier0 import create_2d_xy
 
 @plugin_function(output_creator=create_2d_xy)
-def mean_z_projection(input : Image, output : Image):
+def mean_z_projection(source : Image, destination : Image):
     """Determines the mean average intensity projection of an image along Z. 
 
     Parameters
@@ -31,9 +31,9 @@ def mean_z_projection(input : Image, output : Image):
 
 
     parameters = {
-        "dst":output,
-        "src":input,
+        "dst":destination,
+        "src":source,
     }
 
-    execute(__file__, 'mean_z_projection_x.cl', 'mean_z_projection', output.shape, parameters)
-    return output
+    execute(__file__, 'mean_z_projection_x.cl', 'mean_z_projection', destination.shape, parameters)
+    return destination

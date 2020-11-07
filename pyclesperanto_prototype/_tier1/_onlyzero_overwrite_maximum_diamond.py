@@ -1,6 +1,6 @@
 from .._tier0 import execute
 
-def onlyzero_overwrite_maximum_diamond(src, flag_dst, dst):
+def onlyzero_overwrite_maximum_diamond(input, flag_dst, destination):
     """Apply a local maximum filter to an image which only overwrites pixels 
     with value 0. 
 
@@ -28,11 +28,11 @@ def onlyzero_overwrite_maximum_diamond(src, flag_dst, dst):
 
 
     parameters = {
-        "dst": dst,
+        "dst": destination,
         "flag_dst": flag_dst,
-        "src":src,
+        "src":input,
     }
 
-    execute(__file__, 'onlyzero_overwrite_maximum_diamond_' + str(len(dst.shape)) + 'd_x.cl', 'onlyzero_overwrite_maximum_diamond_' + str(len(dst.shape)) + 'd', dst.shape, parameters)
+    execute(__file__, 'onlyzero_overwrite_maximum_diamond_' + str(len(destination.shape)) + 'd_x.cl', 'onlyzero_overwrite_maximum_diamond_' + str(len(destination.shape)) + 'd', destination.shape, parameters)
 
-    return [flag_dst, dst]
+    return [flag_dst, destination]

@@ -4,7 +4,7 @@ from .._tier0 import plugin_function
 from .._tier0 import Image
 
 @plugin_function
-def sum_of_all_pixels(input : Image):
+def sum_of_all_pixels(source : Image):
     from .._tier1 import sum_x_projection
     from .._tier1 import sum_y_projection
     from .._tier1 import sum_z_projection
@@ -24,29 +24,29 @@ def sum_of_all_pixels(input : Image):
 
     """
 
-    dimensionality = input.shape
+    dimensionality = source.shape
 
     if (len(dimensionality) == 3): # 3D image
 
         temp = create([dimensionality[1], dimensionality[2]])
 
-        sum_z_projection(input, temp)
+        sum_z_projection(source, temp)
 
-        input = temp
+        source = temp
 
-        dimensionality = input.shape
+        dimensionality = source.shape
 
     if (len(dimensionality) == 2): # 2D image (or projected 3D)
 
         temp = create([1, dimensionality[1]])
 
-        sum_y_projection(input, temp)
+        sum_y_projection(source, temp)
 
-        input = temp
+        source = temp
 
     temp = create([1, 1])
 
-    sum_x_projection(input, temp)
+    sum_x_projection(source, temp)
 
     return pull(temp)[0][0]
 

@@ -9,7 +9,7 @@ from .._tier0 import Image
 from .._tier3 import histogram
 
 @plugin_function
-def threshold_otsu(input : Image, binary_output : Image = None):
+def threshold_otsu(input : Image, destination : Image = None):
     """The automatic thresholder utilizes the Otsu threshold method 
     implemented in ImageJ using a histogram determined on 
     the GPU to create binary images as similar as possible to ImageJ 'Apply 
@@ -54,9 +54,9 @@ Detailed documentation on the implemented methods can be found online: https://i
     # print(str(threshold))
 
     # apply the threshold on the GPU
-    binary_output = greater_constant(input, binary_output, threshold)
+    destination = greater_constant(input, destination, threshold)
 
-    return binary_output
+    return destination
 
 
 

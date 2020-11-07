@@ -4,7 +4,7 @@ from .._tier0 import Image
 from .._tier0 import create_2d_zx
 
 @plugin_function(output_creator=create_2d_zx)
-def sum_y_projection(input : Image, output : Image = None):
+def sum_y_projection(source : Image, destination : Image = None):
     """Determines the sum intensity projection of an image along Z. 
 
     Parameters
@@ -31,9 +31,9 @@ def sum_y_projection(input : Image, output : Image = None):
 
 
     parameters = {
-        "dst":output,
-        "src":input,
+        "dst":destination,
+        "src":source,
     }
 
-    execute(__file__, 'sum_y_projection_x.cl', 'sum_y_projection', output.shape, parameters)
-    return output
+    execute(__file__, 'sum_y_projection_x.cl', 'sum_y_projection', destination.shape, parameters)
+    return destination

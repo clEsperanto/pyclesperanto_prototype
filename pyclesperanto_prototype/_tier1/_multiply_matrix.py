@@ -1,7 +1,7 @@
 from .._tier0 import execute
 
 
-def multiply_matrix(input1, input2, output):
+def multiply_matrix(matrix1, matrix2, matrix_destination):
     """Multiplies two matrices with each other. 
 
     Parameters
@@ -29,10 +29,10 @@ def multiply_matrix(input1, input2, output):
 
 
     parameters = {
-        "dst_matrix":output,
-        "src1":input1,
-        "src2":input2
+        "dst_matrix":matrix_destination,
+        "src1":matrix1,
+        "src2":matrix2
     };
-    execute(__file__, "multiply_matrix_x.cl", "multiply_matrix", output.shape, parameters);
+    execute(__file__, "multiply_matrix_x.cl", "multiply_matrix", matrix_destination.shape, parameters);
 
 

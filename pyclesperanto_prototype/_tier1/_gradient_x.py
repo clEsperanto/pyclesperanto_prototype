@@ -4,7 +4,7 @@ from .._tier0 import plugin_function
 from .._tier0 import Image
 
 @plugin_function
-def gradient_x(src : Image, dst : Image = None):
+def gradient_x(source : Image, destination : Image = None):
     """Computes the gradient of gray values along X. 
     
     Assuming a, b and c are three adjacent
@@ -35,9 +35,9 @@ def gradient_x(src : Image, dst : Image = None):
 
 
     parameters = {
-        "dst":dst,
-        "src":src
+        "dst":destination,
+        "src":source
     }
 
-    execute(__file__, 'gradient_x_' + str(len(dst.shape)) + 'd_x.cl', 'gradient_x_' + str(len(dst.shape)) + 'd', dst.shape, parameters)
-    return dst
+    execute(__file__, 'gradient_x_' + str(len(destination.shape)) + 'd_x.cl', 'gradient_x_' + str(len(destination.shape)) + 'd', destination.shape, parameters)
+    return destination

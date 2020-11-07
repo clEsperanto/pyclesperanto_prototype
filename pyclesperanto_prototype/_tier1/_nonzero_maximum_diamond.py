@@ -1,6 +1,6 @@
 from .._tier0 import execute
 
-def nonzero_maximum_diamond (src, flag_dst, dst):
+def nonzero_maximum_diamond (input, flag_dst, destination):
     """Apply a maximum filter (diamond shape) to the input image. 
     
     The radius is fixed to 1 and pixels with value 0 are ignored.
@@ -33,11 +33,11 @@ def nonzero_maximum_diamond (src, flag_dst, dst):
 
 
     parameters = {
-        "dst": dst,
+        "dst": destination,
         "flag_dst": flag_dst,
-        "src":src,
+        "src":input,
     }
 
-    execute(__file__, 'nonzero_maximum_diamond_' + str(len(dst.shape)) + 'd_x.cl', 'nonzero_maximum_diamond_' + str(len(dst.shape)) + 'd', dst.shape, parameters)
+    execute(__file__, 'nonzero_maximum_diamond_' + str(len(destination.shape)) + 'd_x.cl', 'nonzero_maximum_diamond_' + str(len(destination.shape)) + 'd', destination.shape, parameters)
 
-    return [flag_dst, dst]
+    return [flag_dst, destination]

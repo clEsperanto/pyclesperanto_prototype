@@ -6,7 +6,7 @@ from .._tier0 import plugin_function
 from .._tier0 import Image
 
 @plugin_function
-def top_hat_sphere(input : Image, output : Image = None, radius_x : float = 1, radius_y : float = 1, radius_z : float = 1):
+def top_hat_sphere(input : Image, destination : Image = None, radius_x : float = 1, radius_y : float = 1, radius_z : float = 1):
     """Applies a top-hat filter for background subtraction to the input image.
     
     Parameters
@@ -44,5 +44,5 @@ def top_hat_sphere(input : Image, output : Image = None, radius_x : float = 1, r
 
     minimum_sphere(input, temp1, radius_x, radius_y, radius_z);
     maximum_sphere(temp1, temp2, radius_x, radius_y, radius_z);
-    add_images_weighted(input, temp2, output, 1, -1);
-    return output
+    add_images_weighted(input, temp2, destination, 1, -1);
+    return destination

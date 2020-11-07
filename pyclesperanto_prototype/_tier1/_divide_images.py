@@ -3,7 +3,7 @@ from .._tier0 import plugin_function
 from .._tier0 import Image
 
 @plugin_function
-def divide_images(src : Image, src1 : Image, dst : Image = None):
+def divide_images(divident : Image, divisor : Image, destination : Image = None):
     """Divides two images X and Y by each other pixel wise. 
     
     <pre>f(x, y) = x / y</pre> 
@@ -33,10 +33,10 @@ def divide_images(src : Image, src1 : Image, dst : Image = None):
 
 
     parameters = {
-        "src":src,
-        "src1":src1,
-        "dst":dst
+        "src":divident,
+        "src1":divisor,
+        "dst":destination
     }
 
-    execute(__file__, 'divide_images_' + str(len(dst.shape)) + 'd_x.cl', 'divide_images_' + str(len(dst.shape)) + 'd', dst.shape, parameters)
-    return dst
+    execute(__file__, 'divide_images_' + str(len(destination.shape)) + 'd_x.cl', 'divide_images_' + str(len(destination.shape)) + 'd', destination.shape, parameters)
+    return destination

@@ -3,7 +3,7 @@ from .._tier0 import plugin_function
 from .._tier0 import Image
 
 @plugin_function
-def set_where_x_equals_y(output : Image, scalar : float = 0):
+def set_where_x_equals_y(source : Image, value : float = 0):
     """Sets all pixel values a of a given image A to a constant value v in 
     case its coordinates x == y. 
     
@@ -24,10 +24,10 @@ def set_where_x_equals_y(output : Image, scalar : float = 0):
 
 
     parameters = {
-        "dst":output,
-        "value":float(scalar)
+        "dst":source,
+        "value":float(value)
     }
 
     # todo: rename cl file to fit to naming conventions
-    execute(__file__, 'setWhereXequalsY_' + str(len(output.shape)) + 'd_x.cl', 'set_where_x_equals_y_' + str(len(output.shape)) + 'd', output.shape, parameters);
-    return output
+    execute(__file__, 'setWhereXequalsY_' + str(len(source.shape)) + 'd_x.cl', 'set_where_x_equals_y_' + str(len(source.shape)) + 'd', source.shape, parameters);
+    return source

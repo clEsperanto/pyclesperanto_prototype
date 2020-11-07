@@ -24,7 +24,7 @@ from .._tier1 import sum_z_projection
 from .._tier1 import copy_slice
 
 @plugin_function(output_creator=create_none)
-def histogram(image : Image, hist : Image = None, num_bins = 256, minimum_intensity : float = None, maximum_intensity : float = None, determine_min_max : bool = True):
+def histogram(source : Image, destination : Image = None, num_bins = 256, minimum_intensity : float = None, maximum_intensity : float = None, determine_min_max : bool = True):
     """Determines the histogram of a given image.
     
     The histogram image is of dimensions number_of_bins/1/1; a 3D image with 
@@ -74,7 +74,7 @@ def histogram(image : Image, hist : Image = None, num_bins = 256, minimum_intens
     .. [1] https://clij.github.io/clij2-docs/reference_histogram    
 
     """
-    image_to_process = image
+    image_to_process = source
 
     # workaround for 2D images; the 2D kernel doesn't work as
     # in Java (global_id starts a 1 instead of 0, only tested
@@ -89,10 +89,10 @@ def histogram(image : Image, hist : Image = None, num_bins = 256, minimum_intens
     # print(str(pull(image_to_process)[0]))
 
     if minimum_intensity is None or maximum_intensity is None or determine_min_max:
-        minimum_intensity = minimum_of_all_pixels(image)
-        maximum_intensity = maximum_of_all_pixels(image)
+        minimum_intensity = minimum_of_all_pixels(source)
+        maximum_intensity = maximum_of_all_pixels(source)
 
-    number_of_partial_histograms = image.shape[-2]
+    number_of_partial_histograms = source.shape[-2]
 
     # determine multiple histograms. one for each Y (row) in the image
     partial_histograms = create([number_of_partial_histograms, 1, num_bins])
@@ -120,10 +120,10 @@ def histogram(image : Image, hist : Image = None, num_bins = 256, minimum_intens
                 constants=constants)
 
     # sum partial histograms
-    if hist is None:
-        hist = create([num_bins])
+    if destination is None:
+        destination = create([num_bins])
 
-    sum_z_projection(partial_histograms, hist)
+    sum_z_projection(partial_histograms, destination)
 
-    return hist
+    return destination
 

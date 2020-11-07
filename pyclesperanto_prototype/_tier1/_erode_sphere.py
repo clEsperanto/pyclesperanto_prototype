@@ -3,7 +3,7 @@ from .._tier0 import plugin_function
 from .._tier0 import Image
 
 @plugin_function
-def erode_sphere(src : Image, dst : Image = None):
+def erode_sphere(source : Image, destination : Image = None):
     """Computes a binary image with pixel values 0 and 1 containing the binary 
     erosion of a given input image. 
     
@@ -36,9 +36,9 @@ def erode_sphere(src : Image, dst : Image = None):
 
 
     parameters = {
-        "src":src,
-        "dst":dst
+        "src":source,
+        "dst":destination
     }
 
-    execute(__file__, 'erode_sphere_' + str(len(dst.shape)) + 'd_x.cl', 'erode_sphere_' + str(len(dst.shape)) + 'd', dst.shape, parameters)
-    return dst
+    execute(__file__, 'erode_sphere_' + str(len(destination.shape)) + 'd_x.cl', 'erode_sphere_' + str(len(destination.shape)) + 'd', destination.shape, parameters)
+    return destination

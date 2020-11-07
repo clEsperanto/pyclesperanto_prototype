@@ -3,7 +3,7 @@ from .._tier0 import Image
 from .._tier0 import plugin_function
 
 @plugin_function
-def greater_constant(src1 : Image, dst :Image = None, scalar :float = 0):
+def greater_constant(source1 : Image, source2 :Image = None, constant :float = 0):
     """Determines if two images A and B greater pixel wise. 
     
     f(a, b) = 1 if a > b; 0 otherwise. 
@@ -33,11 +33,11 @@ def greater_constant(src1 : Image, dst :Image = None, scalar :float = 0):
 
 
     parameters = {
-        "src1":src1,
-        "scalar":float(scalar),
-        "dst":dst
+        "src1":source1,
+        "scalar":float(constant),
+        "dst":source2
     }
 
-    execute(__file__, 'greater_constant_' + str(len(dst.shape)) + 'd_x.cl', 'greater_constant_' + str(len(dst.shape)) + 'd', dst.shape, parameters)
+    execute(__file__, 'greater_constant_' + str(len(source2.shape)) + 'd_x.cl', 'greater_constant_' + str(len(source2.shape)) + 'd', source2.shape, parameters)
 
-    return dst
+    return source2

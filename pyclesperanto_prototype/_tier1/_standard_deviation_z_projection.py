@@ -4,7 +4,7 @@ from .._tier0 import Image
 from .._tier0 import create_2d_zy
 
 @plugin_function(output_creator=create_2d_zy)
-def standard_deviation_z_projection(input : Image, output : Image = None):
+def standard_deviation_z_projection(source : Image, destination : Image = None):
     """Determines the standard deviation intensity projection of an image 
     stack along Z. 
 
@@ -32,9 +32,9 @@ def standard_deviation_z_projection(input : Image, output : Image = None):
 
 
     parameters = {
-        "dst":output,
-        "src":input,
+        "dst":destination,
+        "src":source,
     }
 
-    execute(__file__, 'standard_deviation_z_projection_x.cl', 'standard_deviation_z_projection', output.shape, parameters)
-    return output
+    execute(__file__, 'standard_deviation_z_projection_x.cl', 'standard_deviation_z_projection', destination.shape, parameters)
+    return destination

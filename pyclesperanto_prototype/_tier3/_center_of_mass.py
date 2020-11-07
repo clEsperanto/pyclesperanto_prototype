@@ -5,7 +5,7 @@ from .._tier0 import plugin_function
 from .._tier0 import Image
 
 @plugin_function
-def center_of_mass(image : Image):
+def center_of_mass(source : Image):
     """Determines the center of mass of an image or image stack. 
     
     It writes the result in the results table
@@ -21,17 +21,17 @@ def center_of_mass(image : Image):
 
     """
 
-    temp = create_like(image)
+    temp = create_like(source)
 
-    sum = sum_of_all_pixels(image)
+    sum = sum_of_all_pixels(source)
 
-    multiply_image_and_coordinate(image, temp, 0)
+    multiply_image_and_coordinate(source, temp, 0)
     sum_x = sum_of_all_pixels(temp)
 
-    multiply_image_and_coordinate(image, temp, 1)
+    multiply_image_and_coordinate(source, temp, 1)
     sum_y = sum_of_all_pixels(temp)
 
-    multiply_image_and_coordinate(image, temp, 2)
+    multiply_image_and_coordinate(source, temp, 2)
     sum_z = sum_of_all_pixels(temp)
 
     return [sum_x / sum, sum_y / sum, sum_z / sum]

@@ -6,7 +6,7 @@ from .._tier0 import plugin_function
 from .._tier0 import Image
 
 @plugin_function
-def bounding_box(binary_image : Image):
+def bounding_box(source : Image):
     """Determines the bounding box of all non-zero pixels in a binary image. 
     
     If called from macro, the positions will be stored in a new row of ImageJs 
@@ -24,21 +24,21 @@ def bounding_box(binary_image : Image):
 
     """
 
-    temp = create_like(binary_image)
+    temp = create_like(source)
 
-    multiply_image_and_coordinate(binary_image, temp, 0)
+    multiply_image_and_coordinate(source, temp, 0)
     max_x = maximum_of_all_pixels(temp)
-    min_x = minimum_of_masked_pixels(temp, binary_image)
+    min_x = minimum_of_masked_pixels(temp, source)
     print("min_x" + str(min_x))
 
-    multiply_image_and_coordinate(binary_image, temp, 1)
+    multiply_image_and_coordinate(source, temp, 1)
     max_y = maximum_of_all_pixels(temp)
-    min_y = minimum_of_masked_pixels(temp, binary_image)
+    min_y = minimum_of_masked_pixels(temp, source)
 
-    if len(binary_image.shape) == 3:
-        multiply_image_and_coordinate(binary_image, temp, 2)
+    if len(source.shape) == 3:
+        multiply_image_and_coordinate(source, temp, 2)
         max_z = maximum_of_all_pixels(temp)
-        min_z = minimum_of_masked_pixels(temp, binary_image)
+        min_z = minimum_of_masked_pixels(temp, source)
 
         return [min_x, min_y, min_z, max_x, max_y, max_z]
     else:

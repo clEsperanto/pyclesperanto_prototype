@@ -3,7 +3,7 @@ from .._tier0 import plugin_function
 from .._tier0 import Image
 
 @plugin_function
-def binary_not(src1 : Image, dst : Image = None):
+def binary_not(source : Image, destination : Image = None):
     """Computes a binary image (containing pixel values 0 and 1) from an image 
     X by negating its pixel values
     x using the binary NOT operator !
@@ -37,9 +37,9 @@ def binary_not(src1 : Image, dst : Image = None):
 
 
     parameters = {
-        "src1":src1,
-        "dst":dst
+        "src1":source,
+        "dst":destination
     }
 
-    execute(__file__, 'binary_not_' + str(len(dst.shape)) + 'd_x.cl', 'binary_not_' + str(len(dst.shape)) + 'd', dst.shape, parameters)
-    return dst
+    execute(__file__, 'binary_not_' + str(len(destination.shape)) + 'd_x.cl', 'binary_not_' + str(len(destination.shape)) + 'd', destination.shape, parameters)
+    return destination

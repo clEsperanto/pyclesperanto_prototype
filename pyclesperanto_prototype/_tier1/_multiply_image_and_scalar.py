@@ -3,7 +3,7 @@ from .._tier0 import plugin_function
 from .._tier0 import Image
 
 @plugin_function
-def multiply_image_and_scalar(src : Image, dst : Image = None, scalar : None = 0):
+def multiply_image_and_scalar(source : Image, destination : Image = None, scalar : None = 0):
     """Multiplies all pixels value x in a given image X with a constant scalar s.
     
     <pre>f(x, s) = x * s</pre>
@@ -35,10 +35,10 @@ def multiply_image_and_scalar(src : Image, dst : Image = None, scalar : None = 0
 
 
     parameters = {
-        "src":src,
-        "dst": dst,
+        "src":source,
+        "dst": destination,
         "scalar":float(scalar)
     }
 
-    execute(__file__, 'multiply_image_and_scalar_' + str(len(dst.shape)) + 'd_x.cl', 'multiply_image_and_scalar_' + str(len(dst.shape)) + 'd', dst.shape, parameters)
-    return dst
+    execute(__file__, 'multiply_image_and_scalar_' + str(len(destination.shape)) + 'd_x.cl', 'multiply_image_and_scalar_' + str(len(destination.shape)) + 'd', destination.shape, parameters)
+    return destination

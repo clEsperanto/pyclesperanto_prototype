@@ -3,7 +3,7 @@ from .._tier0 import plugin_function
 from .._tier0 import Image
 
 @plugin_function
-def draw_box(dst: Image, x: int = 0, y: int = 0, z: int = 0, width: int = 1, height: int = 1, depth: int = 1, value : float = 1):
+def draw_box(destination: Image, x: int = 0, y: int = 0, z: int = 0, width: int = 1, height: int = 1, depth: int = 1, value : float = 1):
     """Draws a box at a given start point with given size. 
     All pixels other than in the box are untouched. Consider using `set(buffer, 
     0);` in advance. 
@@ -37,9 +37,9 @@ def draw_box(dst: Image, x: int = 0, y: int = 0, z: int = 0, width: int = 1, hei
     """
 
 
-    if (len(dst.shape) == 2):
+    if (len(destination.shape) == 2):
         parameters = {
-            "dst": dst,
+            "dst": destination,
             "x1": float(x),
             "y1": float(y),
             "x2": float(x + width),
@@ -48,7 +48,7 @@ def draw_box(dst: Image, x: int = 0, y: int = 0, z: int = 0, width: int = 1, hei
         }
     else: # 3D
         parameters = {
-            "dst": dst,
+            "dst": destination,
             "x1": float(x),
             "y1": float(y),
             "z1": float(z),
@@ -58,5 +58,5 @@ def draw_box(dst: Image, x: int = 0, y: int = 0, z: int = 0, width: int = 1, hei
             "value": float(value)
         }
 
-    execute(__file__, 'draw_box_' + str(len(dst.shape)) + 'd_x.cl', 'draw_box_' + str(len(dst.shape)) + 'd', dst.shape, parameters)
-    return dst
+    execute(__file__, 'draw_box_' + str(len(destination.shape)) + 'd_x.cl', 'draw_box_' + str(len(destination.shape)) + 'd', destination.shape, parameters)
+    return destination

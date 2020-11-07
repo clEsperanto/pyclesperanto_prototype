@@ -3,7 +3,7 @@ from .._tier0 import plugin_function
 from .._tier0 import Image
 
 @plugin_function
-def set_ramp_x(output : Image):
+def set_ramp_x(source : Image):
     """Sets all pixel values to their X coordinate 
 
     Parameters
@@ -24,8 +24,8 @@ def set_ramp_x(output : Image):
 
 
     parameters = {
-        "dst":output
+        "dst":source
     }
 
-    execute(__file__, 'set_ramp_x_' + str(len(output.shape)) + 'd_x.cl', 'set_ramp_x_' + str(len(output.shape)) + 'd', output.shape, parameters);
-    return output
+    execute(__file__, 'set_ramp_x_' + str(len(source.shape)) + 'd_x.cl', 'set_ramp_x_' + str(len(source.shape)) + 'd', source.shape, parameters);
+    return source

@@ -29,7 +29,7 @@ def _slice_to_stack(image : Image, stack : Image = None, num_slices = 1):
     return stack
 
 @plugin_function
-def minimum_of_masked_pixels(input : Image, mask : Image):
+def minimum_of_masked_pixels(source : Image, mask : Image):
     """Determines the minimum intensity in a masked image. 
     
     But only in pixels which have non-zero values in another mask image. 
@@ -45,21 +45,21 @@ def minimum_of_masked_pixels(input : Image, mask : Image):
 
     """
 
-    dimensionality = input.shape
+    dimensionality = source.shape
 
     # analyse a 3D image by reducing it to 2D using special minimum projection
     if (len(dimensionality) == 3): # 3D image
-        reduced_image = create_2d_xy(input)
+        reduced_image = create_2d_xy(source)
         reduced_mask = create_2d_xy(mask)
 
-        __minimum_of_masked_pixels_reduction(input, mask, reduced_image, reduced_mask)
+        __minimum_of_masked_pixels_reduction(source, mask, reduced_image, reduced_mask)
 
-        input = reduced_image
+        source = reduced_image
         mask = reduced_mask
 
     # analyse the 2D image by making a stack out of it first
     if (len(dimensionality) == 2): # 2D image
-        temp_input = transpose_xz(input)
+        temp_input = transpose_xz(source)
         temp_mask = transpose_xz(mask)
 
         reduced_image = create_2d_yx(temp_input)
@@ -67,11 +67,11 @@ def minimum_of_masked_pixels(input : Image, mask : Image):
 
         __minimum_of_masked_pixels_reduction(temp_input, temp_mask, reduced_image, reduced_mask)
 
-        input = _slice_to_stack(reduced_image)
+        source = _slice_to_stack(reduced_image)
         mask = _slice_to_stack(reduced_mask)
 
     # analyse a 1D image by making a stack out of it first
-    temp_input = transpose_yz(input)
+    temp_input = transpose_yz(source)
     temp_mask = transpose_yz(mask)
 
     reduced_image = create([1,1])

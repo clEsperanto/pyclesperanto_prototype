@@ -3,7 +3,7 @@ from .._tier0 import plugin_function
 from .._tier0 import Image
 
 @plugin_function
-def minimum_image_and_scalar(src : Image, dst : Image = None, scalar : float = 0):
+def minimum_image_and_scalar(source : Image, destination : Image = None, scalar : float = 0):
     """Computes the minimum of a constant scalar s and each pixel value x in a 
     given image X.
     
@@ -34,10 +34,10 @@ def minimum_image_and_scalar(src : Image, dst : Image = None, scalar : float = 0
 
 
     parameters = {
-        "src":src,
-        "dst": dst,
+        "src":source,
+        "dst": destination,
         "valueB":float(scalar)
     }
 
-    execute(__file__, 'minimum_image_and_scalar_' + str(len(dst.shape)) + 'd_x.cl', 'minimum_image_and_scalar_' + str(len(dst.shape)) + 'd', dst.shape, parameters)
-    return dst
+    execute(__file__, 'minimum_image_and_scalar_' + str(len(destination.shape)) + 'd_x.cl', 'minimum_image_and_scalar_' + str(len(destination.shape)) + 'd', destination.shape, parameters)
+    return destination

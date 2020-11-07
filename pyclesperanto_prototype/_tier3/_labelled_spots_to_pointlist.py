@@ -5,7 +5,7 @@ from .._tier0 import plugin_function
 from .._tier0 import Image
 
 @plugin_function(output_creator=create_pointlist_from_labelmap)
-def labelled_spots_to_pointlist(label_map:Image, pointlist :Image = None):
+def labelled_spots_to_pointlist(input_labelled_spots:Image, destination_pointlist :Image = None):
 
     """Generates a coordinate list of points in a labelled spot image. 
     
@@ -32,11 +32,11 @@ def labelled_spots_to_pointlist(label_map:Image, pointlist :Image = None):
     """
 
     parameters = {
-        "src":label_map,
-        "dst_point_list":pointlist
+        "src":input_labelled_spots,
+        "dst_point_list":destination_pointlist
     }
 
     # todo: make naming conventions fit
-    execute(__file__, 'labelled_spots_to_point_list_x.cl', 'labelled_spots_to_point_list', label_map.shape, parameters)
+    execute(__file__, 'labelled_spots_to_point_list_x.cl', 'labelled_spots_to_point_list', input_labelled_spots.shape, parameters)
 
-    return pointlist
+    return destination_pointlist

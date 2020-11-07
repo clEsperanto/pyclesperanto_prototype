@@ -4,7 +4,7 @@ from .._tier0 import Image
 from .._tier0 import create_2d_zx
 
 @plugin_function(output_creator=create_2d_zx)
-def maximum_y_projection(input : Image, output : Image = None):
+def maximum_y_projection(source : Image, destination_max : Image = None):
     """Determines the maximum intensity projection of an image along X. 
 
     Parameters
@@ -31,9 +31,9 @@ def maximum_y_projection(input : Image, output : Image = None):
 
 
     parameters = {
-        "dst_max":output,
-        "src":input,
+        "dst_max":destination_max,
+        "src":source,
     }
 
-    execute(__file__, 'maximum_y_projection_x.cl', 'maximum_y_projection', output.shape, parameters)
-    return output
+    execute(__file__, 'maximum_y_projection_x.cl', 'maximum_y_projection', destination_max.shape, parameters)
+    return destination_max

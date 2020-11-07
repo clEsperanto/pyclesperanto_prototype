@@ -5,7 +5,7 @@ from .._tier0 import Image
 # todo: add a proper output-generator
 
 @plugin_function
-def touch_matrix_to_mesh(src_pointlist  : Image, src_touch_matrix : Image, dst_mesh : Image):
+def touch_matrix_to_mesh(pointlist  : Image, touch_matrix : Image, mesh_destination : Image):
     """Takes a pointlist with dimensions n*d with n point coordinates in d 
     dimensions and a touch matrix of 
     size n*n to draw lines from all points to points if the corresponding pixel 
@@ -38,13 +38,13 @@ def touch_matrix_to_mesh(src_pointlist  : Image, src_touch_matrix : Image, dst_m
     """
 
     parameters = {
-        "src_pointlist": src_pointlist,
-        "src_touch_matrix": src_touch_matrix,
-        "dst_mesh": dst_mesh
+        "src_pointlist": pointlist,
+        "src_touch_matrix": touch_matrix,
+        "dst_mesh": mesh_destination
     }
 
-    dimensions = [1, 1, src_touch_matrix.shape[0]]
+    dimensions = [1, 1, touch_matrix.shape[0]]
 
     execute(__file__, 'touch_matrix_to_mesh_3d_x.cl', 'touch_matrix_to_mesh_3d', dimensions, parameters)
 
-    return dst_mesh
+    return mesh_destination

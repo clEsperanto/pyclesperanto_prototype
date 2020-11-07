@@ -4,7 +4,7 @@ from .._tier0 import plugin_function
 from .._tier0 import Image
 
 @plugin_function
-def mean_sphere(input : Image, output : Image = None, radius_x : float = 1, radius_y : float = 1, radius_z : float = 1):
+def mean_sphere(source : Image, destination : Image = None, radius_x : float = 1, radius_y : float = 1, radius_z : float = 1):
     """Computes the local mean average of a pixels spherical neighborhood. 
     
     The spheres size is specified by 
@@ -41,12 +41,12 @@ def mean_sphere(input : Image, output : Image = None, radius_x : float = 1, radi
     kernel_size_z = radius_to_kernel_size(radius_z);
 
     parameters = {
-        "dst":output,
-        "src":input,
+        "dst":destination,
+        "src":source,
         "Nx":int(kernel_size_x),
         "Ny":int(kernel_size_y)
     };
 
-    if (len(output.shape) == 3):
+    if (len(destination.shape) == 3):
         parameters.update({"Nz":int(kernel_size_z)});
-    execute(__file__, 'mean_sphere_' + str(len(output.shape)) + 'd_x.cl', 'mean_sphere_' + str(len(output.shape)) + 'd', output.shape, parameters);
+    execute(__file__, 'mean_sphere_' + str(len(destination.shape)) + 'd_x.cl', 'mean_sphere_' + str(len(destination.shape)) + 'd', destination.shape, parameters);

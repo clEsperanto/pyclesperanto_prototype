@@ -4,7 +4,7 @@ from .._tier0 import plugin_function
 from .._tier0 import Image
 
 @plugin_function
-def mean_box(src : Image, dst : Image = None, radius_x : float = 1, radius_y : float = 1, radius_z : float = 1):
+def mean_box(source : Image, destination : Image = None, radius_x : float = 1, radius_y : float = 1, radius_z : float = 1):
     """Computes the local mean average of a pixels cube neighborhood. 
     
     The cubes size is specified by 
@@ -41,17 +41,17 @@ def mean_box(src : Image, dst : Image = None, radius_x : float = 1, radius_y : f
     kernel_size_z = radius_to_kernel_size(radius_z)
 
     execute_separable_kernel(
-        src,
-        dst,
+        source,
+        destination,
         __file__,
-        'mean_separable_' + str(len(dst.shape)) + 'd_x.cl',
-        'mean_separable_' + str(len(dst.shape)) + 'd',
+        'mean_separable_' + str(len(destination.shape)) + 'd_x.cl',
+        'mean_separable_' + str(len(destination.shape)) + 'd',
         kernel_size_x,
         kernel_size_y,
         kernel_size_z,
         radius_x,
         radius_y,
         radius_z,
-        len(dst.shape)
+        len(destination.shape)
     )
-    return dst
+    return destination

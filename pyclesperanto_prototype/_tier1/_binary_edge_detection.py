@@ -3,7 +3,7 @@ from .._tier0 import plugin_function
 from .._tier0 import Image
 
 @plugin_function
-def binary_edge_detection(src : Image, dst : Image = None):
+def binary_edge_detection(source : Image, destination : Image = None):
     """Determines pixels/voxels which are on the surface of binary objects and 
     sets only them to 1 in the 
     destination image. All other pixels are set to 0.
@@ -33,10 +33,10 @@ def binary_edge_detection(src : Image, dst : Image = None):
 
 
     parameters = {
-        "dst": dst,
-        "src":src
+        "dst": destination,
+        "src":source
     }
 
     # TODO: Rename cl file and kernel function to fit to naming conventions. This needs to be done in clij2 as well.
-    execute(__file__, 'binaryEdgeDetection' + str(len(dst.shape)) + 'd_x.cl', 'binary_edge_detection_diamond_image' + str(len(dst.shape)) + 'd', dst.shape, parameters)
-    return dst
+    execute(__file__, 'binaryEdgeDetection' + str(len(destination.shape)) + 'd_x.cl', 'binary_edge_detection_diamond_image' + str(len(destination.shape)) + 'd', destination.shape, parameters)
+    return destination

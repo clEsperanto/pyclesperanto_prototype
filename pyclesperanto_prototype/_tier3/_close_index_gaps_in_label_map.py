@@ -12,6 +12,18 @@ from .._tier2 import block_enumerate
 
 
 def close_index_gaps_in_label_map(input, output, blocksize = 4096):
+    """
+
+    Parameters
+    ----------
+    input
+    output
+    blocksize
+
+    Returns
+    -------
+
+    """
     max_label = maximum_of_all_pixels(input)
 
     flagged_indices = create([1, int(max_label) + 1])

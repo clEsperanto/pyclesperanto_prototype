@@ -4,7 +4,7 @@ from .._tier0 import plugin_function
 from .._tier0 import Image
 
 @plugin_function
-def laplace_box(src : Image, dst : Image = None):
+def laplace_box(input : Image, destination : Image = None):
     """Applies the Laplace operator (Box neighborhood) to an image. 
 
     Parameters
@@ -31,9 +31,9 @@ def laplace_box(src : Image, dst : Image = None):
 
 
     parameters = {
-        "dst":dst,
-        "src":src
+        "dst":destination,
+        "src":input
     }
 
-    execute(__file__, 'laplace_box_' + str(len(dst.shape)) + 'd_x.cl', 'laplace_box_' + str(len(dst.shape)) + 'd', dst.shape, parameters)
-    return dst
+    execute(__file__, 'laplace_box_' + str(len(destination.shape)) + 'd_x.cl', 'laplace_box_' + str(len(destination.shape)) + 'd', destination.shape, parameters)
+    return destination

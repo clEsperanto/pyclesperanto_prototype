@@ -4,7 +4,7 @@ from .._tier0 import plugin_function
 from .._tier0 import Image
 
 @plugin_function
-def flip(src : Image, dst : Image = None, flip_x : bool = True, flip_y : bool = True, flip_z : bool = True):
+def flip(source : Image, destination : Image = None, flip_x : bool = True, flip_y : bool = True, flip_z : bool = True):
     """Flips an image in X, Y and/or Z direction depending on boolean flags. 
 
     Parameters
@@ -34,14 +34,14 @@ def flip(src : Image, dst : Image = None, flip_x : bool = True, flip_y : bool = 
 
 
     parameters = {
-        "src":src,
-        "dst":dst,
+        "src":source,
+        "dst":destination,
         "flipx": int(1 if flip_x else 0),
         "flipy": int(1 if flip_y else 0)
     }
 
-    if (len(dst.shape) == 3):
+    if (len(destination.shape) == 3):
         parameters.update({"flipz": int(1 if flip_z else 0)});
 
-    execute(__file__, 'flip_' + str(len(dst.shape)) + 'd_x.cl', 'flip_' + str(len(dst.shape)) + 'd', dst.shape, parameters)
-    return dst
+    execute(__file__, 'flip_' + str(len(destination.shape)) + 'd_x.cl', 'flip_' + str(len(destination.shape)) + 'd', destination.shape, parameters)
+    return destination

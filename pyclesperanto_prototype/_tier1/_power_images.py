@@ -3,7 +3,7 @@ from .._tier0 import plugin_function
 from .._tier0 import Image
 
 @plugin_function
-def power_images(src1 : Image, src2 : Image, dst : Image = None):
+def power_images(input : Image, exponent : Image, destination : Image = None):
     """Calculates x to the power of y pixel wise of two images X and Y. 
 
     Parameters
@@ -31,10 +31,10 @@ def power_images(src1 : Image, src2 : Image, dst : Image = None):
 
 
     parameters = {
-        "dst": dst,
-        "src1":src1,
-        "src2":src2
+        "dst": destination,
+        "src1":input,
+        "src2":exponent
     }
 
-    execute(__file__, 'power_images_' + str(len(dst.shape)) + 'd_x.cl', 'power_images_' + str(len(dst.shape)) + 'd', dst.shape, parameters)
-    return dst
+    execute(__file__, 'power_images_' + str(len(destination.shape)) + 'd_x.cl', 'power_images_' + str(len(destination.shape)) + 'd', destination.shape, parameters)
+    return destination

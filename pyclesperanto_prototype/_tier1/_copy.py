@@ -3,7 +3,7 @@ from .._tier0 import plugin_function
 from .._tier0 import Image
 
 @plugin_function
-def copy(src : Image, dst : Image = None):
+def copy(source : Image, destination : Image = None):
     """Copies an image.
     
     <pre>f(x) = x</pre> 
@@ -32,9 +32,9 @@ def copy(src : Image, dst : Image = None):
 
 
     parameters = {
-        "dst":dst,
-        "src":src
+        "dst":destination,
+        "src":source
     }
 
-    execute(__file__, 'copy_' + str(len(dst.shape)) + 'd_x.cl', 'copy_' + str(len(dst.shape)) + 'd', dst.shape, parameters)
-    return dst
+    execute(__file__, 'copy_' + str(len(destination.shape)) + 'd_x.cl', 'copy_' + str(len(destination.shape)) + 'd', destination.shape, parameters)
+    return destination

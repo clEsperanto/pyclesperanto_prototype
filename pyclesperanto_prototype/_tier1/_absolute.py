@@ -3,7 +3,7 @@ from .._tier0 import plugin_function
 from .._tier0 import Image
 
 @plugin_function
-def absolute(src : Image, dst : Image = None):
+def absolute(source : Image, destintation : Image = None):
     """Computes the absolute value of every individual pixel x in a given image.
     
     <pre>f(x) = |x| </pre>
@@ -33,9 +33,9 @@ def absolute(src : Image, dst : Image = None):
 
 
     parameters = {
-        "src":src,
-        "dst":dst
+        "src":source,
+        "dst":destintation
     }
 
-    execute(__file__, 'absolute_' + str(len(dst.shape)) + 'd_x.cl', 'absolute_' + str(len(dst.shape)) + 'd', dst.shape, parameters)
-    return dst
+    execute(__file__, 'absolute_' + str(len(destintation.shape)) + 'd_x.cl', 'absolute_' + str(len(destintation.shape)) + 'd', destintation.shape, parameters)
+    return destintation

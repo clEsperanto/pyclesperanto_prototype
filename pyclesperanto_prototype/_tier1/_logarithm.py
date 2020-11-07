@@ -4,7 +4,7 @@ from .._tier0 import plugin_function
 from .._tier0 import Image
 
 @plugin_function
-def logarithm(src : Image, dst : Image = None):
+def logarithm(source : Image, destination : Image = None):
     """Computes base e logarithm of all pixels values.
     
     f(x) = log(x)     Author(s): Peter Haub, Robert Haase
@@ -35,9 +35,9 @@ def logarithm(src : Image, dst : Image = None):
 
 
     parameters = {
-        "src":src,
-        "dst":dst
+        "src":source,
+        "dst":destination
     }
 
-    execute(__file__, 'logarithm_' + str(len(dst.shape)) + 'd_x.cl', 'logarithm_' + str(len(dst.shape)) + 'd', dst.shape, parameters)
-    return dst
+    execute(__file__, 'logarithm_' + str(len(destination.shape)) + 'd_x.cl', 'logarithm_' + str(len(destination.shape)) + 'd', destination.shape, parameters)
+    return destination

@@ -5,7 +5,7 @@ from .._tier0 import create
 from .._tier0 import Image
 
 @plugin_function(output_creator=create_none)
-def transpose_xy(src : Image , dst : Image = None):
+def transpose_xy(input : Image, destination : Image = None):
     """Transpose X and Y axes of an image.
     
     Parameters
@@ -31,20 +31,20 @@ def transpose_xy(src : Image , dst : Image = None):
 
     """
 
-    if dst is None:
-        dimensions = src.shape
+    if destination is None:
+        dimensions = input.shape
         if len(dimensions) == 3:
-            dst = create([dimensions[0], dimensions[2], dimensions[1]])
+            destination = create([dimensions[0], dimensions[2], dimensions[1]])
         elif len(dimensions) == 2:
-            dst = create([dimensions[1], dimensions[0]])
+            destination = create([dimensions[1], dimensions[0]])
         elif len(dimensions) == 1:
-            dst = create([dimensions[0], 1])
+            destination = create([dimensions[0], 1])
 
     parameters = {
-        "src":src,
-        "dst":dst
+        "src":input,
+        "dst":destination
     }
 
-    execute(__file__, 'transpose_xy_3d_x.cl', 'transpose_xy_3d', dst.shape, parameters)
+    execute(__file__, 'transpose_xy_3d_x.cl', 'transpose_xy_3d', destination.shape, parameters)
 
-    return dst
+    return destination

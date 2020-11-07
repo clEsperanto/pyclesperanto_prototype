@@ -3,7 +3,7 @@ from .._tier0 import plugin_function
 from .._tier0 import Image
 
 @plugin_function
-def mask_label(src : Image, labelmap : Image, dst : Image = None, label_id : int = 1):
+def mask_label(source : Image, label_map : Image, destination : Image = None, label_index : int = 1):
     """Computes a masked image by applying a label mask to an image. 
     
     All pixel values x of image X will be copied
@@ -38,11 +38,11 @@ def mask_label(src : Image, labelmap : Image, dst : Image = None, label_id : int
 
 
     parameters = {
-        "src":src,
-        "src_label_map":labelmap,
-        "label_id": float(label_id),
-        "dst": dst
+        "src":source,
+        "src_label_map":label_map,
+        "label_id": float(label_index),
+        "dst": destination
     }
 
-    execute(__file__, 'mask_label_' + str(len(dst.shape)) + 'd_x.cl', 'mask_label_' + str(len(dst.shape)) + 'd', dst.shape, parameters)
-    return dst
+    execute(__file__, 'mask_label_' + str(len(destination.shape)) + 'd_x.cl', 'mask_label_' + str(len(destination.shape)) + 'd', destination.shape, parameters)
+    return destination
