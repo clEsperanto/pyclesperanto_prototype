@@ -1,4 +1,6 @@
 from ._block_enumerate import block_enumerate
+from ._bottom_hat_box import bottom_hat_box
+from ._bottom_hat_sphere import bottom_hat_sphere
 from ._flag_existing_intensities import flag_existing_intensities
 from ._maximum_of_all_pixels import maximum_of_all_pixels
 from ._minimum_of_all_pixels import minimum_of_all_pixels
