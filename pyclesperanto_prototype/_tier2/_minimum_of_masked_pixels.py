@@ -9,12 +9,12 @@ from .._tier0 import pull
 from .._tier1 import copy_slice
 from .._tier0 import plugin_function
 
-def __minimum_of_masked_pixels_reduction(input : Image, input_mask : Image, output : Image, output_mask : Image):
+def __minimum_of_masked_pixels_reduction(source : Image, source_mask : Image, output : Image, output_mask : Image):
     parameters = {
         "dst_min": output,
         "dst_mask": output_mask,
-        "mask": input_mask,
-        "src": input
+        "mask": source_mask,
+        "src": source
     }
 
     execute(__file__, 'minimum_of_masked_pixels_3d_2d_x.cl', 'minimum_of_masked_pixels_3d_2d', output.shape, parameters)
@@ -56,7 +56,7 @@ def minimum_of_masked_pixels(source : Image, mask : Image):
         source = reduced_image
         mask = reduced_mask
 
-    dimensionality = input.shape
+    dimensionality = source.shape
 
     # analyse the 2D image by making a stack out of it first
     if (len(dimensionality) == 2): # 2D image
