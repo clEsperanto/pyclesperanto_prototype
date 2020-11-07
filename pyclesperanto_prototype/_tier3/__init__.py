@@ -5,3 +5,4 @@ from ._difference_of_gaussian import difference_of_gaussian
 from ._histogram import histogram
 from ._jaccard_index import jaccard_index
 from ._labelled_spots_to_pointlist import labelled_spots_to_pointlist
+from ._squared_difference import squared_difference
