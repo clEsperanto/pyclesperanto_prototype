@@ -7,27 +7,24 @@ from .._tier0 import create_2d_xy
 @plugin_function(output_creator=create_2d_xy)
 def minimum_z_projection(source : Image, destination_min : Image = None):
     """Determines the minimum intensity projection of an image along Z. 
-
+    
     Parameters
     ----------
     source : Image
-    destination_sum : Image
-    
+    destination_min : Image
     
     Returns
     -------
-    destination_sum
-
+    destination_min
+    
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
-    >>> cle.minimum_z_projection(source, destination_sum)
-    >>>     
+    >>> cle.minimum_z_projection(source, destination_min)
     
     References
     ----------
-    .. [1] https://clij.github.io/clij2-docs/reference_minimumZProjection    
-
+    .. [1] https://clij.github.io/clij2-docs/reference_minimumZProjection
     """
 
 

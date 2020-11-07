@@ -6,30 +6,27 @@ from .._tier0 import Image
 def exponential(source : Image, destination : Image = None):
     """Computes base exponential of all pixels values.
     
-    f(x) = exp(x)     Author(s): Peter Haub, Robert Haase
-
-
-
+    f(x) = exp(x) 
+    
+    Author(s): Peter Haub, Robert Haase
+    
     Parameters
     ----------
     source : Image
     destination : Image
     
-    
     Returns
     -------
     destination
-
+    
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
     >>> cle.exponential(source, destination)
-    >>>     
     
     References
     ----------
-    .. [1] https://clij.github.io/clij2-docs/reference_exponential    
-
+    .. [1] https://clij.github.io/clij2-docs/reference_exponential
     """
 
 

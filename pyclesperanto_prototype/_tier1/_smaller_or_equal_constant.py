@@ -8,28 +8,25 @@ def smaller_or_equal_constant(source : Image, destination : Image = None, consta
     """Determines if two images A and B smaller or equal pixel wise.
     
     f(a, b) = 1 if a <= b; 0 otherwise. 
-
+    
     Parameters
     ----------
     source : Image
     destination : Image
     constant : Number
     
-    
     Returns
     -------
     destination
-
+    
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
     >>> cle.smaller_or_equal_constant(source, destination, constant)
-    >>>     
     
     References
     ----------
-    .. [1] https://clij.github.io/clij2-docs/reference_smallerOrEqualConstant    
-
+    .. [1] https://clij.github.io/clij2-docs/reference_smallerOrEqualConstant
     """
 
 

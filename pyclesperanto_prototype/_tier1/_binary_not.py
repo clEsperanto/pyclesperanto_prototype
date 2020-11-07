@@ -18,21 +18,20 @@ def binary_not(source : Image, destination : Image = None):
         The binary input image to be inverted.
     destination : Image
         The output image where results are written into.
-         
+     
+    
     Returns
     -------
     destination
-
+    
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
     >>> cle.binary_not(source, destination)
-    >>>     
     
     References
     ----------
-    .. [1] https://clij.github.io/clij2-docs/reference_binaryNot    
-
+    .. [1] https://clij.github.io/clij2-docs/reference_binaryNot
     """
 
 

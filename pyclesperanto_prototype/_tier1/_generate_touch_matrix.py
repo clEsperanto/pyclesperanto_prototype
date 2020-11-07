@@ -10,28 +10,27 @@ def generate_touch_matrix(label_map :Image, touch_matrix_destination :Image = No
     all pixels are set to 0 exept those where labels are touching. 
     
     Only half of the matrix is filled (with x < y). For example, if labels 3 and 
-    4 are touching then the pixel (3,4) in the matrix will be set to 1. 
-
+    4 are touching then the pixel (3,4) in the matrix will be set to 1.
+    The touch matrix is a representation of a region adjacency graph
+     
+    
     Parameters
     ----------
     label_map : Image
     touch_matrix_destination : Image
     
-    
     Returns
     -------
     touch_matrix_destination
-
+    
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
     >>> cle.generate_touch_matrix(label_map, touch_matrix_destination)
-    >>>     
     
     References
     ----------
-    .. [1] https://clij.github.io/clij2-docs/reference_generateTouchMatrix    
-
+    .. [1] https://clij.github.io/clij2-docs/reference_generateTouchMatrix
     """
     set(touch_matrix_destination, 0)
 

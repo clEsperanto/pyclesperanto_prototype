@@ -18,23 +18,22 @@ def touch_matrix_to_mesh(pointlist  : Image, touch_matrix : Image, mesh_destinat
     touch_matrix : Image
         A 2D binary matrix with 1 in pixels (i,j) where label i touches 
     label j.
-    mehs_destination : Image
+    mesh_destination : Image
         The output image where results are written into.
-         
+     
+    
     Returns
     -------
     mesh_destination
-
+    
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
     >>> cle.touch_matrix_to_mesh(pointlist, touch_matrix, mesh_destination)
-    >>>     
     
     References
     ----------
-    .. [1] https://clij.github.io/clij2-docs/reference_touchMatrixToMesh    
-
+    .. [1] https://clij.github.io/clij2-docs/reference_touchMatrixToMesh
     """
 
     parameters = {

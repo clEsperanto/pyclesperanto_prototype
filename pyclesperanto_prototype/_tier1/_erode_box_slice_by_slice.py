@@ -17,27 +17,24 @@ def erode_box_slice_by_slice(source : Image, destination : Image = None):
     difference is that the output image contains values 0 and 1 instead of 0 and 255.
     
     This filter is applied slice by slice in 2D. 
-
+    
     Parameters
     ----------
     source : Image
     destination : Image
     
-    
     Returns
     -------
     destination
-
+    
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
     >>> cle.erode_box_slice_by_slice(source, destination)
-    >>>     
     
     References
     ----------
-    .. [1] https://clij.github.io/clij2-docs/reference_erodeBoxSliceBySlice    
-
+    .. [1] https://clij.github.io/clij2-docs/reference_erodeBoxSliceBySlice
     """
 
 

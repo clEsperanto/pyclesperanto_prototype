@@ -12,28 +12,25 @@ def mask(source : Image, mask : Image, destination : Image = None):
     zero.
     
     <pre>f(x,m) = (x if (m != 0); (0 otherwise))</pre> 
-
+    
     Parameters
     ----------
     source : Image
     mask : Image
     destination : Image
     
-    
     Returns
     -------
     destination
-
+    
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
     >>> cle.mask(source, mask, destination)
-    >>>     
     
     References
     ----------
-    .. [1] https://clij.github.io/clij2-docs/reference_mask    
-
+    .. [1] https://clij.github.io/clij2-docs/reference_mask
     """
 
 

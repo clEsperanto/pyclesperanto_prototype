@@ -13,28 +13,26 @@ def threshold_otsu(input : Image, destination : Image = None):
     """The automatic thresholder utilizes the Otsu threshold method 
     implemented in ImageJ using a histogram determined on 
     the GPU to create binary images as similar as possible to ImageJ 'Apply 
-    Threshold' method.     Author(s): Robert Haase based on work by G. Landini and W. Rasband
-
+    Threshold' method. 
+    
+    Author(s): Robert Haase based on work by G. Landini and W. Rasband
+    
     License: The code for the automatic thresholding methods originates from https://github.com/imagej/imagej1/blob/master/ij/process/AutoThresholder.java
-
-Detailed documentation on the implemented methods can be found online: https://imagej.net/Auto_Threshold
-
-
-
+    
+    Detailed documentation on the implemented methods can be found online: https://imagej.net/Auto_Threshold
+    
     Parameters
     ----------
     input : Image
     destination : Image
     
-    
     Returns
     -------
     destination
-
+    
     References
     ----------
-    .. [1] https://clij.github.io/clij2-docs/reference_thresholdOtsu    
-
+    .. [1] https://clij.github.io/clij2-docs/reference_thresholdOtsu
     """
 
     # build a bin-centers array for scikit-image

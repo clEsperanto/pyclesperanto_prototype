@@ -14,21 +14,19 @@ def labelled_spots_to_pointlist(input_labelled_spots:Image, destination_pointlis
     from connected components analysis in an image where every column contains d 
     pixels (with d = dimensionality of the original image) with the coordinates of 
     the maxima/minima. 
-
+    
     Parameters
     ----------
     input_labelled_spots : Image
     destination_pointlist : Image
     
-    
     Returns
     -------
     destination_pointlist
-
+    
     References
     ----------
-    .. [1] https://clij.github.io/clij2-docs/reference_labelledSpotsToPointList    
-
+    .. [1] https://clij.github.io/clij2-docs/reference_labelledSpotsToPointList
     """
 
     parameters = {

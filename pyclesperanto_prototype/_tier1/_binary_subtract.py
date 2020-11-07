@@ -14,21 +14,20 @@ def binary_subtract(minuend : Image, subtrahend : Image, destination : Image = N
         The second binary input image to be subtracted from the first.
     destination : Image
         The output image where results are written into.
-         
+     
+    
     Returns
     -------
     destination
-
+    
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
     >>> cle.binary_subtract(minuend, subtrahend, destination)
-    >>>     
     
     References
     ----------
-    .. [1] https://clij.github.io/clij2-docs/reference_binarySubtract    
-
+    .. [1] https://clij.github.io/clij2-docs/reference_binarySubtract
     """
 
 

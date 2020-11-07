@@ -13,30 +13,27 @@ def gaussian_blur(source : Image, destination : Image = None, sigma_x : float = 
     
     The implementation is done separable. In case a sigma equals zero, the 
     direction is not blurred. 
-
+    
     Parameters
     ----------
     source : Image
     destination : Image
-    sigmaX : Number
-    sigmaY : Number
-    sigmaZ : Number
-    
+    sigma_x : Number
+    sigma_y : Number
+    sigma_z : Number
     
     Returns
     -------
     destination
-
+    
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
-    >>> cle.gaussian_blur(source, destination, sigmaX, sigmaY, sigmaZ)
-    >>>     
+    >>> cle.gaussian_blur(source, destination, sigma_x, sigma_y, sigma_z)
     
     References
     ----------
-    .. [1] https://clij.github.io/clij2-docs/reference_gaussianBlur3D    
-
+    .. [1] https://clij.github.io/clij2-docs/reference_gaussianBlur3D
     """
 
 

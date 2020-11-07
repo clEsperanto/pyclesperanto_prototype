@@ -18,10 +18,11 @@ def sum_of_all_pixels(source : Image):
     ----------
     source : Image
         The image of which all pixels or voxels will be summed.
-         References
+     
+    
+    References
     ----------
-    .. [1] https://clij.github.io/clij2-docs/reference_sumOfAllPixels    
-
+    .. [1] https://clij.github.io/clij2-docs/reference_sumOfAllPixels
     """
 
     dimensionality = source.shape

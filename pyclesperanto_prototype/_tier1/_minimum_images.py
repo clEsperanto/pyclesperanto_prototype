@@ -8,28 +8,25 @@ def minimum_images(source1 : Image, source2 : Image, destination : Image = None)
     images X and Y.
     
     <pre>f(x, y) = min(x, y)</pre> 
-
+    
     Parameters
     ----------
     source1 : Image
     source2 : Image
     destination : Image
     
-    
     Returns
     -------
     destination
-
+    
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
     >>> cle.minimum_images(source1, source2, destination)
-    >>>     
     
     References
     ----------
-    .. [1] https://clij.github.io/clij2-docs/reference_minimumImages    
-
+    .. [1] https://clij.github.io/clij2-docs/reference_minimumImages
     """
 
 

@@ -19,28 +19,25 @@ def generate_distance_matrix(coorindate_list1 :Image, coordinate_list2 :Image, d
     the same size as touch matrices (see generateTouchMatrix). Thus, one 
     can threshold a distance matrix to generate a touch matrix out of it 
     for drawing meshes. 
-
+    
     Parameters
     ----------
     coordinate_list1 : Image
     coordinate_list2 : Image
     distance_matrix_destination : Image
     
-    
     Returns
     -------
     distance_matrix_destination
-
+    
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
     >>> cle.generate_distance_matrix(coordinate_list1, coordinate_list2, distance_matrix_destination)
-    >>>     
     
     References
     ----------
-    .. [1] https://clij.github.io/clij2-docs/reference_generateDistanceMatrix    
-
+    .. [1] https://clij.github.io/clij2-docs/reference_generateDistanceMatrix
     """
     set(distance_matrix_destination, 0)
 

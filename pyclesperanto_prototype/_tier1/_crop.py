@@ -10,33 +10,30 @@ def crop(input : Image, output : Image = None, start_x : int = 0, start_y : int 
     
     Note: If the destination image pre-exists already, it will be overwritten and 
     keep it's dimensions. 
-
+    
     Parameters
     ----------
     source : Image
     destination : Image
-    startX : Number
-    startY : Number
-    startZ : Number
+    start_x : Number
+    start_y : Number
+    start_z : Number
     width : Number
     height : Number
     depth : Number
     
-    
     Returns
     -------
     destination
-
+    
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
-    >>> cle.crop(source, destination, startX, startY, startZ, width, height, depth)
-    >>>     
+    >>> cle.crop(source, destination, start_x, start_y, start_z, width, height, depth)
     
     References
     ----------
-    .. [1] https://clij.github.io/clij2-docs/reference_crop3D    
-
+    .. [1] https://clij.github.io/clij2-docs/reference_crop3D
     """
 
     if output is None:

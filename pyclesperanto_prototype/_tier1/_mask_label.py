@@ -11,7 +11,7 @@ def mask_label(source : Image, label_map : Image, destination : Image = None, la
     label_map image has the right index value i.
     
     f(x,m,i) = (x if (m == i); (0 otherwise)) 
-
+    
     Parameters
     ----------
     source : Image
@@ -19,21 +19,18 @@ def mask_label(source : Image, label_map : Image, destination : Image = None, la
     destination : Image
     label_index : Number
     
-    
     Returns
     -------
     destination
-
+    
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
     >>> cle.mask_label(source, label_map, destination, label_index)
-    >>>     
     
     References
     ----------
-    .. [1] https://clij.github.io/clij2-docs/reference_maskLabel    
-
+    .. [1] https://clij.github.io/clij2-docs/reference_maskLabel
     """
 
 

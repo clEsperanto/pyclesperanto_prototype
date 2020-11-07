@@ -5,27 +5,24 @@ from .._tier0 import Image
 @plugin_function
 def laplace_diamond(source : Image, destination : Image = None):
     """Applies the Laplace operator (Diamond neighborhood) to an image. 
-
+    
     Parameters
     ----------
     input : Image
     destination : Image
     
-    
     Returns
     -------
     destination
-
+    
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
     >>> cle.laplace_diamond(input, destination)
-    >>>     
     
     References
     ----------
-    .. [1] https://clij.github.io/clij2-docs/reference_laplaceDiamond    
-
+    .. [1] https://clij.github.io/clij2-docs/reference_laplaceDiamond
     """
 
 

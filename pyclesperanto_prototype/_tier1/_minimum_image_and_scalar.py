@@ -8,28 +8,25 @@ def minimum_image_and_scalar(source : Image, destination : Image = None, scalar 
     given image X.
     
     <pre>f(x, s) = min(x, s)</pre> 
-
+    
     Parameters
     ----------
     source : Image
     destination : Image
     scalar : Number
     
-    
     Returns
     -------
     destination
-
+    
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
     >>> cle.minimum_image_and_scalar(source, destination, scalar)
-    >>>     
     
     References
     ----------
-    .. [1] https://clij.github.io/clij2-docs/reference_minimumImageAndScalar    
-
+    .. [1] https://clij.github.io/clij2-docs/reference_minimumImageAndScalar
     """
 
 

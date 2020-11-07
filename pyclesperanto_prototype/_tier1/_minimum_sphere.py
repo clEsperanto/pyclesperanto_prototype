@@ -9,30 +9,27 @@ def minimum_sphere(source : Image, destination : Image = None, radius_x : float 
     
     The spheres size is specified by 
     its half-width, half-height and half-depth (radius). 
-
+    
     Parameters
     ----------
     source : Image
     destination : Image
-    radiusX : Number
-    radiusY : Number
-    radiusZ : Number
-    
+    radius_x : Number
+    radius_y : Number
+    radius_z : Number
     
     Returns
     -------
     destination
-
+    
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
-    >>> cle.minimum_sphere(source, destination, radiusX, radiusY, radiusZ)
-    >>>     
+    >>> cle.minimum_sphere(source, destination, radius_x, radius_y, radius_z)
     
     References
     ----------
-    .. [1] https://clij.github.io/clij2-docs/reference_minimum3DSphere    
-
+    .. [1] https://clij.github.io/clij2-docs/reference_minimum3DSphere
     """
 
 

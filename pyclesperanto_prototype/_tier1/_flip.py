@@ -6,30 +6,27 @@ from .._tier0 import Image
 @plugin_function
 def flip(source : Image, destination : Image = None, flip_x : bool = True, flip_y : bool = True, flip_z : bool = True):
     """Flips an image in X, Y and/or Z direction depending on boolean flags. 
-
+    
     Parameters
     ----------
     source : Image
     destination : Image
-    flipX : Boolean
-    flipY : Boolean
-    flipZ : Boolean
-    
+    flip_x : Boolean
+    flip_y : Boolean
+    flip_z : Boolean
     
     Returns
     -------
     destination
-
+    
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
-    >>> cle.flip(source, destination, flipX, flipY, flipZ)
-    >>>     
+    >>> cle.flip(source, destination, flip_x, flip_y, flip_z)
     
     References
     ----------
-    .. [1] https://clij.github.io/clij2-docs/reference_flip3D    
-
+    .. [1] https://clij.github.io/clij2-docs/reference_flip3D
     """
 
 

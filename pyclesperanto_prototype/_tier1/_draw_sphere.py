@@ -11,7 +11,7 @@ def draw_sphere(destination : Image, x : float = 0, y : float = 0, z : float = 0
     
      All pixels other than in the sphere are untouched. Consider using 
     `set(buffer, 0);` in advance. 
-
+    
     Parameters
     ----------
     destination : Image
@@ -23,21 +23,18 @@ def draw_sphere(destination : Image, x : float = 0, y : float = 0, z : float = 0
     radius_z : Number
     value : Number
     
-    
     Returns
     -------
     destination
-
+    
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
     >>> cle.draw_sphere(destination, x, y, z, radius_x, radius_y, radius_z, value)
-    >>>     
     
     References
     ----------
-    .. [1] https://clij.github.io/clij2-docs/reference_drawSphere    
-
+    .. [1] https://clij.github.io/clij2-docs/reference_drawSphere
     """
 
 

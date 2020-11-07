@@ -37,42 +37,40 @@ def histogram(source : Image, destination : Image = None, num_bins = 256, minimu
     be determined. 
     When calling this operation many times, it is recommended to determine 
     minimum and maximum intensity 
-    once at the beginning and handing over these values.     Author(s): Robert Haase adapted work from Aaftab Munshi, Benedict Gaster, Timothy Mattson, James Fung, Dan Ginsburg
-
+    once at the beginning and handing over these values. 
+    
+    Author(s): Robert Haase adapted work from Aaftab Munshi, Benedict Gaster, Timothy Mattson, James Fung, Dan Ginsburg
+    
     License: // adapted code from
-// https://github.com/bgaster/opencl-book-samples/blob/master/src/Chapter_14/histogram/histogram_image.cl
-//
-// It was published unter BSD license according to
-// https://code.google.com/archive/p/opencl-book-samples/
-//
-// Book:      OpenCL(R) Programming Guide
-// Authors:   Aaftab Munshi, Benedict Gaster, Timothy Mattson, James Fung, Dan Ginsburg
-// ISBN-10:   0-321-74964-2
-// ISBN-13:   978-0-321-74964-2
-// Publisher: Addison-Wesley Professional
-// URLs:      http://safari.informit.com/9780132488006/
-//            http://www.openclprogrammingguide.com
-
-
-
+    // https://github.com/bgaster/opencl-book-samples/blob/master/src/Chapter_14/histogram/histogram_image.cl
+    //
+    // It was published unter BSD license according to
+    // https://code.google.com/archive/p/opencl-book-samples/
+    //
+    // Book:      OpenCL(R) Programming Guide
+    // Authors:   Aaftab Munshi, Benedict Gaster, Timothy Mattson, James Fung, Dan Ginsburg
+    // ISBN-10:   0-321-74964-2
+    // ISBN-13:   978-0-321-74964-2
+    // Publisher: Addison-Wesley Professional
+    // URLs:      http://safari.informit.com/9780132488006/
+    //            http://www.openclprogrammingguide.com
+    
     Parameters
     ----------
     source : Image
     destination : Image
-    numberOfBins : Number
-    minimumGreyValue : Number
-    maximumGreyValue : Number
-    determineMinAndMax : Boolean
-    
+    number_of_bins : Number
+    minimum_intensity : Number
+    maximum_intensity : Number
+    determine_min_max : Boolean
     
     Returns
     -------
     destination
-
+    
     References
     ----------
-    .. [1] https://clij.github.io/clij2-docs/reference_histogram    
-
+    .. [1] https://clij.github.io/clij2-docs/reference_histogram
     """
     image_to_process = source
 

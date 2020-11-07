@@ -33,7 +33,7 @@ def minimum_of_masked_pixels(source : Image, mask : Image):
     """Determines the minimum intensity in a masked image. 
     
     But only in pixels which have non-zero values in another mask image. 
-
+    
     Parameters
     ----------
     source : Image
@@ -41,8 +41,7 @@ def minimum_of_masked_pixels(source : Image, mask : Image):
     
     References
     ----------
-    .. [1] https://clij.github.io/clij2-docs/reference_minimumOfMaskedPixels    
-
+    .. [1] https://clij.github.io/clij2-docs/reference_minimumOfMaskedPixels
     """
 
     dimensionality = source.shape

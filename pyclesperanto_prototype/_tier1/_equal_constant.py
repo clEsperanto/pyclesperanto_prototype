@@ -18,21 +18,20 @@ def equal_constant(source : Image, destination : Image = None, constant : float 
     and source2 equal in the given pixel.
     constant : float
         The constant where every pixel is compared to.
-         
+     
+    
     Returns
     -------
     destination
-
+    
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
     >>> cle.equal_constant(source, destination, constant)
-    >>>     
     
     References
     ----------
-    .. [1] https://clij.github.io/clij2-docs/reference_equalConstant    
-
+    .. [1] https://clij.github.io/clij2-docs/reference_equalConstant
     """
 
 

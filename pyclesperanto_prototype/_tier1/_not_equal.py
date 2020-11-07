@@ -17,21 +17,20 @@ def not_equal(source1 : Image, source2 : Image, destination : Image = None):
     destination : Image
         The resulting binary image where pixels will be 1 only if source1 
     and source2 are not equal in the given pixel.
-         
+     
+    
     Returns
     -------
     destination
-
+    
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
     >>> cle.not_equal(source1, source2, destination)
-    >>>     
     
     References
     ----------
-    .. [1] https://clij.github.io/clij2-docs/reference_notEqual    
-
+    .. [1] https://clij.github.io/clij2-docs/reference_notEqual
     """
 
 

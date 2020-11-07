@@ -7,28 +7,25 @@ def subtract_image_from_scalar(input : Image, destination : Image = None, scalar
     """Subtracts one image X from a scalar s pixel wise.
     
     <pre>f(x, s) = s - x</pre> 
-
+    
     Parameters
     ----------
     input : Image
     destination : Image
     scalar : Number
     
-    
     Returns
     -------
     destination
-
+    
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
     >>> cle.subtract_image_from_scalar(input, destination, scalar)
-    >>>     
     
     References
     ----------
-    .. [1] https://clij.github.io/clij2-docs/reference_subtractImageFromScalar    
-
+    .. [1] https://clij.github.io/clij2-docs/reference_subtractImageFromScalar
     """
 
 

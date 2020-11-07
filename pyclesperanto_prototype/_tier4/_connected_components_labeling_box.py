@@ -15,27 +15,24 @@ from .._tier0 import Image
 def connected_components_labeling_box(binary_input : Image, labeling_destination : Image = None):
     """Performs connected components analysis inspecting the box neighborhood 
     of every pixel to a binary image and generates a label map. 
-
+    
     Parameters
     ----------
     binary_input : Image
     labeling_destination : Image
     
-    
     Returns
     -------
     labeling_destination
-
+    
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
     >>> cle.connected_components_labeling_box(binary_input, labeling_destination)
-    >>>     
     
     References
     ----------
-    .. [1] https://clij.github.io/clij2-docs/reference_connectedComponentsLabelingBox    
-
+    .. [1] https://clij.github.io/clij2-docs/reference_connectedComponentsLabelingBox
     """
 
     temp1 = create_like(labeling_destination)

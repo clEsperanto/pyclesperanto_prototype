@@ -9,27 +9,24 @@ def gradient_y(source : Image, destination : Image = None):
     Assuming a, b and c are three adjacent
      pixels in Y direction. In the target image will be saved as: <pre>b' = 
     c - a;</pre> 
-
+    
     Parameters
     ----------
     source : Image
     destination : Image
     
-    
     Returns
     -------
     destination
-
+    
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
     >>> cle.gradient_y(source, destination)
-    >>>     
     
     References
     ----------
-    .. [1] https://clij.github.io/clij2-docs/reference_gradientY    
-
+    .. [1] https://clij.github.io/clij2-docs/reference_gradientY
     """
 
 

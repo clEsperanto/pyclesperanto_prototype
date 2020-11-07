@@ -14,21 +14,20 @@ def transpose_xy(input : Image, destination : Image = None):
         The input image.
     destination : Image
         The output image where results are written into.
-         
+     
+    
     Returns
     -------
     destination
-
+    
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
     >>> cle.transpose_xy(input, destination)
-    >>>     
     
     References
     ----------
-    .. [1] https://clij.github.io/clij2-docs/reference_transposeXY    
-
+    .. [1] https://clij.github.io/clij2-docs/reference_transposeXY
     """
 
     if destination is None:

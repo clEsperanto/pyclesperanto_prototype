@@ -14,21 +14,20 @@ def transpose_xz(input : Image, destination : Image = None):
         The input image.
     destination : Image
         The output image where results are written into.
-         
+     
+    
     Returns
     -------
     destination
-
+    
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
     >>> cle.transpose_xz(input, destination)
-    >>>     
     
     References
     ----------
-    .. [1] https://clij.github.io/clij2-docs/reference_transposeXZ    
-
+    .. [1] https://clij.github.io/clij2-docs/reference_transposeXZ
     """
 
     if dst is None:

@@ -8,7 +8,7 @@ def draw_line(destination : Image, x1 : float = 0, y1 : float = 0, z1 : float = 
     
     All pixels other than on the line are untouched. Consider using 
     `set(buffer, 0);` in advance. 
-
+    
     Parameters
     ----------
     destination : Image
@@ -21,21 +21,18 @@ def draw_line(destination : Image, x1 : float = 0, y1 : float = 0, z1 : float = 
     thickness : Number
     value : Number
     
-    
     Returns
     -------
     destination
-
+    
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
     >>> cle.draw_line(destination, x1, y1, z1, x2, y2, z2, thickness, value)
-    >>>     
     
     References
     ----------
-    .. [1] https://clij.github.io/clij2-docs/reference_drawLine    
-
+    .. [1] https://clij.github.io/clij2-docs/reference_drawLine
     """
 
 

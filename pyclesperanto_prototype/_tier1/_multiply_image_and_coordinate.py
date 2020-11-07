@@ -7,28 +7,25 @@ from .._tier0 import Image
 def multiply_image_and_coordinate(source : Image, destination : Image = None, dimension = 0):
     """Multiplies all pixel intensities with the x, y or z coordinate, 
     depending on specified dimension. 
-
+    
     Parameters
     ----------
     source : Image
     destination : Image
     dimension : Number
     
-    
     Returns
     -------
     destination
-
+    
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
     >>> cle.multiply_image_and_coordinate(source, destination, dimension)
-    >>>     
     
     References
     ----------
-    .. [1] https://clij.github.io/clij2-docs/reference_multiplyImageAndCoordinate    
-
+    .. [1] https://clij.github.io/clij2-docs/reference_multiplyImageAndCoordinate
     """
 
     parameters = {

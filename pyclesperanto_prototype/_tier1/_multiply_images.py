@@ -17,21 +17,20 @@ def multiply_images(factor1 : Image, factor2 : Image, destination : Image = None
         The second image to be multiplied.
     destination : Image
         The output image where results are written into.
-         
+     
+    
     Returns
     -------
     destination
-
+    
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
     >>> cle.multiply_images(factor1, factor2, destination)
-    >>>     
     
     References
     ----------
-    .. [1] https://clij.github.io/clij2-docs/reference_multiplyImages    
-
+    .. [1] https://clij.github.io/clij2-docs/reference_multiplyImages
     """
 
 

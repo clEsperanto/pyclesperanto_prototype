@@ -5,7 +5,7 @@ from .._tier0 import Image
 @plugin_function
 def set_row(source : Image, row_index : int = 0, value : float = 0):
     """Sets all pixel values x of a given row in X to a constant value v. 
-
+    
     Parameters
     ----------
     source : Image
@@ -16,12 +16,10 @@ def set_row(source : Image, row_index : int = 0, value : float = 0):
     --------
     >>> import pyclesperanto_prototype as cle
     >>> cle.set_row(source, row_index, value)
-    >>>     
     
     References
     ----------
-    .. [1] https://clij.github.io/clij2-docs/reference_setRow    
-
+    .. [1] https://clij.github.io/clij2-docs/reference_setRow
     """
 
 

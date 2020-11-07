@@ -7,27 +7,24 @@ def nonzero_minimum_diamond (input, flag_dst, destination):
     with 0 value in the input image will not be overwritten in the output image.
     Thus, the result image should be initialized by copying the original image in 
     advance. 
-
+    
     Parameters
     ----------
     input : Image
     destination : Image
     
-    
     Returns
     -------
     destination
-
+    
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
     >>> cle.nonzero_minimum_diamond(input, destination)
-    >>>     
     
     References
     ----------
-    .. [1] https://clij.github.io/clij2-docs/reference_nonzeroMinimumDiamond    
-
+    .. [1] https://clij.github.io/clij2-docs/reference_nonzeroMinimumDiamond
     """
 
 

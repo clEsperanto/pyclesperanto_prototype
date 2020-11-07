@@ -9,28 +9,25 @@ def maximum_image_and_scalar(source : Image, destination : Image = None, scalar 
     given image X. 
     
     <pre>f(x, s) = max(x, s)</pre> 
-
+    
     Parameters
     ----------
     source : Image
     destination : Image
     scalar : Number
     
-    
     Returns
     -------
     destination
-
+    
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
     >>> cle.maximum_image_and_scalar(source, destination, scalar)
-    >>>     
     
     References
     ----------
-    .. [1] https://clij.github.io/clij2-docs/reference_maximumImageAndScalar    
-
+    .. [1] https://clij.github.io/clij2-docs/reference_maximumImageAndScalar
     """
 
 

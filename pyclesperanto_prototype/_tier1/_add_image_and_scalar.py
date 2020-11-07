@@ -16,21 +16,20 @@ def add_image_and_scalar(source : Image, destination : Image = None, scalar : fl
         The output image where results are written into.
     scalar : float
         The constant number which will be added to all pixels.
-         
+     
+    
     Returns
     -------
     destination
-
+    
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
     >>> cle.add_image_and_scalar(source, destination, scalar)
-    >>>     
     
     References
     ----------
-    .. [1] https://clij.github.io/clij2-docs/reference_addImageAndScalar    
-
+    .. [1] https://clij.github.io/clij2-docs/reference_addImageAndScalar
     """
 
 

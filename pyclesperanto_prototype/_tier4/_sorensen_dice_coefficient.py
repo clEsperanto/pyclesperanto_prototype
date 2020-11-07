@@ -12,7 +12,7 @@ def sorensen_dice_coefficient(source1 : Image, source2 : Image):
     Note that the Sorensen-Dice coefficient s can be calculated from the Jaccard 
     index j using this formula:
     <pre>s = f(j) = 2 j / (j + 1)</pre> 
-
+    
     Parameters
     ----------
     source1 : Image
@@ -20,8 +20,7 @@ def sorensen_dice_coefficient(source1 : Image, source2 : Image):
     
     References
     ----------
-    .. [1] https://clij.github.io/clij2-docs/reference_sorensenDiceCoefficient    
-
+    .. [1] https://clij.github.io/clij2-docs/reference_sorensenDiceCoefficient
     """
 
     j = jaccard_index(source1, source2)

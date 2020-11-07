@@ -13,15 +13,14 @@ def bounding_box(source : Image):
     Results table in the columns 'BoundingBoxX', 'BoundingBoxY', 
     'BoundingBoxZ', 'BoundingBoxWidth', 'BoundingBoxHeight' 
     'BoundingBoxDepth'.In case of 2D images Z and depth will be zero. 
-
+    
     Parameters
     ----------
     source : Image
     
     References
     ----------
-    .. [1] https://clij.github.io/clij2-docs/reference_boundingBox    
-
+    .. [1] https://clij.github.io/clij2-docs/reference_boundingBox
     """
 
     temp = create_like(source)

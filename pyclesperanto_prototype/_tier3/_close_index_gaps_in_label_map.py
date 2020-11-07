@@ -12,17 +12,30 @@ from .._tier2 import block_enumerate
 
 
 def close_index_gaps_in_label_map(input, output, blocksize = 4096):
-    """
-
+    """Analyses a label map and if there are gaps in the indexing (e.g. label 
+    5 is not present) all 
+    subsequent labels will be relabelled. 
+    
+    Thus, afterwards number of labels and maximum label index are equal.
+    This operation is mostly performed on the CPU. 
+    
     Parameters
     ----------
-    input
-    output
-    blocksize
-
+    labeling_input : Image
+    labeling_destination : Image
+    
     Returns
     -------
-
+    labeling_destination
+    
+    Examples
+    --------
+    >>> import pyclesperanto_prototype as cle
+    >>> cle.close_index_gaps_in_label_map(labeling_input, labeling_destination)
+    
+    References
+    ----------
+    .. [1] https://clij.github.io/clij2-docs/reference_closeIndexGapsInLabelMap
     """
     max_label = maximum_of_all_pixels(input)
 

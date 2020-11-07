@@ -21,21 +21,20 @@ def top_hat_sphere(input : Image, destination : Image = None, radius_x : float =
         Radius of the background determination region in Y.
     radius_z : Image
         Radius of the background determination region in Z.
-         
+     
+    
     Returns
     -------
     destination
-
+    
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
     >>> cle.top_hat_sphere(input, destination, radiusX, radiusY, radiusZ)
-    >>>     
     
     References
     ----------
-    .. [1] https://clij.github.io/clij2-docs/reference_topHatSphere    
-
+    .. [1] https://clij.github.io/clij2-docs/reference_topHatSphere
     """
 
 

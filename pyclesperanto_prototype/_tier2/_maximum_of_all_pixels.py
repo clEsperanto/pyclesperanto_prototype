@@ -18,16 +18,16 @@ def maximum_of_all_pixels(source  : Image):
     ----------
     source : Image
         The image of which the maximum of all pixels or voxels will be determined.
-         Examples
+     
+    
+    Examples
     --------
     >>> import pyclesperanto_prototype as cle
     >>> cle.maximum_of_all_pixels(source)
-    >>>     
     
     References
     ----------
-    .. [1] https://clij.github.io/clij2-docs/reference_maximumOfAllPixels    
-
+    .. [1] https://clij.github.io/clij2-docs/reference_maximumOfAllPixels
     """
 
     dimensionality = source.shape

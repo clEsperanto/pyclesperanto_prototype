@@ -14,21 +14,20 @@ def transpose_yz(input : Image, destination : Image = None):
         The input image.
     destination : Image
         The output image where results are written into.
-         
+     
+    
     Returns
     -------
     destination
-
+    
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
     >>> cle.transpose_yz(input, destination)
-    >>>     
     
     References
     ----------
-    .. [1] https://clij.github.io/clij2-docs/reference_transposeYZ    
-
+    .. [1] https://clij.github.io/clij2-docs/reference_transposeYZ
     """
 
 

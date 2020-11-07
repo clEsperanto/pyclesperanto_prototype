@@ -14,28 +14,25 @@ def replace_intensities(input : Image, new_values_vector : Image, destination : 
      * All pixels with value 2 get value 0
      * All pixels with value 3 get value 2
      
-
+    
     Parameters
     ----------
     input : Image
     new_values_vector : Image
     destination : Image
     
-    
     Returns
     -------
     destination
-
+    
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
     >>> cle.replace_intensities(input, new_values_vector, destination)
-    >>>     
     
     References
     ----------
-    .. [1] https://clij.github.io/clij2-docs/reference_replaceIntensities    
-
+    .. [1] https://clij.github.io/clij2-docs/reference_replaceIntensities
     """
 
 

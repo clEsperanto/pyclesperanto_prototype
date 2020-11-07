@@ -7,28 +7,25 @@ def smaller_or_equal(source1 : Image, source2 : Image, destination : Image = Non
     """Determines if two images A and B smaller or equal pixel wise.
     
     f(a, b) = 1 if a <= b; 0 otherwise. 
-
+    
     Parameters
     ----------
     source1 : Image
     source2 : Image
     destination : Image
     
-    
     Returns
     -------
     destination
-
+    
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
     >>> cle.smaller_or_equal(source1, source2, destination)
-    >>>     
     
     References
     ----------
-    .. [1] https://clij.github.io/clij2-docs/reference_smallerOrEqual    
-
+    .. [1] https://clij.github.io/clij2-docs/reference_smallerOrEqual
     """
 
 

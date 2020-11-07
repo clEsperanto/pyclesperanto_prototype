@@ -21,21 +21,20 @@ def binary_xor(operand1 : Image, operand2 : Image, destination : Image = None):
         The second binary input image to be processed.
     destination : Image
         The output image where results are written into.
-         
+     
+    
     Returns
     -------
     destination
-
+    
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
     >>> cle.binary_xor(operand1, operand2, destination)
-    >>>     
     
     References
     ----------
-    .. [1] https://clij.github.io/clij2-docs/reference_binaryXOr    
-
+    .. [1] https://clij.github.io/clij2-docs/reference_binaryXOr
     """
 
 

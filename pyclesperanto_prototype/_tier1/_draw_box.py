@@ -7,7 +7,7 @@ def draw_box(destination: Image, x: int = 0, y: int = 0, z: int = 0, width: int 
     """Draws a box at a given start point with given size. 
     All pixels other than in the box are untouched. Consider using `set(buffer, 
     0);` in advance. 
-
+    
     Parameters
     ----------
     destination : Image
@@ -19,21 +19,18 @@ def draw_box(destination: Image, x: int = 0, y: int = 0, z: int = 0, width: int 
     depth : Number
     value : Number
     
-    
     Returns
     -------
     destination
-
+    
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
     >>> cle.draw_box(destination, x, y, z, width, height, depth, value)
-    >>>     
     
     References
     ----------
-    .. [1] https://clij.github.io/clij2-docs/reference_drawBox    
-
+    .. [1] https://clij.github.io/clij2-docs/reference_drawBox
     """
 
 

@@ -5,7 +5,7 @@ from .._tier0 import Image
 @plugin_function
 def set_image_borders(destination : Image, value : float = 0):
     """Sets all pixel values at the image border to a given value. 
-
+    
     Parameters
     ----------
     destination : Image
@@ -15,12 +15,10 @@ def set_image_borders(destination : Image, value : float = 0):
     --------
     >>> import pyclesperanto_prototype as cle
     >>> cle.set_image_borders(destination, value)
-    >>>     
     
     References
     ----------
-    .. [1] https://clij.github.io/clij2-docs/reference_setImageBorders    
-
+    .. [1] https://clij.github.io/clij2-docs/reference_setImageBorders
     """
 
 

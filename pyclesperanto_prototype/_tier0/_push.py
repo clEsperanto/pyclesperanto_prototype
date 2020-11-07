@@ -5,7 +5,7 @@ from ._pycl import OCLArray
 def push(any_array):
     """Copies an image specified by its name to GPU memory in order to process 
     it there later. 
-
+    
     Parameters
     ----------
     image : String
@@ -14,12 +14,10 @@ def push(any_array):
     --------
     >>> import pyclesperanto_prototype as cle
     >>> cle.push(image)
-    >>>     
     
     References
     ----------
-    .. [1] https://clij.github.io/clij2-docs/reference_push    
-
+    .. [1] https://clij.github.io/clij2-docs/reference_push
     """
 
     if isinstance(any_array, OCLArray):

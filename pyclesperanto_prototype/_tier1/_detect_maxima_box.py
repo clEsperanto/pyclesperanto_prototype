@@ -9,28 +9,25 @@ def detect_maxima_box(source :Image, destination :Image = None):
     Pixels in the resulting image are set to 1 if there is no other pixel in a 
     given radius which has a 
     higher intensity, and to 0 otherwise. 
-
+    
     Parameters
     ----------
     source : Image
     destination : Image
     radius : Number
     
-    
     Returns
     -------
     destination
-
+    
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
     >>> cle.detect_maxima_box(source, destination, radius)
-    >>>     
     
     References
     ----------
-    .. [1] https://clij.github.io/clij2-docs/reference_detectMaximaBox    
-
+    .. [1] https://clij.github.io/clij2-docs/reference_detectMaximaBox
     """
 
     parameters = {

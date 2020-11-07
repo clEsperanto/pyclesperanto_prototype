@@ -11,27 +11,24 @@ def dilate_sphere(source : Image, destination : Image = None):
     pixels in 3d) into account.
     The pixels in the input image with pixel value not equal to 0 will be 
     interpreted as 1. 
-
+    
     Parameters
     ----------
     source : Image
     destination : Image
     
-    
     Returns
     -------
     destination
-
+    
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
     >>> cle.dilate_sphere(source, destination)
-    >>>     
     
     References
     ----------
-    .. [1] https://clij.github.io/clij2-docs/reference_dilateSphere    
-
+    .. [1] https://clij.github.io/clij2-docs/reference_dilateSphere
     """
 
 

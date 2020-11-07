@@ -7,27 +7,24 @@ def copy(source : Image, destination : Image = None):
     """Copies an image.
     
     <pre>f(x) = x</pre> 
-
+    
     Parameters
     ----------
     source : Image
     destination : Image
     
-    
     Returns
     -------
     destination
-
+    
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
     >>> cle.copy(source, destination)
-    >>>     
     
     References
     ----------
-    .. [1] https://clij.github.io/clij2-docs/reference_copy    
-
+    .. [1] https://clij.github.io/clij2-docs/reference_copy
     """
 
 

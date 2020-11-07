@@ -8,27 +8,24 @@ def nonzero_minimum_box (input, flag_dst, destination):
     output image.
     Thus, the result image should be initialized by copying the original image in 
     advance. 
-
+    
     Parameters
     ----------
     input : Image
     destination : Image
     
-    
     Returns
     -------
     destination
-
+    
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
     >>> cle.nonzero_minimum_box(input, destination)
-    >>>     
     
     References
     ----------
-    .. [1] https://clij.github.io/clij2-docs/reference_nonzeroMinimumBox    
-
+    .. [1] https://clij.github.io/clij2-docs/reference_nonzeroMinimumBox
     """
 
 

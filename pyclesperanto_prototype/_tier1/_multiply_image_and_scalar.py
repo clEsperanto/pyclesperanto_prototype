@@ -16,21 +16,20 @@ def multiply_image_and_scalar(source : Image, destination : Image = None, scalar
         The output image where results are written into.
     scalar : float
         The number with which every pixel will be multiplied with.
-         
+     
+    
     Returns
     -------
     destination
-
+    
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
     >>> cle.multiply_image_and_scalar(source, destination, scalar)
-    >>>     
     
     References
     ----------
-    .. [1] https://clij.github.io/clij2-docs/reference_multiplyImageAndScalar    
-
+    .. [1] https://clij.github.io/clij2-docs/reference_multiplyImageAndScalar
     """
 
 

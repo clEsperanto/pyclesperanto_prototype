@@ -10,7 +10,7 @@ def set_where_x_greater_than_y(source : Image, value : float = 0):
     Otherwise the pixel is not overwritten.
     If you want to initialize an identity transfrom matrix, set all pixels to 
     0 first. 
-
+    
     Parameters
     ----------
     source : Image
@@ -18,8 +18,7 @@ def set_where_x_greater_than_y(source : Image, value : float = 0):
     
     References
     ----------
-    .. [1] https://clij.github.io/clij2-docs/reference_setWhereXgreaterThanY    
-
+    .. [1] https://clij.github.io/clij2-docs/reference_setWhereXgreaterThanY
     """
 
 

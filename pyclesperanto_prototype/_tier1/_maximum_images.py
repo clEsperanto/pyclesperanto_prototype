@@ -8,28 +8,25 @@ def maximum_images(source1 : Image, source2 : Image, destination : Image = None)
     images X and Y. 
     
     <pre>f(x, y) = max(x, y)</pre> 
-
+    
     Parameters
     ----------
     source1 : Image
     source2 : Image
     destination : Image
     
-    
     Returns
     -------
     destination
-
+    
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
     >>> cle.maximum_images(source1, source2, destination)
-    >>>     
     
     References
     ----------
-    .. [1] https://clij.github.io/clij2-docs/reference_maximumImages    
-
+    .. [1] https://clij.github.io/clij2-docs/reference_maximumImages
     """
 
 

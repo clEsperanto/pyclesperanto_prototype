@@ -25,21 +25,20 @@ def add_images_weighted(summand1:Image, summand2:Image, destination :Image = Non
     factor2 : float
         The constant number which will be multiplied with each pixel of 
     summand2 before adding it.
-         
+     
+    
     Returns
     -------
     destination
-
+    
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
     >>> cle.add_images_weighted(summand1, summand2, destination, factor1, factor2)
-    >>>     
     
     References
     ----------
-    .. [1] https://clij.github.io/clij2-docs/reference_addImagesWeighted    
-
+    .. [1] https://clij.github.io/clij2-docs/reference_addImagesWeighted
     """
 
     parameters = {

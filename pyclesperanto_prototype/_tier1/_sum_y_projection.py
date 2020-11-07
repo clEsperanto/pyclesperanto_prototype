@@ -6,27 +6,24 @@ from .._tier0 import create_2d_zx
 @plugin_function(output_creator=create_2d_zx)
 def sum_y_projection(source : Image, destination : Image = None):
     """Determines the sum intensity projection of an image along Z. 
-
+    
     Parameters
     ----------
     source : Image
     destination : Image
     
-    
     Returns
     -------
     destination
-
+    
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
     >>> cle.sum_y_projection(source, destination)
-    >>>     
     
     References
     ----------
-    .. [1] https://clij.github.io/clij2-docs/reference_sumYProjection    
-
+    .. [1] https://clij.github.io/clij2-docs/reference_sumYProjection
     """
 
 

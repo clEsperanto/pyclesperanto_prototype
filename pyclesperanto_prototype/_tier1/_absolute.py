@@ -14,21 +14,20 @@ def absolute(source : Image, destintation : Image = None):
         The input image to be processed.
     destination : Image
         The output image where results are written into.
-         
+     
+    
     Returns
     -------
     destination
-
+    
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
     >>> cle.absolute(source, destination)
-    >>>     
     
     References
     ----------
-    .. [1] https://clij.github.io/clij2-docs/reference_absolute    
-
+    .. [1] https://clij.github.io/clij2-docs/reference_absolute
     """
 
 

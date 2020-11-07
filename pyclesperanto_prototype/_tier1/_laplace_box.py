@@ -6,27 +6,24 @@ from .._tier0 import Image
 @plugin_function
 def laplace_box(input : Image, destination : Image = None):
     """Applies the Laplace operator (Box neighborhood) to an image. 
-
+    
     Parameters
     ----------
     input : Image
     destination : Image
     
-    
     Returns
     -------
     destination
-
+    
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
     >>> cle.laplace_box(input, destination)
-    >>>     
     
     References
     ----------
-    .. [1] https://clij.github.io/clij2-docs/reference_laplaceBox    
-
+    .. [1] https://clij.github.io/clij2-docs/reference_laplaceBox
     """
 
 

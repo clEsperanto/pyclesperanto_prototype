@@ -15,27 +15,24 @@ def dilate_box(source : Image, destination : Image = None):
     This method is comparable to the 'Dilate' menu in ImageJ in case it is 
     applied to a 2D image. The only
     difference is that the output image contains values 0 and 1 instead of 0 and 255. 
-
+    
     Parameters
     ----------
     source : Image
     destination : Image
     
-    
     Returns
     -------
     destination
-
+    
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
     >>> cle.dilate_box(source, destination)
-    >>>     
     
     References
     ----------
-    .. [1] https://clij.github.io/clij2-docs/reference_dilateBox    
-
+    .. [1] https://clij.github.io/clij2-docs/reference_dilateBox
     """
 
 

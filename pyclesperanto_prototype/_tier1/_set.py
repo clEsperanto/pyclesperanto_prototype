@@ -7,7 +7,7 @@ def set(source : Image, scalar : float = 0):
     """Sets all pixel values x of a given image X to a constant value v.
     
     <pre>f(x) = v</pre> 
-
+    
     Parameters
     ----------
     source : Image
@@ -17,12 +17,10 @@ def set(source : Image, scalar : float = 0):
     --------
     >>> import pyclesperanto_prototype as cle
     >>> cle.set(source, value)
-    >>>     
     
     References
     ----------
-    .. [1] https://clij.github.io/clij2-docs/reference_set    
-
+    .. [1] https://clij.github.io/clij2-docs/reference_set
     """
 
 

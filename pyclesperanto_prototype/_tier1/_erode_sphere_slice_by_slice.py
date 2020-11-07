@@ -13,27 +13,24 @@ def erode_sphere_slice_by_slice(source : Image, destination : Image = None):
     interpreted as 1.
     
     This filter is applied slice by slice in 2D. 
-
+    
     Parameters
     ----------
     source : Image
     destination : Image
     
-    
     Returns
     -------
     destination
-
+    
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
     >>> cle.erode_sphere_slice_by_slice(source, destination)
-    >>>     
     
     References
     ----------
-    .. [1] https://clij.github.io/clij2-docs/reference_erodeSphereSliceBySlice    
-
+    .. [1] https://clij.github.io/clij2-docs/reference_erodeSphereSliceBySlice
     """
 
 

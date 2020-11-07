@@ -5,28 +5,25 @@ from .._tier0 import Image
 @plugin_function
 def power_images(input : Image, exponent : Image, destination : Image = None):
     """Calculates x to the power of y pixel wise of two images X and Y. 
-
+    
     Parameters
     ----------
     input : Image
     exponent : Image
     destination : Image
     
-    
     Returns
     -------
     destination
-
+    
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
     >>> cle.power_images(input, exponent, destination)
-    >>>     
     
     References
     ----------
-    .. [1] https://clij.github.io/clij2-docs/reference_powerImages    
-
+    .. [1] https://clij.github.io/clij2-docs/reference_powerImages
     """
 
 

@@ -7,28 +7,25 @@ def convolve(source : Image, convolution_kernel : Image, destination : Image = N
     """Convolve the image with a given kernel image.
     
     It is recommended that the kernel image has an odd size in X, Y and Z. 
-
+    
     Parameters
     ----------
     source : Image
     convolution_kernel : Image
     destination : Image
     
-    
     Returns
     -------
     destination
-
+    
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
     >>> cle.convolve(source, convolution_kernel, destination)
-    >>>     
     
     References
     ----------
-    .. [1] https://clij.github.io/clij2-docs/reference_convolve    
-
+    .. [1] https://clij.github.io/clij2-docs/reference_convolve
     """
 
 

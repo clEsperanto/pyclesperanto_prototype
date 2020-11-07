@@ -7,28 +7,25 @@ def greater_constant(source1 : Image, source2 :Image = None, constant :float = 0
     """Determines if two images A and B greater pixel wise. 
     
     f(a, b) = 1 if a > b; 0 otherwise. 
-
+    
     Parameters
     ----------
     source : Image
     destination : Image
     constant : Number
     
-    
     Returns
     -------
     destination
-
+    
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
     >>> cle.greater_constant(source, destination, constant)
-    >>>     
     
     References
     ----------
-    .. [1] https://clij.github.io/clij2-docs/reference_greaterConstant    
-
+    .. [1] https://clij.github.io/clij2-docs/reference_greaterConstant
     """
 
 

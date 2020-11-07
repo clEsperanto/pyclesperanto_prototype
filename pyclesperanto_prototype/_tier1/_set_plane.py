@@ -5,7 +5,7 @@ from .._tier0 import Image
 @plugin_function
 def set_plane(source : Image, plane_index : int = 0, value : float = 0):
     """Sets all pixel values x of a given plane in X to a constant value v. 
-
+    
     Parameters
     ----------
     source : Image
@@ -16,12 +16,10 @@ def set_plane(source : Image, plane_index : int = 0, value : float = 0):
     --------
     >>> import pyclesperanto_prototype as cle
     >>> cle.set_plane(source, plane_index, value)
-    >>>     
     
     References
     ----------
-    .. [1] https://clij.github.io/clij2-docs/reference_setPlane    
-
+    .. [1] https://clij.github.io/clij2-docs/reference_setPlane
     """
 
 

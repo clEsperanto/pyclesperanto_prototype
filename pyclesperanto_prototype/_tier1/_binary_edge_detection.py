@@ -14,21 +14,20 @@ def binary_edge_detection(source : Image, destination : Image = None):
         The binary input image where edges will be searched.
     destination : Image
         The output image where edge pixels will be 1.
-         
+     
+    
     Returns
     -------
     destination
-
+    
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
     >>> cle.binary_edge_detection(source, destination)
-    >>>     
     
     References
     ----------
-    .. [1] https://clij.github.io/clij2-docs/reference_binaryEdgeDetection    
-
+    .. [1] https://clij.github.io/clij2-docs/reference_binaryEdgeDetection
     """
 
 

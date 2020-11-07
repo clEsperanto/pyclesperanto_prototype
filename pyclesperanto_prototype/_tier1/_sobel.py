@@ -4,30 +4,27 @@ from .._tier0 import Image
 
 @plugin_function
 def sobel(source : Image, destination : Image = None):
-    """Convolve the image with the Sobel kernel.     Author(s): Ruth Whelan-Jeans, Robert Haase
-
-
-
+    """Convolve the image with the Sobel kernel. 
+    
+    Author(s): Ruth Whelan-Jeans, Robert Haase
+    
     Parameters
     ----------
     source : Image
     destination : Image
     
-    
     Returns
     -------
     destination
-
+    
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
     >>> cle.sobel(source, destination)
-    >>>     
     
     References
     ----------
-    .. [1] https://clij.github.io/clij2-docs/reference_sobel    
-
+    .. [1] https://clij.github.io/clij2-docs/reference_sobel
     """
 
 
