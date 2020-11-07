@@ -4,8 +4,21 @@ from .._tier0 import Image
 
 @plugin_function
 def undefined_to_zero(source : Image, destination : Image = None):
-    """
-
+    """Copies all pixels instead those which are not a number (NaN) or 
+    infinity (inf), which are replaced by 0. 
+    
+    Parameters
+    ----------
+    source : Image
+    destination : Image
+    
+    Returns
+    -------
+    destination
+    
+    References
+    ----------
+    .. [1] https://clij.github.io/clij2-docs/reference_undefinedToZero
     """
 
 

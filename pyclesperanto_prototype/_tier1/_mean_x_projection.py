@@ -5,7 +5,7 @@ from .._tier0 import create_2d_zy
 
 @plugin_function(output_creator=create_2d_zy)
 def mean_x_projection(source : Image, destination : Image):
-    """Determines the mean average intensity projection of an image along Z. 
+    """Determines the mean average intensity projection of an image along X. 
     
     Parameters
     ----------
@@ -16,14 +16,9 @@ def mean_x_projection(source : Image, destination : Image):
     -------
     destination
     
-    Examples
-    --------
-    >>> import pyclesperanto_prototype as cle
-    >>> cle.mean_z_projection(source, destination)
-    
     References
     ----------
-    .. [1] https://clij.github.io/clij2-docs/reference_meanZProjection
+    .. [1] https://clij.github.io/clij2-docs/reference_meanXProjection
     """
 
 

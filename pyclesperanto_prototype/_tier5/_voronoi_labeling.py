@@ -6,11 +6,23 @@ from .._tier4 import extend_labeling_via_voronoi
 
 @plugin_function
 def voronoi_labeling(binary_source : Image, labeling_destination : Image = None):
-    """
-
+    """Takes a binary image, labels connected components and dilates the 
+    regions using a octagon shape until they touch. 
+    
+    The resulting label map is written to the output. 
+    
+    Parameters
+    ----------
+    input : Image
+    destination : Image
+    
     Returns
     -------
-
+    destination
+    
+    References
+    ----------
+    .. [1] https://clij.github.io/clij2-docs/reference_voronoiLabeling
     """
 
     flip = create_like(labeling_destination)

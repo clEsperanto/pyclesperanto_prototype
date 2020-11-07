@@ -5,15 +5,18 @@ import numpy as np
 
 @plugin_function
 def mean_of_all_pixels(source : Image):
-    """
-
-    Parameters
+    """Determines the mean average of all pixels in a given image. 
+    
+    It will be stored in a new row of ImageJs
+    Results table in the column 'Mean'.Parameters
     ----------
-    source
-
-    Returns
-    -------
-
+    source : Image
+        The image of which the mean average of all pixels or voxels will be determined.
+     
+    
+    References
+    ----------
+    .. [1] https://clij.github.io/clij2-docs/reference_meanOfAllPixels
     """
 
     num_pixels = np.prod(source.shape)

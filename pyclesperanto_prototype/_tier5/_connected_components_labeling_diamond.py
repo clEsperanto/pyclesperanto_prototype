@@ -6,26 +6,22 @@ from .._tier0 import Image
 
 @plugin_function
 def connected_components_labeling_diamond(binary_input: Image, labeling_destination: Image = None):
-    """Performs connected components analysis inspecting the box neighborhood
-    of every pixel to a binary image and generates a label map.
-
+    """Performs connected components analysis inspecting the diamond 
+    neighborhood of every pixel to a binary image and generates a label 
+    map. 
+    
     Parameters
     ----------
     binary_input : Image
     labeling_destination : Image
-
+    
     Returns
     -------
     labeling_destination
-
-    Examples
-    --------
-    >>> import pyclesperanto_prototype as cle
-    >>> cle.connected_components_labeling_box(binary_input, labeling_destination)
-
+    
     References
     ----------
-    .. [1] https://clij.github.io/clij2-docs/reference_connectedComponentsLabelingBox
+    .. [1] https://clij.github.io/clij2-docs/reference_connectedComponentsLabelingDiamond
     """
     connected_components_labeling_box(binary_input, labeling_destination, nonzero_minimum_diamond)
 
