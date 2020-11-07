@@ -30,11 +30,11 @@ def greater_constant(source : Image, destination :Image = None, constant :float 
 
 
     parameters = {
-        "src1":source1,
+        "src1":source,
         "scalar":float(constant),
-        "dst":source2
+        "dst":destination
     }
 
-    execute(__file__, 'greater_constant_' + str(len(source2.shape)) + 'd_x.cl', 'greater_constant_' + str(len(source2.shape)) + 'd', source2.shape, parameters)
+    execute(__file__, 'greater_constant_' + str(len(destination.shape)) + 'd_x.cl', 'greater_constant_' + str(len(destination.shape)) + 'd', destination.shape, parameters)
 
-    return source2
+    return destination
