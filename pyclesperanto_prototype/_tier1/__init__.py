@@ -107,6 +107,7 @@ from ._sum_z_projection import sum_z_projection
 from ._transpose_xy import transpose_xy
 from ._transpose_xz import transpose_xz
 from ._transpose_yz import transpose_yz
+from ._undefined_to_zero import undefined_to_zero
 
 
 
