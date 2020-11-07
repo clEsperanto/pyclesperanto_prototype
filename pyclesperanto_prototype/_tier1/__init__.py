@@ -13,6 +13,7 @@ from ._convolve import convolve
 from ._copy import copy
 from ._copy_slice import copy_slice
 from ._crop import crop
+from ._detect_label_edges import detect_label_edges
 from ._detect_maxima_box import detect_maxima_box
 from ._dilate_box import dilate_box
 from ._dilate_box_slice_by_slice import dilate_box_slice_by_slice
