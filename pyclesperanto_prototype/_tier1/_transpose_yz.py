@@ -31,21 +31,21 @@ def transpose_yz(input : Image, destination : Image = None):
     """
 
 
-    if dst is None:
-        dimensions = src.shape
+    if destination is None:
+        dimensions = input.shape
         if len(dimensions) == 3:
-            dst = create([dimensions[1], dimensions[0], dimensions[2]])
+            destination = create([dimensions[1], dimensions[0], dimensions[2]])
         elif len(dimensions) == 2:
-            dst = create([dimensions[0], 1, dimensions[1]])
+            destination = create([dimensions[0], 1, dimensions[1]])
         elif len(dimensions) == 1:
-            dst = create([1, 1, dimensions[0]])
+            destination = create([1, 1, dimensions[0]])
 
 
     parameters = {
-        "src":src,
-        "dst":dst
+        "src":input,
+        "dst":destination
     }
 
-    execute(__file__, 'transpose_yz_3d_x.cl', 'transpose_yz_3d', dst.shape, parameters)
+    execute(__file__, 'transpose_yz_3d_x.cl', 'transpose_yz_3d', destination.shape, parameters)
 
-    return dst
+    return destination

@@ -30,20 +30,20 @@ def transpose_xz(input : Image, destination : Image = None):
     .. [1] https://clij.github.io/clij2-docs/reference_transposeXZ
     """
 
-    if dst is None:
-        dimensions = src.shape
+    if destination is None:
+        dimensions = input.shape
         if len(dimensions) == 3:
-            dst = create(dimensions[::-1])
+            destination = create(dimensions[::-1])
         elif len(dimensions) == 2:
-            dst = create([dimensions[1], dimensions[0], 1])
+            destination = create([dimensions[1], dimensions[0], 1])
         elif len(dimensions) == 1:
-            dst = create([dimensions[0], 1, 1])
+            destination = create([dimensions[0], 1, 1])
 
     parameters = {
-        "src":src,
-        "dst":dst
+        "src":input,
+        "dst":destination
     }
 
-    execute(__file__, 'transpose_xz_3d_x.cl', 'transpose_xz_3d', dst.shape, parameters)
+    execute(__file__, 'transpose_xz_3d_x.cl', 'transpose_xz_3d', destination.shape, parameters)
 
-    return dst
+    return destination
