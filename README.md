@@ -28,29 +28,43 @@ DLL load failed: The specified procedure could not be found.
 Try downloading and installing a pyopencl with a lower cl version, e.g. cl12 : pyopencl-2020.1+cl12-cp37-cp37m-win_amd64
 
 ## Example code
-Basically, you import clEsperanto:
+A basic image procressing workflow loads blobs.gif and counts the number of gold particles:
 
 ```python
 import pyclesperanto_prototype as cle
+
+from skimage.io import imread, imsave
+
+# initialize GPU
+cle.select_device("GTX")
+print("Used GPU: " + cle.get_device().name)
+
+# load data
+image = imread('https://imagej.nih.gov/ij/images/blobs.gif')
+print("Loaded image size: " + str(image.shape))
+
+# push image to GPU memory
+input = cle.push(image)
+print("Image size in GPU: " + str(input.shape))
+
+# process the image
+inverted = cle.subtract_image_from_scalar(image, scalar=255)
+blurred = cle.gaussian_blur(inverted, sigma_x=1, sigma_y=1)
+binary = cle.threshold_otsu(blurred)
+labeled = cle.connected_components_labeling_box(binary)
+
+# The maxmium intensity in a label image corresponds to the number of objects
+num_labels = cle.maximum_of_all_pixels(labeled)
+
+# print out result
+print("Num objects in the image: " + str(num_labels))
+
+# for debugging: print out image
+print(labeled)
+
+# for debugging: save image to disc
+imsave("result.tif", cle.pull(labeled))
 ```
 
-You can then push an image to the GPU and create memory there:
-```python
-import numpy as np
+More examples can be found in the `/demo/` directory.
 
-# push an array to the GPU
-flip = cle.push(np.array([[2, 4, 6, 8, 10, 12, 14, 16, 18, 20]]))
-
-# create memory for the output
-flop = cle.create((10,1))
-```
-
-And then you can call methods in the GPU without the need for learning OpenCL:
-
-```python
-# add a constant to all pixels
-cle.add_image_and_scalar(flip, flop, 100.0)
-
-# print result
-print(flop)
-```
