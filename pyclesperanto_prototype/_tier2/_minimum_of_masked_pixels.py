@@ -56,6 +56,8 @@ def minimum_of_masked_pixels(source : Image, mask : Image):
         source = reduced_image
         mask = reduced_mask
 
+    dimensionality = input.shape
+
     # analyse the 2D image by making a stack out of it first
     if (len(dimensionality) == 2): # 2D image
         temp_input = transpose_xz(source)

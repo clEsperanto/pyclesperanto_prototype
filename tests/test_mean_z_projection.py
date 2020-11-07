@@ -1,10 +1,6 @@
 import pyclesperanto_prototype as cle
 import numpy as np
-import pytest
-import pyopencl as cl
 
-
-@pytest.mark.xfail(raises=cl.RuntimeError)
 def test_mean_z_projection():
 
     test1 = cle.push(np.asarray([

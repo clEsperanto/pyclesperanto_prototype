@@ -115,7 +115,7 @@ def execute(anchor, opencl_kernel_filename, kernel_name, global_size, parameters
             defines.extend(IMAGE_HEADER.format(**params).split("\n"))
 
         elif isinstance(value, int):
-            arguments.append(np.array([value], np.int))
+            arguments.append(np.array([value], np.int32))
         elif isinstance(value, float):
             arguments.append(np.array([value], np.float32))
         else:

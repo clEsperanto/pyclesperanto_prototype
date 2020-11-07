@@ -1,7 +1,5 @@
 import pyclesperanto_prototype as cle
 import numpy as np
-import pytest
-import pyopencl as cl
 
 def test_sum_of_all_pixels_3d():
     test1 = cle.push(np.asarray([
