@@ -21,4 +21,3 @@ def test_binary_subtract():
     assert (np.min(a) == 0)
     assert (np.max(a) == 1)
     assert (np.mean(a) == 0.25)
-    print ("ok binary_subtract")

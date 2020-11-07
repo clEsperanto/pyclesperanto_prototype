@@ -22,9 +22,6 @@ def test_binary_and_1():
     assert (np.min(a) == 0)
     assert (np.max(a) == 1)
     assert (np.mean(a) == 0.25)
-    print ("ok binary_and")
-
-
 
 def test_binary_and_2():
     a = np.asarray([[1, 0], [1, 0]])

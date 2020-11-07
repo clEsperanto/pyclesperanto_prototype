@@ -34,4 +34,3 @@ def test_not_equal():
     print(a)
 
     assert (np.array_equal(a, b))
-    print("ok not_equal")

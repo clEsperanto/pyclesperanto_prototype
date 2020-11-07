@@ -24,5 +24,3 @@ def test_set_nonzero_pixels_to_pixelindex():
     print(a)
 
     assert (np.array_equal(a, b))
-    print("ok set_nonzero_pixels_to_pixelindex")
-

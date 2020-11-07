@@ -27,5 +27,3 @@ def test_minimum_box():
     print(a)
 
     assert (np.array_equal(a, b))
-    print("ok minimum_box")
-

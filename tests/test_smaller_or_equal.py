@@ -34,5 +34,3 @@ def test_smaller_or_equal():
     print(a)
 
     assert (np.array_equal(a, b))
-    print("ok smaller_or_equal")
-

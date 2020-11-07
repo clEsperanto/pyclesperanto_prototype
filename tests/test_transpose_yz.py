@@ -31,7 +31,6 @@ def test_transpose_yz():
     print(a)
 
     assert (np.array_equal(a, b))
-    print("ok transpose_yz")
 
 def test_transpose_yz_3d_generate_output():
     test1 = cle.push(np.asarray([

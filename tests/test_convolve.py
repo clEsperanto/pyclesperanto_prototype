@@ -25,4 +25,3 @@ def test_convolve():
     assert (np.min(a) == np.min(b))
     assert (np.max(a) == np.max(b))
     assert (np.mean(a) == np.mean(b))
-    print ("ok convolve")

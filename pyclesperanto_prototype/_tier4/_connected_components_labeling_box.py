@@ -12,14 +12,31 @@ from .._tier0 import plugin_function
 from .._tier0 import Image
 
 @plugin_function
-def connected_components_labeling_box(binary_input : Image, labelmap_output : Image = None):
+def connected_components_labeling_box(binary_input : Image, labeling_destination : Image = None):
+    """Performs connected components analysis inspecting the box neighborhood 
+    of every pixel to a binary image and generates a label map. 
+    
+    Parameters
+    ----------
+    binary_input : Image
+    labeling_destination : Image
+    
+    Returns
+    -------
+    labeling_destination
+    
+    Examples
+    --------
+    >>> import pyclesperanto_prototype as cle
+    >>> cle.connected_components_labeling_box(binary_input, labeling_destination)
+    
+    References
+    ----------
+    .. [1] https://clij.github.io/clij2-docs/reference_connectedComponentsLabelingBox
     """
 
-    :return:
-    """
-
-    temp1 = create_like(labelmap_output)
-    temp2 = create_like(labelmap_output)
+    temp1 = create_like(labeling_destination)
+    temp2 = create_like(labeling_destination)
 
     flag = push(np.asarray([[[0]]]))
 
@@ -41,8 +58,8 @@ def connected_components_labeling_box(binary_input : Image, labelmap_output : Im
         iteration_count += 1
 
     if (iteration_count % 2 == 0):
-        close_index_gaps_in_label_map(temp1, labelmap_output)
+        close_index_gaps_in_label_map(temp1, labeling_destination)
     else:
-        close_index_gaps_in_label_map(temp2, labelmap_output)
+        close_index_gaps_in_label_map(temp2, labeling_destination)
 
-    return labelmap_output
+    return labeling_destination

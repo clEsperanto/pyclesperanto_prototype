@@ -3,13 +3,21 @@ from ._pycl import OCLArray
 
 
 def push(any_array):
-    """Push numpy array on device to an OpenCL array on GPU.
-
-    This method does the same as the converters in CLIJ but is less flexible
-    https://github.com/clij/clij-core/tree/master/src/main/java/net/haesleinhuepf/clij/converters/implementations
-
-    :param any_array: input numpy array
-    :return: opencl-array
+    """Copies an image specified by its name to GPU memory in order to process 
+    it there later. 
+    
+    Parameters
+    ----------
+    image : String
+    
+    Examples
+    --------
+    >>> import pyclesperanto_prototype as cle
+    >>> cle.push(image)
+    
+    References
+    ----------
+    .. [1] https://clij.github.io/clij2-docs/reference_push
     """
 
     if isinstance(any_array, OCLArray):

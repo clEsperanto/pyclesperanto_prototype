@@ -53,5 +53,4 @@ def test_maximum_y_projection():
     print(a)
 
     assert (np.array_equal(a, b))
-    print("ok maximum_y_projection")
 

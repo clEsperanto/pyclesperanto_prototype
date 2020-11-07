@@ -1,29 +1,37 @@
 from .._tier0 import execute
+from .._tier0 import plugin_function
+from .._tier0 import Image
 
-
-def copy (src, dst):
+@plugin_function
+def copy(source : Image, destination : Image = None):
     """Copies an image.
     
-    <pre>f(x) = x</pre>
-
-    Available for: 2D, 3D
-
+    <pre>f(x) = x</pre> 
+    
     Parameters
     ----------
-    (Image source, ByRef Image destination)
-    todo: Better documentation will follow
-          In the meantime, read more: https://clij.github.io/clij2-docs/reference_copy
-
-
+    source : Image
+    destination : Image
+    
     Returns
     -------
-
+    destination
+    
+    Examples
+    --------
+    >>> import pyclesperanto_prototype as cle
+    >>> cle.copy(source, destination)
+    
+    References
+    ----------
+    .. [1] https://clij.github.io/clij2-docs/reference_copy
     """
 
 
     parameters = {
-        "dst":dst,
-        "src":src
+        "dst":destination,
+        "src":source
     }
 
-    execute(__file__, 'copy_' + str(len(dst.shape)) + 'd_x.cl', 'copy_' + str(len(dst.shape)) + 'd', dst.shape, parameters)
+    execute(__file__, 'copy_' + str(len(destination.shape)) + 'd_x.cl', 'copy_' + str(len(destination.shape)) + 'd', destination.shape, parameters)
+    return destination

@@ -19,6 +19,5 @@ def test_binary_edge_detection():
     assert (np.min(a) == 0)
     assert (np.max(a) == 1)
     assert (np.mean(a) - 12 / 36 < 0.001)
-    print ("ok binary_edge_detection")
 
 

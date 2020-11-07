@@ -16,7 +16,6 @@ def test_jaccard_index_2d():
     j = cle.jaccard_index(test1, test2)
 
     assert j == 0.5
-    print("ok jaccard_index")
 
 def test_accard_index_3d():
     test1 = cle.push(np.asarray([
@@ -32,5 +31,3 @@ def test_accard_index_3d():
     j = cle.jaccard_index(test1, test2)
 
     assert j == 0.5
-    print("ok jaccard_index")
-

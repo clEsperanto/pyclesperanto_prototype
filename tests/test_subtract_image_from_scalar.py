@@ -24,4 +24,3 @@ def test_subtract_image_from_scalar():
     print(a)
 
     assert (np.array_equal(a, b))
-    print("ok subtract_image_from_scalar")

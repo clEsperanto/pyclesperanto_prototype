@@ -55,4 +55,3 @@ def test_dilate_sphere_slice_by_slice():
     print(a)
 
     assert (np.array_equal(a, b))
-    print("ok dilate_sphere_slice_by_slice")

@@ -1,29 +1,46 @@
 from .._tier0 import execute
 
 
-def draw_sphere (dst, x, y, z, radius_x, radius_y, radius_z, value):
-    """Draws a sphere around a given point with given radii in x, y and z (if 3D). 
+from .._tier0 import plugin_function
+from .._tier0 import Image
+
+@plugin_function
+def draw_sphere(destination : Image, x : float = 0, y : float = 0, z : float = 0, radius_x : float = 1, radius_y : float = 1, radius_z : float = 1, value : float = 1):
+    """Draws a sphere around a given point with given radii in x, y and z (if 
+    3D). 
     
-     All pixels other than in the sphere are untouched. Consider using `set(buffer, 0);` in advance.
-
-    Available for: 2D, 3D
-
+     All pixels other than in the sphere are untouched. Consider using 
+    `set(buffer, 0);` in advance. 
+    
     Parameters
     ----------
-    (ByRef Image destination, Number x, Number y, Number z, Number radius_x, Number radius_y, Number radius_z, Number value)
-    todo: Better documentation will follow
-          In the meantime, read more: https://clij.github.io/clij2-docs/reference_drawSphere
-
-
+    destination : Image
+    x : Number
+    y : Number
+    z : Number
+    radius_x : Number
+    radius_y : Number
+    radius_z : Number
+    value : Number
+    
     Returns
     -------
-
+    destination
+    
+    Examples
+    --------
+    >>> import pyclesperanto_prototype as cle
+    >>> cle.draw_sphere(destination, x, y, z, radius_x, radius_y, radius_z, value)
+    
+    References
+    ----------
+    .. [1] https://clij.github.io/clij2-docs/reference_drawSphere
     """
 
 
-    if (len(dst.shape) == 2):
+    if (len(destination.shape) == 2):
         parameters = {
-            "dst": dst,
+            "dst": destination,
             "cx": float(x),
             "cy": float(y),
             "rx": float(radius_x),
@@ -34,7 +51,7 @@ def draw_sphere (dst, x, y, z, radius_x, radius_y, radius_z, value):
         }
     else: # 3D
         parameters = {
-            "dst": dst,
+            "dst": destination,
             "cx": float(x),
             "cy": float(y),
             "cz": float(z),
@@ -47,4 +64,5 @@ def draw_sphere (dst, x, y, z, radius_x, radius_y, radius_z, value):
             "value": float(value)
         }
 
-    execute(__file__, 'draw_sphere_' + str(len(dst.shape)) + 'd_x.cl', 'draw_sphere_' + str(len(dst.shape)) + 'd', dst.shape, parameters)
+    execute(__file__, 'draw_sphere_' + str(len(destination.shape)) + 'd_x.cl', 'draw_sphere_' + str(len(destination.shape)) + 'd', destination.shape, parameters)
+    return destination

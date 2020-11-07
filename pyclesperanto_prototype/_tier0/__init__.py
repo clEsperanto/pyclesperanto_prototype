@@ -10,6 +10,8 @@ from ._create import (
     create_square_matrix_from_labelmap,
     create_2d_xy,
     create_2d_yx,
+    create_2d_zx,
+    create_2d_zy,
     create_none,
 )
 from ._execute import execute

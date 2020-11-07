@@ -23,4 +23,3 @@ def test_crop():
 
     print(a)
     assert (np.array_equal(a, b))
-    print("ok crop")

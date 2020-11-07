@@ -35,4 +35,3 @@ def test_equal():
     a = cle.pull(result)
     b = cle.pull(reference)
     assert (np.array_equal(a, b))
-    print("ok equal")

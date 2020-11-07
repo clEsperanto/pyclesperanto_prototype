@@ -34,4 +34,3 @@ def test_set_ramp_x():
     print(a)
 
     assert (np.allclose(a, b, 0.001))
-    print("ok set_ramp_x")

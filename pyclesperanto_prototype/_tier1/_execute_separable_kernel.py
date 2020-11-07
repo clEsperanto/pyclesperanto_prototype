@@ -1,5 +1,3 @@
-
-
 from pyclesperanto_prototype._tier0._create import create_like
 from pyclesperanto_prototype._tier1 import copy
 from pyclesperanto_prototype._tier0._execute import execute
@@ -73,3 +71,5 @@ def execute_separable_kernel(src, dst, anchor, opencl_kernel_filename, kernel_na
             execute(anchor, opencl_kernel_filename, kernel_name, src.shape, parameters)
         else:
             copy(temp1, dst)
+
+    return dst

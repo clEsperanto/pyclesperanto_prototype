@@ -1,27 +1,36 @@
-from .._tier0 import radius_to_kernel_size
 from .._tier0 import execute
+from .._tier0 import plugin_function
+from .._tier0 import Image
+from .._tier0 import create_2d_xy
 
-def mean_z_projection(input, output):
-    """Determines the mean average projection of an image along Z.
-
-    Available for: 3D
-
+@plugin_function(output_creator=create_2d_xy)
+def mean_z_projection(source : Image, destination : Image):
+    """Determines the mean average intensity projection of an image along Z. 
+    
     Parameters
     ----------
-    (Image source, ByRef Image destination)
-    todo: Better documentation will follow
-          In the meantime, read more: https://clij.github.io/clij2-docs/reference_meanZProjection
-
-
+    source : Image
+    destination : Image
+    
     Returns
     -------
-
+    destination
+    
+    Examples
+    --------
+    >>> import pyclesperanto_prototype as cle
+    >>> cle.mean_z_projection(source, destination)
+    
+    References
+    ----------
+    .. [1] https://clij.github.io/clij2-docs/reference_meanZProjection
     """
 
 
     parameters = {
-        "dst":output,
-        "src":input,
-    };
+        "dst":destination,
+        "src":source,
+    }
 
-    execute(__file__, 'mean_z_projection_x.cl', 'mean_z_projection', output.shape, parameters);
+    execute(__file__, 'mean_z_projection_x.cl', 'mean_z_projection', destination.shape, parameters)
+    return destination

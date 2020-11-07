@@ -34,4 +34,3 @@ def test_minimum_images():
     print(a)
 
     assert (np.array_equal(a, b))
-    print("ok minimum_images")

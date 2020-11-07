@@ -55,4 +55,3 @@ def test_dilate_box_slice_by_slice():
     print(a)
 
     assert (np.array_equal(a, b))
-    print("ok dilate_box_slice_by_slice")

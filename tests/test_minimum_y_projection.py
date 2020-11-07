@@ -53,4 +53,3 @@ def test_minimum_y_projection():
     print(a)
 
     assert (np.allclose(a, b, 0.001))
-    print("ok minimum_y_projection")

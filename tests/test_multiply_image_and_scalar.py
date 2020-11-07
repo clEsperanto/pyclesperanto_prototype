@@ -24,6 +24,3 @@ def test_multiply_image_and_scalar():
     print(a)
 
     assert (np.array_equal(a, b))
-    print("ok multiply_image_and_scalar")
-
-

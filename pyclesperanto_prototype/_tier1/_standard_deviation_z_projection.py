@@ -1,27 +1,37 @@
-from .._tier0 import radius_to_kernel_size
 from .._tier0 import execute
+from .._tier0 import plugin_function
+from .._tier0 import Image
+from .._tier0 import create_2d_zy
 
-def standard_deviation_z_projection(input, output):
-    """Determines the standard deviation projection of an image stack along Z.
-
-    Available for: 3D
-
+@plugin_function(output_creator=create_2d_zy)
+def standard_deviation_z_projection(source : Image, destination : Image = None):
+    """Determines the standard deviation intensity projection of an image 
+    stack along Z. 
+    
     Parameters
     ----------
-    (Image source, ByRef Image destination)
-    todo: Better documentation will follow
-          In the meantime, read more: https://clij.github.io/clij2-docs/reference_standardDeviationZProjection
-
-
+    source : Image
+    destination : Image
+    
     Returns
     -------
-
+    destination
+    
+    Examples
+    --------
+    >>> import pyclesperanto_prototype as cle
+    >>> cle.standard_deviation_z_projection(source, destination)
+    
+    References
+    ----------
+    .. [1] https://clij.github.io/clij2-docs/reference_standardDeviationZProjection
     """
 
 
     parameters = {
-        "dst":output,
-        "src":input,
-    };
+        "dst":destination,
+        "src":source,
+    }
 
-    execute(__file__, 'standard_deviation_z_projection_x.cl', 'standard_deviation_z_projection', output.shape, parameters);
+    execute(__file__, 'standard_deviation_z_projection_x.cl', 'standard_deviation_z_projection', destination.shape, parameters)
+    return destination

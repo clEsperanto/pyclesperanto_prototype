@@ -53,4 +53,3 @@ def test_standard_deviation_z_projection():
     print(a)
 
     assert (np.allclose(a, b, 0.01))
-    print("ok standard_deviation_z_projection")

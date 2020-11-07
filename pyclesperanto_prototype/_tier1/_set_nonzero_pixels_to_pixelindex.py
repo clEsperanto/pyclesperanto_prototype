@@ -1,6 +1,9 @@
 from .._tier0 import execute
+from .._tier0 import plugin_function
+from .._tier0 import Image
 
-def set_nonzero_pixels_to_pixelindex(input, output, offset=0):
+@plugin_function
+def set_nonzero_pixels_to_pixelindex(input : Image, output : Image, offset : float = 0):
     """
     documentation placeholder
     """
@@ -13,3 +16,4 @@ def set_nonzero_pixels_to_pixelindex(input, output, offset=0):
     }
 
     execute(__file__, 'set_nonzero_pixels_to_pixelindex_x.cl', 'set_nonzero_pixels_to_pixelindex', output.shape, parameters);
+    return output

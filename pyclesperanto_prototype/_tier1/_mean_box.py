@@ -1,9 +1,35 @@
 from .._tier0 import radius_to_kernel_size
 from ._execute_separable_kernel import execute_separable_kernel
+from .._tier0 import plugin_function
+from .._tier0 import Image
 
-def mean_box (src, dst, radius_x, radius_y, radius_z):
-    """
-    documentation placeholder
+@plugin_function
+def mean_box(source : Image, destination : Image = None, radius_x : float = 1, radius_y : float = 1, radius_z : float = 1):
+    """Computes the local mean average of a pixels cube neighborhood. 
+    
+    The cubes size is specified by 
+    its half-width, half-height and half-depth (radius). 
+    
+    Parameters
+    ----------
+    source : Image
+    destination : Image
+    radius_x : Number
+    radius_y : Number
+    radius_z : Number
+    
+    Returns
+    -------
+    destination
+    
+    Examples
+    --------
+    >>> import pyclesperanto_prototype as cle
+    >>> cle.mean_box(source, destination, radius_x, radius_y, radius_z)
+    
+    References
+    ----------
+    .. [1] https://clij.github.io/clij2-docs/reference_mean3DBox
     """
 
 
@@ -12,16 +38,17 @@ def mean_box (src, dst, radius_x, radius_y, radius_z):
     kernel_size_z = radius_to_kernel_size(radius_z)
 
     execute_separable_kernel(
-        src,
-        dst,
+        source,
+        destination,
         __file__,
-        'mean_separable_' + str(len(dst.shape)) + 'd_x.cl',
-        'mean_separable_' + str(len(dst.shape)) + 'd',
+        'mean_separable_' + str(len(destination.shape)) + 'd_x.cl',
+        'mean_separable_' + str(len(destination.shape)) + 'd',
         kernel_size_x,
         kernel_size_y,
         kernel_size_z,
         radius_x,
         radius_y,
         radius_z,
-        len(dst.shape)
+        len(destination.shape)
     )
+    return destination

@@ -28,5 +28,3 @@ def test_laplace_diamond():
     print(a)
 
     assert (np.array_equal(a, b))
-    print("ok laplace_diamond")
-

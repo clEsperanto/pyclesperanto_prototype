@@ -1,29 +1,40 @@
 from .._tier0 import execute
 
-def gradient_x (src, dst):
+from .._tier0 import plugin_function
+from .._tier0 import Image
+
+@plugin_function
+def gradient_x(source : Image, destination : Image = None):
     """Computes the gradient of gray values along X. 
     
     Assuming a, b and c are three adjacent
-     pixels in X direction. In the target image will be saved as: <pre>b' = c - a;</pre>
-
-    Available for: 2D, 3D
-
+     pixels in X direction. In the target image will be saved as: <pre>b' = 
+    c - a;</pre> 
+    
     Parameters
     ----------
-    (Image source, ByRef Image destination)
-    todo: Better documentation will follow
-          In the meantime, read more: https://clij.github.io/clij2-docs/reference_gradientX
-
-
+    source : Image
+    destination : Image
+    
     Returns
     -------
-
+    destination
+    
+    Examples
+    --------
+    >>> import pyclesperanto_prototype as cle
+    >>> cle.gradient_x(source, destination)
+    
+    References
+    ----------
+    .. [1] https://clij.github.io/clij2-docs/reference_gradientX
     """
 
 
     parameters = {
-        "dst":dst,
-        "src":src
+        "dst":destination,
+        "src":source
     }
 
-    execute(__file__, 'gradient_x_' + str(len(dst.shape)) + 'd_x.cl', 'gradient_x_' + str(len(dst.shape)) + 'd', dst.shape, parameters)
+    execute(__file__, 'gradient_x_' + str(len(destination.shape)) + 'd_x.cl', 'gradient_x_' + str(len(destination.shape)) + 'd', destination.shape, parameters)
+    return destination
