@@ -25,6 +25,7 @@ from ._draw_sphere import draw_sphere
 from ._draw_line import draw_line
 from ._equal import equal
 from ._equal_constant import equal_constant
+from ._equal_constant import equal_constant as label_to_mask
 from ._erode_box import erode_box
 from ._erode_box_slice_by_slice import erode_box_slice_by_slice
 from ._erode_sphere import erode_sphere
@@ -39,7 +40,9 @@ from ._gradient_x import gradient_x
 from ._gradient_y import gradient_y
 from ._gradient_z import gradient_z
 from ._greater import greater
+from ._greater import greater as local_threshold
 from ._greater_constant import greater_constant
+from ._greater_constant import greater_constant as threshold
 from ._greater_or_equal import greater_or_equal
 from ._greater_or_equal_constant import greater_or_equal_constant
 from ._laplace_box import laplace_box
