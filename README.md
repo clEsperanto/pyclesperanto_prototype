@@ -68,3 +68,8 @@ imsave("result.tif", cle.pull(labeled))
 
 More examples can be found in the `/demo/` directory.
 
+## Reference
+The [full reference](https://clij.github.io/clij2-docs/reference__pyclesperanto) is available as part of the CLIJ2 documentation.
+
+## Feedback welcome!
+clEsperanto is developed in the open because we believe in the [open source community](https://clij.github.io/clij2-docs/community_guidelines). Feel free to drop feedback as [github issue](https://github.com/clEsperanto/pyclesperanto_prototype/issues) or via [image.sc](https://image.sc)
