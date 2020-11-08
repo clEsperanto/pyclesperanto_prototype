@@ -4,6 +4,7 @@ from .._tier0 import create_like
 from .._tier1 import set
 from .._tier1 import set_nonzero_pixels_to_pixelindex
 from .._tier1 import nonzero_minimum_box
+from .._tier1 import nonzero_minimum_diamond
 from .._tier3 import close_index_gaps_in_label_map
 
 import numpy as np
@@ -12,7 +13,7 @@ from .._tier0 import plugin_function
 from .._tier0 import Image
 
 @plugin_function
-def connected_components_labeling_box(binary_input : Image, labeling_destination : Image = None):
+def connected_components_labeling_box(binary_input : Image, labeling_destination : Image = None, flagged_nonzero_minimum_filter : callable = nonzero_minimum_box):
     """Performs connected components analysis inspecting the box neighborhood 
     of every pixel to a binary image and generates a label map. 
     
@@ -50,9 +51,9 @@ def connected_components_labeling_box(binary_input : Image, labeling_destination
 
     while (flag_value > 0):
         if (iteration_count % 2 == 0):
-            nonzero_minimum_box(temp1, flag, temp2)
+            flagged_nonzero_minimum_filter(temp1, flag, temp2)
         else:
-            nonzero_minimum_box(temp2, flag, temp1)
+            flagged_nonzero_minimum_filter(temp2, flag, temp1)
         flag_value = pull(flag)[0][0][0]
         set(flag, 0)
         iteration_count += 1

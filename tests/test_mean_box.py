@@ -2,7 +2,7 @@ import pyclesperanto_prototype as cle
 import numpy as np
 
 
-def mean_box():
+def test_mean_box():
     test1 = cle.push(np.asarray([
         [0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0],
@@ -27,5 +27,5 @@ def mean_box():
 
     print(a)
 
-    assert (np.array_equal(a, b))
+    assert (np.allclose(a, b))
 
