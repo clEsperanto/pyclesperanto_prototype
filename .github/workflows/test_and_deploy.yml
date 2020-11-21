@@ -16,7 +16,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Set up conda ${{ matrix.python-version }}
-        uses: onda-incubator/setup-miniconda@v2.0.0
+        uses: conda-incubator/setup-miniconda@v2.0.0
         with:
           auto-update-conda: true
           activate-environment: test
