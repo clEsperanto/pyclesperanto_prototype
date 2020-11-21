@@ -122,8 +122,6 @@ class Gui(QWidget):
 
 
 # inspired from https://github.com/pr4deepr/pyclesperanto_prototype/blob/master/napari_clij_widget.py# Using Enums for getting a dropdown menu
-# clesperanto functions are not being passed as enum values for some reason, so
-# they are defined as strings
 from enum import Enum
 from functools import partial
 
@@ -267,9 +265,9 @@ def table_to_widget(table : dict) -> QTableWidget:
 
 # -----------------------------------------------------------------------------
 from skimage.io import imread
-#image = imread('https://samples.fiji.sc/blobs.png')
+image = imread('https://samples.fiji.sc/blobs.png')
 
-image = imread('C:/structure/data/lund_000500_resampled.tif')
+#image = imread('C:/structure/data/lund_000500_resampled.tif')
 
 
 cle.select_device("RTX")
