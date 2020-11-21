@@ -4,6 +4,9 @@ It uses [OpenCL kernels](https://github.com/clEsperanto/clij-opencl-kernels/tree
 
 Right now, this is very preliminary.
 
+## Reference
+The [full reference](https://clij.github.io/clij2-docs/reference__pyclesperanto) is available as part of the CLIJ2 documentation.
+
 ## Installation
 * Get a python environment, e.g. via [mini-conda](https://docs.conda.io/en/latest/miniconda.html)
 * Install [pyopencl](https://documen.tician.de/pyopencl/).
@@ -79,8 +82,6 @@ Example notebooks and scripts are available for
 * [Napari+Dask Timelapse processing](https://github.com/clEsperanto/pyclesperanto_prototype/tree/master/demo/napari_gui/napari_dask.ipynb)
 * [Napari Particle Analyser](https://github.com/clEsperanto/pyclesperanto_prototype/tree/master/demo/napari_gui/particle_analyser.py)
 
-## Reference
-The [full reference](https://clij.github.io/clij2-docs/reference__pyclesperanto) is available as part of the CLIJ2 documentation.
 
 ## Feedback welcome!
 clEsperanto is developed in the open because we believe in the [open source community](https://clij.github.io/clij2-docs/community_guidelines). Feel free to drop feedback as [github issue](https://github.com/clEsperanto/pyclesperanto_prototype/issues) or via [image.sc](https://image.sc)
