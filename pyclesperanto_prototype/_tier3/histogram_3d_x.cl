@@ -44,7 +44,7 @@ kernel void histogram_3d(
         for (int x = 0; x < image_width; x+= step_size_x) {
             float clr = READ_src_IMAGE(src, sampler, (int4)(x, y, z, 0)).x;
             uint   indx_x;
-            indx_x = convert_uint_sat( (clr - minimum) * (float)(GET_IMAGE_WIDTH(dst_histogram) - 1) / range );
+            indx_x = convert_uint_sat(( (clr - minimum) * (float)(GET_IMAGE_WIDTH(dst_histogram) - 1)) / range + 0.5);
             tmp_histogram[indx_x]++;
         }
     }
