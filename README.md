@@ -66,7 +66,8 @@ print(labeled)
 imsave("result.tif", cle.pull(labeled))
 ```
 
-Example notebooks are available for 
+Example notebooks and scripts are available for 
+* [Select GPU](https://github.com/clEsperanto/pyclesperanto_prototype/tree/master/demo/basics/select_GPU.py)
 * [Counting blobs](https://github.com/clEsperanto/pyclesperanto_prototype/tree/master/demo/basics/count_blobs.ipynb)
 * [Crop and paste images](https://github.com/clEsperanto/pyclesperanto_prototype/tree/master/demo/basics/crop_and_paste_images.ipynb)
 * [Inspecting 3D image data](https://github.com/clEsperanto/pyclesperanto_prototype/tree/master/demo/basics/inspecting_3d_images.ipynb)
@@ -75,8 +76,8 @@ Example notebooks are available for
 * [Working with spots, pointlist and matrices](https://github.com/clEsperanto/pyclesperanto_prototype/tree/master/demo/basics/spots_pointlists_matrices_tables.ipynb)
 * [Voronoi diagrams](https://github.com/clEsperanto/pyclesperanto_prototype/tree/master/demo/basics/voronoi_diagrams.ipynb)
 * [Tribolium morphometry](https://github.com/clEsperanto/pyclesperanto_prototype/tree/master/demo/tribolium_morphometry/tribolium_morphometry.ipynb)
-
-Even moore example scripts can be found in the `/demo/` directory.
+* [Napari+Dask Timelapse processing](https://github.com/clEsperanto/pyclesperanto_prototype/tree/master/demo/napari_gui/napari_dask.ipynb)
+* [Napari Particle Analyser](https://github.com/clEsperanto/pyclesperanto_prototype/tree/master/demo/napari_gui/particle_analyser.py)
 
 ## Reference
 The [full reference](https://clij.github.io/clij2-docs/reference__pyclesperanto) is available as part of the CLIJ2 documentation.
