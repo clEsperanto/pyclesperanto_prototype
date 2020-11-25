@@ -6,7 +6,7 @@ from magicgui import magicgui
 from napari.layers import Image, Labels
 
 @magicgui(auto_call=True)
-def process_image(input: Image, sigma: float = 5) -> Image:
+def process_image(input: Image, sigma: float = 5) -> Labels:
     if input:
         # push image to GPU
         input = cle.push_zyx(input.data)
@@ -32,3 +32,5 @@ with napari.gui_qt():
     # generate a Graphical User Interface from the function above magically
     gui = process_image.Gui()
     viewer.window.add_dock_widget(gui)
+
+
