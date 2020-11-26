@@ -11,7 +11,7 @@ def process_image(input: Image, sigma: float = 5) -> Labels:
         # push image to GPU
         input = cle.push_zyx(input.data)
 
-        # process the mage
+        # process the image
         blurred = cle.gaussian_blur(input, sigma_x=sigma, sigma_y=sigma)
         binary = cle.threshold_otsu(blurred)
         labels = cle.connected_components_labeling_box(binary)
