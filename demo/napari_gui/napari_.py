@@ -1,10 +1,11 @@
+import pyclesperanto_prototype as cle
+
 # load data
 from skimage.io import imread
 image = imread('https://samples.fiji.sc/blobs.png')
 
 # start up napari
 import napari
-import pyclesperanto_prototype as cle
 with napari.gui_qt():
     viewer = napari.Viewer()
     viewer.add_image(image, name='blobs')
@@ -12,7 +13,7 @@ with napari.gui_qt():
     # push image to GPU
     input = cle.push_zyx(image)
 
-    # process the mage
+    # process the image
     sigma = 3
     blurred = cle.gaussian_blur(input, sigma_x=sigma, sigma_y=sigma)
     binary = cle.threshold_otsu(blurred)
