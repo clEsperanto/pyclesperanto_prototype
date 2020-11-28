@@ -26,5 +26,4 @@ def test_flip():
     a = cle.pull_zyx(result)
     b = cle.pull_zyx(reference)
     assert (np.array_equal(a, b))
-    print("ok flip")
 

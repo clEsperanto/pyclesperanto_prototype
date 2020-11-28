@@ -1,26 +1,36 @@
 from .._tier0 import execute
 
-def laplace_box (src, dst):
-    """Applies the Laplace operator (Box neighborhood) to an image.
+from .._tier0 import plugin_function
+from .._tier0 import Image
 
-    Available for: 2D, 3D
-
+@plugin_function
+def laplace_box(input : Image, destination : Image = None):
+    """Applies the Laplace operator (Box neighborhood) to an image. 
+    
     Parameters
     ----------
-    (Image input, ByRef Image destination)
-    todo: Better documentation will follow
-          In the meantime, read more: https://clij.github.io/clij2-docs/reference_laplaceBox
-
-
+    input : Image
+    destination : Image
+    
     Returns
     -------
-
+    destination
+    
+    Examples
+    --------
+    >>> import pyclesperanto_prototype as cle
+    >>> cle.laplace_box(input, destination)
+    
+    References
+    ----------
+    .. [1] https://clij.github.io/clij2-docs/reference_laplaceBox
     """
 
 
     parameters = {
-        "dst":dst,
-        "src":src
+        "dst":destination,
+        "src":input
     }
 
-    execute(__file__, 'laplace_box_' + str(len(dst.shape)) + 'd_x.cl', 'laplace_box_' + str(len(dst.shape)) + 'd', dst.shape, parameters)
+    execute(__file__, 'laplace_box_' + str(len(destination.shape)) + 'd_x.cl', 'laplace_box_' + str(len(destination.shape)) + 'd', destination.shape, parameters)
+    return destination

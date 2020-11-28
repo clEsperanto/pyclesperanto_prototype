@@ -1,27 +1,36 @@
-from .._tier0 import radius_to_kernel_size
 from .._tier0 import execute
+from .._tier0 import plugin_function
+from .._tier0 import Image
+from .._tier0 import create_2d_zx
 
-def sum_y_projection(input, output):
-    """Determines the sum intensity projection of an image along Z.
-
-    Available for: 3D
-
+@plugin_function(output_creator=create_2d_zx)
+def sum_y_projection(source : Image, destination : Image = None):
+    """Determines the sum intensity projection of an image along Z. 
+    
     Parameters
     ----------
-    (Image source, ByRef Image destination)
-    todo: Better documentation will follow
-          In the meantime, read more: https://clij.github.io/clij2-docs/reference_sumYProjection
-
-
+    source : Image
+    destination : Image
+    
     Returns
     -------
-
+    destination
+    
+    Examples
+    --------
+    >>> import pyclesperanto_prototype as cle
+    >>> cle.sum_y_projection(source, destination)
+    
+    References
+    ----------
+    .. [1] https://clij.github.io/clij2-docs/reference_sumYProjection
     """
 
 
     parameters = {
-        "dst":output,
-        "src":input,
-    };
+        "dst":destination,
+        "src":source,
+    }
 
-    execute(__file__, 'sum_y_projection_x.cl', 'sum_y_projection', output.shape, parameters);
+    execute(__file__, 'sum_y_projection_x.cl', 'sum_y_projection', destination.shape, parameters)
+    return destination

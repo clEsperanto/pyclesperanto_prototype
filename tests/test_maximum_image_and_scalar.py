@@ -24,4 +24,3 @@ def test_maximum_image_and_scalar():
     print(a)
 
     assert (np.array_equal(a, b))
-    print("ok maximum_image_and_scalar")

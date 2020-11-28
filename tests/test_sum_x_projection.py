@@ -53,4 +53,3 @@ def test_sum_x_projection():
     print(a)
 
     assert (np.allclose(a, b, 0.01))
-    print("ok sum_x_projection")

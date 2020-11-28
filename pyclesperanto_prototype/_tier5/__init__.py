@@ -1,0 +1,2 @@
+from ._connected_components_labeling_diamond import connected_components_labeling_diamond
+from ._voronoi_labeling import voronoi_labeling

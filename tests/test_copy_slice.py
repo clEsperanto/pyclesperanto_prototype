@@ -22,7 +22,6 @@ def test_copy_slice_from_3d():
     assert (np.min(a) == 0)
     assert (np.max(a) == 1)
     assert (np.mean(a) == 0.75)
-    print ("ok copy slice from 3d")
 
 
 def test_copy_slice_to_3d():
@@ -40,7 +39,6 @@ def test_copy_slice_to_3d():
     assert (np.min(a) == 0)
     assert (np.max(a) == 5)
     assert (np.mean(a) == 2)
-    print ("ok copy slice to 3d")
 
 def test_copy_slice_to3d_with_one_slice():
     test1 = cle.push(np.asarray([

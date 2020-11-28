@@ -15,7 +15,6 @@ def test_histogram():
 
     a = cle.pull(my_histogram)
     assert (np.allclose(a, ref_histogram))
-    print ("ok histogram")
 
 def test_histogram_3d():
     test = cle.push_zyx(np.asarray([
@@ -34,7 +33,6 @@ def test_histogram_3d():
 
     a = cle.pull(my_histogram)
     assert (np.allclose(a, ref_histogram))
-    print ("ok histogram")
 
 
 def test_histogram_3d_2():
@@ -56,7 +54,6 @@ def test_histogram_3d_2():
 
     a = cle.pull(my_histogram)
     assert (np.allclose(a, ref_histogram))
-    print ("ok histogram")
 
 def test_histogram_against_scikit_image():
     from skimage.data import camera

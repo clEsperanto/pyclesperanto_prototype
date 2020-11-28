@@ -23,5 +23,4 @@ def test_logarithm():
     print(b)
 
     assert (np.allclose(a, b, 0.01))
-    print("ok logarithm")
 

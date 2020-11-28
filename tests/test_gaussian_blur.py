@@ -21,5 +21,3 @@ def test_gaussian_blur():
     assert (np.max(a) > 15.9)
     assert (np.max(a) < 16)
 
-    print ("ok gaussian_blur")
-    

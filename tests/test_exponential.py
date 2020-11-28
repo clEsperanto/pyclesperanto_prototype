@@ -27,5 +27,4 @@ def test_exponential():
     a = cle.pull(result)
     b = cle.pull(reference)
     assert (np.allclose(a, b, atol=0.00001))
-    print("ok exponential")
 

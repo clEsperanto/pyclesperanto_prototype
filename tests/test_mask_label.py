@@ -34,4 +34,3 @@ def test_mask_label():
     print(a)
 
     assert (np.array_equal(a, b))
-    print("ok mask_label")

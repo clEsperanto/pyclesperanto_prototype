@@ -24,11 +24,55 @@ from .._tier1 import sum_z_projection
 from .._tier1 import copy_slice
 
 @plugin_function(output_creator=create_none)
-def histogram(image : Image, hist : Image = None, num_bins = 256, minimum_intensity : float = None, maximum_intensity : float = None, determine_min_max : bool = True):
+def histogram(source : Image, destination : Image = None, num_bins = 256, minimum_intensity : float = None, maximum_intensity : float = None, determine_min_max : bool = True):
+    """Determines the histogram of a given image.
+    
+    The histogram image is of dimensions number_of_bins/1/1; a 3D image with 
+    height=1 and depth=1. 
+    Histogram bins contain the number of pixels with intensity in this corresponding 
+    bin. 
+    The histogram bins are uniformly distributed between given minimum and 
+    maximum grey value intensity. 
+    If the flag determine_min_max is set, minimum and maximum intensity will 
+    be determined. 
+    When calling this operation many times, it is recommended to determine 
+    minimum and maximum intensity 
+    once at the beginning and handing over these values. 
+    
+    Author(s): Robert Haase adapted work from Aaftab Munshi, Benedict Gaster, Timothy Mattson, James Fung, Dan Ginsburg
+    
+    License: // adapted code from
+    // https://github.com/bgaster/opencl-book-samples/blob/master/src/Chapter_14/histogram/histogram_image.cl
+    //
+    // It was published unter BSD license according to
+    // https://code.google.com/archive/p/opencl-book-samples/
+    //
+    // Book:      OpenCL(R) Programming Guide
+    // Authors:   Aaftab Munshi, Benedict Gaster, Timothy Mattson, James Fung, Dan Ginsburg
+    // ISBN-10:   0-321-74964-2
+    // ISBN-13:   978-0-321-74964-2
+    // Publisher: Addison-Wesley Professional
+    // URLs:      http://safari.informit.com/9780132488006/
+    //            http://www.openclprogrammingguide.com
+    
+    Parameters
+    ----------
+    source : Image
+    destination : Image
+    number_of_bins : Number
+    minimum_intensity : Number
+    maximum_intensity : Number
+    determine_min_max : Boolean
+    
+    Returns
+    -------
+    destination
+    
+    References
+    ----------
+    .. [1] https://clij.github.io/clij2-docs/reference_histogram
     """
-    documentation placeholder
-    """
-    image_to_process = image
+    image_to_process = source
 
     # workaround for 2D images; the 2D kernel doesn't work as
     # in Java (global_id starts a 1 instead of 0, only tested
@@ -43,10 +87,10 @@ def histogram(image : Image, hist : Image = None, num_bins = 256, minimum_intens
     # print(str(pull(image_to_process)[0]))
 
     if minimum_intensity is None or maximum_intensity is None or determine_min_max:
-        minimum_intensity = minimum_of_all_pixels(image)
-        maximum_intensity = maximum_of_all_pixels(image)
+        minimum_intensity = minimum_of_all_pixels(source)
+        maximum_intensity = maximum_of_all_pixels(source)
 
-    number_of_partial_histograms = image.shape[-2]
+    number_of_partial_histograms = source.shape[-2]
 
     # determine multiple histograms. one for each Y (row) in the image
     partial_histograms = create([number_of_partial_histograms, 1, num_bins])
@@ -74,10 +118,10 @@ def histogram(image : Image, hist : Image = None, num_bins = 256, minimum_intens
                 constants=constants)
 
     # sum partial histograms
-    if hist is None:
-        hist = create([num_bins])
+    if destination is None:
+        destination = create([num_bins])
 
-    sum_z_projection(partial_histograms, hist)
+    sum_z_projection(partial_histograms, destination)
 
-    return hist
+    return destination
 

@@ -24,8 +24,6 @@ def test_maximum_sphere_1():
     assert (np.max(a) == 5)
     assert (np.mean(a) == 5)
 
-    print("ok maximum sphere")
-
 
 def test_maximum_sphere_2():
     gpu_a = cle.push(np.asarray([[1, 1, 1], [1, 2, 1], [1, 1, 1]]))

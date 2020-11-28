@@ -34,4 +34,3 @@ def test_power_images():
     print(a)
 
     assert (np.allclose(a, b, 0.0001))
-    print("ok power_images")

@@ -31,5 +31,3 @@ def test_nonzero_minimum_box():
     a = cle.pull(result)
     b = cle.pull(reference)
     assert (np.allclose(a, b, atol=0.00001))
-    print("ok nonzero_minimum_box")
-

@@ -1,29 +1,38 @@
 from .._tier0 import execute
+from .._tier0 import plugin_function
+from .._tier0 import Image
 
-
-def subtract_image_from_scalar(input, output, scalar):
+@plugin_function
+def subtract_image_from_scalar(input : Image, destination : Image = None, scalar : float = 0):
     """Subtracts one image X from a scalar s pixel wise.
     
-    <pre>f(x, s) = s - x</pre>
-
-    Available for: 2D, 3D
-
+    <pre>f(x, s) = s - x</pre> 
+    
     Parameters
     ----------
-    (Image input, ByRef Image destination, Number scalar)
-    todo: Better documentation will follow
-          In the meantime, read more: https://clij.github.io/clij2-docs/reference_subtractImageFromScalar
-
-
+    input : Image
+    destination : Image
+    scalar : Number
+    
     Returns
     -------
-
+    destination
+    
+    Examples
+    --------
+    >>> import pyclesperanto_prototype as cle
+    >>> cle.subtract_image_from_scalar(input, destination, scalar)
+    
+    References
+    ----------
+    .. [1] https://clij.github.io/clij2-docs/reference_subtractImageFromScalar
     """
 
 
     parameters = {
         "src":input,
-        "dst":output,
+        "dst":destination,
         "scalar":float(scalar)
-    };
-    execute(__file__, 'subtract_image_from_scalar_' + str(len(output.shape)) + 'd_x.cl', 'subtract_image_from_scalar_' + str(len(output.shape)) + 'd', output.shape, parameters);
+    }
+    execute(__file__, 'subtract_image_from_scalar_' + str(len(destination.shape)) + 'd_x.cl', 'subtract_image_from_scalar_' + str(len(destination.shape)) + 'd', destination.shape, parameters)
+    return destination

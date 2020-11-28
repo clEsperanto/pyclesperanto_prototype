@@ -1,27 +1,40 @@
 from .._tier0 import execute
+from .._tier0 import plugin_function
+from .._tier0 import Image
 
-def binary_edge_detection (src, dst):
-    """Determines pixels/voxels which are on the surface of binary objects and sets only them to 1 in the 
+@plugin_function
+def binary_edge_detection(source : Image, destination : Image = None):
+    """Determines pixels/voxels which are on the surface of binary objects and 
+    sets only them to 1 in the 
     destination image. All other pixels are set to 0.
-
-    Available for: 2D, 3D
-
+    
     Parameters
     ----------
-    (Image source, ByRef Image destination)
-    todo: Better documentation will follow
-          In the meantime, read more: https://clij.github.io/clij2-docs/reference_binaryEdgeDetection
-
-
+    source : Image
+        The binary input image where edges will be searched.
+    destination : Image
+        The output image where edge pixels will be 1.
+     
+    
     Returns
     -------
-
+    destination
+    
+    Examples
+    --------
+    >>> import pyclesperanto_prototype as cle
+    >>> cle.binary_edge_detection(source, destination)
+    
+    References
+    ----------
+    .. [1] https://clij.github.io/clij2-docs/reference_binaryEdgeDetection
     """
 
 
     parameters = {
-        "dst": dst,
-        "src":src
+        "dst": destination,
+        "src":source
     }
 
     execute(__file__, 'binary_edge_detection_' + str(len(dst.shape)) + 'd_x.cl', 'binary_edge_detection_' + str(len(dst.shape)) + 'd', dst.shape, parameters)
+    return destination

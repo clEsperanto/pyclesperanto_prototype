@@ -1,32 +1,44 @@
 from .._tier0 import execute
+from .._tier0 import plugin_function
+from .._tier0 import Image
 
-
-def binary_not (src1, dst):
-    """Computes a binary image (containing pixel values 0 and 1) from an image X by negating its pixel values
+@plugin_function
+def binary_not(source : Image, destination : Image = None):
+    """Computes a binary image (containing pixel values 0 and 1) from an image 
+    X by negating its pixel values
     x using the binary NOT operator !
     
     All pixel values except 0 in the input image are interpreted as 1.
     
     <pre>f(x) = !x</pre>
-
-    Available for: 2D, 3D
-
+    
     Parameters
     ----------
-    (Image source, ByRef Image destination)
-    todo: Better documentation will follow
-          In the meantime, read more: https://clij.github.io/clij2-docs/reference_binaryNot
-
-
+    source : Image
+        The binary input image to be inverted.
+    destination : Image
+        The output image where results are written into.
+     
+    
     Returns
     -------
-
+    destination
+    
+    Examples
+    --------
+    >>> import pyclesperanto_prototype as cle
+    >>> cle.binary_not(source, destination)
+    
+    References
+    ----------
+    .. [1] https://clij.github.io/clij2-docs/reference_binaryNot
     """
 
 
     parameters = {
-        "src1":src1,
-        "dst":dst
+        "src1":source,
+        "dst":destination
     }
 
-    execute(__file__, 'binary_not_' + str(len(dst.shape)) + 'd_x.cl', 'binary_not_' + str(len(dst.shape)) + 'd', dst.shape, parameters)
+    execute(__file__, 'binary_not_' + str(len(destination.shape)) + 'd_x.cl', 'binary_not_' + str(len(destination.shape)) + 'd', destination.shape, parameters)
+    return destination

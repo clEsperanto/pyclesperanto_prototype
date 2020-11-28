@@ -3,36 +3,43 @@ from .._tier0 import Image
 from .._tier0 import plugin_function
 
 @plugin_function
-def mask (src : Image, mask : Image, dst : Image = None):
-    """Computes a masked image by applying a mask to an image. 
+def mask(source : Image, mask : Image, destination : Image = None):
+    """Computes a masked image by applying a binary mask to an image. 
     
     All pixel values x of image X will be copied
-    to the destination image in case pixel value m at the same position in the mask image is not equal to 
+    to the destination image in case pixel value m at the same position in the 
+    mask image is not equal to 
     zero.
     
-    <pre>f(x,m) = (x if (m != 0); (0 otherwise))</pre>
-
-    Available for: 2D, 3D
-
+    <pre>f(x,m) = (x if (m != 0); (0 otherwise))</pre> 
+    
     Parameters
     ----------
-    (Image source, Image mask, ByRef Image destination)
-    todo: Better documentation will follow
-          In the meantime, read more: https://clij.github.io/clij2-docs/reference_mask
-
-
+    source : Image
+    mask : Image
+    destination : Image
+    
     Returns
     -------
-
+    destination
+    
+    Examples
+    --------
+    >>> import pyclesperanto_prototype as cle
+    >>> cle.mask(source, mask, destination)
+    
+    References
+    ----------
+    .. [1] https://clij.github.io/clij2-docs/reference_mask
     """
 
 
     parameters = {
-        "src":src,
+        "src":source,
         "mask":mask,
-        "dst":dst
+        "dst":destination
     }
 
-    execute(__file__, 'mask_' + str(len(dst.shape)) + 'd_x.cl', 'mask_' + str(len(dst.shape)) + 'd', dst.shape, parameters)
+    execute(__file__, 'mask_' + str(len(destination.shape)) + 'd_x.cl', 'mask_' + str(len(destination.shape)) + 'd', destination.shape, parameters)
 
-    return dst
+    return destination

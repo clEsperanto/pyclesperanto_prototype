@@ -27,4 +27,3 @@ def test_power():
     a = cle.pull(result)
     b = cle.pull(reference)
     assert (np.allclose(a, b, 0.001))
-    print("ok power")

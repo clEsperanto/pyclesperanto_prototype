@@ -12,7 +12,7 @@ __kernel void block_enumerate(
   const int z = get_global_id(1);
   const int y = get_global_id(2);
   float sum = 0;
-  for(int sx = 0; sx < x - 1; sx++)
+  for(int sx = 0; sx < x; sx++)
   {
     sum = sum + READ_src_sums_IMAGE(src_sums,sampler,POS_src_sums_INSTANCE(sx,y,z,0)).x;
   }

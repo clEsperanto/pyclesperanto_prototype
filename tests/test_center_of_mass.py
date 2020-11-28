@@ -14,6 +14,4 @@ def test_center_of_mass():
     print(c)
 
     assert (np.array_equal(c, [2, 1, 0]))
-    print("ok center_of_mass")
-
 

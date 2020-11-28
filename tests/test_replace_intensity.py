@@ -27,6 +27,3 @@ def test_replace_intensity():
     a = cle.pull(result)
     b = cle.pull(reference)
     assert (np.allclose(a, b, 0.001))
-    print("ok replace_intensity")
-
-

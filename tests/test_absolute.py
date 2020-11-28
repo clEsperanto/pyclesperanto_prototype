@@ -16,7 +16,6 @@ def test_absolute():
     assert (np.min(a) == 1)
     assert (np.max(a) == 1)
     assert (np.mean(a) == 1)
-    print ("ok absolute")
 
 
 def test_absolute1():

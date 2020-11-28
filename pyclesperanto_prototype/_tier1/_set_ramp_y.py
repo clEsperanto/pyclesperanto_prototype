@@ -1,25 +1,29 @@
 from .._tier0 import execute
+from .._tier0 import plugin_function
+from .._tier0 import Image
 
-def set_ramp_y(output):
-    """Sets all pixel values to their Y coordinate
-
-    Available for: 2D, 3D
-
+@plugin_function
+def set_ramp_y(source : Image):
+    """Sets all pixel values to their Y coordinate 
+    
     Parameters
     ----------
-    (Image source)
-    todo: Better documentation will follow
-          In the meantime, read more: https://clij.github.io/clij2-docs/reference_setRampY
-
-
-    Returns
-    -------
-
+    source : Image
+    
+    Examples
+    --------
+    >>> import pyclesperanto_prototype as cle
+    >>> cle.set_ramp_y(source)
+    
+    References
+    ----------
+    .. [1] https://clij.github.io/clij2-docs/reference_setRampY
     """
 
 
     parameters = {
-        "dst":output
+        "dst":source
     }
 
-    execute(__file__, 'set_ramp_y_' + str(len(output.shape)) + 'd_x.cl', 'set_ramp_y_' + str(len(output.shape)) + 'd', output.shape, parameters);
+    execute(__file__, 'set_ramp_y_' + str(len(source.shape)) + 'd_x.cl', 'set_ramp_y_' + str(len(source.shape)) + 'd', source.shape, parameters);
+    return source

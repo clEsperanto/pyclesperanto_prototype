@@ -24,4 +24,3 @@ def test_set_where_x_equals_y():
     print(a)
 
     assert (np.array_equal(a, b))
-    print("ok set_where_x_equals_y")

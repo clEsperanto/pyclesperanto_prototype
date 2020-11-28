@@ -55,4 +55,4 @@ def test_mean_z_projection():
     print(a)
 
     assert (np.allclose(a, b, 0.001))
-    print ("ok mean_z_projection")
+

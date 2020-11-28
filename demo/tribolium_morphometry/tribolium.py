@@ -33,7 +33,7 @@ def mesh_data(gpu_input, sigma : float = 2.0, threshold : float = 300):
     # Now, we remove spots with values below a certain intensity and label the remaining spots
 
     # threshold
-    gpu_thresholded = cle.greater_constant(gpu_blurred, scalar = threshold)
+    gpu_thresholded = cle.greater_constant(gpu_blurred, constant= threshold)
 
     # mask
     gpu_masked_spots = cle.mask(gpu_detected_maxima, gpu_thresholded)
@@ -60,7 +60,7 @@ def mesh_data(gpu_input, sigma : float = 2.0, threshold : float = 300):
         cle.onlyzero_overwrite_maximum_box(flip, flag, flop)
         cle.onlyzero_overwrite_maximum_diamond(flop, flag, flip)
 
-    flap = cle.greater_constant(flip, scalar = 1)
+    flap = cle.greater_constant(flip, constant= 1)
 
     for i in range(0, number_of_erosions):
         cle.erode_box(flap, flop)

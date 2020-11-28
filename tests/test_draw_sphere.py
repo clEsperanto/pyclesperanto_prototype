@@ -21,4 +21,3 @@ def test_draw_sphere():
     b = cle.pull(reference)
 
     assert (np.array_equal(a, b))
-    print("ok draw_sphere")

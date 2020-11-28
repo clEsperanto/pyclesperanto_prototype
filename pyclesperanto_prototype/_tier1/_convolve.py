@@ -1,29 +1,39 @@
 from .._tier0 import execute
+from .._tier0 import plugin_function
+from .._tier0 import Image
 
-def convolve (src, kernelImage, dst):
+@plugin_function
+def convolve(source : Image, convolution_kernel : Image, destination : Image = None):
     """Convolve the image with a given kernel image.
     
-    It is recommended that the kernel image has an odd size in X, Y and Z.
-
-    Available for: 2D, 3D
-
+    It is recommended that the kernel image has an odd size in X, Y and Z. 
+    
     Parameters
     ----------
-    (Image source, Image convolution_kernel, Image destination)
-    todo: Better documentation will follow
-          In the meantime, read more: https://clij.github.io/clij2-docs/reference_convolve
-
-
+    source : Image
+    convolution_kernel : Image
+    destination : Image
+    
     Returns
     -------
-
+    destination
+    
+    Examples
+    --------
+    >>> import pyclesperanto_prototype as cle
+    >>> cle.convolve(source, convolution_kernel, destination)
+    
+    References
+    ----------
+    .. [1] https://clij.github.io/clij2-docs/reference_convolve
     """
 
 
     parameters = {
-        "src":src,
-        "kernelImage":kernelImage,
-        "dst":dst
+        "src":source,
+        "kernelImage":convolution_kernel,
+        "dst":destination
     }
 
-    execute(__file__, 'convolve_' + str(len(dst.shape)) + 'd_x.cl', 'convolve_' + str(len(dst.shape)) + 'd', dst.shape, parameters)
+    execute(__file__, 'convolve_' + str(len(destination.shape)) + 'd_x.cl', 'convolve_' + str(len(destination.shape)) + 'd', destination.shape, parameters)
+    return destination

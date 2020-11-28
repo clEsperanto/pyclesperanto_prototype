@@ -25,4 +25,3 @@ def test_set_row():
     a = cle.pull(result)
     b = cle.pull(reference)
     assert (np.allclose(a, b, 0.001))
-    print("ok set_row")

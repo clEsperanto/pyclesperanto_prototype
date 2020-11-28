@@ -13,6 +13,7 @@ from ._convolve import convolve
 from ._copy import copy
 from ._copy_slice import copy_slice
 from ._crop import crop
+from ._detect_label_edges import detect_label_edges
 from ._detect_maxima_box import detect_maxima_box
 from ._dilate_box import dilate_box
 from ._dilate_box_slice_by_slice import dilate_box_slice_by_slice
@@ -24,6 +25,7 @@ from ._draw_sphere import draw_sphere
 from ._draw_line import draw_line
 from ._equal import equal
 from ._equal_constant import equal_constant
+from ._equal_constant import equal_constant as label_to_mask
 from ._erode_box import erode_box
 from ._erode_box_slice_by_slice import erode_box_slice_by_slice
 from ._erode_sphere import erode_sphere
@@ -38,7 +40,9 @@ from ._gradient_x import gradient_x
 from ._gradient_y import gradient_y
 from ._gradient_z import gradient_z
 from ._greater import greater
+from ._greater import greater as local_threshold
 from ._greater_constant import greater_constant
+from ._greater_constant import greater_constant as threshold
 from ._greater_or_equal import greater_or_equal
 from ._greater_or_equal_constant import greater_or_equal_constant
 from ._laplace_box import laplace_box
@@ -54,6 +58,8 @@ from ._maximum_y_projection import maximum_y_projection
 from ._maximum_z_projection import maximum_z_projection
 from ._mean_box import mean_box
 from ._mean_sphere import mean_sphere
+from ._mean_x_projection import mean_x_projection
+from ._mean_y_projection import mean_y_projection
 from ._mean_z_projection import mean_z_projection
 from ._minimum_box import minimum_box
 from ._minimum_image_and_scalar import minimum_image_and_scalar
@@ -106,6 +112,7 @@ from ._sum_z_projection import sum_z_projection
 from ._transpose_xy import transpose_xy
 from ._transpose_xz import transpose_xz
 from ._transpose_yz import transpose_yz
+from ._undefined_to_zero import undefined_to_zero
 
 
 
