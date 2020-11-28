@@ -14,7 +14,7 @@ with napari.gui_qt():
     input = cle.push_zyx(image)
 
     # process the image
-    sigma = 3
+    sigma = 1
     blurred = cle.gaussian_blur(input, sigma_x=sigma, sigma_y=sigma)
     binary = cle.threshold_otsu(blurred)
     labels = cle.connected_components_labeling_box(binary)
