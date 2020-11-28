@@ -13,7 +13,7 @@ __kernel void binary_and_2d(
 
   IMAGE_dst_PIXEL_TYPE value1 = CONVERT_dst_PIXEL_TYPE(READ_src1_IMAGE(src1, sampler, pos).x);
   IMAGE_dst_PIXEL_TYPE value2 = CONVERT_dst_PIXEL_TYPE(READ_src2_IMAGE(src2, sampler, pos).x);
-  if ( value1 > 0 && value2 > 0 ) {
+  if ( value1 != 0 && value2 != 0 ) {
     value1 = 1;
   } else {
     value1 = 0;

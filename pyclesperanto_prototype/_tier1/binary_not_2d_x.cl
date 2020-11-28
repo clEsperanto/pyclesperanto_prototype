@@ -11,7 +11,7 @@ __kernel void binary_not_2d(
   const int2 pos = (int2){x,y};
 
   IMAGE_dst_PIXEL_TYPE value1 = CONVERT_dst_PIXEL_TYPE(READ_src1_IMAGE(src1, sampler, pos).x);
-  if ( value1 > 0) {
+  if ( value1 != 0) {
     value1 = 0;
   } else {
     value1 = 1;

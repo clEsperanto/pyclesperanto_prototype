@@ -41,7 +41,7 @@ def connected_components_labeling_box(binary_input : Image, labeling_destination
 
     flag = push(np.asarray([[[0]]]))
 
-    set_nonzero_pixels_to_pixelindex(binary_input, temp1, offset=1)
+    set_nonzero_pixels_to_pixelindex(binary_input, temp1)
 
     set(temp2, 0)
 
