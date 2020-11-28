@@ -36,5 +36,5 @@ def binary_edge_detection(source : Image, destination : Image = None):
         "src":source
     }
 
-    execute(__file__, 'binary_edge_detection_' + str(len(dst.shape)) + 'd_x.cl', 'binary_edge_detection_' + str(len(dst.shape)) + 'd', dst.shape, parameters)
+    execute(__file__, 'binary_edge_detection_' + str(len(destination.shape)) + 'd_x.cl', 'binary_edge_detection_' + str(len(destination.shape)) + 'd', destination.shape, parameters)
     return destination

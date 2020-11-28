@@ -36,5 +36,5 @@ def binary_subtract(minuend : Image, subtrahend : Image, destination : Image = N
         "src1":minuend,
         "src2":subtrahend
     }
-    execute(__file__, 'binary_subtract_' + str(len(dst.shape)) + 'd_x.cl', 'binary_subtract_' + str(len(dst.shape)) + 'd', dst.shape, parameters)
+    execute(__file__, 'binary_subtract_' + str(len(destination.shape)) + 'd_x.cl', 'binary_subtract_' + str(len(destination.shape)) + 'd', destination.shape, parameters)
     return destination
