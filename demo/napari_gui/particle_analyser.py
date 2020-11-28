@@ -206,7 +206,7 @@ class Combine(Enum):
 
 @magicgui(auto_call=True, layout='vertical')
 def combine(input1: Image, input2: Image, operation: Combine) -> Image:
-    if input1 is not None:
+    if input1 is not None and input2 is not None:
         cle_input1 = cle.push_zyx(input1.data)
         cle_input2 = cle.push_zyx(input2.data)
         output = cle.create_like(cle_input1)
