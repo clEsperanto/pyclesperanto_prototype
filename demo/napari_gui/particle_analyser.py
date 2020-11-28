@@ -14,7 +14,7 @@ from qtpy.QtWidgets import (
 from qtpy.QtCore import Qt
 import napari
 import numpy as np
-from napari.layers import Image
+from napari.layers import Image, Labels
 from magicgui import magicgui
 
 import pyclesperanto_prototype as cle
@@ -233,7 +233,7 @@ class Label(Enum):
         return self.value(*args)
 
 @magicgui(auto_call=True, layout='vertical')
-def label(input1: Image, operation: Label) -> Image:
+def label(input1: Image, operation: Label) -> Labels:
     if input1 is not None:
         cle_input1 = cle.push_zyx(input1.data)
         output = cle.create_like(cle_input1)
