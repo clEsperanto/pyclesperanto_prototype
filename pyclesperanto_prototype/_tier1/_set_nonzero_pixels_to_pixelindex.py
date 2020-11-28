@@ -1,6 +1,6 @@
 from .._tier0 import execute
 
-def set_nonzero_pixels_to_pixelindex(input, output, offset=0):
+def set_nonzero_pixels_to_pixelindex(input, output, offset=1):
     """
     documentation placeholder
     """
