@@ -121,7 +121,8 @@ class Gui(QWidget):
 
 
 
-# inspired from https://github.com/pr4deepr/pyclesperanto_prototype/blob/master/napari_clij_widget.py# Using Enums for getting a dropdown menu
+# inspired from https://github.com/pr4deepr/pyclesperanto_prototype/blob/master/napari_clij_widget.py
+# Using Enums for getting a dropdown menu
 from enum import Enum
 from functools import partial
 
