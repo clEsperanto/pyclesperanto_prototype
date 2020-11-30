@@ -74,7 +74,7 @@ imsave("result.tif", cle.pull(labeled))
 <table border="0">
 <tr><td>
 
-<img src="https://github.com/pyclesperanto_prototype/tree/master/docs/images/screenshot_select_GPU.png" width="300"/>
+<img src="https://github.com/clEsperanto/pyclesperanto_prototype/raw/master/docs/images/screenshot_select_GPU.png" width="300"/>
 
 </td><td>
 
@@ -82,7 +82,7 @@ imsave("result.tif", cle.pull(labeled))
 
 </td></tr><tr><td>
 
-<img src="https://github.com/pyclesperanto_prototype/tree/master/docs/images/screenshot_count_blobs.png" width="300"/>
+<img src="https://github.com/clEsperanto/pyclesperanto_prototype/raw/master/docs/images/screenshot_count_blobs.png" width="300"/>
 
 </td><td>
 
@@ -90,7 +90,7 @@ imsave("result.tif", cle.pull(labeled))
 
 </td></tr><tr><td>
 
-<img src="https://github.com/pyclesperanto_prototype/tree/master/docs/images/screenshot_crop_and_paste_images.png" width="300"/>
+<img src="https://github.com/clEsperanto/pyclesperanto_prototype/raw/master/docs/images/screenshot_crop_and_paste_images.png" width="300"/>
 
 
 </td><td>
@@ -99,7 +99,7 @@ imsave("result.tif", cle.pull(labeled))
 
 </td></tr><tr><td>
 
-<img src="https://github.com/pyclesperanto_prototype/tree/master/docs/images/screenshot_inspecting_3d_images.png" width="300"/>
+<img src="https://github.com/clEsperanto/pyclesperanto_prototype/raw/master/docs/images/screenshot_inspecting_3d_images.png" width="300"/>
 
 </td><td>
 
@@ -107,7 +107,7 @@ imsave("result.tif", cle.pull(labeled))
 
 </td></tr><tr><td>
 
-<img src="https://github.com/pyclesperanto_prototype/tree/master/docs/images/screenshot_multiply_vectors_and_matrices.png" width="300"/>
+<img src="https://github.com/clEsperanto/pyclesperanto_prototype/raw/master/docs/images/screenshot_multiply_vectors_and_matrices.png" width="300"/>
 
 </td><td>
 
@@ -115,7 +115,7 @@ imsave("result.tif", cle.pull(labeled))
 
 </td></tr><tr><td>
 
-<img src="https://github.com/pyclesperanto_prototype/tree/master/docs/images/screenshot_multiply_matrices.png" width="300"/>
+<img src="https://github.com/clEsperanto/pyclesperanto_prototype/raw/master/docs/images/screenshot_multiply_matrices.png" width="300"/>
 
 </td><td>
 
@@ -123,7 +123,7 @@ imsave("result.tif", cle.pull(labeled))
 
 </td></tr><tr><td>
 
-<img src="https://github.com/pyclesperanto_prototype/tree/master/docs/images/screenshot_spots_pointlists_matrices_tables.png" width="300"/>
+<img src="https://github.com/clEsperanto/pyclesperanto_prototype/raw/master/docs/images/screenshot_spots_pointlists_matrices_tables.png" width="300"/>
 
 </td><td>
 
@@ -131,7 +131,7 @@ imsave("result.tif", cle.pull(labeled))
 
 </td></tr><tr><td>
 
-<img src="https://github.com/pyclesperanto_prototype/tree/master/docs/images/screenshot_voronoi_diagrams.png" width="300"/>
+<img src="https://github.com/clEsperanto/pyclesperanto_prototype/raw/master/docs/images/screenshot_voronoi_diagrams.png" width="300"/>
 
 </td><td>
 
@@ -139,7 +139,7 @@ imsave("result.tif", cle.pull(labeled))
 
 </td></tr><tr><td>
 
-<img src="https://github.com/pyclesperanto_prototype/tree/master/docs/images/screenshot_tribolium_napari.png" width="300"/>
+<img src="https://github.com/clEsperanto/pyclesperanto_prototype/raw/master/docs/images/screenshot_tribolium_napari.png" width="300"/>
 
 </td><td>
 
@@ -147,7 +147,7 @@ imsave("result.tif", cle.pull(labeled))
 
 </td></tr><tr><td>
 
-<img src="https://github.com/pyclesperanto_prototype/tree/master/docs/images/screenshot_tribolium_morphometry.png" width="300"/>
+<img src="https://github.com/clEsperanto/pyclesperanto_prototype/raw/master/docs/images/screenshot_tribolium_morphometry.png" width="300"/>
 
 </td><td>
 
@@ -155,7 +155,7 @@ imsave("result.tif", cle.pull(labeled))
 
 </td></tr><tr><td>
 
-<img src="https://github.com/pyclesperanto_prototype/tree/master/docs/images/screenshot_napari_dask.png" width="300"/>
+<img src="https://github.com/clEsperanto/pyclesperanto_prototype/raw/master/docs/images/screenshot_napari_dask.png" width="300"/>
 
 </td><td>
 
@@ -163,7 +163,7 @@ imsave("result.tif", cle.pull(labeled))
 
 </td></tr><tr><td>
 
-<img src="https://github.com/pyclesperanto_prototype/tree/master/docs/images/screenshot_particle_analyzer.png" width="300"/>
+<img src="https://github.com/clEsperanto/pyclesperanto_prototype/raw/master/docs/images/screenshot_particle_analyzer.png" width="300"/>
 
 </td><td>
 
