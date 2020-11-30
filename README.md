@@ -69,18 +69,110 @@ print(labeled)
 imsave("result.tif", cle.pull(labeled))
 ```
 
-Example notebooks and scripts are available for 
-* [Select GPU](https://github.com/clEsperanto/pyclesperanto_prototype/tree/master/demo/basics/select_GPU.py)
-* [Counting blobs](https://github.com/clEsperanto/pyclesperanto_prototype/tree/master/demo/basics/count_blobs.ipynb)
-* [Crop and paste images](https://github.com/clEsperanto/pyclesperanto_prototype/tree/master/demo/basics/crop_and_paste_images.ipynb)
-* [Inspecting 3D image data](https://github.com/clEsperanto/pyclesperanto_prototype/tree/master/demo/basics/inspecting_3d_images.ipynb)
-* [Multiply vectors and matrices](https://github.com/clEsperanto/pyclesperanto_prototype/tree/master/demo/basics/multiply_vectors_and_matrices.ipynb)
-* [Matrix multiplication](https://github.com/clEsperanto/pyclesperanto_prototype/tree/master/demo/basics/multiply_matrices.ipynb)
-* [Working with spots, pointlist and matrices](https://github.com/clEsperanto/pyclesperanto_prototype/tree/master/demo/basics/spots_pointlists_matrices_tables.ipynb)
-* [Voronoi diagrams](https://github.com/clEsperanto/pyclesperanto_prototype/tree/master/demo/basics/voronoi_diagrams.ipynb)
-* [Tribolium morphometry](https://github.com/clEsperanto/pyclesperanto_prototype/tree/master/demo/tribolium_morphometry/tribolium_morphometry.ipynb)
-* [Napari+Dask Timelapse processing](https://github.com/clEsperanto/pyclesperanto_prototype/tree/master/demo/napari_gui/napari_dask.ipynb)
-* [Napari Particle Analyser](https://github.com/clEsperanto/pyclesperanto_prototype/tree/master/demo/napari_gui/particle_analyser.py)
+## Example gallery 
+
+<table border="0">
+<tr><td>
+
+<img src="https://github.com/pyclesperanto_prototype/tree/master/docs/images/screenshot_select_GPU.png" width="300"/>
+
+</td><td>
+
+[Select GPU](https://github.com/clEsperanto/pyclesperanto_prototype/tree/master/demo/basics/select_GPU.py)
+
+</td></tr><tr><td>
+
+<img src="https://github.com/pyclesperanto_prototype/tree/master/docs/images/screenshot_count_blobs.png" width="300"/>
+
+</td><td>
+
+[Counting blobs](https://github.com/clEsperanto/pyclesperanto_prototype/tree/master/demo/basics/count_blobs.ipynb)
+
+</td></tr><tr><td>
+
+<img src="https://github.com/pyclesperanto_prototype/tree/master/docs/images/screenshot_crop_and_paste_images.png" width="300"/>
+
+
+</td><td>
+
+[Crop and paste images](https://github.com/clEsperanto/pyclesperanto_prototype/tree/master/demo/basics/crop_and_paste_images.ipynb)
+
+</td></tr><tr><td>
+
+<img src="https://github.com/pyclesperanto_prototype/tree/master/docs/images/screenshot_inspecting_3d_images.png" width="300"/>
+
+</td><td>
+
+[Inspecting 3D image data](https://github.com/clEsperanto/pyclesperanto_prototype/tree/master/demo/basics/inspecting_3d_images.ipynb)
+
+</td></tr><tr><td>
+
+<img src="https://github.com/pyclesperanto_prototype/tree/master/docs/images/screenshot_multiply_vectors_and_matrices.png" width="300"/>
+
+</td><td>
+
+[Multiply vectors and matrices](https://github.com/clEsperanto/pyclesperanto_prototype/tree/master/demo/basics/multiply_vectors_and_matrices.ipynb)
+
+</td></tr><tr><td>
+
+<img src="https://github.com/pyclesperanto_prototype/tree/master/docs/images/screenshot_multiply_matrices.png" width="300"/>
+
+</td><td>
+
+[Matrix multiplication](https://github.com/clEsperanto/pyclesperanto_prototype/tree/master/demo/basics/multiply_matrices.ipynb)
+
+</td></tr><tr><td>
+
+<img src="https://github.com/pyclesperanto_prototype/tree/master/docs/images/screenshot_spots_pointlists_matrices_tables.png" width="300"/>
+
+</td><td>
+
+[Working with spots, pointlist and matrices](https://github.com/clEsperanto/pyclesperanto_prototype/tree/master/demo/basics/spots_pointlists_matrices_tables.ipynb)
+
+</td></tr><tr><td>
+
+<img src="https://github.com/pyclesperanto_prototype/tree/master/docs/images/screenshot_voronoi_diagrams.png" width="300"/>
+
+</td><td>
+
+[Voronoi diagrams](https://github.com/clEsperanto/pyclesperanto_prototype/tree/master/demo/basics/voronoi_diagrams.ipynb)
+
+</td></tr><tr><td>
+
+<img src="https://github.com/pyclesperanto_prototype/tree/master/docs/images/screenshot_tribolium_napari.png" width="300"/>
+
+</td><td>
+
+[Tribolium morphometry + Napari](https://github.com/clEsperanto/pyclesperanto_prototype/tree/master/demo/tribolium_morphometry/tribolium.py)
+
+</td></tr><tr><td>
+
+<img src="https://github.com/pyclesperanto_prototype/tree/master/docs/images/screenshot_tribolium_morphometry.png" width="300"/>
+
+</td><td>
+
+[Tribolium morphometry](https://github.com/clEsperanto/pyclesperanto_prototype/tree/master/demo/tribolium_morphometry/tribolium_morphometry.ipynb)
+
+</td></tr><tr><td>
+
+<img src="https://github.com/pyclesperanto_prototype/tree/master/docs/images/screenshot_napari_dask.png" width="300"/>
+
+</td><td>
+
+[Napari+Dask Timelapse processing](https://github.com/clEsperanto/pyclesperanto_prototype/tree/master/demo/napari_gui/napari_dask.ipynb)
+
+</td></tr><tr><td>
+
+<img src="https://github.com/pyclesperanto_prototype/tree/master/docs/images/screenshot_particle_analyzer.png" width="300"/>
+
+</td><td>
+
+[Napari Particle Analyser](https://github.com/clEsperanto/pyclesperanto_prototype/tree/master/demo/napari_gui/particle_analyser.py)
+
+</td></tr></table>
+
+
+
 
 
 ## Feedback welcome!

@@ -14,7 +14,7 @@ from qtpy.QtWidgets import (
 from qtpy.QtCore import Qt
 import napari
 import numpy as np
-from napari.layers import Image
+from napari.layers import Image, Labels
 from magicgui import magicgui
 
 import pyclesperanto_prototype as cle
@@ -121,7 +121,8 @@ class Gui(QWidget):
 
 
 
-# inspired from https://github.com/pr4deepr/pyclesperanto_prototype/blob/master/napari_clij_widget.py# Using Enums for getting a dropdown menu
+# inspired from https://github.com/pr4deepr/pyclesperanto_prototype/blob/master/napari_clij_widget.py
+# Using Enums for getting a dropdown menu
 from enum import Enum
 from functools import partial
 
@@ -206,7 +207,7 @@ class Combine(Enum):
 
 @magicgui(auto_call=True, layout='vertical')
 def combine(input1: Image, input2: Image, operation: Combine) -> Image:
-    if input1 is not None:
+    if input1 is not None and input2 is not None:
         cle_input1 = cle.push_zyx(input1.data)
         cle_input2 = cle.push_zyx(input2.data)
         output = cle.create_like(cle_input1)
@@ -233,7 +234,7 @@ class Label(Enum):
         return self.value(*args)
 
 @magicgui(auto_call=True, layout='vertical')
-def label(input1: Image, operation: Label) -> Image:
+def label(input1: Image, operation: Label) -> Labels:
     if input1 is not None:
         cle_input1 = cle.push_zyx(input1.data)
         output = cle.create_like(cle_input1)
