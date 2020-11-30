@@ -1,6 +1,6 @@
 __constant sampler_t sampler = CLK_NORMALIZED_COORDS_FALSE | CLK_ADDRESS_CLAMP_TO_EDGE | CLK_FILTER_NEAREST;
 
-__kernel void binary_edge_detection_diamond_image2d
+__kernel void binary_edge_detection_2d
 (
   IMAGE_dst_TYPE dst, IMAGE_src_TYPE src
 )

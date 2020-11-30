@@ -7,6 +7,6 @@ __kernel void set_where_x_greater_than_y_2d(
   const int x = get_global_id(0);
   const int y = get_global_id(1);
   if (x > y) {
-    WRITE_dst_IMAGE (dst, (int2)(x,y), CONVERT_dst_PIXEL_TYPE(value));
+    WRITE_IMAGE (dst, (int2)(x,y), CONVERT_dst_PIXEL_TYPE(value));
   }
 }
