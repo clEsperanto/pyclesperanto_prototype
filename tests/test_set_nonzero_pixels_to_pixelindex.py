@@ -10,10 +10,10 @@ def test_set_nonzero_pixels_to_pixelindex():
     ]))
 
     reference = cle.push_zyx(np.asarray([
-        [0, 0, 0, 12],
-        [0, 0, 9, 13],
+        [0, 0, 0, 13],
         [0, 0, 10, 14],
-        [3, 7, 11, 15]
+        [0, 0, 11, 15],
+        [4, 8, 12, 16]
     ]))
 
     result = cle.create(test1)

@@ -36,6 +36,5 @@ def binary_edge_detection(source : Image, destination : Image = None):
         "src":source
     }
 
-    # TODO: Rename cl file and kernel function to fit to naming conventions. This needs to be done in clij2 as well.
-    execute(__file__, 'binaryEdgeDetection' + str(len(destination.shape)) + 'd_x.cl', 'binary_edge_detection_diamond_image' + str(len(destination.shape)) + 'd', destination.shape, parameters)
+    execute(__file__, 'binary_edge_detection_' + str(len(destination.shape)) + 'd_x.cl', 'binary_edge_detection_' + str(len(destination.shape)) + 'd', destination.shape, parameters)
     return destination
