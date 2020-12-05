@@ -120,7 +120,8 @@ def execute(anchor, opencl_kernel_filename, kernel_name, global_size, parameters
             arguments.append(np.array([value], np.float32))
         else:
             raise TypeError(
-                f"other types than float and int aren`t supported yet for parameters {value}"
+                f"other types than float and int aren`t supported yet for parameters {key} : {value} . \n"
+                f"function {kernel_name}"
             )
 
     # print("Assembling " + opencl_kernel_filename + " took " + str((time.time() - time_stamp) * 1000) + " ms")
