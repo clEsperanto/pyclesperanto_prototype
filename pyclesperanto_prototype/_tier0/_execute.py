@@ -35,20 +35,28 @@ def get_ocl_source(anchor, opencl_kernel_filename):
     kernel = (Path(anchor).parent / opencl_kernel_filename).read_text()
     return "\n".join([preamble(), kernel])
 
-
-IMAGE_HEADER = """
+COMMON_HEADER = """
 #define CONVERT_{key}_PIXEL_TYPE clij_convert_float_sat
-#define IMAGE_{key}_TYPE __global float*
 #define IMAGE_{key}_PIXEL_TYPE float
 #define IMAGE_SIZE_{key}_WIDTH {width}
 #define IMAGE_SIZE_{key}_HEIGHT {height}
 #define IMAGE_SIZE_{key}_DEPTH {depth}
 #define POS_{key}_TYPE {pos_type}
 #define POS_{key}_INSTANCE(pos0,pos1,pos2,pos3) ({pos_type}){pos}
+"""
+
+
+ARRAY_HEADER = COMMON_HEADER + """
+#define IMAGE_{key}_TYPE __global float*
 #define READ_{key}_IMAGE(a,b,c) read_buffer{img_dims}d{typeId}(GET_IMAGE_WIDTH(a),GET_IMAGE_HEIGHT(a),GET_IMAGE_DEPTH(a),a,b,c)
 #define WRITE_{key}_IMAGE(a,b,c) write_buffer{img_dims}d{typeId}(GET_IMAGE_WIDTH(a),GET_IMAGE_HEIGHT(a),GET_IMAGE_DEPTH(a),a,b,c)
 """
 
+IMAGE_HEADER = COMMON_HEADER + """
+#define IMAGE_{key}_TYPE {type_name}
+#define READ_{key}_IMAGE(a,b,c) read_image{typeId}(a,b,c)
+#define WRITE_{key}_IMAGE(a,b,c) write_image{typeId}(a,b,c)
+"""
 
 def execute(anchor, opencl_kernel_filename, kernel_name, global_size, parameters, prog : OCLProgram = None, constants = None):
     """
@@ -94,7 +102,7 @@ def execute(anchor, opencl_kernel_filename, kernel_name, global_size, parameters
 
             if value.dtype != np.dtype("float32"):
                 raise TypeError(
-                    "Only float32 is currently supported for images/buffers/arrays"
+                    "Only float32 is currently supported for buffers/arrays"
                 )
 
             # image type handling
@@ -112,8 +120,38 @@ def execute(anchor, opencl_kernel_filename, kernel_name, global_size, parameters
                 "height": height,
                 "width": width,
             }
-            defines.extend(IMAGE_HEADER.format(**params).split("\n"))
+            defines.extend(ARRAY_HEADER.format(**params).split("\n"))
+        elif isinstance(value, cl.Image):
+            arguments.append(value)
 
+            if value.dtype != np.dtype("float32"):
+                raise TypeError(
+                    "Only float32 is currently supported for images"
+                )
+
+            # image type handling
+            depth_height_width = [1, 1, 1]
+            depth_height_width[-len(value.shape) :] = value.shape
+            depth, height, width = depth_height_width
+            ndim = len(value.shape)
+
+            if "destination" in key or "output" in key or "dst" in key:
+                type_name = "__write_only image" + str(ndim) + "d_t"
+            else:
+                type_name = "__read_only image" + str(ndim) + "d_t"
+
+            params = {
+                "typeId": "f", # can alternatively only be ui
+                "type_name": type_name,
+                "key": key,
+                "pos_type": "int2" if ndim < 3 else "int4",
+                "pos": ["(pos0, 0)", "(pos0, pos1)", "(pos0, pos1, pos2, 0)"][ndim - 1],
+                "img_dims": 2 if ndim < 3 else 3,
+                "depth": depth,
+                "height": height,
+                "width": width,
+            }
+            defines.extend(IMAGE_HEADER.format(**params).split("\n"))
         elif isinstance(value, int):
             arguments.append(np.array([value], np.int32))
         elif isinstance(value, float):

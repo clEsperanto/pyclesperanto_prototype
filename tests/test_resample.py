@@ -131,3 +131,29 @@ def test_resample_upsample_3d():
     print(b)
     assert (np.array_equal(a, b))
 
+
+def test_resample_upsample_3d_with_interpolation():
+    test1 = cle.push_zyx(np.asarray([
+        [
+            [0, 2]
+        ], [
+            [5, 5]
+        ]
+    ]))
+
+    reference = cle.push_zyx(np.asarray([
+        [
+            [0, 0.5, 1.5, 1.5],
+        ], [
+            [3.75, 5, 5, 3.75]
+        ]
+    ]))
+
+    result = cle.resample(test1, factor_x=2, factor_y=1, factor_z=1,linear_interpolation=True)
+
+    a = cle.pull_zyx(result)
+    b = cle.pull_zyx(reference)
+
+    print(a)
+    print(b)
+    assert (np.array_equal(a, b))
