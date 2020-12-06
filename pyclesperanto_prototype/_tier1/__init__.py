@@ -83,6 +83,7 @@ from ._power import power
 from ._power_images import power_images
 from ._replace_intensities import replace_intensities
 from ._replace_intensity import replace_intensity
+from ._resample import resample
 from ._touch_matrix_to_mesh import touch_matrix_to_mesh
 from ._maximum_sphere import maximum_sphere
 from ._minimum_sphere import minimum_sphere
