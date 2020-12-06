@@ -28,24 +28,26 @@ def resample(source : Image, destination : Image = None, factor_x : float = 1, f
     """
     import numpy as np
 
+    source_dimensions = source.shape
+    if len(source_dimensions) == 2:
+        transform_matrix = np.asarray([
+            [1.0 / factor_x, 0, 0],
+            [0, 1.0 / factor_y, 0]
+        ])
+        destination_dimensions = [int(factor_y * source_dimensions[0]), int(factor_x * source_dimensions[1])]
+    else:
+        transform_matrix = np.asarray([
+            [1.0 / factor_x, 0, 0, 0],
+            [0, 1.0 / factor_y, 0, 0],
+            [0, 0, 1.0 / factor_z, 0]
+        ])
+        destination_dimensions = [int(factor_z * source_dimensions[0]), int(factor_y * source_dimensions[1]),
+                                  int(factor_x * source_dimensions[2])]
+
+    # create an output image in case none is given
     if destination is None:
-        source_dimensions = source.shape
-        if len(source_dimensions) == 2:
-            transform_matrix = np.asarray([
-                [1.0 / factor_x, 0, 0],
-                [0, 1.0 / factor_y, 0]
-            ])
-            destination_dimensions = [int(factor_y * source_dimensions[0]), int(factor_x * source_dimensions[1])]
-        else:
-            transform_matrix = np.asarray([
-                [1.0 / factor_x, 0, 0, 0],
-                [0, 1.0 / factor_y, 0, 0],
-                [0, 0, 1.0 / factor_z, 0]
-            ])
-            destination_dimensions = [int(factor_z * source_dimensions[0]), int(factor_y * source_dimensions[1]), int(factor_x * source_dimensions[2])]
-        print(destination_dimensions)
         destination = create(destination_dimensions)
-    print(transform_matrix)
+
     gpu_transform_matrix = push_zyx(transform_matrix)
 
     kernel_suffix = ''
