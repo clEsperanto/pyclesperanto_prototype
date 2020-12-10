@@ -69,5 +69,5 @@ def create_2d_zy(input):
 def create_2d_zx(input):
     return create([input.shape[0], input.shape[2]])
 
-def create_none(input):
+def create_none(*args):
     return None
