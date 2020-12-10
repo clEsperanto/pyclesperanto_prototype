@@ -10,6 +10,17 @@ import numpy as np
 
 @plugin_function
 def exclude_labels_on_edges(labels_source : Image, labels_destination : Image = None):
+    """
+    
+    Parameters
+    ----------
+    labels_source
+    labels_destination
+
+    Returns
+    -------
+
+    """
     num_labels = int(maximum_of_all_pixels(labels_source))
 
     label_indices = range(0, num_labels + 1)
