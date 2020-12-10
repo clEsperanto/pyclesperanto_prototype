@@ -57,6 +57,14 @@ def create_square_matrix_from_labelmap(labelmap: OCLArray):
 
     return create([width, width])
 
+
+def create_square_matrix_from_two_labelmaps(labelmap1: OCLArray, labelmap2: OCLArray):
+    from .._tier2 import maximum_of_all_pixels
+    width = int(maximum_of_all_pixels(labelmap1) + 1)
+    height = int(maximum_of_all_pixels(labelmap2) + 1)
+
+    return create([height, width])
+
 def create_2d_xy(input):
     return create([input.shape[2], input.shape[1]])
 
