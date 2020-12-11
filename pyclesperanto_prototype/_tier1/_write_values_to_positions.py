@@ -23,7 +23,7 @@ def write_values_to_positions(pointlist_and_values : Image, destination : Image 
     if destination is None:
         max_pos = pull(maximum_x_projection(pointlist_and_values)).astype(int)
         max_pos = max_pos[0]
-        print("max pos: " + str(max_pos))
+        
         if len(max_pos) == 4: # 3D image requested
             destination = create([max_pos[2] + 1,max_pos[1] + 1,max_pos[0] + 1])
         elif len(max_pos) == 3:  # 2D image requested
