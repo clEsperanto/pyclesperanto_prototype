@@ -1,0 +1,40 @@
+from .._tier0 import execute
+from .._tier0 import plugin_function
+from .._tier0 import Image
+from .._tier0 import create
+from .._tier0 import create_none
+from .._tier1 import maximum_x_projection
+from .._tier0 import pull
+
+@plugin_function(output_creator=create_none)
+def write_values_to_positions(pointlist_and_values : Image, destination : Image = None):
+    """
+
+    Parameters
+    ----------
+    pointlist_and_values
+    destination
+
+    Returns
+    -------
+
+    """
+
+    if destination is None:
+        max_pos = pull(maximum_x_projection(pointlist_and_values)).astype(int)
+        max_pos = max_pos[0]
+        print("max pos: " + str(max_pos))
+        if len(max_pos) == 4: # 3D image requested
+            destination = create([max_pos[2] + 1,max_pos[1] + 1,max_pos[0] + 1])
+        elif len(max_pos) == 3:  # 2D image requested
+            destination = create([max_pos[1] + 1,max_pos[0] + 1])
+        else:
+            raise Exception("Size not supported: " + str(max_pos))
+
+    parameters = {
+        "dst":destination,
+        "src":pointlist_and_values
+    }
+
+    execute(__file__, 'write_values_to_positions_' + str(len(destination.shape)) + 'd_x.cl', 'write_values_to_positions_' + str(len(destination.shape)) + 'd', pointlist_and_values.shape, parameters)
+    return destination
