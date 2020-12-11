@@ -44,6 +44,20 @@ def create_matrix_from_pointlists(pointlist1:OCLArray, pointlist2:OCLArray):
 
     return create([width, height])
 
+def create_from_pointlist(pointlist: OCLArray, *args):
+    from .._tier1 import maximum_x_projection
+    from .._tier0 import pull
+
+    max_pos = pull(maximum_x_projection(pointlist)).astype(int)
+    max_pos = max_pos[0]
+
+    if len(max_pos) == 3:  # 3D image requested
+        destination = create([max_pos[2] + 1, max_pos[1] + 1, max_pos[0] + 1])
+    elif len(max_pos) == 2:  # 2D image requested
+        destination = create([max_pos[1] + 1, max_pos[0] + 1])
+    else:
+        raise Exception("Size not supported: " + str(max_pos))
+    return destination
 
 def create_square_matrix_from_pointlist(pointlist1:OCLArray):
     width = pointlist1.shape[1] + 1

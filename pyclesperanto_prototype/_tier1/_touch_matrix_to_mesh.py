@@ -1,10 +1,9 @@
 from .._tier0 import execute
 from .._tier0 import plugin_function
 from .._tier0 import Image
+from .._tier0 import create_from_pointlist
 
-# todo: add a proper output-generator
-
-@plugin_function
+@plugin_function(output_creator=create_from_pointlist)
 def touch_matrix_to_mesh(pointlist  : Image, touch_matrix : Image, mesh_destination : Image):
     """Takes a pointlist with dimensions n*d with n point coordinates in d 
     dimensions and a touch matrix of 
