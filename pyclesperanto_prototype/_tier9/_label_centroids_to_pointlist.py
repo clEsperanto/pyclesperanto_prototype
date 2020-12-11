@@ -19,7 +19,7 @@ def label_centroids_to_pointlist(labels:Image, destination_pointlist :Image = No
     matrix = np.zeros([num_rows, num_columns])
 
     for i, label_props in enumerate(regionprops):
-        print(i)
+        #print(i)
         # centroid
         if (len(label_props.centroid) == 3):
             matrix[i][0] = label_props.centroid[2]

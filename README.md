@@ -131,6 +131,15 @@ imsave("result.tif", cle.pull(labeled))
 
 </td></tr><tr><td>
 
+<img src="https://github.com/clEsperanto/pyclesperanto_prototype/raw/master/docs/images/mesh_between_centroids.png
+" width="300"/>
+
+</td><td>
+
+[Mesh between centroids](https://github.com/clEsperanto/pyclesperanto_prototype/tree/master/demo/neighbors/mesh_between_centroids.ipynb)
+
+</td></tr><tr><td>
+
 <img src="https://github.com/clEsperanto/pyclesperanto_prototype/raw/master/docs/images/screenshot_voronoi_diagrams.png" width="300"/>
 
 </td><td>
