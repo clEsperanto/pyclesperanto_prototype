@@ -10,6 +10,7 @@ from ._create import (
     create_square_matrix_from_pointlist,
     create_square_matrix_from_labelmap,
     create_square_matrix_from_two_labelmaps,
+    create_vector_from_square_matrix,
     create_2d_xy,
     create_2d_yx,
     create_2d_zx,

@@ -79,6 +79,10 @@ def create_square_matrix_from_two_labelmaps(labelmap1: OCLArray, labelmap2: OCLA
 
     return create([height, width])
 
+
+def create_vector_from_square_matrix(square_matrix : OCLArray, *args):
+    return create([1, square_matrix.shape[0]])
+
 def create_2d_xy(input):
     return create([input.shape[2], input.shape[1]])
 

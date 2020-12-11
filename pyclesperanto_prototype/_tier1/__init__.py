@@ -12,6 +12,7 @@ from ._binary_xor import binary_xor
 from ._convolve import convolve
 from ._copy import copy
 from ._copy_slice import copy_slice
+from ._count_touching_neighbors import count_touching_neighbors
 from ._crop import crop
 from ._detect_label_edges import detect_label_edges
 from ._detect_maxima_box import detect_maxima_box
