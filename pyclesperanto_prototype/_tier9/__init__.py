@@ -1,3 +1,4 @@
+from ._draw_distance_mesh_between_touching_labels import draw_distance_mesh_between_touching_labels
 from ._label_centroids_to_pointlist import label_centroids_to_pointlist
 from ._push_regionprops import push_regionprops
 from ._statistics_of_background_and_labelled_pixels import statistics_of_background_and_labelled_pixels
