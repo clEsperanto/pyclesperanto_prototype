@@ -1,4 +1,5 @@
 from ._artificial_tissue_2d import artificial_tissue_2d
+from ._average_distance_of_n_closest_neighbors_map import average_distance_of_n_closest_neighbors_map
 from ._centroids_of_labels import centroids_of_labels
 from ._centroids_of_labels import centroids_of_labels as label_centroids_to_pointlist
 from ._draw_distance_mesh_between_touching_labels import draw_distance_mesh_between_touching_labels
