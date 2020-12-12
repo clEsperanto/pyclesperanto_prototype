@@ -1,6 +1,7 @@
 from ._absolute import absolute
 from ._add_images_weighted import add_images_weighted
 from ._add_image_and_scalar import add_image_and_scalar
+from ._average_distance_of_n_far_off_distances import average_distance_of_n_far_off_distances
 from ._average_distance_of_touching_neighbors import average_distance_of_touching_neighbors
 from ._binary_and import binary_and
 from ._binary_and import binary_and as binary_intersection
