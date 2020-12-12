@@ -26,6 +26,6 @@ def label_mean_intensity_map(intensity_image : Image, labels : Image, mean_inten
     values_vector = push_zyx(np.asarray([[r.mean_intensity for r in regionprops]]))
     set_column(values_vector, 0, 0)
 
-    pixel_count_map = replace_intensities(labels, values_vector)
+    mean_intensity_map = replace_intensities(labels, values_vector, mean_intensity_map)
 
-    return pixel_count_map
+    return mean_intensity_map
