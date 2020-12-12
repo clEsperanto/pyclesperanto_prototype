@@ -60,7 +60,9 @@ class Gui(QWidget):
             self._add_button("Binarize", self._add_binarize_clicked)
             self._add_button("Combine", self._add_combine_clicked)
             self._add_button("Label", self._add_label_clicked)
+            self._add_button("Label Processing", self._add_label_processing_clicked)
             self._add_button("Measure", self._measure_clicked)
+            self._add_button("Maps and meshes", self._maps_and_meshes_clicked)
         else:
             self._add_button("Done", self._done_clicked)
             self._add_button("Cancel", self._cancel_clicked)
@@ -85,8 +87,14 @@ class Gui(QWidget):
     def _add_label_clicked(self):
         self._activate(label)
 
+    def _add_label_processing_clicked(self):
+        self._activate(label_processing)
+
     def _measure_clicked(self):
         self._activate(measure)
+
+    def _maps_and_meshes_clicked(self):
+        self._activate(maps_and_meshes)
 
     def _activate(self, magicgui):
         for layer in viewer.layers:
@@ -103,7 +111,7 @@ class Gui(QWidget):
         if Gui.global_last_filter_applied is not None:
             data = viewer.layers.selected[0].data
             viewer.layers.remove_selected()
-            if isinstance(Gui.global_last_filter_applied, Label):
+            if isinstance(Gui.global_last_filter_applied, Label) or isinstance(Gui.global_last_filter_applied, LabelProcessing):
                 viewer.add_labels(data, name = str(Gui.global_last_filter_applied))
             else:
                 viewer.add_image(data, name=str(Gui.global_last_filter_applied))
@@ -133,8 +141,10 @@ class Filter(Enum):
     maximum_box = partial(cle.maximum_box)
     minimum_box = partial(cle.minimum_box)
     top_hat_box = partial(cle.top_hat_box)
+    divide_by_gaussian = partial(cle.divide_by_gaussian_background)
     bottom_hat_box = partial(cle.bottom_hat_box)
     gaussian_blur = partial(cle.gaussian_blur)
+    gamma_correctiion = partial(cle.gamma_correction)
     gradient_x = partial(cle.gradient_x)
     gradient_y = partial(cle.gradient_y)
     gradient_z = partial(cle.gradient_z)
@@ -239,6 +249,63 @@ def label(input1: Image, operation: Label) -> Labels:
         cle_input1 = cle.push_zyx(input1.data)
         output = cle.create_like(cle_input1)
         operation(cle_input1, output)
+        output = cle.pull_zyx(output)
+
+        # workaround to cause a auto-contrast in the viewer after returning the result
+        if Gui.global_last_filter_applied is not None:
+            viewer.layers.remove_selected()
+        Gui.global_last_filter_applied = operation
+
+        return output
+
+# -----------------------------------------------------------------------------
+class LabelProcessing(Enum):
+    please_select = partial(cle.copy)
+    exclude_labels_on_edges = partial(cle.exclude_labels_on_edges)
+    extend_labeling_via_voronoi = partial(cle.extend_labeling_via_voronoi)
+    extend_labels_with_maximum_radius = partial(cle.extend_labels_with_maximum_radius)
+    exclude_labels_out_of_size_range = partial(cle.exclude_labels_out_of_size_range)
+
+    #define the call method for the functions or it won't return anything
+    def __call__(self, *args):
+        return self.value(*args)
+
+@magicgui(auto_call=True, layout='vertical')
+def label_processing(input1: Image, operation: LabelProcessing, min: float=0, max:float=100) -> Labels:
+    if input1 is not None:
+        cle_input1 = cle.push_zyx(input1.data)
+        output = cle.create_like(cle_input1)
+        operation(cle_input1, output, min, max)
+        output = cle.pull_zyx(output)
+
+        # workaround to cause a auto-contrast in the viewer after returning the result
+        if Gui.global_last_filter_applied is not None:
+            viewer.layers.remove_selected()
+        Gui.global_last_filter_applied = operation
+
+        return output
+
+
+# -----------------------------------------------------------------------------
+class MapsAndMeshes(Enum):
+    please_select = partial(cle.copy)
+    draw_mesh_between_proximal_labels = partial(cle.draw_mesh_between_proximal_labels)
+    draw_distance_mesh_between_touching_labels = partial(cle.draw_distance_mesh_between_touching_labels)
+    draw_mesh_between_touching_labels = partial(cle.draw_mesh_between_touching_labels)
+    draw_mesh_between_n_closest_labels = partial(cle.draw_mesh_between_n_closest_labels)
+    label_pixel_count_map = partial(cle.label_pixel_count_map)
+    touching_neighbor_count_map = partial(cle.touching_neighbor_count_map)
+
+    #define the call method for the functions or it won't return anything
+    def __call__(self, *args):
+        return self.value(*args)
+
+@magicgui(auto_call=True, layout='vertical')
+def maps_and_meshes(input1: Image, operation: MapsAndMeshes, n : float = 1) -> Image:
+    if input1 is not None:
+        cle_input1 = cle.push_zyx(input1.data)
+        output = cle.create_like(cle_input1)
+        operation(cle_input1, output, n)
         output = cle.pull_zyx(output)
 
         # workaround to cause a auto-contrast in the viewer after returning the result
