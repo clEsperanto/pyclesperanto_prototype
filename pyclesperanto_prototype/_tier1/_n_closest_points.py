@@ -20,7 +20,7 @@ def n_closest_points(distance_matrix : Image, index_list : Image = None, n : int
     """
 
     if index_list is None:
-        index_list = create([n, distance_matrix.shape[1]])
+        index_list = create([int(n), distance_matrix.shape[1]])
 
     parameters = {
         "src_distancematrix":distance_matrix,
