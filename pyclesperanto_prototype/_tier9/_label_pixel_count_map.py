@@ -5,7 +5,7 @@ from .._tier1 import replace_intensities
 from .._tier1 import set_column
 
 @plugin_function
-def label_pixelcount_map(labels : Image, pixel_count_map : Image = None):
+def label_pixel_count_map(labels : Image, pixel_count_map : Image = None):
     """
 
     Parameters
