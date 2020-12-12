@@ -2,7 +2,7 @@ import pyclesperanto_prototype as cle
 import numpy as np
 
 
-def test_combine_horizontally():
+def test_combine_vertically():
     test1 = cle.push_zyx(np.asarray([
         [1, 1],
         [1, 1]
