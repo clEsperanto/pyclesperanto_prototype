@@ -31,7 +31,7 @@ def exclude_labels(flaglist_vector : Image, labels_source : Image, labels_destin
 
     count = 1
     for i in range(1, num_labels):
-        if (flaglist_np[i] > 0):
+        if (flaglist_np[i] == 0):
             flaglist_np[i] = count
             count = count + 1
         else:
