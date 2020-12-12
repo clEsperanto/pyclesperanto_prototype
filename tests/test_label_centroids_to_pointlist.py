@@ -17,7 +17,7 @@ def test_label_centroids_to_pointlist():
     ]
     ))
 
-    result = cle.label_centroids_to_pointlist(labels)
+    result = cle.centroids_of_labels(labels)
 
     a = cle.pull_zyx(result)
     b = cle.pull_zyx(reference)
@@ -50,7 +50,7 @@ def test_label_centroids_to_pointlist_3d():
     ]
     ))
 
-    result = cle.label_centroids_to_pointlist(labels)
+    result = cle.centroids_of_labels(labels)
 
     a = cle.pull_zyx(result)
     b = cle.pull_zyx(reference)

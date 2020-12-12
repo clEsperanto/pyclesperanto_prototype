@@ -16,7 +16,7 @@ def test_average_distance_of_touching_neighbors():
                     [[0, 3, 3, 3]]
     ))
 
-    centroids = cle.label_centroids_to_pointlist(labels)
+    centroids = cle.centroids_of_labels(labels)
     distance_matrix = cle.generate_distance_matrix(centroids, centroids)
     touch_matrix = cle.generate_touch_matrix(labels)
 

@@ -16,7 +16,7 @@ def test_average_distance_of_n_far_off_distances():
                     [[0, 4.2426, 4.2426, 3]]
     ))
 
-    centroids = cle.label_centroids_to_pointlist(labels)
+    centroids = cle.centroids_of_labels(labels)
     distance_matrix = cle.generate_distance_matrix(centroids, centroids)
 
     average_distance_of_n_far_off_distances = cle.average_distance_of_n_far_off_distances(distance_matrix, n=1)

@@ -6,7 +6,7 @@ from .._tier0 import Image
 from .._tier0 import push
 
 @plugin_function(output_creator=create_pointlist_from_labelmap)
-def label_centroids_to_pointlist(labels:Image, destination_pointlist :Image = None):
+def centroids_of_labels(labels:Image, destination_pointlist :Image = None):
     """
     """
     from .._tier9 import statistics_of_labelled_pixels
