@@ -3,6 +3,7 @@ from ._bounding_box import bounding_box
 from ._center_of_mass import center_of_mass
 from ._close_index_gaps_in_label_map import close_index_gaps_in_label_map
 from ._difference_of_gaussian import difference_of_gaussian
+from ._divide_by_gaussian_background import divide_by_gaussian_background
 from ._exclude_labels import exclude_labels
 from ._exclude_labels_on_edges import exclude_labels_on_edges
 from ._exclude_labels_out_of_size_range import exclude_labels_out_of_size_range
