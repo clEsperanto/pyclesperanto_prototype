@@ -12,6 +12,7 @@ from ._minimum_of_all_pixels import minimum_of_all_pixels
 from ._minimum_of_masked_pixels import minimum_of_masked_pixels
 from ._minimum_of_touching_neighbors import minimum_of_touching_neighbors
 from ._mode_of_touching_neighbors import mode_of_touching_neighbors
+from ._neighbors_of_neighbors import neighbors_of_neighbors
 from ._pointlist_to_labelled_spots import pointlist_to_labelled_spots
 from ._reduce_stack import reduce_stack
 from ._standard_deviation_of_touching_neighbors import standard_deviation_of_touching_neighbors
