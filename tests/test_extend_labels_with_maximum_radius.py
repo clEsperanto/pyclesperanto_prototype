@@ -25,7 +25,7 @@ def test_extend_labels_with_maximum_radius_2d():
 
     ]))
 
-    gpu_output = cle.extend_labels_wth_maximum_radius(gpu_input, radius=1)
+    gpu_output = cle.extend_labels_with_maximum_radius(gpu_input, radius=1)
 
     a = cle.pull_zyx(gpu_output)
     b = cle.pull_zyx(gpu_reference)
@@ -72,7 +72,7 @@ def test_extend_labels_with_maximum_radius_3d():
         ]
     ]))
 
-    gpu_output = cle.extend_labels_wth_maximum_radius(gpu_input, radius=1)
+    gpu_output = cle.extend_labels_with_maximum_radius(gpu_input, radius=1)
 
     a = cle.pull_zyx(gpu_output)
     b = cle.pull_zyx(gpu_reference)

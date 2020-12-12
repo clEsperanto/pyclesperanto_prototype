@@ -10,7 +10,7 @@ from .._tier1 import onlyzero_overwrite_maximum_diamond
 import numpy as np
 
 @plugin_function
-def extend_labels_wth_maximum_radius(labeling_source : Image, labeling_destination : Image = None, radius: int = 2):
+def extend_labels_with_maximum_radius(labeling_source : Image, labeling_destination : Image = None, radius: int = 2):
     flip = create_like(labeling_destination)
     flop = create_like(labeling_destination)
 
