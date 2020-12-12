@@ -11,7 +11,7 @@ def test_exclude_labels_with_values_out_of_range_2d():
 
     gpu_reference = cle.push_zyx(np.asarray([
 
-            [0, 0, 0, 0, 1, 2, 3]
+            [0, 1, 2, 3, 0, 0, 0]
 
     ]))
 
