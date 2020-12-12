@@ -76,6 +76,7 @@ from ._minimum_z_projection import minimum_z_projection
 from ._multiply_image_and_coordinate import multiply_image_and_coordinate
 from ._multiply_image_and_scalar import multiply_image_and_scalar
 from ._multiply_images import multiply_images
+from ._n_closest_points import n_closest_points
 from ._nonzero_maximum_box import nonzero_maximum_box
 from ._nonzero_maximum_diamond import nonzero_maximum_diamond
 from ._nonzero_minimum_box import nonzero_minimum_box
