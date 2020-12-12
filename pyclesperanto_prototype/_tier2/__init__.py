@@ -5,6 +5,7 @@ from ._flag_existing_intensities import flag_existing_intensities
 from ._invert import invert
 from ._label_spots import label_spots
 from ._maximum_of_all_pixels import maximum_of_all_pixels
+from ._maximum_of_touching_neighbors import maximum_of_touching_neighbors
 from ._mean_of_touching_neighbors import mean_of_touching_neighbors
 from ._median_of_touching_neighbors import median_of_touching_neighbors
 from ._minimum_of_all_pixels import minimum_of_all_pixels
