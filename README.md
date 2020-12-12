@@ -150,19 +150,29 @@ imsave("result.tif", cle.pull(labeled))
 
 <img src="https://github.com/clEsperanto/pyclesperanto_prototype/raw/master/docs/images/mesh_with_distances.png" width="300"/>
 
-
 </td><td>
 
 [Mesh with distances](https://github.com/clEsperanto/pyclesperanto_prototype/tree/master/demo/neighbors/mesh_with_distances.ipynb)
 
 </td></tr><tr><td>
 
+<img src="https://github.com/clEsperanto/pyclesperanto_prototype/raw/master/docs/images/tissue_neighborhood_quantification.png" width="300"/>
+
+</td><td>
+
+[Tissue neighborhood quantification](https://github.com/clEsperanto/pyclesperanto_prototype/tree/master/demo/neighbors/tissue_neighborhood_quantification.ipynb)
+
+</td></tr><tr><td>
+
+<img src="https://github.com/clEsperanto/pyclesperanto_prototype/raw/master/docs/images/neighbors_of_neighbors.png" width="300"/>
+
+</td><td>
+
+[Neighbors of neighbors](https://github.com/clEsperanto/pyclesperanto_prototype/tree/master/demo/neighbors/neighbors_of_neighbors.ipynb)
+
+</td></tr><tr><td>
+
 <img src="https://github.com/clEsperanto/pyclesperanto_prototype/raw/master/docs/images/screenshot_voronoi_diagrams.png" width="300"/>
-
-
-
-
-
 
 </td><td>
 
