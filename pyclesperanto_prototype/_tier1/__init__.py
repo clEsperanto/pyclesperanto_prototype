@@ -2,7 +2,9 @@ from ._absolute import absolute
 from ._add_images_weighted import add_images_weighted
 from ._add_image_and_scalar import add_image_and_scalar
 from ._average_distance_of_n_far_off_distances import average_distance_of_n_far_off_distances
+from ._average_distance_of_n_far_off_distances import average_distance_of_n_far_off_distances as average_distance_of_n_far_off_points
 from ._average_distance_of_n_shortest_distances import average_distance_of_n_shortest_distances
+from ._average_distance_of_n_shortest_distances import average_distance_of_n_shortest_distances as average_distance_of_n_closest_points
 from ._average_distance_of_touching_neighbors import average_distance_of_touching_neighbors
 from ._binary_and import binary_and
 from ._binary_and import binary_and as binary_intersection
@@ -28,6 +30,7 @@ from ._draw_box import draw_box
 from ._draw_sphere import draw_sphere
 from ._draw_line import draw_line
 from ._downsample_xy_by_half_median import downsample_xy_by_half_median
+from ._downsample_xy_by_half_median import downsample_xy_by_half_median as downsample_slice_by_slice_half_median
 from ._equal import equal
 from ._equal_constant import equal_constant
 from ._equal_constant import equal_constant as label_to_mask
