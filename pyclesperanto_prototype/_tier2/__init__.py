@@ -3,6 +3,7 @@ from ._bottom_hat_box import bottom_hat_box
 from ._bottom_hat_sphere import bottom_hat_sphere
 from ._combine_horizontally import combine_horizontally
 from ._combine_vertically import combine_vertically
+from ._concatenate_stacks import concatenate_stacks
 from ._flag_existing_intensities import flag_existing_intensities
 from ._invert import invert
 from ._label_spots import label_spots
