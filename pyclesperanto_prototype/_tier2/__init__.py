@@ -1,6 +1,7 @@
 from ._block_enumerate import block_enumerate
 from ._bottom_hat_box import bottom_hat_box
 from ._bottom_hat_sphere import bottom_hat_sphere
+from ._combine_horizontally import combine_horizontally
 from ._flag_existing_intensities import flag_existing_intensities
 from ._invert import invert
 from ._label_spots import label_spots
