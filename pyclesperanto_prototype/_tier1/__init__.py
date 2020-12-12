@@ -86,6 +86,7 @@ from ._not_equal_constant import not_equal_constant
 from ._paste import paste
 from ._onlyzero_overwrite_maximum_box import onlyzero_overwrite_maximum_box
 from ._onlyzero_overwrite_maximum_diamond import onlyzero_overwrite_maximum_diamond
+from ._pointindexlist_to_mesh import pointindexlist_to_mesh
 from ._power import power
 from ._power_images import power_images
 from ._replace_intensities import replace_intensities
