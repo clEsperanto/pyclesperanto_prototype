@@ -87,6 +87,7 @@ def execute(anchor, opencl_kernel_filename, kernel_name, global_size, parameters
         "#define GET_IMAGE_WIDTH(image_key) IMAGE_SIZE_ ## image_key ## _WIDTH",
         "#define GET_IMAGE_HEIGHT(image_key) IMAGE_SIZE_ ## image_key ## _HEIGHT",
         "#define GET_IMAGE_DEPTH(image_key) IMAGE_SIZE_ ## image_key ## _DEPTH",
+        "#define MAX_ARRAY_SIZE 1000"
     ]
 
     if constants is not None:
