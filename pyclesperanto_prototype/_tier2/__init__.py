@@ -1,3 +1,4 @@
+from ._add_images import add_images
 from ._block_enumerate import block_enumerate
 from ._bottom_hat_box import bottom_hat_box
 from ._bottom_hat_sphere import bottom_hat_sphere
