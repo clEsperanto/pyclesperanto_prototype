@@ -5,6 +5,7 @@ from ._combine_horizontally import combine_horizontally
 from ._combine_vertically import combine_vertically
 from ._concatenate_stacks import concatenate_stacks
 from ._flag_existing_intensities import flag_existing_intensities
+from ._gamma_correction import gamma_correction
 from ._invert import invert
 from ._label_spots import label_spots
 from ._maximum_of_all_pixels import maximum_of_all_pixels
