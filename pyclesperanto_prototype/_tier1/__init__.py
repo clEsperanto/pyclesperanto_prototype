@@ -27,6 +27,7 @@ from ._divide_images import divide_images
 from ._draw_box import draw_box
 from ._draw_sphere import draw_sphere
 from ._draw_line import draw_line
+from ._downsample_xy_by_half_median import downsample_xy_by_half_median
 from ._equal import equal
 from ._equal_constant import equal_constant
 from ._equal_constant import equal_constant as label_to_mask
