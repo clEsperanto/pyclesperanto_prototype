@@ -1,7 +1,7 @@
 import pyclesperanto_prototype as cle
 import numpy as np
 
-def test_label_centroids_to_pointlist():
+def test_label_pixel_count_map():
 
     labels = cle.push_zyx(np.asarray([
         [1, 1, 2],
@@ -16,7 +16,7 @@ def test_label_centroids_to_pointlist():
     ]
     ))
 
-    result = cle.label_pixelcount_map(labels)
+    result = cle.label_pixel_count_map(labels)
 
     a = cle.pull_zyx(result)
     b = cle.pull_zyx(reference)
@@ -27,29 +27,30 @@ def test_label_centroids_to_pointlist():
     assert (np.array_equal(a, b))
 
 
-def test_label_centroids_to_pointlist_3d():
+def test_label_pixel_count_map():
 
     labels = cle.push_zyx(np.asarray([
         [
             [1, 1, 2],
         ], [
-            [1, 2, 2],
+            [1, 0, 0],
         ], [
-            [3, 3, 3]
+            [3, 3, 0]
         ]
     ]))
 
     reference = cle.push_zyx(np.asarray([
-        #     CENTROID_X(25),
-        [0.33333334,    1.6666666,    1.],
-        #     CENTROID_Y(26),
-        [0.,    0.,    0.],
-        #     CENTROID_Z(27),
-        [0.33333334,  0.6666667,   2.],
+        [
+            [3, 3, 1],
+        ], [
+            [3, 0, 0],
+        ], [
+            [2, 2, 0]
+        ]
     ]
     ))
 
-    result = cle.centroids_of_labels(labels)
+    result = cle.label_pixel_count_map(labels)
 
     a = cle.pull_zyx(result)
     b = cle.pull_zyx(reference)
