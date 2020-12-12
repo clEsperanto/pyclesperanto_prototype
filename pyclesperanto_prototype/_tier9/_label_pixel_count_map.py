@@ -25,6 +25,6 @@ def label_pixel_count_map(labels : Image, pixel_count_map : Image = None):
     values_vector = push_zyx(np.asarray([[r.area for r in regionprops]]))
     set_column(values_vector, 0, 0)
 
-    pixel_count_map = replace_intensities(labels, values_vector)
+    pixel_count_map = replace_intensities(labels, values_vector, pixel_count_map)
 
     return pixel_count_map
