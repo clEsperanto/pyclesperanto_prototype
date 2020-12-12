@@ -168,7 +168,7 @@ imsave("result.tif", cle.pull(labeled))
 
 </td><td>
 
-[Tissue neighborhood quantification](https://github.com/clEsperanto/pyclesperanto_prototype/tree/master/demo/neighbors/tissue_neighborhood_quantification.ipynb)
+[Tissue neighborhood quantification](https://github.com/clEsperanto/pyclesperanto_prototype/tree/master/demo/tissues/tissue_neighborhood_quantification.ipynb)
 
 </td></tr><tr><td>
 
