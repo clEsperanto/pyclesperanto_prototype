@@ -13,7 +13,7 @@ def test_average_distance_of_touching_neighbors():
     ]))
 
     reference = cle.push_zyx(np.asarray(
-                    [[0, 1.5, 1.5, 3]]
+                    [[0, 3, 3, 3]]
     ))
 
     centroids = cle.label_centroids_to_pointlist(labels)

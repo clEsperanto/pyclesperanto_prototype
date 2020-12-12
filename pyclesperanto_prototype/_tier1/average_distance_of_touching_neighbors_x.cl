@@ -14,7 +14,7 @@ __kernel void average_distance_of_touching_neighbors (
 
   int y = label_id;
   int x = 0;
-  for (x = 0; x < label_id; x++) {
+  for (x = 1; x < label_id; x++) {
     POS_src_touch_matrix_TYPE pos = POS_src_touch_matrix_INSTANCE(x, y, 0, 0);
     float value = READ_src_touch_matrix_IMAGE(src_touch_matrix, sampler, pos).x;
     if (value > 0) {
