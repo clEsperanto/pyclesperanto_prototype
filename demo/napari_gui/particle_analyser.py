@@ -311,8 +311,9 @@ class LayerDialog():
         self.operation.initial_call = True
         self.operation(self.viewer.active_layer)
         self.layer = self.viewer.active_layer
-        while(self.layer is None):
+        if(self.layer is None):
             import time
+            self.operation(self.viewer.active_layer)
             time.sleep(0.1) # dirty workaround: wait until napari has set its active_layer
             self.layer = self.viewer.active_layer
 
