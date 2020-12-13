@@ -9,9 +9,13 @@ from qtpy.QtWidgets import (
     QWidget,
     QSlider,
     QTableWidget,
-    QTableWidgetItem
+    QTableWidgetItem, QLabel
 )
-from qtpy.QtCore import Qt
+from qtpy.QtCore import Qt, QSize
+from pathlib import Path
+from qtpy import QtGui
+
+
 import napari
 import numpy as np
 from napari.layers import Image, Labels
@@ -73,6 +77,7 @@ class Binarize(Enum):
     smaller_constant = partial(cle.smaller_constant)
     equal_constant = partial(cle.equal_constant)
     not_equal_constant = partial(cle.not_equal_constant)
+    detect_label_edges = partial(cle.detect_label_edges)
 
     #define the call method for the functions or it won't return anything
     def __call__(self, *args):
@@ -336,7 +341,16 @@ class Gui(QWidget):
         self.setLayout(self.layout)
 
     def _add_button(self, title : str, handler : callable):
+        # text
         btn = QPushButton(title, self)
+        btn.setFont(QtGui.QFont('Arial', 12))
+
+        # icon
+        btn.setIcon(QtGui.QIcon(str(Path(__file__).parent) + "/icons/" + title.lower().replace(" ", "_") + ".png"))
+        btn.setIconSize(QSize(50, 50))
+        btn.setStyleSheet("text-align:left;");
+
+        # action
         btn.clicked.connect(handler)
         self.layout.addWidget(btn)
 
