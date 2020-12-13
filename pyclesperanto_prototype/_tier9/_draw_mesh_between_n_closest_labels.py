@@ -5,7 +5,6 @@ from .._tier1 import generate_distance_matrix
 from .._tier1 import set_where_x_equals_y
 from .._tier1 import set_row
 from .._tier1 import set_column
-from .._tier1 import set
 from .._tier1 import pointindexlist_to_mesh
 from .._tier1 import n_closest_points
 
@@ -22,6 +21,7 @@ def draw_mesh_between_n_closest_labels(labels : Image, mesh_target : Image = Non
     set_row(distance_matrix, 0, max_float)
     set_column(distance_matrix, 0, max_float)
 
+    from .._tier1 import set
     set(mesh_target, 0)
     indexlist = n_closest_points(distance_matrix, n=n)
     pointindexlist_to_mesh(pointlist, indexlist, mesh_target)

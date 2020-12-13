@@ -28,5 +28,9 @@ def draw_mesh_between_proximal_labels(labels : Image, mesh_target : Image = None
     distance_matrix = generate_distance_matrix(pointlist, pointlist)
 
     from .._tier2 import distance_matrix_to_mesh
+
+    from .._tier1 import set
+    set(mesh_target, 0)
+
     mesh_target = distance_matrix_to_mesh(pointlist, distance_matrix, mesh_target, maximum_distance)
     return mesh_target

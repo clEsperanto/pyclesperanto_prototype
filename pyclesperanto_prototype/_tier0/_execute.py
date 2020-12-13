@@ -38,27 +38,29 @@ def get_ocl_source(anchor, opencl_kernel_filename):
 COMMON_HEADER = """
 #define CONVERT_{key}_PIXEL_TYPE clij_convert_float_sat
 #define IMAGE_{key}_PIXEL_TYPE float
-#define IMAGE_SIZE_{key}_WIDTH {width}
-#define IMAGE_SIZE_{key}_HEIGHT {height}
-#define IMAGE_SIZE_{key}_DEPTH {depth}
 #define POS_{key}_TYPE {pos_type}
 #define POS_{key}_INSTANCE(pos0,pos1,pos2,pos3) ({pos_type}){pos}
 """
 
+SIZE_HEADER = """
+#define IMAGE_SIZE_{key}_WIDTH {width}
+#define IMAGE_SIZE_{key}_HEIGHT {height}
+#define IMAGE_SIZE_{key}_DEPTH {depth}
+"""
 
 ARRAY_HEADER = COMMON_HEADER + """
-#define IMAGE_{key}_TYPE __global float*
+#define IMAGE_{key}_TYPE {size_parameters} __global float*
 #define READ_{key}_IMAGE(a,b,c) read_buffer{img_dims}d{typeId}(GET_IMAGE_WIDTH(a),GET_IMAGE_HEIGHT(a),GET_IMAGE_DEPTH(a),a,b,c)
 #define WRITE_{key}_IMAGE(a,b,c) write_buffer{img_dims}d{typeId}(GET_IMAGE_WIDTH(a),GET_IMAGE_HEIGHT(a),GET_IMAGE_DEPTH(a),a,b,c)
 """
 
 IMAGE_HEADER = COMMON_HEADER + """
-#define IMAGE_{key}_TYPE {type_name}
+#define IMAGE_{key}_TYPE {size_parameters} {type_name} 
 #define READ_{key}_IMAGE(a,b,c) read_image{typeId}(a,b,c)
 #define WRITE_{key}_IMAGE(a,b,c) write_image{typeId}(a,b,c)
 """
 
-def execute(anchor, opencl_kernel_filename, kernel_name, global_size, parameters, prog : OCLProgram = None, constants = None):
+def execute(anchor, opencl_kernel_filename, kernel_name, global_size, parameters, prog : OCLProgram = None, constants = None, image_size_independent_kernel_compilation : bool = True):
     """
     Convenience method for calling opencl kernel files
 
@@ -77,18 +79,28 @@ def execute(anchor, opencl_kernel_filename, kernel_name, global_size, parameters
                        statements. They are necessary, e.g. to create arrays of a given
                        maximum size in OpenCL as variable array lengths are not
                        supported.
-
+    :param image_size_independent_kernel_compilation:  bool, if set to true, the kernel can handle images of different
+                       size and isa bit slower. If set to false, it can handle only images of a specific size and is
+                       a bit faster
     :return:
     """
     # import time
     # time_stamp = time.time()
+    defines = ["#define MAX_ARRAY_SIZE 1000"]
 
-    defines = [
-        "#define GET_IMAGE_WIDTH(image_key) IMAGE_SIZE_ ## image_key ## _WIDTH",
-        "#define GET_IMAGE_HEIGHT(image_key) IMAGE_SIZE_ ## image_key ## _HEIGHT",
-        "#define GET_IMAGE_DEPTH(image_key) IMAGE_SIZE_ ## image_key ## _DEPTH",
-        "#define MAX_ARRAY_SIZE 1000"
-    ]
+
+    if image_size_independent_kernel_compilation:
+        defines.extend([
+            "#define GET_IMAGE_WIDTH(image_key) image_size_ ## image_key ## _width",
+            "#define GET_IMAGE_HEIGHT(image_key) image_size_ ## image_key ## _height",
+            "#define GET_IMAGE_DEPTH(image_key) image_size_ ## image_key ## _depth"
+        ])
+    else:
+        defines.extend([
+            "#define GET_IMAGE_WIDTH(image_key) IMAGE_SIZE_ ## image_key ## _WIDTH",
+            "#define GET_IMAGE_HEIGHT(image_key) IMAGE_SIZE_ ## image_key ## _HEIGHT",
+            "#define GET_IMAGE_DEPTH(image_key) IMAGE_SIZE_ ## image_key ## _DEPTH"
+        ])
 
     if constants is not None:
         for key, value in constants.items():
@@ -99,7 +111,6 @@ def execute(anchor, opencl_kernel_filename, kernel_name, global_size, parameters
     for key, value in parameters.items():
 
         if isinstance(value, cl.array.Array):
-            arguments.append(value.data)
 
             if value.dtype != np.dtype("float32"):
                 raise TypeError(
@@ -111,6 +122,21 @@ def execute(anchor, opencl_kernel_filename, kernel_name, global_size, parameters
             depth_height_width[-len(value.shape) :] = value.shape
             depth, height, width = depth_height_width
             ndim = value.ndim
+
+            if image_size_independent_kernel_compilation:
+                size_parameters = "int image_size_" + key + "_width" + \
+                                  ", int image_size_" + key + "_height" + \
+                                  ", int image_size_" + key + "_depth, "
+
+                arguments.append(np.array([int(width)], np.int32))
+                arguments.append(np.array([int(height)], np.int32))
+                arguments.append(np.array([int(depth)], np.int32))
+            else:
+                size_parameters = ""
+
+            arguments.append(value.data)
+
+
             params = {
                 "typeId": "f",
                 "key": key,
@@ -120,10 +146,15 @@ def execute(anchor, opencl_kernel_filename, kernel_name, global_size, parameters
                 "depth": depth,
                 "height": height,
                 "width": width,
+                "size_parameters":size_parameters
             }
             defines.extend(ARRAY_HEADER.format(**params).split("\n"))
+
+            if not image_size_independent_kernel_compilation:
+                defines.extend(SIZE_HEADER.format(**params).split("\n"))
+
+
         elif isinstance(value, cl.Image):
-            arguments.append(value)
 
             if value.dtype != np.dtype("float32"):
                 raise TypeError(
@@ -135,6 +166,18 @@ def execute(anchor, opencl_kernel_filename, kernel_name, global_size, parameters
             depth_height_width[-len(value.shape) :] = value.shape
             depth, height, width = depth_height_width
             ndim = len(value.shape)
+
+            if image_size_independent_kernel_compilation:
+                size_parameters = "int image_size_" + key + "_width" + \
+                                  ", int image_size_" + key + "_height" + \
+                                  ", int image_size_" + key + "_depth, "
+                arguments.append(np.array([int(width)], np.int32))
+                arguments.append(np.array([int(height)], np.int32))
+                arguments.append(np.array([int(depth)], np.int32))
+            else:
+                size_parameters = ""
+
+            arguments.append(value)
 
             if "destination" in key or "output" in key or "dst" in key:
                 type_name = "__write_only image" + str(ndim) + "d_t"
@@ -151,8 +194,12 @@ def execute(anchor, opencl_kernel_filename, kernel_name, global_size, parameters
                 "depth": depth,
                 "height": height,
                 "width": width,
+                "size_parameters":size_parameters
             }
             defines.extend(IMAGE_HEADER.format(**params).split("\n"))
+            if not image_size_independent_kernel_compilation:
+                defines.extend(SIZE_HEADER.format(**params).split("\n"))
+
         elif isinstance(value, int):
             arguments.append(np.array([value], np.int32))
         elif isinstance(value, float):
@@ -168,7 +215,9 @@ def execute(anchor, opencl_kernel_filename, kernel_name, global_size, parameters
         # time_stamp = time.time()
 
         defines.append(get_ocl_source(anchor, opencl_kernel_filename))
+        
         prog = OCLProgram.from_source("\n".join(defines))
+
         # Todo: the order of the arguments matters; fix that
         # print("Compilation " + opencl_kernel_filename + " took " + str((time.time() - time_stamp) * 1000) + " ms")
 

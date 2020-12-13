@@ -9,5 +9,8 @@ def draw_mesh_between_touching_labels(labels : Image, distance_mesh_destination 
 
     centroids = centroids_of_labels(labels)
     touch_matrix = generate_touch_matrix(labels)
+
+    from .._tier1 import set
+    set(distance_mesh_destination, 0)
     touch_mesh_destination = touch_matrix_to_mesh(centroids, touch_matrix, distance_mesh_destination)
     return touch_mesh_destination
