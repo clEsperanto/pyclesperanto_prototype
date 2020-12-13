@@ -10,21 +10,27 @@ from .._tier0 import create
 from .._tier0 import create_image
 
 @plugin_function(output_creator=create_none)
-def downsample_xy_by_half_median(source : Image, destination : Image = None):
-    """
-
+def downsample_slice_by_slice_half_median(source : Image, destination : Image = None):
+    """Scales an image using scaling factors 0.5 for X and Y dimensions. The Z 
+    dimension stays untouched. 
+    
+    Thus, each slice is processed separately.
+    The median method is applied. Thus, each pixel value in the destination 
+    image equals to the median of
+    four corresponding pixels in the source image. 
+    
     Parameters
     ----------
-    source
-    destination
-    factor_x
-    factor_y
-    factor_z
-    linear_interpolation
-
+    source : Image
+    destination : Image
+    
     Returns
     -------
-
+    destination
+    
+    References
+    ----------
+    .. [1] https://clij.github.io/clij2-docs/reference_downsampleSliceBySliceHalfMedian
     """
 
     factor_x = 0.5

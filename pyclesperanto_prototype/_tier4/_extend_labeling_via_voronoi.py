@@ -11,6 +11,29 @@ import numpy as np
 
 @plugin_function
 def extend_labeling_via_voronoi(labeling_source : Image, labeling_destination : Image = None):
+    """Takes a label map image and dilates the regions using a octagon shape 
+    until they touch. 
+    
+    The resulting label map is written to the output. 
+    
+    Parameters
+    ----------
+    input : Image
+    destination : Image
+    
+    Returns
+    -------
+    destination
+    
+    Examples
+    --------
+    >>> import pyclesperanto_prototype as cle
+    >>> cle.extend_labeling_via_voronoi(input, destination)
+    
+    References
+    ----------
+    .. [1] https://clij.github.io/clij2-docs/reference_extendLabelingViaVoronoi
+    """
     flip = create_like(labeling_destination)
     flop = create_like(labeling_destination)
 

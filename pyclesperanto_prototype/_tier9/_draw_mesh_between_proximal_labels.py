@@ -6,7 +6,7 @@ from .._tier1 import set_where_x_equals_y
 from .._tier1 import set_row
 from .._tier1 import set_column
 from .._tier1 import set
-from .._tier1 import pointindexlist_to_mesh
+from .._tier1 import point_index_list_to_mesh
 from .._tier1 import n_closest_points
 
 @plugin_function

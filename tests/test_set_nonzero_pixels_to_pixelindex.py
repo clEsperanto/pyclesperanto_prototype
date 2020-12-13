@@ -17,7 +17,7 @@ def test_set_nonzero_pixels_to_pixelindex():
     ]))
 
     result = cle.create(test1)
-    cle.set_nonzero_pixels_to_pixelindex(test1, result)
+    cle.set_non_zero_pixels_to_pixel_index(test1, result)
 
     a = cle.pull(result)
     b = cle.pull(reference)

@@ -14,7 +14,7 @@ def test_downsample_xy_by_half_median():
         [1, 4]
     ]))
 
-    result = cle.downsample_xy_by_half_median(test1)
+    result = cle.downsample_slice_by_slice_half_median(test1)
 
     a = cle.pull_zyx(result)
     b = cle.pull_zyx(reference)
@@ -63,7 +63,7 @@ def test_resample_downsample_3d():
         ]
     ]))
 
-    result = cle.downsample_xy_by_half_median(test1)
+    result = cle.downsample_slice_by_slice_half_median(test1)
 
     a = cle.pull_zyx(result)
     b = cle.pull_zyx(reference)

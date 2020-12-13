@@ -29,8 +29,8 @@ from ._divide_images import divide_images
 from ._draw_box import draw_box
 from ._draw_sphere import draw_sphere
 from ._draw_line import draw_line
-from ._downsample_xy_by_half_median import downsample_xy_by_half_median
-from ._downsample_xy_by_half_median import downsample_xy_by_half_median as downsample_slice_by_slice_half_median
+from ._downsample_slice_by_slice_half_median import downsample_slice_by_slice_half_median
+from ._downsample_slice_by_slice_half_median import downsample_slice_by_slice_half_median as downsample_xy_by_half_median
 from ._equal import equal
 from ._equal_constant import equal_constant
 from ._equal_constant import equal_constant as label_to_mask
@@ -89,7 +89,7 @@ from ._not_equal_constant import not_equal_constant
 from ._paste import paste
 from ._onlyzero_overwrite_maximum_box import onlyzero_overwrite_maximum_box
 from ._onlyzero_overwrite_maximum_diamond import onlyzero_overwrite_maximum_diamond
-from ._pointindexlist_to_mesh import pointindexlist_to_mesh
+from ._point_index_list_to_mesh import point_index_list_to_mesh
 from ._power import power
 from ._power_images import power_images
 from ._replace_intensities import replace_intensities
@@ -107,7 +107,8 @@ from ._set_ramp_x import set_ramp_x
 from ._set_ramp_y import set_ramp_y
 from ._set_ramp_z import set_ramp_z
 from ._set_row import set_row
-from ._set_nonzero_pixels_to_pixelindex import set_nonzero_pixels_to_pixelindex
+from ._set_non_zero_pixels_to_pixel_index import set_non_zero_pixels_to_pixel_index
+from ._set_non_zero_pixels_to_pixel_index import set_non_zero_pixels_to_pixel_index as set_nonzero_pixels_to_pixelindex
 from ._set_where_x_equals_y import set_where_x_equals_y
 from ._set_where_x_greater_than_y import set_where_x_greater_than_y
 from ._set_where_x_smaller_than_y import set_where_x_smaller_than_y

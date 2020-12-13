@@ -3,7 +3,7 @@ from .._tier0 import plugin_function
 from .._tier0 import Image
 
 @plugin_function
-def set_nonzero_pixels_to_pixelindex(input : Image, output : Image, offset : float = 1):
+def set_non_zero_pixels_to_pixel_index(input : Image, output : Image, offset : float = 1):
     """
     documentation placeholder
     """
