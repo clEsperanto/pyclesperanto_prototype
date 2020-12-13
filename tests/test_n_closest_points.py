@@ -15,7 +15,7 @@ def test_n_closest_points():
     ]))
 
     reference = cle.push_zyx(np.asarray(
-                    [[3, 3, 1]]
+                    [[0, 3, 3, 1]]
     ))
 
     centroids = cle.centroids_of_labels(labels)
