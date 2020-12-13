@@ -53,11 +53,6 @@ def filter(input1: Image, operation: Filter = Filter.please_select, x: float = 1
         operation(cle_input, output, x, y, z)
         output = cle.pull_zyx(output)
 
-        # workaround to cause a auto-contrast in the viewer after returning the result
-        # if Gui.global_last_filter_applied is not None:
-        #    viewer.layers.remove_selected()
-        # Gui.global_last_filter_applied = operation
-
         if (filter.initial_call):
             print("ADD layer")
             filter.count = filter.count + 1
@@ -67,7 +62,6 @@ def filter(input1: Image, operation: Filter = Filter.please_select, x: float = 1
             filter.self.layer.data = output
             print("MOD layer")
 
-        # return output
 filter.count = 0
 
 
@@ -91,13 +85,6 @@ def binarize(input1: Image, operation: Binarize= Binarize.threshold_otsu, consta
         output = cle.create_like(cle_input1)
         operation(cle_input1, output, constant)
         output = cle.pull_zyx(output)
-
-        # workaround to cause a auto-contrast in the viewer after returning the result
-        #if Gui.global_last_filter_applied is not None:
-        #    viewer.layers.remove_selected()
-        #Gui.global_last_filter_applied = operation
-
-        #return output
 
         if (binarize.initial_call):
             binarize.count = binarize.count + 1
@@ -137,13 +124,6 @@ def combine(input1: Image, input2: Image, operation: Combine = Combine.please_se
         operation(cle_input1, cle_input2, output)
         output = cle.pull_zyx(output)
 
-        # workaround to cause a auto-contrast in the viewer after returning the result
-        #if Gui.global_last_filter_applied is not None:
-        #    viewer.layers.remove_selected()
-        #Gui.global_last_filter_applied = operation
-        #return output
-
-
         if (combine.initial_call):
             combine.count = combine.count + 1
             combine.self.viewer.add_image(output, name="combine" + str(combine.count), colormap=input1.colormap)
@@ -173,12 +153,6 @@ def label(input1: Image, operation: Label = Label.connected_component):
         output = cle.create_like(cle_input1)
         operation(cle_input1, output)
         output = cle.pull_zyx(output)
-
-        # workaround to cause a auto-contrast in the viewer after returning the result
-        #if Gui.global_last_filter_applied is not None:
-        #    viewer.layers.remove_selected()
-        #Gui.global_last_filter_applied = operation
-        #return output
 
         if (label.initial_call):
             label.count = label.count + 1
@@ -211,16 +185,9 @@ def label_processing(input1: Image, operation: LabelProcessing = LabelProcessing
         operation(cle_input1, output, min, max)
         output = cle.pull_zyx(output)
 
-        # workaround to cause a auto-contrast in the viewer after returning the result
-        #if Gui.global_last_filter_applied is not None:
-        #    viewer.layers.remove_selected()
-        #Gui.global_last_filter_applied = operation
-        #
-        #return output
-
         if (label_processing.initial_call):
             label_processing.count = label_processing.count + 1
-            label_processing.self.viewer.add_labels(output, name="label_processing" + str(label_processing.count), colormap=input1.colormap)
+            label_processing.self.viewer.add_labels(output, name="label_processing" + str(label_processing.count))
             label_processing.initial_call = False
         else:
             label_processing.self.layer.data = output
@@ -248,12 +215,6 @@ def maps_and_meshes(input1: Image, operation: MapsAndMeshes = MapsAndMeshes.plea
         operation(cle_input1, output, n)
         output = cle.pull_zyx(output)
 
-        # workaround to cause a auto-contrast in the viewer after returning the result
-        #if Gui.global_last_filter_applied is not None:
-        #    viewer.layers.remove_selected()
-        #Gui.global_last_filter_applied = operation
-
-        #return output
         if (label.initial_call):
             maps_and_meshes.count = maps_and_meshes.count + 1
             maps_and_meshes.self.viewer.add_labels(output, name="maps_and_meshes" + str(label.count))
@@ -278,8 +239,6 @@ def table_to_widget(table : dict) -> QTableWidget:
         for j, value in enumerate(table.get(column)):
             view.setItem(j + 1, i,  QTableWidgetItem(str(value)))
     return view
-
-
 
 class LayerDialog():
     def __init__(self, viewer, operation):
@@ -337,13 +296,6 @@ class LayerDialog():
                     layer.dialog.refresh()
             except AttributeError:
                 print()
-                # whatever
-
-            #if active:
-            #    layer.dialog.refresh()
-            #    break;
-            #if layer == self.layer:
-            #    active = True
 
 class Gui(QWidget):
     """This Gui takes a napari as parameter and infiltrates it.
@@ -351,30 +303,10 @@ class Gui(QWidget):
     It adds some buttons for categories of operations.
     """
 
-    # I don't like global variables.
-    # But that's what it is.
-    # It's a global variable.
-    #                            haesleinhuepf
-    global_last_filter_applied = None
-    _instance = None
-    _current_layer = None
-
     def __init__(self, viewer):
         super().__init__()
 
         self.viewer = viewer
-        Gui._instance = self
-        #self.viewer.events.connect()
-
-        #def print_layer_name(event):
-        #    print(f"{event.source.name} changed its data!")
-        # layer.events.data.connect(print_layer_name)
-        # layer.events.select.connect
-        # layer.events.deselect.connect
-
-        # worker.returned.connect(viewer.add_image)  # connect callback functions
-        #      worker.start()  # start the thread!
-        #
 
         self.layout = QVBoxLayout()
 
@@ -429,15 +361,8 @@ class Gui(QWidget):
     def _maps_and_meshes_clicked(self):
         self._activate(maps_and_meshes)
 
-    def _button_clicked(self):
-        print("Something returned")
-
     def _activate(self, magicgui):
         LayerDialog(self.viewer, magicgui)
-        Gui.global_last_filter_applied = None
-
-
-
 
 # -----------------------------------------------------------------------------
 from skimage.io import imread
@@ -465,20 +390,5 @@ with napari.gui_qt():
 
         # add the gui to the viewer as a dock widget
     dock_widget = viewer.window.add_dock_widget(Gui(viewer), area='right')
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
