@@ -63,7 +63,6 @@ class Filter(Enum):
 # The user interface of the operations is build by magicgui
 @magicgui(auto_call=True, layout='vertical')
 def filter(input1: Image, operation: Filter = Filter.please_select, x: float = 1, y: float = 1, z: float = 0):
-    print(filter.self)
     if input1:
         # execute operation
         cle_input = cle.push_zyx(input1.data)
@@ -312,6 +311,11 @@ class LayerDialog():
         self.operation.initial_call = True
         self.operation(self.viewer.active_layer)
         self.layer = self.viewer.active_layer
+        while(self.layer is None):
+            import time
+            time.sleep(0.1) # dirty workaround: wait until napari has set its active_layer
+            self.layer = self.viewer.active_layer
+
         self.layer.dialog = self
 
         self.layer.events.data.connect(self._updated)
@@ -361,7 +365,6 @@ class LayerDialog():
 
         """
         for layer in self.viewer.layers:
-            print(layer.name)
             try:
                 if layer.dialog.filter_gui.get_widget('input1').currentData() == self.layer:
                     layer.dialog.refresh()
@@ -473,7 +476,6 @@ with napari.gui_qt():
 
     def _on_removed(event):
         layer = event.value
-        print(layer.name)
         try:
             layer.dialog._removed()
         except AttributeError:
