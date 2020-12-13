@@ -137,7 +137,7 @@ import pyopencl as cl
 
 from . import LINUX, CI
 
-@pytest.mark.xfail('LINUX and CI', reason='clImages not supported on CI', raises=cl.LogicError)
+@pytest.mark.xfail('LINUX and CI', reason='clImages not supported on CI', raises=cl.ValueError)
 def test_resample_upsample_3d_with_interpolation():
     test1 = cle.push_zyx(np.asarray([
         [
