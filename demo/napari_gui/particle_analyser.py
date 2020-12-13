@@ -59,14 +59,11 @@ def filter(input1: Image, operation: Filter = Filter.please_select, x: float = 1
         output = cle.pull_zyx(output)
 
         if (filter.initial_call):
-            filter.count = filter.count + 1
-            filter.self.viewer.add_image(output, name="filter" + str(filter.count), colormap=input1.colormap)
+            filter.self.viewer.add_image(output, colormap=input1.colormap)
             filter.initial_call = False
         else:
             filter.self.layer.data = output
             filter.self.layer.name = str(operation)
-
-filter.count = 0
 
 
 # -----------------------------------------------------------------------------
@@ -92,15 +89,12 @@ def binarize(input1: Image, operation: Binarize= Binarize.threshold_otsu, consta
         output = cle.pull_zyx(output)
 
         if (binarize.initial_call):
-            binarize.count = binarize.count + 1
-            binarize.self.viewer.add_image(output, name="binarize" + str(binarize.count))
+            binarize.self.viewer.add_image(output)
             binarize.initial_call = False
         else:
             binarize.self.layer.data = output
             binarize.self.layer.contrast_limits = (0, 1)
             binarize.self.layer.name = str(operation)
-
-binarize.count = 0
 
 # -----------------------------------------------------------------------------
 class Combine(Enum):
@@ -134,17 +128,11 @@ def combine(input1: Image, input2: Image = None, operation: Combine = Combine.pl
         output = cle.pull_zyx(output)
 
         if (combine.initial_call):
-            combine.count = combine.count + 1
-            combine.self.viewer.add_image(output, name="combine" + str(combine.count), colormap=input1.colormap)
+            combine.self.viewer.add_image(output, colormap=input1.colormap)
             combine.initial_call = False
         else:
             combine.self.layer.data = output
             combine.self.layer.name = str(operation)
-
-combine.count = 0
-
-
-
 
 # -----------------------------------------------------------------------------
 class Label(Enum):
@@ -165,16 +153,11 @@ def label(input1: Image, operation: Label = Label.connected_component):
         output = cle.pull_zyx(output)
 
         if (label.initial_call):
-            label.count = label.count + 1
-            label.self.viewer.add_labels(output, name="label" + str(label.count))
+            label.self.viewer.add_labels(output)
             label.initial_call = False
         else:
             label.self.layer.data = output
             label.self.layer.name = str(operation)
-
-label.count = 0
-
-
 
 # -----------------------------------------------------------------------------
 class LabelProcessing(Enum):
@@ -197,13 +180,11 @@ def label_processing(input1: Image, operation: LabelProcessing = LabelProcessing
         output = cle.pull_zyx(output)
 
         if (label_processing.initial_call):
-            label_processing.count = label_processing.count + 1
-            label_processing.self.viewer.add_labels(output, name="label_processing" + str(label_processing.count))
+            label_processing.self.viewer.add_labels(output)
             label_processing.initial_call = False
         else:
             label_processing.self.layer.data = output
             label_processing.self.layer.name = str(operation)
-label_processing.count = 0
 
 # -----------------------------------------------------------------------------
 class Mesh(Enum):
@@ -229,16 +210,12 @@ def mesh(input1: Image, operation: Mesh = Mesh.touching, n : float = 1):
         output = cle.pull_zyx(output)
 
         if (mesh.initial_call):
-            mesh.count = mesh.count + 1
-            mesh.self.viewer.add_image(output, name="mesh" + str(mesh.count), colormap='green', blending='additive')
+            mesh.self.viewer.add_image(output, colormap='green', blending='additive')
             mesh.initial_call = False
         else:
             mesh.self.layer.data = output
             mesh.self.layer.name = str(operation)
             mesh.self.layer.contrast_limits=(0, max_intensity)
-
-
-mesh.count = 0
 
 # -----------------------------------------------------------------------------
 class Map(Enum):
@@ -262,15 +239,12 @@ def map(input1: Image, operation: Map = Map.please_select, n : float = 1):
         output = cle.pull_zyx(output)
 
         if (map.initial_call):
-            map.count = map.count + 1
-            map.self.viewer.add_image(output, name="map" + str(map.count), colormap='magenta')
+            map.self.viewer.add_image(output, colormap='magenta')
             map.initial_call = False
         else:
             map.self.layer.data = output
             map.self.layer.name = str(operation)
             map.self.layer.contrast_limits=(0, max_intensity)
-
-map.count = 0
 
 # -----------------------------------------------------------------------------
 @magicgui(layout='vertical', call_button="Measure")
