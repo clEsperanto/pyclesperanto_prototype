@@ -59,13 +59,12 @@ def filter(input1: Image, operation: Filter = Filter.please_select, x: float = 1
         output = cle.pull_zyx(output)
 
         if (filter.initial_call):
-            print("ADD layer")
             filter.count = filter.count + 1
             filter.self.viewer.add_image(output, name="filter" + str(filter.count), colormap=input1.colormap)
             filter.initial_call = False
         else:
             filter.self.layer.data = output
-            print("MOD layer")
+            filter.self.layer.name = str(operation)
 
 filter.count = 0
 
@@ -124,7 +123,7 @@ class Combine(Enum):
 @magicgui(auto_call=True, layout='vertical')
 def combine(input1: Image, input2: Image = None, operation: Combine = Combine.please_select):
     if input1 is not None:
-        if (input2 is not None):
+        if (input2 is None):
             input2 = input1
 
         cle_input1 = cle.push_zyx(input1.data)
@@ -177,10 +176,10 @@ label.count = 0
 # -----------------------------------------------------------------------------
 class LabelProcessing(Enum):
     please_select = partial(cle.copy)
-    exclude_labels_on_edges = partial(cle.exclude_labels_on_edges)
-    extend_labeling_via_voronoi = partial(cle.extend_labeling_via_voronoi)
-    extend_labels_with_maximum_radius = partial(cle.extend_labels_with_maximum_radius)
-    exclude_labels_out_of_size_range = partial(cle.exclude_labels_out_of_size_range)
+    exclude_on_edges = partial(cle.exclude_labels_on_edges)
+    exclude_out_of_size_range = partial(cle.exclude_labels_out_of_size_range)
+    extend_via_voronoi = partial(cle.extend_labeling_via_voronoi)
+    extend_with_maximum_radius = partial(cle.extend_labels_with_maximum_radius)
 
     #define the call method for the functions or it won't return anything
     def __call__(self, *args):
@@ -200,38 +199,75 @@ def label_processing(input1: Image, operation: LabelProcessing = LabelProcessing
             label_processing.initial_call = False
         else:
             label_processing.self.layer.data = output
+            label_processing.self.layer.name = str(operation)
 label_processing.count = 0
 
 # -----------------------------------------------------------------------------
-class MapsAndMeshes(Enum):
+class Mesh(Enum):
     please_select = partial(cle.copy)
-    draw_mesh_between_proximal_labels = partial(cle.draw_mesh_between_proximal_labels)
-    draw_distance_mesh_between_touching_labels = partial(cle.draw_distance_mesh_between_touching_labels)
-    draw_mesh_between_touching_labels = partial(cle.draw_mesh_between_touching_labels)
-    draw_mesh_between_n_closest_labels = partial(cle.draw_mesh_between_n_closest_labels)
-    label_pixel_count_map = partial(cle.label_pixel_count_map)
-    touching_neighbor_count_map = partial(cle.touching_neighbor_count_map)
+    touching = partial(cle.draw_mesh_between_touching_labels)
+    proximal = partial(cle.draw_mesh_between_proximal_labels)
+    n_closest = partial(cle.draw_mesh_between_n_closest_labels)
+    distance_touching = partial(cle.draw_distance_mesh_between_touching_labels)
 
     #define the call method for the functions or it won't return anything
     def __call__(self, *args):
         return self.value(*args)
 
 @magicgui(auto_call=True, layout='vertical')
-def maps_and_meshes(input1: Image, operation: MapsAndMeshes = MapsAndMeshes.please_select, n : float = 1):
+def mesh(input1: Image, operation: Mesh = Mesh.please_select, n : float = 1):
     if input1 is not None:
         cle_input1 = cle.push_zyx(input1.data)
         output = cle.create_like(cle_input1)
         operation(cle_input1, output, n)
+        max_intensity = cle.maximum_of_all_pixels(output)
+        if max_intensity == 0:
+            max_intensity = 1 # prevent division by zero in vispy
         output = cle.pull_zyx(output)
 
-        if (label.initial_call):
-            maps_and_meshes.count = maps_and_meshes.count + 1
-            maps_and_meshes.self.viewer.add_labels(output, name="maps_and_meshes" + str(label.count))
-            maps_and_meshes.initial_call = False
+        if (mesh.initial_call):
+            mesh.count = mesh.count + 1
+            mesh.self.viewer.add_image(output, name="mesh" + str(mesh.count), colormap='green', blending='additive')
+            mesh.initial_call = False
         else:
-            maps_and_meshes.self.layer.data = output
+            mesh.self.layer.data = output
+            mesh.self.layer.name = str(operation)
+            mesh.self.layer.contrast_limits=(0, max_intensity)
 
-maps_and_meshes.count = 0
+
+mesh.count = 0
+
+# -----------------------------------------------------------------------------
+class Map(Enum):
+    please_select = partial(cle.copy)
+    pixel_count = partial(cle.label_pixel_count_map)
+    touching_neighbor_count = partial(cle.touching_neighbor_count_map)
+
+    #define the call method for the functions or it won't return anything
+    def __call__(self, *args):
+        return self.value(*args)
+
+@magicgui(auto_call=True, layout='vertical')
+def map(input1: Image, operation: Map = Map.please_select, n : float = 1):
+    if input1 is not None:
+        cle_input1 = cle.push_zyx(input1.data)
+        output = cle.create_like(cle_input1)
+        operation(cle_input1, output, n)
+        max_intensity = cle.maximum_of_all_pixels(output)
+        if max_intensity == 0:
+            max_intensity = 1 # prevent division by zero in vispy
+        output = cle.pull_zyx(output)
+
+        if (map.initial_call):
+            map.count = map.count + 1
+            map.self.viewer.add_image(output, name="map" + str(map.count), colormap='magenta')
+            map.initial_call = False
+        else:
+            map.self.layer.data = output
+            map.self.layer.name = str(operation)
+            map.self.layer.contrast_limits=(0, max_intensity)
+
+map.count = 0
 
 # -----------------------------------------------------------------------------
 @magicgui(layout='vertical', call_button="Measure")
@@ -344,7 +380,8 @@ class Gui(QWidget):
         self._add_button("Combine", self._add_combine_clicked)
         self._add_button("Label", self._add_label_clicked)
         self._add_button("Label Processing", self._add_label_processing_clicked)
-        self._add_button("Maps and meshes", self._maps_and_meshes_clicked)
+        self._add_button("Map", self._map_clicked)
+        self._add_button("Mesh", self._mesh_clicked)
         self._add_button("Measure", self._measure_clicked)
 
         self.setLayout(self.layout)
@@ -356,7 +393,7 @@ class Gui(QWidget):
 
         # icon
         btn.setIcon(QtGui.QIcon(str(Path(__file__).parent) + "/icons/" + title.lower().replace(" ", "_") + ".png"))
-        btn.setIconSize(QSize(50, 50))
+        btn.setIconSize(QSize(40, 40))
         btn.setStyleSheet("text-align:left;");
 
         # action
@@ -381,8 +418,11 @@ class Gui(QWidget):
     def _measure_clicked(self):
         self._activate(measure)
 
-    def _maps_and_meshes_clicked(self):
-        self._activate(maps_and_meshes)
+    def _map_clicked(self):
+        self._activate(map)
+
+    def _mesh_clicked(self):
+        self._activate(mesh)
 
     def _activate(self, magicgui):
         LayerDialog(self.viewer, magicgui)
