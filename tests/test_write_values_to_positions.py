@@ -20,7 +20,9 @@ def test_write_values_to_positions_2d():
         [0, 0, 0, 0, 0, 4]
     ]))
 
-    result = cle.write_values_to_positions(positions_and_values)
+    result = cle.create_like(reference)
+    cle.set(result, 0)
+    result = cle.write_values_to_positions(positions_and_values, result)
 
     a = cle.pull_zyx(result)
     b = cle.pull_zyx(reference)
@@ -59,7 +61,9 @@ def test_write_values_to_positions_3d():
         ]
     ]))
 
-    result = cle.write_values_to_positions(positions_and_values)
+    result = cle.create_like(reference)
+    cle.set(result, 0)
+    result = cle.write_values_to_positions(positions_and_values, result)
 
     a = cle.pull_zyx(result)
     b = cle.pull_zyx(reference)
