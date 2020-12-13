@@ -29,12 +29,16 @@ def difference_of_gaussian(input : Image, destination : Image = None, sigma1_x :
     sigma2_y : float
         Sigma of the second Gaussian filter in y
     sigma2_z : float
-        Sigma of the second Gaussian filter in z
-     
+        Sigma of the second Gaussian filter in z 
     
     Returns
     -------
     destination
+    
+    Examples
+    --------
+    >>> import pyclesperanto_prototype as cle
+    >>> cle.difference_of_gaussian(input, destination, sigma1x, sigma1y, sigma1z, sigma2x, sigma2y, sigma2z)
     
     References
     ----------

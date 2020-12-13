@@ -6,13 +6,30 @@ from .._tier0 import Image
 from .._tier0 import push
 
 @plugin_function(output_creator=create_pointlist_from_labelmap)
-def centroids_of_labels(labels:Image, destination_pointlist :Image = None):
-    """
+def centroids_of_labels(source:Image, pointlist_destination :Image = None):
+    """Determines the centroids of all labels in a label image or image stack. 
+    
+    It writes the resulting  coordinates in a pointlist image. Depending on 
+    the dimensionality d of the labelmap and the number  of labels n, the 
+    pointlist image will have n*d pixels. 
+    
+    Parameters
+    ----------
+    source : Image
+    pointlist_destination : Image
+    
+    Returns
+    -------
+    pointlist_destination
+    
+    References
+    ----------
+    .. [1] https://clij.github.io/clij2-docs/reference_centroidsOfLabels
     """
     from .._tier9 import statistics_of_labelled_pixels
-    regionprops = statistics_of_labelled_pixels(input_image=None, input_label_map=labels)
+    regionprops = statistics_of_labelled_pixels(input=None, labelmap=source)
 
-    num_columns = len(labels.shape)
+    num_columns = len(source.shape)
     num_rows = len(regionprops)
 
     import numpy as np

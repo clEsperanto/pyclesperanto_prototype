@@ -39,6 +39,11 @@ def minimum_of_masked_pixels(source : Image, mask : Image):
     source : Image
     mask : Image
     
+    Examples
+    --------
+    >>> import pyclesperanto_prototype as cle
+    >>> cle.minimum_of_masked_pixels(source, mask)
+    
     References
     ----------
     .. [1] https://clij.github.io/clij2-docs/reference_minimumOfMaskedPixels

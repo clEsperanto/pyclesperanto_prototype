@@ -5,32 +5,36 @@ from .._tier0 import Image
 from .._tier1 import paste
 
 @plugin_function(output_creator=create_none)
-def combine_vertically(source1 : Image, source2 : Image, target : Image = None):
-    """
-
+def combine_vertically(stack1 : Image, stack2 : Image, destination : Image = None):
+    """Combines two images or stacks in Y. 
+    
     Parameters
     ----------
-    source1
-    source2
-    target
-
+    stack1 : Image
+    stack2 : Image
+    destination : Image
+    
     Returns
     -------
-
+    destination
+    
+    References
+    ----------
+    .. [1] https://clij.github.io/clij2-docs/reference_combineVertically
     """
 
     import numpy as np
-    dimensions = np.asarray(source1.shape)
+    dimensions = np.asarray(stack1.shape)
 
-    if target is None:
+    if destination is None:
         if (len(dimensions) == 3):
-            dimensions[1] = dimensions[1] + source2.shape[1]
+            dimensions[1] = dimensions[1] + stack2.shape[1]
         else:
-            dimensions[0] = dimensions[0] + source2.shape[0]
+            dimensions[0] = dimensions[0] + stack2.shape[0]
 
-        target = create(dimensions)
+        destination = create(dimensions)
 
-    paste(source1, target, 0, 0, 0)
-    paste(source2, target, 0, source1.shape[-2], 0)
+    paste(stack1, destination, 0, 0, 0)
+    paste(stack2, destination, 0, stack1.shape[-2], 0)
 
-    return target
+    return destination

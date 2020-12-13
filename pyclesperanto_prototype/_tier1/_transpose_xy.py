@@ -5,12 +5,12 @@ from .._tier0 import create
 from .._tier0 import Image
 
 @plugin_function(output_creator=create_none)
-def transpose_xy(source : Image, destination : Image = None):
+def transpose_xy(input : Image, destination : Image = None):
     """Transpose X and Y axes of an image.
     
     Parameters
     ----------
-    source : Image
+    input : Image
         The input image.
     destination : Image
         The output image where results are written into.
@@ -23,7 +23,7 @@ def transpose_xy(source : Image, destination : Image = None):
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
-    >>> cle.transpose_xy(source, destination)
+    >>> cle.transpose_xy(input, destination)
     
     References
     ----------
@@ -31,7 +31,7 @@ def transpose_xy(source : Image, destination : Image = None):
     """
 
     if destination is None:
-        dimensions = source.shape
+        dimensions = input.shape
         if len(dimensions) == 3:
             destination = create([dimensions[0], dimensions[2], dimensions[1]])
         elif len(dimensions) == 2:
@@ -40,7 +40,7 @@ def transpose_xy(source : Image, destination : Image = None):
             destination = create([dimensions[0], 1])
 
     parameters = {
-        "src":source,
+        "src":input,
         "dst":destination
     }
 

@@ -15,6 +15,11 @@ def center_of_mass(source : Image):
     ----------
     source : Image
     
+    Examples
+    --------
+    >>> import pyclesperanto_prototype as cle
+    >>> cle.center_of_mass(source)
+    
     References
     ----------
     .. [1] https://clij.github.io/clij2-docs/reference_centerOfMass

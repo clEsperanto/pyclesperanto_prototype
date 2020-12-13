@@ -20,6 +20,11 @@ def voronoi_labeling(binary_source : Image, labeling_destination : Image = None)
     -------
     destination
     
+    Examples
+    --------
+    >>> import pyclesperanto_prototype as cle
+    >>> cle.voronoi_labeling(input, destination)
+    
     References
     ----------
     .. [1] https://clij.github.io/clij2-docs/reference_voronoiLabeling

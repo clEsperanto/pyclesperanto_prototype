@@ -30,6 +30,11 @@ def threshold_otsu(input : Image, destination : Image = None):
     -------
     destination
     
+    Examples
+    --------
+    >>> import pyclesperanto_prototype as cle
+    >>> cle.threshold_otsu(input, destination)
+    
     References
     ----------
     .. [1] https://clij.github.io/clij2-docs/reference_thresholdOtsu

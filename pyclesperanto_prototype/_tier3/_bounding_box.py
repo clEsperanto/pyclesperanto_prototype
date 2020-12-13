@@ -18,6 +18,11 @@ def bounding_box(source : Image):
     ----------
     source : Image
     
+    Examples
+    --------
+    >>> import pyclesperanto_prototype as cle
+    >>> cle.bounding_box(source)
+    
     References
     ----------
     .. [1] https://clij.github.io/clij2-docs/reference_boundingBox

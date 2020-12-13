@@ -16,6 +16,11 @@ def mean_y_projection(source : Image, destination : Image):
     -------
     destination
     
+    Examples
+    --------
+    >>> import pyclesperanto_prototype as cle
+    >>> cle.mean_y_projection(source, destination)
+    
     References
     ----------
     .. [1] https://clij.github.io/clij2-docs/reference_meanYProjection

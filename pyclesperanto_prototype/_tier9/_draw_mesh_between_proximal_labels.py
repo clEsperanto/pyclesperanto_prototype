@@ -11,17 +11,24 @@ from .._tier1 import n_closest_points
 
 @plugin_function
 def draw_mesh_between_proximal_labels(labels : Image, mesh_target : Image = None, maximum_distance : int = 1):
-    """
-
+    """Starting from a label map, draw lines between labels that are closer 
+    than a given distance resulting in a mesh.
+    
+    The end points of the lines correspond to the centroids of the labels. 
+    
     Parameters
     ----------
-    labels
-    mesh_target
-    maximum_distance
-
+    input : Image
+    destination : Image
+    maximum_distance : Number
+    
     Returns
     -------
-
+    destination
+    
+    References
+    ----------
+    .. [1] https://clij.github.io/clij2-docs/reference_drawMeshBetweenProximalLabels
     """
     pointlist = centroids_of_labels(labels)
 

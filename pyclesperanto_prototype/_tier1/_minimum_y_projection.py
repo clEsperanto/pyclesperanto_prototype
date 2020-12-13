@@ -17,6 +17,11 @@ def minimum_y_projection(source : Image, destination_min : Image = None):
     -------
     destination_min
     
+    Examples
+    --------
+    >>> import pyclesperanto_prototype as cle
+    >>> cle.minimum_y_projection(source, destination_min)
+    
     References
     ----------
     .. [1] https://clij.github.io/clij2-docs/reference_minimumYProjection

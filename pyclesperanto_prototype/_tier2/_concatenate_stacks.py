@@ -5,29 +5,33 @@ from .._tier0 import Image
 from .._tier1 import paste
 
 @plugin_function(output_creator=create_none)
-def concatenate_stacks(source1 : Image, source2 : Image, target : Image = None):
-    """
-
+def concatenate_stacks(stack1 : Image, stack2 : Image, destination : Image = None):
+    """Concatenates two stacks in Z. 
+    
     Parameters
     ----------
-    source1
-    source2
-    target
-
+    stack1 : Image
+    stack2 : Image
+    destination : Image
+    
     Returns
     -------
-
+    destination
+    
+    References
+    ----------
+    .. [1] https://clij.github.io/clij2-docs/reference_concatenateStacks
     """
 
     import numpy as np
-    dimensions = np.asarray(source1.shape)
+    dimensions = np.asarray(stack1.shape)
 
-    if target is None:
-        dimensions[0] = dimensions[0] + source2.shape[0]
+    if destination is None:
+        dimensions[0] = dimensions[0] + stack2.shape[0]
 
-        target = create(dimensions)
+        destination = create(dimensions)
 
-    paste(source1, target, 0, 0, 0)
-    paste(source2, target, 0, 0, source1.shape[0])
+    paste(stack1, destination, 0, 0, 0)
+    paste(stack2, destination, 0, 0, stack1.shape[0])
 
-    return target
+    return destination

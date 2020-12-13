@@ -19,7 +19,7 @@ def test_exclude_labels_out_of_size_range_2d():
             [3, 3, 0, 0, 0, 0]
     ]))
 
-    gpu_output = cle.exclude_labels_out_of_size_range(gpu_input, gpu_input, min_size=4, max_size=5)
+    gpu_output = cle.exclude_labels_outside_size_range(gpu_input, gpu_input, minimum_size=4, maximum_size=5)
 
     a = cle.pull_zyx(gpu_output)
     b = cle.pull_zyx(gpu_reference)

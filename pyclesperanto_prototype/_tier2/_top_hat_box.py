@@ -27,6 +27,11 @@ def top_hat_box(input : Image, destination : Image = None, radius_x : float = 1,
     -------
     destination
     
+    Examples
+    --------
+    >>> import pyclesperanto_prototype as cle
+    >>> cle.top_hat_box(input, destination, radiusX, radiusY, radiusZ)
+    
     References
     ----------
     .. [1] https://clij.github.io/clij2-docs/reference_topHatBox

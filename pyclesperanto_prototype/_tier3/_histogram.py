@@ -68,6 +68,11 @@ def histogram(source : Image, destination : Image = None, num_bins = 256, minimu
     -------
     destination
     
+    Examples
+    --------
+    >>> import pyclesperanto_prototype as cle
+    >>> cle.histogram(source, destination, number_of_bins, minimum_intensity, maximum_intensity, determine_min_max)
+    
     References
     ----------
     .. [1] https://clij.github.io/clij2-docs/reference_histogram

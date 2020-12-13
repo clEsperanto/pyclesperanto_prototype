@@ -15,7 +15,7 @@ def test_exclude_labels_with_values_out_of_range_2d():
 
     ]))
 
-    gpu_output = cle.exclude_labels_with_values_out_of_range(gpu_input, gpu_input, min=0, max=3)
+    gpu_output = cle.exclude_labels_with_values_out_of_range(gpu_input, gpu_input, minimum_value_range=0, maximum_value_range=3)
 
     a = cle.pull_zyx(gpu_output)
     b = cle.pull_zyx(gpu_reference)

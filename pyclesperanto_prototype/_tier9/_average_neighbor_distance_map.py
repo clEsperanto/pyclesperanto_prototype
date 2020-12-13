@@ -4,17 +4,24 @@ from .._tier0 import Image
 
 @plugin_function
 def average_neighbor_distance_map(labels : Image, distance_map : Image = None):
-    """
-
+    """Takes a label map, determines which labels touch and replaces every 
+    label with the average distance to their neighboring labels.
+    
+    To determine the distances, the centroid of the labels is determined 
+    internally. 
+    
     Parameters
     ----------
-    labels
-    distance_map
-    n
-
+    input : Image
+    destination : Image
+    
     Returns
     -------
-
+    destination
+    
+    References
+    ----------
+    .. [1] https://clij.github.io/clij2-docs/reference_averageNeighborDistanceMap
     """
 
     from .._tier9 import centroids_of_labels

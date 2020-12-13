@@ -5,24 +5,31 @@ from .._tier1 import count_touching_neighbors
 from .._tier1 import replace_intensities
 
 @plugin_function
-def touching_neighbor_count_map(labels : Image, map_destination : Image = None):
-    """
-
+def touching_neighbor_count_map(input : Image, destination : Image = None):
+    """Takes a label map, determines which labels touch and replaces every 
+    label with the number of touching neighboring labels.
+    
+     
+    
     Parameters
     ----------
-    labels
-    map_destination
-
+    input : Image
+    destination : Image
+    
     Returns
     -------
-
+    destination
+    
+    References
+    ----------
+    .. [1] https://clij.github.io/clij2-docs/reference_touchingNeighborCountMap
     """
     from .._tier1 import set_column
 
-    touch_matrix = generate_touch_matrix(labels)
+    touch_matrix = generate_touch_matrix(input)
     number_of_touching_neighbors_vector = count_touching_neighbors(touch_matrix)
 
     # ignore how many objects touch the background
     set_column(number_of_touching_neighbors_vector, 0, 0)
-    replace_intensities(labels, number_of_touching_neighbors_vector, map_destination)
-    return map_destination
+    replace_intensities(input, number_of_touching_neighbors_vector, destination)
+    return destination

@@ -18,6 +18,11 @@ def subtract_images(subtrahend : Image, minuend : Image, destination : Image = N
     -------
     destination
     
+    Examples
+    --------
+    >>> import pyclesperanto_prototype as cle
+    >>> cle.subtract_images(subtrahend, minuend, destination)
+    
     References
     ----------
     .. [1] https://clij.github.io/clij2-docs/reference_subtractImages

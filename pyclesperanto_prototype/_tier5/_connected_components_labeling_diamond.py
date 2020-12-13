@@ -19,6 +19,11 @@ def connected_components_labeling_diamond(binary_input: Image, labeling_destinat
     -------
     labeling_destination
     
+    Examples
+    --------
+    >>> import pyclesperanto_prototype as cle
+    >>> cle.connected_components_labeling_diamond(binary_input, labeling_destination)
+    
     References
     ----------
     .. [1] https://clij.github.io/clij2-docs/reference_connectedComponentsLabelingDiamond

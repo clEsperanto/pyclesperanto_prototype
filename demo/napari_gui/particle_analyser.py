@@ -183,7 +183,7 @@ def label(input1: Image, operation: Label = Label.connected_component):
 class LabelProcessing(Enum):
     please_select = partial(cle.copy)
     exclude_on_edges = partial(cle.exclude_labels_on_edges)
-    exclude_out_of_size_range = partial(cle.exclude_labels_out_of_size_range)
+    exclude_out_of_size_range = partial(cle.exclude_labels_outside_size_range)
     extend_via_voronoi = partial(cle.extend_labeling_via_voronoi)
     extend_with_maximum_radius = partial(cle.extend_labels_with_maximum_radius)
 

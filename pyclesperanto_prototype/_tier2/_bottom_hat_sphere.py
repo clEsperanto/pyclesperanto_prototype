@@ -27,6 +27,11 @@ def bottom_hat_sphere(input : Image, destination : Image = None, radius_x : floa
     -------
     destination
     
+    Examples
+    --------
+    >>> import pyclesperanto_prototype as cle
+    >>> cle.bottom_hat_sphere(input, destination, radiusX, radiusY, radiusZ)
+    
     References
     ----------
     .. [1] https://clij.github.io/clij2-docs/reference_bottomHatSphere

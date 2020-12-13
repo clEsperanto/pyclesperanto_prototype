@@ -5,29 +5,37 @@ from .._tier0 import Image
 from .._tier0 import execute
 
 @plugin_function(output_creator=create_none)
-def n_closest_points(distance_matrix : Image, index_list : Image = None, n : int = 1):
-    """
-
+def n_closest_points(distance_matrix : Image, indexlist_destination : Image = None, n : int = 1):
+    """Determine the n point indices with shortest distance for all points in 
+    a distance matrix. 
+    
+    This corresponds to the n row indices with minimum values for each column of 
+    the distance matrix. 
+    
     Parameters
     ----------
-    distance_matrix
-    index_list
-    n
-
+    distance_matrix : Image
+    indexlist_destination : Image
+    n : Number
+    
     Returns
     -------
-
+    indexlist_destination
+    
+    References
+    ----------
+    .. [1] https://clij.github.io/clij2-docs/reference_nClosestPoints
     """
 
-    if index_list is None:
-        index_list = create([int(n), distance_matrix.shape[1]])
+    if indexlist_destination is None:
+        indexlist_destination = create([int(n), distance_matrix.shape[1]])
 
     parameters = {
         "src_distancematrix":distance_matrix,
-        "dst_indexlist":index_list,
+        "dst_indexlist":indexlist_destination,
     }
 
     # todo: rename cl-file kernel to fulfill naming conventions
     execute(__file__, "n_shortest_points_x.cl", "find_n_closest_points", distance_matrix.shape, parameters)
 
-    return index_list
+    return indexlist_destination

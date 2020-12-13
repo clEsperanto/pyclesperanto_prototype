@@ -16,6 +16,11 @@ def detect_label_edges(label_source :Image, binary_destination :Image = None):
     -------
     edge_image_destination
     
+    Examples
+    --------
+    >>> import pyclesperanto_prototype as cle
+    >>> cle.detect_label_edges(label_map, edge_image_destination)
+    
     References
     ----------
     .. [1] https://clij.github.io/clij2-docs/reference_detectLabelEdges

@@ -4,26 +4,31 @@ from .._tier0 import Image
 from .._tier0 import create_vector_from_square_matrix
 
 @plugin_function(output_creator=create_vector_from_square_matrix)
-def count_touching_neighbors(touch_matrix: Image, count_vector_destination: Image = None):
-    """
-
+def count_touching_neighbors(touch_matrix: Image, touching_neighbors_count_destination: Image = None):
+    """Takes a touch matrix as input and delivers a vector with number of 
+    touching neighbors per label as a vector. 
+    
     Parameters
     ----------
-    touch_matrix
-    count_vector_destination
-
+    touch_matrix : Image
+    touching_neighbors_count_destination : Image
+    
     Returns
     -------
-
+    touching_neighbors_count_destination
+    
+    References
+    ----------
+    .. [1] https://clij.github.io/clij2-docs/reference_countTouchingNeighbors
     """
     parameters = {
         "src_touch_matrix": touch_matrix,
-        "dst_count_list": count_vector_destination
+        "dst_count_list": touching_neighbors_count_destination
     }
 
     execute(__file__, 'count_touching_neighbors_x.cl',
-            'count_touching_neighbors', count_vector_destination.shape,
+            'count_touching_neighbors', touching_neighbors_count_destination.shape,
             parameters)
 
-    return count_vector_destination
+    return touching_neighbors_count_destination
 

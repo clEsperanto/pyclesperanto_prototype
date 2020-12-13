@@ -16,6 +16,11 @@ def undefined_to_zero(source : Image, destination : Image = None):
     -------
     destination
     
+    Examples
+    --------
+    >>> import pyclesperanto_prototype as cle
+    >>> cle.undefined_to_zero(source, destination)
+    
     References
     ----------
     .. [1] https://clij.github.io/clij2-docs/reference_undefinedToZero

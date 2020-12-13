@@ -16,6 +16,11 @@ def mean_x_projection(source : Image, destination : Image):
     -------
     destination
     
+    Examples
+    --------
+    >>> import pyclesperanto_prototype as cle
+    >>> cle.mean_x_projection(source, destination)
+    
     References
     ----------
     .. [1] https://clij.github.io/clij2-docs/reference_meanXProjection

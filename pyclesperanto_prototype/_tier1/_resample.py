@@ -11,20 +11,24 @@ from .._tier0 import create_image
 
 @plugin_function(output_creator=create_none)
 def resample(source : Image, destination : Image = None, factor_x : float = 1, factor_y : float = 1, factor_z : float = 1, linear_interpolation : bool = False):
-    """
-
+    """Resamples an image with given size factors using an affine transform. 
+    
     Parameters
     ----------
-    source
-    destination
-    factor_x
-    factor_y
-    factor_z
-    linear_interpolation
-
+    source : Image
+    destination : Image
+    factor_x : Number
+    factor_y : Number
+    factor_z : Number
+    linear_interpolation : Boolean
+    
     Returns
     -------
-
+    destination
+    
+    References
+    ----------
+    .. [1] https://clij.github.io/clij2-docs/reference_resample
     """
     import numpy as np
 

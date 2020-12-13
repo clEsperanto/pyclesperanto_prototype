@@ -27,6 +27,11 @@ def bottom_hat_box(input : Image, destination : Image = None, radius_x : float =
     -------
     destination
     
+    Examples
+    --------
+    >>> import pyclesperanto_prototype as cle
+    >>> cle.bottom_hat_box(input, destination, radiusX, radiusY, radiusZ)
+    
     References
     ----------
     .. [1] https://clij.github.io/clij2-docs/reference_bottomHatBox

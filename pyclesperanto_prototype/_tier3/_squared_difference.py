@@ -18,6 +18,11 @@ def squared_difference(source1 : Image, source2 : Image, destination : Image = N
     -------
     destination
     
+    Examples
+    --------
+    >>> import pyclesperanto_prototype as cle
+    >>> cle.squared_difference(source1, source2, destination)
+    
     References
     ----------
     .. [1] https://clij.github.io/clij2-docs/reference_squaredDifference

@@ -6,19 +6,24 @@ from pyclesperanto_prototype._tier2 import subtract_images
 
 @plugin_function
 def divide_by_gaussian_background(input : Image, destination : Image = None, sigma_x : float = 2, sigma_y : float = 2, sigma_z : float = 2):
-    """
-
+    """Applies Gaussian blur to the input image and divides the original by 
+    the result. 
+    
     Parameters
     ----------
-    input
-    destination
-    sigma_x
-    sigma_y
-    sigma_z
-
+    input : Image
+    destination : Image
+    sigmaX : Number
+    sigmaY : Number
+    sigmaZ : Number
+    
     Returns
     -------
-
+    destination
+    
+    References
+    ----------
+    .. [1] https://clij.github.io/clij2-docs/reference_divideByGaussianBackground
     """
     temp1 = create_like(destination)
 

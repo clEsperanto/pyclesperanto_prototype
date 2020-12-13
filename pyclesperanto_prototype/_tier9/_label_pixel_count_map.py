@@ -5,26 +5,33 @@ from .._tier1 import replace_intensities
 from .._tier1 import set_column
 
 @plugin_function
-def label_pixel_count_map(labels : Image, pixel_count_map : Image = None):
-    """
-
+def label_pixel_count_map(input : Image, destination : Image = None):
+    """Takes a label map, determines the number of pixels per label and 
+    replaces every label with the that number.
+    
+    This results in a parametric image expressing area or volume. 
+    
     Parameters
     ----------
-    labels
-    pixel_count_map
-
+    input : Image
+    destination : Image
+    
     Returns
     -------
-
+    destination
+    
+    References
+    ----------
+    .. [1] https://clij.github.io/clij2-docs/reference_labelPixelCountMap
     """
     from .._tier9 import statistics_of_background_and_labelled_pixels
 
-    regionprops = statistics_of_background_and_labelled_pixels(None, labels)
+    regionprops = statistics_of_background_and_labelled_pixels(None, input)
 
     import numpy as np
     values_vector = push_zyx(np.asarray([[r.area for r in regionprops]]))
     set_column(values_vector, 0, 0)
 
-    pixel_count_map = replace_intensities(labels, values_vector, pixel_count_map)
+    destination = replace_intensities(input, values_vector, destination)
 
-    return pixel_count_map
+    return destination

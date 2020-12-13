@@ -24,6 +24,11 @@ def absolute_difference(source1 : Image, source2 : Image, destination : Image = 
     -------
     destination
     
+    Examples
+    --------
+    >>> import pyclesperanto_prototype as cle
+    >>> cle.absolute_difference(source1, source2, destination)
+    
     References
     ----------
     .. [1] https://clij.github.io/clij2-docs/reference_absoluteDifference

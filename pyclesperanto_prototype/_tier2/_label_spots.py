@@ -7,20 +7,36 @@ from .._tier1 import sum_x_projection
 from .._tier1 import sum_y_projection
 
 @plugin_function
-def label_spots(binary_input : Image, labeling_destination : Image = None):
-    """
-    docs placeholder
+def label_spots(input_spots : Image, labelled_spots_destination : Image = None):
+    """Transforms a binary image with single pixles set to 1 to a labelled 
+    spots image. 
+    
+    Transforms a spots image as resulting from maximum/minimum detection in an image 
+    of the same size where every spot has a number 1, 2, ... n. 
+    
+    Parameters
+    ----------
+    input_spots : Image
+    labelled_spots_destination : Image
+    
+    Returns
+    -------
+    labelled_spots_destination
+    
+    References
+    ----------
+    .. [1] https://clij.github.io/clij2-docs/reference_labelSpots
     """
 
-    set(labeling_destination, 0)
+    set(labelled_spots_destination, 0)
 
-    dimensionality = binary_input.shape
+    dimensionality = input_spots.shape
     if (len(dimensionality) == 2):  # 2D image
         dimensionality = [1, dimensionality[0], dimensionality[1]]
 
     spot_count_per_x = create([dimensionality[1], dimensionality[2]])
 
-    sum_x_projection(binary_input, spot_count_per_x)
+    sum_x_projection(input_spots, spot_count_per_x)
 
     spot_count_per_xy = create([dimensionality[1], dimensionality[2]])
 
@@ -29,12 +45,12 @@ def label_spots(binary_input : Image, labeling_destination : Image = None):
     dims = [dimensionality[0], dimensionality[1], 1]
 
     parameters = {
-        "dst": labeling_destination,
-        "src": binary_input,
+        "dst": labelled_spots_destination,
+        "src": input_spots,
         "spotCountPerX": spot_count_per_x,
         "spotCountPerXY": spot_count_per_xy
     }
 
     execute(__file__, 'label_spots_in_x.cl', 'label_spots_in_x', dims, parameters)
 
-    return labeling_destination
+    return labelled_spots_destination
