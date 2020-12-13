@@ -20,6 +20,152 @@ from magicgui import magicgui
 import pyclesperanto_prototype as cle
 
 
+# inspired from https://github.com/pr4deepr/pyclesperanto_prototype/blob/master/napari_clij_widget.py
+# Using Enums for getting a dropdown menu
+from enum import Enum
+from functools import partial
+
+# -----------------------------------------------------------------------------
+class Filter(Enum):
+    please_select = partial(cle.copy)
+    mean_box = partial(cle.mean_box)
+    maximum_box = partial(cle.maximum_box)
+    minimum_box = partial(cle.minimum_box)
+    top_hat_box = partial(cle.top_hat_box)
+    divide_by_gaussian = partial(cle.divide_by_gaussian_background)
+    bottom_hat_box = partial(cle.bottom_hat_box)
+    gaussian_blur = partial(cle.gaussian_blur)
+    gamma_correction = partial(cle.gamma_correction)
+    gradient_x = partial(cle.gradient_x)
+    gradient_y = partial(cle.gradient_y)
+    gradient_z = partial(cle.gradient_z)
+
+    #define the call method for the functions or it won't return anything
+    def __call__(self, *args):
+        return self.value(*args)
+
+@magicgui(auto_call=True, layout='vertical')
+def filter(input1: Image, operation: Filter = Filter.please_select, x: float = 1, y: float = 1, z: float = 0):
+    print(filter.self)
+    if input1:
+        cle_input = cle.push_zyx(input1.data)
+        output = cle.create_like(cle_input)
+        operation(cle_input, output, x, y, z)
+        output = cle.pull_zyx(output)
+
+        # workaround to cause a auto-contrast in the viewer after returning the result
+        # if Gui.global_last_filter_applied is not None:
+        #    viewer.layers.remove_selected()
+        # Gui.global_last_filter_applied = operation
+
+        if (filter.initial_call):
+            print("ADD layer")
+            filter.count = filter.count + 1
+            filter.self.viewer.add_image(output, name="filter" + str(filter.count))
+            filter.initial_call = False
+        else:
+            filter.self.viewer.layers["filter" + str(filter.count)].data = output
+            print("MOD layer")
+
+        # return output
+filter.count = 0
+
+
+# -----------------------------------------------------------------------------
+class Binarize(Enum):
+    please_select = partial(cle.copy)
+    threshold_otsu = partial(cle.threshold_otsu)
+    greater_constant = partial(cle.greater_constant)
+    smaller_constant = partial(cle.smaller_constant)
+    equal_constant = partial(cle.equal_constant)
+    not_equal_constant = partial(cle.not_equal_constant)
+
+    #define the call method for the functions or it won't return anything
+    def __call__(self, *args):
+        return self.value(*args)
+
+@magicgui(auto_call=True, layout='vertical')
+def binarize(input1: Image, operation: Binarize= Binarize.threshold_otsu, constant : int = 0):
+    if input1 is not None:
+        cle_input1 = cle.push_zyx(input1.data)
+        output = cle.create_like(cle_input1)
+        operation(cle_input1, output, constant)
+        output = cle.pull_zyx(output)
+
+        # workaround to cause a auto-contrast in the viewer after returning the result
+        #if Gui.global_last_filter_applied is not None:
+        #    viewer.layers.remove_selected()
+        #Gui.global_last_filter_applied = operation
+
+        #return output
+
+        if (binarize.initial_call):
+            print("ADD layer")
+            binarize.count = binarize.count + 1
+            binarize.self.viewer.add_image(output, name="binarize" + str(binarize.count))
+            binarize.initial_call = False
+        else:
+            binarize.self.viewer.layers["binarize" + str(binarize.count)].data = output
+            binarize.self.viewer.layers["binarize" + str(binarize.count)].contrast_limits = (0, 1)
+            print("MOD layer")
+
+binarize.count = 0
+
+
+class LayerDialog():
+    def __init__(self, viewer, operation):
+        self.viewer = viewer
+
+        self.viewer.layers.events.removed.connect(self._removed)
+
+        self.operation = operation
+        self.operation.self = self # arrrrg
+
+        former_active_layer = self.viewer.active_layer
+        try:
+            former_active_layer.dialog._deselected(None)
+        except AttributeError:
+            self
+
+        self.operation.initial_call = True
+        self.operation(self.viewer.active_layer)
+        self.layer = self.viewer.active_layer
+        self.layer.dialog = self
+
+        self.layer.events.data.connect(self._updated)
+        self.layer.events.select.connect(self._selected)
+        self.layer.events.deselect.connect(self._deselected)
+
+        self.filter_gui = self.operation.Gui()
+        self.dock_widget = viewer.window.add_dock_widget(self.filter_gui, area='right')
+        self.filter_gui.set_widget('input1', former_active_layer)
+
+    def _updated(self, event):
+        print("Updated : " + self.layer.name)
+        self.refresh_all_followers()
+        #print(event)
+    def _selected(self, event):
+        print("Selected : " + self.layer.name)
+        self.operation.self = self    # sigh
+        self.dock_widget = viewer.window.add_dock_widget(self.filter_gui, area='right')
+        #print(event)
+    def _deselected(self, event):
+        print("Deselected : " + self.layer.name)
+        self.viewer.window.remove_dock_widget(self.dock_widget)
+        #print(event)
+
+    def refresh(self):
+        print("Refresh " + self.layer.name)
+        self.filter_gui()
+
+    def refresh_all_followers(self):
+        active = False
+        for layer in self.viewer.layers:
+            if active:
+                layer.dialog.refresh()
+            if layer == self.layer:
+                active = True
+
 class Gui(QWidget):
     """This Gui takes a napari as parameter and infiltrates it.
 
@@ -31,12 +177,25 @@ class Gui(QWidget):
     # It's a global variable.
     #                            haesleinhuepf
     global_last_filter_applied = None
+    _instance = None
+    _current_layer = None
 
     def __init__(self, viewer):
         super().__init__()
 
         self.viewer = viewer
-        self.items = []
+        Gui._instance = self
+        #self.viewer.events.connect()
+
+        #def print_layer_name(event):
+        #    print(f"{event.source.name} changed its data!")
+        # layer.events.data.connect(print_layer_name)
+        # layer.events.select.connect
+        # layer.events.deselect.connect
+
+        # worker.returned.connect(viewer.add_image)  # connect callback functions
+        #      worker.start()  # start the thread!
+        #
 
         self.layout = QVBoxLayout()
 
@@ -55,17 +214,20 @@ class Gui(QWidget):
         for i in reversed(range(self.layout.count())):
             self.layout.itemAt(i).widget().setParent(None)
 
-        if main_menu:
-            self._add_button("Filter", self._add_filter_clicked)
-            self._add_button("Binarize", self._add_binarize_clicked)
-            self._add_button("Combine", self._add_combine_clicked)
-            self._add_button("Label", self._add_label_clicked)
-            self._add_button("Label Processing", self._add_label_processing_clicked)
-            self._add_button("Measure", self._measure_clicked)
-            self._add_button("Maps and meshes", self._maps_and_meshes_clicked)
-        else:
-            self._add_button("Done", self._done_clicked)
-            self._add_button("Cancel", self._cancel_clicked)
+        self._add_button("Filter", self._add_filter_clicked)
+        self._add_button("Binarize", self._add_binarize_clicked)
+
+        #if main_menu:
+        #    self._add_button("Filter", self._add_filter_clicked)
+        #    self._add_button("Binarize", self._add_binarize_clicked)
+        #    self._add_button("Combine", self._add_combine_clicked)
+        #    self._add_button("Label", self._add_label_clicked)
+        #    self._add_button("Label Processing", self._add_label_processing_clicked)
+        #    self._add_button("Measure", self._measure_clicked)
+        #    self._add_button("Maps and meshes", self._maps_and_meshes_clicked)
+        #else:
+        #    self._add_button("Done", self._done_clicked)
+        #    self._add_button("Cancel", self._cancel_clicked)
 
         self.setLayout(self.layout)
 
@@ -73,7 +235,6 @@ class Gui(QWidget):
         btn = QPushButton(title, self)
         btn.clicked.connect(handler)
         self.layout.addWidget(btn)
-        self.items.append(btn)
 
     def _add_filter_clicked(self):
         self._activate(filter)
@@ -96,14 +257,20 @@ class Gui(QWidget):
     def _maps_and_meshes_clicked(self):
         self._activate(maps_and_meshes)
 
+    def _button_clicked(self):
+        print("Something returned")
+
     def _activate(self, magicgui):
-        for layer in viewer.layers:
-            layer.visible = False
+        #for layer in viewer.layers:
+        #    layer.visible = False
+        #
+        #magicgui._gui = self
+
+        LayerDialog(self.viewer, magicgui)
 
         Gui.global_last_filter_applied = None
-        self.filter_gui = magicgui.Gui()
-        self.dock_widget = viewer.window.add_dock_widget(self.filter_gui, area='right')
         self._init_gui(False)
+
 
     def _done_clicked(self):
         # magicqui somehow internally keeps the layer.
@@ -129,72 +296,8 @@ class Gui(QWidget):
 
 
 
-# inspired from https://github.com/pr4deepr/pyclesperanto_prototype/blob/master/napari_clij_widget.py
-# Using Enums for getting a dropdown menu
-from enum import Enum
-from functools import partial
 
-# -----------------------------------------------------------------------------
-class Filter(Enum):
-    please_select = partial(cle.copy)
-    mean_box = partial(cle.mean_box)
-    maximum_box = partial(cle.maximum_box)
-    minimum_box = partial(cle.minimum_box)
-    top_hat_box = partial(cle.top_hat_box)
-    divide_by_gaussian = partial(cle.divide_by_gaussian_background)
-    bottom_hat_box = partial(cle.bottom_hat_box)
-    gaussian_blur = partial(cle.gaussian_blur)
-    gamma_correctiion = partial(cle.gamma_correction)
-    gradient_x = partial(cle.gradient_x)
-    gradient_y = partial(cle.gradient_y)
-    gradient_z = partial(cle.gradient_z)
 
-    #define the call method for the functions or it won't return anything
-    def __call__(self, *args):
-        return self.value(*args)
-
-@magicgui(auto_call=True, layout='vertical')
-def filter(input: Image, operation: Filter, x: float = 1, y: float = 1, z: float = 0) -> Image:
-    if input:
-        cle_input = cle.push_zyx(input.data)
-        output = cle.create_like(cle_input)
-        operation(cle_input, output, x, y, z)
-        output = cle.pull_zyx(output)
-
-        # workaround to cause a auto-contrast in the viewer after returning the result
-        if Gui.global_last_filter_applied is not None:
-            viewer.layers.remove_selected()
-        Gui.global_last_filter_applied = operation
-
-        return output
-
-# -----------------------------------------------------------------------------
-class Binarize(Enum):
-    please_select = partial(cle.copy)
-    threshold_otsu = partial(cle.threshold_otsu)
-    greater_constant = partial(cle.greater_constant)
-    smaller_constant = partial(cle.smaller_constant)
-    equal_constant = partial(cle.equal_constant)
-    not_equal_constant = partial(cle.not_equal_constant)
-
-    #define the call method for the functions or it won't return anything
-    def __call__(self, *args):
-        return self.value(*args)
-
-@magicgui(auto_call=True, layout='vertical')
-def binarize(input1: Image, operation: Binarize, constant : int = 0) -> Image:
-    if input1 is not None:
-        cle_input1 = cle.push_zyx(input1.data)
-        output = cle.create_like(cle_input1)
-        operation(cle_input1, output, constant)
-        output = cle.pull_zyx(output)
-
-        # workaround to cause a auto-contrast in the viewer after returning the result
-        if Gui.global_last_filter_applied is not None:
-            viewer.layers.remove_selected()
-        Gui.global_last_filter_applied = operation
-
-        return output
 
 # -----------------------------------------------------------------------------
 class Combine(Enum):
