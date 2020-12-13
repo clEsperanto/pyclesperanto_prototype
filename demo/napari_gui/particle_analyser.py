@@ -1,3 +1,4 @@
+from magicgui._qt.widgets import QDataComboBox
 from qtpy.QtWidgets import (
     QPushButton,
     QComboBox,
@@ -121,8 +122,11 @@ class Combine(Enum):
         return self.value(*args)
 
 @magicgui(auto_call=True, layout='vertical')
-def combine(input1: Image, input2: Image, operation: Combine = Combine.please_select):
-    if input1 is not None and input2 is not None:
+def combine(input1: Image, input2: Image = None, operation: Combine = Combine.please_select):
+    if input1 is not None:
+        if (input2 is not None):
+            input2 = input1
+
         cle_input1 = cle.push_zyx(input1.data)
         cle_input2 = cle.push_zyx(input2.data)
         output = cle.create_like(cle_input1)
@@ -291,13 +295,18 @@ class LayerDialog():
 
     def refresh(self):
         print("Refresh " + self.layer.name)
+        former = self.operation.self
+        self.operation.self = self    # sigh
         self.filter_gui()
+        self.operation.self = former
 
     def refresh_all_followers(self):
         for layer in self.viewer.layers:
             print(layer.name)
             try:
-                if layer.dialog.filter_gui.get_widget('input1') == self.layer:
+                if layer.dialog.filter_gui.get_widget('input1').currentData() == self.layer:
+                    layer.dialog.refresh()
+                if layer.dialog.filter_gui.get_widget('input2').currentData() == self.layer:
                     layer.dialog.refresh()
             except AttributeError:
                 print()
