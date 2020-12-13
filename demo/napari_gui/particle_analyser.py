@@ -33,17 +33,24 @@ from functools import partial
 # -----------------------------------------------------------------------------
 class Filter(Enum):
     please_select = partial(cle.copy)
+    gaussian_blur = partial(cle.gaussian_blur)
+    top_hat_box = partial(cle.top_hat_box)
+    sobel = partial(cle.sobel)
+    laplace = partial(cle.laplace_box)
     mean_box = partial(cle.mean_box)
     maximum_box = partial(cle.maximum_box)
     minimum_box = partial(cle.minimum_box)
-    top_hat_box = partial(cle.top_hat_box)
     divide_by_gaussian = partial(cle.divide_by_gaussian_background)
     bottom_hat_box = partial(cle.bottom_hat_box)
-    gaussian_blur = partial(cle.gaussian_blur)
     gamma_correction = partial(cle.gamma_correction)
     gradient_x = partial(cle.gradient_x)
     gradient_y = partial(cle.gradient_y)
     gradient_z = partial(cle.gradient_z)
+    binary_edge_detection = partial(cle.binary_edge_detection)
+    invert = partial(cle.invert)
+    logarithm = partial(cle.logarithm)
+    exponential = partial(cle.exponential)
+    power = partial(cle.power
 
     #define the call method for the functions or it won't return anything
     def __call__(self, *args):
@@ -70,6 +77,7 @@ def filter(input1: Image, operation: Filter = Filter.please_select, x: float = 1
 class Binarize(Enum):
     please_select = partial(cle.copy)
     threshold_otsu = partial(cle.threshold_otsu)
+    detect_maxima = partial(cle.detect_maxima_box)
     greater_constant = partial(cle.greater_constant)
     smaller_constant = partial(cle.smaller_constant)
     equal_constant = partial(cle.equal_constant)
