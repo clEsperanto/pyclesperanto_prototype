@@ -1,4 +1,10 @@
-from magicgui._qt.widgets import QDataComboBox
+# Particle analyzer GUI uing napari
+#
+# This example shows how one can call operations from the graphical user interface and implment an
+# image-data-flow-graph. When parameters of operations high in the hierarchy are updated, downstream
+# operations are updated. This facilitates finding a good parameter setting for complex workflows.
+#
+
 from qtpy.QtWidgets import (
     QPushButton,
     QComboBox,
@@ -15,22 +21,20 @@ from qtpy.QtWidgets import (
 from qtpy.QtCore import Qt, QSize
 from pathlib import Path
 from qtpy import QtGui
-
-
 import napari
-import numpy as np
 from napari.layers import Image, Labels
 from magicgui import magicgui
 
 import pyclesperanto_prototype as cle
 
-
-# inspired from https://github.com/pr4deepr/pyclesperanto_prototype/blob/master/napari_clij_widget.py
-# Using Enums for getting a dropdown menu
 from enum import Enum
 from functools import partial
 
 # -----------------------------------------------------------------------------
+# We define an enum that represents operations in a given category
+#
+# inspired from https://github.com/pr4deepr/pyclesperanto_prototype/blob/master/napari_clij_widget.py
+# Using Enums for getting a dropdown menu
 class Filter(Enum):
     please_select = partial(cle.copy)
     gaussian_blur = partial(cle.gaussian_blur)
@@ -50,21 +54,24 @@ class Filter(Enum):
     invert = partial(cle.invert)
     logarithm = partial(cle.logarithm)
     exponential = partial(cle.exponential)
-    power = partial(cle.power
+    power = partial(cle.power)
 
     #define the call method for the functions or it won't return anything
     def __call__(self, *args):
         return self.value(*args)
 
+# The user interface of the operations is build by magicgui
 @magicgui(auto_call=True, layout='vertical')
 def filter(input1: Image, operation: Filter = Filter.please_select, x: float = 1, y: float = 1, z: float = 0):
     print(filter.self)
     if input1:
+        # execute operation
         cle_input = cle.push_zyx(input1.data)
         output = cle.create_like(cle_input)
         operation(cle_input, output, x, y, z)
         output = cle.pull_zyx(output)
 
+        # show result in napari
         if (filter.initial_call):
             filter.self.viewer.add_image(output, colormap=input1.colormap)
             filter.initial_call = False
@@ -91,11 +98,13 @@ class Binarize(Enum):
 @magicgui(auto_call=True, layout='vertical')
 def binarize(input1: Image, operation: Binarize= Binarize.threshold_otsu, constant : int = 0):
     if input1 is not None:
+        # execute operation
         cle_input1 = cle.push_zyx(input1.data)
         output = cle.create_like(cle_input1)
         operation(cle_input1, output, constant)
         output = cle.pull_zyx(output)
 
+        # show result in napari
         if (binarize.initial_call):
             binarize.self.viewer.add_image(output)
             binarize.initial_call = False
@@ -129,12 +138,14 @@ def combine(input1: Image, input2: Image = None, operation: Combine = Combine.pl
         if (input2 is None):
             input2 = input1
 
+        # execute operation
         cle_input1 = cle.push_zyx(input1.data)
         cle_input2 = cle.push_zyx(input2.data)
         output = cle.create_like(cle_input1)
         operation(cle_input1, cle_input2, output)
         output = cle.pull_zyx(output)
 
+        # show result in napari
         if (combine.initial_call):
             combine.self.viewer.add_image(output, colormap=input1.colormap)
             combine.initial_call = False
@@ -155,11 +166,13 @@ class Label(Enum):
 @magicgui(auto_call=True, layout='vertical')
 def label(input1: Image, operation: Label = Label.connected_component):
     if input1 is not None:
+        # execute operation
         cle_input1 = cle.push_zyx(input1.data)
         output = cle.create_like(cle_input1)
         operation(cle_input1, output)
         output = cle.pull_zyx(output)
 
+        # show result in napari
         if (label.initial_call):
             label.self.viewer.add_labels(output)
             label.initial_call = False
@@ -182,11 +195,13 @@ class LabelProcessing(Enum):
 @magicgui(auto_call=True, layout='vertical')
 def label_processing(input1: Image, operation: LabelProcessing = LabelProcessing.please_select, min: float=0, max:float=100):
     if input1 is not None:
+        # execute operation
         cle_input1 = cle.push_zyx(input1.data)
         output = cle.create_like(cle_input1)
         operation(cle_input1, output, min, max)
         output = cle.pull_zyx(output)
 
+        # show result in napari
         if (label_processing.initial_call):
             label_processing.self.viewer.add_labels(output)
             label_processing.initial_call = False
@@ -209,6 +224,7 @@ class Mesh(Enum):
 @magicgui(auto_call=True, layout='vertical')
 def mesh(input1: Image, operation: Mesh = Mesh.touching, n : float = 1):
     if input1 is not None:
+        # execute operation
         cle_input1 = cle.push_zyx(input1.data)
         output = cle.create_like(cle_input1)
         operation(cle_input1, output, n)
@@ -217,6 +233,7 @@ def mesh(input1: Image, operation: Mesh = Mesh.touching, n : float = 1):
             max_intensity = 1 # prevent division by zero in vispy
         output = cle.pull_zyx(output)
 
+        # show result in napari
         if (mesh.initial_call):
             mesh.self.viewer.add_image(output, colormap='green', blending='additive')
             mesh.initial_call = False
@@ -238,6 +255,7 @@ class Map(Enum):
 @magicgui(auto_call=True, layout='vertical')
 def map(input1: Image, operation: Map = Map.please_select, n : float = 1):
     if input1 is not None:
+        # execute operation
         cle_input1 = cle.push_zyx(input1.data)
         output = cle.create_like(cle_input1)
         operation(cle_input1, output, n)
@@ -246,6 +264,7 @@ def map(input1: Image, operation: Map = Map.please_select, n : float = 1):
             max_intensity = 1 # prevent division by zero in vispy
         output = cle.pull_zyx(output)
 
+        # show result in napari
         if (map.initial_call):
             map.self.viewer.add_image(output, colormap='magenta')
             map.initial_call = False
@@ -255,6 +274,8 @@ def map(input1: Image, operation: Map = Map.please_select, n : float = 1):
             map.self.layer.contrast_limits=(0, max_intensity)
 
 # -----------------------------------------------------------------------------
+# A special case of ooperation is measurement: it results in a table instead of
+# an image
 @magicgui(layout='vertical', call_button="Measure")
 def measure(input: Image = None, labels : Image = None):
     if input is not None and labels is not None:
@@ -272,6 +293,10 @@ def table_to_widget(table : dict) -> QTableWidget:
     return view
 
 class LayerDialog():
+    """
+    The LayerDialog contains a dock-widget that allows configuring parameters of all operations.
+    It uses events emitted by napari to toggle which dock widget is shown.
+    """
     def __init__(self, viewer, operation):
         self.viewer = viewer
 
@@ -301,31 +326,40 @@ class LayerDialog():
             self.filter_gui.layout().itemAt(i).widget().setFont(QtGui.QFont('Arial', 12))
 
     def _updated(self, event):
-        print("Updated : " + self.layer.name)
         self.refresh_all_followers()
-        #print(event)
+
     def _selected(self, event):
-        print("Selected : " + self.layer.name)
         self.operation.self = self    # sigh
         self.dock_widget = viewer.window.add_dock_widget(self.filter_gui, area='right')
-        #print(event)
+
     def _deselected(self, event):
-        print("Deselected : " + self.layer.name)
         self.viewer.window.remove_dock_widget(self.dock_widget)
-        #print(event)
 
     def _removed(self):
-        print("removed: " + self.layer.name)
         self.viewer.window.remove_dock_widget(self.dock_widget)
 
     def refresh(self):
-        print("Refresh " + self.layer.name)
+        """
+        Refresh/recompute the current layer
+
+        Returns
+        -------
+
+        """
         former = self.operation.self
         self.operation.self = self    # sigh
         self.filter_gui()
         self.operation.self = former
 
     def refresh_all_followers(self):
+        """
+        Go through all layers and identify layers which have the current layer (self.layer) as parameter.
+        Then, refresh those layers.
+
+        Returns
+        -------
+
+        """
         for layer in self.viewer.layers:
             print(layer.name)
             try:
