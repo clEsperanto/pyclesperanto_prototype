@@ -98,6 +98,7 @@ def binarize(input1: Image, operation: Binarize= Binarize.threshold_otsu, consta
         else:
             binarize.self.layer.data = output
             binarize.self.layer.contrast_limits = (0, 1)
+            binarize.self.layer.name = str(operation)
 
 binarize.count = 0
 
@@ -138,6 +139,7 @@ def combine(input1: Image, input2: Image = None, operation: Combine = Combine.pl
             combine.initial_call = False
         else:
             combine.self.layer.data = output
+            combine.self.layer.name = str(operation)
 
 combine.count = 0
 
@@ -168,6 +170,7 @@ def label(input1: Image, operation: Label = Label.connected_component):
             label.initial_call = False
         else:
             label.self.layer.data = output
+            label.self.layer.name = str(operation)
 
 label.count = 0
 
@@ -215,7 +218,7 @@ class Mesh(Enum):
         return self.value(*args)
 
 @magicgui(auto_call=True, layout='vertical')
-def mesh(input1: Image, operation: Mesh = Mesh.please_select, n : float = 1):
+def mesh(input1: Image, operation: Mesh = Mesh.touching, n : float = 1):
     if input1 is not None:
         cle_input1 = cle.push_zyx(input1.data)
         output = cle.create_like(cle_input1)
@@ -271,11 +274,12 @@ map.count = 0
 
 # -----------------------------------------------------------------------------
 @magicgui(layout='vertical', call_button="Measure")
-def measure(input: Image, labels : Image):
-    from skimage.measure import regionprops_table
-    table = regionprops_table(labels.data.astype(int), intensity_image=input.data, properties=('area', 'centroid', 'mean_intensity'))
-    dock_widget = table_to_widget(table)
-    viewer.window.add_dock_widget(dock_widget, area='right')
+def measure(input: Image = None, labels : Image = None):
+    if input is not None and labels is not None:
+        from skimage.measure import regionprops_table
+        table = regionprops_table(labels.data.astype(int), intensity_image=input.data, properties=('area', 'centroid', 'mean_intensity'))
+        dock_widget = table_to_widget(table)
+        viewer.window.add_dock_widget(dock_widget, area='right')
 
 def table_to_widget(table : dict) -> QTableWidget:
     view = QTableWidget(len(next(iter(table.values()))), len(table))
@@ -310,6 +314,9 @@ class LayerDialog():
         self.filter_gui = self.operation.Gui()
         self.dock_widget = viewer.window.add_dock_widget(self.filter_gui, area='right')
         self.filter_gui.set_widget('input1', former_active_layer)
+
+        for i in reversed(range(self.filter_gui.layout().count())):
+            self.filter_gui.layout().itemAt(i).widget().setFont(QtGui.QFont('Arial', 12))
 
     def _updated(self, event):
         print("Updated : " + self.layer.name)
@@ -362,10 +369,6 @@ class Gui(QWidget):
 
         self._init_gui()
 
-        self.setLayout(self.layout)
-
-        self.dock_widget = None
-
     def _init_gui(self):
         """Switches the GUI internally between a main menu
         where you can select categories and a sub menu where
@@ -374,6 +377,12 @@ class Gui(QWidget):
         # remove all buttons first
         for i in reversed(range(self.layout.count())):
             self.layout.itemAt(i).widget().setParent(None)
+
+        label = QLabel("Add layer")
+        label.setFont(QtGui.QFont('Arial', 12))
+        label.setFixedSize(QSize(400, 30))
+        self.layout.addWidget(label)
+
 
         self._add_button("Filter", self._add_filter_clicked)
         self._add_button("Binarize", self._add_binarize_clicked)
@@ -384,6 +393,8 @@ class Gui(QWidget):
         self._add_button("Mesh", self._mesh_clicked)
         self._add_button("Measure", self._measure_clicked)
 
+        self.layout.addStretch()
+
         self.setLayout(self.layout)
 
     def _add_button(self, title : str, handler : callable):
@@ -393,7 +404,7 @@ class Gui(QWidget):
 
         # icon
         btn.setIcon(QtGui.QIcon(str(Path(__file__).parent) + "/icons/" + title.lower().replace(" ", "_") + ".png"))
-        btn.setIconSize(QSize(40, 40))
+        btn.setIconSize(QSize(30, 30))
         btn.setStyleSheet("text-align:left;");
 
         # action
@@ -429,8 +440,10 @@ class Gui(QWidget):
 
 # -----------------------------------------------------------------------------
 from skimage.io import imread
-image = imread('https://samples.fiji.sc/blobs.png')
 
+image = imread('data/Lund_000500_resampled-cropped.tif')
+#image = imread('data/CalibZAPWfixed_000154_max-16.tif')
+#image = imread('https://samples.fiji.sc/blobs.png'')
 #image = imread('C:/structure/data/lund_000500_resampled.tif')
 
 
@@ -451,7 +464,7 @@ with napari.gui_qt():
             print()
     viewer.layers.events.removed.connect(_on_removed)
 
-        # add the gui to the viewer as a dock widget
-    dock_widget = viewer.window.add_dock_widget(Gui(viewer), area='right')
+    # add the gui to the viewer as a dock widget
+    viewer.window.add_dock_widget(Gui(viewer), area='right')
 
 
