@@ -1,4 +1,4 @@
-# Particle analyzer GUI uing napari
+# Particle analyzer GUI using napari
 #
 # This example shows how one can call operations from the graphical user interface and implment an
 # image-data-flow-graph. When parameters of operations high in the hierarchy are updated, downstream
