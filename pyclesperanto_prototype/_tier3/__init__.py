@@ -15,3 +15,4 @@ from ._jaccard_index import jaccard_index
 from ._labelled_spots_to_pointlist import labelled_spots_to_pointlist
 from ._mean_of_all_pixels import mean_of_all_pixels
 from ._squared_difference import squared_difference
+from ._subtract_gaussian_background import subtract_gaussian_background
