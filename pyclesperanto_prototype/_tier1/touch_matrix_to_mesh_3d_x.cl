@@ -20,7 +20,7 @@ IMAGE_dst_mesh_TYPE dst_mesh) {
   const int num_pointBs = GET_IMAGE_HEIGHT(src_touch_matrix);
   for (int pointBIndex = pointIndex + 1; pointBIndex < num_pointBs; pointBIndex++) {
     const float touching = READ_src_touch_matrix_IMAGE(src_touch_matrix, sampler, POS_src_touch_matrix_INSTANCE(pointIndex + 1, pointBIndex + 1, 0, 0)).x;
-    if (touching > 0) {
+    if (touching != 0) {
       const float pointBx = READ_src_pointlist_IMAGE(src_pointlist, sampler, POS_src_pointlist_INSTANCE(pointBIndex, 0, 0, 0)).x;
       const float pointBy = READ_src_pointlist_IMAGE(src_pointlist, sampler, POS_src_pointlist_INSTANCE(pointBIndex, 1, 0, 0)).x;
       const float pointBz = READ_src_pointlist_IMAGE(src_pointlist, sampler, POS_src_pointlist_INSTANCE(pointBIndex, 2, 0, 0)).x;
