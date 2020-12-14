@@ -7,6 +7,7 @@ from ._combine_vertically import combine_vertically
 from ._concatenate_stacks import concatenate_stacks
 from ._distance_matrix_to_mesh import distance_matrix_to_mesh
 from ._flag_existing_intensities import flag_existing_intensities
+from ._degrees_to_radians import degrees_to_radians
 from ._gamma_correction import gamma_correction
 from ._invert import invert
 from ._label_spots import label_spots
@@ -20,6 +21,7 @@ from ._minimum_of_touching_neighbors import minimum_of_touching_neighbors
 from ._mode_of_touching_neighbors import mode_of_touching_neighbors
 from ._neighbors_of_neighbors import neighbors_of_neighbors
 from ._pointlist_to_labelled_spots import pointlist_to_labelled_spots
+from ._radians_to_degrees import radians_to_degrees
 from ._reduce_stack import reduce_stack
 from ._standard_deviation_of_touching_neighbors import standard_deviation_of_touching_neighbors
 from ._subtract_images import subtract_images

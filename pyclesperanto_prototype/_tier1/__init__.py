@@ -42,6 +42,7 @@ from ._exponential import exponential
 from ._execute_separable_kernel import execute_separable_kernel
 from ._flip import flip
 from ._gaussian_blur import gaussian_blur
+from ._generate_angle_matrix import generate_angle_matrix
 from ._generate_binary_overlap_matrix import generate_binary_overlap_matrix
 from ._generate_distance_matrix import generate_distance_matrix
 from ._generate_touch_matrix import generate_touch_matrix
