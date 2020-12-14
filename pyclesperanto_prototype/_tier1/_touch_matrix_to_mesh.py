@@ -42,7 +42,8 @@ def touch_matrix_to_mesh(pointlist  : Image, touch_matrix : Image, mesh_destinat
     }
 
     dimensions = [1, 1, touch_matrix.shape[0]]
-
+    from .._tier1 import set
+    set(mesh_destination, 0)
     execute(__file__, 'touch_matrix_to_mesh_3d_x.cl', 'touch_matrix_to_mesh_3d', dimensions, parameters)
 
     return mesh_destination
