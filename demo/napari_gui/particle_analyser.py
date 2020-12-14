@@ -215,6 +215,7 @@ class Mesh(Enum):
     proximal = partial(cle.draw_mesh_between_proximal_labels)
     n_closest = partial(cle.draw_mesh_between_n_closest_labels)
     distance_touching = partial(cle.draw_distance_mesh_between_touching_labels)
+    angle_touching = partial(cle.draw_angle_mesh_between_touching_labels)
 
     #define the call method for the functions or it won't return anything
     def __call__(self, *args):
@@ -227,9 +228,10 @@ def mesh(input1: Image, operation: Mesh = Mesh.touching, n : float = 1):
         cle_input1 = cle.push_zyx(input1.data)
         output = cle.create_like(cle_input1)
         operation(cle_input1, output, n)
+        min_intensity = cle.minimum_of_all_pixels(output)
         max_intensity = cle.maximum_of_all_pixels(output)
-        if max_intensity == 0:
-            max_intensity = 1 # prevent division by zero in vispy
+        if max_intensity - min_intensity == 0:
+            max_intensity = min_intensity + 1 # prevent division by zero in vispy
         output = cle.pull_zyx(output)
 
         # show result in napari
@@ -239,7 +241,7 @@ def mesh(input1: Image, operation: Mesh = Mesh.touching, n : float = 1):
         else:
             mesh.self.layer.data = output
             mesh.self.layer.name = str(operation)
-            mesh.self.layer.contrast_limits=(0, max_intensity)
+            mesh.self.layer.contrast_limits=(min_intensity, max_intensity)
 
 # -----------------------------------------------------------------------------
 class Map(Enum):
