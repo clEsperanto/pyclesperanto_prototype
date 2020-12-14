@@ -246,6 +246,11 @@ class Map(Enum):
     please_select = partial(cle.copy)
     pixel_count = partial(cle.label_pixel_count_map)
     touching_neighbor_count = partial(cle.touching_neighbor_count_map)
+    local_maximum_touching_neighbor_count = partial(cle.local_maximum_touching_neighbor_count_map)
+    local_mean_touching_neighbor_count = partial(cle.local_mean_touching_neighbor_count_map)
+    local_median_touching_neighbor_count = partial(cle.local_median_touching_neighbor_count_map)
+    local_minimum_touching_neighbor_count = partial(cle.local_minimum_touching_neighbor_count_map)
+    local_std_dev_touching_neighbor_count = partial(cle.local_standard_deviation_touching_neighbor_count_map)
 
     #define the call method for the functions or it won't return anything
     def __call__(self, *args):
@@ -461,8 +466,8 @@ class Gui(QWidget):
 # -----------------------------------------------------------------------------
 from skimage.io import imread
 
-image = imread('data/Lund_000500_resampled-cropped.tif')
-#image = imread('data/CalibZAPWfixed_000154_max-16.tif')
+#image = imread('data/Lund_000500_resampled-cropped.tif')
+image = imread('data/CalibZAPWfixed_000154_max-16.tif')
 #image = imread('https://samples.fiji.sc/blobs.png'')
 #image = imread('C:/structure/data/lund_000500_resampled.tif')
 
