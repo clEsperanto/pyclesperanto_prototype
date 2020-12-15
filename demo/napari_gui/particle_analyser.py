@@ -83,18 +83,32 @@ def filter(input1: Image, operation: Filter = Filter.please_select, x: float = 1
 
 # -----------------------------------------------------------------------------
 class Binarize(Enum):
-    please_select = partial(cle.copy)
-    threshold_otsu = partial(cle.threshold_otsu)
-    detect_maxima = partial(cle.detect_maxima_box)
-    greater_constant = partial(cle.greater_constant)
-    smaller_constant = partial(cle.smaller_constant)
-    equal_constant = partial(cle.equal_constant)
-    not_equal_constant = partial(cle.not_equal_constant)
-    detect_label_edges = partial(cle.detect_label_edges)
+    please_select = "copy"
+    threshold_otsu = "threshold_otsu"
+    detect_maxima = "detect_maxima_box"
+    greater_constant = "greater_constant"
+    smaller_constant = "smaller_constant"
+    equal_constant = "equal_constant"
+    not_equal_constant = "not_equal_constant"
+    detect_label_edges = "detect_label_edges"
 
     #define the call method for the functions or it won't return anything
     def __call__(self, *args):
-        return self.value(*args)
+
+        from inspect import getmembers, isfunction
+
+        index = -1
+        methods = getmembers(cle)
+        for i, method in enumerate(methods):
+            if str(method[0]) == self.value:
+                index = i
+
+        print(index)
+        method = methods[index][0]
+        method = methods[index][1]
+
+        print(method)
+        return method(*args)
 
 
 
