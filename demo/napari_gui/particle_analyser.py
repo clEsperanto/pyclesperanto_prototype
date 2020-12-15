@@ -4,7 +4,8 @@
 # image-data-flow-graph. When parameters of operations high in the hierarchy are updated, downstream
 # operations are updated. This facilitates finding a good parameter setting for complex workflows.
 #
-
+from PyQt5.QtWidgets import QDoubleSpinBox, QSpinBox
+from magicgui._qt.widgets import QDataComboBox
 from qtpy.QtWidgets import (
     QPushButton,
     QComboBox,
@@ -16,7 +17,7 @@ from qtpy.QtWidgets import (
     QWidget,
     QSlider,
     QTableWidget,
-    QTableWidgetItem, QLabel
+    QTableWidgetItem, QLabel, QMenu, QAction
 )
 from qtpy.QtCore import Qt, QSize
 from pathlib import Path
@@ -94,6 +95,8 @@ class Binarize(Enum):
     #define the call method for the functions or it won't return anything
     def __call__(self, *args):
         return self.value(*args)
+
+
 
 @magicgui(auto_call=True, layout='vertical')
 def binarize(input1: Image, operation: Binarize= Binarize.threshold_otsu, constant : int = 0):
@@ -314,7 +317,7 @@ class LayerDialog():
         try:
             former_active_layer.dialog._deselected(None)
         except AttributeError:
-            print() # whatever
+            pass
 
         self.operation.initial_call = True
         self.operation(self.viewer.active_layer)
@@ -380,7 +383,7 @@ class LayerDialog():
                 if layer.dialog.filter_gui.get_widget('input2').currentData() == self.layer:
                     layer.dialog.refresh()
             except AttributeError:
-                print()
+                pass
 
 class Gui(QWidget):
     """This Gui takes a napari as parameter and infiltrates it.
@@ -420,10 +423,16 @@ class Gui(QWidget):
         self._add_button("Map", self._map_clicked)
         self._add_button("Mesh", self._mesh_clicked)
         self._add_button("Measure", self._measure_clicked)
+        self._add_button("Export workflow", self._export_workflow)
 
         self.layout.addStretch()
 
         self.setLayout(self.layout)
+
+        # Add a menu
+        action = QAction('Export pyclesperanto code', viewer.window._qt_window)
+        action.triggered.connect(self._export_code)
+        viewer.window.plugins_menu.addAction(action)
 
     def _add_button(self, title : str, handler : callable):
         # text
@@ -463,14 +472,139 @@ class Gui(QWidget):
     def _mesh_clicked(self):
         self._activate(mesh)
 
+    def _export_workflow(self):
+        print("action")
+
     def _activate(self, magicgui):
         LayerDialog(self.viewer, magicgui)
+
+    def _export_code(self):
+        print(ScriptGenerator(self.viewer.layers).generate())
+
+class ScriptGenerator:
+    def __init__(self, layers):
+        self.layers = layers
+    def generate(self):
+        code = self._header()
+
+        for i, layer in enumerate(self.layers):
+            parse_layer = False
+            try:
+                layer.dialog
+            except AttributeError:
+                parse_layer = True
+            if parse_layer:
+                code = code + self._export_layer(layer, i)
+
+        code = code + "\n# show result\n" \
+                      "from skimage import imshow\n" + \
+            "imshow(cle.pull_zyx(image" + str(len(self.layers) - 1) + "))\n"
+
+        return code
+
+    def _header(self):
+        return "import pyclesperanto_prototype as cle\n"
+
+    def _push(self, layer, layer_number):
+        return "from skimage.io import imread\n" + \
+            "image = imread('" + layer.filename + "')\n" + \
+            self._nice_name(layer, layer_number) + " = cle.push_zyx(image)\n"
+
+    def _execute(self, layer, layer_number):
+        method = layer.dialog.filter_gui.get_widget("operation").currentData()
+        method_name = str(method)
+        method_name = method_name.replace(method.__class__.__name__, "cle")
+        method_name = method_name.replace("please_select", "copy")
+
+        command = method_name + "("
+
+        # todo: put parameter names in front of values, remove unneccessary parameters
+
+        put_comma = False
+        for i, parameter_name in enumerate(layer.dialog.filter_gui.param_names):
+            comma = ""
+            if put_comma:
+                comma = ", "
+            put_comma = True
+
+            widget = layer.dialog.filter_gui.get_widget(parameter_name)
+
+            if isinstance(widget, QDoubleSpinBox) or isinstance(widget, QSpinBox):
+                value = widget.value()
+            elif isinstance(widget, QDataComboBox):
+                value = widget.currentData()
+            else:
+                value = None
+
+            if isinstance(value, Enum): # operation
+                pass
+            elif isinstance(value, Image) or isinstance(value, Labels):
+                command = command + comma + "image" + str(self._get_index_of_layer(value))
+            elif isinstance(value, str):
+                command = command + comma + "'" + value + "'"
+            else:
+                command = command + comma + str(value)
+
+        command = command + ")\n"
+
+        command = "image" + str(layer_number) + " = " + command
+
+
+        return command
+
+    def _get_index_of_layer(self, layer):
+        for i, other_layer in enumerate(self.layers):
+            if other_layer == layer:
+                return i
+
+    def _nice_name(self, layer, layer_number : int):
+        name = str(layer.name) + str(layer_number)
+        name = name.replace(".", "_")
+        return name
+
+    def _export_layer(self, layer, layer_number):
+        code = "\n# Layer " + self._nice_name(layer, layer_number) + "\n"
+
+        record_push = False
+        try:
+            if layer.filename is not None:
+                record_push = True
+        except:
+            pass
+        if record_push:
+            code = code + self._push(layer, layer_number)
+
+        record_exec = False
+        try:
+            if layer.dialog is not None:
+                record_exec = True
+        except:
+            pass
+        if record_exec:
+            code = code + self._execute(layer, layer_number)
+
+        for i, other_layer in enumerate(self.layers):
+            parse_layer = False
+            try:
+                if other_layer.dialog is not None:
+                    if (other_layer.dialog.filter_gui.get_widget("input1").currentData() == layer):
+                        parse_layer = True
+                    if (other_layer.dialog.filter_gui.get_widget("input2").currentData() == layer):
+                        parse_layer = True
+            except AttributeError:
+                pass
+            if parse_layer:
+                code = code + self._export_layer(other_layer, i)
+        return code
+
+
 
 # -----------------------------------------------------------------------------
 from skimage.io import imread
 
 #image = imread('data/Lund_000500_resampled-cropped.tif')
-image = imread('data/CalibZAPWfixed_000154_max-16.tif')
+filename = 'data/CalibZAPWfixed_000154_max-16.tif'
+image = imread(filename)
 #image = imread('https://samples.fiji.sc/blobs.png'')
 #image = imread('C:/structure/data/lund_000500_resampled.tif')
 
@@ -481,14 +615,15 @@ print(cle.get_device())
 with napari.gui_qt():
     # create a viewer and add some image
     viewer = napari.Viewer()
-    viewer.add_image(image)
+    layer = viewer.add_image(image)
+    layer.filename = filename
 
     def _on_removed(event):
         layer = event.value
         try:
             layer.dialog._removed()
         except AttributeError:
-            print()
+            pass
     viewer.layers.events.removed.connect(_on_removed)
 
     # add the gui to the viewer as a dock widget
