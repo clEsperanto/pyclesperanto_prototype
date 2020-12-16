@@ -64,6 +64,16 @@ def plugin_function(
             if value is not None:
                 kwargs[argument] = value
 
+        # accumulate args in a list in case only kwargs were passed
+        args_list = []
+        for argument in enumerate(argument_specification.args):
+            print(argument[1])
+            try:
+                value = kwargs[argument[1]]
+                args_list = args_list = [value]
+            except KeyError:
+                break
+
 
         # go through all arguments again and check if an image wasn't set,
         # in which case we create one.
@@ -74,7 +84,7 @@ def plugin_function(
                 if type_annotation is Image:
                     # if not set and should be an image, create an image
                     # create a new output image with specified/default creator
-                    kwargs[argument] = output_creator(*args)
+                    kwargs[argument] = output_creator(*args_list)
 
         #print("Got arguments")
         #print(args)
