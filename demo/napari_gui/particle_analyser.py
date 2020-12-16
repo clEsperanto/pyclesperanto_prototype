@@ -89,8 +89,8 @@ class Filter(Enum):
         CallableEnum(self).call(*args, **kwargs)
 
     @property
-    def fullargspec(self):
-        return CallableEnum(self).function().fullargspec
+    def function(self):
+        return CallableEnum(self).function()
 
 # The user interface of the operations is build by magicgui
 @magicgui(auto_call=True, layout='vertical')
@@ -125,8 +125,8 @@ class Binarize(Enum):
         CallableEnum(self).call(*args, **kwargs)
 
     @property
-    def fullargspec(self):
-        return CallableEnum(self).function().fullargspec
+    def function(self):
+        return CallableEnum(self).function()
 
 @magicgui(auto_call=True, layout='vertical')
 def binarize(input1: Image, operation: Binarize= Binarize.threshold_otsu, constant : int = 0):
@@ -165,8 +165,8 @@ class Combine(Enum):
         CallableEnum(self).call(*args, **kwargs)
 
     @property
-    def fullargspec(self):
-        return CallableEnum(self).function().fullargspec
+    def function(self):
+        return CallableEnum(self).function()
 
 @magicgui(auto_call=True, layout='vertical')
 def combine(input1: Image, input2: Image = None, operation: Combine = Combine.please_select):
@@ -199,8 +199,8 @@ class Label(Enum):
         return CallableEnum(self).call(*args, **kwargs)
 
     @property
-    def fullargspec(self):
-        return CallableEnum(self).function().fullargspec
+    def function(self):
+        return CallableEnum(self).function()
 
 
 @magicgui(auto_call=True, layout='vertical')
@@ -232,8 +232,8 @@ class LabelProcessing(Enum):
         CallableEnum(self).call(*args, **kwargs)
 
     @property
-    def fullargspec(self):
-        return CallableEnum(self).function().fullargspec
+    def function(self):
+        return CallableEnum(self).function()
 
 
 @magicgui(auto_call=True, layout='vertical')
@@ -266,8 +266,8 @@ class Mesh(Enum):
         CallableEnum(self).call(*args, **kwargs)
 
     @property
-    def fullargspec(self):
-        return CallableEnum(self).function().fullargspec
+    def function(self):
+        return CallableEnum(self).function()
 
 @magicgui(auto_call=True, layout='vertical')
 def mesh(input1: Image, operation: Mesh = Mesh.touching, n : float = 1):
@@ -306,8 +306,8 @@ class Map(Enum):
         CallableEnum(self).call(*args, **kwargs)
 
     @property
-    def fullargspec(self):
-        return CallableEnum(self).function().fullargspec
+    def function(self):
+        return CallableEnum(self).function()
 
 @magicgui(auto_call=True, layout='vertical')
 def map(input1: Image, operation: Map = Map.please_select, n : float = 1):
@@ -547,12 +547,12 @@ class ScriptGenerator:
     def _push(self, layer, layer_number):
         return "from skimage.io import imread\n" + \
             "image = imread('" + layer.filename + "')\n" + \
-            self._nice_name(layer, layer_number) + " = cle.push_zyx(image)\n"
+            "image" + str(layer_number) + " = cle.push_zyx(image)\n"
 
     def _execute(self, layer, layer_number):
-        method = layer.dialog.filter_gui.get_widget("operation").currentData()
-        method_name = str(method)
-        method_name = method_name.replace(method.__class__.__name__, "cle")
+        method = layer.dialog.filter_gui.get_widget("operation").currentData().function
+        method_name = method.__name__
+        method_name = "cle." + method_name
         method_name = method_name.replace("please_select", "copy")
         command = method_name + "("
 
@@ -596,13 +596,8 @@ class ScriptGenerator:
             if other_layer == layer:
                 return i
 
-    def _nice_name(self, layer, layer_number : int):
-        name = str(layer.name) + str(layer_number)
-        name = name.replace(".", "_")
-        return name
-
     def _export_layer(self, layer, layer_number):
-        code = "\n# Layer " + self._nice_name(layer, layer_number) + "\n"
+        code = "\n# Layer " + layer.name + "\n"
 
         record_push = False
         try:
