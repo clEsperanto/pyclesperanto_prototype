@@ -67,13 +67,11 @@ def plugin_function(
         # accumulate args in a list in case only kwargs were passed
         args_list = []
         for argument in enumerate(argument_specification.args):
-            print(argument[1])
             try:
                 value = kwargs[argument[1]]
                 args_list = args_list = [value]
             except KeyError:
                 break
-
 
         # go through all arguments again and check if an image wasn't set,
         # in which case we create one.
