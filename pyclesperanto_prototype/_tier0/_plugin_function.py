@@ -38,6 +38,8 @@ def plugin_function(
         output arguments of the correct type.
     """
 
+    function.fullargspec = inspect.getfullargspec(function)
+
     @wraps(function)
     def worker_function(*args, **kwargs):
         # determine argument spec and default values, values are given as args
