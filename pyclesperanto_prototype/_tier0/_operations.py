@@ -1,4 +1,4 @@
-def operations(category : str = None) -> dict:
+def operations(must_have_categories : list = None, must_not_have_categories : list = None) -> dict:
     result = {}
 
     from inspect import getmembers, isfunction
@@ -7,14 +7,21 @@ def operations(category : str = None) -> dict:
     if not hasattr(operations, "_all") or operations._all is None:
         operations._all = getmembers(cle, isfunction)
 
-    if category is None:
-        return dict(operations._all) # make a copy to keep it safe
-
     for operation_name, operation in operations._all:
+        keep_it = True
         if hasattr(operation, "categories") and operation.categories is not None:
-            if category in operation.categories and operation not in result:
+            if must_have_categories is not None:
+                if not all(item in operation.categories for item in must_have_categories):
+                    keep_it = False
 
-                result[operation_name] = operation
+            if must_not_have_categories is not None:
+                if any(item in operation.categories for item in must_not_have_categories):
+                    keep_it = False
+        else:
+            if must_have_categories is not None:
+                keep_it = False
+        if (keep_it):
+            result[operation_name] = operation
 
     return result
 

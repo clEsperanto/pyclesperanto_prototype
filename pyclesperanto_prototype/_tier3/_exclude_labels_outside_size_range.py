@@ -9,7 +9,7 @@ from .._tier0 import create_like
 from .._tier1 import replace_intensities
 import numpy as np
 
-@plugin_function(output_creator=create_none)
+@plugin_function(output_creator=create_none, categories=['label processing', 'in assistant'])
 def exclude_labels_outside_size_range(input : Image, destination : Image = None, minimum_size : float = 0, maximum_size : float = 100):
     """Removes labels from a label map which are not within a certain size range.
     

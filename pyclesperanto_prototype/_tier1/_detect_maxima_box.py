@@ -2,7 +2,7 @@ from .._tier0 import execute
 from .._tier0 import plugin_function
 from .._tier0 import Image
 
-@plugin_function
+@plugin_function(categories=['binarize', 'in assistant'])
 def detect_maxima_box(source :Image, destination :Image = None):
     """Detects local maxima in a given square/cubic neighborhood. 
     

@@ -14,7 +14,8 @@ from ._push import push
 def plugin_function(
     function: Callable,
     output_creator: Callable = create_like,
-    categories : list = None
+    categories : list = None,
+    priority : int = 0
 ) -> Callable:
     """Function decorator to ensure correct types and values of all parameters.
 
@@ -43,6 +44,7 @@ def plugin_function(
 
     function.fullargspec = inspect.getfullargspec(function)
     function.categories = categories
+    function.priority = priority
 
     @wraps(function)
     def worker_function(*args, **kwargs):

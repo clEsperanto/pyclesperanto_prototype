@@ -2,7 +2,7 @@ from .._tier0 import execute
 from .._tier0 import plugin_function
 from .._tier0 import Image
 
-@plugin_function
+@plugin_function(categories=['combine', 'in assistant'], priority=-1)
 def divide_images(divident : Image, divisor : Image, destination : Image = None):
     """Divides two images X and Y by each other pixel wise. 
     

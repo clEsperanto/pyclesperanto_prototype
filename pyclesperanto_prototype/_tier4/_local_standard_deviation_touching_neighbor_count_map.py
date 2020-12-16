@@ -4,7 +4,7 @@ from .._tier1 import generate_touch_matrix
 from .._tier1 import count_touching_neighbors
 from .._tier1 import replace_intensities
 
-@plugin_function
+@plugin_function(categories=['label measurement', 'map', 'in assistant'])
 def local_standard_deviation_touching_neighbor_count_map(input : Image, destination : Image = None):
     """Takes a label map, determines which labels touch and replaces every 
     label with the number of touching neighboring labels.

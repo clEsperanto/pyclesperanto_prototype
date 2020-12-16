@@ -6,7 +6,7 @@ from .._tier0 import execute
 from .._tier1 import sum_x_projection
 from .._tier1 import sum_y_projection
 
-@plugin_function
+@plugin_function(categories=['label', 'in assistant'])
 def label_spots(input_spots : Image, labelled_spots_destination : Image = None):
     """Transforms a binary image with single pixles set to 1 to a labelled 
     spots image. 

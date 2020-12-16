@@ -2,7 +2,7 @@ from .._tier0 import execute
 from .._tier0 import plugin_function
 from .._tier0 import Image
 
-@plugin_function
+@plugin_function(categories=['filter', 'in assistant'], priority=-1)
 def power(source : Image, destination : Image = None, exponent : float = 1):
     """Computes all pixels value x to the power of a given exponent a.
     

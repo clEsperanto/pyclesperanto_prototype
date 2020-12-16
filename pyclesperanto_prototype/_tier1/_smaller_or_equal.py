@@ -2,7 +2,7 @@ from .._tier0 import execute
 from .._tier0 import plugin_function
 from .._tier0 import Image
 
-@plugin_function
+@plugin_function(categories=['combine', 'binarize', 'in assistant'])
 def smaller_or_equal(source1 : Image, source2 : Image, destination : Image = None):
     """Determines if two images A and B smaller or equal pixel wise.
     

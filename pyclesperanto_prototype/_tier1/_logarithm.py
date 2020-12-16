@@ -3,7 +3,7 @@ from .._tier0 import execute
 from .._tier0 import plugin_function
 from .._tier0 import Image
 
-@plugin_function
+@plugin_function(categories=['filter', 'in assistant'], priority=-1)
 def logarithm(source : Image, destination : Image = None):
     """Computes base e logarithm of all pixels values.
     

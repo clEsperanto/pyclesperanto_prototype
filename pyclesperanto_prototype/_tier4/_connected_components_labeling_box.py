@@ -12,7 +12,7 @@ import numpy as np
 from .._tier0 import plugin_function
 from .._tier0 import Image
 
-@plugin_function
+@plugin_function(categories=['label', 'in assistant'], priority=1)
 def connected_components_labeling_box(binary_input : Image, labeling_destination : Image = None, flagged_nonzero_minimum_filter : callable = nonzero_minimum_box):
     """Performs connected components analysis inspecting the box neighborhood 
     of every pixel to a binary image and generates a label map. 

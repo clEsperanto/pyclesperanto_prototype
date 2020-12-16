@@ -2,7 +2,7 @@ from .._tier0 import execute
 from .._tier0 import plugin_function
 from .._tier0 import Image
 
-@plugin_function
+@plugin_function(categories=['filter', 'edge detection', 'in assistant'])
 def gradient_y(source : Image, destination : Image = None):
     """Computes the gradient of gray values along Y. 
     

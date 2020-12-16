@@ -2,7 +2,7 @@ from .._tier0 import execute
 from .._tier0 import plugin_function
 from .._tier0 import Image
 
-@plugin_function
+@plugin_function(categories=['filter'])
 def add_image_and_scalar(source : Image, destination : Image = None, scalar : float = 1):
     """Adds a scalar value s to all pixels x of a given image X.
     

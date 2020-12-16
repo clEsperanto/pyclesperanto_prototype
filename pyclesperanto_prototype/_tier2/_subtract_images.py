@@ -2,7 +2,7 @@ from .._tier0 import plugin_function
 from .._tier0 import Image
 from .._tier1 import add_images_weighted
 
-@plugin_function
+@plugin_function(categories=['combine', 'in assistant'], priority=-1)
 def subtract_images(subtrahend : Image, minuend : Image, destination : Image = None):
     """Subtracts one image X from another image Y pixel wise.
     

@@ -4,7 +4,7 @@ from .._tier0 import create_none
 from .._tier0 import create
 from .._tier0 import Image
 
-@plugin_function(output_creator=create_none)
+@plugin_function(output_creator=create_none, categories=['transform'])
 def transpose_xz(input : Image, destination : Image = None):
     """Transpose X and Z axes of an image.
     

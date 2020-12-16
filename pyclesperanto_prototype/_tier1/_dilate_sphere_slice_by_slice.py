@@ -2,7 +2,7 @@ from .._tier0 import execute
 from .._tier0 import plugin_function
 from .._tier0 import Image
 
-@plugin_function
+@plugin_function(categories=['binary processing'])
 def dilate_sphere_slice_by_slice(src : Image, dst : Image = None):
     """Computes a binary image with pixel values 0 and 1 containing the binary 
     dilation of a given input image.

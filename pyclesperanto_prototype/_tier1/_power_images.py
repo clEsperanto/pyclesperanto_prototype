@@ -2,7 +2,7 @@ from .._tier0 import execute
 from .._tier0 import plugin_function
 from .._tier0 import Image
 
-@plugin_function
+@plugin_function(categories=['combine', 'in assistant'], priority=-1)
 def power_images(input : Image, exponent : Image, destination : Image = None):
     """Calculates x to the power of y pixel wise of two images X and Y. 
     

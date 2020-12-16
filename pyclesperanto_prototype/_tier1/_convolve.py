@@ -2,7 +2,7 @@ from .._tier0 import execute
 from .._tier0 import plugin_function
 from .._tier0 import Image
 
-@plugin_function
+@plugin_function(categories=['filter'])
 def convolve(source : Image, convolution_kernel : Image, destination : Image = None):
     """Convolve the image with a given kernel image.
     

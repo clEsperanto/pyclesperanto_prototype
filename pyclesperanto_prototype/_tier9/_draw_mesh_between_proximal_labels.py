@@ -9,7 +9,7 @@ from .._tier1 import set
 from .._tier1 import point_index_list_to_mesh
 from .._tier1 import n_closest_points
 
-@plugin_function
+@plugin_function(categories=['label measurement', 'mesh', 'in assistant'])
 def draw_mesh_between_proximal_labels(labels : Image, mesh_target : Image = None, maximum_distance : int = 1):
     """Starting from a label map, draw lines between labels that are closer 
     than a given distance resulting in a mesh.

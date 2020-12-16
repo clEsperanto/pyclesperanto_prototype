@@ -9,7 +9,7 @@ from .._tier1 import onlyzero_overwrite_maximum_box
 from .._tier1 import onlyzero_overwrite_maximum_diamond
 import numpy as np
 
-@plugin_function
+@plugin_function(categories=['label processing', 'in assistant'])
 def extend_labeling_via_voronoi(labeling_source : Image, labeling_destination : Image = None):
     """Takes a label map image and dilates the regions using a octagon shape 
     until they touch. 
