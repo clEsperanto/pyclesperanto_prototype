@@ -28,78 +28,26 @@ from magicgui import magicgui
 
 import pyclesperanto_prototype as cle
 
-from enum import Enum
-from functools import partial
-
 # -----------------------------------------------------------------------------
-# We define an enum that represents operations in a given category
-#
-# inspired from https://github.com/pr4deepr/pyclesperanto_prototype/blob/master/napari_clij_widget.py
-# Using Enums for getting a dropdown menu
-class CallableEnum:
-    def __init__(self, enum):
-        self.enum = enum
-
-    _all_cle_methods = None
-
-    #define the call method for the functions or it won't return anything
-    def call(self, *args, **kwargs):
-        method = self.function()
-
-        print(method)
-        print(method.fullargspec)
-
-        return method(*args, **kwargs)
-
-    def function(self):
-        from inspect import getmembers
-
-        if CallableEnum._all_cle_methods is None:
-            index = -1
-            methods = getmembers(cle)
-        for i, method in enumerate(methods):
-            if str(method[0]) == self.enum.value:
-                index = i
-
-        return methods[index][1]
-
-class Filter(Enum):
-    please_select = cle.copy.__name__
-    gaussian_blur = cle.gaussian_blur.__name__
-    top_hat_box = cle.top_hat_box.__name__
-    sobel = cle.sobel.__name__
-    laplace = cle.laplace_box.__name__
-    mean_box = cle.mean_box.__name__
-    maximum_box = cle.maximum_box.__name__
-    minimum_box = cle.minimum_box.__name__
-    subtract_gaussian_background = cle.subtract_gaussian_background.__name__
-    divide_by_gaussian_background = cle.divide_by_gaussian_background.__name__
-    bottom_hat_box = cle.bottom_hat_box.__name__
-    gamma_correction = cle.gamma_correction.__name__
-    gradient_x = cle.gradient_x.__name__
-    gradient_y = cle.gradient_y.__name__
-    gradient_z = cle.gradient_z.__name__
-    binary_edge_detection = cle.binary_edge_detection.__name__
-    invert = cle.invert.__name__
-    logarithm = cle.logarithm.__name__
-    exponential = cle.exponential.__name__
-    power = cle.power.__name__
-
-    def __call__(self, *args, **kwargs):
-        CallableEnum(self).call(*args, **kwargs)
-
-    @property
-    def function(self):
-        return CallableEnum(self).function()
-
 # The user interface of the operations is build by magicgui
-@magicgui(auto_call=True, layout='vertical')
-def filter(input1: Image, operation: Filter = Filter.please_select, x: float = 1, y: float = 1, z: float = 0):
+@magicgui(
+    auto_call=True,
+    layout='vertical',
+    operation_name={'choices':cle.operations(must_have_categories=['filter', 'in assistant'], must_not_have_categories=['combine']).keys()},
+    x={'minimum': -1000, 'maximum': 1000},
+    y={'minimum': -1000, 'maximum': 1000},
+    z={'minimum': -1000, 'maximum': 1000},
+)
+def filter(input1: Image, operation_name: str = cle.gaussian_blur.__name__, x: float = 1, y: float = 1, z: float = 0):
     if input1:
         # execute operation
         cle_input = cle.push_zyx(input1.data)
         output = cle.create_like(cle_input)
+        operation = cle.operation(operation_name)
         operation(cle_input, output, x, y, z)
+        max_intensity = cle.maximum_of_all_pixels(output)
+        if max_intensity == 0:
+            max_intensity = 1 # prevent division by zero in vispy
         output = cle.pull_zyx(output)
 
         # show result in napari
@@ -108,32 +56,22 @@ def filter(input1: Image, operation: Filter = Filter.please_select, x: float = 1
             filter.initial_call = False
         else:
             filter.self.layer.data = output
-            filter.self.layer.name = str(operation)
+            filter.self.layer.name = operation.__name__
+            map.self.layer.contrast_limits=(0, max_intensity)
 
 # -----------------------------------------------------------------------------
-class Binarize(Enum):
-    please_select = cle.copy.__name__
-    threshold_otsu = cle.threshold_otsu.__name__
-    detect_maxima = cle.detect_maxima_box.__name__
-    greater_constant = cle.greater_constant.__name__
-    smaller_constant = cle.smaller_constant.__name__
-    equal_constant = cle.equal_constant.__name__
-    not_equal_constant = cle.not_equal_constant.__name__
-    detect_label_edges = cle.detect_label_edges.__name__
-
-    def __call__(self, *args, **kwargs):
-        CallableEnum(self).call(*args, **kwargs)
-
-    @property
-    def function(self):
-        return CallableEnum(self).function()
-
-@magicgui(auto_call=True, layout='vertical')
-def binarize(input1: Image, operation: Binarize= Binarize.threshold_otsu, constant : int = 0):
+@magicgui(
+    auto_call=True,
+    layout='vertical',
+    operation_name={'choices':cle.operations(must_have_categories=['binarize', 'in assistant'], must_not_have_categories=['combine']).keys()},
+    constant={'minimum':-1000, 'maximum':1000}
+)
+def binarize(input1: Image, operation_name : str = cle.threshold_otsu.__name__, constant : int = 0):
     if input1 is not None:
         # execute operation
         cle_input1 = cle.push_zyx(input1.data)
         output = cle.create_like(cle_input1)
+        operation = cle.operation(operation_name)
         operation(cle_input1, output, constant)
         output = cle.pull_zyx(output)
 
@@ -144,32 +82,15 @@ def binarize(input1: Image, operation: Binarize= Binarize.threshold_otsu, consta
         else:
             binarize.self.layer.data = output
             binarize.self.layer.contrast_limits = (0, 1)
-            binarize.self.layer.name = str(operation)
+            binarize.self.layer.name = operation.__name__
 
 # -----------------------------------------------------------------------------
-class Combine(Enum):
-    please_select = cle.copy.__name__
-    binary_and = cle.binary_and.__name__
-    binary_or = cle.binary_or.__name__
-    binary_xor = cle.binary_xor.__name__
-    add = cle.add_images_weighted.__name__
-    subtract = cle.subtract_images.__name__
-    multiply = cle.multiply_images.__name__
-    divide = cle.divide_images.__name__
-    greater = cle.greater.__name__
-    smaller = cle.smaller.__name__
-    equal = cle.equal.__name__
-    not_equal = cle.not_equal.__name__
-
-    def __call__(self, *args, **kwargs):
-        CallableEnum(self).call(*args, **kwargs)
-
-    @property
-    def function(self):
-        return CallableEnum(self).function()
-
-@magicgui(auto_call=True, layout='vertical')
-def combine(input1: Image, input2: Image = None, operation: Combine = Combine.please_select):
+@magicgui(
+    auto_call=True,
+    layout='vertical',
+    operation_name={'choices':cle.operations(must_have_categories=['combine', 'in assistant']).keys()}
+)
+def combine(input1: Image, input2: Image = None, operation_name: str = cle.binary_and.__name__):
     if input1 is not None:
         if (input2 is None):
             input2 = input1
@@ -178,7 +99,11 @@ def combine(input1: Image, input2: Image = None, operation: Combine = Combine.pl
         cle_input1 = cle.push_zyx(input1.data)
         cle_input2 = cle.push_zyx(input2.data)
         output = cle.create_like(cle_input1)
+        operation = cle.operation(operation_name)
         operation(cle_input1, cle_input2, output)
+        max_intensity = cle.maximum_of_all_pixels(output)
+        if max_intensity == 0:
+            max_intensity = 1 # prevent division by zero in vispy
         output = cle.pull_zyx(output)
 
         # show result in napari
@@ -187,28 +112,21 @@ def combine(input1: Image, input2: Image = None, operation: Combine = Combine.pl
             combine.initial_call = False
         else:
             combine.self.layer.data = output
-            combine.self.layer.name = str(operation)
+            combine.self.layer.name = operation.__name__
+            map.self.layer.contrast_limits=(0, max_intensity)
 
 # -----------------------------------------------------------------------------
-class Label(Enum):
-    please_select = cle.copy.__name__
-    connected_component = cle.connected_components_labeling_box.__name__
-    voronoi = cle.voronoi_labeling.__name__
-
-    def __call__(self, *args, **kwargs):
-        return CallableEnum(self).call(*args, **kwargs)
-
-    @property
-    def function(self):
-        return CallableEnum(self).function()
-
-
-@magicgui(auto_call=True, layout='vertical')
-def label(input1: Image, operation: Label = Label.connected_component):
+@magicgui(
+    auto_call=True,
+    layout='vertical',
+    operation_name={'choices':cle.operations(must_have_categories=['label', 'in assistant']).keys()}
+)
+def label(input1: Image, operation_name: str = cle.connected_components_labeling_box.__name__):
     if input1 is not None:
         # execute operation
         cle_input1 = cle.push_zyx(input1.data)
         output = cle.create_like(cle_input1)
+        operation = cle.operation(operation_name)
         operation(cle_input1, output)
         output = cle.pull_zyx(output)
 
@@ -218,30 +136,22 @@ def label(input1: Image, operation: Label = Label.connected_component):
             label.initial_call = False
         else:
             label.self.layer.data = output
-            label.self.layer.name = str(operation)
+            label.self.layer.name = operation.__name__
 
 # -----------------------------------------------------------------------------
-class LabelProcessing(Enum):
-    please_select = cle.copy.__name__
-    exclude_on_edges = cle.exclude_labels_on_edges.__name__
-    exclude_out_of_size_range = cle.exclude_labels_outside_size_range.__name__
-    extend_via_voronoi = cle.extend_labeling_via_voronoi.__name__
-    extend_with_maximum_radius = cle.extend_labels_with_maximum_radius.__name__
-
-    def __call__(self, *args, **kwargs):
-        CallableEnum(self).call(*args, **kwargs)
-
-    @property
-    def function(self):
-        return CallableEnum(self).function()
-
-
-@magicgui(auto_call=True, layout='vertical')
-def label_processing(input1: Image, operation: LabelProcessing = LabelProcessing.please_select, min: float=0, max:float=100):
+@magicgui(
+    auto_call=True,
+    layout='vertical',
+    operation_name={'choices':cle.operations(must_have_categories=['label processing', 'in assistant']).keys()},
+    min = {'minimum': -1000, 'maximum': 1000},
+    max = {'minimum': -1000, 'maximum': 1000}
+)
+def label_processing(input1: Image, operation_name: str = cle.exclude_labels_on_edges.__name__, min: float=0, max:float=100):
     if input1 is not None:
         # execute operation
         cle_input1 = cle.push_zyx(input1.data)
         output = cle.create_like(cle_input1)
+        operation = cle.operation(operation_name)
         operation(cle_input1, output, min, max)
         output = cle.pull_zyx(output)
 
@@ -251,30 +161,21 @@ def label_processing(input1: Image, operation: LabelProcessing = LabelProcessing
             label_processing.initial_call = False
         else:
             label_processing.self.layer.data = output
-            label_processing.self.layer.name = str(operation)
+            label_processing.self.layer.name = operation.__name__
 
 # -----------------------------------------------------------------------------
-class Mesh(Enum):
-    please_select = cle.copy.__name__
-    touching = cle.draw_mesh_between_touching_labels.__name__
-    proximal = cle.draw_mesh_between_proximal_labels.__name__
-    n_closest = cle.draw_mesh_between_n_closest_labels.__name__
-    distance_touching = cle.draw_distance_mesh_between_touching_labels.__name__
-    angle_touching = cle.draw_angle_mesh_between_touching_labels.__name__
-
-    def __call__(self, *args, **kwargs):
-        CallableEnum(self).call(*args, **kwargs)
-
-    @property
-    def function(self):
-        return CallableEnum(self).function()
-
-@magicgui(auto_call=True, layout='vertical')
-def mesh(input1: Image, operation: Mesh = Mesh.touching, n : float = 1):
+@magicgui(
+    auto_call=True,
+    layout='vertical',
+    operation_name={'choices':cle.operations(must_have_categories=['label measurement', 'mesh', 'in assistant'], must_not_have_categories=["combine"]).keys()},
+    n = {'minimum': 0, 'maximum': 1000}
+)
+def mesh(input1: Image, operation_name : str = cle.draw_mesh_between_touching_labels.__name__, n : float = 1):
     if input1 is not None:
         # execute operation
         cle_input1 = cle.push_zyx(input1.data)
         output = cle.create_like(cle_input1)
+        operation = cle.operation(operation_name)
         operation(cle_input1, output, n)
         min_intensity = cle.minimum_of_all_pixels(output)
         max_intensity = cle.maximum_of_all_pixels(output)
@@ -288,33 +189,22 @@ def mesh(input1: Image, operation: Mesh = Mesh.touching, n : float = 1):
             mesh.initial_call = False
         else:
             mesh.self.layer.data = output
-            mesh.self.layer.name = str(operation)
+            mesh.self.layer.name = operation.__name__
             mesh.self.layer.contrast_limits=(min_intensity, max_intensity)
 
 # -----------------------------------------------------------------------------
-class Map(Enum):
-    please_select = cle.copy.__name__
-    pixel_count = cle.label_pixel_count_map.__name__
-    touching_neighbor_count = cle.touching_neighbor_count_map.__name__
-    local_maximum_touching_neighbor_count = cle.local_maximum_touching_neighbor_count_map.__name__
-    local_mean_touching_neighbor_count = cle.local_mean_touching_neighbor_count_map.__name__
-    local_median_touching_neighbor_count = cle.local_median_touching_neighbor_count_map.__name__
-    local_minimum_touching_neighbor_count = cle.local_minimum_touching_neighbor_count_map.__name__
-    local_std_dev_touching_neighbor_count = cle.local_standard_deviation_touching_neighbor_count_map.__name__
-
-    def __call__(self, *args, **kwargs):
-        CallableEnum(self).call(*args, **kwargs)
-
-    @property
-    def function(self):
-        return CallableEnum(self).function()
-
-@magicgui(auto_call=True, layout='vertical')
-def map(input1: Image, operation: Map = Map.please_select, n : float = 1):
+@magicgui(
+    auto_call=True,
+    layout='vertical',
+    operation_name={'choices':cle.operations(must_have_categories=['label measurement', 'map', 'in assistant'], must_not_have_categories=["combine"]).keys()},
+    n = {'minimum': 0, 'maximum': 1000}
+)
+def map(input1: Image, operation_name: str = cle.label_pixel_count_map.__name__, n : float = 1):
     if input1 is not None:
         # execute operation
         cle_input1 = cle.push_zyx(input1.data)
         output = cle.create_like(cle_input1)
+        operation = cle.operation(operation_name)
         operation(cle_input1, output, n)
         max_intensity = cle.maximum_of_all_pixels(output)
         if max_intensity == 0:
@@ -327,17 +217,17 @@ def map(input1: Image, operation: Map = Map.please_select, n : float = 1):
             map.initial_call = False
         else:
             map.self.layer.data = output
-            map.self.layer.name = str(operation)
+            map.self.layer.name = operation.__name__
             map.self.layer.contrast_limits=(0, max_intensity)
 
 # -----------------------------------------------------------------------------
 # A special case of ooperation is measurement: it results in a table instead of
 # an image
 @magicgui(layout='vertical', call_button="Measure")
-def measure(input: Image = None, labels : Image = None):
-    if input is not None and labels is not None:
+def measure(input1: Image = None, labels : Image = None):
+    if input1 is not None and labels is not None:
         from skimage.measure import regionprops_table
-        table = regionprops_table(labels.data.astype(int), intensity_image=input.data, properties=('area', 'centroid', 'mean_intensity'))
+        table = regionprops_table(labels.data.astype(int), intensity_image=input1.data, properties=('area', 'centroid', 'mean_intensity'))
         dock_widget = table_to_widget(table)
         viewer.window.add_dock_widget(dock_widget, area='right')
 
@@ -453,7 +343,6 @@ class Gui(QWidget):
         label.setFixedSize(QSize(400, 30))
         self.layout.addWidget(label)
 
-
         self._add_button("Filter", self._add_filter_clicked)
         self._add_button("Binarize", self._add_binarize_clicked)
         self._add_button("Combine", self._add_combine_clicked)
@@ -550,7 +439,7 @@ class ScriptGenerator:
             "image" + str(layer_number) + " = cle.push_zyx(image)\n"
 
     def _execute(self, layer, layer_number):
-        method = layer.dialog.filter_gui.get_widget("operation").currentData().function
+        method = cle.operation(cle.operation(layer.dialog.filter_gui.get_widget("operation").currentData()))
         method_name = method.__name__
         method_name = "cle." + method_name
         method_name = method_name.replace("please_select", "copy")
@@ -575,7 +464,7 @@ class ScriptGenerator:
                 else:
                     value = None
 
-                if isinstance(value, Enum): # operation
+                if value == method: # operation
                     pass
                 elif isinstance(value, Image) or isinstance(value, Labels):
                     command = command + comma + parameter_names[i] + "=image" + str(self._get_index_of_layer(value))
@@ -585,9 +474,7 @@ class ScriptGenerator:
                     command = command + comma + parameter_names[i] + "=" + str(value)
 
         command = command + ")\n"
-
         command = "image" + str(layer_number) + " = " + command
-
 
         return command
 
@@ -630,8 +517,6 @@ class ScriptGenerator:
             if parse_layer:
                 code = code + self._export_layer(other_layer, i)
         return code
-
-
 
 # -----------------------------------------------------------------------------
 from skimage.io import imread
