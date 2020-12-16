@@ -36,31 +36,61 @@ from functools import partial
 #
 # inspired from https://github.com/pr4deepr/pyclesperanto_prototype/blob/master/napari_clij_widget.py
 # Using Enums for getting a dropdown menu
-class Filter(Enum):
-    please_select = partial(cle.copy)
-    gaussian_blur = partial(cle.gaussian_blur)
-    top_hat_box = partial(cle.top_hat_box)
-    sobel = partial(cle.sobel)
-    laplace = partial(cle.laplace_box)
-    mean_box = partial(cle.mean_box)
-    maximum_box = partial(cle.maximum_box)
-    minimum_box = partial(cle.minimum_box)
-    subtract_gaussian_background = partial(cle.subtract_gaussian_background)
-    divide_by_gaussian_background = partial(cle.divide_by_gaussian_background)
-    bottom_hat_box = partial(cle.bottom_hat_box)
-    gamma_correction = partial(cle.gamma_correction)
-    gradient_x = partial(cle.gradient_x)
-    gradient_y = partial(cle.gradient_y)
-    gradient_z = partial(cle.gradient_z)
-    binary_edge_detection = partial(cle.binary_edge_detection)
-    invert = partial(cle.invert)
-    logarithm = partial(cle.logarithm)
-    exponential = partial(cle.exponential)
-    power = partial(cle.power)
+class CallableEnum:
+    def __init__(self, enum):
+        self.enum = enum
+
+    _all_cle_methods = None
 
     #define the call method for the functions or it won't return anything
-    def __call__(self, *args):
-        return self.value(*args)
+    def call(self, *args, **kwargs):
+        method = self.function()
+
+        print(method)
+        print(method.fullargspec)
+
+        return method(*args, **kwargs)
+
+    def function(self):
+        from inspect import getmembers
+
+        if CallableEnum._all_cle_methods is None:
+            index = -1
+            methods = getmembers(cle)
+        for i, method in enumerate(methods):
+            if str(method[0]) == self.enum.value:
+                index = i
+
+        return methods[index][1]
+
+class Filter(Enum):
+    please_select = cle.copy.__name__
+    gaussian_blur = cle.gaussian_blur.__name__
+    top_hat_box = cle.top_hat_box.__name__
+    sobel = cle.sobel.__name__
+    laplace = cle.laplace_box.__name__
+    mean_box = cle.mean_box.__name__
+    maximum_box = cle.maximum_box.__name__
+    minimum_box = cle.minimum_box.__name__
+    subtract_gaussian_background = cle.subtract_gaussian_background.__name__
+    divide_by_gaussian_background = cle.divide_by_gaussian_background.__name__
+    bottom_hat_box = cle.bottom_hat_box.__name__
+    gamma_correction = cle.gamma_correction.__name__
+    gradient_x = cle.gradient_x.__name__
+    gradient_y = cle.gradient_y.__name__
+    gradient_z = cle.gradient_z.__name__
+    binary_edge_detection = cle.binary_edge_detection.__name__
+    invert = cle.invert.__name__
+    logarithm = cle.logarithm.__name__
+    exponential = cle.exponential.__name__
+    power = cle.power.__name__
+
+    def __call__(self, *args, **kwargs):
+        CallableEnum(self).call(*args, **kwargs)
+
+    @property
+    def fullargspec(self):
+        return CallableEnum(self).function().fullargspec
 
 # The user interface of the operations is build by magicgui
 @magicgui(auto_call=True, layout='vertical')
@@ -80,37 +110,23 @@ def filter(input1: Image, operation: Filter = Filter.please_select, x: float = 1
             filter.self.layer.data = output
             filter.self.layer.name = str(operation)
 
-
 # -----------------------------------------------------------------------------
 class Binarize(Enum):
-    please_select = "copy"
-    threshold_otsu = "threshold_otsu"
-    detect_maxima = "detect_maxima_box"
-    greater_constant = "greater_constant"
-    smaller_constant = "smaller_constant"
-    equal_constant = "equal_constant"
-    not_equal_constant = "not_equal_constant"
-    detect_label_edges = "detect_label_edges"
+    please_select = cle.copy.__name__
+    threshold_otsu = cle.threshold_otsu.__name__
+    detect_maxima = cle.detect_maxima_box.__name__
+    greater_constant = cle.greater_constant.__name__
+    smaller_constant = cle.smaller_constant.__name__
+    equal_constant = cle.equal_constant.__name__
+    not_equal_constant = cle.not_equal_constant.__name__
+    detect_label_edges = cle.detect_label_edges.__name__
 
-    #define the call method for the functions or it won't return anything
-    def __call__(self, *args):
+    def __call__(self, *args, **kwargs):
+        CallableEnum(self).call(*args, **kwargs)
 
-        from inspect import getmembers, isfunction
-
-        index = -1
-        methods = getmembers(cle)
-        for i, method in enumerate(methods):
-            if str(method[0]) == self.value:
-                index = i
-
-        print(index)
-        method = methods[index][0]
-        method = methods[index][1]
-
-        print(method)
-        return method(*args)
-
-
+    @property
+    def fullargspec(self):
+        return CallableEnum(self).function().fullargspec
 
 @magicgui(auto_call=True, layout='vertical')
 def binarize(input1: Image, operation: Binarize= Binarize.threshold_otsu, constant : int = 0):
@@ -132,22 +148,25 @@ def binarize(input1: Image, operation: Binarize= Binarize.threshold_otsu, consta
 
 # -----------------------------------------------------------------------------
 class Combine(Enum):
-    please_select = partial(cle.copy)
-    binary_and = partial(cle.binary_and)
-    binary_or = partial(cle.binary_or)
-    binary_xor = partial(cle.binary_xor)
-    add = partial(cle.add_images_weighted)
-    subtract = partial(cle.subtract_images)
-    multiply = partial(cle.multiply_images)
-    divide = partial(cle.divide_images)
-    greater = partial(cle.greater)
-    smaller = partial(cle.smaller)
-    equal = partial(cle.equal)
-    not_equal = partial(cle.not_equal)
+    please_select = cle.copy.__name__
+    binary_and = cle.binary_and.__name__
+    binary_or = cle.binary_or.__name__
+    binary_xor = cle.binary_xor.__name__
+    add = cle.add_images_weighted.__name__
+    subtract = cle.subtract_images.__name__
+    multiply = cle.multiply_images.__name__
+    divide = cle.divide_images.__name__
+    greater = cle.greater.__name__
+    smaller = cle.smaller.__name__
+    equal = cle.equal.__name__
+    not_equal = cle.not_equal.__name__
 
-    #define the call method for the functions or it won't return anything
-    def __call__(self, *args):
-        return self.value(*args)
+    def __call__(self, *args, **kwargs):
+        CallableEnum(self).call(*args, **kwargs)
+
+    @property
+    def fullargspec(self):
+        return CallableEnum(self).function().fullargspec
 
 @magicgui(auto_call=True, layout='vertical')
 def combine(input1: Image, input2: Image = None, operation: Combine = Combine.please_select):
@@ -172,13 +191,17 @@ def combine(input1: Image, input2: Image = None, operation: Combine = Combine.pl
 
 # -----------------------------------------------------------------------------
 class Label(Enum):
-    please_select = partial(cle.copy)
-    connected_component = partial(cle.connected_components_labeling_box)
-    voronoi = partial(cle.voronoi_labeling)
+    please_select = cle.copy.__name__
+    connected_component = cle.connected_components_labeling_box.__name__
+    voronoi = cle.voronoi_labeling.__name__
 
-    #define the call method for the functions or it won't return anything
-    def __call__(self, *args):
-        return self.value(*args)
+    def __call__(self, *args, **kwargs):
+        return CallableEnum(self).call(*args, **kwargs)
+
+    @property
+    def fullargspec(self):
+        return CallableEnum(self).function().fullargspec
+
 
 @magicgui(auto_call=True, layout='vertical')
 def label(input1: Image, operation: Label = Label.connected_component):
@@ -199,15 +222,19 @@ def label(input1: Image, operation: Label = Label.connected_component):
 
 # -----------------------------------------------------------------------------
 class LabelProcessing(Enum):
-    please_select = partial(cle.copy)
-    exclude_on_edges = partial(cle.exclude_labels_on_edges)
-    exclude_out_of_size_range = partial(cle.exclude_labels_outside_size_range)
-    extend_via_voronoi = partial(cle.extend_labeling_via_voronoi)
-    extend_with_maximum_radius = partial(cle.extend_labels_with_maximum_radius)
+    please_select = cle.copy.__name__
+    exclude_on_edges = cle.exclude_labels_on_edges.__name__
+    exclude_out_of_size_range = cle.exclude_labels_outside_size_range.__name__
+    extend_via_voronoi = cle.extend_labeling_via_voronoi.__name__
+    extend_with_maximum_radius = cle.extend_labels_with_maximum_radius.__name__
 
-    #define the call method for the functions or it won't return anything
-    def __call__(self, *args):
-        return self.value(*args)
+    def __call__(self, *args, **kwargs):
+        CallableEnum(self).call(*args, **kwargs)
+
+    @property
+    def fullargspec(self):
+        return CallableEnum(self).function().fullargspec
+
 
 @magicgui(auto_call=True, layout='vertical')
 def label_processing(input1: Image, operation: LabelProcessing = LabelProcessing.please_select, min: float=0, max:float=100):
@@ -228,16 +255,19 @@ def label_processing(input1: Image, operation: LabelProcessing = LabelProcessing
 
 # -----------------------------------------------------------------------------
 class Mesh(Enum):
-    please_select = partial(cle.copy)
-    touching = partial(cle.draw_mesh_between_touching_labels)
-    proximal = partial(cle.draw_mesh_between_proximal_labels)
-    n_closest = partial(cle.draw_mesh_between_n_closest_labels)
-    distance_touching = partial(cle.draw_distance_mesh_between_touching_labels)
-    angle_touching = partial(cle.draw_angle_mesh_between_touching_labels)
+    please_select = cle.copy.__name__
+    touching = cle.draw_mesh_between_touching_labels.__name__
+    proximal = cle.draw_mesh_between_proximal_labels.__name__
+    n_closest = cle.draw_mesh_between_n_closest_labels.__name__
+    distance_touching = cle.draw_distance_mesh_between_touching_labels.__name__
+    angle_touching = cle.draw_angle_mesh_between_touching_labels.__name__
 
-    #define the call method for the functions or it won't return anything
-    def __call__(self, *args):
-        return self.value(*args)
+    def __call__(self, *args, **kwargs):
+        CallableEnum(self).call(*args, **kwargs)
+
+    @property
+    def fullargspec(self):
+        return CallableEnum(self).function().fullargspec
 
 @magicgui(auto_call=True, layout='vertical')
 def mesh(input1: Image, operation: Mesh = Mesh.touching, n : float = 1):
@@ -263,18 +293,21 @@ def mesh(input1: Image, operation: Mesh = Mesh.touching, n : float = 1):
 
 # -----------------------------------------------------------------------------
 class Map(Enum):
-    please_select = partial(cle.copy)
-    pixel_count = partial(cle.label_pixel_count_map)
-    touching_neighbor_count = partial(cle.touching_neighbor_count_map)
-    local_maximum_touching_neighbor_count = partial(cle.local_maximum_touching_neighbor_count_map)
-    local_mean_touching_neighbor_count = partial(cle.local_mean_touching_neighbor_count_map)
-    local_median_touching_neighbor_count = partial(cle.local_median_touching_neighbor_count_map)
-    local_minimum_touching_neighbor_count = partial(cle.local_minimum_touching_neighbor_count_map)
-    local_std_dev_touching_neighbor_count = partial(cle.local_standard_deviation_touching_neighbor_count_map)
+    please_select = cle.copy.__name__
+    pixel_count = cle.label_pixel_count_map.__name__
+    touching_neighbor_count = cle.touching_neighbor_count_map.__name__
+    local_maximum_touching_neighbor_count = cle.local_maximum_touching_neighbor_count_map.__name__
+    local_mean_touching_neighbor_count = cle.local_mean_touching_neighbor_count_map.__name__
+    local_median_touching_neighbor_count = cle.local_median_touching_neighbor_count_map.__name__
+    local_minimum_touching_neighbor_count = cle.local_minimum_touching_neighbor_count_map.__name__
+    local_std_dev_touching_neighbor_count = cle.local_standard_deviation_touching_neighbor_count_map.__name__
 
-    #define the call method for the functions or it won't return anything
-    def __call__(self, *args):
-        return self.value(*args)
+    def __call__(self, *args, **kwargs):
+        CallableEnum(self).call(*args, **kwargs)
+
+    @property
+    def fullargspec(self):
+        return CallableEnum(self).function().fullargspec
 
 @magicgui(auto_call=True, layout='vertical')
 def map(input1: Image, operation: Map = Map.please_select, n : float = 1):
@@ -371,10 +404,6 @@ class LayerDialog():
     def refresh(self):
         """
         Refresh/recompute the current layer
-
-        Returns
-        -------
-
         """
         former = self.operation.self
         self.operation.self = self    # sigh
@@ -385,10 +414,6 @@ class LayerDialog():
         """
         Go through all layers and identify layers which have the current layer (self.layer) as parameter.
         Then, refresh those layers.
-
-        Returns
-        -------
-
         """
         for layer in self.viewer.layers:
             try:
@@ -529,35 +554,35 @@ class ScriptGenerator:
         method_name = str(method)
         method_name = method_name.replace(method.__class__.__name__, "cle")
         method_name = method_name.replace("please_select", "copy")
-
         command = method_name + "("
 
-        # todo: put parameter names in front of values, remove unneccessary parameters
+        parameter_names = method.fullargspec.args
 
         put_comma = False
         for i, parameter_name in enumerate(layer.dialog.filter_gui.param_names):
-            comma = ""
-            if put_comma:
-                comma = ", "
-            put_comma = True
+            if (i < len(parameter_names)):
+                comma = ""
+                if put_comma:
+                    comma = ", "
+                put_comma = True
 
-            widget = layer.dialog.filter_gui.get_widget(parameter_name)
+                widget = layer.dialog.filter_gui.get_widget(parameter_name)
 
-            if isinstance(widget, QDoubleSpinBox) or isinstance(widget, QSpinBox):
-                value = widget.value()
-            elif isinstance(widget, QDataComboBox):
-                value = widget.currentData()
-            else:
-                value = None
+                if isinstance(widget, QDoubleSpinBox) or isinstance(widget, QSpinBox):
+                    value = widget.value()
+                elif isinstance(widget, QDataComboBox):
+                    value = widget.currentData()
+                else:
+                    value = None
 
-            if isinstance(value, Enum): # operation
-                pass
-            elif isinstance(value, Image) or isinstance(value, Labels):
-                command = command + comma + "image" + str(self._get_index_of_layer(value))
-            elif isinstance(value, str):
-                command = command + comma + "'" + value + "'"
-            else:
-                command = command + comma + str(value)
+                if isinstance(value, Enum): # operation
+                    pass
+                elif isinstance(value, Image) or isinstance(value, Labels):
+                    command = command + comma + parameter_names[i] + "=image" + str(self._get_index_of_layer(value))
+                elif isinstance(value, str):
+                    command = command + comma + parameter_names[i] + "='" + value + "'"
+                else:
+                    command = command + comma + parameter_names[i] + "=" + str(value)
 
         command = command + ")\n"
 
