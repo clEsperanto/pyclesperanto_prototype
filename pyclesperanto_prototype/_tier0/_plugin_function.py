@@ -13,7 +13,8 @@ from ._push import push
 @curry
 def plugin_function(
     function: Callable,
-    output_creator: Callable = create_like
+    output_creator: Callable = create_like,
+    categories : list = None
 ) -> Callable:
     """Function decorator to ensure correct types and values of all parameters.
 
@@ -30,6 +31,8 @@ def plugin_function(
         A function to create an output OCLArray given an input OCLArray. By
         default, we create float32 output images of the same shape as input
         images.
+    categories : list[str]
+        A list of category names the function is associated with
 
     Returns
     -------
@@ -39,6 +42,7 @@ def plugin_function(
     """
 
     function.fullargspec = inspect.getfullargspec(function)
+    function.categories = categories
 
     @wraps(function)
     def worker_function(*args, **kwargs):

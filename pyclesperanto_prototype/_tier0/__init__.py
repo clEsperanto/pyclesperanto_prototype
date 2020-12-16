@@ -18,6 +18,8 @@ from ._create import (
     create_none,
 )
 from ._execute import execute
+from ._operations import operation
+from ._operations import operations
 from ._pull import pull
 from ._pull import pull_zyx
 from ._push import push
