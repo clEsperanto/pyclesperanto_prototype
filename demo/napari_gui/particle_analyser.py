@@ -57,7 +57,7 @@ def filter(input1: Image, operation_name: str = cle.gaussian_blur.__name__, x: f
         else:
             filter.self.layer.data = output
             filter.self.layer.name = operation.__name__
-            map.self.layer.contrast_limits=(0, max_intensity)
+            filter.self.layer.contrast_limits=(0, max_intensity)
 
 # -----------------------------------------------------------------------------
 @magicgui(
@@ -113,7 +113,7 @@ def combine(input1: Image, input2: Image = None, operation_name: str = cle.binar
         else:
             combine.self.layer.data = output
             combine.self.layer.name = operation.__name__
-            map.self.layer.contrast_limits=(0, max_intensity)
+            combine.self.layer.contrast_limits=(0, max_intensity)
 
 # -----------------------------------------------------------------------------
 @magicgui(
@@ -273,10 +273,14 @@ class LayerDialog():
 
         self.filter_gui = self.operation.Gui()
         self.dock_widget = viewer.window.add_dock_widget(self.filter_gui, area='right')
+        self.dock_widget.setMaximumWidth(300)
         self.filter_gui.set_widget('input1', former_active_layer)
 
         for i in reversed(range(self.filter_gui.layout().count())):
-            self.filter_gui.layout().itemAt(i).widget().setFont(QtGui.QFont('Arial', 12))
+            widget = self.filter_gui.layout().itemAt(i).widget()
+            widget.setFont(QtGui.QFont('Arial', 12))
+            if isinstance(widget, QDataComboBox):
+                widget.setMaximumWidth(200)
 
     def _updated(self, event):
         self.refresh_all_followers()
@@ -340,7 +344,7 @@ class Gui(QWidget):
 
         label = QLabel("Add layer")
         label.setFont(QtGui.QFont('Arial', 12))
-        label.setFixedSize(QSize(400, 30))
+        label.setFixedSize(QSize(300, 30))
         self.layout.addWidget(label)
 
         self._add_button("Filter", self._add_filter_clicked)
@@ -521,14 +525,14 @@ class ScriptGenerator:
 # -----------------------------------------------------------------------------
 from skimage.io import imread
 
-#image = imread('data/Lund_000500_resampled-cropped.tif')
-filename = 'data/CalibZAPWfixed_000154_max-16.tif'
+filename = 'data/Lund_000500_resampled-cropped.tif'
+#filename = 'data/CalibZAPWfixed_000154_max-16.tif'
 image = imread(filename)
 #image = imread('https://samples.fiji.sc/blobs.png'')
 #image = imread('C:/structure/data/lund_000500_resampled.tif')
 
-
-cle.select_device("RTX")
+print(cle.available_device_names())
+cle.select_device("p520")
 print(cle.get_device())
 
 with napari.gui_qt():
