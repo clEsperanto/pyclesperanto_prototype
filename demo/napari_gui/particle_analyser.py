@@ -536,7 +536,7 @@ class ScriptGenerator:
                 code = code + self._export_layer(layer, i)
 
         code = code + "\n# show result\n" \
-                      "from skimage import imshow\n" + \
+                      "from skimage.io import imshow\n" + \
             "imshow(cle.pull_zyx(image" + str(len(self.layers) - 1) + "))\n"
 
         return code
