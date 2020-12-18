@@ -32,8 +32,11 @@ def plugin_function(
         A function to create an output OCLArray given an input OCLArray. By
         default, we create float32 output images of the same shape as input
         images.
-    categories : list[str]
+    categories : list of str, optional
         A list of category names the function is associated with
+    priority : int, optional
+        can be used in lists of multiple operations to differentiate multiple operations that fulfill the same purpose
+        but better/faster/more general.
 
     Returns
     -------
