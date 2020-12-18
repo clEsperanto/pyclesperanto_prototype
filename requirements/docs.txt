@@ -1,0 +1,10 @@
+sphinx
+sphinx-gallery
+sphinx-apidoc
+recommonmark
+numpydoc
+sphinx-copybutton
+numpy
+pyopencl
+toolz
+scikit-image
