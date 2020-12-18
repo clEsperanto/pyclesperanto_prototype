@@ -6,8 +6,6 @@
 
 # -- Path setup --------------------------------------------------------------
 
-from .update_index import update_index
-update_index()
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
@@ -23,6 +21,22 @@ from recommonmark.transform import AutoStructify
 sys.path.insert(0, os.path.abspath('../pyclesperanto_prototype/'))
 from pyclesperanto_prototype import __version__
 
+import pyclesperanto_prototype as cle
+all = ""
+for key in cle.operations():
+    all = all + key + ", "
+
+filename = "index.rst"
+index = open(filename).readlines()
+new_index = []
+for line in index:
+    if ":members:" in line:
+        line = "   :members: " + all + "\n"
+    new_index = new_index + [line]
+
+result = open(filename, "w+")
+result.writelines(new_index)
+result.close()
 
 # -- Project information -----------------------------------------------------
 
