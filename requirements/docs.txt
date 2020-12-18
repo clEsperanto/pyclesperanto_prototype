@@ -4,6 +4,8 @@ recommonmark
 numpydoc
 sphinx-copybutton
 numpy
+headers_workaround
+spacy
 pocl-binary-distribution
 pyopencl
 toolz
