@@ -12,7 +12,7 @@ For example operations working with distance matrices and point lists. (d897863)
 * `cle.functions` now have a parameter fullargspec to enable better automatic GUI generation for them (119cee3)
 * We're working with a version controlled `release_notes` file now. Let's see how this evolves.
 
-### new operations
+### New operations
 * `artificial_tissue_2d` (08b154a)
 * `add_images` (30fd15b)
 * `average_distance_of_n_closest_neighbors` (e90773b)
@@ -71,10 +71,15 @@ For example operations working with distance matrices and point lists. (d897863)
 * `touching_neighbor_count_map` (d92d7c4, 49fa5c9)
 * `write_values_to_positions` (829bd72)
 
-## backwards compatibility breaking changes
+## Backwards compatibility breaking changes
 * the behaviour of `exclude_labels` is inverted now 
 * The implementation of `label_spots` changed. It's now comparable with CLIJ2.
 * `set_nonzero_pixels_to_pixelindex` was renamed to `set_non_zero_pixels_to_pixel_index`
+
+## Deprecations
+* As an answer to [Issue #49](https://github.com/clEsperanto/pyclesperanto_prototype/issues/49), 
+the `push` and `pull` commands warn now about deprecation. In a future release, we may remove the transposition so that
+`push` does the same as `push_zyx`, and `pull` does the same as `pull_zyx`.
 
 ## Bugfixes
 * automatic `create*` functions failed when only `kwargs` were passed to any operation (d033fed, 4fd6099)

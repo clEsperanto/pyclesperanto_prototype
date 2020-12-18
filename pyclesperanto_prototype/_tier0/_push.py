@@ -19,6 +19,11 @@ def push(any_array):
     ----------
     .. [1] https://clij.github.io/clij2-docs/reference_push
     """
+    import warnings
+    warnings.warn(
+            "Deprecated: The behaviour of `push()` may change in a future release. Switch to using push_zyx now to prvent issues in the future.",
+            DeprecationWarning
+        )
 
     if isinstance(any_array, OCLArray):
         return any_array
