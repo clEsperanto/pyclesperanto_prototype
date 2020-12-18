@@ -19,24 +19,24 @@ import recommonmark  # noqa: F401
 from recommonmark.transform import AutoStructify
 
 sys.path.insert(0, os.path.abspath('../pyclesperanto_prototype/'))
-from pyclesperanto_prototype import __version__
-
-import pyclesperanto_prototype as cle
-all = ""
-for key in cle.operations():
-    all = all + key + ", "
-
-filename = "index.rst"
-index = open(filename).readlines()
-new_index = []
-for line in index:
-    if ":members:" in line:
-        line = "   :members: " + all + "\n"
-    new_index = new_index + [line]
-
-result = open(filename, "w+")
-result.writelines(new_index)
-result.close()
+# from pyclesperanto_prototype import __version__
+#
+# import pyclesperanto_prototype as cle
+# all = ""
+# for key in cle.operations():
+#     all = all + key + ", "
+#
+# filename = "index.rst"
+# index = open(filename).readlines()
+# new_index = []
+# for line in index:
+#     if ":members:" in line:
+#         line = "   :members: " + all + "\n"
+#     new_index = new_index + [line]
+#
+# result = open(filename, "w+")
+# result.writelines(new_index)
+# result.close()
 
 # -- Project information -----------------------------------------------------
 
@@ -44,8 +44,8 @@ project = 'pyclesperanto_prototype'
 copyright = '2020, Robert Haase'
 author = 'Robert Haase'
 
-release = __version__
-version = __version__
+release = "0.5.0"
+version = "0.5.0"
 CONFDIR = os.path.dirname(__file__)
 
 # -- General configuration ---------------------------------------------------
