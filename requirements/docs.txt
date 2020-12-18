@@ -4,6 +4,7 @@ recommonmark
 numpydoc
 sphinx-copybutton
 numpy
+pocl-binary-distribution
 pyopencl
 toolz
 scikit-image
