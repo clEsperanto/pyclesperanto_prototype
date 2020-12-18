@@ -12,7 +12,7 @@ def test_generate_angle_matrix():
             [8, 0, 9, 0, 0]
     ]))
 
-    reference = cle.push(np.asarray([
+    reference = cle.push_zyx(np.asarray([
             [0., -45.,  90.,  45.,  45.,   0., -45., -90.]
     ]))
 
