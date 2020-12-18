@@ -1,17 +1,19 @@
-import pyclesperanto_prototype as cle
 
-all = ""
-for key in cle.operations():
-    all = all + key + ", "
+def update_index():
+    import pyclesperanto_prototype as cle
 
-filename = "index.rst"
-index = open(filename).readlines()
-new_index = []
-for line in index:
-    if ":members:" in line:
-        line = "   :members: " + all
-    new_index = new_index + [line]
+    all = ""
+    for key in cle.operations():
+        all = all + key + ", "
 
-result = open(filename, "w+")
-result.writelines(new_index)
-result.close()
+    filename = "index.rst"
+    index = open(filename).readlines()
+    new_index = []
+    for line in index:
+        if ":members:" in line:
+            line = "   :members: " + all
+        new_index = new_index + [line]
+
+    result = open(filename, "w+")
+    result.writelines(new_index)
+    result.close()
