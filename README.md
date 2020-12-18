@@ -208,15 +208,15 @@ imsave("result.tif", cle.pull(labeled))
 
 </td><td>
 
-[Napari+Dask Timelapse processing](https://github.com/clEsperanto/pyclesperanto_prototype/tree/master/demo/napari_gui/napari_dask.ipynb)
+[napari+dask timelapse processing](https://github.com/clEsperanto/pyclesperanto_prototype/tree/master/demo/napari_gui/napari_dask.ipynb)
 
 </td></tr><tr><td>
 
-<img src="https://github.com/clEsperanto/pyclesperanto_prototype/raw/master/docs/images/screenshot_particle_analyzer.png" width="300"/>
+<img src="https://github.com/haesleinhuepf/pyclesperanto_assistant/raw/master/docs/images/screenshot.png" width="300"/>
 
 </td><td>
 
-[Napari Particle Analyser](https://github.com/clEsperanto/pyclesperanto_prototype/tree/master/demo/napari_gui/particle_analyser.py)
+[pyclesperanto assistant](https://github.com/haesleinhuepf/pyclesperanto_assistant)
 
 </td></tr></table>
 
