@@ -10,6 +10,10 @@ Welcome to pyclesperanto_prototype's documentation!
    :maxdepth: 2
    :caption: Contents:
 
+.. automodule:: pyclesperanto_prototype
+   :members: absolute, add_image_and_scalar
+   :undoc-members:
+   :show-inheritance:
 
 
 Indices and tables
