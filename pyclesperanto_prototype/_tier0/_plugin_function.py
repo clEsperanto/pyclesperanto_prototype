@@ -78,7 +78,7 @@ def plugin_function(
         for argument in enumerate(argument_specification.args):
             try:
                 value = kwargs[argument[1]]
-                args_list = args_list = [value]
+                args_list = args_list + [value]
             except KeyError:
                 break
 
