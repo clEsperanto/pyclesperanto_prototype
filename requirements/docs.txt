@@ -1,6 +1,5 @@
 sphinx
 sphinx-gallery
-sphinx-apidoc
 recommonmark
 numpydoc
 sphinx-copybutton
