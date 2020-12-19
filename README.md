@@ -216,7 +216,7 @@ imsave("result.tif", cle.pull(labeled))
 
 </td><td>
 
-[pyclesperanto assistant](https://github.com/haesleinhuepf/pyclesperanto_assistant)
+[pyclesperanto assistant](https://github.com/clesperanto/napari_pyclesperanto_assistant)
 
 </td></tr></table>
 
