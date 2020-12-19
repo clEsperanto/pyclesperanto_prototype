@@ -212,7 +212,7 @@ imsave("result.tif", cle.pull(labeled))
 
 </td></tr><tr><td>
 
-<img src="https://github.com/haesleinhuepf/pyclesperanto_assistant/raw/master/docs/images/screenshot.png" width="300"/>
+<img src="https://github.com/clesperanto/napari_pyclesperanto_assistant/raw/master/docs/images/screenshot.png" width="300"/>
 
 </td><td>
 
