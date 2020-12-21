@@ -10,5 +10,6 @@ def imshow(image : Image, title : str = None, labels : bool = False, min_display
         import numpy as np
         cmap = matplotlib.colors.ListedColormap ( np.random.rand ( 256,3))
 
-    from skimage.io import imshow as skimshow
-    skimshow(image, cmap=cmap, vmin=min_display_intensity, vmax=max_display_intensity)
+    import matplotlib.pyplot as plt
+    plt.imshow(image, cmap=cmap, vmin=min_display_intensity, vmax=max_display_intensity)
+    plt.show()
