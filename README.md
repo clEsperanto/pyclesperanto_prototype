@@ -10,10 +10,10 @@ For users convenience, there are code generators available for [napari](https://
 The [full reference](https://clij.github.io/clij2-docs/reference__pyclesperanto) is available as part of the CLIJ2 documentation.
 
 ## Installation
-* Get a python environment, e.g. via [mini-conda](https://docs.conda.io/en/latest/miniconda.html)
+* Get a python environment, e.g. via [mini-conda](https://docs.conda.io/en/latest/miniconda.html). If you never used python/conda environments before, please follow the instructions [here](https://mpicbg-scicomp.github.io/ipf_howtoguides/guides/Python_Conda_Environments) first.
 * Install [pyopencl](https://documen.tician.de/pyopencl/).
 
-If installation of pyopencl for Windows fails, consider downloading a precompiled wheel (e.g. from [here](https://www.lfd.uci.edu/~gohlke/pythonlibs/#pyopencl) ) and installing it manually:
+If installation of pyopencl for Windows fails, consider downloading a precompiled wheel (e.g. from [here](https://www.lfd.uci.edu/~gohlke/pythonlibs/#pyopencl) ) and installing it manually. Note that "cl12" and "cp38" in the filename matter: They allow you using OpenCL 1.2 compatible GPU devices from Python 3.8.
 
 ```
 pip install pyopencl-2019.1.1+cl12-cp37-cp37m-win_amd64.whl
