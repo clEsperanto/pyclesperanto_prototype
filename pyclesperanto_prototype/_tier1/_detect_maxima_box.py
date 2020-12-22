@@ -3,7 +3,7 @@ from .._tier0 import plugin_function
 from .._tier0 import Image
 
 @plugin_function(categories=['binarize', 'in assistant'])
-def detect_maxima_box(source :Image, destination :Image = None, radius_x : int = 1, radius_y : int = 1, radius_z : int = 0):
+def detect_maxima_box(source :Image, destination :Image = None, radius_x : int = 0, radius_y : int = 0, radius_z : int = 0):
     """Detects local maxima in a given square/cubic neighborhood. 
     
     Pixels in the resulting image are set to 1 if there is no other pixel in a 
