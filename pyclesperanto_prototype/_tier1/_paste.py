@@ -2,7 +2,7 @@ from .._tier0 import execute
 from .._tier0 import plugin_function
 from .._tier0 import Image
 
-@plugin_function
+@plugin_function(categories=['combine', 'in assistant'])
 def paste (source : Image, destination : Image = None, destination_x : int = 0, destination_y : int = 0, destination_z : int = 0):
     """Pastes an image into another image at a given position. 
     
