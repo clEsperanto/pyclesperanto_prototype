@@ -3,9 +3,16 @@ from ._bounding_box import bounding_box
 from ._center_of_mass import center_of_mass
 from ._close_index_gaps_in_label_map import close_index_gaps_in_label_map
 from ._difference_of_gaussian import difference_of_gaussian
+from ._divide_by_gaussian_background import divide_by_gaussian_background
+from ._exclude_labels import exclude_labels
 from ._exclude_labels_on_edges import exclude_labels_on_edges
+from ._exclude_labels_outside_size_range import exclude_labels_outside_size_range
+from ._exclude_labels_outside_size_range import exclude_labels_outside_size_range as exclude_labels_out_of_size_range
+from ._exclude_labels_with_values_out_of_range import exclude_labels_with_values_out_of_range
+from ._exclude_labels_with_values_within_range import exclude_labels_with_values_within_range
 from ._histogram import histogram
 from ._jaccard_index import jaccard_index
 from ._labelled_spots_to_pointlist import labelled_spots_to_pointlist
 from ._mean_of_all_pixels import mean_of_all_pixels
 from ._squared_difference import squared_difference
+from ._subtract_gaussian_background import subtract_gaussian_background

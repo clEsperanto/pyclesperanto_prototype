@@ -8,33 +8,55 @@ from .._tier1 import replace_intensities
 from .._tier0 import create_like
 import numpy as np
 
-@plugin_function
-def exclude_labels_on_edges(labels_source : Image, labels_destination : Image = None):
-    num_labels = int(maximum_of_all_pixels(labels_source))
+@plugin_function(categories=['label processing', 'in assistant'], priority=1)
+def exclude_labels_on_edges(label_map_input : Image, label_map_destination : Image = None):
+    """Removes all labels from a label map which touch the edges of the image 
+    (in X, Y and Z if the image is 3D). 
+    
+    Remaining label elements are renumbered afterwards. 
+    
+    Parameters
+    ----------
+    label_map_input : Image
+    label_map_destination : Image
+    
+    Returns
+    -------
+    label_map_destination
+    
+    Examples
+    --------
+    >>> import pyclesperanto_prototype as cle
+    >>> cle.exclude_labels_on_edges(label_map_input, label_map_destination)
+    
+    References
+    ----------
+    .. [1] https://clij.github.io/clij2-docs/reference_excludeLabelsOnEdges
+    """
+    num_labels = int(maximum_of_all_pixels(label_map_input))
 
     label_indices = range(0, num_labels + 1)
 
     label_index_map = push(np.asarray(label_indices))
-    print(label_index_map)
 
     parameters = {
-        "src":labels_source,
+        "src":label_map_input,
         "label_index_dst":label_index_map
     }
-    if (len(labels_source.shape) == 3):
+    if (len(label_map_input.shape) == 3):
         dimensions = [
-            labels_source.shape[0],
-            labels_source.shape[1],
-            labels_source.shape[2]
+            label_map_input.shape[0],
+            label_map_input.shape[1],
+            label_map_input.shape[2]
         ]
     else:
         dimensions = [
             1,
-            labels_source.shape[0],
-            labels_source.shape[1]
+            label_map_input.shape[0],
+            label_map_input.shape[1]
         ]
 
-    if (len(labels_source.shape) == 3):
+    if (len(label_map_input.shape) == 3):
         global_sizes = [1, dimensions[1], dimensions[2]]
         execute(__file__, "exclude_labels_on_edges_3d_x.cl", "exclude_on_edges_z_3d", global_sizes, parameters)
 
@@ -54,9 +76,7 @@ def exclude_labels_on_edges(labels_source : Image, labels_destination : Image = 
             count = count + 1
 
     label_index_map = push(np.asarray(label_indices))
-    print(label_index_map)
 
+    replace_intensities(label_map_input, label_index_map, label_map_destination)
 
-    replace_intensities(labels_source, label_index_map, labels_destination)
-
-    return labels_destination
+    return label_map_destination

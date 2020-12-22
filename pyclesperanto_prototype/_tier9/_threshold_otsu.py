@@ -8,7 +8,7 @@ from .._tier0 import plugin_function
 from .._tier0 import Image
 from .._tier3 import histogram
 
-@plugin_function
+@plugin_function(categories=['binarize', 'in assistant'], priority=1)
 def threshold_otsu(input : Image, destination : Image = None):
     """The automatic thresholder utilizes the Otsu threshold method 
     implemented in ImageJ using a histogram determined on 
@@ -29,6 +29,11 @@ def threshold_otsu(input : Image, destination : Image = None):
     Returns
     -------
     destination
+    
+    Examples
+    --------
+    >>> import pyclesperanto_prototype as cle
+    >>> cle.threshold_otsu(input, destination)
     
     References
     ----------

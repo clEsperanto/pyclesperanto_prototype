@@ -13,7 +13,9 @@ from ._push import push
 @curry
 def plugin_function(
     function: Callable,
-    output_creator: Callable = create_like
+    output_creator: Callable = create_like,
+    categories : list = None,
+    priority : int = 0
 ) -> Callable:
     """Function decorator to ensure correct types and values of all parameters.
 
@@ -30,6 +32,11 @@ def plugin_function(
         A function to create an output OCLArray given an input OCLArray. By
         default, we create float32 output images of the same shape as input
         images.
+    categories : list of str, optional
+        A list of category names the function is associated with
+    priority : int, optional
+        can be used in lists of multiple operations to differentiate multiple operations that fulfill the same purpose
+        but better/faster/more general.
 
     Returns
     -------
@@ -37,6 +44,10 @@ def plugin_function(
         The actual function call that will be executed, magically creating
         output arguments of the correct type.
     """
+
+    function.fullargspec = inspect.getfullargspec(function)
+    function.categories = categories
+    function.priority = priority
 
     @wraps(function)
     def worker_function(*args, **kwargs):
@@ -62,6 +73,14 @@ def plugin_function(
             if value is not None:
                 kwargs[argument] = value
 
+        # accumulate args in a list in case only kwargs were passed
+        args_list = []
+        for argument in enumerate(argument_specification.args):
+            try:
+                value = kwargs[argument[1]]
+                args_list = args_list + [value]
+            except KeyError:
+                break
 
         # go through all arguments again and check if an image wasn't set,
         # in which case we create one.
@@ -72,7 +91,7 @@ def plugin_function(
                 if type_annotation is Image:
                     # if not set and should be an image, create an image
                     # create a new output image with specified/default creator
-                    kwargs[argument] = output_creator(*args)
+                    kwargs[argument] = output_creator(*args_list)
 
         #print("Got arguments")
         #print(args)

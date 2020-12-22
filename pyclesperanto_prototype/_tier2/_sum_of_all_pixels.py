@@ -5,10 +5,6 @@ from .._tier0 import Image
 
 @plugin_function
 def sum_of_all_pixels(source : Image):
-    from .._tier1 import sum_x_projection
-    from .._tier1 import sum_y_projection
-    from .._tier1 import sum_z_projection
-
     """Determines the sum of all pixels in a given image. 
     
     It will be stored in a new row of ImageJs
@@ -20,10 +16,18 @@ def sum_of_all_pixels(source : Image):
         The image of which all pixels or voxels will be summed.
      
     
+    Examples
+    --------
+    >>> import pyclesperanto_prototype as cle
+    >>> cle.sum_of_all_pixels(source)
+    
     References
     ----------
     .. [1] https://clij.github.io/clij2-docs/reference_sumOfAllPixels
     """
+    from .._tier1 import sum_x_projection
+    from .._tier1 import sum_y_projection
+    from .._tier1 import sum_z_projection
 
     dimensionality = source.shape
 

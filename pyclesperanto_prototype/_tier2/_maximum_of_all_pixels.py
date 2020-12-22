@@ -5,10 +5,6 @@ from .._tier0 import Image
 
 @plugin_function
 def maximum_of_all_pixels(source  : Image):
-    from .._tier1 import maximum_x_projection
-    from .._tier1 import maximum_y_projection
-    from .._tier1 import maximum_z_projection
-
     """Determines the maximum of all pixels in a given image. 
     
     It will be stored in a new row of ImageJs
@@ -29,6 +25,9 @@ def maximum_of_all_pixels(source  : Image):
     ----------
     .. [1] https://clij.github.io/clij2-docs/reference_maximumOfAllPixels
     """
+    from .._tier1 import maximum_x_projection
+    from .._tier1 import maximum_y_projection
+    from .._tier1 import maximum_z_projection
 
     dimensionality = source.shape
 

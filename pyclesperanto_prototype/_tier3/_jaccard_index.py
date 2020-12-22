@@ -19,6 +19,11 @@ def jaccard_index(source1 : Image, source2 : Image):
     source1 : Image
     source2 : Image
     
+    Examples
+    --------
+    >>> import pyclesperanto_prototype as cle
+    >>> cle.jaccard_index(source1, source2)
+    
     References
     ----------
     .. [1] https://clij.github.io/clij2-docs/reference_jaccardIndex

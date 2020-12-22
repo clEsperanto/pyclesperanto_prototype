@@ -2,7 +2,7 @@ from pyclesperanto_prototype._tier0 import Image
 from pyclesperanto_prototype._tier0 import plugin_function
 from pyclesperanto_prototype._tier1 import multiply_image_and_scalar
 
-@plugin_function
+@plugin_function(categories=['filter', 'in assistant'])
 def invert(source : Image, destination :Image = None):
     """Computes the negative value of all pixels in a given image. 
     
@@ -21,6 +21,11 @@ def invert(source : Image, destination :Image = None):
     Returns
     -------
     destination
+    
+    Examples
+    --------
+    >>> import pyclesperanto_prototype as cle
+    >>> cle.invert(source, destination)
     
     References
     ----------

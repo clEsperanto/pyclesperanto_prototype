@@ -4,7 +4,7 @@ from ._execute_separable_kernel import execute_separable_kernel
 from .._tier0 import plugin_function
 from .._tier0 import Image
 
-@plugin_function
+@plugin_function(categories=['filter', 'in assistant'])
 def maximum_box(source : Image, destination : Image = None, radius_x : int = 1, radius_y : int = 1, radius_z : int = 1):
     """Computes the local maximum of a pixels cube neighborhood. 
     

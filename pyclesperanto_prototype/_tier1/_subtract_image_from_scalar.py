@@ -2,7 +2,7 @@ from .._tier0 import execute
 from .._tier0 import plugin_function
 from .._tier0 import Image
 
-@plugin_function
+@plugin_function(categories=['filter', 'in assistant'])
 def subtract_image_from_scalar(input : Image, destination : Image = None, scalar : float = 0):
     """Subtracts one image X from a scalar s pixel wise.
     

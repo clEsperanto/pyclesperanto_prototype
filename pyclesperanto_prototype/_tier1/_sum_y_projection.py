@@ -3,7 +3,7 @@ from .._tier0 import plugin_function
 from .._tier0 import Image
 from .._tier0 import create_2d_zx
 
-@plugin_function(output_creator=create_2d_zx)
+@plugin_function(output_creator=create_2d_zx, categories=['projection'])
 def sum_y_projection(source : Image, destination : Image = None):
     """Determines the sum intensity projection of an image along Z. 
     

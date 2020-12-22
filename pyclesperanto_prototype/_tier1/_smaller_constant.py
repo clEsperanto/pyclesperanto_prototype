@@ -2,7 +2,7 @@ from .._tier0 import execute
 from .._tier0 import plugin_function
 from .._tier0 import Image
 
-@plugin_function
+@plugin_function(categories=['binarize', 'in assistant'])
 def smaller_constant(source : Image, destination : Image = None, constant : float = 0):
     """Determines if two images A and B smaller pixel wise.
     

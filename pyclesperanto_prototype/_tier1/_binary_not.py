@@ -2,7 +2,7 @@ from .._tier0 import execute
 from .._tier0 import plugin_function
 from .._tier0 import Image
 
-@plugin_function
+@plugin_function(categories=['binary processing', 'filter', 'in assistant'])
 def binary_not(source : Image, destination : Image = None):
     """Computes a binary image (containing pixel values 0 and 1) from an image 
     X by negating its pixel values

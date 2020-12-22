@@ -2,7 +2,7 @@ from .._tier0 import execute
 from .._tier0 import plugin_function
 from .._tier0 import Image
 
-@plugin_function
+@plugin_function(categories=['binarize', 'in assistant'])
 def detect_label_edges(label_source :Image, binary_destination :Image = None):
     """Takes a labelmap and returns an image where all pixels on label edges 
     are set to 1 and all other pixels to 0. 
@@ -15,6 +15,11 @@ def detect_label_edges(label_source :Image, binary_destination :Image = None):
     Returns
     -------
     edge_image_destination
+    
+    Examples
+    --------
+    >>> import pyclesperanto_prototype as cle
+    >>> cle.detect_label_edges(label_map, edge_image_destination)
     
     References
     ----------

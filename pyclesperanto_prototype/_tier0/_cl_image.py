@@ -3,6 +3,8 @@ from functools import lru_cache
 import numpy as np
 from typing import Tuple
 
+from .._tier0 import get_device
+
 
 def empty_image(ctx, shape, dtype, num_channels=1, channel_order=None):
     if not len(shape) in [2, 3]:
@@ -38,11 +40,16 @@ def empty_image(ctx, shape, dtype, num_channels=1, channel_order=None):
     return res
 
 
-def empty_image_like(arr, ctx):
+def empty_image_like(arr, ctx=None):
+    if ctx is None:
+        ctx = get_device().context
     return empty_image(ctx, arr.shape, arr.dtype)
 
 
-def create_image(arr: np.ndarray, ctx: cl.Context, *args, **kwargs) -> cl.Image:
+def create_image(arr: np.ndarray, ctx: cl.Context = None, *args, **kwargs) -> cl.Image:
+    if ctx is None:
+        ctx = get_device().context
+
     """Create a pyopencl.Image from a numpy array.
 
     Parameters

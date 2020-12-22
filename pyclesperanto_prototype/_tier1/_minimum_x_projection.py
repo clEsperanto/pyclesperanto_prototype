@@ -4,7 +4,7 @@ from .._tier0 import plugin_function
 from .._tier0 import Image
 from .._tier0 import create_2d_zy
 
-@plugin_function(output_creator=create_2d_zy)
+@plugin_function(output_creator=create_2d_zy, categories=['projection'])
 def minimum_x_projection(source : Image, destination_min : Image = None):
     """Determines the minimum intensity projection of an image along Y. 
     
@@ -16,6 +16,11 @@ def minimum_x_projection(source : Image, destination_min : Image = None):
     Returns
     -------
     destination_min
+    
+    Examples
+    --------
+    >>> import pyclesperanto_prototype as cle
+    >>> cle.minimum_x_projection(source, destination_min)
     
     References
     ----------

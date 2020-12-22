@@ -6,7 +6,6 @@ from .._tier0 import Image
 
 @plugin_function(output_creator=create_pointlist_from_labelmap)
 def labelled_spots_to_pointlist(input_labelled_spots:Image, destination_pointlist :Image = None):
-
     """Generates a coordinate list of points in a labelled spot image. 
     
     Transforms a labelmap of spots (single pixels with values 1, 2, ..., n for n 

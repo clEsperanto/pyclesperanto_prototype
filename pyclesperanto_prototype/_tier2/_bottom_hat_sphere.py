@@ -5,7 +5,7 @@ from .._tier1 import add_images_weighted
 from .._tier0 import plugin_function
 from .._tier0 import Image
 
-@plugin_function
+@plugin_function(categories=['filter', 'background removal'], priority=-1)
 def bottom_hat_sphere(input : Image, destination : Image = None, radius_x : float = 1, radius_y : float = 1, radius_z : float = 1):
     """Applies a bottom-hat filter for background subtraction to the input image.
     
@@ -26,6 +26,11 @@ def bottom_hat_sphere(input : Image, destination : Image = None, radius_x : floa
     Returns
     -------
     destination
+    
+    Examples
+    --------
+    >>> import pyclesperanto_prototype as cle
+    >>> cle.bottom_hat_sphere(input, destination, radiusX, radiusY, radiusZ)
     
     References
     ----------

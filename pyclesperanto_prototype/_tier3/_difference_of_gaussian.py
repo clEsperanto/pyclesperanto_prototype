@@ -4,7 +4,7 @@ from pyclesperanto_prototype._tier0 import create_like
 from pyclesperanto_prototype._tier0 import plugin_function
 from pyclesperanto_prototype._tier2 import subtract_images
 
-@plugin_function
+@plugin_function(categories=['filter', 'background removal'])
 def difference_of_gaussian(input : Image, destination : Image = None, sigma1_x : float = 2, sigma1_y : float = 2, sigma1_z : float = 2, sigma2_x : float = 2, sigma2_y : float = 2, sigma2_z : float = 2):
     """Applies Gaussian blur to the input image twice with different sigma 
     values resulting in two images which are then subtracted from each other.
@@ -29,12 +29,16 @@ def difference_of_gaussian(input : Image, destination : Image = None, sigma1_x :
     sigma2_y : float
         Sigma of the second Gaussian filter in y
     sigma2_z : float
-        Sigma of the second Gaussian filter in z
-     
+        Sigma of the second Gaussian filter in z 
     
     Returns
     -------
     destination
+    
+    Examples
+    --------
+    >>> import pyclesperanto_prototype as cle
+    >>> cle.difference_of_gaussian(input, destination, sigma1x, sigma1y, sigma1z, sigma2x, sigma2y, sigma2z)
     
     References
     ----------

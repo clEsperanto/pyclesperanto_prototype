@@ -4,7 +4,7 @@ from .._tier1 import nonzero_minimum_diamond
 from .._tier0 import plugin_function
 from .._tier0 import Image
 
-@plugin_function
+@plugin_function(categories=['label'])
 def connected_components_labeling_diamond(binary_input: Image, labeling_destination: Image = None):
     """Performs connected components analysis inspecting the diamond 
     neighborhood of every pixel to a binary image and generates a label 
@@ -18,6 +18,11 @@ def connected_components_labeling_diamond(binary_input: Image, labeling_destinat
     Returns
     -------
     labeling_destination
+    
+    Examples
+    --------
+    >>> import pyclesperanto_prototype as cle
+    >>> cle.connected_components_labeling_diamond(binary_input, labeling_destination)
     
     References
     ----------

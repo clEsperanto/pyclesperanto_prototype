@@ -45,7 +45,7 @@ def crop(input : Image, output : Image = None, start_x : int = 0, start_y : int 
             "start_x": int(start_x),
             "start_y": int(start_y),
         }
-    if len(input.shape) == 3:
+    if len(output.shape) == 3:
         # 3D image
         parameters.update({"start_z": int(start_z)})
 

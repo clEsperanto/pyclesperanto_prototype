@@ -3,7 +3,7 @@ from .._tier0 import execute
 from .._tier0 import plugin_function
 from .._tier0 import Image
 
-@plugin_function
+@plugin_function(categories=['filter', 'in assistant'])
 def maximum_sphere(source : Image, destination : Image = None, radius_x : float = 1, radius_y : float = 1, radius_z=0):
     """Computes the local maximum of a pixels spherical neighborhood. 
     

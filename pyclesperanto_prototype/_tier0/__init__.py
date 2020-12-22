@@ -4,10 +4,13 @@ from ._create import (
     create,
     create_zyx,
     create_like,
+    create_from_pointlist,
     create_pointlist_from_labelmap,
     create_matrix_from_pointlists,
     create_square_matrix_from_pointlist,
     create_square_matrix_from_labelmap,
+    create_square_matrix_from_two_labelmaps,
+    create_vector_from_square_matrix,
     create_2d_xy,
     create_2d_yx,
     create_2d_zx,
@@ -15,6 +18,8 @@ from ._create import (
     create_none,
 )
 from ._execute import execute
+from ._operations import operation
+from ._operations import operations
 from ._pull import pull
 from ._pull import pull_zyx
 from ._push import push

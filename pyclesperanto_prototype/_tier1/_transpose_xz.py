@@ -4,13 +4,13 @@ from .._tier0 import create_none
 from .._tier0 import create
 from .._tier0 import Image
 
-@plugin_function(output_creator=create_none)
-def transpose_xz(source : Image, destination : Image = None):
+@plugin_function(output_creator=create_none, categories=['transform'])
+def transpose_xz(input : Image, destination : Image = None):
     """Transpose X and Z axes of an image.
     
     Parameters
     ----------
-    source : Image
+    input : Image
         The input image.
     destination : Image
         The output image where results are written into.
@@ -23,7 +23,7 @@ def transpose_xz(source : Image, destination : Image = None):
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
-    >>> cle.transpose_xz(source, destination)
+    >>> cle.transpose_xz(input, destination)
     
     References
     ----------
@@ -31,7 +31,7 @@ def transpose_xz(source : Image, destination : Image = None):
     """
 
     if destination is None:
-        dimensions = source.shape
+        dimensions = input.shape
         if len(dimensions) == 3:
             destination = create(dimensions[::-1])
         elif len(dimensions) == 2:
@@ -40,7 +40,7 @@ def transpose_xz(source : Image, destination : Image = None):
             destination = create([dimensions[0], 1, 1])
 
     parameters = {
-        "src":source,
+        "src":input,
         "dst":destination
     }
 

@@ -31,14 +31,11 @@ def create_like(*args):
         dimensions = dimensions.shape[::-1]
     return create(dimensions)
 
-def create_pointlist_from_labelmap(input:OCLArray):
+def create_pointlist_from_labelmap(input:OCLArray, *args):
     from .._tier2 import maximum_of_all_pixels
     number_of_labels = int(maximum_of_all_pixels(input))
     number_of_dimensions = len(input.shape)
-
-    print(number_of_labels)
-    print(number_of_dimensions)
-
+    
     return create([number_of_dimensions, number_of_labels])
 
 def create_matrix_from_pointlists(pointlist1:OCLArray, pointlist2:OCLArray):
@@ -47,6 +44,20 @@ def create_matrix_from_pointlists(pointlist1:OCLArray, pointlist2:OCLArray):
 
     return create([width, height])
 
+def create_from_pointlist(pointlist: OCLArray, *args):
+    from .._tier1 import maximum_x_projection
+    from .._tier0 import pull
+
+    max_pos = pull(maximum_x_projection(pointlist)).astype(int)
+    max_pos = max_pos[0]
+
+    if len(max_pos) == 3:  # 3D image requested
+        destination = create([max_pos[2] + 1, max_pos[1] + 1, max_pos[0] + 1])
+    elif len(max_pos) == 2:  # 2D image requested
+        destination = create([max_pos[1] + 1, max_pos[0] + 1])
+    else:
+        raise Exception("Size not supported: " + str(max_pos))
+    return destination
 
 def create_square_matrix_from_pointlist(pointlist1:OCLArray):
     width = pointlist1.shape[1] + 1
@@ -60,6 +71,18 @@ def create_square_matrix_from_labelmap(labelmap: OCLArray):
 
     return create([width, width])
 
+
+def create_square_matrix_from_two_labelmaps(labelmap1: OCLArray, labelmap2: OCLArray):
+    from .._tier2 import maximum_of_all_pixels
+    width = int(maximum_of_all_pixels(labelmap1) + 1)
+    height = int(maximum_of_all_pixels(labelmap2) + 1)
+
+    return create([height, width])
+
+
+def create_vector_from_square_matrix(square_matrix : OCLArray, *args):
+    return create([1, square_matrix.shape[0]])
+
 def create_2d_xy(input):
     return create([input.shape[2], input.shape[1]])
 
@@ -72,5 +95,5 @@ def create_2d_zy(input):
 def create_2d_zx(input):
     return create([input.shape[0], input.shape[2]])
 
-def create_none(input):
+def create_none(*args):
     return None

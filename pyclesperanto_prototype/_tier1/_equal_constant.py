@@ -3,7 +3,7 @@ from .._tier0 import execute
 from .._tier0 import plugin_function
 from .._tier0 import Image
 
-@plugin_function
+@plugin_function(categories=['binarize', 'in assistant'])
 def equal_constant(source : Image, destination : Image = None, constant : float = 0):
     """Determines if an image A and a constant b are equal.
     
