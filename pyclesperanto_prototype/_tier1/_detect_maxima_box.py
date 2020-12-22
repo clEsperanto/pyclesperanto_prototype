@@ -3,7 +3,7 @@ from .._tier0 import plugin_function
 from .._tier0 import Image
 
 @plugin_function(categories=['binarize', 'in assistant'])
-def detect_maxima_box(source :Image, destination :Image = None):
+def detect_maxima_box(source :Image, destination :Image = None, radius_x : int = 1, radius_y : int = 1, radius_z : int = 0):
     """Detects local maxima in a given square/cubic neighborhood. 
     
     Pixels in the resulting image are set to 1 if there is no other pixel in a 
@@ -14,8 +14,10 @@ def detect_maxima_box(source :Image, destination :Image = None):
     ----------
     source : Image
     destination : Image
-    radius : Number
-    
+    radius_x : Number
+    radius_y : Number
+    radius_z : Number
+
     Returns
     -------
     destination
@@ -23,15 +25,20 @@ def detect_maxima_box(source :Image, destination :Image = None):
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
-    >>> cle.detect_maxima_box(source, destination, radius)
+    >>> cle.detect_maxima_box(source, destination, 1, 1, 1)
     
     References
     ----------
     .. [1] https://clij.github.io/clij2-docs/reference_detectMaximaBox
     """
 
+    from .._tier0 import create_like
+    from .._tier1 import mean_box
+    temp = create_like(source)
+    mean_box(source, temp, radius_x, radius_y, radius_z)
+
     parameters = {
-        "src":source,
+        "src":temp,
         "dst":destination
     }
 

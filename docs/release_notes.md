@@ -89,3 +89,4 @@ the `push` and `pull` commands warn now about deprecation. In a future release, 
 * before drawing a mesh, all pixels are set to 0 (9433a2f, 52572a6)
 * the behaviour of `exclude_labels` was inverse (3c9f5b1, fd5d98b)
 * in `exclude_labels` background was added to label 1 in case it was kept (439dba5)
+* `detect_maxima_box` had missing parameters compared to the CLIJ2 API
