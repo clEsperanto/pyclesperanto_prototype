@@ -5,8 +5,8 @@ from .._tier0 import create_none
 from .._tier0 import plugin_function
 
 @plugin_function(output_creator=create_none)
-def statistics_of_labelled_pixels(input : Image = None, labelmap : Image = None):
-    """Determines bounding box, area (in pixels/voxels), min, max, mean, standard deviation and variance
+def statistics_of_labelled_pixels(input : Image = None, labelmap : Image = None, extra_properties = []):
+    """Determines bounding box, area (in pixels/voxels), min, max, mean and standard deviation
     intensity of labelled objects in a label map and corresponding pixels in the
     original image. 
     
@@ -42,23 +42,16 @@ def statistics_of_labelled_pixels(input : Image = None, labelmap : Image = None)
     else:
         intensity_image = pull_zyx(input)
 
-    props = regionprops(label_image, intensity_image=intensity_image, cache=True)
-
+    # Inspired by: https://forum.image.sc/t/how-to-measure-standard-deviation-of-intensities-with-scikit-image-regionprops/46948/2
     import numpy as np
 
-    means = [element.mean_intensity for element in props]
-    mean_vector = push_zyx(np.asarray(means))
+    # arguments must be in the specified order, matching regionprops
+    def standard_deviation_intensity(region, intensities):
+        return np.std(intensities[region])
 
-    temp1 = create_like(input)
-    temp2 = create_like(input)
-    replace_intensities(labelmap, mean_vector, temp1)
-    squared_difference(input, temp1, temp2)
-    var_intensity_image = pull_zyx(temp2)
-    var_props = regionprops(label_image, intensity_image=var_intensity_image, cache=True)
+    extra_properties.append(standard_deviation_intensity)
 
-    for element, var_element in zip(props, var_props):
-        element.variance_intensity = var_element.mean_intensity
-        element.standard_deviation_intensity = np.sqrt(var_element.mean_intensity)
+    props = regionprops(label_image, intensity_image=intensity_image, cache=True, extra_properties=extra_properties)
 
     return props
 
