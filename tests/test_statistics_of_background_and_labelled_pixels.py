@@ -161,7 +161,7 @@ def test_statistics_of_background_and_labelled_pixels_3d():
         [2.,          7.,          9.],
 
         #     STANDARD_DEVIATION_INTENSITY(14),
-        [-1., - 1., - 1.],# Todo; not supported yet
+        [1.7320508, 0.8164966, 0.8164966],
         #     PIXEL_COUNT(15),
         [3.,    3.,    3.],
         #     SUM_INTENSITY_TIMES_X(16),
