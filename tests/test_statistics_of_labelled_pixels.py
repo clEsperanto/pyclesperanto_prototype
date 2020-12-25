@@ -161,7 +161,7 @@ def test_statistics_of_labelled_pixels_3d():
         [2.,          7.,          9.],
 
         #     STANDARD_DEVIATION_INTENSITY(14),
-        [-1., - 1., - 1.],# Todo; not supported yet
+        [1.7320508, 0.8164966, 0.8164966],
         #     PIXEL_COUNT(15),
         [3.,    3.,    3.],
         #     SUM_INTENSITY_TIMES_X(16),
@@ -218,6 +218,29 @@ def test_statistics_of_labelled_pixels_3d():
 
     assert (np.array_equal(a, b))
 
+def test_standard_deviation():
+    import numpy as np
 
+    image = np.asarray([
+        [1, 2, 3],
+        [4, 5, 6],
+        [7, 8, 9]
+    ])
+
+    labels = np.asarray([
+        [1, 1, 1],
+        [1, 1, 1],
+        [1, 1, 1]
+    ])
+
+    print("numpy standard deviation", np.std(image))
+    print("numpy variance", np.var(image))
+
+    stats = cle.statistics_of_labelled_pixels(image, labels)
+
+    print("std", stats[0].standard_deviation_intensity)
+    print("var", stats[0].variance_intensity)
+
+    assert np.abs(stats[0].standard_deviation_intensity - 2.58) < 0.1
 
 
