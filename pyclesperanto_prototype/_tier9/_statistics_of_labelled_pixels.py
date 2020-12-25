@@ -6,15 +6,16 @@ from .._tier0 import plugin_function
 
 @plugin_function(output_creator=create_none)
 def statistics_of_labelled_pixels(input : Image = None, labelmap : Image = None):
-    """Determines bounding box, area (in pixels/voxels), min, max and mean 
-    intensity 
-     of labelled objects in a label map and corresponding pixels in the 
+    """Determines bounding box, area (in pixels/voxels), min, max, mean, standard deviation and variance
+    intensity of labelled objects in a label map and corresponding pixels in the
     original image. 
     
     Instead of a label map, you can also use a binary image as a binary image is a 
     label map with just one label.
     
-    This method is executed on the CPU and not on the GPU/OpenCL device. 
+    This method is executed on the CPU and not on the GPU/OpenCL device. Under the hood, it uses
+    skimage.measure.regionprops [2] and thus, offers the same output. Additionally, `standard_deviation_intensity` and
+    `variance_intensity` is stored in the `regionprops` object.
     
     Parameters
     ----------
@@ -24,6 +25,7 @@ def statistics_of_labelled_pixels(input : Image = None, labelmap : Image = None)
     References
     ----------
     .. [1] https://clij.github.io/clij2-docs/reference_statisticsOfLabelledPixels
+    .. [2] https://scikit-image.org/docs/stable/api/skimage.measure.html#skimage.measure.regionprops
     """
     from .._tier0 import create_like
     from .._tier0 import pull_zyx
