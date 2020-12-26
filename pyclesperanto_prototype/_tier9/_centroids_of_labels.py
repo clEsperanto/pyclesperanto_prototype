@@ -29,6 +29,7 @@ def centroids_of_labels(source:Image, pointlist_destination :Image = None, inclu
     from .._tier9 import statistics_of_labelled_pixels
     from .._tier9 import statistics_of_background_and_labelled_pixels
     from .._tier2 import maximum_of_all_pixels
+    from .._tier1 import copy
 
     if include_background:
         regionprops = statistics_of_background_and_labelled_pixels(input=None, labelmap=source)
@@ -55,4 +56,9 @@ def centroids_of_labels(source:Image, pointlist_destination :Image = None, inclu
             matrix[index][0] = label_props.centroid[1]
             matrix[index][1] = label_props.centroid[0]
 
-    return push(matrix)
+    if pointlist_destination is None:
+        return push(matrix)
+    else:
+        temp = push(matrix)
+        copy(temp, pointlist_destination)
+        return pointlist_destination
