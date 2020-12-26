@@ -1,11 +1,11 @@
 from .._tier2 import maximum_of_all_pixels
-from .._tier0 import create_pointlist_from_labelmap
+from .._tier0 import create_none
 from .._tier0 import execute
 from .._tier0 import plugin_function
 from .._tier0 import Image
 from .._tier0 import push
 
-@plugin_function(output_creator=create_pointlist_from_labelmap)
+@plugin_function(output_creator=create_none)
 def centroids_of_labels(source:Image, pointlist_destination :Image = None, include_background :bool = False, regionprops : list = None):
     """Determines the centroids of all labels in a label image or image stack. 
     
@@ -35,7 +35,7 @@ def centroids_of_labels(source:Image, pointlist_destination :Image = None, inclu
 
     if regionprops is None:
         if include_background:
-            regionprops = statistics_of_background_and_labelled_pixels(input=None, labelmap=source)
+            regionprops = statistics_of_background_and_labelled_pixels(input=None, labelmap=source, measure_shape=False)
             num_rows = int(maximum_of_all_pixels(source) + 1)
         else:
             regionprops = statistics_of_labelled_pixels(input=None, labelmap=source)
