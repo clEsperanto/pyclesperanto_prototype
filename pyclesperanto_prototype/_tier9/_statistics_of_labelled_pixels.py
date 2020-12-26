@@ -57,12 +57,17 @@ def statistics_of_labelled_pixels(input : Image = None, labelmap : Image = None,
 
     if measure_shape:
 
+        # todo: the following block could make things faster
         # determine shape descriptors by generating another image with distances of all labeled pixels to the label centroid
-        from ._centroids_of_labels import centroids_of_labels
-        centroids_pointlist = centroids_of_labels(label_image, regionprops=props)
+        # from ._centroids_of_labels import centroids_of_labels
+        #centroids_pointlist = centroids_of_labels(labelmap, regionprops=props, include_background=True)
+        #print(centroids_pointlist)
+        centroids_pointlist = None
 
         from ._euclidean_distance_from_label_centroid_map import euclidean_distance_from_label_centroid_map
         distance_map = euclidean_distance_from_label_centroid_map(labelmap, centroids_pointlist)
+
+        # todo: do the same as above with the mass_center instead of the centroid
 
         distance_props = regionprops(label_image, intensity_image=pull_zyx(distance_map))
 
@@ -70,7 +75,7 @@ def statistics_of_labelled_pixels(input : Image = None, labelmap : Image = None,
             region_prop.mean_distance_to_centroid = distance_prop.mean_intensity
             region_prop.max_distance_to_centroid = distance_prop.max_intensity
             region_prop.sum_distance_to_centroid = distance_prop.mean_intensity * region_prop.area
-            region_prop.mean_max_distance_to_centroid_ratio = region_prop.mean_distance_to_centroid / region_prop.max_distance_to_centroid
+            region_prop.mean_max_distance_to_centroid_ratio = region_prop.max_distance_to_centroid / region_prop.mean_distance_to_centroid
 
             if label_and_intensity_equal:
                 region_prop.mean_distance_to_mass_center = region_prop.mean_distance_to_centroid
