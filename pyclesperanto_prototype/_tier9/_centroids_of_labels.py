@@ -50,6 +50,8 @@ def centroids_of_labels(source:Image, pointlist_destination :Image = None, inclu
 
     for i, label_props in enumerate(regionprops):
         index = label_props.label - 1
+        if not include_background:
+            index = index - 1
 
         # centroid
         if (len(label_props.centroid) == 3):
