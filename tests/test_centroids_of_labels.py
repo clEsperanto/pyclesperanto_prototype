@@ -1,7 +1,7 @@
 import pyclesperanto_prototype as cle
 import numpy as np
 
-def test_label_centroids_to_pointlist():
+def test_centroids_of_labels():
 
     labels = cle.push_zyx(np.asarray([
         [1, 1, 2],
@@ -28,7 +28,7 @@ def test_label_centroids_to_pointlist():
     assert (np.array_equal(a, b))
 
 
-def test_label_centroids_to_pointlist_3d():
+def test_centroids_of_labels_3d():
 
     labels = cle.push_zyx(np.asarray([
         [
