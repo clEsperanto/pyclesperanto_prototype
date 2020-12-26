@@ -25,16 +25,16 @@ def test_statistics_of_labelled_pixels():
         [0.,          0.,          0.],
 
         #     BOUNDING_BOX_END_X(4),
-        [2.,    3.,    3.],
+        [1.,    2.,    2.],
         #     BOUNDING_BOX_END_Y(5),
-        [2.,          2.,          3.],
+        [1.,    1.,    2.],
         #     BOUNDING_BOX_END_Z(6),
         [0.,    0.,    0.],
 
         #     BOUNDING_BOX_WIDTH(7),
-        [3.,         3.,          4.],
+        [2.,    2.,    3.],
         #     BOUNDING_BOX_HEIGHT(8),
-        [3.,    3.,    2.],
+        [2.,    2.,    1.],
         #     BOUNDING_BOX_DEPTH(9),
         [1.,          1.,          1.],
 
@@ -84,13 +84,13 @@ def test_statistics_of_labelled_pixels():
         #     MAX_MEAN_DISTANCE_TO_MASS_CENTER_RATIO(31),
         [0.,    0.,    0.],# Todo; not supported yet
         #     SUM_DISTANCE_TO_CENTROID(32),
-        [0.,          0.,          0.],# Todo; not supported yet
+        [1.9621165, 1.9621165, 2.],
         #     MEAN_DISTANCE_TO_CENTROID(33),
-        [0.,    0.,    0.],# Todo; not supported yet
+        [0.65403885, 0.65403885, 0.6666667],
         #     MAX_DISTANCE_TO_CENTROID(34),
-        [0.,          0.,          0.],# Todo; not supported yet
+        [0.74535596, 0.745356, 1.],
         #     MAX_MEAN_DISTANCE_TO_CENTROID_RATIO(35);
-        [0.,    0.,    0.]# Todo; not supported yet
+        [1.1396203, 1.1396204, 1.5]
     ]
     ))
 
@@ -138,18 +138,18 @@ def test_statistics_of_labelled_pixels_3d():
         [0., 0., 2.],
 
         #     BOUNDING_BOX_END_X(4),
-        [2.,    3.,    3.],
+        [1.,    2.,    2.],
         #     BOUNDING_BOX_END_Y(5),
-        [1.,    1.,    1.],
+        [0.,    0.,    0.],
         #     BOUNDING_BOX_END_Z(6),
-        [2., 2., 3.],
+        [1., 1., 2.],
 
         #     BOUNDING_BOX_WIDTH(7),
-        [3.,         3.,          4.],
+        [2.,         2.,          3.],
         #     BOUNDING_BOX_HEIGHT(8),
-        [2.,          2.,          2.],
+        [1.,          1.,          1.],
         #     BOUNDING_BOX_DEPTH(9),
-        [3., 3., 2.],
+        [2., 2., 1.],
 
         #     MINIMUM_INTENSITY(10),
         [0.,    2.,    2.],
@@ -197,13 +197,13 @@ def test_statistics_of_labelled_pixels_3d():
         #     MAX_MEAN_DISTANCE_TO_MASS_CENTER_RATIO(31),
         [0.,    0.,    0.],# Todo; not supported yet
         #     SUM_DISTANCE_TO_CENTROID(32),
-        [0.,          0.,          0.],# Todo; not supported yet
+        [1.9621165, 1.9621165, 2.],
         #     MEAN_DISTANCE_TO_CENTROID(33),
-        [0.,    0.,    0.],# Todo; not supported yet
+        [0.65403885, 0.65403885, 0.6666667],
         #     MAX_DISTANCE_TO_CENTROID(34),
-        [0.,          0.,          0.],# Todo; not supported yet
+        [0.74535596, 0.745356, 1.],
         #     MAX_MEAN_DISTANCE_TO_CENTROID_RATIO(35);
-        [0.,    0.,    0.]# Todo; not supported yet
+        [1.1396203, 1.1396204, 1.5]
     ]
     ))
 
