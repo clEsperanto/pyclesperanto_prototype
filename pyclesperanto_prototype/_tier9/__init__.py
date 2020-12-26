@@ -17,6 +17,7 @@ from ._label_maximum_intensity_map import label_maximum_intensity_map
 from ._label_minimum_intensity_map import label_minimum_intensity_map
 from ._label_pixel_count_map import label_pixel_count_map
 from ._push_regionprops import push_regionprops
+from ._seeded_watershed import seeded_watershed
 from ._statistics_of_background_and_labelled_pixels import statistics_of_background_and_labelled_pixels
 from ._statistics_of_labelled_pixels import statistics_of_labelled_pixels
 from ._threshold_otsu import threshold_otsu
