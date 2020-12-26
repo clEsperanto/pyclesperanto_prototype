@@ -240,6 +240,7 @@ def test_standard_deviation():
 
     print("std", stats[0].standard_deviation_intensity)
 
-    assert np.abs(stats[0].standard_deviation_intensity - 2.58) < 0.1
+    from numpy import testing
+    testing.assert_almost_equal(stats[0].standard_deviation_intensity, 2.58, decimal=1)
 
 
