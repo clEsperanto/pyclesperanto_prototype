@@ -75,8 +75,8 @@ def statistics_of_labelled_pixels(input : Image = None, labelmap : Image = None,
             if label_and_intensity_equal:
                 region_prop.mean_distance_to_mass_center = region_prop.mean_distance_to_centroid
                 region_prop.max_distance_to_mass_center = region_prop.max_distance_to_centroid
-                region_prop.sum_distance_to_mass_center = region_prop.sum_distance_to_mass_center
-                region_prop.mean_max_distance_to_mass_center_ratio = region_prop.mean_max_distance_to_mass_center_ratio
+                region_prop.sum_distance_to_mass_center = region_prop.sum_distance_to_centroid
+                region_prop.mean_max_distance_to_mass_center_ratio = region_prop.mean_max_distance_to_centroid_ratio
 
 
 
