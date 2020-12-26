@@ -42,11 +42,11 @@ def test_label_centroids_to_pointlist_3d():
 
     reference = cle.push_zyx(np.asarray([
         #     CENTROID_X(25),
-        [0.33333334,    1.6666666,    1.],
+        [0.5,    1.6666666,    1.],
         #     CENTROID_Y(26),
         [0.,    0.,    0.],
         #     CENTROID_Z(27),
-        [0.33333334,  0.6666667,   2.],
+        [0.5,  0.6666667,   2.],
     ]
     ))
 
