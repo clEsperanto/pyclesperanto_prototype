@@ -219,5 +219,74 @@ def test_statistics_of_background_and_labelled_pixels_3d():
     assert (np.array_equal(a, b))
 
 
+def test_statistics_of_background_and_labelled_pixels_compare_to_clij2():
+    from skimage.io import imread
+
+    blobs = cle.push_zyx(imread('../data/mini_blobs.tif'))
+    labels = cle.push_zyx(imread('../data/mini_blobs_otsu_labels_excluded_edges_imagej.tif'))
+
+    regionprops = cle.statistics_of_background_and_labelled_pixels(blobs, labels)
+    table = cle.pull_zyx(cle.transpose_xy(cle.push_regionprops(regionprops)))
 
 
+    print(table)
+
+    import numpy as np
+    np.savetxt('../data/mini_blobs_measurements_pyclesperanto.csv', table,delimiter=',')
+    clij_reference_table = np.loadtxt('../data/mini_blobs_measurements_clij.csv', delimiter=',', skiprows=1)
+    # chop off first column as ImageJ saved an additional counter column
+    clij_reference_table = clij_reference_table[:, 1:]
+
+    print(clij_reference_table)
+
+    columns_to_test = [
+        cle.STATISTICS_ENTRY.IDENTIFIER.value,
+        cle.STATISTICS_ENTRY.BOUNDING_BOX_X.value,
+        cle.STATISTICS_ENTRY.BOUNDING_BOX_Y.value,
+        cle.STATISTICS_ENTRY.BOUNDING_BOX_Z.value,
+        cle.STATISTICS_ENTRY.BOUNDING_BOX_END_X.value,
+        cle.STATISTICS_ENTRY.BOUNDING_BOX_END_Y.value,
+        cle.STATISTICS_ENTRY.BOUNDING_BOX_END_Z.value,
+        cle.STATISTICS_ENTRY.BOUNDING_BOX_WIDTH.value,
+        cle.STATISTICS_ENTRY.BOUNDING_BOX_HEIGHT.value,
+        cle.STATISTICS_ENTRY.BOUNDING_BOX_DEPTH.value,
+        cle.STATISTICS_ENTRY.MINIMUM_INTENSITY.value,
+        cle.STATISTICS_ENTRY.MAXIMUM_INTENSITY.value,
+        cle.STATISTICS_ENTRY.MEAN_INTENSITY.value,
+        cle.STATISTICS_ENTRY.SUM_INTENSITY.value,
+        cle.STATISTICS_ENTRY.STANDARD_DEVIATION_INTENSITY.value,
+        cle.STATISTICS_ENTRY.PIXEL_COUNT.value,
+        cle.STATISTICS_ENTRY.MASS_CENTER_X.value,
+        cle.STATISTICS_ENTRY.MASS_CENTER_Y.value,
+        cle.STATISTICS_ENTRY.MASS_CENTER_Z.value,
+        cle.STATISTICS_ENTRY.CENTROID_X.value,
+        cle.STATISTICS_ENTRY.CENTROID_Y.value,
+        cle.STATISTICS_ENTRY.CENTROID_Z.value,
+        # Errors:
+        cle.STATISTICS_ENTRY.SUM_DISTANCE_TO_CENTROID.value,
+        cle.STATISTICS_ENTRY.MEAN_DISTANCE_TO_CENTROID.value,
+        cle.STATISTICS_ENTRY.MAX_DISTANCE_TO_CENTROID.value,
+        cle.STATISTICS_ENTRY.MAX_MEAN_DISTANCE_TO_CENTROID_RATIO.value
+    ]
+
+    # TODO: not yet implemented:
+    not_yet_implemeneted_columns = [
+        cle.STATISTICS_ENTRY.SUM_INTENSITY_TIMES_X.value,
+        cle.STATISTICS_ENTRY.SUM_INTENSITY_TIMES_Y.value,
+        cle.STATISTICS_ENTRY.SUM_INTENSITY_TIMES_Z.value,
+        cle.STATISTICS_ENTRY.SUM_X.value,
+        cle.STATISTICS_ENTRY.SUM_Y.value,
+        cle.STATISTICS_ENTRY.SUM_Z.value,
+        cle.STATISTICS_ENTRY.SUM_DISTANCE_TO_MASS_CENTER.value,
+        cle.STATISTICS_ENTRY.MEAN_DISTANCE_TO_MASS_CENTER.value,
+        cle.STATISTICS_ENTRY.MAX_DISTANCE_TO_MASS_CENTER.value,
+        cle.STATISTICS_ENTRY.MAX_MEAN_DISTANCE_TO_MASS_CENTER_RATIO.value,
+
+    ]
+    for column_index in columns_to_test:
+        reference_values = clij_reference_table[:, column_index]
+        values = table[:, column_index]
+        print("testing STATISTICS_ENTRY" + str( cle.STATISTICS_ENTRY(column_index)))
+        print(reference_values)
+        print(values)
+        assert np.allclose(reference_values, values, 0.001)

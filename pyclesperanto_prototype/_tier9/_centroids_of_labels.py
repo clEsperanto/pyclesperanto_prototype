@@ -6,7 +6,7 @@ from .._tier0 import Image
 from .._tier0 import push
 
 @plugin_function(output_creator=create_pointlist_from_labelmap)
-def centroids_of_labels(source:Image, pointlist_destination :Image = None, include_background :bool = False):
+def centroids_of_labels(source:Image, pointlist_destination :Image = None, include_background :bool = False, regionprops : list = None):
     """Determines the centroids of all labels in a label image or image stack. 
     
     It writes the resulting  coordinates in a pointlist image. Depending on 
@@ -17,6 +17,8 @@ def centroids_of_labels(source:Image, pointlist_destination :Image = None, inclu
     ----------
     source : Image
     pointlist_destination : Image
+    include_background : bool
+    regionprops : list of skimage.measure._regionprops.RegionProperties
     
     Returns
     -------
@@ -31,15 +33,17 @@ def centroids_of_labels(source:Image, pointlist_destination :Image = None, inclu
     from .._tier2 import maximum_of_all_pixels
     from .._tier1 import copy
 
-    if include_background:
-        regionprops = statistics_of_background_and_labelled_pixels(input=None, labelmap=source)
-        num_rows = int(maximum_of_all_pixels(source) + 1)
+    if regionprops is None:
+        if include_background:
+            regionprops = statistics_of_background_and_labelled_pixels(input=None, labelmap=source)
+            num_rows = int(maximum_of_all_pixels(source) + 1)
+        else:
+            regionprops = statistics_of_labelled_pixels(input=None, labelmap=source)
+            num_rows = int(maximum_of_all_pixels(source))
     else:
-        regionprops = statistics_of_labelled_pixels(input=None, labelmap=source)
-        num_rows = int(maximum_of_all_pixels(source))
+        num_rows = len(regionprops)
 
     num_columns = len(source.shape)
-    #num_rows = len(regionprops)
 
     import numpy as np
     matrix = np.zeros([num_rows, num_columns])
