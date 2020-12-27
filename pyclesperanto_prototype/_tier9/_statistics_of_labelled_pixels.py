@@ -15,7 +15,7 @@ def statistics_of_labelled_pixels(input : Image = None, labelmap : Image = None,
     
     This method is executed on the CPU and not on the GPU/OpenCL device. Under the hood, it uses
     skimage.measure.regionprops [2] and thus, offers the same output. Additionally, `standard_deviation_intensity` and
-    `variance_intensity` is stored in the `regionprops` object.
+    is stored in the `regionprops` object.
     
     Parameters
     ----------
