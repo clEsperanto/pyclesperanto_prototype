@@ -290,3 +290,45 @@ def test_statistics_of_background_and_labelled_pixels_compare_to_clij2():
         print(reference_values)
         print(values)
         assert np.allclose(reference_values, values, 0.001)
+
+def test_statistics_of_background_and_labelled_pixels1():
+    labels = cle.push_zyx(np.asarray([
+        [
+            [0, 0, 2],
+        ], [
+            [0, 1, 2],
+        ], [
+            [3, 3, 4]
+        ]
+    ]))
+    reference = [3, 1, 2, 2, 1]
+
+    regionprops = cle.statistics_of_background_and_labelled_pixels(None, labels)
+    areas = [r.area for r in regionprops]
+
+    print(reference)
+    print(areas)
+
+    assert np.array_equal(reference, areas)
+
+def test_statistics_of_background_and_labelled_pixels2():
+    labels = cle.push_zyx(np.asarray([
+        [
+            [4, 4, 2],
+        ], [
+            [4, 1, 2],
+        ], [
+            [3, 3, 4]
+        ]
+    ]))
+    reference = [1, 2, 2, 4]
+
+    regionprops = cle.statistics_of_background_and_labelled_pixels(None, labels)
+    areas = [r.area for r in regionprops]
+
+    print(reference)
+    print(areas)
+
+    assert np.array_equal(reference, areas)
+
+
