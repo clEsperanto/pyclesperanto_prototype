@@ -13,4 +13,6 @@ def push_regionprops_column(regionprops : list, column : str):
         else:
             label = r.label
         values[label] = r[column]
-    return values
+
+    from .._tier0 import push_zyx
+    return push_zyx(np.asarray([values]))
