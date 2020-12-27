@@ -13,6 +13,8 @@ def extend_labels_with_relative_threshold(intensity_image: Image, labels_input: 
 
     This function expects pixel intensities above 0.
 
+    It is recommended to process images with isotropic pixel size only.
+
     Parameters
     ----------
     intensity_image : Image
@@ -52,14 +54,14 @@ def extend_labels_with_relative_threshold(intensity_image: Image, labels_input: 
 
     maximum_intensities = push_zyx(np.asarray([[p.max_intensity for p in props]]))
     thresholds = multiply_image_and_scalar(maximum_intensities, scalar=relative_threshold)
-    print(thresholds)
+    #print(thresholds)
 
     # set the threshold of the background to an unreachable value
     max_intensity = maximum_of_all_pixels(thresholds)
     set_column(thresholds, 0, max_intensity + 1)
 
     # print(maximum_intensities)
-    print(thresholds)
+    # print(thresholds)
 
     extended_labels = None
     local_threshold = None
@@ -68,7 +70,7 @@ def extend_labels_with_relative_threshold(intensity_image: Image, labels_input: 
     former_number_of_labelled_pixels = 0
 
     for i in range(0, max_iterations):
-        from .._tier9 import imshow
+        #from .._tier9 import imshow
         #print(i)
         #imshow(labels_destination)
 
@@ -82,16 +84,16 @@ def extend_labels_with_relative_threshold(intensity_image: Image, labels_input: 
 
         labels_destination = multiply_images(extended_labels, binary_image, labels_destination)
 
-        from .._tier3 import absolute_difference
-        imshow(absolute_difference(temp, labels_destination))
-        imshow(labels_destination)
+        #from .._tier3 import absolute_difference
+        #imshow(absolute_difference(temp, labels_destination))
+        #imshow(labels_destination)
 
 
         number_of_labelled_pixels = sum_of_all_pixels(binary_image)
-        print(number_of_labelled_pixels)
+        #print(number_of_labelled_pixels)
 
         if number_of_labelled_pixels == former_number_of_labelled_pixels:
-            print("extend_labels_with_relative_threshold converged. Jeey!")
+            print("extend_labels_with_relative_threshold converged after " + str(i) + ". Jeey!")
             break
         former_number_of_labelled_pixels = number_of_labelled_pixels
 
