@@ -38,7 +38,7 @@ def find_maxima_plateaus(source: Image, destination:Image, dimension : int = Non
         else:
             depth = 1
 
-        print("whd", width, height, depth)
+        #print("whd", width, height, depth)
 
         result = None
 
