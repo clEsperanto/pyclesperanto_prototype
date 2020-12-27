@@ -6,6 +6,7 @@
 ### New operations
 * `centroids_of_background_and_labels`
 * `euclidean_distance_from_label_centroid_map`
+* `extend_labels_with_relative_threshold`
 * `find_maxima_plateaus`
 * `read_intensities`
 
