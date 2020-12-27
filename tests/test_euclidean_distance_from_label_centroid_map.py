@@ -28,4 +28,3 @@ def test_euclidean_distance_from_label_centroid_map():
     print(b)
 
     assert (np.allclose(a, b, 0.001))
-

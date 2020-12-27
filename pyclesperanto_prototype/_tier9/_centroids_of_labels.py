@@ -36,20 +36,34 @@ def centroids_of_labels(source:Image, pointlist_destination :Image = None, inclu
     if regionprops is None:
         if include_background:
             regionprops = statistics_of_background_and_labelled_pixels(input=None, labelmap=source, measure_shape=False)
-            num_rows = int(maximum_of_all_pixels(source) + 1)
         else:
             regionprops = statistics_of_labelled_pixels(input=None, labelmap=source)
-            num_rows = int(maximum_of_all_pixels(source))
+
+    if hasattr(regionprops[0], 'original_label'):
+        labels = [r.original_label for r in regionprops]
     else:
-        num_rows = len(regionprops)
+        labels = [r.label for r in regionprops]
+    import numpy as np
+    max_label = np.max(labels)
+
+    if include_background:
+        num_rows = max_label + 1
+    else:
+        num_rows = max_label
 
     num_columns = len(source.shape)
 
     import numpy as np
     matrix = np.zeros([num_rows, num_columns])
 
-    for i, label_props in enumerate(regionprops):
-        index = label_props.label - 1
+    for label_props in regionprops:
+        if hasattr(label_props, 'original_label'):
+            index = label_props.original_label
+        else:
+            index = label_props.label
+
+        if not include_background:
+            index = index - 1
 
         # centroid
         if (len(label_props.centroid) == 3):
