@@ -68,12 +68,13 @@ def find_sparse_maxima(image: Image, destination: Image = None, max_distance: in
     thresholds = None
 
     #print("initial labels")
-    #cle.imshow(labels, labels=True)
+    #from .._tier9 import imshow
+    #imshow(labels, labels=True)
 
     former_sum_labels = 0
 
     for i in range(0, max_iterations):
-        print("i", i)
+        #print("i", i)
         extend_labels_with_maximum_radius(labels, extended_labels, int(max_distance / 2 + 0.5))
 
         touch_matrix = generate_touch_matrix(extended_labels)
@@ -85,7 +86,7 @@ def find_sparse_maxima(image: Image, destination: Image = None, max_distance: in
         thresholds = add_image_and_scalar(local_maximum_intensities, thresholds, -prominence)
 
         #print("extended_labels")
-        #cle.imshow(labels, labels=True)
+        #imshow(labels, labels=True)
 
         # print(local_maximum_intensities)
         # print(maximum_intensities)
@@ -98,7 +99,7 @@ def find_sparse_maxima(image: Image, destination: Image = None, max_distance: in
         labels_to_keep = multiply_images(binary_vector, labels_to_keep)
 
         sum_labels = sum_of_all_pixels(labels_to_keep)
-        print(sum_labels)
+        #print(sum_labels)
         if former_sum_labels == sum_labels:
             print("find_sparse_maxima converged. Jeey!")
             break
@@ -106,7 +107,7 @@ def find_sparse_maxima(image: Image, destination: Image = None, max_distance: in
 
         labels = replace_intensities(labels, labels_to_keep)
 
-        #cle.imshow(labels, labels=True)
+        #imshow(labels, labels=True)
         if (i == max_iterations - 1):
             from warnings import warn
             warn("Maximum number of iterations reached in find_sparse_maxima. The algorithm did not converge.")
