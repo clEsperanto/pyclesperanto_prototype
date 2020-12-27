@@ -51,6 +51,9 @@ def find_sparse_maxima(image: Image, destination: Image = None, max_distance: in
     from .._tier2 import sum_of_all_pixels
     from .._tier1 import replace_intensities
 
+    import time
+    start_time = time.time()
+
     extended_labels = destination  # re-use memory
 
     maxima_plateaus = find_maxima_plateaus(image)
@@ -62,7 +65,7 @@ def find_sparse_maxima(image: Image, destination: Image = None, max_distance: in
 
     labels = connected_components_labeling_box(temp)
 
-    props = statistics_of_background_and_labelled_pixels(image, labels)
+    props = statistics_of_background_and_labelled_pixels(image, labels, measure_shape=False)
     maximum_intensities = push_zyx(np.asarray([[p.max_intensity for p in props]]))
     local_maximum_intensities = None
     thresholds = None
@@ -113,5 +116,7 @@ def find_sparse_maxima(image: Image, destination: Image = None, max_distance: in
             warn("Maximum number of iterations reached in find_sparse_maxima. The algorithm did not converge.")
 
     greater_constant(labels, destination, constant=0)
+
+    print("find_sparse_maxima took " + str(time.time() - start_time) + "s")
 
     return destination
