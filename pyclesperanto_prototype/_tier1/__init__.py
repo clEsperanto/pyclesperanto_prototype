@@ -40,6 +40,7 @@ from ._erode_sphere import erode_sphere
 from ._erode_sphere_slice_by_slice import erode_sphere_slice_by_slice
 from ._exponential import exponential
 from ._execute_separable_kernel import execute_separable_kernel
+from ._find_maxima_plateaus import find_maxima_plateaus
 from ._flip import flip
 from ._gaussian_blur import gaussian_blur
 from ._generate_angle_matrix import generate_angle_matrix
