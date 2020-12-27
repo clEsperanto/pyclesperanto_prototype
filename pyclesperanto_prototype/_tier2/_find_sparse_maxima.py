@@ -66,7 +66,9 @@ def find_sparse_maxima(image: Image, destination: Image = None, max_distance: in
     labels = connected_components_labeling_box(temp)
 
     props = statistics_of_background_and_labelled_pixels(image, labels, measure_shape=False)
-    maximum_intensities = push_zyx(np.asarray([[p.max_intensity for p in props]]))
+
+    from .._tier9 import push_regionprops_column
+    maximum_intensities = push_regionprops_column(props, 'max_intensity')
     local_maximum_intensities = None
     thresholds = None
 
@@ -79,8 +81,11 @@ def find_sparse_maxima(image: Image, destination: Image = None, max_distance: in
     for i in range(0, max_iterations):
         #print("i", i)
         extend_labels_with_maximum_radius(labels, extended_labels, int(max_distance / 2 + 0.5))
+        #imshow(extended_labels, labels=True)
 
         touch_matrix = generate_touch_matrix(extended_labels)
+        #print("tm shape", touch_matrix.shape)
+
         set_column(touch_matrix, 0, 0)
         set_row(touch_matrix, 0, 0)
 
@@ -104,13 +109,14 @@ def find_sparse_maxima(image: Image, destination: Image = None, max_distance: in
         sum_labels = sum_of_all_pixels(labels_to_keep)
         #print(sum_labels)
         if former_sum_labels == sum_labels:
-            print("find_sparse_maxima converged. Jeey!")
+            print("find_sparse_maxima converged after " + str(i) + ". Jeey!")
             break
         former_sum_labels = sum_labels
 
         labels = replace_intensities(labels, labels_to_keep)
-
+        #
         #imshow(labels, labels=True)
+
         if (i == max_iterations - 1):
             from warnings import warn
             warn("Maximum number of iterations reached in find_sparse_maxima. The algorithm did not converge.")
