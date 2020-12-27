@@ -34,7 +34,7 @@ def statistics_of_background_and_labelled_pixels(input : Image, labelmap : Image
 
     # correct regionprops label
     for r in regionprops:
-        r.label = r.label - 1
+        r.original_label = r.label - 1
 
     return regionprops
 

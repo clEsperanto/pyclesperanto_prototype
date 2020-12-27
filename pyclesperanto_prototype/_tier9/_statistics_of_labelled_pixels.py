@@ -72,7 +72,10 @@ def statistics_of_labelled_pixels(input : Image = None, labelmap : Image = None,
         distance_props = regionprops(label_image, intensity_image=pull_zyx(distance_map))
 
         for region_prop, distance_prop in zip(props, distance_props):
+            #print(str(region_prop.label) + "/" + str(distance_prop.label))
+
             region_prop.mean_distance_to_centroid = distance_prop.mean_intensity
+            print(str(region_prop.mean_distance_to_centroid))
             region_prop.max_distance_to_centroid = distance_prop.max_intensity
             region_prop.sum_distance_to_centroid = distance_prop.mean_intensity * region_prop.area
             region_prop.mean_max_distance_to_centroid_ratio = region_prop.max_distance_to_centroid / region_prop.mean_distance_to_centroid
@@ -83,7 +86,9 @@ def statistics_of_labelled_pixels(input : Image = None, labelmap : Image = None,
                 region_prop.sum_distance_to_mass_center = region_prop.sum_distance_to_centroid
                 region_prop.mean_max_distance_to_mass_center_ratio = region_prop.mean_max_distance_to_centroid_ratio
 
-
+    # save regionprops label
+    for r in props:
+        r.original_label = r.label
 
     return props
 
