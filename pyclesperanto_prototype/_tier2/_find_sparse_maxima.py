@@ -2,7 +2,7 @@ from .._tier0 import Image
 from .._tier0 import plugin_function
 
 @plugin_function(categories=['binarize', 'in assistant'])
-def find_sparse_maxima(image: Image, destination: Image = None, max_distance: int = 10, max_iterations=2, timeout_seconds : float = None):
+def find_sparse_maxima(image: Image, destination: Image = None, max_distance: int = 10, max_iterations=2):
     """
     Finds local maxima, extends them so that all below a given distance touch and then removes touching neighbors
     which have a lower maximum intensity than the local maximum intensity minus a given prominence value.
@@ -113,11 +113,7 @@ def find_sparse_maxima(image: Image, destination: Image = None, max_distance: in
         former_sum_labels = sum_labels
 
         labels = replace_intensities(labels, labels_to_keep)
-        #
-        #imshow(labels, labels=True)
-        if timeout_seconds is not None and start_time - time.time() > timeout_seconds:
-            warn("Timeout reached in find_sparse_maxima. The algorithm did not converge.")
-            break
+
         if i == max_iterations - 1:
             from warnings import warn
             warn("Maximum number of iterations reached in find_sparse_maxima. The algorithm did not converge.")
