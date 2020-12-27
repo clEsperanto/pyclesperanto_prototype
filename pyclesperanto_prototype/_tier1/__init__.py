@@ -93,6 +93,7 @@ from ._onlyzero_overwrite_maximum_diamond import onlyzero_overwrite_maximum_diam
 from ._point_index_list_to_mesh import point_index_list_to_mesh
 from ._power import power
 from ._power_images import power_images
+from ._read_intensities import read_intensities
 from ._replace_intensities import replace_intensities
 from ._replace_intensity import replace_intensity
 from ._resample import resample

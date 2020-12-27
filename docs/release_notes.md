@@ -6,6 +6,7 @@
 ### New operations
 * `centroids_of_background_and_labels`
 * `euclidean_distance_from_label_centroid_map`
+* `read_intensities`
 
 # 0.6.0 - Christmas 2020
 
