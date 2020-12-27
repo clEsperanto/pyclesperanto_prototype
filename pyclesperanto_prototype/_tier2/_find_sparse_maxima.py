@@ -2,8 +2,7 @@ from .._tier0 import Image
 from .._tier0 import plugin_function
 
 @plugin_function(categories=['binarize', 'in assistant'])
-def find_sparse_maxima(image: Image, destination: Image = None, max_distance: int = 1, prominence: float = 0,
-                       max_iterations=2):
+def find_sparse_maxima(image: Image, destination: Image = None, max_distance: int = 10, max_iterations=2, timeout_seconds : float = None):
     """
     Finds local maxima, extends them so that all below a given distance touch and then removes touching neighbors
     which have a lower maximum intensity than the local maximum intensity minus a given prominence value.
@@ -57,7 +56,7 @@ def find_sparse_maxima(image: Image, destination: Image = None, max_distance: in
     extended_labels = destination  # re-use memory
 
     maxima_plateaus = find_maxima_plateaus(image)
-    binary = greater_constant(image, constant=prominence)
+    binary = greater_constant(image, constant=0)
 
     temp = destination  # re-use memory
 
@@ -91,7 +90,7 @@ def find_sparse_maxima(image: Image, destination: Image = None, max_distance: in
 
         local_maximum_intensities = maximum_of_touching_neighbors(maximum_intensities, touch_matrix,
                                                                       local_maximum_intensities)
-        thresholds = add_image_and_scalar(local_maximum_intensities, thresholds, -prominence)
+        thresholds = local_maximum_intensities
 
         #print("extended_labels")
         #imshow(labels, labels=True)
@@ -109,15 +108,17 @@ def find_sparse_maxima(image: Image, destination: Image = None, max_distance: in
         sum_labels = sum_of_all_pixels(labels_to_keep)
         #print(sum_labels)
         if former_sum_labels == sum_labels:
-            print("find_sparse_maxima converged after " + str(i) + ". Jeey!")
+            print("find_sparse_maxima converged after " + str(i) + " iterations. Jeey!")
             break
         former_sum_labels = sum_labels
 
         labels = replace_intensities(labels, labels_to_keep)
         #
         #imshow(labels, labels=True)
-
-        if (i == max_iterations - 1):
+        if timeout_seconds is not None and start_time - time.time() > timeout_seconds:
+            warn("Timeout reached in find_sparse_maxima. The algorithm did not converge.")
+            break
+        if i == max_iterations - 1:
             from warnings import warn
             warn("Maximum number of iterations reached in find_sparse_maxima. The algorithm did not converge.")
 
