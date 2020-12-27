@@ -30,5 +30,13 @@ def statistics_of_background_and_labelled_pixels(input : Image, labelmap : Image
     from .._tier9 import statistics_of_labelled_pixels
 
     temp = add_image_and_scalar(labelmap, scalar=1)
-    return statistics_of_labelled_pixels(input, temp, measure_shape=measure_shape, extra_properties=extra_properties)
+    regionprops = statistics_of_labelled_pixels(input, temp, measure_shape=measure_shape, extra_properties=extra_properties)
+
+    # correct regionprops label
+    for r in regionprops:
+        r.label = r.label - 1
+
+    return regionprops
+
+
 
