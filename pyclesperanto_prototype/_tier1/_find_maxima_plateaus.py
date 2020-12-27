@@ -81,6 +81,8 @@ def find_maxima_plateaus(source: Image, destination:Image, dimension : int = Non
             "src":source,
             "dst":destination
         }
+        from .._tier1 import set
+        set(destination, 0)
 
         global_sizes = list(destination.shape)
         global_sizes.reverse()
