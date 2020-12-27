@@ -98,9 +98,9 @@ def find_maxima_plateaus(source: Image, destination:Image, dimension : int = Non
             global_sizes.reverse()
             execute(__file__, 'find_maxima_plateaus_1d_x.cl', 'find_maxima_plateaus_1d_z', global_sizes, parameters)
 
-        print("---------------")
-        print("FMP ", dimension)
-        print(destination)
-        print("---------------")
+        #print("---------------")
+        #print("FMP ", dimension)
+        #print(destination)
+        #print("---------------")
 
-        return destination
+    return destination
