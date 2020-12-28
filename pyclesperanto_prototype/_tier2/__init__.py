@@ -6,7 +6,8 @@ from ._combine_horizontally import combine_horizontally
 from ._combine_vertically import combine_vertically
 from ._concatenate_stacks import concatenate_stacks
 from ._distance_matrix_to_mesh import distance_matrix_to_mesh
-from ._flag_existing_intensities import flag_existing_intensities
+from ._flag_existing_labels import flag_existing_labels
+from ._flag_existing_labels import flag_existing_labels as flag_existing_intensities
 from ._degrees_to_radians import degrees_to_radians
 from ._gamma_correction import gamma_correction
 from ._invert import invert

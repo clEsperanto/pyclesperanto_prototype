@@ -5,7 +5,7 @@ from .._tier0 import create
 from .._tier1 import replace_intensities
 from .._tier1 import set
 from .._tier1 import set_column
-from .._tier2 import flag_existing_intensities
+from .._tier2 import flag_existing_labels
 from .._tier2 import maximum_of_all_pixels
 from .._tier2 import sum_reduction_x
 from .._tier2 import block_enumerate
@@ -41,7 +41,7 @@ def close_index_gaps_in_label_map(input, output, blocksize = 4096):
 
     flagged_indices = create([1, int(max_label) + 1])
     set(flagged_indices, 0)
-    flag_existing_intensities(input, flagged_indices)
+    flag_existing_labels(input, flagged_indices)
     set_column(flagged_indices, 0, 0) # background shouldn't be relabelled
 
     # sum existing labels per blocks

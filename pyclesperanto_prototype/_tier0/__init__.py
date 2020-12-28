@@ -6,6 +6,7 @@ from ._create import (
     create_like,
     create_from_pointlist,
     create_pointlist_from_labelmap,
+    create_vector_from_labelmap,
     create_matrix_from_pointlists,
     create_square_matrix_from_pointlist,
     create_square_matrix_from_labelmap,

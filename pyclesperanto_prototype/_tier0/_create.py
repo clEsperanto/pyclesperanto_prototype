@@ -38,6 +38,12 @@ def create_pointlist_from_labelmap(input:OCLArray, *args):
     
     return create([number_of_dimensions, number_of_labels])
 
+def create_vector_from_labelmap(input: OCLArray, *args):
+    from .._tier2 import maximum_of_all_pixels
+    number_of_labels = int(maximum_of_all_pixels(input)) + 1
+
+    return create([1, number_of_labels])
+
 def create_matrix_from_pointlists(pointlist1:OCLArray, pointlist2:OCLArray):
     width = pointlist1.shape[1] + 1
     height = pointlist2.shape[1] + 1
