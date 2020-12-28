@@ -2,10 +2,6 @@
 
 ## New features
 * `statistics_of_labelled_pixels` and `statistics_of_background_and_labelled_pixels` contain the parameter `standard_deviation_intensity` now.
-* `flag_existing_labels`
-
-## Deprecation messages
-* `flag_existing_intensities` was renamed to `flag_existing_labels`. An alias to the old method is kept for backwards compatibility. The alias may be removed in a later major release.
 
 # 0.6.0 - Christmas 2020
 
