@@ -75,7 +75,7 @@ def statistics_of_labelled_pixels(input : Image = None, labelmap : Image = None,
             #print(str(region_prop.label) + "/" + str(distance_prop.label))
 
             region_prop.mean_distance_to_centroid = distance_prop.mean_intensity
-            print(str(region_prop.mean_distance_to_centroid))
+            #print(str(region_prop.mean_distance_to_centroid))
             region_prop.max_distance_to_centroid = distance_prop.max_intensity
             region_prop.sum_distance_to_centroid = distance_prop.mean_intensity * region_prop.area
             region_prop.mean_max_distance_to_centroid_ratio = region_prop.max_distance_to_centroid / region_prop.mean_distance_to_centroid
