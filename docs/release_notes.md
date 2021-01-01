@@ -7,6 +7,7 @@
 
 ### New operations
 * `centroids_of_background_and_labels`
+* `detect_minima_box`
 * `euclidean_distance_from_label_centroid_map`
 
 # 0.6.0 - Christmas 2020
