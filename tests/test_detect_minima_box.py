@@ -5,11 +5,11 @@ def test_detect_minima_box():
 
     gpu_input = cle.push(np.asarray([
 
-            [0, 0, 0, 0, 0],
-            [1, 0, 0, 2, 0],
-            [1, 2, 1, 3, 2],
-            [0, 1, 0, 2, 0],
-            [0, 0, 0, 0, 0]
+            [6, 6, 6, 6, 6],
+            [5, 6, 6, 4, 6],
+            [5, 4, 5, 3, 4],
+            [6, 5, 6, 4, 6],
+            [6, 6, 6, 6, 6]
 
     ]))
     gpu_output = cle.create_like(gpu_input)
@@ -24,9 +24,7 @@ def test_detect_minima_box():
 
     ]))
 
-    gpu_input = cle.subtract_image_from_scalar(gpu_input, scalar=255)
-
-    cle.detect_maxima_box(gpu_input, gpu_output)
+    cle.detect_minima_box(gpu_input, gpu_output)
 
     a = cle.pull_zyx(gpu_output)
     b = cle.pull_zyx(gpu_reference)

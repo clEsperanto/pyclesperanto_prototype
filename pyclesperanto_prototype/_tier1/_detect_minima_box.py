@@ -25,7 +25,7 @@ def detect_minima_box(source :Image, destination :Image = None, radius_x : int =
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
-    >>> cle.detect_maxima_box(source, destination, 1, 1, 1)
+    >>> cle.detect_minima_box(source, destination, 1, 1, 1)
     
     References
     ----------
