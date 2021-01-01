@@ -1,6 +1,5 @@
-import numpy as np
-from .._tier0 import pull
-from .._tier0 import push
+from .._tier0 import plugin_function
+from .._tier0 import Image
 from .._tier0 import create
 from .._tier1 import replace_intensities
 from .._tier1 import set
@@ -10,8 +9,8 @@ from .._tier2 import maximum_of_all_pixels
 from .._tier2 import sum_reduction_x
 from .._tier2 import block_enumerate
 
-
-def close_index_gaps_in_label_map(input, output, blocksize = 4096):
+@plugin_function
+def close_index_gaps_in_label_map(input : Image, output : Image = None, blocksize = 4096):
     """Analyses a label map and if there are gaps in the indexing (e.g. label 
     5 is not present) all 
     subsequent labels will be relabelled. 

@@ -1,6 +1,7 @@
 # upcoming release
 
 ## New features
+* `merge_touching_labels`
 * 'statistics_of_image'
 * `statistics_of_labelled_pixels` and `statistics_of_background_and_labelled_pixels` contain the parameter `standard_deviation_intensity` now.
 
