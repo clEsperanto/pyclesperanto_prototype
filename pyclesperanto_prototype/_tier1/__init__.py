@@ -21,6 +21,7 @@ from ._count_touching_neighbors import count_touching_neighbors
 from ._crop import crop
 from ._detect_label_edges import detect_label_edges
 from ._detect_maxima_box import detect_maxima_box
+from ._detect_minima_box import detect_minima_box
 from ._dilate_box import dilate_box
 from ._dilate_box_slice_by_slice import dilate_box_slice_by_slice
 from ._dilate_sphere import dilate_sphere
