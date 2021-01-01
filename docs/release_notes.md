@@ -10,6 +10,9 @@
 * `merge_touching_labels`
 * `statistics_of_image`
 
+### Bug fixes
+* `imshow` in 3D caused an error
+
 # 0.6.0 - Christmas 2020
 
 ## New features
