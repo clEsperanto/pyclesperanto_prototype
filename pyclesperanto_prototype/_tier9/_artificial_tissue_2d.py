@@ -39,8 +39,16 @@ def artificial_tissue_2d(width: int = 256, height: int = 256, delta_x=24, delta_
         all_x_coords = np.append(all_x_coords, x_coords)
         all_y_coords = np.append(all_y_coords, y_coords)
 
-    # print(all_x_coords)
-    # print(all_y_coords)
+    # ensure that the coordinates lie within the image
+    for i in range(0, len(all_x_coords)):
+        if all_x_coords[i] < 0:
+            all_x_coords[i] = 0
+        if all_y_coords[i] < 0:
+            all_y_coords[i] = 0
+        if all_x_coords[i] >= width:
+            all_x_coords[i] = width
+        if all_y_coords[i] >= height:
+            all_y_coords[i] = height
 
     # define centroids of cells
     pointlist = push_zyx(np.asarray(
@@ -48,7 +56,6 @@ def artificial_tissue_2d(width: int = 256, height: int = 256, delta_x=24, delta_
             all_x_coords,
             all_y_coords
         ]))
-    # print(pointlist)
 
     centroids = pointlist_to_labelled_spots(pointlist)
 

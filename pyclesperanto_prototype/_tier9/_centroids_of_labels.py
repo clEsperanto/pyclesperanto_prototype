@@ -1,12 +1,12 @@
 from .._tier2 import maximum_of_all_pixels
-from .._tier0 import create_pointlist_from_labelmap
+from .._tier0 import create_none
 from .._tier0 import execute
 from .._tier0 import plugin_function
 from .._tier0 import Image
 from .._tier0 import push
 
-@plugin_function(output_creator=create_pointlist_from_labelmap)
-def centroids_of_labels(source:Image, pointlist_destination :Image = None):
+@plugin_function(output_creator=create_none)
+def centroids_of_labels(source:Image, pointlist_destination :Image = None, include_background :bool = False, regionprops : list = None):
     """Determines the centroids of all labels in a label image or image stack. 
     
     It writes the resulting  coordinates in a pointlist image. Depending on 
@@ -17,6 +17,8 @@ def centroids_of_labels(source:Image, pointlist_destination :Image = None):
     ----------
     source : Image
     pointlist_destination : Image
+    include_background : bool
+    regionprops : list of skimage.measure._regionprops.RegionProperties
     
     Returns
     -------
@@ -27,23 +29,54 @@ def centroids_of_labels(source:Image, pointlist_destination :Image = None):
     .. [1] https://clij.github.io/clij2-docs/reference_centroidsOfLabels
     """
     from .._tier9 import statistics_of_labelled_pixels
-    regionprops = statistics_of_labelled_pixels(input=None, labelmap=source)
+    from .._tier9 import statistics_of_background_and_labelled_pixels
+    from .._tier2 import maximum_of_all_pixels
+    from .._tier1 import copy
+
+    if regionprops is None:
+        if include_background:
+            regionprops = statistics_of_background_and_labelled_pixels(input=None, labelmap=source, measure_shape=False)
+        else:
+            regionprops = statistics_of_labelled_pixels(input=None, labelmap=source)
+
+    if hasattr(regionprops[0], 'original_label'):
+        labels = [r.original_label for r in regionprops]
+    else:
+        labels = [r.label for r in regionprops]
+    import numpy as np
+    max_label = np.max(labels)
+
+    if include_background:
+        num_rows = max_label + 1
+    else:
+        num_rows = max_label
 
     num_columns = len(source.shape)
-    num_rows = len(regionprops)
 
     import numpy as np
     matrix = np.zeros([num_rows, num_columns])
 
-    for i, label_props in enumerate(regionprops):
-        #print(i)
+    for label_props in regionprops:
+        if hasattr(label_props, 'original_label'):
+            index = label_props.original_label
+        else:
+            index = label_props.label
+
+        if not include_background:
+            index = index - 1
+
         # centroid
         if (len(label_props.centroid) == 3):
-            matrix[i][0] = label_props.centroid[2]
-            matrix[i][1] = label_props.centroid[1]
-            matrix[i][2] = label_props.centroid[0]
+            matrix[index][0] = label_props.centroid[2]
+            matrix[index][1] = label_props.centroid[1]
+            matrix[index][2] = label_props.centroid[0]
         else:
-            matrix[i][0] = label_props.centroid[1]
-            matrix[i][1] = label_props.centroid[0]
+            matrix[index][0] = label_props.centroid[1]
+            matrix[index][1] = label_props.centroid[0]
 
-    return push(matrix)
+    if pointlist_destination is None:
+        return push(matrix)
+    else:
+        temp = push(matrix)
+        copy(temp, pointlist_destination)
+        return pointlist_destination
