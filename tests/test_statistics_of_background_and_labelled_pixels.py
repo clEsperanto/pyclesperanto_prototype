@@ -48,7 +48,7 @@ def test_statistics_of_background_and_labelled_pixels():
         [2.,          7.,          9.],
 
         #     STANDARD_DEVIATION_INTENSITY(14),
-        [-1., - 1., - 1.],# Todo; not supported yet
+        [0.47140452, 0.4714045, 0.8164966],
         #     PIXEL_COUNT(15),
         [3.,    3.,    3.],
         #     SUM_INTENSITY_TIMES_X(16),
@@ -161,7 +161,7 @@ def test_statistics_of_background_and_labelled_pixels_3d():
         [2.,          7.,          9.],
 
         #     STANDARD_DEVIATION_INTENSITY(14),
-        [-1., - 1., - 1.],# Todo; not supported yet
+        [0.47140452, 0.4714045, 0.8164966],
         #     PIXEL_COUNT(15),
         [3.,    3.,    3.],
         #     SUM_INTENSITY_TIMES_X(16),

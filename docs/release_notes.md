@@ -1,3 +1,8 @@
+# upcoming release
+
+## New features
+* `statistics_of_labelled_pixels` and `statistics_of_background_and_labelled_pixels` contain the parameter `standard_deviation_intensity` now.
+
 # 0.6.0 - Christmas 2020
 
 ## New features

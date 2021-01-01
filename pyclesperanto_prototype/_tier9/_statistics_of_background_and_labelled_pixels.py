@@ -6,7 +6,7 @@ from .._tier0 import plugin_function
 from .._tier0 import pull_zyx
 
 @plugin_function(output_creator=create_none)
-def statistics_of_background_and_labelled_pixels(input : Image, labelmap : Image):
+def statistics_of_background_and_labelled_pixels(input : Image = None, labelmap : Image = None, extra_properties=[]):
     """Determines bounding box, area (in pixels/voxels), min, max and mean 
     intensity 
      of background and labelled objects in a label map and corresponding 
@@ -30,5 +30,5 @@ def statistics_of_background_and_labelled_pixels(input : Image, labelmap : Image
     from .._tier9 import statistics_of_labelled_pixels
 
     temp = add_image_and_scalar(labelmap, scalar=1)
-    return statistics_of_labelled_pixels(input, temp)
+    return statistics_of_labelled_pixels(input, temp, extra_properties=extra_properties)
 

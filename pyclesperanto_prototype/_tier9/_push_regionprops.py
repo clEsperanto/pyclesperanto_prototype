@@ -1,3 +1,5 @@
+from warnings import warn
+
 from skimage.measure._regionprops import RegionProperties
 import numpy as np
 from .._tier0 import push
@@ -90,9 +92,13 @@ def push_regionprops(props : RegionProperties, first_row_index : int = 0):
         # sum intensity
         matrix[i][13] = label_props.mean_intensity * label_props.area
         # stddev intensity
-        matrix[i][14] = -1 # not implemented
+        if hasattr(label_props, 'standard_deviation_intensity'):
+            matrix[i][14] = label_props.standard_deviation_intensity
+        else:
+            warn("regionprops didn't contains stanard_deviation_intensity. Consider using cle.statistics_of_labelled_pixels to determine the standard deviation. ")
+            matrix[i][14] = -1
 
-        # area
+            # area
         matrix[i][15] = label_props.area
 
         # center of mass
