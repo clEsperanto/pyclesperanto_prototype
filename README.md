@@ -190,6 +190,12 @@ imsave("result.tif", cle.pull(labeled))
 
 </td></tr><tr><td>
 
+</td><td>
+
+[Shape descriptors based on neighborhood graphs](https://github.com/clEsperanto/pyclesperanto_prototype/tree/master/demo/neighbors/shape_descriptors_based_on_neighborhood_graphs.ipynb)
+
+</td></tr><tr><td>
+
 <img src="https://github.com/clEsperanto/pyclesperanto_prototype/raw/master/docs/images/screenshot_tribolium_napari.png" width="300"/>
 
 </td><td>

@@ -64,6 +64,7 @@ from ._mask_label import mask_label
 from ._maximum_image_and_scalar import maximum_image_and_scalar
 from ._maximum_images import maximum_images
 from ._maximum_box import maximum_box
+from ._maximum_distance_of_touching_neighbors import maximum_distance_of_touching_neighbors
 from ._maximum_x_projection import maximum_x_projection
 from ._maximum_y_projection import maximum_y_projection
 from ._maximum_z_projection import maximum_z_projection
@@ -73,6 +74,7 @@ from ._mean_x_projection import mean_x_projection
 from ._mean_y_projection import mean_y_projection
 from ._mean_z_projection import mean_z_projection
 from ._minimum_box import minimum_box
+from ._minimum_distance_of_touching_neighbors import minimum_distance_of_touching_neighbors
 from ._minimum_image_and_scalar import minimum_image_and_scalar
 from ._minimum_images import minimum_images
 from ._minimum_x_projection import minimum_x_projection
