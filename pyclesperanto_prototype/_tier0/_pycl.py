@@ -144,6 +144,7 @@ class OCLProgram(cl.Program):
     example:
          prog = OCLProgram("mykernels.cl",build_options=["-D FLAG"])
     """
+    _wait_for_kernel_finish = None
 
     def __init__(self, file_name=None, src_str=None, build_options=[], dev=None):
         if file_name is not None:
@@ -168,6 +169,8 @@ class OCLProgram(cl.Program):
         self._kernel_dict[name](
             self._dev.queue, global_size, local_size, *args, **kwargs
         )
+        if OCLProgram._wait_for_kernel_finish:
+            self._dev.queue.finish()
 
     @classmethod
     @lru_cache(maxsize=128)

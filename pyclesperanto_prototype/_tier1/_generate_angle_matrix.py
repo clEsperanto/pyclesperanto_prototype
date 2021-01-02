@@ -34,7 +34,7 @@ def generate_angle_matrix(coordinate_list1 :Image, coordinate_list2 :Image, angl
     
     Returns
     -------
-    distance_matrix_destination
+    angle_matrix_destination
     
     Examples
     --------

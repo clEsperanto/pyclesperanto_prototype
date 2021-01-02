@@ -7,11 +7,16 @@
 * `centroids_of_background_and_labels`
 * `detect_minima_box`
 * `euclidean_distance_from_label_centroid_map`
+* `maximum_distance_of_touching_neighbors`
 * `merge_touching_labels`
+* `minimum_distance_of_touching_neighbors`
 * `statistics_of_image`
 
 ### Bug fixes
 * `imshow` in 3D caused an error
+
+### Miscellaneous
+* `flag_existing_intensities` has been renamed to `flag_existing_labels`. And alias to the old method was created to keep backwards-compatibility
 
 # 0.6.0 - Christmas 2020
 
