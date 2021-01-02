@@ -2,15 +2,13 @@ import pyclesperanto_prototype as cle
 import numpy as np
 
 source = np.asarray([[0, 1, 0, 1, 0, 0, 1, 1, 0, 0, 1, 0]])
-reference_4 = np.asarray([[2, 2, 1, 0]])
-reference_2 = np.asarray([[1, 1, 0, 2, 0, 1, 0]])
+reference_4 = np.asarray([[2, 2, 1]])
+reference_2 = np.asarray([[1, 1, 0, 2, 0, 1]])
 
 def sum_reduction(source, blocksize):
     flagged_indices = cle.push_zyx(source)
-    max_label = source.shape[1] - 1
 
-    block_sums = cle.create([1, int((int(max_label) + 1) / blocksize) + 1])
-    cle.sum_reduction_x(flagged_indices, block_sums, blocksize)
+    block_sums = cle.sum_reduction_x(flagged_indices, blocksize=blocksize)
 
     return cle.pull_zyx(block_sums)
 

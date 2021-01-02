@@ -17,6 +17,8 @@ def block_enumerate(src : Image, src_sums : Image, dst : Image = sum, blocksize 
     sum_reduction_x). In the above example, with blocksize 4, that
     would be the sum array:
     [2, 3]
+    Note that the block size when calling this function and sum_reduction
+    must be identical
 
     Parameters
     ----------
