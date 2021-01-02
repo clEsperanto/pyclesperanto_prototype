@@ -1,0 +1,3 @@
+[submodule "pyclesperanto_prototype/clij-opencl-kernels"]
+	path = pyclesperanto_prototype/clij-opencl-kernels
+	url = https://github.com/clEsperanto/clij-opencl-kernels
