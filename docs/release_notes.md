@@ -15,6 +15,9 @@
 ### Bug fixes
 * `imshow` in 3D caused an error
 
+### Miscellaneous
+* `flag_existing_intensities` has been renamed to `flag_existing_labels`. And alias to the old method was created to keep backwards-compatibility
+
 # 0.6.0 - Christmas 2020
 
 ## New features
