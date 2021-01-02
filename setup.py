@@ -8,7 +8,7 @@ setuptools.setup(
     version="0.6.0",
     author="haesleinhuepf",
     author_email="rhaase@mpi-cbg.de",
-    description="OpenCL based GPU-accelerated image processing (an early prototype)",
+    description="OpenCL based GPU-accelerated image processing",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/clEsperanto/pyclesperanto_prototype",
