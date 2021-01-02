@@ -31,3 +31,4 @@ from ._cl_info import cl_info
 from ._pycl import get_device, select_device, set_device_scoring_key
 from ._cl_image import create_image, empty_image_like, empty_image
 from ._available_device_names import available_device_names
+from ._set_wait_for_kernel_finish import set_wait_for_kernel_finish
