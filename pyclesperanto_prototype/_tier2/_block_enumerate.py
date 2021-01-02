@@ -42,6 +42,6 @@ def block_enumerate(src : Image, src_sums : Image, dst : Image = sum, blocksize 
         "blocksize": int(blocksize)
     }
 
-    execute(__file__, '../clij-opencl-kernels/kernels/block_enumerate.cl', 'block_enumerate', src_sums.shape, parameters)
+    execute(__file__, '../clij-opencl-kernels/kernels/block_enumerate_x.cl', 'block_enumerate', src_sums.shape, parameters)
 
     return dst
