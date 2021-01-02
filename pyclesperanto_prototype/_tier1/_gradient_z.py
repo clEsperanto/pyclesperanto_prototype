@@ -36,5 +36,5 @@ def gradient_z(source : Image, destination : Image = None):
         "src":source
     }
 
-    execute(__file__, 'gradient_z_3d_x.cl', 'gradient_z_3d', destination.shape, parameters)
+    execute(__file__, '../clij-opencl-kernels/kernels/gradient_z_3d_x.cl', 'gradient_z_3d', destination.shape, parameters)
     return destination

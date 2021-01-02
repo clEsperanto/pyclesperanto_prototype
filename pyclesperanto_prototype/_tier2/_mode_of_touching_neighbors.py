@@ -31,6 +31,6 @@ def mode_of_touching_neighbors(src_values : Image, touch_matrix : Image, dst_val
         "x_correction": int(x_correction)
     }
 
-    execute(__file__, 'mode_of_touching_neighbors_x.cl', 'mode_of_touching_neighbors', dst_values.shape, parameters)
+    execute(__file__, '../clij-opencl-kernels/kernels/mode_of_touching_neighbors_x.cl', 'mode_of_touching_neighbors', dst_values.shape, parameters)
 
     return dst_values

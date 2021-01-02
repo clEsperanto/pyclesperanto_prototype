@@ -32,5 +32,5 @@ def mean_y_projection(source : Image, destination : Image):
         "src":source,
     }
 
-    execute(__file__, 'mean_y_projection_x.cl', 'mean_y_projection', destination.shape, parameters)
+    execute(__file__, '../clij-opencl-kernels/kernels/mean_y_projection_x.cl', 'mean_y_projection', destination.shape, parameters)
     return destination

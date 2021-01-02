@@ -32,5 +32,5 @@ def sum_z_projection(source : Image, destination : Image = None):
         "src":source,
     }
 
-    execute(__file__, 'sum_z_projection_x.cl', 'sum_z_projection', destination.shape, parameters)
+    execute(__file__, '../clij-opencl-kernels/kernels/sum_z_projection_x.cl', 'sum_z_projection', destination.shape, parameters)
     return destination

@@ -44,6 +44,6 @@ def transpose_xz(input : Image, destination : Image = None):
         "dst":destination
     }
 
-    execute(__file__, 'transpose_xz_3d_x.cl', 'transpose_xz_3d', destination.shape, parameters)
+    execute(__file__, '../clij-opencl-kernels/kernels/transpose_xz_3d_x.cl', 'transpose_xz_3d', destination.shape, parameters)
 
     return destination

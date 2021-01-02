@@ -38,6 +38,6 @@ def flag_existing_labels(label_src : Image, flag_vector_destination : Image = No
 
     set(flag_vector_destination, 0)
 
-    execute(__file__, 'flag_existing_labels_x.cl', 'flag_existing_labels', label_src.shape, parameters)
+    execute(__file__, '../clij-opencl-kernels/kernels/flag_existing_labels_x.cl', 'flag_existing_labels', label_src.shape, parameters)
     return flag_vector_destination
 

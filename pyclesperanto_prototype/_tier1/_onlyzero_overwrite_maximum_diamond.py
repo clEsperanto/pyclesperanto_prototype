@@ -30,6 +30,6 @@ def onlyzero_overwrite_maximum_diamond(input, flag_dst, destination):
         "src":input,
     }
 
-    execute(__file__, 'onlyzero_overwrite_maximum_diamond_' + str(len(destination.shape)) + 'd_x.cl', 'onlyzero_overwrite_maximum_diamond_' + str(len(destination.shape)) + 'd', destination.shape, parameters)
+    execute(__file__, '../clij-opencl-kernels/kernels/onlyzero_overwrite_maximum_diamond_' + str(len(destination.shape)) + 'd_x.cl', 'onlyzero_overwrite_maximum_diamond_' + str(len(destination.shape)) + 'd', destination.shape, parameters)
 
     return [flag_dst, destination]

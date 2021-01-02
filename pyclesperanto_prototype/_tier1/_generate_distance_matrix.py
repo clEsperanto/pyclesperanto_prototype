@@ -47,6 +47,6 @@ def generate_distance_matrix(coordindate_list1 :Image, coordinate_list2 :Image, 
         "src_point_list2": coordinate_list2
     }
 
-    execute(__file__, 'generate_distance_matrix_x.cl', 'generate_distance_matrix', distance_matrix_destination.shape, parameters)
+    execute(__file__, '../clij-opencl-kernels/kernels/generate_distance_matrix_x.cl', 'generate_distance_matrix', distance_matrix_destination.shape, parameters)
 
     return distance_matrix_destination

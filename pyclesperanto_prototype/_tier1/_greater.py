@@ -36,5 +36,5 @@ def greater(source1 : Image, source2 : Image, destination : Image = None):
         "dst":destination
     }
 
-    execute(__file__, 'greater_' + str(len(destination.shape)) + 'd_x.cl', 'greater_' + str(len(destination.shape)) + 'd', destination.shape, parameters)
+    execute(__file__, '../clij-opencl-kernels/kernels/greater_' + str(len(destination.shape)) + 'd_x.cl', 'greater_' + str(len(destination.shape)) + 'd', destination.shape, parameters)
     return destination

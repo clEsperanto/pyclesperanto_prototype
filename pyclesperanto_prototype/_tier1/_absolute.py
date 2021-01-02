@@ -36,5 +36,5 @@ def absolute(source : Image, destintation : Image = None):
         "dst":destintation
     }
 
-    execute(__file__, 'absolute_' + str(len(destintation.shape)) + 'd_x.cl', 'absolute_' + str(len(destintation.shape)) + 'd', destintation.shape, parameters)
+    execute(__file__, '../clij-opencl-kernels/kernels/absolute_' + str(len(destintation.shape)) + 'd_x.cl', 'absolute_' + str(len(destintation.shape)) + 'd', destintation.shape, parameters)
     return destintation

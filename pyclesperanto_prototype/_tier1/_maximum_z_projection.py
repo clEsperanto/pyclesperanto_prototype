@@ -32,6 +32,6 @@ def maximum_z_projection(source :Image, destination_max :Image = None):
         "src":source,
     }
 
-    execute(__file__, 'maximum_z_projection_x.cl', 'maximum_z_projection', destination_max.shape, parameters)
+    execute(__file__, '../clij-opencl-kernels/kernels/maximum_z_projection_x.cl', 'maximum_z_projection', destination_max.shape, parameters)
 
     return destination_max

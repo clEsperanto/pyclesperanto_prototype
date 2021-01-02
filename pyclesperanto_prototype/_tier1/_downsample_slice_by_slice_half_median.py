@@ -53,7 +53,7 @@ def downsample_slice_by_slice_half_median(source : Image, destination : Image = 
         "src": source,
     }
 
-    execute(__file__, 'downsample_xy_by_half_median_3d' + '_x.cl',
+    execute(__file__, '../clij-opencl-kernels/kernels/downsample_xy_by_half_median_3d' + '_x.cl',
             'downsample_xy_by_half_median_3d', destination.shape, parameters)
 
     return destination

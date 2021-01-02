@@ -31,5 +31,5 @@ def laplace_diamond(source : Image, destination : Image = None):
         "src":source
     }
 
-    execute(__file__, 'laplace_diamond_' + str(len(destination.shape)) + 'd_x.cl', 'laplace_diamond_' + str(len(destination.shape)) + 'd', destination.shape, parameters)
+    execute(__file__, '../clij-opencl-kernels/kernels/laplace_diamond_' + str(len(destination.shape)) + 'd_x.cl', 'laplace_diamond_' + str(len(destination.shape)) + 'd', destination.shape, parameters)
     return destination

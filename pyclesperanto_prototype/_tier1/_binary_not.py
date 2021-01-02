@@ -40,5 +40,5 @@ def binary_not(source : Image, destination : Image = None):
         "dst":destination
     }
 
-    execute(__file__, 'binary_not_' + str(len(destination.shape)) + 'd_x.cl', 'binary_not_' + str(len(destination.shape)) + 'd', destination.shape, parameters)
+    execute(__file__, '../clij-opencl-kernels/kernels/binary_not_' + str(len(destination.shape)) + 'd_x.cl', 'binary_not_' + str(len(destination.shape)) + 'd', destination.shape, parameters)
     return destination

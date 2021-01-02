@@ -35,5 +35,5 @@ def smaller_constant(source : Image, destination : Image = None, constant : floa
         "dst":destination
     }
 
-    execute(__file__, 'smaller_constant_' + str(len(destination.shape)) + 'd_x.cl', 'smaller_constant_' + str(len(destination.shape)) + 'd', destination.shape, parameters)
+    execute(__file__, '../clij-opencl-kernels/kernels/smaller_constant_' + str(len(destination.shape)) + 'd_x.cl', 'smaller_constant_' + str(len(destination.shape)) + 'd', destination.shape, parameters)
     return destination

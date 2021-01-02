@@ -34,5 +34,5 @@ def multiply_image_and_coordinate(source : Image, destination : Image = None, di
         "dimension":int(dimension)
     }
 
-    execute(__file__, 'multiply_image_and_coordinate_' + str(len(destination.shape)) + 'd_x.cl', 'multiply_image_and_coordinate_' + str(len(destination.shape)) + 'd', destination.shape, parameters)
+    execute(__file__, '../clij-opencl-kernels/kernels/multiply_image_and_coordinate_' + str(len(destination.shape)) + 'd_x.cl', 'multiply_image_and_coordinate_' + str(len(destination.shape)) + 'd', destination.shape, parameters)
     return destination

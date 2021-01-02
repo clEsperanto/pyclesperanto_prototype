@@ -31,6 +31,6 @@ def detect_label_edges(label_source :Image, binary_destination :Image = None):
         "dst_edge_image":binary_destination
     }
 
-    execute(__file__, 'detect_label_edges_' + str(len(binary_destination.shape)) + 'd_x.cl', 'detect_label_edges_diamond_' + str(len(binary_destination.shape)) + 'd', binary_destination.shape, parameters)
+    execute(__file__, '../clij-opencl-kernels/kernels/detect_label_edges_' + str(len(binary_destination.shape)) + 'd_x.cl', 'detect_label_edges_diamond_' + str(len(binary_destination.shape)) + 'd', binary_destination.shape, parameters)
 
     return binary_destination

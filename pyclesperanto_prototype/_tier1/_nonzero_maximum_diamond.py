@@ -35,6 +35,6 @@ def nonzero_maximum_diamond (input, flag_dst, destination):
         "src":input,
     }
 
-    execute(__file__, 'nonzero_maximum_diamond_' + str(len(destination.shape)) + 'd_x.cl', 'nonzero_maximum_diamond_' + str(len(destination.shape)) + 'd', destination.shape, parameters)
+    execute(__file__, '../clij-opencl-kernels/kernels/nonzero_maximum_diamond_' + str(len(destination.shape)) + 'd_x.cl', 'nonzero_maximum_diamond_' + str(len(destination.shape)) + 'd', destination.shape, parameters)
 
     return [flag_dst, destination]

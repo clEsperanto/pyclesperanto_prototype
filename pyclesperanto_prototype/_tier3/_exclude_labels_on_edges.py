@@ -58,13 +58,13 @@ def exclude_labels_on_edges(label_map_input : Image, label_map_destination : Ima
 
     if (len(label_map_input.shape) == 3):
         global_sizes = [1, dimensions[1], dimensions[2]]
-        execute(__file__, "exclude_labels_on_edges_3d_x.cl", "exclude_on_edges_z_3d", global_sizes, parameters)
+        execute(__file__, "../clij-opencl-kernels/kernels/exclude_labels_on_edges_3d_x.cl", "exclude_on_edges_z_3d", global_sizes, parameters)
 
     global_sizes = [dimensions[0], 1 ,dimensions[2]]
-    execute(__file__, "exclude_labels_on_edges_3d_x.cl", "exclude_on_edges_y_3d", global_sizes, parameters)
+    execute(__file__, "../clij-opencl-kernels/kernels/exclude_labels_on_edges_3d_x.cl", "exclude_on_edges_y_3d", global_sizes, parameters)
 
     global_sizes = [dimensions[0], dimensions[1], 1]
-    execute(__file__, "exclude_labels_on_edges_3d_x.cl", "exclude_on_edges_x_3d", global_sizes, parameters)
+    execute(__file__, "../clij-opencl-kernels/kernels/exclude_labels_on_edges_3d_x.cl", "exclude_on_edges_x_3d", global_sizes, parameters)
 
 
 

@@ -35,5 +35,5 @@ def power(source : Image, destination : Image = None, exponent : float = 1):
         "exponent":float(exponent)
     }
 
-    execute(__file__, 'power_' + str(len(destination.shape)) + 'd_x.cl', 'power_' + str(len(destination.shape)) + 'd', destination.shape, parameters)
+    execute(__file__, '../clij-opencl-kernels/kernels/power_' + str(len(destination.shape)) + 'd_x.cl', 'power_' + str(len(destination.shape)) + 'd', destination.shape, parameters)
     return destination

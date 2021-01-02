@@ -43,6 +43,6 @@ def maximum_of_touching_neighbors(values : Image, touch_matrix : Image, maximum_
     }
 
     # todo: correct kernel function name to fulfill naming conventions
-    execute(__file__, 'maximum_of_touching_neighbors_x.cl', 'maximum_value_of_touching_neighbors', maximum_values_destination.shape, parameters)
+    execute(__file__, '../clij-opencl-kernels/kernels/maximum_of_touching_neighbors_x.cl', 'maximum_value_of_touching_neighbors', maximum_values_destination.shape, parameters)
 
     return maximum_values_destination

@@ -44,7 +44,7 @@ def gaussian_blur(source : Image, destination : Image = None, sigma_x : float = 
         source,
         destination,
         __file__,
-        'gaussian_blur_separable_' + str(len(destination.shape)) + 'd_x.cl',
+        '../clij-opencl-kernels/kernels/gaussian_blur_separable_' + str(len(destination.shape)) + 'd_x.cl',
         'gaussian_blur_separable_' + str(len(destination.shape)) + 'd',
         kernel_size_x,
         kernel_size_y,

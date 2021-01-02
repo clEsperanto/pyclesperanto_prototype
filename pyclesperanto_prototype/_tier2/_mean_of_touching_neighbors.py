@@ -43,6 +43,6 @@ def mean_of_touching_neighbors(values : Image, touch_matrix : Image, mean_values
     }
 
     # todo: correct kernel function name to fulfill naming conventions
-    execute(__file__, 'mean_of_touching_neighbors_x.cl', 'mean_value_of_touching_neighbors', mean_values_destination.shape, parameters)
+    execute(__file__, '../clij-opencl-kernels/kernels/mean_of_touching_neighbors_x.cl', 'mean_value_of_touching_neighbors', mean_values_destination.shape, parameters)
 
     return mean_values_destination

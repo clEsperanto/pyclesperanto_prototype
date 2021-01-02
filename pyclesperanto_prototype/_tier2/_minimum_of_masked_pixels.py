@@ -17,7 +17,7 @@ def __minimum_of_masked_pixels_reduction(source : Image, source_mask : Image, ou
         "src": source
     }
 
-    execute(__file__, 'minimum_of_masked_pixels_3d_2d_x.cl', 'minimum_of_masked_pixels_3d_2d', output.shape, parameters)
+    execute(__file__, '../clij-opencl-kernels/kernels/minimum_of_masked_pixels_3d_2d_x.cl', 'minimum_of_masked_pixels_3d_2d', output.shape, parameters)
 
 def _slice_to_stack(image : Image, stack : Image = None, num_slices = 1):
     # TODO: This might become a core method

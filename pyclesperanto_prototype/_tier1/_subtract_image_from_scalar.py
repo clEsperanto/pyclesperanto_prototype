@@ -34,5 +34,5 @@ def subtract_image_from_scalar(input : Image, destination : Image = None, scalar
         "dst":destination,
         "scalar":float(scalar)
     }
-    execute(__file__, 'subtract_image_from_scalar_' + str(len(destination.shape)) + 'd_x.cl', 'subtract_image_from_scalar_' + str(len(destination.shape)) + 'd', destination.shape, parameters)
+    execute(__file__, '../clij-opencl-kernels/kernels/subtract_image_from_scalar_' + str(len(destination.shape)) + 'd_x.cl', 'subtract_image_from_scalar_' + str(len(destination.shape)) + 'd', destination.shape, parameters)
     return destination

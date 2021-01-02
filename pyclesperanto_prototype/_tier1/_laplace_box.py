@@ -32,5 +32,5 @@ def laplace_box(input : Image, destination : Image = None):
         "src":input
     }
 
-    execute(__file__, 'laplace_box_' + str(len(destination.shape)) + 'd_x.cl', 'laplace_box_' + str(len(destination.shape)) + 'd', destination.shape, parameters)
+    execute(__file__, '../clij-opencl-kernels/kernels/laplace_box_' + str(len(destination.shape)) + 'd_x.cl', 'laplace_box_' + str(len(destination.shape)) + 'd', destination.shape, parameters)
     return destination

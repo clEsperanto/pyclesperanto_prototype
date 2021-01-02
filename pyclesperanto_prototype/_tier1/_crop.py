@@ -49,5 +49,5 @@ def crop(input : Image, output : Image = None, start_x : int = 0, start_y : int 
         # 3D image
         parameters.update({"start_z": int(start_z)})
 
-    execute(__file__, 'crop_' + str(len(output.shape)) + 'd_x.cl', 'crop_' + str(len(output.shape)) + 'd', output.shape, parameters)
+    execute(__file__, '../clij-opencl-kernels/kernels/crop_' + str(len(output.shape)) + 'd_x.cl', 'crop_' + str(len(output.shape)) + 'd', output.shape, parameters)
     return output

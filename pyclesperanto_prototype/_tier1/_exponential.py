@@ -35,5 +35,5 @@ def exponential(source : Image, destination : Image = None):
         "dst":destination
     }
 
-    execute(__file__, 'exponential_' + str(len(destination.shape)) + 'd_x.cl', 'exponential_' + str(len(destination.shape)) + 'd', destination.shape, parameters)
+    execute(__file__, '../clij-opencl-kernels/kernels/exponential_' + str(len(destination.shape)) + 'd_x.cl', 'exponential_' + str(len(destination.shape)) + 'd', destination.shape, parameters)
     return destination

@@ -64,5 +64,5 @@ def draw_sphere(destination : Image, x : float = 0, y : float = 0, z : float = 0
             "value": float(value)
         }
 
-    execute(__file__, 'draw_sphere_' + str(len(destination.shape)) + 'd_x.cl', 'draw_sphere_' + str(len(destination.shape)) + 'd', destination.shape, parameters)
+    execute(__file__, '../clij-opencl-kernels/kernels/draw_sphere_' + str(len(destination.shape)) + 'd_x.cl', 'draw_sphere_' + str(len(destination.shape)) + 'd', destination.shape, parameters)
     return destination

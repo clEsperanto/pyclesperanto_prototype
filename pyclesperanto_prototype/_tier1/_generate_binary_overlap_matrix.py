@@ -36,5 +36,5 @@ def generate_binary_overlap_matrix(label_map1 : Image, label_map2 : Image, binar
         "src_label_map2":label_map2
     }
 
-    execute(__file__, 'generate_binary_overlap_matrix_' + str(len(label_map1.shape)) + 'd_x.cl', 'generate_binary_overlap_matrix_' + str(len(label_map1.shape)) + 'd', label_map1.shape, parameters)
+    execute(__file__, '../clij-opencl-kernels/kernels/generate_binary_overlap_matrix_' + str(len(label_map1.shape)) + 'd_x.cl', 'generate_binary_overlap_matrix_' + str(len(label_map1.shape)) + 'd', label_map1.shape, parameters)
     return binary_overlap_matrix_destination

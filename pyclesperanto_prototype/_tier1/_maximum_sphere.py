@@ -46,5 +46,5 @@ def maximum_sphere(source : Image, destination : Image = None, radius_x : float 
 
     if (len(destination.shape) == 3):
         parameters.update({"Nz":int(kernel_size_z)});
-    execute(__file__, 'maximum_sphere_' + str(len(destination.shape)) + 'd_x.cl', 'maximum_sphere_' + str(len(destination.shape)) + 'd', destination.shape, parameters);
+    execute(__file__, '../clij-opencl-kernels/kernels/maximum_sphere_' + str(len(destination.shape)) + 'd_x.cl', 'maximum_sphere_' + str(len(destination.shape)) + 'd', destination.shape, parameters);
     return destination

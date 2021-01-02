@@ -27,5 +27,5 @@ def set_image_borders(destination : Image, value : float = 0):
         "value":float(value)
     }
 
-    execute(__file__, 'set_image_borders_' + str(len(destination.shape)) + 'd_x.cl', 'set_image_borders_' + str(len(destination.shape)) + 'd', destination.shape, parameters);
+    execute(__file__, '../clij-opencl-kernels/kernels/set_image_borders_' + str(len(destination.shape)) + 'd_x.cl', 'set_image_borders_' + str(len(destination.shape)) + 'd', destination.shape, parameters);
     return destination

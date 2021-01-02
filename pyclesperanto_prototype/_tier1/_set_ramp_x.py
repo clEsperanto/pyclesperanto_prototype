@@ -25,5 +25,5 @@ def set_ramp_x(source : Image):
         "dst":source
     }
 
-    execute(__file__, 'set_ramp_x_' + str(len(source.shape)) + 'd_x.cl', 'set_ramp_x_' + str(len(source.shape)) + 'd', source.shape, parameters);
+    execute(__file__, '../clij-opencl-kernels/kernels/set_ramp_x_' + str(len(source.shape)) + 'd_x.cl', 'set_ramp_x_' + str(len(source.shape)) + 'd', source.shape, parameters);
     return source

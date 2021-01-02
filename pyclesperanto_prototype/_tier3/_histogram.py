@@ -116,7 +116,7 @@ def histogram(source : Image, destination : Image = None, num_bins = 256, minimu
 
     global_sizes = [number_of_partial_histograms]
     execute(__file__,
-                "histogram_" + str(len(image_to_process.shape)) + "d_x.cl",
+                "../clij-opencl-kernels/kernels/histogram_" + str(len(image_to_process.shape)) + "d_x.cl",
                 "histogram_" + str(len(image_to_process.shape)) + "d",
                 global_sizes,
                 parameters,

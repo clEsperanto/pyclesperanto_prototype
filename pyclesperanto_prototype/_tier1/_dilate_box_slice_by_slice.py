@@ -41,5 +41,5 @@ def dilate_box_slice_by_slice(src : Image, dst : Image = None):
         "dst":dst
     }
 
-    execute(__file__, 'dilate_box_slice_by_slice_' + str(len(dst.shape)) + 'd_x.cl', 'dilate_box_slice_by_slice_' + str(len(dst.shape)) + 'd', dst.shape, parameters)
+    execute(__file__, '../clij-opencl-kernels/kernels/dilate_box_slice_by_slice_' + str(len(dst.shape)) + 'd_x.cl', 'dilate_box_slice_by_slice_' + str(len(dst.shape)) + 'd', dst.shape, parameters)
     return dst

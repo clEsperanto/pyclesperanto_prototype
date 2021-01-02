@@ -29,5 +29,5 @@ def set_plane(source : Image, plane_index : int = 0, value : float = 0):
         "value":float(value)
     }
 
-    execute(__file__, 'set_plane_' + str(len(source.shape)) + 'd_x.cl', 'set_plane_' + str(len(source.shape)) + 'd', source.shape, parameters);
+    execute(__file__, '../clij-opencl-kernels/kernels/set_plane_' + str(len(source.shape)) + 'd_x.cl', 'set_plane_' + str(len(source.shape)) + 'd', source.shape, parameters);
     return source

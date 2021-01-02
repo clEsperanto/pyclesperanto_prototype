@@ -39,5 +39,5 @@ def multiply_image_and_scalar(source : Image, destination : Image = None, scalar
         "scalar":float(scalar)
     }
 
-    execute(__file__, 'multiply_image_and_scalar_' + str(len(destination.shape)) + 'd_x.cl', 'multiply_image_and_scalar_' + str(len(destination.shape)) + 'd', destination.shape, parameters)
+    execute(__file__, '../clij-opencl-kernels/kernels/multiply_image_and_scalar_' + str(len(destination.shape)) + 'd_x.cl', 'multiply_image_and_scalar_' + str(len(destination.shape)) + 'd', destination.shape, parameters)
     return destination

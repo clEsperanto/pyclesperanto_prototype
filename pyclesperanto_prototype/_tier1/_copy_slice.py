@@ -42,8 +42,8 @@ def copy_slice(source : Image, destination : Image = None, slice_index : int = 0
     }
 
     if (len(destination.shape) == 3):
-        execute(__file__, 'copy_slice_to_3d_x.cl', 'copy_slice_to_3d', [1, source.shape[0], source.shape[1]], parameters)
+        execute(__file__, '../clij-opencl-kernels/kernels/copy_slice_to_3d_x.cl', 'copy_slice_to_3d', [1, source.shape[0], source.shape[1]], parameters)
     else:
-        execute(__file__, 'copy_slice_from_3d_x.cl', 'copy_slice_from_3d', destination.shape, parameters)
+        execute(__file__, '../clij-opencl-kernels/kernels/copy_slice_from_3d_x.cl', 'copy_slice_from_3d', destination.shape, parameters)
 
     return destination

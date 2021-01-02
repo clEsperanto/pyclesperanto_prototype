@@ -29,7 +29,7 @@ def average_distance_of_touching_neighbors(distance_matrix : Image, touch_matrix
         "dst_average_distance_list": average_distancelist_destination
     }
 
-    execute(__file__, 'average_distance_of_touching_neighbors_x.cl',
+    execute(__file__, '../clij-opencl-kernels/kernels/average_distance_of_touching_neighbors_x.cl',
             'average_distance_of_touching_neighbors', average_distancelist_destination.shape,
             parameters)
 

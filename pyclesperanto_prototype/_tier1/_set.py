@@ -29,5 +29,5 @@ def set(source : Image, scalar : float = 0):
         "value":float(scalar)
     }
 
-    execute(__file__, 'set_' + str(len(source.shape)) + 'd_x.cl', 'set_' + str(len(source.shape)) + 'd', source.shape, parameters);
+    execute(__file__, '../clij-opencl-kernels/kernels/set_' + str(len(source.shape)) + 'd_x.cl', 'set_' + str(len(source.shape)) + 'd', source.shape, parameters);
     return source

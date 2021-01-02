@@ -51,6 +51,6 @@ def label_spots(input_spots : Image, labelled_spots_destination : Image = None):
         "spotCountPerXY": spot_count_per_xy
     }
 
-    execute(__file__, 'label_spots_in_x.cl', 'label_spots_in_x', dims, parameters)
+    execute(__file__, '../clij-opencl-kernels/kernels/label_spots_in_x.cl', 'label_spots_in_x', dims, parameters)
 
     return labelled_spots_destination

@@ -43,5 +43,5 @@ def write_values_to_positions(positions_and_values : Image, destination : Image 
         "src":positions_and_values
     }
 
-    execute(__file__, 'write_values_to_positions_' + str(len(destination.shape)) + 'd_x.cl', 'write_values_to_positions_' + str(len(destination.shape)) + 'd', positions_and_values.shape, parameters)
+    execute(__file__, '../clij-opencl-kernels/kernels/write_values_to_positions_' + str(len(destination.shape)) + 'd_x.cl', 'write_values_to_positions_' + str(len(destination.shape)) + 'd', positions_and_values.shape, parameters)
     return destination
