@@ -27,6 +27,17 @@ def test_centroids_of_labels():
 
     assert (np.array_equal(a, b))
 
+    result = cle.centroids_of_labels(labels, use_gpu=True)
+
+    a = cle.pull_zyx(result)
+    b = cle.pull_zyx(reference)
+
+    print("-----------------")
+    print(a)
+    print(b)
+
+    assert (np.allclose(a, b, 0.0001))
+
 
 def test_centroids_of_labels_3d():
 
@@ -60,6 +71,17 @@ def test_centroids_of_labels_3d():
 
     assert (np.array_equal(a, b))
 
+
+    result = cle.centroids_of_labels(labels, use_gpu=True)
+
+    a = cle.pull_zyx(result)
+    b = cle.pull_zyx(reference)
+
+    print("-----------------")
+    print(a)
+    print(b)
+
+    assert (np.allclose(a, b, 0.0001))
 
 
 
