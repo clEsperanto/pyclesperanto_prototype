@@ -10,7 +10,7 @@ def sum_reduction_x(src : Image, dst : Image = None, blocksize : int = 256):
     given the following image and block size 4:
     [0, 1, 1, 0, 1, 0, 1, 1]
     would lead to an image
-    [3, 2]
+    [2, 3]
 
     Parameters
     ----------
