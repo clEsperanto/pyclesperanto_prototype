@@ -41,5 +41,5 @@ def dilate_box(source : Image, destination : Image = None):
         "dst":destination
     }
 
-    execute(__file__, 'dilate_box_' + str(len(destination.shape)) + 'd_x.cl', 'dilate_box_' + str(len(destination.shape)) + 'd', destination.shape, parameters)
+    execute(__file__, '../clij-opencl-kernels/kernels/dilate_box_' + str(len(destination.shape)) + 'd_x.cl', 'dilate_box_' + str(len(destination.shape)) + 'd', destination.shape, parameters)
     return destination

@@ -40,6 +40,6 @@ def multiply_images(factor1 : Image, factor2 : Image, destination : Image = None
         "dst": destination
     }
 
-    execute(__file__, 'multiply_images_' + str(len(destination.shape)) + 'd_x.cl', 'multiply_images_' + str(len(destination.shape)) + 'd', destination.shape, parameters)
+    execute(__file__, '../clij-opencl-kernels/kernels/multiply_images_' + str(len(destination.shape)) + 'd_x.cl', 'multiply_images_' + str(len(destination.shape)) + 'd', destination.shape, parameters)
 
     return destination

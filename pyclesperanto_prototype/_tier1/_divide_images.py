@@ -35,5 +35,5 @@ def divide_images(divident : Image, divisor : Image, destination : Image = None)
         "dst":destination
     }
 
-    execute(__file__, 'divide_images_' + str(len(destination.shape)) + 'd_x.cl', 'divide_images_' + str(len(destination.shape)) + 'd', destination.shape, parameters)
+    execute(__file__, '../clij-opencl-kernels/kernels/divide_images_' + str(len(destination.shape)) + 'd_x.cl', 'divide_images_' + str(len(destination.shape)) + 'd', destination.shape, parameters)
     return destination

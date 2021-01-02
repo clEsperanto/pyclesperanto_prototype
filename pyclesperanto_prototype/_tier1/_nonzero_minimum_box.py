@@ -35,6 +35,6 @@ def nonzero_minimum_box (input, flag_dst, destination):
         "src":input,
     }
 
-    execute(__file__, 'nonzero_minimum_box_' + str(len(destination.shape)) + 'd_x.cl', 'nonzero_minimum_box_' + str(len(destination.shape)) + 'd', destination.shape, parameters)
+    execute(__file__, '../clij-opencl-kernels/kernels/nonzero_minimum_box_' + str(len(destination.shape)) + 'd_x.cl', 'nonzero_minimum_box_' + str(len(destination.shape)) + 'd', destination.shape, parameters)
 
     return [flag_dst, destination]

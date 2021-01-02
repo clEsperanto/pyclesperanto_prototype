@@ -23,6 +23,6 @@ def euclidean_distance_from_label_centroid_map(labels:Image, centroids_pointlist
         "pointlist": centroids_pointlist
     }
 
-    execute(__file__, 'euclidean_distance_from_label_centroid_map_x.cl', 'euclidean_distance_from_label_centroid_map', distance_map_destination.shape, parameters)
+    execute(__file__, '../clij-opencl-kernels/kernels/euclidean_distance_from_label_centroid_map_x.cl', 'euclidean_distance_from_label_centroid_map', distance_map_destination.shape, parameters)
     return distance_map_destination
 

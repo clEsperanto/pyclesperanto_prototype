@@ -40,5 +40,5 @@ def flip(source : Image, destination : Image = None, flip_x : bool = True, flip_
     if (len(destination.shape) == 3):
         parameters.update({"flipz": int(1 if flip_z else 0)});
 
-    execute(__file__, 'flip_' + str(len(destination.shape)) + 'd_x.cl', 'flip_' + str(len(destination.shape)) + 'd', destination.shape, parameters)
+    execute(__file__, '../clij-opencl-kernels/kernels/flip_' + str(len(destination.shape)) + 'd_x.cl', 'flip_' + str(len(destination.shape)) + 'd', destination.shape, parameters)
     return destination

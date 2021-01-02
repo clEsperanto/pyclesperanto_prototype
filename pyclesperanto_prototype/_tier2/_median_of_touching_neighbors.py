@@ -39,6 +39,6 @@ def median_of_touching_neighbors(values : Image, touch_matrix : Image, median_va
     }
 
     # todo: correct kernel function name to fulfill naming conventions
-    execute(__file__, 'median_of_touching_neighbors_x.cl', 'median_value_of_touching_neighbors', median_values_destination.shape, parameters)
+    execute(__file__, '../clij-opencl-kernels/kernels/median_of_touching_neighbors_x.cl', 'median_value_of_touching_neighbors', median_values_destination.shape, parameters)
 
     return median_values_destination

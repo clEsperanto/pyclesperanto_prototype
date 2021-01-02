@@ -37,5 +37,5 @@ def erode_sphere(source : Image, destination : Image = None):
         "dst":destination
     }
 
-    execute(__file__, 'erode_sphere_' + str(len(destination.shape)) + 'd_x.cl', 'erode_sphere_' + str(len(destination.shape)) + 'd', destination.shape, parameters)
+    execute(__file__, '../clij-opencl-kernels/kernels/erode_sphere_' + str(len(destination.shape)) + 'd_x.cl', 'erode_sphere_' + str(len(destination.shape)) + 'd', destination.shape, parameters)
     return destination

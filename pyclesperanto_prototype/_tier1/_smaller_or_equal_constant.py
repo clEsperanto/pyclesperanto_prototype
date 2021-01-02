@@ -36,5 +36,5 @@ def smaller_or_equal_constant(source : Image, destination : Image = None, consta
         "dst":destination
     }
 
-    execute(__file__, 'smaller_or_equal_constant_' + str(len(destination.shape)) + 'd_x.cl', 'smaller_or_equal_constant_' + str(len(destination.shape)) + 'd', destination.shape, parameters)
+    execute(__file__, '../clij-opencl-kernels/kernels/smaller_or_equal_constant_' + str(len(destination.shape)) + 'd_x.cl', 'smaller_or_equal_constant_' + str(len(destination.shape)) + 'd', destination.shape, parameters)
     return destination

@@ -55,5 +55,5 @@ def draw_box(destination: Image, x: int = 0, y: int = 0, z: int = 0, width: int 
             "value": float(value)
         }
 
-    execute(__file__, 'draw_box_' + str(len(destination.shape)) + 'd_x.cl', 'draw_box_' + str(len(destination.shape)) + 'd', destination.shape, parameters)
+    execute(__file__, '../clij-opencl-kernels/kernels/draw_box_' + str(len(destination.shape)) + 'd_x.cl', 'draw_box_' + str(len(destination.shape)) + 'd', destination.shape, parameters)
     return destination

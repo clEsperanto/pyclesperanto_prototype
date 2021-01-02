@@ -33,5 +33,5 @@ def minimum_x_projection(source : Image, destination_min : Image = None):
         "src":source,
     }
 
-    execute(__file__, 'minimum_x_projection_x.cl', 'minimum_x_projection', destination_min.shape, parameters)
+    execute(__file__, '../clij-opencl-kernels/kernels/minimum_x_projection_x.cl', 'minimum_x_projection', destination_min.shape, parameters)
     return destination_min

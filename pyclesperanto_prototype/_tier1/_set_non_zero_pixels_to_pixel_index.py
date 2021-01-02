@@ -15,5 +15,5 @@ def set_non_zero_pixels_to_pixel_index(input : Image, output : Image, offset : f
         "offset":int(offset)
     }
 
-    execute(__file__, 'set_nonzero_pixels_to_pixelindex_x.cl', 'set_nonzero_pixels_to_pixelindex', output.shape, parameters);
+    execute(__file__, '../clij-opencl-kernels/kernels/set_nonzero_pixels_to_pixelindex_x.cl', 'set_nonzero_pixels_to_pixelindex', output.shape, parameters);
     return output

@@ -39,6 +39,6 @@ def generate_touch_matrix(label_map :Image, touch_matrix_destination :Image = No
         "src_label_map": label_map
     }
 
-    execute(__file__, 'generate_touch_matrix_' + str(len(label_map.shape)) + 'd_x.cl', 'generate_touch_matrix_' + str(len(label_map.shape)) + 'd', label_map.shape, parameters)
+    execute(__file__, '../clij-opencl-kernels/kernels/generate_touch_matrix_' + str(len(label_map.shape)) + 'd_x.cl', 'generate_touch_matrix_' + str(len(label_map.shape)) + 'd', label_map.shape, parameters)
 
     return touch_matrix_destination

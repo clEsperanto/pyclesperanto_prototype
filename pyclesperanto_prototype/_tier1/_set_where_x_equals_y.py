@@ -27,6 +27,6 @@ def set_where_x_equals_y(source : Image, value : float = 0):
         "value":float(value)
     }
 
-    execute(__file__, 'set_where_x_equals_y_' + str(len(source.shape)) + 'd_x.cl', 'set_where_x_equals_y_' + str(len(source.shape)) + 'd', source.shape, parameters)
+    execute(__file__, '../clij-opencl-kernels/kernels/set_where_x_equals_y_' + str(len(source.shape)) + 'd_x.cl', 'set_where_x_equals_y_' + str(len(source.shape)) + 'd', source.shape, parameters)
     return source
  

@@ -35,5 +35,5 @@ def smaller(source1 : Image, source2 : Image, destination : Image = None):
         "dst":destination
     }
 
-    execute(__file__, 'smaller_' + str(len(destination.shape)) + 'd_x.cl', 'smaller_' + str(len(destination.shape)) + 'd', destination.shape, parameters)
+    execute(__file__, '../clij-opencl-kernels/kernels/smaller_' + str(len(destination.shape)) + 'd_x.cl', 'smaller_' + str(len(destination.shape)) + 'd', destination.shape, parameters)
     return destination

@@ -35,5 +35,5 @@ def smaller_or_equal(source1 : Image, source2 : Image, destination : Image = Non
         "dst":destination
     }
 
-    execute(__file__, 'smaller_or_equal_' + str(len(destination.shape)) + 'd_x.cl', 'smaller_or_equal_' + str(len(destination.shape)) + 'd', destination.shape, parameters)
+    execute(__file__, '../clij-opencl-kernels/kernels/smaller_or_equal_' + str(len(destination.shape)) + 'd_x.cl', 'smaller_or_equal_' + str(len(destination.shape)) + 'd', destination.shape, parameters)
     return destination

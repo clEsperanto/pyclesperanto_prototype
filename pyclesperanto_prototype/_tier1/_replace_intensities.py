@@ -42,5 +42,5 @@ def replace_intensities(input : Image, new_values_vector : Image, destination : 
         "map": new_values_vector
     }
 
-    execute(__file__, 'replace_intensities_x.cl', 'replace_intensities', destination.shape, parameters)
+    execute(__file__, '../clij-opencl-kernels/kernels/replace_intensities_x.cl', 'replace_intensities', destination.shape, parameters)
     return destination

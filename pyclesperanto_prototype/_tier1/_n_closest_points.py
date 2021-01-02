@@ -36,6 +36,6 @@ def n_closest_points(distance_matrix : Image, indexlist_destination : Image = No
     }
 
     # todo: rename cl-file kernel to fulfill naming conventions
-    execute(__file__, "n_shortest_points_x.cl", "find_n_closest_points", distance_matrix.shape, parameters)
+    execute(__file__, "../clij-opencl-kernels/kernels/n_shortest_points_x.cl", "find_n_closest_points", distance_matrix.shape, parameters)
 
     return indexlist_destination

@@ -41,7 +41,7 @@ def mean_box(source : Image, destination : Image = None, radius_x : float = 1, r
         source,
         destination,
         __file__,
-        'mean_separable_' + str(len(destination.shape)) + 'd_x.cl',
+        '../clij-opencl-kernels/kernels/mean_separable_' + str(len(destination.shape)) + 'd_x.cl',
         'mean_separable_' + str(len(destination.shape)) + 'd',
         kernel_size_x,
         kernel_size_y,

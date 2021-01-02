@@ -32,5 +32,5 @@ def undefined_to_zero(source : Image, destination : Image = None):
         "src":source
     }
 
-    execute(__file__, 'undefined_to_zero_x.cl', 'undefined_to_zero', destination.shape, parameters)
+    execute(__file__, '../clij-opencl-kernels/kernels/undefined_to_zero_x.cl', 'undefined_to_zero', destination.shape, parameters)
     return destination

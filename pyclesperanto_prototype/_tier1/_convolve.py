@@ -35,5 +35,5 @@ def convolve(source : Image, convolution_kernel : Image, destination : Image = N
         "dst":destination
     }
 
-    execute(__file__, 'convolve_' + str(len(destination.shape)) + 'd_x.cl', 'convolve_' + str(len(destination.shape)) + 'd', destination.shape, parameters)
+    execute(__file__, '../clij-opencl-kernels/kernels/convolve_' + str(len(destination.shape)) + 'd_x.cl', 'convolve_' + str(len(destination.shape)) + 'd', destination.shape, parameters)
     return destination

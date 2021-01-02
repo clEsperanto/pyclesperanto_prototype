@@ -26,7 +26,7 @@ def count_touching_neighbors(touch_matrix: Image, touching_neighbors_count_desti
         "dst_count_list": touching_neighbors_count_destination
     }
 
-    execute(__file__, 'count_touching_neighbors_x.cl',
+    execute(__file__, '../clij-opencl-kernels/kernels/count_touching_neighbors_x.cl',
             'count_touching_neighbors', touching_neighbors_count_destination.shape,
             parameters)
 

@@ -33,5 +33,5 @@ def sum_x_projection(source : Image, destination : Image = None):
         "src":source,
     }
 
-    execute(__file__, 'sum_x_projection_x.cl', 'sum_x_projection', destination.shape, parameters)
+    execute(__file__, '../clij-opencl-kernels/kernels/sum_x_projection_x.cl', 'sum_x_projection', destination.shape, parameters)
     return destination

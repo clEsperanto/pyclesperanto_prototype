@@ -36,5 +36,5 @@ def minimum_image_and_scalar(source : Image, destination : Image = None, scalar 
         "valueB":float(scalar)
     }
 
-    execute(__file__, 'minimum_image_and_scalar_' + str(len(destination.shape)) + 'd_x.cl', 'minimum_image_and_scalar_' + str(len(destination.shape)) + 'd', destination.shape, parameters)
+    execute(__file__, '../clij-opencl-kernels/kernels/minimum_image_and_scalar_' + str(len(destination.shape)) + 'd_x.cl', 'minimum_image_and_scalar_' + str(len(destination.shape)) + 'd', destination.shape, parameters)
     return destination

@@ -35,5 +35,5 @@ def replace_intensity(input : Image, destination : Image = None, value_to_replac
         "out":float(value_replacement)
     }
 
-    execute(__file__, 'replace_intensity_x.cl', 'replace_intensity', destination.shape, parameters)
+    execute(__file__, '../clij-opencl-kernels/kernels/replace_intensity_x.cl', 'replace_intensity', destination.shape, parameters)
     return destination

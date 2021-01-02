@@ -36,5 +36,5 @@ def gradient_x(source : Image, destination : Image = None):
         "src":source
     }
 
-    execute(__file__, 'gradient_x_' + str(len(destination.shape)) + 'd_x.cl', 'gradient_x_' + str(len(destination.shape)) + 'd', destination.shape, parameters)
+    execute(__file__, '../clij-opencl-kernels/kernels/gradient_x_' + str(len(destination.shape)) + 'd_x.cl', 'gradient_x_' + str(len(destination.shape)) + 'd', destination.shape, parameters)
     return destination

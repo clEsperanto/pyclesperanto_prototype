@@ -68,7 +68,7 @@ def resample(source : Image, destination : Image = None, factor_x : float = 1, f
         "mat": gpu_transform_matrix
     }
 
-    execute(__file__, 'affine_transform_' + str(len(destination.shape)) + 'd' + kernel_suffix + '_x.cl',
+    execute(__file__, '../clij-opencl-kernels/kernels/affine_transform_' + str(len(destination.shape)) + 'd' + kernel_suffix + '_x.cl',
             'affine_transform_' + str(len(destination.shape)) + 'd' + kernel_suffix, destination.shape, parameters)
 
     return destination

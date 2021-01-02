@@ -33,5 +33,5 @@ def power_images(input : Image, exponent : Image, destination : Image = None):
         "src2":exponent
     }
 
-    execute(__file__, 'power_images_' + str(len(destination.shape)) + 'd_x.cl', 'power_images_' + str(len(destination.shape)) + 'd', destination.shape, parameters)
+    execute(__file__, '../clij-opencl-kernels/kernels/power_images_' + str(len(destination.shape)) + 'd_x.cl', 'power_images_' + str(len(destination.shape)) + 'd', destination.shape, parameters)
     return destination

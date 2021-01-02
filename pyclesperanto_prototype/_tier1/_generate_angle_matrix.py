@@ -56,6 +56,6 @@ def generate_angle_matrix(coordinate_list1 :Image, coordinate_list2 :Image, angl
         "src_point_list2": coordinate_list2
     }
 
-    execute(__file__, 'generate_angle_matrix_2d_x.cl', 'generate_angle_matrix', angle_matrix_destination.shape, parameters)
+    execute(__file__, '../clij-opencl-kernels/kernels/generate_angle_matrix_2d_x.cl', 'generate_angle_matrix', angle_matrix_destination.shape, parameters)
 
     return angle_matrix_destination

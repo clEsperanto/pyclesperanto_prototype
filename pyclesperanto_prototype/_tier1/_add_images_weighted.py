@@ -49,6 +49,6 @@ def add_images_weighted(summand1:Image, summand2:Image, destination :Image = Non
         "factor1":float(factor2)
     }
 
-    execute(__file__, 'add_images_weighted_' + str(len(destination.shape)) + 'd_x.cl', 'add_images_weighted_' + str(len(destination.shape)) + 'd', destination.shape, parameters)
+    execute(__file__, '../clij-opencl-kernels/kernels/add_images_weighted_' + str(len(destination.shape)) + 'd_x.cl', 'add_images_weighted_' + str(len(destination.shape)) + 'd', destination.shape, parameters)
 
     return destination

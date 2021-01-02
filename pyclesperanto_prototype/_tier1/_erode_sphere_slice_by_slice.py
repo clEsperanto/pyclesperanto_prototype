@@ -39,5 +39,5 @@ def erode_sphere_slice_by_slice(source : Image, destination : Image = None):
         "dst":destination
     }
 
-    execute(__file__, 'erode_sphere_slice_by_slice_' + str(len(destination.shape)) + 'd_x.cl', 'erode_sphere_slice_by_slice_' + str(len(destination.shape)) + 'd', destination.shape, parameters)
+    execute(__file__, '../clij-opencl-kernels/kernels/erode_sphere_slice_by_slice_' + str(len(destination.shape)) + 'd_x.cl', 'erode_sphere_slice_by_slice_' + str(len(destination.shape)) + 'd', destination.shape, parameters)
     return destination

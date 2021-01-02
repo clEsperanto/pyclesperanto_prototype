@@ -30,6 +30,6 @@ def multiply_matrix(matrix1, matrix2, matrix_destination):
         "src1":matrix1,
         "src2":matrix2
     };
-    execute(__file__, "multiply_matrix_x.cl", "multiply_matrix", matrix_destination.shape, parameters);
+    execute(__file__, "../clij-opencl-kernels/kernels/multiply_matrix_x.cl", "multiply_matrix", matrix_destination.shape, parameters);
 
 

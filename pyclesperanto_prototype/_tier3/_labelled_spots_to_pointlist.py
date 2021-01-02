@@ -34,6 +34,6 @@ def labelled_spots_to_pointlist(input_labelled_spots:Image, destination_pointlis
     }
 
     # todo: make naming conventions fit
-    execute(__file__, 'labelled_spots_to_point_list_x.cl', 'labelled_spots_to_point_list', input_labelled_spots.shape, parameters)
+    execute(__file__, '../clij-opencl-kernels/kernels/labelled_spots_to_point_list_x.cl', 'labelled_spots_to_point_list', input_labelled_spots.shape, parameters)
 
     return destination_pointlist

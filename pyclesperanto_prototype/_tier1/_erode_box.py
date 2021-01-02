@@ -41,5 +41,5 @@ def erode_box(source : Image, destination : Image = None):
         "dst":destination
     }
 
-    execute(__file__, 'erode_box_' + str(len(destination.shape)) + 'd_x.cl', 'erode_box_' + str(len(destination.shape)) + 'd', destination.shape, parameters)
+    execute(__file__, '../clij-opencl-kernels/kernels/erode_box_' + str(len(destination.shape)) + 'd_x.cl', 'erode_box_' + str(len(destination.shape)) + 'd', destination.shape, parameters)
     return destination

@@ -33,5 +33,5 @@ def minimum_z_projection(source : Image, destination_min : Image = None):
         "src":source,
     };
 
-    execute(__file__, 'minimum_z_projection_x.cl', 'minimum_z_projection', destination_min.shape, parameters);
+    execute(__file__, '../clij-opencl-kernels/kernels/minimum_z_projection_x.cl', 'minimum_z_projection', destination_min.shape, parameters);
     return destination_min

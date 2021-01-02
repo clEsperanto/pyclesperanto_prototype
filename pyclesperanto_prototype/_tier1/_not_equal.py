@@ -40,5 +40,5 @@ def not_equal(source1 : Image, source2 : Image, destination : Image = None):
         "dst":destination
     }
 
-    execute(__file__, 'not_equal_' + str(len(destination.shape)) + 'd_x.cl', 'not_equal_' + str(len(destination.shape)) + 'd', destination.shape, parameters)
+    execute(__file__, '../clij-opencl-kernels/kernels/not_equal_' + str(len(destination.shape)) + 'd_x.cl', 'not_equal_' + str(len(destination.shape)) + 'd', destination.shape, parameters)
     return destination

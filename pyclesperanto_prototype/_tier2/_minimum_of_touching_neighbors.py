@@ -43,6 +43,6 @@ def minimum_of_touching_neighbors(values : Image, touch_matrix : Image, minimum_
     }
 
     # todo: correct kernel function name to fulfill naming conventions
-    execute(__file__, 'minimum_of_touching_neighbors_x.cl', 'minimum_value_of_touching_neighbors', minimum_values_destination.shape, parameters)
+    execute(__file__, '../clij-opencl-kernels/kernels/minimum_of_touching_neighbors_x.cl', 'minimum_value_of_touching_neighbors', minimum_values_destination.shape, parameters)
 
     return minimum_values_destination

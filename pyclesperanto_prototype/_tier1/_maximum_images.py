@@ -36,5 +36,5 @@ def maximum_images(source1 : Image, source2 : Image, destination : Image = None)
         "dst": destination
     }
 
-    execute(__file__, 'maximum_images_' + str(len(destination.shape)) + 'd_x.cl', 'maximum_images_' + str(len(destination.shape)) + 'd', destination.shape, parameters)
+    execute(__file__, '../clij-opencl-kernels/kernels/maximum_images_' + str(len(destination.shape)) + 'd_x.cl', 'maximum_images_' + str(len(destination.shape)) + 'd', destination.shape, parameters)
     return destination

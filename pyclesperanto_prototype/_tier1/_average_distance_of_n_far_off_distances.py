@@ -26,7 +26,7 @@ def average_distance_of_n_far_off_distances(distance_matrix : Image, distance_ve
     }
 
     # todo: rename kernel function to fulfill naming conventions
-    execute(__file__, 'average_distance_of_n_far_off_distances_x.cl',
+    execute(__file__, '../clij-opencl-kernels/kernels/average_distance_of_n_far_off_distances_x.cl',
             'average_distance_of_n_far_off_points', distance_vector_destination.shape,
             parameters)
 

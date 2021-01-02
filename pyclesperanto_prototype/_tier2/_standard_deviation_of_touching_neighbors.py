@@ -39,6 +39,6 @@ def standard_deviation_of_touching_neighbors(values : Image, touch_matrix : Imag
     }
 
     # todo: correct kernel function name to fulfill naming conventions
-    execute(__file__, 'standard_deviation_of_touching_neighbors_x.cl', 'standard_deviation_value_of_touching_neighbors', standard_deviation_values_destination.shape, parameters)
+    execute(__file__, '../clij-opencl-kernels/kernels/standard_deviation_of_touching_neighbors_x.cl', 'standard_deviation_value_of_touching_neighbors', standard_deviation_values_destination.shape, parameters)
 
     return standard_deviation_values_destination

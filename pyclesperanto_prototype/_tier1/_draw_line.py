@@ -62,5 +62,5 @@ def draw_line(destination : Image, x1 : float = 0, y1 : float = 0, z1 : float = 
     # todo: rename cl file (missing _ between drawn and line)
     # todo: rname kernel name (upper case D should be lower case d)
 
-    execute(__file__, 'drawline_' + str(len(destination.shape)) + 'd_x.cl', 'draw_line_' + str(len(destination.shape)) + 'D', destination.shape, parameters)
+    execute(__file__, '../clij-opencl-kernels/kernels/drawline_' + str(len(destination.shape)) + 'd_x.cl', 'draw_line_' + str(len(destination.shape)) + 'D', destination.shape, parameters)
     return destination

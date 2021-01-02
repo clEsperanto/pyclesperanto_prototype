@@ -11,5 +11,5 @@ def sum_reduction_x(src, dst, blocksize):
         "blocksize": int(blocksize)
     }
 
-    execute(__file__, 'sum_reduction_x.cl', 'sum_reduction_x', dst.shape, parameters)
+    execute(__file__, '../clij-opencl-kernels/kernels/sum_reduction_x.cl', 'sum_reduction_x', dst.shape, parameters)
 

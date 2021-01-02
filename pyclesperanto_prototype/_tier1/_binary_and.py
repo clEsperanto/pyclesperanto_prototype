@@ -43,5 +43,5 @@ def binary_and(operand1 : Image, operand2 : Image, destination : Image = None):
         "dst":destination
     }
 
-    execute(__file__, 'binary_and_' + str(len(destination.shape)) + 'd_x.cl', 'binary_and_' + str(len(destination.shape)) + 'd', destination.shape, parameters)
+    execute(__file__, '../clij-opencl-kernels/kernels/binary_and_' + str(len(destination.shape)) + 'd_x.cl', 'binary_and_' + str(len(destination.shape)) + 'd', destination.shape, parameters)
     return destination

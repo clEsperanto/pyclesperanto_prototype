@@ -33,5 +33,5 @@ def standard_deviation_z_projection(source : Image, destination : Image = None):
         "src":source,
     }
 
-    execute(__file__, 'standard_deviation_z_projection_x.cl', 'standard_deviation_z_projection', destination.shape, parameters)
+    execute(__file__, '../clij-opencl-kernels/kernels/standard_deviation_z_projection_x.cl', 'standard_deviation_z_projection', destination.shape, parameters)
     return destination

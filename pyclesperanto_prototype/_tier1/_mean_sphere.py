@@ -46,4 +46,4 @@ def mean_sphere(source : Image, destination : Image = None, radius_x : float = 1
 
     if (len(destination.shape) == 3):
         parameters.update({"Nz":int(kernel_size_z)});
-    execute(__file__, 'mean_sphere_' + str(len(destination.shape)) + 'd_x.cl', 'mean_sphere_' + str(len(destination.shape)) + 'd', destination.shape, parameters);
+    execute(__file__, '../clij-opencl-kernels/kernels/mean_sphere_' + str(len(destination.shape)) + 'd_x.cl', 'mean_sphere_' + str(len(destination.shape)) + 'd', destination.shape, parameters);
