@@ -6,7 +6,7 @@ from .._tier0 import Image
 from .._tier0 import push
 
 @plugin_function(output_creator=create_none)
-def centroids_of_labels(source:Image, pointlist_destination :Image = None, include_background :bool = False, regionprops : list = None, use_gpu : bool = False):
+def centroids_of_labels(labels:Image, pointlist_destination :Image = None, include_background :bool = False, regionprops : list = None, use_gpu : bool = True):
     """Determines the centroids of all labels in a label image or image stack. 
     
     It writes the resulting  coordinates in a pointlist image. Depending on 
@@ -15,10 +15,18 @@ def centroids_of_labels(source:Image, pointlist_destination :Image = None, inclu
     
     Parameters
     ----------
-    source : Image
+    labels : Image
+        input label image
     pointlist_destination : Image
+        target image of size d*n for a d-dimensional label image with n labels. In case the background should be
+        determined as well, this image needs to be one pixel wider
     include_background : bool
+        measure the centroid of the background as well
     regionprops : list of skimage.measure._regionprops.RegionProperties
+        in case regionprops of the label image were determined earlier, one can hand them over to prevent re-generation
+    use_gpu : bool
+        in case the centroid determination can't handle a large number of labels, one can turn this flag of and let
+        the centroid determination be done by scikit-image regionprops
     
     Returns
     -------
@@ -29,9 +37,7 @@ def centroids_of_labels(source:Image, pointlist_destination :Image = None, inclu
     .. [1] https://clij.github.io/clij2-docs/reference_centroidsOfLabels
     """
     if use_gpu:
-        return _centroids_of_labels_gpu(source, pointlist_destination, include_background)
-
-
+        return _centroids_of_labels_gpu(labels, pointlist_destination, include_background)
 
     from .._tier9 import statistics_of_labelled_pixels
     from .._tier9 import statistics_of_background_and_labelled_pixels
@@ -40,9 +46,9 @@ def centroids_of_labels(source:Image, pointlist_destination :Image = None, inclu
 
     if regionprops is None:
         if include_background:
-            regionprops = statistics_of_background_and_labelled_pixels(input=None, labelmap=source, measure_shape=False)
+            regionprops = statistics_of_background_and_labelled_pixels(input=None, labelmap=labels, measure_shape=False)
         else:
-            regionprops = statistics_of_labelled_pixels(input=None, labelmap=source)
+            regionprops = statistics_of_labelled_pixels(input=None, labelmap=labels)
 
     if hasattr(regionprops[0], 'original_label'):
         labels = [r.original_label for r in regionprops]
@@ -56,7 +62,7 @@ def centroids_of_labels(source:Image, pointlist_destination :Image = None, inclu
     else:
         num_rows = max_label
 
-    num_columns = len(source.shape)
+    num_columns = len(labels.shape)
 
     import numpy as np
     matrix = np.zeros([num_rows, num_columns])

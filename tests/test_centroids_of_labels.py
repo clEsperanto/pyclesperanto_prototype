@@ -17,7 +17,7 @@ def test_centroids_of_labels():
     ]
     ))
 
-    result = cle.centroids_of_labels(labels)
+    result = cle.centroids_of_labels(labels, use_gpu=False)
 
     a = cle.pull_zyx(result)
     b = cle.pull_zyx(reference)
@@ -61,7 +61,7 @@ def test_centroids_of_labels_3d():
     ]
     ))
 
-    result = cle.centroids_of_labels(labels)
+    result = cle.centroids_of_labels(labels, use_gpu=False)
 
     a = cle.pull_zyx(result)
     b = cle.pull_zyx(reference)
