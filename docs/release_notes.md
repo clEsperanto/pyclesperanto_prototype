@@ -1,6 +1,7 @@
 # upcoming release
 
 ## New features
+* `centroids_of_labels` was GPU-accelerated. The old functionality is still available when parameter `use_gpu=False` is set.
 * `statistics_of_labelled_pixels` and `statistics_of_background_and_labelled_pixels` contain the parameter `standard_deviation_intensity` now.
 
 ### New operations
@@ -16,7 +17,7 @@
 * `imshow` in 3D caused an error
 
 ### Miscellaneous
-* `flag_existing_intensities` has been renamed to `flag_existing_labels`. And alias to the old method was created to keep backwards-compatibility
+* `flag_existing_intensities` has been renamed to `flag_existing_labels`. An alias to the old method was created to keep backwards-compatibility
 
 # 0.6.0 - Christmas 2020
 
