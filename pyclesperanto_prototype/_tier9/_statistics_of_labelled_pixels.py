@@ -7,7 +7,7 @@ from .._tier0 import create_none
 from .._tier0 import plugin_function
 
 @plugin_function(output_creator=create_none)
-def statistics_of_labelled_pixels(input : Image = None, labelmap : Image = None, measure_shape : bool = True, extra_properties = [], use_gpu : bool = False):
+def statistics_of_labelled_pixels(input : Image = None, labelmap : Image = None, measure_shape : bool = True, extra_properties = [], use_gpu : bool = True):
     """Determines bounding box, area (in pixels/voxels), min, max, mean and standard deviation
     intensity of labelled objects in a label map and corresponding pixels in the
     original image. 
