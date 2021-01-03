@@ -23,6 +23,8 @@ def push_regionprops(props : Union[dict, RegionProperties], first_row_index : in
     from ._statistics_entry import STATISTICS_ENTRY
     num_columns = 36
 
+    zeros = np.zeros([len(props['original_label'])])
+
     if isinstance(props, dict):
         list = [
             # IDENTIFIER = 0
@@ -58,11 +60,11 @@ def push_regionprops(props : Union[dict, RegionProperties], first_row_index : in
             # PIXEL_COUNT = 15
             props['area'],
             # SUM_INTENSITY_TIMES_X = 16
-            props['sum_intensity_times_x'],
+            zeros, #props['sum_intensity_times_x'],
             # SUM_INTENSITY_TIMES_Y = 17
-            props['sum_intensity_times_y'],
+            zeros, #props['sum_intensity_times_y'],
             # SUM_INTENSITY_TIMES_Z = 18
-            props['sum_intensity_times_z'],
+            zeros, #props['sum_intensity_times_z'],
             # MASS_CENTER_X = 19
             props['mass_center_x'],
             # MASS_CENTER_Y = 20
@@ -70,11 +72,11 @@ def push_regionprops(props : Union[dict, RegionProperties], first_row_index : in
             # MASS_CENTER_Z = 21
             props['mass_center_z'],
             # SUM_X = 22
-            props['sum_x'],
+            zeros, #props['sum_x'],
             # SUM_Y = 23
-            props['sum_y'],
+            zeros, #props['sum_y'],
             # SUM_Z = 24
-            props['sum_z'],
+            zeros, #props['sum_z'],
             # CENTROID_X = 25
             props['centroid_x'],
             # CENTROID_Y = 26
@@ -82,13 +84,13 @@ def push_regionprops(props : Union[dict, RegionProperties], first_row_index : in
             # CENTROID_Z = 27
             props['centroid_z'],
             # SUM_DISTANCE_TO_MASS_CENTER = 28
-            props['sum_distance_to_mass_center'],
+            zeros, #props['sum_distance_to_mass_center'],
             # MEAN_DISTANCE_TO_MASS_CENTER = 29
-            props['mean_distance_to_mass_center'],
+            zeros, #props['mean_distance_to_mass_center'],
             # MAX_DISTANCE_TO_MASS_CENTER = 30
-            props['max_distance_to_mass_center'],
+            zeros, #props['max_distance_to_mass_center'],
             # MAX_MEAN_DISTANCE_TO_MASS_CENTER_RATIO = 31
-            props['mean_max_distance_to_mass_center_ratio'],
+            zeros, #props['mean_max_distance_to_mass_center_ratio'],
             # SUM_DISTANCE_TO_CENTROID = 32
             props['sum_distance_to_centroid'],
             # MEAN_DISTANCE_TO_CENTROID = 33
