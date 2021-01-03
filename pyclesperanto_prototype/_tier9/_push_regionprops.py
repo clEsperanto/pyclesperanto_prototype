@@ -40,11 +40,11 @@ def push_regionprops(props : Union[dict, RegionProperties], first_row_index : in
             # BOUNDING_BOX_END_Z = 6
             props['bbox_max_z'],
             # BOUNDING_BOX_WIDTH = 7
-            props['bbox_max_width'],
+            props['bbox_width'],
             # BOUNDING_BOX_HEIGHT = 8
-            props['bbox_max_depth'],
+            props['bbox_height'],
             # BOUNDING_BOX_DEPTH = 9
-            props['bbox_max_height'],
+            props['bbox_depth'],
             # MINIMUM_INTENSITY = 10
             props['min_intensity'],
             # MAXIMUM_INTENSITY = 11
@@ -99,7 +99,7 @@ def push_regionprops(props : Union[dict, RegionProperties], first_row_index : in
             props['mean_max_distance_to_centroid_ratio']
         ]
 
-        matrix = np.asarray(list)
+        matrix = np.asarray(list).T
     else:
         if hasattr(props[0], 'original_label'):
             labels = [r.original_label for r in props]

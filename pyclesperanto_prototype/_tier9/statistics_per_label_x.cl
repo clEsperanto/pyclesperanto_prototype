@@ -37,7 +37,7 @@ __kernel void statistics_per_label (
   for(int x = 0; x <= width; x++)
   {
     int label = (int)(READ_IMAGE(src_label,sampler,POS_src_label_INSTANCE(x,y,z,0)).x);
-    float value = READ_IMAGE(src_label,sampler,POS_src_image_INSTANCE(x,y,z,0)).x;
+    float value = READ_IMAGE(src_image,sampler,POS_src_image_INSTANCE(x,y,z,0)).x;
 
     if (x == width || (label != former_label && former_label >= 0)) {
 
@@ -112,19 +112,19 @@ __kernel void statistics_per_label (
         if (min_x > x) {
           min_x = x;
         }
-        if (max_x > x) {
+        if (max_x < x) {
           max_x = x;
         }
         if (min_y > y) {
           min_y = y;
         }
-        if (max_y > y) {
+        if (max_y < y) {
           max_y = y;
         }
         if (min_z > z) {
           min_z = z;
         }
-        if (max_z > z) {
+        if (max_z < z) {
           max_z = z;
         }
 

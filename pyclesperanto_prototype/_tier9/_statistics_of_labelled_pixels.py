@@ -103,9 +103,13 @@ def _statistics_of_labelled_pixels_gpu(intensity_image : Image = None, label_ima
         raise ValueError("Either intensity image or labels must be set")
 
     include_background: bool = False
+    if include_background:
+        target_x = 0
+    else:
+        target_x = 1
 
     from .._tier2 import maximum_of_all_pixels
-    num_labels = int(maximum_of_all_pixels(label_image)) + 1
+    num_labels = int(maximum_of_all_pixels(label_image)) + target_x
 
     width = label_image.shape[-1]
     height = label_image.shape[-2]
@@ -123,11 +127,13 @@ def _statistics_of_labelled_pixels_gpu(intensity_image : Image = None, label_ima
     from .._tier1 import sum_y_projection
     from .._tier1 import minimum_y_projection
     from .._tier1 import maximum_y_projection
+    from .._tier1 import mean_y_projection
     from .._tier1 import crop
     from .._tier1 import paste
     from .._tier1 import divide_images
     from .._tier1 import set_ramp_x
     from .._tier0 import pull_zyx
+    from .._tier1 import power
 
     region_props = {}
 
@@ -140,10 +146,8 @@ def _statistics_of_labelled_pixels_gpu(intensity_image : Image = None, label_ima
         label_image = create_like(intensity_image)
         set(label_image, 1) # all pixels belong to label 1
 
-    label_and_intensity_equal = False
     if intensity_image is None:
         intensity_image = label_image
-        label_and_intensity_equal = True
 
     parameters = {
         'dst': sum_per_label_image,
@@ -163,22 +167,21 @@ def _statistics_of_labelled_pixels_gpu(intensity_image : Image = None, label_ima
     min_per_label = minimum_y_projection(sum_per_label_image)
     max_per_label = maximum_y_projection(sum_per_label_image)
 
+    label_statistics_image = create([1, 8, num_labels])
+
     # print(sum_per_label)
 
     num_dimensions = len(label_image.shape)
 
     # IDENTIFIER = 0
-    region_props['label'] = range(0, num_labels)
-    region_props['original_label'] = range(0, num_labels)
+    region_props['label'] = range(target_x, num_labels)
+    region_props['original_label'] = range(target_x, num_labels)
 
-    if include_background:
-        target_x = 0
-    else:
-        target_x = 1
 
-    result_vector = create([1, num_labels])
-    sum_dim = create([1, num_labels])
-    avg_dim = create([1, num_labels])
+
+    result_vector = create([1, num_labels - target_x])
+    sum_dim = create([1, num_labels - target_x])
+    avg_dim = create([1, num_labels - target_x])
 
     #     BOUNDING_BOX_X = 1
     #     BOUNDING_BOX_Y = 2
@@ -189,18 +192,23 @@ def _statistics_of_labelled_pixels_gpu(intensity_image : Image = None, label_ima
     crop(min_per_label, result_vector, target_x, 10, 0)
     bbox_min_x = pull_zyx(result_vector)[0]
     region_props['bbox_min_x'] = bbox_min_x
+
     crop(min_per_label, result_vector, target_x, 12, 0)
     bbox_min_y = pull_zyx(result_vector)[0]
     region_props['bbox_min_y'] = bbox_min_y
+
     crop(min_per_label, result_vector, target_x, 14, 0)
     bbox_min_z = pull_zyx(result_vector)[0]
     region_props['bbox_min_z'] = bbox_min_z
+
     crop(max_per_label, result_vector, target_x, 11, 0)
     bbox_max_x = pull_zyx(result_vector)[0]
     region_props['bbox_max_x'] = bbox_max_x
+
     crop(max_per_label, result_vector, target_x, 13, 0)
     bbox_max_y = pull_zyx(result_vector)[0]
     region_props['bbox_max_y'] = bbox_max_y
+
     crop(max_per_label, result_vector, target_x, 15, 0)
     bbox_max_z = pull_zyx(result_vector)[0]
     region_props['bbox_max_z'] = bbox_max_z
@@ -221,9 +229,9 @@ def _statistics_of_labelled_pixels_gpu(intensity_image : Image = None, label_ima
             bbox_max_y - bbox_min_y + 1,
             bbox_max_x - bbox_min_x + 1,
         ]
-    region_props['bbox_max_width'] = bbox_max_x - bbox_min_x + 1
-    region_props['bbox_max_height'] = bbox_max_y - bbox_min_y + 1
-    region_props['bbox_max_depth'] = bbox_max_z - bbox_min_z + 1
+    region_props['bbox_width'] = bbox_max_x - bbox_min_x + 1
+    region_props['bbox_height'] = bbox_max_y - bbox_min_y + 1
+    region_props['bbox_depth'] = bbox_max_z - bbox_min_z + 1
 
     region_props['bbox'] = bbox
 
@@ -239,10 +247,15 @@ def _statistics_of_labelled_pixels_gpu(intensity_image : Image = None, label_ima
     #     PIXEL_COUNT = 15
     crop(sum_per_label, result_vector, target_x, 7, 0)
     region_props['sum_intensity'] = pull_zyx(result_vector)[0]
+
     crop(sum_per_label, sum_dim, target_x, 3, 0)
     region_props['area'] = pull_zyx(sum_dim)[0]
+    paste(sum_dim, label_statistics_image, target_x, 7, 0)
+
     divide_images(result_vector, sum_dim, avg_dim)
     region_props['mean_intensity'] = pull_zyx(avg_dim)[0]
+    paste(avg_dim, label_statistics_image, target_x, 6, 0)
+    print("mean_intens", avg_dim)
 
     #     SUM_INTENSITY_TIMES_X = 16
     #     SUM_INTENSITY_TIMES_Y = 17
@@ -251,8 +264,8 @@ def _statistics_of_labelled_pixels_gpu(intensity_image : Image = None, label_ima
     #     MASS_CENTER_Y = 20
     #     MASS_CENTER_Z = 21
     mass_centers = None
-    if measure_shape:
-        mass_centers = create([num_dimensions, num_labels])
+    if measure_shape:###
+        mass_centers = create([num_dimensions, num_labels])###
     dim_names = ['x', 'y', 'z']
     crop(sum_per_label, result_vector, target_x, 4 + 3, 0)
     for dim in range(0, num_dimensions):
@@ -260,8 +273,9 @@ def _statistics_of_labelled_pixels_gpu(intensity_image : Image = None, label_ima
         region_props['sum_intensity_times_' + dim_names[dim]] = pull_zyx(sum_dim)[0]
         divide_images(sum_dim, result_vector, avg_dim)
         region_props['mass_center_' + dim_names[dim]] = pull_zyx(avg_dim)[0]
-        if mass_centers is not None:
-            paste(avg_dim, mass_centers, target_x, dim, 0)
+        if mass_centers is not None: ###
+            paste(avg_dim, mass_centers, target_x, dim, 0) ###
+        paste(avg_dim, label_statistics_image, target_x, 3 + dim, 0)
 
     if len(intensity_image.shape) == 2:
         region_props['weighted_centroid'] = [
@@ -292,6 +306,7 @@ def _statistics_of_labelled_pixels_gpu(intensity_image : Image = None, label_ima
         region_props['centroid_' + dim_names[dim]] = pull_zyx(avg_dim)[0]
         if centroids is not None:
             paste(avg_dim, centroids, target_x, dim, 0)
+        paste(avg_dim, label_statistics_image, target_x, dim, 0)
 
     if len(intensity_image.shape) == 2:
         region_props['centroid'] = [
@@ -305,38 +320,72 @@ def _statistics_of_labelled_pixels_gpu(intensity_image : Image = None, label_ima
             region_props['centroid_x'],
         ]
 
-    if measure_shape:
+    # ================================================================
 
-        from ._euclidean_distance_from_label_centroid_map import euclidean_distance_from_label_centroid_map
-        distance_map = euclidean_distance_from_label_centroid_map(label_image, centroids)
+    label_statistics_stack = create([6, height, num_labels])
+    set(label_statistics_stack, 0)
+
+    print("stats")
+    print(label_statistics_image)
+
+    parameters = {
+        'dst': label_statistics_stack,
+        'src_statistics': label_statistics_image,
+        'src_label': label_image,
+        'src_image': intensity_image,
+        'sum_background': 1 if include_background else 0
+    }
+
+    for z in range(0, depth):
+        # print('z', z)
+        parameters['z'] = z
+
+        from .._tier0 import execute
+        execute(__file__, 'standard_deviation_per_label_x.cl', 'standard_deviation_per_label', dimensions, parameters)
+
+    sum_statistics = sum_y_projection(label_statistics_stack)
+    #mean_statistics = mean_y_projection(label_statistics_stack)
+    max_statistics = maximum_y_projection(label_statistics_stack)
+
+    # area
+    crop(sum_per_label, result_vector, target_x, 3, 0)
+
+    # distance to centroid
+    crop(sum_statistics, sum_dim, target_x, 0, 0)
+    region_props['sum_distance_to_centroid'] = pull_zyx(sum_dim)[0]
+    divide_images(sum_dim, result_vector, avg_dim)
+    region_props['mean_distance_to_centroid'] = pull_zyx(avg_dim)[0]
+
+    # distance to center of mass
+    crop(sum_statistics, sum_dim, target_x, 1, 0)
+    region_props['sum_distance_to_mass_center'] = pull_zyx(sum_dim)[0]
+    divide_images(sum_dim, result_vector, avg_dim)
+    region_props['mean_distance_to_mass_center'] = pull_zyx(avg_dim)[0]
+
+    # standard deviation intensity
+    crop(sum_statistics, sum_dim, target_x, 2, 0)
+    print("sum_dim", sum_dim)
+    # divide_images(sum_dim, result_vector, avg_dim)
+    power(sum_dim, result_vector, 0.5)
+    region_props['standard_deviation_intensity'] = pull_zyx(result_vector)[0]
+
+    crop(max_statistics, result_vector, target_x, 4, 0)
+    region_props['max_distance_to_centroid'] = pull_zyx(result_vector)[0]
+    crop(max_statistics, result_vector, target_x, 5, 0)
+    region_props['max_distance_to_mass_center'] = pull_zyx(result_vector)[0]
+
+    region_props['mean_max_distance_to_centroid_ratio'] = region_props['max_distance_to_centroid'] / region_props[
+        'mean_distance_to_centroid']
+    region_props['mean_max_distance_to_mass_center_ratio'] = region_props['max_distance_to_mass_center'] / region_props[
+        'mean_distance_to_mass_center']
 
 
-        distance_props = _statistics_of_labelled_pixels_gpu(distance_map, label_image, measure_shape=False)
-
-        region_props['mean_distance_to_centroid'] = distance_props['mean_intensity']
-        # print(str(region_prop.mean_distance_to_centroid))
-        region_props['max_distance_to_centroid'] = distance_props['max_intensity']
-        region_props['sum_distance_to_centroid'] = distance_props['mean_intensity'] * region_props['area']
-        region_props['mean_max_distance_to_centroid_ratio'] = region_props['max_distance_to_centroid'] / region_props['mean_distance_to_centroid']
-
-        if label_and_intensity_equal:
-            region_props['mean_distance_to_mass_center'] = region_props['mean_distance_to_centroid']
-            region_props['max_distance_to_mass_center'] = region_props['max_distance_to_centroid']
-            region_props['sum_distance_to_mass_center'] = region_props['sum_distance_to_centroid']
-            region_props['mean_max_distance_to_mass_center_ratio'] = region_props['mean_max_distance_to_centroid_ratio']
-        else:
-            distance_map = euclidean_distance_from_label_centroid_map(label_image, mass_centers)
-            distance_props = _statistics_of_labelled_pixels_gpu(distance_map, label_image,
-                                                                measure_shape=False)
-
-            region_props['mean_distance_to_mass_center'] = distance_props['mean_intensity']
-            # print(str(region_prop.mean_distance_to_centroid))
-            region_props['max_distance_to_mass_center'] = distance_props['max_intensity']
-            region_props['sum_distance_to_mass_center'] = distance_props['mean_intensity'] * region_props['area']
-            region_props['mean_max_distance_to_mass_center_ratio'] = region_props['max_distance_to_mass_center'] / region_props['mean_distance_to_mass_center']
-
-    #for key in regionpros.keys():
-    #    setattr(regionpros, key, regionpros[key])
+    # WRITE_IMAGE(dst, POS_dst_INSTANCE(former_label, y, 0, 0), CONVERT_dst_PIXEL_TYPE(sum_distance_centroid));
+    # WRITE_IMAGE(dst, POS_dst_INSTANCE(former_label, y, 1, 0), CONVERT_dst_PIXEL_TYPE(sum_distance_mass_center));
+    # WRITE_IMAGE(dst, POS_dst_INSTANCE(former_label, y, 2, 0), CONVERT_dst_PIXEL_TYPE(sum_squared_difference));
+    # WRITE_IMAGE(dst, POS_dst_INSTANCE(former_label, y, 3, 0), CONVERT_dst_PIXEL_TYPE(sum));
+    # WRITE_IMAGE(dst, POS_dst_INSTANCE(former_label, y, 4, 0), CONVERT_dst_PIXEL_TYPE(max_distance_centroid));
+    # WRITE_IMAGE(dst, POS_dst_INSTANCE(former_label, y, 5, 0), CONVERT_dst_PIXEL_TYPE(max_distance_mass_center));
 
     return region_props
 
