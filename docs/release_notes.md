@@ -3,6 +3,9 @@
 ## New features
 * `centroids_of_labels` was GPU-accelerated. The old functionality is still available when parameter `use_gpu=False` is set.
 * `statistics_of_labelled_pixels` and `statistics_of_background_and_labelled_pixels` contain the parameter `standard_deviation_intensity` now.
+* `statistics_of_labelled_pixels` and `statistics_of_background_and_labelled_pixels` are now GPU-accelerated 
+(`use_gpu=True` per default). The results of the GPU-accelerated statistics are dictionaries which contain the same 
+measurements as in CLIJ2.
 
 ### New operations
 * `centroids_of_background_and_labels`
@@ -13,8 +16,16 @@
 * `minimum_distance_of_touching_neighbors`
 * `statistics_of_image`
 
+### Backwards compatibility breaking changes
+* `statistics_of_labelled_pixels` and `statistics_of_background_and_labelled_pixels` produce different output now. 
+Instead of a scikit-image RegionProps objects, the produce a dictionary now which contains measurements. `
+push_regionprops_column` also works with the new format. Consider updating your code to work with the dictionaries,
+e.g. `stats['area']` instead of `[s.area for s in stats]`. If not possible, hand over `use_gpu=False` to 
+retrieve results in the old format. This parameter will be removed with a future version.
+
 ### Bug fixes
 * `imshow` in 3D caused an error
+* `push_regionprops_column` didn't actually push
 
 ### Miscellaneous
 * `flag_existing_intensities` has been renamed to `flag_existing_labels`. An alias to the old method was created to keep backwards-compatibility
