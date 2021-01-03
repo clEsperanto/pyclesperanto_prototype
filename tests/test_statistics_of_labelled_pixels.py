@@ -94,7 +94,7 @@ def test_statistics_of_labelled_pixels():
     ]
     ))
 
-    result = cle.statistics_of_labelled_pixels(intensity, labels)
+    result = cle.statistics_of_labelled_pixels(intensity, labels, use_gpu=False)
     result_image = cle.push_regionprops(result, first_row_index=1)
 
     a = cle.pull_zyx(result_image)
@@ -460,7 +460,7 @@ def test_standard_deviation():
     print("numpy standard deviation", np.std(image))
     print("numpy variance", np.var(image))
 
-    stats = cle.statistics_of_labelled_pixels(image, labels)
+    stats = cle.statistics_of_labelled_pixels(image, labels, use_gpu=False)
 
     print("std", stats[0].standard_deviation_intensity)
 

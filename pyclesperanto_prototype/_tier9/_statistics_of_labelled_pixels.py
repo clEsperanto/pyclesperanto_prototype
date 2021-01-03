@@ -188,8 +188,8 @@ def _statistics_of_labelled_pixels_gpu(intensity_image : Image = None, label_ima
     num_dimensions = len(label_image.shape)
 
     # IDENTIFIER = 0
-    region_props['label'] = range(target_x, num_labels)
-    region_props['original_label'] = range(target_x, num_labels)
+    region_props['label'] = np.arange(target_x, num_labels)
+    region_props['original_label'] = np.arange(target_x, num_labels)
 
 
 

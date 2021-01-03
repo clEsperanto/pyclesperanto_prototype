@@ -8,7 +8,7 @@ def test_statistics_of_labelled_pixels():
         [2, 3, 4]
     ]))
 
-    props = cle.statistics_of_image(intensity)
+    props = cle.statistics_of_image(intensity, use_gpu=False)
 
     assert np.equal(0, props.min_intensity)
     assert np.equal(4, props.max_intensity)
