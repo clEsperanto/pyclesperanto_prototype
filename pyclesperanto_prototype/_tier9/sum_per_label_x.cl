@@ -30,7 +30,7 @@ __kernel void sum_per_label (
       }
     }
 
-    if (x == width || (label != former_label)) {
+    if (x != width && (label != former_label)) {
       if (label > 0 || sum_background != 0) {
         sum_x = READ_dst_IMAGE(dst,sampler,POS_dst_INSTANCE(label,y,0,0)).x;
         sum_y = READ_dst_IMAGE(dst,sampler,POS_dst_INSTANCE(label,y,1,0)).x;
