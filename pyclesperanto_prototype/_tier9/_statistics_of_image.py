@@ -2,7 +2,7 @@ from .._tier0 import Image
 from .._tier0 import plugin_function
 
 @plugin_function
-def statistics_of_image(image : Image):
+def statistics_of_image(image : Image, use_gpu:bool = False):
     """Determines image size (bounding box), area (in pixels/voxels), min, max, mean and standard deviation of the
     intensity of all pixels in the original image.
 
@@ -31,4 +31,4 @@ def statistics_of_image(image : Image):
     binary_image = create_like(image)
     set(binary_image, 1)
 
-    return statistics_of_labelled_pixels(image, binary_image)[0]
+    return statistics_of_labelled_pixels(image, binary_image, use_gpu=use_gpu)[0]

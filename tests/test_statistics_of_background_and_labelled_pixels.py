@@ -222,8 +222,8 @@ def test_statistics_of_background_and_labelled_pixels_3d():
 def test_statistics_of_background_and_labelled_pixels_compare_to_clij2():
     from skimage.io import imread
 
-    blobs = cle.push_zyx(imread('../data/mini_blobs.tif'))
-    labels = cle.push_zyx(imread('../data/mini_blobs_otsu_labels_excluded_edges_imagej.tif'))
+    blobs = cle.push_zyx(imread('data/mini_blobs.tif'))
+    labels = cle.push_zyx(imread('data/mini_blobs_otsu_labels_excluded_edges_imagej.tif'))
 
     regionprops = cle.statistics_of_background_and_labelled_pixels(blobs, labels, use_gpu=False)
     table = cle.pull_zyx(cle.transpose_xy(cle.push_regionprops(regionprops)))
@@ -233,7 +233,7 @@ def test_statistics_of_background_and_labelled_pixels_compare_to_clij2():
 
     import numpy as np
     # np.savetxt('../data/mini_blobs_measurements_pyclesperanto.csv', table,delimiter=',')
-    clij_reference_table = np.loadtxt('../data/mini_blobs_measurements_clij.csv', delimiter=',', skiprows=1)
+    clij_reference_table = np.loadtxt('data/mini_blobs_measurements_clij.csv', delimiter=',', skiprows=1)
     # chop off first column as ImageJ saved an additional counter column
     clij_reference_table = clij_reference_table[:, 1:]
 
