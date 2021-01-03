@@ -40,6 +40,6 @@ def test_push_regionprops_column_gpu():
     print(reference)
     print(areas)
 
-    assert np.array_equal(reference, areas)
+    assert np.allclose(reference, areas, 0.0001)
 
 

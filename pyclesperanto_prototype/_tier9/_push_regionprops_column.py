@@ -6,7 +6,7 @@ def push_regionprops_column(regionprops : Union[list, dict], column : str):
     import numpy as np
 
     if isinstance(regionprops, dict):
-        return push_zyx(np.asarray(regionprops[column]))
+        return push_zyx(np.asarray([regionprops[column]]))
     else:
         if hasattr(regionprops[0], 'original_label'):
             labels = [r.original_label for r in regionprops]
