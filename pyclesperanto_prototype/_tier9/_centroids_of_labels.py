@@ -40,7 +40,6 @@ def centroids_of_labels(labels_source:Image, pointlist_destination :Image = None
         return _centroids_of_labels_gpu(labels_source, pointlist_destination, include_background)
 
 
-
     from .._tier9 import statistics_of_labelled_pixels
     from .._tier9 import statistics_of_background_and_labelled_pixels
     from .._tier2 import maximum_of_all_pixels
@@ -48,9 +47,9 @@ def centroids_of_labels(labels_source:Image, pointlist_destination :Image = None
 
     if regionprops is None:
         if include_background:
-            regionprops = statistics_of_background_and_labelled_pixels(input=None, labelmap=labels_source, measure_shape=False)
+            regionprops = statistics_of_background_and_labelled_pixels(input=None, labelmap=labels_source, measure_shape=False, use_gpu=False)
         else:
-            regionprops = statistics_of_labelled_pixels(input=None, labelmap=labels_source)
+            regionprops = statistics_of_labelled_pixels(input=None, labelmap=labels_source, use_gpu=False)
 
     if hasattr(regionprops[0], 'original_label'):
         labels = [r.original_label for r in regionprops]
