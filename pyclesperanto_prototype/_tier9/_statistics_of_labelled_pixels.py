@@ -132,13 +132,27 @@ def _statistics_of_labelled_pixels_gpu(intensity_image : Image = None, label_ima
     from .._tier1 import paste
     from .._tier1 import divide_images
     from .._tier1 import set_ramp_x
+    from .._tier1 import set_plane
     from .._tier0 import pull_zyx
     from .._tier1 import power
+    import numpy as np
 
     region_props = {}
 
     sum_per_label_image = create([16, height, num_labels])
     set(sum_per_label_image, 0)
+
+    min_value = np.finfo(np.float32).min
+    max_value = np.finfo(np.float32).max
+
+    set_plane(sum_per_label_image, 8, max_value)
+    set_plane(sum_per_label_image, 9, min_value)
+    set_plane(sum_per_label_image, 10, max_value)
+    set_plane(sum_per_label_image, 11, min_value)
+    set_plane(sum_per_label_image, 12, max_value)
+    set_plane(sum_per_label_image, 13, min_value)
+    set_plane(sum_per_label_image, 14, max_value)
+    set_plane(sum_per_label_image, 15, min_value)
 
     dimensions = [1, height, 1]
 
@@ -157,7 +171,7 @@ def _statistics_of_labelled_pixels_gpu(intensity_image : Image = None, label_ima
     }
 
     for z in range(0, depth):
-        # print('z', z)
+        #print('z', z)
         parameters['z'] = z
 
         from .._tier0 import execute
@@ -255,7 +269,7 @@ def _statistics_of_labelled_pixels_gpu(intensity_image : Image = None, label_ima
     divide_images(result_vector, sum_dim, avg_dim)
     region_props['mean_intensity'] = pull_zyx(avg_dim)[0]
     paste(avg_dim, label_statistics_image, target_x, 6, 0)
-    print("mean_intens", avg_dim)
+    #print("mean_intens", avg_dim)
 
     #     SUM_INTENSITY_TIMES_X = 16
     #     SUM_INTENSITY_TIMES_Y = 17
@@ -268,7 +282,7 @@ def _statistics_of_labelled_pixels_gpu(intensity_image : Image = None, label_ima
         mass_centers = create([num_dimensions, num_labels])###
     dim_names = ['x', 'y', 'z']
     crop(sum_per_label, result_vector, target_x, 4 + 3, 0)
-    for dim in range(0, num_dimensions):
+    for dim in range(0, 3):
         crop(sum_per_label, sum_dim, target_x, 4 + dim, 0)
         region_props['sum_intensity_times_' + dim_names[dim]] = pull_zyx(sum_dim)[0]
         divide_images(sum_dim, result_vector, avg_dim)
@@ -299,7 +313,7 @@ def _statistics_of_labelled_pixels_gpu(intensity_image : Image = None, label_ima
     if measure_shape:
         centroids = create([num_dimensions, num_labels])
     crop(sum_per_label, result_vector, target_x, 3, 0)
-    for dim in range(0, num_dimensions):
+    for dim in range(0, 3):
         crop(sum_per_label, sum_dim, target_x, dim, 0)
         region_props['sum_' + dim_names[dim]] = pull_zyx(sum_dim)[0]
         divide_images(sum_dim, result_vector, avg_dim)
@@ -325,8 +339,8 @@ def _statistics_of_labelled_pixels_gpu(intensity_image : Image = None, label_ima
     label_statistics_stack = create([6, height, num_labels])
     set(label_statistics_stack, 0)
 
-    print("stats")
-    print(label_statistics_image)
+    #print("stats")
+    #print(label_statistics_image)
 
     parameters = {
         'dst': label_statistics_stack,
@@ -364,7 +378,7 @@ def _statistics_of_labelled_pixels_gpu(intensity_image : Image = None, label_ima
 
     # standard deviation intensity
     crop(sum_statistics, sum_dim, target_x, 2, 0)
-    print("sum_dim", sum_dim)
+    #print("sum_dim", sum_dim)
     # divide_images(sum_dim, result_vector, avg_dim)
     power(sum_dim, result_vector, 0.5)
     region_props['standard_deviation_intensity'] = pull_zyx(result_vector)[0]
