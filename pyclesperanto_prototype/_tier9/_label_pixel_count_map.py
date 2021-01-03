@@ -25,11 +25,11 @@ def label_pixel_count_map(input : Image, destination : Image = None):
     .. [1] https://clij.github.io/clij2-docs/reference_labelPixelCountMap
     """
     from .._tier9 import statistics_of_background_and_labelled_pixels
+    from .._tier9 import push_regionprops_column
 
     regionprops = statistics_of_background_and_labelled_pixels(None, input)
+    values_vector = push_regionprops_column(regionprops, 'area')
 
-    import numpy as np
-    values_vector = push_zyx(np.asarray([[r.area for r in regionprops]]))
     set_column(values_vector, 0, 0)
 
     destination = replace_intensities(input, values_vector, destination)
