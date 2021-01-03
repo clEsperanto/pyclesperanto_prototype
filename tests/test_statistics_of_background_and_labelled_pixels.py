@@ -103,7 +103,7 @@ def test_statistics_of_background_and_labelled_pixels():
     print(a)
     print(b)
 
-    assert (np.array_equal(a, b))
+    assert (np.allclose(a, b, 0.0001))
 
 
 def test_statistics_of_background_and_labelled_pixels_3d():
@@ -216,7 +216,7 @@ def test_statistics_of_background_and_labelled_pixels_3d():
     print(a)
     print(b)
 
-    assert (np.array_equal(a, b))
+    assert (np.allclose(a, b, 0.0001))
 
 
 def test_statistics_of_background_and_labelled_pixels_compare_to_clij2():
