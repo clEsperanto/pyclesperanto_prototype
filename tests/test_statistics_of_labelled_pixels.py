@@ -218,6 +218,18 @@ def test_statistics_of_labelled_pixels_3d():
 
     assert (np.allclose(a, b, 0.0001))
 
+    result = cle.statistics_of_labelled_pixels(intensity, labels, use_gpu=True)
+    result_image = cle.push_regionprops(result, first_row_index=1)
+
+    a = cle.pull_zyx(result_image)
+    b = cle.pull_zyx(reference)
+
+    print(a)
+    print(b)
+
+    assert (np.allclose(a, b, 0.0001))
+
+
 def test_standard_deviation():
     import numpy as np
 
