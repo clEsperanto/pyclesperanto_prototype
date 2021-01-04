@@ -15,6 +15,7 @@ from ._imshow import imshow
 from ._label_mean_intensity_map import label_mean_intensity_map
 from ._label_mean_extension_map import label_mean_extension_map
 from ._label_maximum_extension_map import label_maximum_extension_map
+from ._label_maximum_extension_ratio_map import label_maximum_extension_ratio_map
 from ._label_maximum_intensity_map import label_maximum_intensity_map
 from ._label_minimum_intensity_map import label_minimum_intensity_map
 from ._label_pixel_count_map import label_pixel_count_map
