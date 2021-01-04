@@ -108,7 +108,7 @@ def statistics_of_labelled_pixels(input : Image = None, labelmap : Image = None,
 
 def _statistics_of_labelled_pixels_gpu(intensity_image : Image = None, label_image : Image = None, measure_shape : bool = True):
     """
-    This method will replate statistics_of_labelled_pixels(use_gpu=True) at some point.
+    This method will replace statistics_of_labelled_pixels(use_gpu=True) at some point.
 
     Parameters
     ----------
