@@ -15,6 +15,8 @@ measurements as in CLIJ2.
 * `merge_touching_labels`
 * `minimum_distance_of_touching_neighbors`
 * `statistics_of_image`
+* `label_standard_deviation_intensity_map`
+* `label_mean_extension_map`
 
 ### Backwards compatibility breaking changes
 * `statistics_of_labelled_pixels` and `statistics_of_background_and_labelled_pixels` produce different output now. 
