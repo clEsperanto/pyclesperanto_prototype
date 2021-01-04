@@ -16,6 +16,7 @@ from ._label_mean_intensity_map import label_mean_intensity_map
 from ._label_maximum_intensity_map import label_maximum_intensity_map
 from ._label_minimum_intensity_map import label_minimum_intensity_map
 from ._label_pixel_count_map import label_pixel_count_map
+from ._label_standard_deviation_intensity_map import label_standard_deviation_intensity_map
 from ._push_regionprops import push_regionprops
 from ._push_regionprops_column import push_regionprops_column
 from ._statistics_entry import STATISTICS_ENTRY
