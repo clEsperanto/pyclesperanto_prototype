@@ -182,7 +182,7 @@ def _statistics_of_labelled_pixels_gpu(intensity_image : Image = None, label_ima
         'dst': sum_per_label_image,
         'src_label': label_image,
         'src_image': intensity_image,
-        'sum_background': 0 # dpn't analyse background
+        'sum_background': 0  # don't analyse background
     }
     for z in range(0, depth):
         #print('z', z)
