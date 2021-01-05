@@ -160,26 +160,43 @@ def _statistics_of_labelled_pixels_gpu(intensity_image : Image = None, label_ima
     # results go here
     region_props = {}
 
-    # intermediate results are stored in this image
-    sum_per_label_image = create([16, height, num_labels])
-    set(sum_per_label_image, 0)
-
+    # intermediate results are stored in this image which is a high as the original image,
+    # as wide as number of labels and has 16 planes representing:
+    # 0. sum_x: all x-coordinates summed per label (and column)
+    # 1. sum_y:
+    # 2. sum_z:
+    # 3. sum: number of pixels per label (sum of a binary image representing the label)
+    # 4. sum_intensity_x: intensity (of the intensity image) times x-coordinate summed per label
+    # 5. sum_intensity_y
+    # 6. sum_intensity_z
+    # 7. sum_intensity: sum intensity (a.k.a. total intensity) of the label
+    # 8. min_intensity
+    # 9. max_intensity
+    # 10. min_x: minimum x coordinate of the label (in the given column)
+    # 11. max_x
+    # 12. min_y
+    # 13. max_y
+    # 14. min_z
+    # 15. max_z
+    cumulative_stats_per_label_image = create([16, height, num_labels])
+    # init sum-fields with zero
+    set(cumulative_stats_per_label_image, 0)
     # before determining min/max, set initial values to very high and very low values
     min_value = np.finfo(np.float32).min
     max_value = np.finfo(np.float32).max
-    set_plane(sum_per_label_image, 8, max_value)
-    set_plane(sum_per_label_image, 9, min_value)
-    set_plane(sum_per_label_image, 10, max_value)
-    set_plane(sum_per_label_image, 11, min_value)
-    set_plane(sum_per_label_image, 12, max_value)
-    set_plane(sum_per_label_image, 13, min_value)
-    set_plane(sum_per_label_image, 14, max_value)
-    set_plane(sum_per_label_image, 15, min_value)
+    set_plane(cumulative_stats_per_label_image, 8, max_value)
+    set_plane(cumulative_stats_per_label_image, 9, min_value)
+    set_plane(cumulative_stats_per_label_image, 10, max_value)
+    set_plane(cumulative_stats_per_label_image, 11, min_value)
+    set_plane(cumulative_stats_per_label_image, 12, max_value)
+    set_plane(cumulative_stats_per_label_image, 13, min_value)
+    set_plane(cumulative_stats_per_label_image, 14, max_value)
+    set_plane(cumulative_stats_per_label_image, 15, min_value)
 
     # accumulate statistics slice-by-slice
     dimensions = [1, height, 1]
     parameters = {
-        'dst': sum_per_label_image,
+        'dst': cumulative_stats_per_label_image,
         'src_label': label_image,
         'src_image': intensity_image,
         'sum_background': 0  # don't analyse background
@@ -192,9 +209,9 @@ def _statistics_of_labelled_pixels_gpu(intensity_image : Image = None, label_ima
         execute(__file__, 'statistics_per_label_x.cl', 'statistics_per_label', dimensions, parameters)
 
     # collect slice-by-slice measurements in single planes
-    sum_per_label = sum_y_projection(sum_per_label_image)
-    min_per_label = minimum_y_projection(sum_per_label_image)
-    max_per_label = maximum_y_projection(sum_per_label_image)
+    sum_per_label = sum_y_projection(cumulative_stats_per_label_image)
+    min_per_label = minimum_y_projection(cumulative_stats_per_label_image)
+    max_per_label = maximum_y_projection(cumulative_stats_per_label_image)
 
     # create some temporary images
     label_statistics_image = create([1, 8, num_labels])
@@ -202,6 +219,8 @@ def _statistics_of_labelled_pixels_gpu(intensity_image : Image = None, label_ima
     sum_dim = create([1, num_labels - measurements_start_x])
     avg_dim = create([1, num_labels - measurements_start_x])
 
+    # <param_name> = <column index>
+    # --------------------
     # IDENTIFIER = 0
     region_props['label'] = np.arange(measurements_start_x, num_labels)
     region_props['original_label'] = np.arange(measurements_start_x, num_labels)
