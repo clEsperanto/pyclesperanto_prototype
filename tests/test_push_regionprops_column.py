@@ -13,7 +13,7 @@ def test_push_regionprops_column():
     ]))
     reference = [0, 1, 2, 2, 4]
 
-    regionprops = cle.statistics_of_background_and_labelled_pixels(None, labels, use_gpu=False)
+    regionprops = cle.statistics_of_background_and_labelled_pixels(None, labels)
     areas = cle.push_regionprops_column(regionprops, 'area')
 
     print(reference)
@@ -34,7 +34,7 @@ def test_push_regionprops_column_gpu():
     ]))
     reference = [0, 1, 2, 2, 4]
 
-    regionprops = cle.statistics_of_background_and_labelled_pixels(None, labels, use_gpu=True)
+    regionprops = cle.statistics_of_background_and_labelled_pixels(None, labels)
     areas = cle.push_regionprops_column(regionprops, 'area')
 
     print(reference)
