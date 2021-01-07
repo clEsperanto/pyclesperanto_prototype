@@ -15,7 +15,9 @@ from ._create import (
     create_2d_xy,
     create_2d_yx,
     create_2d_zx,
+    create_2d_xz,
     create_2d_zy,
+    create_2d_yz,
     create_none,
 )
 from ._execute import execute

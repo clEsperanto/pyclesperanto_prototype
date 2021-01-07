@@ -1,9 +1,9 @@
 from .._tier0 import execute
 from .._tier0 import plugin_function
 from .._tier0 import Image
-from .._tier0 import create_2d_zy
+from .._tier0 import create_2d_yz
 
-@plugin_function(output_creator=create_2d_zy, categories=['projection'])
+@plugin_function(output_creator=create_2d_yz, categories=['projection'])
 def maximum_x_projection(source : Image, destination_max : Image = None):
     """Determines the maximum intensity projection of an image along X. 
     
