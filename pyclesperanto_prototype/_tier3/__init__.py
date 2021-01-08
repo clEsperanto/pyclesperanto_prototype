@@ -15,6 +15,7 @@ from ._jaccard_index import jaccard_index
 from ._labelled_spots_to_pointlist import labelled_spots_to_pointlist
 from ._mean_of_all_pixels import mean_of_all_pixels
 from ._mean_of_touching_neighbors_map import mean_of_touching_neighbors_map
+from ._mode_of_touching_neighbors_map import mode_of_touching_neighbors_map
 from ._squared_difference import squared_difference
 from ._standard_deviation_of_touching_neighbors_map import standard_deviation_of_touching_neighbors_map
 from ._subtract_gaussian_background import subtract_gaussian_background
