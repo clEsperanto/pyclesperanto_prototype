@@ -18,8 +18,8 @@ def test_maximum_of_touching_neighbors_map():
     ]))
 
     reference = cle.push_zyx(np.asarray([
-        [3, 3, 6, 6],
-        [3, 0, 0, 6],
+        [4, 4, 6, 6],
+        [4, 0, 0, 6],
         [6, 0, 0, 6],
         [6, 6, 6, 6]
     ]
