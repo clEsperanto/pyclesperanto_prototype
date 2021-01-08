@@ -34,8 +34,8 @@ def mode_of_touching_neighbors_map(parametric_map : Image, label_map : Image, pa
     from .._tier1 import replace_intensities
     from .._tier1 import set_column
 
-    if range == 0:
-        copy(parametric_map, parametric_map_destination)
+    if radius == 0:
+        return copy(parametric_map, parametric_map_destination)
 
     touch_matrix = generate_touch_matrix(label_map)
     if ignore_touching_background:
