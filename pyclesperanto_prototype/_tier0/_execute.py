@@ -1,3 +1,4 @@
+import os
 from functools import lru_cache
 from pathlib import Path
 
@@ -5,6 +6,10 @@ import numpy as np
 
 import pyopencl as cl
 from ._pycl import OCLProgram
+
+if not os.getenv("PYOPENCL_COMPILER_OUTPUT"):
+    import warnings
+    warnings.filterwarnings('ignore', 'Non-empty compiler output', module='pyopencl')
 
 
 # should write a test to make sure kernels and filenames always match
