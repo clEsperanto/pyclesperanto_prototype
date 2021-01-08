@@ -31,4 +31,4 @@ def statistics_of_image(image : Image):
     binary_image = create_like(image)
     set(binary_image, 1)
 
-    return statistics_of_labelled_pixels(image, binary_image)[0]
+    return statistics_of_labelled_pixels(image, binary_image)

@@ -31,10 +31,11 @@ def exclude_labels_outside_size_range(input : Image, destination : Image = None,
     .. [1] https://clij.github.io/clij2-docs/reference_excludeLabelsOutsideSizeRange
     """
     from .._tier9 import statistics_of_background_and_labelled_pixels
+    from .._tier9 import push_regionprops_column
 
     regionprops = statistics_of_background_and_labelled_pixels(None, input)
 
-    values_vector = push_zyx(np.asarray([[r.area for r in regionprops]]))
+    values_vector = push_regionprops_column(regionprops, 'area')
 
 
     above = create_like(values_vector)

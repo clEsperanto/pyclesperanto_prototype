@@ -1,8 +1,10 @@
 # upcoming release
 
 ## New features
-* `centroids_of_labels` was GPU-accelerated. The old functionality is still available when parameter `use_gpu=False` is set.
+* `centroids_of_labels` was GPU-accelerated.
 * `statistics_of_labelled_pixels` and `statistics_of_background_and_labelled_pixels` contain the parameter `standard_deviation_intensity` now.
+* `statistics_of_labelled_pixels` and `statistics_of_background_and_labelled_pixels` are now GPU-accelerated. The 
+results of the GPU-accelerated statistics are dictionaries which contain the same measurements as in CLIJ2.
 
 ### New operations
 * `centroids_of_background_and_labels`
@@ -12,9 +14,22 @@
 * `merge_touching_labels`
 * `minimum_distance_of_touching_neighbors`
 * `statistics_of_image`
+* `label_standard_deviation_intensity_map`
+* `label_mean_extension_map`
+* `label_maximum_extension_map`
+* `label_maximum_extension_ratio_map`
+* `regionprops`
+
+### Backwards compatibility breaking changes
+* `statistics_of_labelled_pixels` and `statistics_of_background_and_labelled_pixels` produce different output now. 
+Instead of a scikit-image RegionProps objects, the produce a dictionary which contains lists of measurements. 
+`push_regionprops_column` also works with the new output format. Consider updating your code to work with the 
+dictionaries,e.g. `stats['area']` instead of `[s.area for s in stats]`. If not possible, use the new function 
+`regionprops` retrieve results in the old format.
 
 ### Bug fixes
 * `imshow` in 3D caused an error
+* `push_regionprops_column` didn't actually push
 
 ### Miscellaneous
 * `flag_existing_intensities` has been renamed to `flag_existing_labels`. An alias to the old method was created to keep backwards-compatibility

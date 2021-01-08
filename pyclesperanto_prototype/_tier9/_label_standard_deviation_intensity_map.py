@@ -5,28 +5,27 @@ from .._tier1 import replace_intensities
 from .._tier1 import set_column
 
 @plugin_function(categories=['combine', 'label measurement', 'map', 'in assistant'], priority=-1)
-def label_minimum_intensity_map(intensity_image : Image, labels : Image, minimum_intensity_map : Image = None):
+def label_standard_deviation_intensity_map(intensity_image : Image, labels : Image, standard_deviation_intensity_map : Image = None):
     """
 
     Parameters
     ----------
     intensity_image
     labels
-    minimum_intensity_map
+    standard_deviation_intensity_map
 
     Returns
     -------
 
     """
     from .._tier9 import statistics_of_background_and_labelled_pixels
-
-    regionprops = statistics_of_background_and_labelled_pixels(intensity_image, labels)
     from .._tier9 import push_regionprops_column
 
-    values_vector = push_regionprops_column(regionprops, 'min_intensity')
+    regionprops = statistics_of_background_and_labelled_pixels(intensity_image, labels)
 
+    values_vector = push_regionprops_column(regionprops, "standard_deviation_intensity")
     set_column(values_vector, 0, 0)
 
-    minimum_intensity_map = replace_intensities(labels, values_vector, minimum_intensity_map)
+    standard_deviation_intensity_map = replace_intensities(labels, values_vector, standard_deviation_intensity_map)
 
-    return minimum_intensity_map
+    return standard_deviation_intensity_map

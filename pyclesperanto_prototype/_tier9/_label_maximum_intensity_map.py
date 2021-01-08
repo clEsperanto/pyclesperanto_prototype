@@ -19,11 +19,11 @@ def label_maximum_intensity_map(intensity_image : Image, labels : Image, maximum
 
     """
     from .._tier9 import statistics_of_background_and_labelled_pixels
+    from .._tier9 import push_regionprops_column
 
     regionprops = statistics_of_background_and_labelled_pixels(intensity_image, labels)
 
-    import numpy as np
-    values_vector = push_zyx(np.asarray([[r.max_intensity for r in regionprops]]))
+    values_vector = push_regionprops_column(regionprops, 'max_intensity')
     set_column(values_vector, 0, 0)
 
     maximum_intensity_map = replace_intensities(labels, values_vector, maximum_intensity_map)
