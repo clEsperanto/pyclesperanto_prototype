@@ -14,6 +14,7 @@
 * `statistics_of_image`
 * `read_intensities_from_map`
 * `read_intensities_from_positions`
+* `mean_of_touching_neighbors_map`
 
 ### Bug fixes
 * `imshow` in 3D caused an error
