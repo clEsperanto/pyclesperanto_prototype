@@ -12,6 +12,7 @@
 * `merge_touching_labels`
 * `minimum_distance_of_touching_neighbors`
 * `statistics_of_image`
+* `read_intensities_from_map`
 * `read_intensities_from_positions`
 
 ### Bug fixes
