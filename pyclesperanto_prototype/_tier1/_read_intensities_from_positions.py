@@ -1,7 +1,9 @@
 from pyclesperanto_prototype._tier0 import plugin_function
 from pyclesperanto_prototype._tier0 import Image
 from pyclesperanto_prototype._tier0 import create_none
+from .._tier0 import plugin_function
 
+@plugin_function(output_creator=create_none)
 def read_intensities_from_positions(pointlist : Image, intensity_image : Image, values_destination : Image = None):
     """Go to positions in a given image specified by a pointlist and read intensities of those pixels. The intensities
     are stored in a new vector.
