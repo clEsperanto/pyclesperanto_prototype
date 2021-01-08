@@ -8,10 +8,10 @@ def mean_of_touching_neighbors_map(parametric_map : Image, label_map : Image, pa
     by the mean value of neighboring labels. The radius of the neighborhood can be configured:
     * radius 0: Nothing is replaced
     * radius 1: direct neighbors are averaged
-    * radius 2: neighbors and neighbors or neighbors are avaraged
+    * radius 2: neighbors and neighbors or neighbors are averaged
     * radius n: ...
 
-    Note: Pixel values of all pixels for each label must be identical.
+    Note: Values of all pixels in a label each must be identical.
 
     Parameters
     ----------
@@ -47,10 +47,8 @@ def mean_of_touching_neighbors_map(parametric_map : Image, label_map : Image, pa
             set_column(touch_matrix, 0)
 
     intensities = read_intensities_from_map(label_map, parametric_map)
-    print(intensities)
-    new_intensities = mean_of_touching_neighbors(intensities, touch_matrix)
-    print(new_intensities)
 
+    new_intensities = mean_of_touching_neighbors(intensities, touch_matrix)
 
     parametric_map_destination = replace_intensities(label_map, new_intensities, parametric_map_destination)
 
