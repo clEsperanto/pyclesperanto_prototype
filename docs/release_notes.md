@@ -18,6 +18,7 @@
 * `standard_deviation_of_touching_neighbors_map`
 * `mode_of_touching_neighbors_map`
 * `minimum_of_touching_neighbors_map`
+* `maximum_of_touching_neighbors_map`
 
 ### Bug fixes
 * `imshow` in 3D caused an error

@@ -13,6 +13,7 @@ from ._exclude_labels_with_values_within_range import exclude_labels_with_values
 from ._histogram import histogram
 from ._jaccard_index import jaccard_index
 from ._labelled_spots_to_pointlist import labelled_spots_to_pointlist
+from ._maximum_of_touching_neighbors_map import maximum_of_touching_neighbors_map
 from ._mean_of_all_pixels import mean_of_all_pixels
 from ._mean_of_touching_neighbors_map import mean_of_touching_neighbors_map
 from ._minimum_of_touching_neighbors_map import minimum_of_touching_neighbors_map
