@@ -30,3 +30,4 @@ from ._sum_of_all_pixels import sum_of_all_pixels
 from ._sum_reduction_x import sum_reduction_x
 from ._top_hat_box import top_hat_box
 from ._top_hat_sphere import top_hat_sphere
+from ._touch_matrix_to_adjacency_matrix import touch_matrix_to_adjacency_matrix
