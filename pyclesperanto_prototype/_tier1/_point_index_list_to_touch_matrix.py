@@ -25,9 +25,6 @@ def point_index_list_to_touch_matrix(indexlist : Image, matrix_destination : Ima
         "dst_matrix": matrix_destination,
     }
 
-    from .._tier0 import pull_zyx
-    print(pull_zyx(indexlist))
-
     dimensions = [1, 1, indexlist.shape[-1]]
 
     execute(__file__, "point_index_list_to_touch_matrix_x.cl", "point_index_list_to_touch_matrix", dimensions, parameters)
