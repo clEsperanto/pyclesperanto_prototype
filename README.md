@@ -170,6 +170,15 @@ imsave("result.tif", cle.pull(labeled))
 
 </td></tr><tr><td>
 
+<img src="https://github.com/clEsperanto/pyclesperanto_prototype/raw/master/docs/images/neighborhood_definitions.png" width="300"/>
+
+</td><td>
+
+[Neighborhood definitions](https://github.com/clEsperanto/pyclesperanto_prototype/tree/master/demo/neighbors/neighborhood_definitions.ipynb)
+
+
+</td></tr><tr><td>
+
 <img src="https://github.com/clEsperanto/pyclesperanto_prototype/raw/master/docs/images/tissue_neighborhood_quantification.png" width="300"/>
 
 </td><td>

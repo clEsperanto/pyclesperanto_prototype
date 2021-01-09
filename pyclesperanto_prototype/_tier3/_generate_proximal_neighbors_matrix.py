@@ -6,8 +6,7 @@ import numpy as np
 
 @plugin_function
 def generate_proximal_neighbors_matrix(distance_matrix :Image, touch_matrix_destination :Image = None, min_distance : float = 0, max_distance : float = np.finfo(np.float32).max):
-    from .._tier1 import set
-    """Produces a touch-matrix where the neighbors within a given distance range are marked as touching neighbors. 
+    """Produces a touch-matrix where the neighbors within a given distance range are marked as touching neighbors.
     
     Takes a distance matrix (e.g. derived from a pointlist of centroids) and marks for every column the neighbors whose
     distance lie within a given distance range (>= min and <= max). 

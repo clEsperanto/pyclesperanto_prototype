@@ -11,6 +11,8 @@ def generate_n_nearest_neighbors_matrix(distance_matrix :Image, touch_matrix_des
     Takes a distance matrix (e.g. derived from a pointlist of centroids) and marks for every column the n smallest
     distances as neighbors. The resulting matrix can be use as if it was a touch-matrix (a.k.a. adjacency graph matrix). 
     
+    Inspired by a similar implementation in imglib2 [1]
+    
     Note: The implementation is limited to square matrices.
     
     Parameters
@@ -19,6 +21,10 @@ def generate_n_nearest_neighbors_matrix(distance_matrix :Image, touch_matrix_des
     touch_matrix_destination : Image
     n : int
         number of neighbors
+        
+    References
+    ----------
+    [1] https://github.com/imglib/imglib2/blob/master/src/main/java/net/imglib2/interpolation/neighborsearch/InverseDistanceWeightingInterpolator.java
     
     Returns
     -------
