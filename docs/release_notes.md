@@ -19,6 +19,7 @@
 * `mode_of_touching_neighbors_map`
 * `minimum_of_touching_neighbors_map`
 * `maximum_of_touching_neighbors_map`
+* `maximum_distance_of_n_shortest_distances`
 
 ### Bug fixes
 * `imshow` in 3D caused an error

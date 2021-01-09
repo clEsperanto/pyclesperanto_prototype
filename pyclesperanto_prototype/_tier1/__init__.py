@@ -65,6 +65,8 @@ from ._maximum_image_and_scalar import maximum_image_and_scalar
 from ._maximum_images import maximum_images
 from ._maximum_box import maximum_box
 from ._maximum_distance_of_touching_neighbors import maximum_distance_of_touching_neighbors
+from ._maximum_distance_of_n_shortest_distances import maximum_distance_of_n_shortest_distances
+from ._maximum_distance_of_n_shortest_distances import maximum_distance_of_n_shortest_distances as maximum_distance_of_n_closest_points
 from ._maximum_x_projection import maximum_x_projection
 from ._maximum_y_projection import maximum_y_projection
 from ._maximum_z_projection import maximum_z_projection
