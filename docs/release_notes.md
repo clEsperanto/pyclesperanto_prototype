@@ -36,7 +36,9 @@ results of the GPU-accelerated statistics are dictionaries which contain the sam
 Instead of a scikit-image RegionProps objects, the produce a dictionary which contains lists of measurements. 
 `push_regionprops_column` also works with the new output format. Consider updating your code to work with the 
 dictionaries,e.g. `stats['area']` instead of `[s.area for s in stats]`. If not possible, use the new function 
-`regionprops` retrieve results in the old format.
+`regionprops` retrieve results in the old format
+* `n_closest_points` ignores the background position and the distance to labels themselves per default now. 
+  Consider passing `ignore_background=False` and `ignore_self=False` to go back to former functionality.
 
 ### Bug fixes
 * `imshow` in 3D caused an error
