@@ -37,6 +37,7 @@ results of the GPU-accelerated statistics are dictionaries which contain the sam
 * `minimum_of_proximal_neighbors_map` and alias `minimum_of_distal_neighbors_map`
 * `mode_of_n_nearest_neighbors_map`
 * `mode_of_proximal_neighbors_map` and alias `mode_of_distal_neighbors_map`
+* `standard_deviation_of_n_nearest_neighbors_map`
 
 ### Backwards compatibility breaking changes
 * `statistics_of_labelled_pixels` and `statistics_of_background_and_labelled_pixels` produce different output now. 
