@@ -65,6 +65,8 @@ from ._maximum_image_and_scalar import maximum_image_and_scalar
 from ._maximum_images import maximum_images
 from ._maximum_box import maximum_box
 from ._maximum_distance_of_touching_neighbors import maximum_distance_of_touching_neighbors
+from ._maximum_distance_of_n_shortest_distances import maximum_distance_of_n_shortest_distances
+from ._maximum_distance_of_n_shortest_distances import maximum_distance_of_n_shortest_distances as maximum_distance_of_n_closest_points
 from ._maximum_x_projection import maximum_x_projection
 from ._maximum_y_projection import maximum_y_projection
 from ._maximum_z_projection import maximum_z_projection
@@ -94,8 +96,11 @@ from ._paste import paste
 from ._onlyzero_overwrite_maximum_box import onlyzero_overwrite_maximum_box
 from ._onlyzero_overwrite_maximum_diamond import onlyzero_overwrite_maximum_diamond
 from ._point_index_list_to_mesh import point_index_list_to_mesh
+from ._point_index_list_to_touch_matrix import point_index_list_to_touch_matrix
 from ._power import power
 from ._power_images import power_images
+from ._read_intensities_from_map import read_intensities_from_map
+from ._read_intensities_from_positions import read_intensities_from_positions
 from ._replace_intensities import replace_intensities
 from ._replace_intensity import replace_intensity
 from ._resample import resample
