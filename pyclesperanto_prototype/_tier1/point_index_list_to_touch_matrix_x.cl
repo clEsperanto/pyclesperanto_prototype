@@ -17,18 +17,14 @@ __kernel void point_index_list_to_touch_matrix(
       continue;
     }
     pointIndexB = pointIndexB - 1;
-    printf("? %d: %d %d\n", pointB, (int)(pointIndex + 1), (int)(pointIndexB + 1));
-
 
     POS_dst_matrix_TYPE tPos;
     if (pointIndex == pointIndexB) {
         continue;
     } else if (pointIndex > pointIndexB) {
        // we add 1 here because the 0th column/row stands for background in touch matrices
-        printf("A %d %d\n", (int)(pointIndex), (int)(pointIndexB));
        tPos = POS_dst_matrix_INSTANCE(pointIndexB + 1, pointIndex + 1, 0, 0);
     } else {
-        printf("B %d %d\n", (int)(pointIndex), (int)(pointIndexB));
        tPos = POS_dst_matrix_INSTANCE(pointIndex + 1, pointIndexB + 1, 0, 0);
     }
     WRITE_dst_matrix_IMAGE(dst_matrix, tPos, 1);
