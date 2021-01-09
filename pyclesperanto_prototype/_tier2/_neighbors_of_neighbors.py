@@ -6,7 +6,7 @@ from .._tier1 import greater_constant
 from .._tier0 import create_like
 
 @plugin_function
-def neighbors_of_neighbors(touch_matrix : Image, neighbor_matrix_destination : Image = None):
+def neighbors_of_neighbors(touch_matrix : Image, neighbor_matrix_destination : Image = None, include_neighbors : bool = True):
     """Determines neighbors of neigbors from touch matrix and saves the result 
     as a new touch matrix. 
     
@@ -14,6 +14,8 @@ def neighbors_of_neighbors(touch_matrix : Image, neighbor_matrix_destination : I
     ----------
     touch_matrix : Image
     neighbor_matrix_destination : Image
+    include_neighbors : bool
+        Defines wheather current neigbors should be include in the resulting neighborhood
     
     Returns
     -------
@@ -26,5 +28,11 @@ def neighbors_of_neighbors(touch_matrix : Image, neighbor_matrix_destination : I
 
     temp = create_like(touch_matrix)
     multiply_matrix(touch_matrix, touch_matrix, temp)
-    neighbor_matrix_destination = greater_constant(temp, neighbor_matrix_destination, 0)
+
+    if include_neighbors:
+        from .._tier1 import binary_or
+        neighbor_matrix_destination = binary_or(touch_matrix, temp, neighbor_matrix_destination)
+    else:
+        neighbor_matrix_destination = greater_constant(temp, neighbor_matrix_destination, 0)
+
     return neighbor_matrix_destination
