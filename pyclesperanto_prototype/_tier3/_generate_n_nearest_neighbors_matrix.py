@@ -3,7 +3,7 @@ from .._tier0 import execute
 from .._tier0 import plugin_function
 from .._tier0 import Image
 
-@plugin_function(output_creator=create_square_matrix_from_labelmap)
+@plugin_function
 def generate_n_nearest_neighbors_matrix(distance_matrix :Image, touch_matrix_destination :Image = None, n : int = 1):
     from .._tier1 import set
     """Produces a touch-matrix where the n nearest neighbors are marked as touching neighbors. 
