@@ -15,7 +15,7 @@ def generate_n_nearest_neighbors_matrix(distance_matrix :Image, touch_matrix_des
     
     Parameters
     ----------
-    distane_marix : Image
+    distance_marix : Image
     touch_matrix_destination : Image
     n : int
         number of neighbors
