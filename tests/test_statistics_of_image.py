@@ -10,7 +10,7 @@ def test_statistics_of_labelled_pixels():
 
     props = cle.statistics_of_image(intensity)
 
-    assert np.equal(0, props.min_intensity)
-    assert np.equal(4, props.max_intensity)
-    assert np.equal(2, props.mean_intensity)
-    assert np.isclose(1.15, props.standard_deviation_intensity, 0.01)
+    assert np.equal(0, props['min_intensity'])
+    assert np.equal(4, props['max_intensity'])
+    assert np.equal(2, props['mean_intensity'])
+    assert np.isclose(1.15, props['standard_deviation_intensity'], 0.01)

@@ -1,7 +1,13 @@
 import pyclesperanto_prototype as cle
 import numpy as np
 
-def test_label_pixel_count_map():
+def test_label_minimum_intensity_map_2d():
+
+    intensity = cle.push_zyx(np.asarray([
+        [1, 1, 2],
+        [4, 0, 0],
+        [5, 3, 0]
+    ]))
 
     labels = cle.push_zyx(np.asarray([
         [1, 1, 2],
@@ -10,13 +16,13 @@ def test_label_pixel_count_map():
     ]))
 
     reference = cle.push_zyx(np.asarray([
-        [3, 3, 1],
-        [3, 0, 0],
-        [2, 2, 0]
+        [1, 1, 2],
+        [1, 0, 0],
+        [3, 3, 0]
     ]
     ))
 
-    result = cle.label_pixel_count_map(labels)
+    result = cle.label_minimum_intensity_map(intensity, labels)
 
     a = cle.pull_zyx(result)
     b = cle.pull_zyx(reference)
@@ -27,7 +33,18 @@ def test_label_pixel_count_map():
     assert (np.array_equal(a, b))
 
 
-def test_label_pixel_count_map_3d():
+def test_label_minimum_intensity_map_3d():
+
+
+    intensity = cle.push_zyx(np.asarray([
+        [
+            [1, 1, 2],
+        ],[
+            [4, 0, 0],
+        ], [
+            [5, 3, 0]
+        ]
+    ]))
 
     labels = cle.push_zyx(np.asarray([
         [
@@ -41,16 +58,16 @@ def test_label_pixel_count_map_3d():
 
     reference = cle.push_zyx(np.asarray([
         [
-            [3, 3, 1],
+            [1, 1, 2],
         ], [
-            [3, 0, 0],
+            [1, 0, 0],
         ], [
-            [2, 2, 0]
+            [3, 3, 0]
         ]
     ]
     ))
 
-    result = cle.label_pixel_count_map(labels)
+    result = cle.label_minimum_intensity_map(intensity, labels)
 
     a = cle.pull_zyx(result)
     b = cle.pull_zyx(reference)

@@ -13,11 +13,16 @@ from ._draw_mesh_between_touching_labels import draw_mesh_between_touching_label
 from ._imread import imread
 from ._imshow import imshow
 from ._label_mean_intensity_map import label_mean_intensity_map
+from ._label_mean_extension_map import label_mean_extension_map
+from ._label_maximum_extension_map import label_maximum_extension_map
+from ._label_maximum_extension_ratio_map import label_maximum_extension_ratio_map
 from ._label_maximum_intensity_map import label_maximum_intensity_map
 from ._label_minimum_intensity_map import label_minimum_intensity_map
 from ._label_pixel_count_map import label_pixel_count_map
+from ._label_standard_deviation_intensity_map import label_standard_deviation_intensity_map
 from ._push_regionprops import push_regionprops
 from ._push_regionprops_column import push_regionprops_column
+from ._regionprops import regionprops
 from ._statistics_entry import STATISTICS_ENTRY
 from ._statistics_of_background_and_labelled_pixels import statistics_of_background_and_labelled_pixels
 from ._statistics_of_image import statistics_of_image
