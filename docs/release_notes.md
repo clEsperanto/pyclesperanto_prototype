@@ -30,6 +30,9 @@ results of the GPU-accelerated statistics are dictionaries which contain the sam
 * `point_index_list_to_touch_matrix`
 * `generate_n_nearest_neighbors_matrix`
 * `generate_proximal_neighbors_matrix` and alias `generate_distal_neighbors_matrix`
+* `maximum_of_n_nearest_neighbors_map`
+* `maximum_of_proximal_neighbors_map` and alias `maximum_of_distal_neighbors_map`
+* `touch_matrix_to_adjacency_matrix`
 
 ### Backwards compatibility breaking changes
 * `statistics_of_labelled_pixels` and `statistics_of_background_and_labelled_pixels` produce different output now. 
