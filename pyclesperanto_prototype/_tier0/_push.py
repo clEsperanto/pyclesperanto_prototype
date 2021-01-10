@@ -20,7 +20,7 @@ def push(any_array):
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
-    >>> cle.push(image)
+    >>> cle.push_zyx(image)
     
     References
     ----------

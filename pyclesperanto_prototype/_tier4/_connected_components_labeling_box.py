@@ -1,5 +1,5 @@
-from .._tier0 import pull
-from .._tier0 import push
+from .._tier0 import pull_zyx
+from .._tier0 import push_zyx
 from .._tier0 import create_like
 from .._tier1 import set
 from .._tier1 import set_non_zero_pixels_to_pixel_index
@@ -39,7 +39,7 @@ def connected_components_labeling_box(binary_input : Image, labeling_destination
     temp1 = create_like(labeling_destination)
     temp2 = create_like(labeling_destination)
 
-    flag = push(np.asarray([[[0]]]))
+    flag = push_zyx(np.asarray([[[0]]]))
 
     set_non_zero_pixels_to_pixel_index(binary_input, temp1)
 
@@ -54,7 +54,7 @@ def connected_components_labeling_box(binary_input : Image, labeling_destination
             flagged_nonzero_minimum_filter(temp1, flag, temp2)
         else:
             flagged_nonzero_minimum_filter(temp2, flag, temp1)
-        flag_value = pull(flag)[0][0][0]
+        flag_value = pull_zyx(flag)[0][0][0]
         set(flag, 0)
         iteration_count += 1
 

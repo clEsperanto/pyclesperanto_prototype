@@ -5,7 +5,7 @@ from .._tier0 import create_2d_yx
 from .._tier0 import execute
 from .._tier1 import transpose_xz
 from .._tier1 import transpose_yz
-from .._tier0 import pull
+from .._tier0 import pull_zyx
 from .._tier1 import copy_slice
 from .._tier0 import plugin_function
 
@@ -86,5 +86,5 @@ def minimum_of_masked_pixels(source : Image, mask : Image):
     __minimum_of_masked_pixels_reduction(temp_input, temp_mask, reduced_image, reduced_mask)
 
     # return the single pixel value
-    return (pull(reduced_image)[0])[0]
+    return (pull_zyx(reduced_image)[0])[0]
 
