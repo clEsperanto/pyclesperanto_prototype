@@ -18,15 +18,13 @@ def point_index_list_to_touch_matrix(indexlist : Image, matrix_destination : Ima
     -------
     matrix_destination
     """
-    from .._tier0 import create
+    from .._tier1 import set
+    set(matrix_destination, 0)
 
     parameters = {
         "src_indexlist": indexlist,
         "dst_matrix": matrix_destination,
     }
-
-    from .._tier0 import pull_zyx
-    print(pull_zyx(indexlist))
 
     dimensions = [1, 1, indexlist.shape[-1]]
 

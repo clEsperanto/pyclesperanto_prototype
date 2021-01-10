@@ -28,13 +28,26 @@ results of the GPU-accelerated statistics are dictionaries which contain the sam
 * `maximum_of_touching_neighbors_map`
 * `maximum_distance_of_n_shortest_distances`
 * `point_index_list_to_touch_matrix`
+* `generate_n_nearest_neighbors_matrix`
+* `generate_proximal_neighbors_matrix` and alias `generate_distal_neighbors_matrix`
+* `maximum_of_n_nearest_neighbors_map`
+* `maximum_of_proximal_neighbors_map` and alias `maximum_of_distal_neighbors_map`
+* `touch_matrix_to_adjacency_matrix`
+* `maximum_of_n_nearest_neighbors_map`
+* `minimum_of_proximal_neighbors_map` and alias `minimum_of_distal_neighbors_map`
+* `mode_of_n_nearest_neighbors_map`
+* `mode_of_proximal_neighbors_map` and alias `mode_of_distal_neighbors_map`
+* `standard_deviation_of_n_nearest_neighbors_map`
+* `standard_deviation_of_proximal_neighbors_map` and alias `standard_deviation_of_distal_neighbors_map`
 
 ### Backwards compatibility breaking changes
 * `statistics_of_labelled_pixels` and `statistics_of_background_and_labelled_pixels` produce different output now. 
 Instead of a scikit-image RegionProps objects, the produce a dictionary which contains lists of measurements. 
 `push_regionprops_column` also works with the new output format. Consider updating your code to work with the 
 dictionaries,e.g. `stats['area']` instead of `[s.area for s in stats]`. If not possible, use the new function 
-`regionprops` retrieve results in the old format.
+`regionprops` retrieve results in the old format
+* `n_closest_points` ignores the background position and the distance to labels themselves per default now. 
+  Consider passing `ignore_background=False` and `ignore_self=False` to go back to former functionality.
 
 ### Bug fixes
 * `imshow` in 3D caused an error
