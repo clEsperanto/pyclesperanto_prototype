@@ -1,7 +1,7 @@
 from pyclesperanto_prototype._tier0 import plugin_function
 from pyclesperanto_prototype._tier0 import Image
-from .._tier0 import push_zyx
-from .._tier0 import pull_zyx
+from .._tier0 import push
+from .._tier0 import pull
 from .._tier0 import create_none
 from .._tier0 import create_like
 from .._tier1 import replace_intensities
@@ -38,7 +38,7 @@ def exclude_labels(binary_flaglist : Image, label_map_input : Image, label_map_d
 
     num_labels = int(binary_flaglist.shape[-1])
 
-    flaglist_np = pull_zyx(binary_flaglist)
+    flaglist_np = pull(binary_flaglist)
 
     flaglist_np[0][0] = 0
     
@@ -50,7 +50,7 @@ def exclude_labels(binary_flaglist : Image, label_map_input : Image, label_map_d
         else:
             flaglist_np[0][i] = 0
 
-    label_index_map = push_zyx(flaglist_np)
+    label_index_map = push(flaglist_np)
 
     replace_intensities(label_map_input, label_index_map, label_map_destination)
 

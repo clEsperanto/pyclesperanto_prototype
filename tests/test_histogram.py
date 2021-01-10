@@ -2,7 +2,7 @@ import pyclesperanto_prototype as cle
 import numpy as np
 
 def test_histogram():
-    test = cle.push_zyx(np.asarray([
+    test = cle.push(np.asarray([
         [1, 2, 4, 4, 2, 3],
         [3, 3, 4, 4, 5, 5]
     ]))
@@ -13,11 +13,11 @@ def test_histogram():
 
     print(my_histogram)
 
-    a = cle.pull_zyx(my_histogram)
+    a = cle.pull(my_histogram)
     assert (np.allclose(a, ref_histogram))
 
 def test_histogram_3d():
-    test = cle.push_zyx(np.asarray([
+    test = cle.push(np.asarray([
         [
             [1, 2, 4, 4, 2, 3]
         ], [
@@ -31,12 +31,12 @@ def test_histogram_3d():
 
     print(my_histogram)
 
-    a = cle.pull_zyx(my_histogram)
+    a = cle.pull(my_histogram)
     assert (np.allclose(a, ref_histogram))
 
 
 def test_histogram_3d_2():
-    test = cle.push_zyx(np.asarray([
+    test = cle.push(np.asarray([
         [
             [1, 2, 4],
             [4, 2, 3]
@@ -52,7 +52,7 @@ def test_histogram_3d_2():
 
     print(my_histogram)
 
-    a = cle.pull_zyx(my_histogram)
+    a = cle.pull(my_histogram)
     assert (np.allclose(a, ref_histogram))
 
 def test_histogram_against_scikit_image():
@@ -64,11 +64,11 @@ def test_histogram_against_scikit_image():
 
     print(str(hist))
 
-    gpu_image = cle.push_zyx(image)
+    gpu_image = cle.push(image)
 
     gpu_hist = cle.histogram(gpu_image, num_bins=256)
 
-    print(str(cle.pull_zyx(gpu_hist)))
+    print(str(cle.pull(gpu_hist)))
 
-    assert (np.allclose(hist, cle.pull_zyx(gpu_hist)))
+    assert (np.allclose(hist, cle.pull(gpu_hist)))
 

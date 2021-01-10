@@ -3,7 +3,7 @@ import numpy as np
 
 
 def test_replace_intensities():
-    test1 = cle.push_zyx(np.asarray([
+    test1 = cle.push(np.asarray([
         [0, 0, 0, 0, 0],
         [0, 1, 2, 3, 0],
         [0, 2, 3, 4, 0],
@@ -11,11 +11,11 @@ def test_replace_intensities():
         [0, 0, 0, 0, 0]
     ]))
 
-    test2 = cle.push_zyx(np.asarray([
+    test2 = cle.push(np.asarray([
         [0, 9, 8, 7, 6, 5]
     ]))
 
-    reference = cle.push_zyx(np.asarray([
+    reference = cle.push(np.asarray([
         [0, 0, 0, 0, 0],
         [0, 9, 8, 7, 0],
         [0, 8, 7, 6, 0],
@@ -28,6 +28,6 @@ def test_replace_intensities():
 
     print(result)
 
-    a = cle.pull_zyx(result)
-    b = cle.pull_zyx(reference)
+    a = cle.pull(result)
+    b = cle.pull(reference)
     assert (np.allclose(a, b, 0.001))

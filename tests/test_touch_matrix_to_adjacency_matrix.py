@@ -3,7 +3,7 @@ import numpy as np
 
 def test_touch_matrix_to_adjacency_matrix():
     
-    gpu_input = cle.push_zyx(np.asarray([
+    gpu_input = cle.push(np.asarray([
 
             [0, 0, 0, 0, 0],
             [1, 0, 0, 0, 0],
@@ -13,7 +13,7 @@ def test_touch_matrix_to_adjacency_matrix():
 
     ]))
 
-    gpu_reference = cle.push_zyx(np.asarray([
+    gpu_reference = cle.push(np.asarray([
 
         [1, 1, 0, 0, 0],
         [1, 1, 1, 1, 0],
@@ -25,8 +25,8 @@ def test_touch_matrix_to_adjacency_matrix():
 
     gpu_touch_matrix = cle.touch_matrix_to_adjacency_matrix(gpu_input)
 
-    a = cle.pull_zyx(gpu_touch_matrix)
-    b = cle.pull_zyx(gpu_reference)
+    a = cle.pull(gpu_touch_matrix)
+    b = cle.pull(gpu_reference)
 
     print(a)
     print(b)

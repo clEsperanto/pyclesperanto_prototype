@@ -19,13 +19,13 @@ def test_threshold_otsu_against_scikit_image():
 
     # threshold in GPU
     import pyclesperanto_prototype as cle
-    gpu_image = cle.push_zyx(image)
+    gpu_image = cle.push(image)
     gpu_binary = cle.threshold_otsu(gpu_image)
 
     print(str(binary))
-    print(str(cle.pull_zyx(gpu_binary)))
+    print(str(cle.pull(gpu_binary)))
 
 
     # compare
     import numpy as np
-    assert(np.allclose(binary, (cle.pull_zyx(gpu_binary) > 0)))
+    assert(np.allclose(binary, (cle.pull(gpu_binary) > 0)))

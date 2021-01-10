@@ -1,8 +1,8 @@
 from pyclesperanto_prototype._tier0 import execute
 from pyclesperanto_prototype._tier0 import plugin_function
 from pyclesperanto_prototype._tier0 import Image
-from .._tier0 import pull_zyx
-from .._tier0 import push_zyx
+from .._tier0 import pull
+from .._tier0 import push
 from .._tier2 import maximum_of_all_pixels
 from .._tier1 import replace_intensities
 from .._tier0 import create_like
@@ -37,7 +37,7 @@ def exclude_labels_on_edges(label_map_input : Image, label_map_destination : Ima
 
     label_indices = range(0, num_labels + 1)
 
-    label_index_map = push_zyx(np.asarray(label_indices))
+    label_index_map = push(np.asarray(label_indices))
 
     parameters = {
         "src":label_map_input,
@@ -68,14 +68,14 @@ def exclude_labels_on_edges(label_map_input : Image, label_map_destination : Ima
 
 
 
-    label_indices = pull_zyx(label_index_map)
+    label_indices = pull(label_index_map)
     count = 1
     for i in range(1, num_labels + 1):
         if (label_indices[i] > 0):
             label_indices[i] = count
             count = count + 1
 
-    label_index_map = push_zyx(np.asarray(label_indices))
+    label_index_map = push(np.asarray(label_indices))
 
     replace_intensities(label_map_input, label_index_map, label_map_destination)
 

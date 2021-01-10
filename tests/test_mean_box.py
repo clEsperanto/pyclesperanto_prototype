@@ -3,7 +3,7 @@ import numpy as np
 
 
 def test_mean_box():
-    test1 = cle.push_zyx(np.asarray([
+    test1 = cle.push(np.asarray([
         [0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0],
         [0, 0, 9, 0, 0],
@@ -11,7 +11,7 @@ def test_mean_box():
         [0, 0, 0, 0, 0]
     ]))
 
-    reference = cle.push_zyx(np.asarray([
+    reference = cle.push(np.asarray([
         [0, 0, 0, 0, 0],
         [0, 1, 1, 1, 0],
         [0, 1, 1, 1, 0],
@@ -22,8 +22,8 @@ def test_mean_box():
     result = cle.create(test1)
     cle.mean_box(test1, result, 1, 1, 0)
 
-    a = cle.pull_zyx(result)
-    b = cle.pull_zyx(reference)
+    a = cle.pull(result)
+    b = cle.pull(reference)
 
     print(a)
 

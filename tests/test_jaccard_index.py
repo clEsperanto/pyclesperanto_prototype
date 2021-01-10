@@ -3,12 +3,12 @@ import numpy as np
 
 
 def test_jaccard_index_2d():
-    test1 = cle.push_zyx(np.asarray([
+    test1 = cle.push(np.asarray([
         [0, 0, 0, 0, 0],
         [0, 1, 1, 0, 0]
     ]))
 
-    test2 = cle.push_zyx(np.asarray([
+    test2 = cle.push(np.asarray([
         [0, 1, 1, 0, 0],
         [0, 1, 1, 0, 0]
     ]))
@@ -18,12 +18,12 @@ def test_jaccard_index_2d():
     assert j == 0.5
 
 def test_accard_index_3d():
-    test1 = cle.push_zyx(np.asarray([
+    test1 = cle.push(np.asarray([
         [[0, 0, 0], [0, 0, 0]],
         [[0, 1, 1], [0, 1, 0]]
     ]))
 
-    test2 = cle.push_zyx(np.asarray([
+    test2 = cle.push(np.asarray([
         [[0, 1, 1], [0, 1, 0]],
         [[0, 1, 1], [0, 1, 0]]
     ]))

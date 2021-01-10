@@ -12,8 +12,8 @@ def test_multiply_matrix(shape, benchmark, target):
         b_np = np.random.rand(shape, shape).astype("float32")
         if target == "gpu":
             # push arrays to GPU
-            gpu_a = cle.push_zyx(a_np)
-            gpu_b = cle.push_zyx(b_np)
+            gpu_a = cle.push(a_np)
+            gpu_b = cle.push(b_np)
             # allocate memory for result on GPU
             gpu_c = cle.create((shape, shape))
             cle.multiply_matrix(gpu_a, gpu_b, gpu_c)

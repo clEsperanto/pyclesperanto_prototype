@@ -3,7 +3,7 @@ import numpy as np
 
 def test_difference_of_gaussian():
 
-    test = cle.push_zyx(np.asarray([
+    test = cle.push(np.asarray([
         [0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0],
         [0, 0, 100, 0, 0],
@@ -16,7 +16,7 @@ def test_difference_of_gaussian():
 
     print(result)
 
-    a = cle.pull_zyx(result)
+    a = cle.pull(result)
     assert (np.min(a) < -1.15)
     assert (np.min(a) > -1.18)
     assert (np.max(a) > 11.9)

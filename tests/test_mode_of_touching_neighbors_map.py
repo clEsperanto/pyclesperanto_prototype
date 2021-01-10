@@ -3,21 +3,21 @@ import numpy as np
 
 def test_mode_of_touching_neighbors_map():
 
-    intensities = cle.push_zyx(np.asarray([
+    intensities = cle.push(np.asarray([
         [0, 0, 2, 5],
         [0, 3, 1, 2],
         [0, 4, 3, 0],
         [0, 0, 0, 0]
     ]))
 
-    labels = cle.push_zyx(np.asarray([
+    labels = cle.push(np.asarray([
         [0, 0, 2, 5],
         [0, 3, 1, 2],
         [0, 4, 3, 0],
         [0, 0, 0, 0],
     ]))
 
-    reference = cle.push_zyx(np.asarray([
+    reference = cle.push(np.asarray([
         [0, 0, 1, 2],
         [0, 1, 2, 1],
         [0, 3, 1, 0],
@@ -27,8 +27,8 @@ def test_mode_of_touching_neighbors_map():
 
     result = cle.mode_of_touching_neighbors_map(intensities, labels)
 
-    a = cle.pull_zyx(result)
-    b = cle.pull_zyx(reference)
+    a = cle.pull(result)
+    b = cle.pull(reference)
 
     print(a)
     print(b)

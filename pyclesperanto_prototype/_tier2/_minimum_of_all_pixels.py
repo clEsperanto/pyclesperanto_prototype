@@ -1,5 +1,5 @@
 from .._tier0 import create
-from .._tier0 import pull_zyx
+from .._tier0 import pull
 from .._tier0 import plugin_function
 from .._tier0 import Image
 
@@ -53,5 +53,5 @@ def minimum_of_all_pixels(source : Image):
 
     minimum_x_projection(source, temp)
 
-    return pull_zyx(temp)[0][0]
+    return pull(temp)[0][0]
 

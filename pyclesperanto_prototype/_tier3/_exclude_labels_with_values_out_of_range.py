@@ -1,13 +1,8 @@
 from .._tier0 import plugin_function
 from .._tier0 import Image
 from .. import smaller_constant, greater_constant, binary_or
-from .._tier0 import push
-from .._tier0 import push_zyx
-from .._tier0 import pull
 from .._tier0 import create_none
 from .._tier0 import create_like
-from .._tier1 import replace_intensities
-import numpy as np
 
 @plugin_function(output_creator=create_none, categories=['label processing'])
 def exclude_labels_with_values_out_of_range(values_vector : Image, label_map_input : Image, label_map_destination : Image = None, minimum_value_range : float = 0, maximum_value_range : float = 100):

@@ -20,7 +20,7 @@ def push_regionprops(props : Union[dict, RegionProperties], first_row_index : in
 
     """
     from ._statistics_entry import STATISTICS_ENTRY
-    from .._tier0 import push_zyx
+    from .._tier0 import push
     num_columns = 36
 
     if isinstance(props, dict):
@@ -198,4 +198,4 @@ def push_regionprops(props : Union[dict, RegionProperties], first_row_index : in
                 if hasattr(label_props, 'mean_max_distance_to_centroid_ratio'):
                     matrix[i][STATISTICS_ENTRY.MAX_MEAN_DISTANCE_TO_CENTROID_RATIO.value] = label_props['mean_max_distance_to_centroid_ratio']
 
-    return push_zyx(matrix.T)
+    return push(matrix.T)

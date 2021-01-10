@@ -5,7 +5,7 @@ import pyclesperanto_prototype as cle
 
 def test_n_closest_points():
 
-    labels = cle.push_zyx(np.asarray([
+    labels = cle.push(np.asarray([
                     [1, 1, 1, 3, 3, 3],
                     [1, 1, 1, 3, 3, 3],
                     [1, 1, 1, 3, 3, 3],
@@ -14,7 +14,7 @@ def test_n_closest_points():
                     [0, 0, 0, 2, 2, 2]
     ]))
 
-    reference = cle.push_zyx(np.asarray(
+    reference = cle.push(np.asarray(
                     [[0, 3, 3, 1]]
     ))
 
@@ -29,8 +29,8 @@ def test_n_closest_points():
 
     n_closest_points = cle.n_closest_points(distance_matrix, n=1, ignore_background=False)
 
-    a = cle.pull_zyx(n_closest_points)
-    b = cle.pull_zyx(reference)
+    a = cle.pull(n_closest_points)
+    b = cle.pull(reference)
 
     print(a)
     print(b)
@@ -45,7 +45,7 @@ import pyclesperanto_prototype as cle
 
 def test_n_closest_points_ignore_background():
 
-    labels = cle.push_zyx(np.asarray([
+    labels = cle.push(np.asarray([
                     [1, 1, 1, 3, 3, 3],
                     [1, 1, 1, 3, 3, 3],
                     [1, 1, 1, 3, 3, 3],
@@ -54,7 +54,7 @@ def test_n_closest_points_ignore_background():
                     [0, 0, 0, 2, 2, 2]
     ]))
 
-    reference = cle.push_zyx(np.asarray(
+    reference = cle.push(np.asarray(
                     [[3, 3, 1]]
     ))
 
@@ -69,8 +69,8 @@ def test_n_closest_points_ignore_background():
 
     n_closest_points = cle.n_closest_points(distance_matrix, n=1)
 
-    a = cle.pull_zyx(n_closest_points)
-    b = cle.pull_zyx(reference)
+    a = cle.pull(n_closest_points)
+    b = cle.pull(reference)
 
     print(a)
     print(b)

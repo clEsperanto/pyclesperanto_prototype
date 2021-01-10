@@ -6,11 +6,11 @@ reference_4 = np.asarray([[2, 2, 1]])
 reference_2 = np.asarray([[1, 1, 0, 2, 0, 1]])
 
 def sum_reduction(source, blocksize):
-    flagged_indices = cle.push_zyx(source)
+    flagged_indices = cle.push(source)
 
     block_sums = cle.sum_reduction_x(flagged_indices, blocksize=blocksize)
 
-    return cle.pull_zyx(block_sums)
+    return cle.pull(block_sums)
 
 def test_sum_reduction():
 

@@ -3,14 +3,14 @@ import numpy as np
 
 
 def test_set_where_x_smaller_than_y():
-    result = cle.push_zyx(np.asarray([
+    result = cle.push(np.asarray([
         [0, 0, 0, 1],
         [0, 0, 3, 1],
         [0, 0, 3, 1],
         [1, 1, 1, 1]
     ]).T)
 
-    reference = cle.push_zyx(np.asarray([
+    reference = cle.push(np.asarray([
         [0, 3, 3, 3],
         [0, 0, 3, 3],
         [0, 0, 3, 3],
@@ -19,8 +19,8 @@ def test_set_where_x_smaller_than_y():
 
     cle.set_where_x_smaller_than_y(result, 3)
 
-    a = cle.pull_zyx(result)
-    b = cle.pull_zyx(reference)
+    a = cle.pull(result)
+    b = cle.pull(reference)
     print(a)
 
     assert (np.array_equal(a, b))

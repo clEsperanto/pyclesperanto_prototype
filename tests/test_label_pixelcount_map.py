@@ -3,13 +3,13 @@ import numpy as np
 
 def test_label_pixel_count_map():
 
-    labels = cle.push_zyx(np.asarray([
+    labels = cle.push(np.asarray([
         [1, 1, 2],
         [1, 0, 0],
         [3, 3, 0]
     ]))
 
-    reference = cle.push_zyx(np.asarray([
+    reference = cle.push(np.asarray([
         [3, 3, 1],
         [3, 0, 0],
         [2, 2, 0]
@@ -18,8 +18,8 @@ def test_label_pixel_count_map():
 
     result = cle.label_pixel_count_map(labels)
 
-    a = cle.pull_zyx(result)
-    b = cle.pull_zyx(reference)
+    a = cle.pull(result)
+    b = cle.pull(reference)
 
     print(a)
     print(b)
@@ -29,7 +29,7 @@ def test_label_pixel_count_map():
 
 def test_label_pixel_count_map_3d():
 
-    labels = cle.push_zyx(np.asarray([
+    labels = cle.push(np.asarray([
         [
             [1, 1, 2],
         ], [
@@ -39,7 +39,7 @@ def test_label_pixel_count_map_3d():
         ]
     ]))
 
-    reference = cle.push_zyx(np.asarray([
+    reference = cle.push(np.asarray([
         [
             [3, 3, 1],
         ], [
@@ -52,8 +52,8 @@ def test_label_pixel_count_map_3d():
 
     result = cle.label_pixel_count_map(labels)
 
-    a = cle.pull_zyx(result)
-    b = cle.pull_zyx(reference)
+    a = cle.pull(result)
+    b = cle.pull(reference)
 
     print(a)
     print(b)

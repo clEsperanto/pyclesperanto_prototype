@@ -3,7 +3,7 @@ import numpy as np
 
 def test_detect_maxima_box():
 
-    gpu_input = cle.push_zyx(np.asarray([
+    gpu_input = cle.push(np.asarray([
 
             [0, 0, 0, 0, 0],
             [1, 0, 0, 2, 0],
@@ -14,7 +14,7 @@ def test_detect_maxima_box():
     ]))
     gpu_output = cle.create_like(gpu_input)
 
-    gpu_reference = cle.push_zyx(np.asarray([
+    gpu_reference = cle.push(np.asarray([
 
             [0, 0, 0, 0, 0],
             [0, 0, 0, 0, 0],
@@ -26,8 +26,8 @@ def test_detect_maxima_box():
 
     cle.detect_maxima_box(gpu_input, gpu_output)
 
-    a = cle.pull_zyx(gpu_output)
-    b = cle.pull_zyx(gpu_reference)
+    a = cle.pull(gpu_output)
+    b = cle.pull(gpu_reference)
 
     print(a)
     print(b)

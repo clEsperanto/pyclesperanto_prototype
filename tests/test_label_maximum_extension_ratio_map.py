@@ -3,13 +3,13 @@ import numpy as np
 
 def test_label_label_maximum_extension_ratio_map_2d():
 
-    labels = cle.push_zyx(np.asarray([
+    labels = cle.push(np.asarray([
         [1, 1, 2],
         [1, 0, 2],
         [3, 3, 0]
     ]))
 
-    reference = cle.push_zyx(np.asarray([
+    reference = cle.push(np.asarray([
         [1.1396203, 1.1396203, 1],
         [1.1396203, 0, 1],
         [1, 1, 0]
@@ -18,8 +18,8 @@ def test_label_label_maximum_extension_ratio_map_2d():
 
     result = cle.label_maximum_extension_ratio_map(labels)
 
-    a = cle.pull_zyx(result)
-    b = cle.pull_zyx(reference)
+    a = cle.pull(result)
+    b = cle.pull(reference)
 
     print(a)
     print(b)
@@ -29,7 +29,7 @@ def test_label_label_maximum_extension_ratio_map_2d():
 
 def test_label_label_maximum_extension_ratio_map_3d():
 
-    labels = cle.push_zyx(np.asarray([
+    labels = cle.push(np.asarray([
         [
             [1, 1, 2],
         ], [
@@ -39,7 +39,7 @@ def test_label_label_maximum_extension_ratio_map_3d():
         ]
     ]))
 
-    reference = cle.push_zyx(np.asarray([
+    reference = cle.push(np.asarray([
         [
             [1.1396203, 1.1396203, 1],
         ], [
@@ -52,8 +52,8 @@ def test_label_label_maximum_extension_ratio_map_3d():
 
     result = cle.label_maximum_extension_ratio_map(labels)
 
-    a = cle.pull_zyx(result)
-    b = cle.pull_zyx(reference)
+    a = cle.pull(result)
+    b = cle.pull(reference)
 
     print(a)
     print(b)

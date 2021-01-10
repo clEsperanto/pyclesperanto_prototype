@@ -15,12 +15,12 @@ def test_maximum_of_all_pixels():
         ]
     ])
 
-    gpu_input = cle.push_zyx(np_input)
+    gpu_input = cle.push(np_input)
     result = cle.maximum_of_all_pixels(gpu_input)
     print(result)
     assert (result == 15)
 
-    gpu_input = cle.push_zyx(np_input)
+    gpu_input = cle.push(np_input)
     result = cle.maximum_of_all_pixels(gpu_input)
     print(result)
     assert (result == 15)

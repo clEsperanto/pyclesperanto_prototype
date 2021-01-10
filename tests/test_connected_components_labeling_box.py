@@ -3,7 +3,7 @@ import numpy as np
 
 def test_connected_components_labeling_box():
     
-    gpu_input = cle.push_zyx(np.asarray([
+    gpu_input = cle.push(np.asarray([
         [
             [1, 0, 1],
             [1, 0, 0],
@@ -11,7 +11,7 @@ def test_connected_components_labeling_box():
         ]
     ]))
 
-    gpu_reference = cle.push_zyx(np.asarray([
+    gpu_reference = cle.push(np.asarray([
         [
             [1, 0, 2],
             [1, 0, 0],
@@ -21,8 +21,8 @@ def test_connected_components_labeling_box():
 
     gpu_output = cle.connected_components_labeling_box(gpu_input)
 
-    a = cle.pull_zyx(gpu_output)
-    b = cle.pull_zyx(gpu_reference)
+    a = cle.pull(gpu_output)
+    b = cle.pull(gpu_reference)
 
     print(a)
     print(b)
@@ -43,7 +43,7 @@ def test_connected_components_labeling_box_blobs():
     print("Loaded image size: " + str(image.shape))
 
     # push image to GPU memory
-    input = cle.push_zyx(image)
+    input = cle.push(image)
     print("Image size in GPU: " + str(input.shape))
 
     # process the image

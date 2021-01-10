@@ -4,7 +4,7 @@ from .._tier0 import Image
 from .._tier0 import create
 from .._tier0 import create_none
 from .._tier1 import maximum_x_projection
-from .._tier0 import pull_zyx
+from .._tier0 import pull
 
 @plugin_function(output_creator=create_none)
 def write_values_to_positions(positions_and_values : Image, destination : Image = None):
@@ -28,7 +28,7 @@ def write_values_to_positions(positions_and_values : Image, destination : Image 
     """
 
     if destination is None:
-        max_pos = pull_zyx(maximum_x_projection(positions_and_values)).T.astype(int)
+        max_pos = pull(maximum_x_projection(positions_and_values)).T.astype(int)
         max_pos = max_pos[0]
         
         if len(max_pos) == 4: # 3D image requested

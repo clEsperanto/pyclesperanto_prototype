@@ -3,21 +3,21 @@ import numpy as np
 
 def test_mean_of_touching_neighbors_map():
 
-    intensities = cle.push_zyx(np.asarray([
+    intensities = cle.push(np.asarray([
         [1, 1, 2, 2],
         [1, 0, 0, 2],
         [4, 0, 0, 6],
         [4, 4, 6, 6]
     ]))
 
-    labels = cle.push_zyx(np.asarray([
+    labels = cle.push(np.asarray([
         [1, 1, 2, 2],
         [1, 0, 0, 2],
         [3, 0, 0, 4],
         [3, 3, 4, 4],
     ]))
 
-    reference = cle.push_zyx(np.asarray([
+    reference = cle.push(np.asarray([
         [0.9660918, 0.9660918, 1.67332, 1.67332],
         [0.9660918, 0, 0, 1.67332],
         [1.5916449, 0, 0, 1.264911],
@@ -27,8 +27,8 @@ def test_mean_of_touching_neighbors_map():
 
     result = cle.standard_deviation_of_touching_neighbors_map(intensities, labels)
 
-    a = cle.pull_zyx(result)
-    b = cle.pull_zyx(reference)
+    a = cle.pull(result)
+    b = cle.pull(reference)
 
     print(a)
     print(b)

@@ -2,11 +2,11 @@ from typing import Union
 
 
 def push_regionprops_column(regionprops : Union[list, dict], column : str):
-    from .._tier0 import push_zyx
+    from .._tier0 import push
     import numpy as np
 
     if isinstance(regionprops, dict):
-        return push_zyx(np.asarray([regionprops[column]]))
+        return push(np.asarray([regionprops[column]]))
     else:
         if hasattr(regionprops[0], 'original_label'):
             labels = [r.original_label for r in regionprops]
@@ -21,4 +21,4 @@ def push_regionprops_column(regionprops : Union[list, dict], column : str):
             else:
                 label = r.label
             values[label] = r[column]
-        return push_zyx(np.asarray([values]))
+        return push(np.asarray([values]))

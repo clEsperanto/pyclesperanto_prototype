@@ -3,7 +3,7 @@ import numpy as np
 
 
 def test_draw_box():
-    reference = cle.push_zyx(np.asarray([
+    reference = cle.push(np.asarray([
         [0, 0, 0, 0, 0],
         [0, 2, 2, 2, 0],
         [0, 2, 2, 2, 0],
@@ -17,7 +17,7 @@ def test_draw_box():
 
     print(result)
 
-    a = cle.pull_zyx(result)
-    b = cle.pull_zyx(reference)
+    a = cle.pull(result)
+    b = cle.pull(reference)
 
     assert (np.array_equal(a, b))

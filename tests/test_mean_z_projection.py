@@ -3,7 +3,7 @@ import numpy as np
 
 def test_mean_z_projection():
 
-    test1 = cle.push_zyx(np.asarray([
+    test1 = cle.push(np.asarray([
         [
             [1, 0, 0, 0, 9],
             [0, 2, 0, 8, 0],
@@ -37,7 +37,7 @@ def test_mean_z_projection():
         ]
     ]).T)
 
-    reference = cle.push_zyx(np.asarray([
+    reference = cle.push(np.asarray([
         [2, 2,   2.8, 2.2, 4.2],
         [2, 2,   2.8, 2.2, 4.2],
         [2, 2.8, 2.2, 2, 4.2],
@@ -49,8 +49,8 @@ def test_mean_z_projection():
     cle.mean_z_projection(test1, result)
 
 
-    a = cle.pull_zyx(result)
-    b = cle.pull_zyx(reference)
+    a = cle.pull(result)
+    b = cle.pull(reference)
 
     print(a)
 

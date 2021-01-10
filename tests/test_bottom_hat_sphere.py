@@ -3,7 +3,7 @@ import numpy as np
 
 def test_bottom_hat_sphere():
 
-    test = cle.push_zyx(np.asarray([
+    test = cle.push(np.asarray([
         [0, 0, 0, 0, 0],
         [0, 50, 50, 50, 0],
         [0, 50, 100, 50, 0],
@@ -16,7 +16,7 @@ def test_bottom_hat_sphere():
 
     print(result)
 
-    a = cle.pull_zyx(result)
+    a = cle.pull(result)
     assert (np.min(a) == 0)
     assert (np.max(a) == 50)
 

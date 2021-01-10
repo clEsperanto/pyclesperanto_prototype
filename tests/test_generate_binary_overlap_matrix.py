@@ -3,7 +3,7 @@ import numpy as np
 
 def test_generate_binary_overlap_matrix_2d():
     
-    gpu_input1 = cle.push_zyx(np.asarray([
+    gpu_input1 = cle.push(np.asarray([
 
             [1, 1, 0, 0, 0],
             [1, 1, 0, 3, 0],
@@ -13,7 +13,7 @@ def test_generate_binary_overlap_matrix_2d():
 
     ]))
 
-    gpu_input2 = cle.push_zyx(np.asarray([
+    gpu_input2 = cle.push(np.asarray([
 
             [1, 1, 2, 2, 2],
             [1, 1, 2, 2, 2],
@@ -24,7 +24,7 @@ def test_generate_binary_overlap_matrix_2d():
     ]))
 
 
-    gpu_reference = cle.push_zyx(np.asarray([
+    gpu_reference = cle.push(np.asarray([
 
             [0, 1, 1],
             [0, 1, 0],
@@ -36,8 +36,8 @@ def test_generate_binary_overlap_matrix_2d():
 
     gpu_binary_overlap_matrix = cle.generate_binary_overlap_matrix(gpu_input1, gpu_input2)
 
-    a = cle.pull_zyx(gpu_binary_overlap_matrix)
-    b = cle.pull_zyx(gpu_reference)
+    a = cle.pull(gpu_binary_overlap_matrix)
+    b = cle.pull(gpu_reference)
 
     print(a)
     print(b)
@@ -46,7 +46,7 @@ def test_generate_binary_overlap_matrix_2d():
 
 
 def test_generate_binary_overlap_matrix_3d():
-    gpu_input1 = cle.push_zyx(np.asarray([
+    gpu_input1 = cle.push(np.asarray([
         [
             [1, 1, 0, 0, 0],
             [1, 1, 0, 3, 0],
@@ -56,7 +56,7 @@ def test_generate_binary_overlap_matrix_3d():
         ]
     ]))
 
-    gpu_input2 = cle.push_zyx(np.asarray([
+    gpu_input2 = cle.push(np.asarray([
         [
             [1, 1, 2, 2, 2],
             [1, 1, 2, 2, 2],
@@ -66,7 +66,7 @@ def test_generate_binary_overlap_matrix_3d():
         ]
     ]))
 
-    gpu_reference = cle.push_zyx(np.asarray([
+    gpu_reference = cle.push(np.asarray([
 
         [0, 1, 1],
         [0, 1, 0],
@@ -78,8 +78,8 @@ def test_generate_binary_overlap_matrix_3d():
 
     gpu_binary_overlap_matrix = cle.generate_binary_overlap_matrix(gpu_input1, gpu_input2)
 
-    a = cle.pull_zyx(gpu_binary_overlap_matrix)
-    b = cle.pull_zyx(gpu_reference)
+    a = cle.pull(gpu_binary_overlap_matrix)
+    b = cle.pull(gpu_reference)
 
     print(a)
     print(b)

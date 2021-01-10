@@ -3,7 +3,7 @@ import numpy as np
 
 
 def test_set_image_borders():
-    result = cle.push_zyx(np.asarray([
+    result = cle.push(np.asarray([
         [3, 3, 3, 3, 3],
         [3, 3, 3, 3, 3],
         [3, 3, 3, 3, 3],
@@ -11,7 +11,7 @@ def test_set_image_borders():
         [3, 3, 3, 3, 3]
     ]))
 
-    reference = cle.push_zyx(np.asarray([
+    reference = cle.push(np.asarray([
         [4, 4, 4, 4, 4],
         [4, 3, 3, 3, 4],
         [4, 3, 3, 3, 4],
@@ -23,6 +23,6 @@ def test_set_image_borders():
 
     print(result)
 
-    a = cle.pull_zyx(result)
-    b = cle.pull_zyx(reference)
+    a = cle.pull(result)
+    b = cle.pull(reference)
     assert (np.allclose(a, b, 0.001))

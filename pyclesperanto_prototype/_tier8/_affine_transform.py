@@ -2,7 +2,7 @@ from typing import Union
 
 from .._tier0 import plugin_function
 from .._tier0 import Image
-from .._tier0 import push_zyx
+from .._tier0 import push
 from ._AffineTransform3D import AffineTransform3D
 from skimage.transform import AffineTransform
 import numpy as np
@@ -64,7 +64,7 @@ def affine_transform(source : Image, destination : Image = None, transform : Uni
     else:
         transform_matrix = np.linalg.inv(transform)
 
-    gpu_transform_matrix = push_zyx(transform_matrix)
+    gpu_transform_matrix = push(transform_matrix)
 
     kernel_suffix = ''
     if linear_interpolation:

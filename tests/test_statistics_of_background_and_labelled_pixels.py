@@ -2,19 +2,19 @@ import pyclesperanto_prototype as cle
 import numpy as np
 
 def test_statistics_of_background_and_labelled_pixels():
-    intensity = cle.push_zyx(np.asarray([
+    intensity = cle.push(np.asarray([
         [0, 1, 2],
         [1, 2, 3],
         [2, 3, 4]
     ]))
 
-    labels = cle.push_zyx(np.asarray([
+    labels = cle.push(np.asarray([
         [0, 0, 1],
         [0, 1, 1],
         [2, 2, 2]
     ]))
 
-    reference = cle.push_zyx(np.asarray([
+    reference = cle.push(np.asarray([
         #IDENTIFIER(0),
         [0.,          1.,          2.],
         # BOUNDING_BOX_X(1),
@@ -96,8 +96,8 @@ def test_statistics_of_background_and_labelled_pixels():
     result = cle.statistics_of_background_and_labelled_pixels(intensity, labels)
     result_image = cle.push_regionprops(result, first_row_index=0)
 
-    a = cle.pull_zyx(result_image)
-    b = cle.pull_zyx(reference)
+    a = cle.pull(result_image)
+    b = cle.pull(reference)
 
     print(a)
     print(b)
@@ -106,7 +106,7 @@ def test_statistics_of_background_and_labelled_pixels():
 
 
 def test_statistics_of_background_and_labelled_pixels_3d():
-    intensity = cle.push_zyx(np.asarray([
+    intensity = cle.push(np.asarray([
         [
             [0, 1, 2],
         ],[
@@ -116,7 +116,7 @@ def test_statistics_of_background_and_labelled_pixels_3d():
         ]
     ]))
 
-    labels = cle.push_zyx(np.asarray([
+    labels = cle.push(np.asarray([
         [
             [0, 0, 1],
         ], [
@@ -126,7 +126,7 @@ def test_statistics_of_background_and_labelled_pixels_3d():
         ]
     ]))
 
-    reference = cle.push_zyx(np.asarray([
+    reference = cle.push(np.asarray([
         # IDENTIFIER(0),
         [0., 1., 2.],
         # BOUNDING_BOX_X(1),
@@ -209,8 +209,8 @@ def test_statistics_of_background_and_labelled_pixels_3d():
     result = cle.statistics_of_background_and_labelled_pixels(intensity, labels)
     result_image = cle.push_regionprops(result, first_row_index=0)
 
-    a = cle.pull_zyx(result_image)
-    b = cle.pull_zyx(reference)
+    a = cle.pull(result_image)
+    b = cle.pull(reference)
 
     print(a)
     print(b)
@@ -221,11 +221,11 @@ def test_statistics_of_background_and_labelled_pixels_3d():
 def test_statistics_of_background_and_labelled_pixels_gpu_compare_to_clij2():
     from skimage.io import imread
 
-    blobs = cle.push_zyx(imread('data/mini_blobs.tif'))
-    labels = cle.push_zyx(imread('data/mini_blobs_otsu_labels_excluded_edges_imagej.tif'))
+    blobs = cle.push(imread('data/mini_blobs.tif'))
+    labels = cle.push(imread('data/mini_blobs_otsu_labels_excluded_edges_imagej.tif'))
 
     regionprops = cle.statistics_of_background_and_labelled_pixels(blobs, labels)
-    table = cle.pull_zyx(cle.transpose_xy(cle.push_regionprops(regionprops)))
+    table = cle.pull(cle.transpose_xy(cle.push_regionprops(regionprops)))
 
 
     print(table)

@@ -2,7 +2,7 @@ import pyclesperanto_prototype as cle
 import numpy as np
 
 def test_set_ramp_z():
-    result = cle.push_zyx(np.asarray([
+    result = cle.push(np.asarray([
         [
             [0, 0, 0],
             [3, 4, 3],
@@ -14,7 +14,7 @@ def test_set_ramp_z():
         ]
     ]))
 
-    reference = cle.push_zyx(np.asarray([
+    reference = cle.push(np.asarray([
         [
             [0, 0, 0],
             [0, 0, 0],
@@ -28,8 +28,8 @@ def test_set_ramp_z():
 
     cle.set_ramp_z(result)
 
-    a = cle.pull_zyx(result)
-    b = cle.pull_zyx(reference)
+    a = cle.pull(result)
+    b = cle.pull(reference)
 
     print(a)
 

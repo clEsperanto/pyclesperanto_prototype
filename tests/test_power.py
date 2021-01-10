@@ -3,7 +3,7 @@ import numpy as np
 
 
 def test_power():
-    test1 = cle.push_zyx(np.asarray([
+    test1 = cle.push(np.asarray([
         [0, 0, 0, 0, 0],
         [0, 1, 2, 3, 0],
         [0, 2, 3, 4, 0],
@@ -11,7 +11,7 @@ def test_power():
         [0, 0, 0, 0, 0]
     ]))
 
-    reference = cle.push_zyx(np.asarray([
+    reference = cle.push(np.asarray([
         [0, 0, 0, 0, 0],
         [0, 1, 4, 9, 0],
         [0, 4, 9, 16, 0],
@@ -24,6 +24,6 @@ def test_power():
 
     print(result)
 
-    a = cle.pull_zyx(result)
-    b = cle.pull_zyx(reference)
+    a = cle.pull(result)
+    b = cle.pull(reference)
     assert (np.allclose(a, b, 0.001))

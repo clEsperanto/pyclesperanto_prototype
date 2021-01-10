@@ -2,19 +2,19 @@ import pyclesperanto_prototype as cle
 import numpy as np
 
 def test_regionprops():
-    intensity = cle.push_zyx(np.asarray([
+    intensity = cle.push(np.asarray([
         [0, 1, 2],
         [1, 2, 3],
         [2, 3, 4]
     ]))
 
-    labels = cle.push_zyx(np.asarray([
+    labels = cle.push(np.asarray([
         [1, 1, 2],
         [1, 2, 2],
         [3, 3, 3]
     ]))
 
-    reference = cle.push_zyx(np.asarray([
+    reference = cle.push(np.asarray([
         #IDENTIFIER(0),
         [1.,          2.,          3.],
         # BOUNDING_BOX_X(1),
@@ -97,8 +97,8 @@ def test_regionprops():
     result = cle.regionprops(labels, intensity)
     result_image = cle.push_regionprops(result, first_row_index=1)
 
-    a = cle.pull_zyx(result_image)
-    b = cle.pull_zyx(reference)
+    a = cle.pull(result_image)
+    b = cle.pull(reference)
 
     print(a)
     print(b)
@@ -106,7 +106,7 @@ def test_regionprops():
     assert (np.allclose(a, b, 0.0001))
 
 def test_statistics_of_labelled_pixels_3d():
-    intensity = cle.push_zyx(np.asarray([
+    intensity = cle.push(np.asarray([
         [
             [0, 1, 2],
         ],[
@@ -116,7 +116,7 @@ def test_statistics_of_labelled_pixels_3d():
         ]
     ]))
 
-    labels = cle.push_zyx(np.asarray([
+    labels = cle.push(np.asarray([
         [
             [1, 1, 2],
         ], [
@@ -126,7 +126,7 @@ def test_statistics_of_labelled_pixels_3d():
         ]
     ]))
 
-    reference = cle.push_zyx(np.asarray([
+    reference = cle.push(np.asarray([
         #IDENTIFIER(0),
         [1.,          2.,          3.],
         # BOUNDING_BOX_X(1),
@@ -209,8 +209,8 @@ def test_statistics_of_labelled_pixels_3d():
     result = cle.regionprops(labels, intensity)
     result_image = cle.push_regionprops(result, first_row_index=1)
 
-    a = cle.pull_zyx(result_image)
-    b = cle.pull_zyx(reference)
+    a = cle.pull(result_image)
+    b = cle.pull(reference)
 
     print(a)
     print(b)

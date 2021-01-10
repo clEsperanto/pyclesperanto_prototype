@@ -3,7 +3,7 @@ import numpy as np
 
 def test_flag_existing_labels():
 
-    gpu_input = cle.push_zyx(np.asarray([
+    gpu_input = cle.push(np.asarray([
         [
             [1, 2, 3],
             [1, 6, 6],
@@ -11,14 +11,14 @@ def test_flag_existing_labels():
         ]
     ]))
 
-    gpu_reference = cle.push_zyx(np.asarray([
+    gpu_reference = cle.push(np.asarray([
         [0, 1, 1, 1, 0, 0, 1, 1, 1, 1]
     ]))
 
     gpu_output = cle.flag_existing_labels(gpu_input)
 
-    a = cle.pull_zyx(gpu_output)
-    b = cle.pull_zyx(gpu_reference)
+    a = cle.pull(gpu_output)
+    b = cle.pull(gpu_reference)
 
     print(a)
     print(b)

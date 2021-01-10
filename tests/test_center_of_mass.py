@@ -3,7 +3,7 @@ import numpy as np
 
 def test_center_of_mass():
 
-    test = cle.push_zyx(np.asarray([
+    test = cle.push(np.asarray([
         [0, 0, 0, 0, 0],
         [1, 1, 1, 1, 1],
         [0, 0, 0, 0, 0]

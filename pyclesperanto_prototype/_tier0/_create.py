@@ -52,9 +52,9 @@ def create_matrix_from_pointlists(pointlist1:OCLArray, pointlist2:OCLArray):
 
 def create_from_pointlist(pointlist: OCLArray, *args):
     from .._tier1 import maximum_x_projection
-    from .._tier0 import pull_zyx
+    from .._tier0 import pull
 
-    max_pos = pull_zyx(maximum_x_projection(pointlist)).T.astype(int)
+    max_pos = pull(maximum_x_projection(pointlist)).T.astype(int)
     max_pos = max_pos[0]
 
     if len(max_pos) == 3:  # 3D image requested

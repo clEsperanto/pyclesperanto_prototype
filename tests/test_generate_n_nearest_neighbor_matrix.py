@@ -3,12 +3,12 @@ import numpy as np
 
 
 def test_generate_n_nearest_neighbors_matrix():
-    positions = cle.push_zyx(np.asarray([
+    positions = cle.push(np.asarray([
         [1, 1, 4, 4],
         [1, 4, 4, 1]
     ]))
 
-    reference = cle.push_zyx(np.asarray([
+    reference = cle.push(np.asarray([
         [0, 0, 0, 0, 0, 0],
         [0, 1, 1, 1, 1, 0],
         [0, 1, 0, 0, 1, 0],
@@ -25,8 +25,8 @@ def test_generate_n_nearest_neighbors_matrix():
 
     result = cle.touch_matrix_to_mesh(positions, n_nearest_neighbor_matrix, result)
 
-    a = cle.pull_zyx(result)
-    b = cle.pull_zyx(reference)
+    a = cle.pull(result)
+    b = cle.pull(reference)
 
     print(a)
     print(b)

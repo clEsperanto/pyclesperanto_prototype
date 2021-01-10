@@ -11,7 +11,7 @@ image = imread('https://imagej.nih.gov/ij/images/blobs.gif')
 print("Loaded image size: " + str(image.shape))
 
 # push image to GPU memory
-input = cle.push_zyx(image)
+input = cle.push(image)
 print("Image size in GPU: " + str(input.shape))
 
 # process the image
@@ -30,4 +30,4 @@ print("Num objects in the image: " + str(num_labels))
 print(labeled)
 
 # for debugging: save image to disc
-imsave("result.tif", cle.pull_zyx(labeled))
+imsave("result.tif", cle.pull(labeled))

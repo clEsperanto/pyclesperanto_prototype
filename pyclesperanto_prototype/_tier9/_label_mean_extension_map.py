@@ -1,6 +1,6 @@
 from .._tier0 import plugin_function
 from .._tier0 import Image
-from .._tier0 import push_zyx
+from .._tier0 import push
 from .._tier1 import replace_intensities
 from .._tier1 import set_column
 

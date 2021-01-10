@@ -3,7 +3,7 @@ import numpy as np
 
 def test_bounding_box_2d():
 
-    test = cle.push_zyx(np.asarray([
+    test = cle.push(np.asarray([
         [0, 0, 0, 0, 0],
         [0, 1, 1, 0, 0],
         [0, 1, 1, 0, 0],
@@ -22,7 +22,7 @@ def test_bounding_box_2d():
 
 def test_bounding_box_3d():
 
-    test = cle.push_zyx(np.asarray([[
+    test = cle.push(np.asarray([[
         [0, 0, 0, 0, 0],
         [0, 1, 1, 0, 0],
         [0, 1, 1, 0, 0],
