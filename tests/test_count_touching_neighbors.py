@@ -19,8 +19,8 @@ def test_count_touching_neighbors():
 
     neighbor_count_vector = cle.count_touching_neighbors(touch_matrix)
 
-    a = cle.pull(neighbor_count_vector)
-    b = cle.pull(reference)
+    a = cle.pull_zyx(neighbor_count_vector)
+    b = cle.pull_zyx(reference)
 
     print(a)
     print(b)

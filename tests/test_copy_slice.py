@@ -3,7 +3,7 @@ import numpy as np
 
 def test_copy_slice_from_3d():
 
-    test1 = cle.push(np.asarray([
+    test1 = cle.push_zyx(np.asarray([
         [
             [1, 4],
             [0, 4]
@@ -12,20 +12,20 @@ def test_copy_slice_from_3d():
             [1, 3],
             [1, 2]
         ]
-    ]))
+    ]).T)
 
     test2 = cle.create((2, 2))
     cle.copy_slice(test1, test2, 0)
 
     print(test2)
-    a = cle.pull(test2)
+    a = cle.pull_zyx(test2)
     assert (np.min(a) == 0)
     assert (np.max(a) == 1)
     assert (np.mean(a) == 0.75)
 
 
 def test_copy_slice_to_3d():
-    test1 = cle.push(np.asarray([
+    test1 = cle.push_zyx(np.asarray([
             [3, 4],
             [4, 5]
     ]))
@@ -35,13 +35,13 @@ def test_copy_slice_to_3d():
     cle.copy_slice(test1, test2, 0)
 
     print(test2)
-    a = cle.pull(test2)
+    a = cle.pull_zyx(test2)
     assert (np.min(a) == 0)
     assert (np.max(a) == 5)
     assert (np.mean(a) == 2)
 
 def test_copy_slice_to3d_with_one_slice():
-    test1 = cle.push(np.asarray([
+    test1 = cle.push_zyx(np.asarray([
         [3, 4, 6],
         [4, 5, 2]
     ]))
@@ -49,14 +49,14 @@ def test_copy_slice_to3d_with_one_slice():
     print(test1)
     print("shape test1 " + str(test1.shape))
 
-    test2 = cle.create((1, 3, 2))
+    test2 = cle.create((1, 2, 3))
     print("shape test2 " + str(test2.shape))
     print(test2)
 
     cle.copy_slice(test1, test2, 0)
     print(test2)
 
-    a = cle.pull(test2)
+    a = cle.pull_zyx(test2)
     assert (np.min(a) == 2)
     assert (np.max(a) == 6)
     assert (np.mean(a) == 4)
