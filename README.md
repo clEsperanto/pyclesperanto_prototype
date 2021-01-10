@@ -11,15 +11,16 @@ The [full reference](https://clij.github.io/clij2-docs/reference__pyclesperanto)
 
 ## Installation
 * Get a python environment, e.g. via [mini-conda](https://docs.conda.io/en/latest/miniconda.html). If you never used python/conda environments before, please follow the instructions [here](https://mpicbg-scicomp.github.io/ipf_howtoguides/guides/Python_Conda_Environments) first.
-* Install [pyopencl](https://documen.tician.de/pyopencl/). Windows users are recommended to use this command:
-```
-conda install -c conda-forge pyopencl=2020.3.1
-```
+* Install [pyopencl](https://documen.tician.de/pyopencl/). 
 
 If installation of pyopencl for Windows fails, consider downloading a precompiled wheel (e.g. from [here](https://www.lfd.uci.edu/~gohlke/pythonlibs/#pyopencl) ) and installing it manually. Note that "cl12" and "cp38" in the filename matter: They allow you using OpenCL 1.2 compatible GPU devices from Python 3.8.
 
 ```
 pip install pyopencl-2019.1.1+cl12-cp37-cp37m-win_amd64.whl
+```
+Alternatively, installing via conda also works:
+```
+conda install -c conda-forge pyopencl=2020.3.1
 ```
 
 Afterwards, install pyclesperanto:
@@ -166,6 +167,15 @@ imsave("result.tif", cle.pull(labeled))
 </td><td>
 
 [Mesh nearest_neighbors](https://github.com/clEsperanto/pyclesperanto_prototype/tree/master/demo/neighbors/mesh_nearest_neighbors.ipynb)
+
+</td></tr><tr><td>
+
+<img src="https://github.com/clEsperanto/pyclesperanto_prototype/raw/master/docs/images/neighborhood_definitions.png" width="300"/>
+
+</td><td>
+
+[Neighborhood definitions](https://github.com/clEsperanto/pyclesperanto_prototype/tree/master/demo/neighbors/neighborhood_definitions.ipynb)
+
 
 </td></tr><tr><td>
 

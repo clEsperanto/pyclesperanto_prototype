@@ -5,7 +5,8 @@ from .._tier0 import create_vector_from_square_matrix
 
 @plugin_function(output_creator=create_vector_from_square_matrix)
 def average_distance_of_n_shortest_distances(distance_matrix : Image, distance_vector_destination: Image = None, n : int = 1):
-    """
+    """Determines the n shortest distances for each column in a distance matrix and puts the average of these in a
+    vector.
 
     Parameters
     ----------
@@ -15,6 +16,7 @@ def average_distance_of_n_shortest_distances(distance_matrix : Image, distance_v
 
     Returns
     -------
+    distance_vector_destination
 
     """
 

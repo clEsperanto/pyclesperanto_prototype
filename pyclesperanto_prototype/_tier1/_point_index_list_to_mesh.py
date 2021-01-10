@@ -22,6 +22,9 @@ def point_index_list_to_mesh(pointlist: Image, indexlist : Image, mesh_destinati
     ----------
     .. [1] https://clij.github.io/clij2-docs/reference_pointIndexListToMesh
     """
+    from .._tier1 import set
+    set(mesh_destination, 0)
+    
     parameters = {
         "src_pointlist": pointlist,
         "src_indexlist": indexlist,
