@@ -21,6 +21,9 @@ def rotate(source : Image, destination : Image = None, angle_around_x_in_degrees
         rotation around y axis in radians
     angle_around_z_in_degrees : float
         rotation around z axis in radians
+    rotate_around_center : boolean
+        if True: rotate image around center
+        if False: rotate image around origin
 
     Returns
     -------
