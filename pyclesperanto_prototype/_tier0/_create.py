@@ -52,9 +52,9 @@ def create_matrix_from_pointlists(pointlist1:OCLArray, pointlist2:OCLArray):
 
 def create_from_pointlist(pointlist: OCLArray, *args):
     from .._tier1 import maximum_x_projection
-    from .._tier0 import pull
+    from .._tier0 import pull_zyx
 
-    max_pos = pull(maximum_x_projection(pointlist)).astype(int)
+    max_pos = pull_zyx(maximum_x_projection(pointlist)).T.astype(int)
     max_pos = max_pos[0]
 
     if len(max_pos) == 3:  # 3D image requested
@@ -89,17 +89,42 @@ def create_square_matrix_from_two_labelmaps(labelmap1: OCLArray, labelmap2: OCLA
 def create_vector_from_square_matrix(square_matrix : OCLArray, *args):
     return create([1, square_matrix.shape[0]])
 
+
 def create_2d_xy(input):
-    return create([input.shape[2], input.shape[1]])
+    if len(input.shape) == 3:
+        return create([input.shape[2], input.shape[1]])
+    else:
+        return create([input.shape[1], input.shape[0]])
 
 def create_2d_yx(input):
-    return create([input.shape[1], input.shape[2]])
+    if len(input.shape) == 3:
+        return create([input.shape[1], input.shape[2]])
+    else:
+        return create([input.shape[0], 1])
 
 def create_2d_zy(input):
-    return create([input.shape[0], input.shape[1]])
+    if len(input.shape) == 3:
+        return create([input.shape[0], input.shape[1]])
+    else:
+        return create([1, input.shape[0]])
+
+def create_2d_yz(input):
+    if len(input.shape) == 3:
+        return create([input.shape[1], input.shape[0]])
+    else:
+        return create([input.shape[0], 1])
 
 def create_2d_zx(input):
-    return create([input.shape[0], input.shape[2]])
+    if len(input.shape) == 3:
+        return create([input.shape[0], input.shape[2]])
+    else:
+        return create([1, input.shape[1]])
+
+def create_2d_xz(input):
+    if len(input.shape) == 3:
+        return create([input.shape[2], input.shape[0]])
+    else:
+        return create([input.shape[1], 1])
 
 def create_none(*args):
     return None
