@@ -43,6 +43,7 @@ results of the GPU-accelerated statistics are dictionaries which contain the sam
 * `translate`
 * `rotate`
 * `scale`
+* `rigid_transform`
 
 ### Backwards compatibility breaking changes
 * `statistics_of_labelled_pixels` and `statistics_of_background_and_labelled_pixels` produce different output now. 
