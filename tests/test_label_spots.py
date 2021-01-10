@@ -3,7 +3,7 @@ import numpy as np
 
 def test_label_spots_2d():
 
-    gpu_input = cle.push(np.asarray([
+    gpu_input = cle.push_zyx(np.asarray([
 
             [0, 0, 0, 0, 0],
             [0, 1, 0, 1, 0],
@@ -11,9 +11,9 @@ def test_label_spots_2d():
             [0, 0, 1, 0, 0],
             [0, 0, 0, 0, 1]
 
-    ]))
+    ]).T)
 
-    gpu_reference = cle.push(np.asarray([
+    gpu_reference = cle.push_zyx(np.asarray([
 
             [0, 0, 0, 0, 0],
             [0, 1, 0, 3, 0],
@@ -21,7 +21,7 @@ def test_label_spots_2d():
             [0, 0, 2, 0, 0],
             [0, 0, 0, 0, 4]
 
-    ]))
+    ]).T)
 
     gpu_output = cle.label_spots(gpu_input)
 

@@ -7,13 +7,13 @@ def test_histogram():
         [3, 3, 4, 4, 5, 5]
     ]))
 
-    ref_histogram = [1, 2, 3, 4, 2]
+    ref_histogram = [[1, 2, 3, 4, 2]]
 
     my_histogram = cle.histogram(test, num_bins = 5)
 
     print(my_histogram)
 
-    a = cle.pull(my_histogram)
+    a = cle.pull_zyx(my_histogram)
     assert (np.allclose(a, ref_histogram))
 
 def test_histogram_3d():

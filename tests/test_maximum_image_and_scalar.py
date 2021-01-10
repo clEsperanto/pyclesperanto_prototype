@@ -3,13 +3,13 @@ import numpy as np
 
 
 def test_maximum_image_and_scalar():
-    test1 = cle.push(np.asarray([
+    test1 = cle.push_zyx(np.asarray([
         [0, 3, 4, 5, 0],
         [0, 2, 1, 6, 0],
         [0, 0, 8, 7, 0]
     ]))
 
-    reference = cle.push(np.asarray([
+    reference = cle.push_zyx(np.asarray([
         [2, 3, 4, 5, 2],
         [2, 2, 2, 6, 2],
         [2, 2, 8, 7, 2]
@@ -18,8 +18,8 @@ def test_maximum_image_and_scalar():
     result = cle.create(test1)
     cle.maximum_image_and_scalar(test1, result, 2)
 
-    a = cle.pull(result)
-    b = cle.pull(reference)
+    a = cle.pull_zyx(result)
+    b = cle.pull_zyx(reference)
 
     print(a)
 

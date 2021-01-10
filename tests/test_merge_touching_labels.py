@@ -3,7 +3,7 @@ import numpy as np
 
 def test_merge_touching_labels():
 
-    gpu_input = cle.push(np.asarray([
+    gpu_input = cle.push_zyx(np.asarray([
         [
             [1, 1, 0, 0, 0],
             [0, 2, 2, 0, 3],
@@ -12,7 +12,7 @@ def test_merge_touching_labels():
     ]))
     gpu_output = cle.create_like(gpu_input)
 
-    gpu_reference = cle.push(np.asarray([
+    gpu_reference = cle.push_zyx(np.asarray([
         [
             [1, 1, 0, 0, 0],
             [0, 1, 1, 0, 2],

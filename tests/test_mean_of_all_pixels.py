@@ -2,7 +2,7 @@ import pyclesperanto_prototype as cle
 import numpy as np
 
 def test_mean_of_all_pixels_3d():
-    test1 = cle.push(np.asarray([
+    test1 = cle.push_zyx(np.asarray([
         [
             [0, 4, 0, 0, 2],
             [0, 0, 0, 8, 0],
@@ -18,7 +18,7 @@ def test_mean_of_all_pixels_3d():
 
 
 def test_mean_of_all_pixels_2d():
-    test1 = cle.push(np.asarray([
+    test1 = cle.push_zyx(np.asarray([
             [0, 4, 0, 0, 2],
             [0, 0, 0, 8, 0],
             [3, 0, 0, 0, 0],
@@ -31,7 +31,7 @@ def test_mean_of_all_pixels_2d():
     assert s == 1
 
 def test_mean_of_all_pixels_1d():
-    test1 = cle.push(np.asarray(
+    test1 = cle.push_zyx(np.asarray(
             [0, 8, 0, 0, 2]
     ))
 
@@ -41,7 +41,7 @@ def test_mean_of_all_pixels_1d():
 
 
 def test_mean_of_all_pixels_1d_y():
-    test1 = cle.push(np.asarray(
+    test1 = cle.push_zyx(np.asarray(
             [[0], [8], [0], [0], [2]]
     ))
 
@@ -50,7 +50,7 @@ def test_mean_of_all_pixels_1d_y():
     assert s == 2
 
 def test_mean_of_all_pixels_1d_z():
-    test1 = cle.push(np.asarray(
+    test1 = cle.push_zyx(np.asarray(
             [[[0]], [[8]], [[0]], [[0]], [[2]]]
     ))
 

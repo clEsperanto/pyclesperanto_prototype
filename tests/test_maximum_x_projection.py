@@ -3,7 +3,7 @@ import numpy as np
 
 def test_maximum_x_projection():
 
-    test1 = cle.push(np.asarray([
+    test1 = cle.push_zyx(np.asarray([
         [
             [1, 0, 0, 0, 9],
             [0, 2, 0, 8, 0],
@@ -35,21 +35,21 @@ def test_maximum_x_projection():
             [0, 2, 0, 8, 0],
             [5, 0, 6, 0, 10]
         ]
-    ]))
+    ]).T)
 
-    reference = cle.push(np.asarray([
+    reference = cle.push_zyx(np.asarray([
         [1, 3, 3, 3, 5],
         [2, 4, 4, 4, 0],
         [0, 1, 1, 1, 6],
         [8, 8, 7, 8, 0],
         [9, 10, 10, 10, 10]
-    ]))
+    ]).T)
 
     result = cle.create(reference)
     cle.maximum_x_projection(test1, result)
 
-    a = cle.pull(result)
-    b = cle.pull(reference)
+    a = cle.pull_zyx(result)
+    b = cle.pull_zyx(reference)
 
     print(a)
 

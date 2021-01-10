@@ -2,7 +2,7 @@ import pyclesperanto_prototype as cle
 import numpy as np
 
 def test_nonzero_minimum_diamond():
-    test = cle.push(np.asarray([
+    test = cle.push_zyx(np.asarray([
         [0, 0, 0, 0, 0],
         [0, 1, 1, 2, 0],
         [0, 2, 2, 3, 0],
@@ -10,7 +10,7 @@ def test_nonzero_minimum_diamond():
         [0, 0, 0, 0, 0]
     ]))
 
-    reference = cle.push(np.asarray([
+    reference = cle.push_zyx(np.asarray([
         [0, 0, 0, 0, 0],
         [0, 1, 1, 1, 0],
         [0, 1, 1, 2, 0],
@@ -22,13 +22,13 @@ def test_nonzero_minimum_diamond():
     flag = cle.create((1, 1, 1))
 
     # as nonzero filters don't touch zero values, we need to initialize the result in advance
-    cle.set(result, 0);
+    cle.set(result, 0)
 
     cle.nonzero_minimum_diamond(test, flag, result)
 
     print(result)
 
-    a = cle.pull(result)
-    b = cle.pull(reference)
+    a = cle.pull_zyx(result)
+    b = cle.pull_zyx(reference)
     assert (np.allclose(a, b, atol=0.00001))
 

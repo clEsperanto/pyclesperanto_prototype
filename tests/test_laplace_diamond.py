@@ -3,7 +3,7 @@ import numpy as np
 
 
 def test_laplace_diamond():
-    test1 = cle.push(np.asarray([
+    test1 = cle.push_zyx(np.asarray([
         [0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0],
         [0, 0, 1, 0, 0],
@@ -11,7 +11,7 @@ def test_laplace_diamond():
         [0, 0, 0, 0, 0]
     ]))
 
-    reference = cle.push(np.asarray([
+    reference = cle.push_zyx(np.asarray([
         [0, 0, 0, 0, 0],
         [0, 0, -1, 0, 0],
         [0, -1, 4, -1, 0],
@@ -22,8 +22,8 @@ def test_laplace_diamond():
     result = cle.create(test1)
     cle.laplace_diamond(test1, result)
 
-    a = cle.pull(result)
-    b = cle.pull(reference)
+    a = cle.pull_zyx(result)
+    b = cle.pull_zyx(reference)
 
     print(a)
 

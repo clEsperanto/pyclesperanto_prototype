@@ -3,14 +3,14 @@ import numpy as np
 
 
 def test_mask_label():
-    test1 = cle.push(np.asarray([
+    test1 = cle.push_zyx(np.asarray([
         [0, 0, 0, 0, 0],
         [0, 1, 2, 3, 0],
         [0, 3, 3, 4, 0],
         [0, 4, 4, 5, 0],
         [0, 0, 0, 0, 0]
     ]))
-    test2 = cle.push(np.asarray([
+    test2 = cle.push_zyx(np.asarray([
         [0, 0, 0, 0, 0],
         [0, 2, 1, 3, 0],
         [0, 2, 1, 3, 0],
@@ -18,7 +18,7 @@ def test_mask_label():
         [0, 0, 0, 0, 0]
     ]))
 
-    reference = cle.push(np.asarray([
+    reference = cle.push_zyx(np.asarray([
         [0, 0, 0, 0, 0],
         [0, 0, 2, 0, 0],
         [0, 0, 3, 0, 0],
@@ -29,8 +29,8 @@ def test_mask_label():
     result = cle.create(test1)
     cle.mask_label(test1, test2, result, 1)
 
-    a = cle.pull(result)
-    b = cle.pull(reference)
+    a = cle.pull_zyx(result)
+    b = cle.pull_zyx(reference)
     print(a)
 
     assert (np.array_equal(a, b))
