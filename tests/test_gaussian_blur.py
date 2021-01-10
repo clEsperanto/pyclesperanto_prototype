@@ -21,6 +21,25 @@ def test_gaussian_blur():
     assert (np.max(a) > 15.9)
     assert (np.max(a) < 16)
 
+def test_gaussian_blur_keyword_arguments():
+
+    test = cle.push(np.asarray([
+        [0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0],
+        [0, 0, 100, 0, 0],
+        [0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0]
+    ]))
+
+    result = cle.gaussian_blur(test, sigma_x=1, sigma_y=1, sigma_z=0)
+
+    print(result)
+
+    a = cle.pull(result)
+    assert (np.min(a) > 0)
+    assert (np.max(a) > 15.9)
+    assert (np.max(a) < 16)
+
 def test_gaussian_blur_with_sigma_array_parameter():
     test = cle.push(np.asarray([
         [0, 0, 0, 0, 0],
