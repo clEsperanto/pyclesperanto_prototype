@@ -1,6 +1,8 @@
 import inspect
 from typing import Any, Callable, Dict, Optional, Sequence, Set, Type, Union
 from functools import wraps
+from warnings import warn
+
 from toolz import curry
 
 from ._pycl import OCLArray
@@ -92,6 +94,50 @@ def plugin_function(
                     # if not set and should be an image, create an image
                     # create a new output image with specified/default creator
                     kwargs[argument] = output_creator(*args_list)
+
+        # go through arguments again to check if one is passed that's not accepted on the other side
+        # if for example a sigma array has been passed, but sigma_x, sigma_y and sigma_z are expected,
+        # we convert the sigma array to three separate values
+        keys_to_remove = []
+        dict_to_append = {}
+        for argument in kwargs.keys():
+            if argument not in argument_specification.args:
+                if argument + "_x" in argument_specification.args and \
+                        argument + "_y" in argument_specification.args and \
+                        argument + "_z" in argument_specification.args:
+
+                    entry = kwargs[argument]
+                    keys_to_remove.append(argument)
+
+                    import numbers
+
+                    if isinstance(entry, list):
+                        if len(entry) == 3:
+                            dict_to_append[argument + "_x"] = entry[2]
+                            dict_to_append[argument + "_y"] = entry[1]
+                            dict_to_append[argument + "_z"] = entry[0]
+                        elif len(entry) == 2:
+                            dict_to_append[argument + "_x"] = entry[1]
+                            dict_to_append[argument + "_y"] = entry[0]
+                        elif len(entry) == 1:
+                            dict_to_append[argument + "_x"] = entry[0]
+                            dict_to_append[argument + "_y"] = entry[0]
+                            dict_to_append[argument + "_z"] = entry[0]
+                    elif isinstance(entry, numbers.Number):
+                        dict_to_append[argument + "_x"] = entry
+                        dict_to_append[argument + "_y"] = entry
+                        dict_to_append[argument + "_z"] = entry
+                    else:
+                        warn("Dropping parameter " + argument + " passed to " + function.__name__ + " because it the wrong type.")
+                else:
+                    warn(
+                        "Dropping parameter " + argument + " passed to " + function.__name__ + " because it's not accepted.")
+
+        for key in keys_to_remove:
+            del kwargs[key]
+
+        for key in dict_to_append.keys():
+            kwargs[key] = dict_to_append[key]
 
         #print("Got arguments")
         #print(args)
