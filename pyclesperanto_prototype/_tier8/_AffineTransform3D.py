@@ -43,7 +43,7 @@ class AffineTransform3D:
 
         return self
 
-    def rotate(self, axis : int = 2, angle_in_rad : float = 0):
+    def rotate(self, axis : int = 2, angle_in_degrees : float = 0):
         """
         Rotation around a given axis (default: z-axis, meaning rotation in x-y-plane)
 
@@ -51,15 +51,16 @@ class AffineTransform3D:
         ----------
         axis : int
             axis to rotate around (0=x, 1=y, 2=z)
-        angle_in_rad : int
-            angle in radians. To convert degrees to radians us this formula:
-            angle_in_rad = angle_in_deg * numpy.pi / 180.0
+        angle_in_degrees : int
+            angle in degrees. To convert radians to degrees use this formula:
+            angle_in_deg = angle_in_rad / numpy.pi * 180.0
 
         Returns
         -------
         self
-
         """
+        angle_in_rad = angle_in_degrees * np.pi / 180.0
+
         if axis == 0:
             self._concatenate(self._3x3_to_4x4(transforms3d.euler.euler2mat(angle_in_rad, 0, 0)))
         if axis == 1:

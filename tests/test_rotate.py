@@ -18,7 +18,7 @@ def test_affine_transform_rotate():
         [0, 0, 0, 0, 0],
     ]]))
 
-    result = cle.rotate(source, angle_around_z_in_rad=45.0 * np.pi / 180.0, rotate_around_center=False)
+    result = cle.rotate(source, angle_around_z_in_degrees=45.0, rotate_around_center=False)
 
     a = cle.pull_zyx(result)
     b = cle.pull_zyx(reference)
@@ -45,7 +45,7 @@ def test_affine_transform_rotate_around_center():
         [0, 0, 1, 0, 0],
     ]]))
 
-    result = cle.rotate(source, angle_around_z_in_rad=90.0 * np.pi / 180.0, rotate_around_center=True)
+    result = cle.rotate(source, angle_around_z_in_degrees=90.0, rotate_around_center=True)
 
     a = cle.pull_zyx(result)
     b = cle.pull_zyx(reference)

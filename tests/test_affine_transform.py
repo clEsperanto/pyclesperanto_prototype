@@ -115,7 +115,7 @@ def test_affine_transform_rotate():
     ]]))
 
     transform = cle.AffineTransform3D()
-    transform.rotate(2, 45.0 * np.pi / 180.0)
+    transform.rotate(2, 45.0)
 
     result = cle.affine_transform(source, transform=transform)
 
@@ -146,7 +146,7 @@ def test_affine_transform_rotate_around_center():
 
     transform = cle.AffineTransform3D()
     transform.translate(-2.5, -2.5)
-    transform.rotate(2, 90.0 * np.pi / 180.0)
+    transform.rotate(2, 90.0)
     transform.translate(2.5, 2.5)
 
     result = cle.affine_transform(source, transform=transform)
