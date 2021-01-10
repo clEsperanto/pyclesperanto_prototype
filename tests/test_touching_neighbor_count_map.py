@@ -22,8 +22,8 @@ def test_touching_neighbor_count_map():
 
     touching_neighbor_count_map = cle.touching_neighbor_count_map(labels)
 
-    a = cle.pull(touching_neighbor_count_map)
-    b = cle.pull(reference)
+    a = cle.pull_zyx(touching_neighbor_count_map)
+    b = cle.pull_zyx(reference)
 
     print(a)
     print(b)

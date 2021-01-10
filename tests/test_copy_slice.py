@@ -77,7 +77,7 @@ def test_copy_slice_to3d_with_one_slice_zyx():
     cle.copy_slice(test1, test2, 0)
     print(test2)
 
-    a = cle.pull(test2)
+    a = cle.pull_zyx(test2)
     assert (np.min(a) == 2)
     assert (np.max(a) == 6)
     assert (np.mean(a) == 4)
@@ -91,7 +91,7 @@ def test_copy_slice_mini_y():
     cle.copy_slice(gpu_input, gpu_output, 0)
     print(gpu_output)
 
-    a = cle.pull(gpu_output)
+    a = cle.pull_zyx(gpu_output)
     assert (np.min(a) == 1)
     assert (np.max(a) == 4)
     assert (np.mean(a) == 2.5)
@@ -105,7 +105,7 @@ def test_copy_slice_mini_x():
     cle.copy_slice(gpu_input, gpu_output, 0)
     print(gpu_output)
 
-    a = cle.pull(gpu_output)
+    a = cle.pull_zyx(gpu_output)
     assert (np.min(a) == 1)
     assert (np.max(a) == 4)
     assert (np.mean(a) == 2.5)

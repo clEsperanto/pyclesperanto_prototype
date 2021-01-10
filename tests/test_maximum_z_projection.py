@@ -47,8 +47,8 @@ def test_maximum_z_projection():
     result = cle.create(reference)
     cle.maximum_z_projection(test1, result)
 
-    a = cle.pull(result)
-    b = cle.pull(reference)
+    a = cle.pull_zyx(result)
+    b = cle.pull_zyx(reference)
 
     print(a)
 

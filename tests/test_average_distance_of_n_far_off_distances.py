@@ -21,8 +21,8 @@ def test_average_distance_of_n_far_off_distances():
 
     average_distance_of_n_far_off_distances = cle.average_distance_of_n_far_off_distances(distance_matrix, n=1)
 
-    a = cle.pull(average_distance_of_n_far_off_distances)
-    b = cle.pull(reference)
+    a = cle.pull_zyx(average_distance_of_n_far_off_distances)
+    b = cle.pull_zyx(reference)
 
     print(a)
     print(b)

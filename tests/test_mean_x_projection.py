@@ -49,8 +49,8 @@ def test_mean_x_projection():
     cle.mean_x_projection(test1, result)
 
 
-    a = cle.pull(result)
-    b = cle.pull(reference)
+    a = cle.pull_zyx(result)
+    b = cle.pull_zyx(reference)
 
     print(a)
     print(b)

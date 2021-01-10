@@ -22,8 +22,8 @@ def test_average_distance_of_touching_neighbors():
 
     average_distance_of_touching_neighbors = cle.average_distance_of_touching_neighbors(distance_matrix, touch_matrix)
 
-    a = cle.pull(average_distance_of_touching_neighbors)
-    b = cle.pull(reference)
+    a = cle.pull_zyx(average_distance_of_touching_neighbors)
+    b = cle.pull_zyx(reference)
 
     print(a)
     print(b)

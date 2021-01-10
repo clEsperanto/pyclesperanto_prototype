@@ -57,7 +57,7 @@ def test_transpose_xy_2d_generate_output():
 
     result = cle.transpose_xy(test1)
 
-    a = cle.pull(result)
+    a = cle.pull_zyx(result)
 
     print(a)
 

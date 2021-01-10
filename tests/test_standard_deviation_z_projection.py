@@ -2,7 +2,7 @@ import pyclesperanto_prototype as cle
 import numpy as np
 
 def test_standard_deviation_z_projection():
-    test1 = cle.push(np.asarray([
+    test1 = cle.push_zyx(np.asarray([
         [
             [1, 0, 0, 0, 9],
             [0, 2, 0, 8, 0],
@@ -34,21 +34,21 @@ def test_standard_deviation_z_projection():
             [0, 2, 0, 8, 0],
             [5, 0, 6, 0, 10]
         ]
-    ]))
+    ]).T)
 
-    reference = cle.push(np.asarray([
+    reference = cle.push_zyx(np.asarray([
         [3.94, 3.46, 4.21, 3.19, 4.27],
         [3.46, 3.94, 4.21, 3.19, 4.27],
         [3.46, 4.21, 3.19, 3.94, 4.27],
         [3.46, 3.94, 3.19, 4.21, 4.27],
         [3.94, 3.19, 4.21, 3.46, 4.27]
-    ]))
+    ]).T)
 
     result = cle.create(reference)
     cle.standard_deviation_z_projection(test1, result)
 
-    a = cle.pull(result)
-    b = cle.pull(reference)
+    a = cle.pull_zyx(result)
+    b = cle.pull_zyx(reference)
 
     print(a)
 

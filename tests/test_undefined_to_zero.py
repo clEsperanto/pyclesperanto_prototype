@@ -3,7 +3,7 @@ import numpy as np
 
 
 def test_undefined_to_zero():
-    test1 = cle.push(np.asarray([
+    test1 = cle.push_zyx(np.asarray([
         [0, 0, 0, 0, 0],
         [0, 1, 1, 0, 0],
         [0, 1, 1, 0, 0],
@@ -11,7 +11,7 @@ def test_undefined_to_zero():
         [0, 0, 0, 0, 0]
     ]))
 
-    test2 = cle.push(np.asarray([
+    test2 = cle.push_zyx(np.asarray([
         [0, 0, 0, 0, 0],
         [0, 0, 1, 1, 0],
         [0, 0, 1, 1, 0],
@@ -19,7 +19,7 @@ def test_undefined_to_zero():
         [0, 0, 0, 0, 0]
     ]))
 
-    reference = cle.push(np.asarray([
+    reference = cle.push_zyx(np.asarray([
         [0, 0, 0, 0, 0],
         [0, 0, 1, 0, 0],
         [0, 0, 1, 0, 0],
@@ -35,8 +35,8 @@ def test_undefined_to_zero():
     print(divided_no_nan)
 
 
-    a = cle.pull(divided_no_nan)
-    b = cle.pull(reference)
+    a = cle.pull_zyx(divided_no_nan)
+    b = cle.pull_zyx(reference)
 
     print(a)
 
