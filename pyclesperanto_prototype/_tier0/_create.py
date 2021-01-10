@@ -90,16 +90,40 @@ def create_vector_from_square_matrix(square_matrix : OCLArray, *args):
     return create([1, square_matrix.shape[0]])
 
 def create_2d_xy(input):
-    return create([input.shape[2], input.shape[1]])
+    if len(input.shape) == 3:
+        return create([input.shape[2], input.shape[1]])
+    else:
+        return create([input.shape[1], input.shape[0]])
 
 def create_2d_yx(input):
-    return create([input.shape[1], input.shape[2]])
+    if len(input.shape) == 3:
+        return create([input.shape[1], input.shape[2]])
+    else:
+        return create([input.shape[0], 1])
 
 def create_2d_zy(input):
-    return create([input.shape[0], input.shape[1]])
+    if len(input.shape) == 3:
+        return create([input.shape[0], input.shape[1]])
+    else:
+        return create([1, input.shape[0]])
+
+def create_2d_yz(input):
+    if len(input.shape) == 3:
+        return create([input.shape[1], input.shape[0]])
+    else:
+        return create([input.shape[0], 1])
 
 def create_2d_zx(input):
-    return create([input.shape[0], input.shape[2]])
+    if len(input.shape) == 3:
+        return create([input.shape[0], input.shape[2]])
+    else:
+        return create([1, input.shape[1]])
+
+def create_2d_xz(input):
+    if len(input.shape) == 3:
+        return create([input.shape[2], input.shape[0]])
+    else:
+        return create([input.shape[1], 1])
 
 def create_none(*args):
     return None
