@@ -2,7 +2,11 @@ import numpy as np
 import transforms3d
 
 class AffineTransform3D:
-    """
+    """This class is a convenience class to setup affine transform matrices.
+    When initialized, this object corresponds to a null transform. Afterwards,
+    you can append transforms, e.g. by calling `transform.translate(10, 20)`.
+
+    The API aims to be compatible to Imglib2 AffineTransform3D.
 
     Inspired by: https://github.com/imglib/imglib2-realtransform/blob/master/src/main/java/net/imglib2/realtransform/AffineTransform3D.java
 
@@ -15,6 +19,20 @@ class AffineTransform3D:
     def scale(self, scale_x: float = None, scale_y: float = None, scale_z: float = None):
         """
         Scaling the current affine transform matrix.
+
+        Parameters
+        ----------
+        scale_x : float
+            scaling along x axis
+        scale_y : float
+            scaling along y axis
+        scale_z : float
+            scaling along z axis
+
+        Returns
+        -------
+        self
+
         """
         if scale_x is not None:
             self._concatenate(transforms3d.zooms.zfdir2aff(scale_x, direction=(1, 0, 0), origin=(0, 0, 0)))
@@ -31,11 +49,15 @@ class AffineTransform3D:
 
         Parameters
         ----------
-        axis
-        angle_in_rad
+        axis : int
+            axis to rotate around (0=x, 1=y, 2=z)
+        angle_in_rad : int
+            angle in radians. To convert degrees to radians us this formula:
+            angle_in_rad = angle_in_deg * numpy.pi / 180.0
 
         Returns
         -------
+        self
 
         """
         if axis == 0:
@@ -48,6 +70,22 @@ class AffineTransform3D:
         return self
 
     def translate(self, translate_x: float = 0, translate_y: float = 0, translate_z : float = 0):
+        """Translation along axes.
+
+        Parameters
+        ----------
+        translate_x : float
+            translation along x-axis
+        translate_y : float
+            translation along y-axis
+        translate_z : float
+            translation along z-axis
+
+        Returns
+        -------
+        self
+
+        """
         self._concatenate(np.asarray([
             [1, 0, 0, translate_x],
             [0, 1, 0, translate_y],
@@ -75,10 +113,28 @@ class AffineTransform3D:
         self._matrix = np.matmul(matrix, self._matrix)
 
     def inverse(self):
+        """Computes the inverse of the transformation.
+
+        This can be useful, e.g. when you want to know the transformation
+        from image B to image A but you only know the transformation from
+        A to B.
+
+        Returns
+        -------
+        self
+
+        """
         self._matrix = np.linalg.inv(self._matrix)
         return self
 
     def copy(self):
+        """Makes a copy of the current transform which can then be
+        manipulated without changing the source.
+
+        Returns
+        -------
+        copy of the current transform
+        """
         a_copy = AffineTransform3D()
         a_copy._matrix = np.copy(self._matrix)
         return a_copy
