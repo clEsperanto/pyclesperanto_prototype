@@ -1,10 +1,13 @@
+from typing import Union
+
 from .._tier0 import plugin_function
 from .._tier0 import Image
 from .._tier0 import push_zyx
 from ._AffineTransform3D import AffineTransform3D
+import numpy as np
 
 @plugin_function
-def affine_transform(source : Image, destination : Image = None, transform : AffineTransform3D = AffineTransform3D(), linear_interpolation : bool = False):
+def affine_transform(source : Image, destination : Image = None, transform : Union[np.ndarray, AffineTransform3D] = None, linear_interpolation : bool = False):
     """
     Applies an affine transform to an image.
 
@@ -24,7 +27,11 @@ def affine_transform(source : Image, destination : Image = None, transform : Aff
     from .._tier0 import execute
     from .._tier1 import copy
 
-    transform_matrix = np.asarray(transform.copy().inverse())
+    # we invert the transform because we go from the target image to the source image to read pixels
+    if isinstance(transform, AffineTransform3D):
+        transform_matrix = np.asarray(transform.copy().inverse())
+    else:
+        transform_matrix = np.linalg.inv(transform)
 
     gpu_transform_matrix = push_zyx(transform_matrix)
 
