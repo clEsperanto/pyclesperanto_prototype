@@ -7,7 +7,7 @@ from ._pycl import OCLArray
 
 from ._create import create_like
 from ._types import Image, is_image
-from ._push import push
+from ._push import push_zyx
 
 
 @curry
@@ -64,7 +64,7 @@ def plugin_function(
                 value = None
 
             if is_image(value):
-                value = push(value)
+                value = push_zyx(value)
                 # value is now for sure OpenCL, we keep it in case we have to
                 # create another one of the same size
                 any_ocl_input = value
