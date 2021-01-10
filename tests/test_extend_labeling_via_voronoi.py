@@ -3,7 +3,7 @@ import numpy as np
 
 def test_extend_labeling_via_voronoi():
     
-    gpu_input = cle.push(np.asarray([
+    gpu_input = cle.push_zyx(np.asarray([
         [
             [0, 0, 0, 0, 3, 3],
             [0, 4, 0, 0, 3, 3],
@@ -14,7 +14,7 @@ def test_extend_labeling_via_voronoi():
         ]
     ]))
 
-    gpu_reference = cle.push(np.asarray([
+    gpu_reference = cle.push_zyx(np.asarray([
         [
             [4, 4, 4, 3, 3, 3],
             [4, 4, 4, 3, 3, 3],

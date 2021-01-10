@@ -3,7 +3,7 @@ import numpy as np
 
 def test_gamma_correction():
 
-    test = cle.push(np.asarray([
+    test = cle.push_zyx(np.asarray([
         [0, 0, 0, 0, 0],
         [0, 50, 0, 5, 0],
         [0, 0, 100, 0, 0],
@@ -14,7 +14,7 @@ def test_gamma_correction():
     result = cle.create(test)
     cle.gamma_correction(test, result, 0.5)
 
-    a = cle.pull(result)
+    a = cle.pull_zyx(result)
 
     print(a)
     print(np.mean(a))

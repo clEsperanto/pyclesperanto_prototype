@@ -18,8 +18,8 @@ def test_crop():
     result = cle.create(reference)
     cle.crop(test1, result, 0, 0)
 
-    a = cle.pull(result)
-    b = cle.pull(reference)
+    a = cle.pull_zyx(result)
+    b = cle.pull_zyx(reference)
 
     print(a)
     assert (np.array_equal(a, b))

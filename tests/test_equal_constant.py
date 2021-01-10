@@ -3,7 +3,7 @@ import numpy as np
 
 
 def test_equal_constant():
-    test1 = cle.push(np.asarray([
+    test1 = cle.push_zyx(np.asarray([
         [0, 0, 0, 0, 0],
         [0, 1, 2, 3, 0],
         [0, 2, 3, 4, 0],
@@ -11,7 +11,7 @@ def test_equal_constant():
         [0, 0, 0, 0, 0]
     ]))
 
-    reference = cle.push(np.asarray([
+    reference = cle.push_zyx(np.asarray([
         [0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0],
         [0, 0, 0, 1, 0],
@@ -24,6 +24,6 @@ def test_equal_constant():
 
     print(result)
 
-    a = cle.pull(result)
-    b = cle.pull(reference)
+    a = cle.pull_zyx(result)
+    b = cle.pull_zyx(reference)
     assert (np.array_equal(a, b))

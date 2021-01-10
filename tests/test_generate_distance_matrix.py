@@ -3,7 +3,7 @@ import numpy as np
 
 def test_generate_distance_matrix():
 
-    gpu_input = cle.push(np.asarray([
+    gpu_input = cle.push_zyx(np.asarray([
 
             [0, 0, 0, 0, 0],
             [0, 1, 0, 3, 0],
@@ -13,7 +13,7 @@ def test_generate_distance_matrix():
 
     ]))
 
-    gpu_reference = cle.push(np.asarray([
+    gpu_reference = cle.push_zyx(np.asarray([
             [0.,        0.   ,        0.    ,     0.    ,     0.    ],
             [0.,        0.   ,     2.236068 ,     2.    , 4.2426405 ],
             [0.,    2.236068 ,         0.   , 2.236068  , 2.236068  ],

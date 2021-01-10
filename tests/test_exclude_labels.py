@@ -3,7 +3,7 @@ import numpy as np
 
 def test_exclude_labels_2d():
     
-    gpu_input = cle.push(np.asarray([
+    gpu_input = cle.push_zyx(np.asarray([
 
             [0, 0, 2, 0, 0, 0, 0],
             [0, 1, 2, 0, 7, 0, 0],
@@ -14,7 +14,7 @@ def test_exclude_labels_2d():
 
     ]))
 
-    gpu_reference = cle.push(np.asarray([
+    gpu_reference = cle.push_zyx(np.asarray([
 
             [0, 0, 2, 0, 0, 0, 0],
             [0, 1, 2, 0, 0, 0, 0],
@@ -39,7 +39,7 @@ def test_exclude_labels_2d():
 
 
 def test_exclude_labels_3d():
-    gpu_input = cle.push(np.asarray([
+    gpu_input = cle.push_zyx(np.asarray([
         [
             [0, 0, 2, 0, 0, 0, 0],
             [0, 1, 2, 0, 7, 0, 0],
@@ -51,7 +51,7 @@ def test_exclude_labels_3d():
         ]
     ]))
 
-    gpu_reference = cle.push(np.asarray([
+    gpu_reference = cle.push_zyx(np.asarray([
         [
             [0, 0, 2, 0, 0, 0, 0],
             [0, 1, 2, 0, 0, 0, 0],

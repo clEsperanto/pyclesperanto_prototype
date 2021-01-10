@@ -1,9 +1,9 @@
 import pyclesperanto_prototype as cle
 import numpy as np
 
-def test_generate_touch_matrix_2d():
+def test_generate_binary_overlap_matrix_2d():
     
-    gpu_input1 = cle.push(np.asarray([
+    gpu_input1 = cle.push_zyx(np.asarray([
 
             [1, 1, 0, 0, 0],
             [1, 1, 0, 3, 0],
@@ -13,7 +13,7 @@ def test_generate_touch_matrix_2d():
 
     ]))
 
-    gpu_input2 = cle.push(np.asarray([
+    gpu_input2 = cle.push_zyx(np.asarray([
 
             [1, 1, 2, 2, 2],
             [1, 1, 2, 2, 2],
@@ -24,7 +24,7 @@ def test_generate_touch_matrix_2d():
     ]))
 
 
-    gpu_reference = cle.push(np.asarray([
+    gpu_reference = cle.push_zyx(np.asarray([
 
             [0, 1, 1],
             [0, 1, 0],
@@ -32,7 +32,7 @@ def test_generate_touch_matrix_2d():
             [0, 0, 1],
             [0, 0, 1]
 
-    ]))
+    ]).T)
 
     gpu_binary_overlap_matrix = cle.generate_binary_overlap_matrix(gpu_input1, gpu_input2)
 
@@ -45,8 +45,8 @@ def test_generate_touch_matrix_2d():
     assert (np.allclose(a, b, 0.01))
 
 
-def test_generate_touch_matrix_3d():
-    gpu_input1 = cle.push(np.asarray([
+def test_generate_binary_overlap_matrix_3d():
+    gpu_input1 = cle.push_zyx(np.asarray([
         [
             [1, 1, 0, 0, 0],
             [1, 1, 0, 3, 0],
@@ -56,7 +56,7 @@ def test_generate_touch_matrix_3d():
         ]
     ]))
 
-    gpu_input2 = cle.push(np.asarray([
+    gpu_input2 = cle.push_zyx(np.asarray([
         [
             [1, 1, 2, 2, 2],
             [1, 1, 2, 2, 2],
@@ -66,7 +66,7 @@ def test_generate_touch_matrix_3d():
         ]
     ]))
 
-    gpu_reference = cle.push(np.asarray([
+    gpu_reference = cle.push_zyx(np.asarray([
 
         [0, 1, 1],
         [0, 1, 0],
@@ -74,7 +74,7 @@ def test_generate_touch_matrix_3d():
         [0, 0, 1],
         [0, 0, 1]
 
-    ]))
+    ]).T)
 
     gpu_binary_overlap_matrix = cle.generate_binary_overlap_matrix(gpu_input1, gpu_input2)
 

@@ -3,7 +3,7 @@ import numpy as np
 
 def test_detect_minima_box():
 
-    gpu_input = cle.push(np.asarray([
+    gpu_input = cle.push_zyx(np.asarray([
 
             [6, 6, 6, 6, 6],
             [5, 6, 6, 4, 6],
@@ -14,7 +14,7 @@ def test_detect_minima_box():
     ]))
     gpu_output = cle.create_like(gpu_input)
 
-    gpu_reference = cle.push(np.asarray([
+    gpu_reference = cle.push_zyx(np.asarray([
 
             [0, 0, 0, 0, 0],
             [0, 0, 0, 0, 0],

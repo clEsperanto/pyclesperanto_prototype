@@ -3,7 +3,7 @@ import numpy as np
 
 
 def test_divide_images():
-    test1 = cle.push(np.asarray([
+    test1 = cle.push_zyx(np.asarray([
         [0, 0, 0, 0, 0],
         [0, 4, 6, 8, 0],
         [0, 4, 6, 8, 0],
@@ -11,7 +11,7 @@ def test_divide_images():
         [0, 0, 0, 0, 0]
     ]))
 
-    test2 = cle.push(np.asarray([
+    test2 = cle.push_zyx(np.asarray([
         [1, 1, 1, 1, 1],
         [1, 2, 3, 2, 1],
         [1, 2, 3, 2, 1],
@@ -19,7 +19,7 @@ def test_divide_images():
         [1, 1, 1, 1, 1]
     ]))
 
-    reference = cle.push(np.asarray([
+    reference = cle.push_zyx(np.asarray([
         [0, 0, 0, 0, 0],
         [0, 2, 2, 4, 0],
         [0, 2, 2, 4, 0],
@@ -32,6 +32,6 @@ def test_divide_images():
 
     print(result)
 
-    a = cle.pull(result)
-    b = cle.pull(reference)
+    a = cle.pull_zyx(result)
+    b = cle.pull_zyx(reference)
     assert (np.allclose(a, b, 0.0001))

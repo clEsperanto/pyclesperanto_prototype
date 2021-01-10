@@ -3,7 +3,7 @@ import numpy as np
 
 def test_generate_touch_matrix():
     
-    gpu_input = cle.push(np.asarray([
+    gpu_input = cle.push_zyx(np.asarray([
 
             [1, 1, 0, 0, 0],
             [1, 1, 0, 3, 0],
@@ -13,7 +13,7 @@ def test_generate_touch_matrix():
 
     ]))
 
-    gpu_reference = cle.push(np.asarray([
+    gpu_reference = cle.push_zyx(np.asarray([
 
             [0, 1, 1, 1, 1],
             [0, 0, 1, 0, 0],
@@ -21,7 +21,7 @@ def test_generate_touch_matrix():
             [0, 0, 0, 0, 0],
             [0, 0, 0, 0, 0]
 
-    ]))
+    ]).T)
 
     gpu_touch_matrix = cle.generate_touch_matrix(gpu_input)
 

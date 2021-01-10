@@ -3,7 +3,7 @@ import numpy as np
 
 def test_gaussian_blur():
 
-    test = cle.push(np.asarray([
+    test = cle.push_zyx(np.asarray([
         [0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0],
         [0, 0, 100, 0, 0],
@@ -16,7 +16,7 @@ def test_gaussian_blur():
 
     print(result)
 
-    a = cle.pull(result)
+    a = cle.pull_zyx(result)
     assert (np.min(a) > 0)
     assert (np.max(a) > 15.9)
     assert (np.max(a) < 16)
