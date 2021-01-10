@@ -61,9 +61,9 @@ class AffineTransform3D:
 
         """
         if axis == 0:
-            self._concatenate(self._3x3_to_4x4(transforms3d.euler.euler2axangle(angle_in_rad, 0, 0)))
+            self._concatenate(self._3x3_to_4x4(transforms3d.euler.euler2mat(angle_in_rad, 0, 0)))
         if axis == 1:
-            self._concatenate(self._3x3_to_4x4(transforms3d.euler.euler2axangle(0, angle_in_rad, 0)))
+            self._concatenate(self._3x3_to_4x4(transforms3d.euler.euler2mat(0, angle_in_rad, 0)))
         if axis == 2:
             self._concatenate(self._3x3_to_4x4(transforms3d.euler.euler2mat(0, 0, angle_in_rad)))
 
@@ -92,6 +92,41 @@ class AffineTransform3D:
             [0, 0, 1, translate_z],
             [0, 0, 0, 1],
         ]))
+        return self
+
+    def center(self, shape, undo : bool = False):
+        """Change the center of the image to the root of the coordinate system
+
+        Parameters
+        ----------
+        shape : iterable
+            shape of the image which should be centered
+        undo : bool, optional
+            if False (default), the image is moved so that the center of the image is in the root of the coordinate system
+            if True, it is translated in the opposite direction
+
+        Returns
+        -------
+        self
+
+        """
+
+        presign = 1
+        if not undo:
+            presign = -1
+
+        if len(shape) == 2:
+            self.translate(
+                translate_x = presign * shape[1] / 2,
+                translate_y = presign * shape[0] / 2
+            )
+        else: # 3 dimensional image
+            self.translate(
+                translate_x = presign * shape[2] / 2,
+                translate_y = presign * shape[1] / 2,
+                translate_z = presign * shape[0] / 2
+            )
+
         return self
 
     def shear(self):

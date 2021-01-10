@@ -41,6 +41,7 @@ results of the GPU-accelerated statistics are dictionaries which contain the sam
 * `standard_deviation_of_proximal_neighbors_map` and alias `standard_deviation_of_distal_neighbors_map`
 * `affine_transform` (yet without shearing)
 * `translate`
+* `rotate`
 
 ### Backwards compatibility breaking changes
 * `statistics_of_labelled_pixels` and `statistics_of_background_and_labelled_pixels` produce different output now. 
