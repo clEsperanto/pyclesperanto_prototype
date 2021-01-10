@@ -3,7 +3,6 @@ from warnings import warn
 
 from skimage.measure._regionprops import RegionProperties
 import numpy as np
-from .._tier0 import push
 
 def push_regionprops(props : Union[dict, RegionProperties], first_row_index : int = 0):
     """
@@ -21,6 +20,7 @@ def push_regionprops(props : Union[dict, RegionProperties], first_row_index : in
 
     """
     from ._statistics_entry import STATISTICS_ENTRY
+    from .._tier0 import push_zyx
     num_columns = 36
 
     if isinstance(props, dict):
@@ -198,4 +198,4 @@ def push_regionprops(props : Union[dict, RegionProperties], first_row_index : in
                 if hasattr(label_props, 'mean_max_distance_to_centroid_ratio'):
                     matrix[i][STATISTICS_ENTRY.MAX_MEAN_DISTANCE_TO_CENTROID_RATIO.value] = label_props['mean_max_distance_to_centroid_ratio']
 
-    return push(matrix)
+    return push_zyx(matrix.T)
