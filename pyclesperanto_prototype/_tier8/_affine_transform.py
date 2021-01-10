@@ -18,7 +18,7 @@ def affine_transform(source : Image, destination : Image = None, transform : Uni
         image to be transformed
     destination : Image, optional
         image where the transformed image should be written to
-    transform : 4x4 numpy array or AffineTransform3D object
+    transform : 4x4 numpy array or AffineTransform3D object or skimage.transform.AffineTransform object
         transform matrix or object describing the transformation
     linear_interpolation: bool
         not implemented yet
