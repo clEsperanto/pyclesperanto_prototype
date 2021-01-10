@@ -19,8 +19,8 @@ def test_set_nonzero_pixels_to_pixelindex():
     result = cle.create(test1)
     cle.set_non_zero_pixels_to_pixel_index(test1, result)
 
-    a = cle.pull(result)
-    b = cle.pull(reference)
+    a = cle.pull_zyx(result)
+    b = cle.pull_zyx(reference)
     print(a)
 
     assert (np.array_equal(a, b))

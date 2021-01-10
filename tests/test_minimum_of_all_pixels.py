@@ -20,7 +20,7 @@ def test_minimum_of_all_pixels():
     print(result)
     assert (result == 1)
 
-    gpu_input = cle.push(np_input)
+    gpu_input = cle.push_zyx(np_input)
     result = cle.minimum_of_all_pixels(gpu_input)
     print(result)
     assert (result == 1)

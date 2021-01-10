@@ -3,34 +3,34 @@ import numpy as np
 
 def test_touch_matrix_to_mesh():
 
-    gpu_touch_matrix = cle.push(np.asarray([
+    gpu_touch_matrix = cle.push_zyx(np.asarray([
                     [0, 0, 0],
-                    [0, 0, 1],
-                    [0, 0, 0]
+                    [0, 0, 0],
+                    [0, 1, 0]
     ]))
 
-    gpu_point_list = cle.push(np.asarray([
-                    [1, 2],
-                    [4, 5]
+    gpu_point_list = cle.push_zyx(np.asarray([
+                    [1, 4],
+                    [2, 5]
     ]))
 
     gpu_output = cle.create([5, 5])
     cle.set(gpu_output, 0)
 
-    gpu_reference = cle.push(np.asarray([
+    gpu_reference = cle.push_zyx(np.asarray([
                     [0, 0, 0, 0, 0],
                     [0, 0, 1, 0, 0],
                     [0, 0, 0, 1, 0],
                     [0, 0, 0, 0, 1],
                     [0, 0, 0, 0, 0]
-    ]))
+    ]).T)
 
 
 
     cle.touch_matrix_to_mesh(gpu_point_list, gpu_touch_matrix, gpu_output)
 
-    a = cle.pull(gpu_output)
-    b = cle.pull(gpu_reference)
+    a = cle.pull_zyx(gpu_output)
+    b = cle.pull_zyx(gpu_reference)
 
     print(a)
     print(b)

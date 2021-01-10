@@ -29,8 +29,8 @@ def test_n_closest_points():
 
     n_closest_points = cle.n_closest_points(distance_matrix, n=1, ignore_background=False)
 
-    a = cle.pull(n_closest_points)
-    b = cle.pull(reference)
+    a = cle.pull_zyx(n_closest_points)
+    b = cle.pull_zyx(reference)
 
     print(a)
     print(b)
@@ -69,8 +69,8 @@ def test_n_closest_points_ignore_background():
 
     n_closest_points = cle.n_closest_points(distance_matrix, n=1)
 
-    a = cle.pull(n_closest_points)
-    b = cle.pull(reference)
+    a = cle.pull_zyx(n_closest_points)
+    b = cle.pull_zyx(reference)
 
     print(a)
     print(b)

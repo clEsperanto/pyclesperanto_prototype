@@ -2,7 +2,7 @@ import pyclesperanto_prototype as cle
 import numpy as np
 
 def test_set_column():
-    result = cle.push(np.asarray([
+    result = cle.push_zyx(np.asarray([
         [3, 3, 3, 3, 3],
         [3, 3, 3, 3, 3],
         [3, 3, 3, 3, 3],
@@ -10,18 +10,18 @@ def test_set_column():
         [3, 3, 3, 3, 3]
     ]))
 
-    reference = cle.push(np.asarray([
+    reference = cle.push_zyx(np.asarray([
         [3, 3, 3, 3, 3],
         [3, 3, 3, 3, 3],
         [3, 3, 3, 3, 3],
         [4, 4, 4, 4, 4],
         [3, 3, 3, 3, 3]
-    ]))
+    ]).T)
 
     cle.set_column(result, 3, 4)
 
     print(result)
 
-    a = cle.pull(result)
-    b = cle.pull(reference)
+    a = cle.pull_zyx(result)
+    b = cle.pull_zyx(reference)
     assert (np.allclose(a, b, 0.001))

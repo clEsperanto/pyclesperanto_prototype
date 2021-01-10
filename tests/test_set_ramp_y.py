@@ -2,7 +2,7 @@ import pyclesperanto_prototype as cle
 import numpy as np
 
 def test_set_ramp_y():
-    result = cle.push(np.asarray([
+    result = cle.push_zyx(np.asarray([
         [
             [0, 0, 0],
             [3, 4, 3],
@@ -14,7 +14,7 @@ def test_set_ramp_y():
         ]
     ]))
 
-    reference = cle.push(np.asarray([
+    reference = cle.push_zyx(np.asarray([
         [
             [0, 0, 0],
             [1, 1, 1],
@@ -28,9 +28,10 @@ def test_set_ramp_y():
 
     cle.set_ramp_y(result)
 
-    a = cle.pull(result)
-    b = cle.pull(reference)
+    a = cle.pull_zyx(result)
+    b = cle.pull_zyx(reference)
 
     print(a)
+    print(b)
 
     assert (np.allclose(a, b, 0.001))

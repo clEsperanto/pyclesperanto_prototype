@@ -2,7 +2,7 @@ import pyclesperanto_prototype as cle
 import numpy as np
 
 def test_sum_x_projection():
-    test1 = cle.push(np.asarray([
+    test1 = cle.push_zyx(np.asarray([
         [
             [1, 0, 0, 0, 9],
             [0, 2, 0, 8, 0],
@@ -34,21 +34,21 @@ def test_sum_x_projection():
             [0, 2, 0, 8, 0],
             [5, 0, 6, 0, 10]
         ]
-    ]))
+    ]).T)
 
-    reference = cle.push(np.asarray([
+    reference = cle.push_zyx(np.asarray([
         [2, 5, 9, 4, 25],
         [6, 6, 8, 10, 0],
         [0, 1, 3, 1, 30],
         [24, 15, 14, 22, 0],
         [18, 28, 30, 19, 50]
-    ]))
+    ]).T)
 
     result = cle.create(reference)
     cle.sum_x_projection(test1, result)
 
-    a = cle.pull(result)
-    b = cle.pull(reference)
+    a = cle.pull_zyx(result)
+    b = cle.pull_zyx(reference)
 
     print(a)
 

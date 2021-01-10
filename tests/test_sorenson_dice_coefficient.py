@@ -3,12 +3,12 @@ import numpy as np
 
 
 def test_sorensen_dice_coefficient_2d():
-    test1 = cle.push(np.asarray([
+    test1 = cle.push_zyx(np.asarray([
         [0, 0, 0, 0, 0],
         [0, 1, 1, 0, 0]
     ]))
 
-    test2 = cle.push(np.asarray([
+    test2 = cle.push_zyx(np.asarray([
         [0, 1, 1, 0, 0],
         [0, 1, 1, 0, 0]
     ]))
@@ -18,12 +18,12 @@ def test_sorensen_dice_coefficient_2d():
     assert abs(d - 0.666) < 0.001
 
 def test_sorensen_dice_coefficient_3d():
-    test1 = cle.push(np.asarray([
+    test1 = cle.push_zyx(np.asarray([
         [[0, 0, 0], [0, 0, 0]],
         [[0, 1, 1], [0, 1, 0]]
     ]))
 
-    test2 = cle.push(np.asarray([
+    test2 = cle.push_zyx(np.asarray([
         [[0, 1, 1], [0, 1, 0]],
         [[0, 1, 1], [0, 1, 0]]
     ]))
