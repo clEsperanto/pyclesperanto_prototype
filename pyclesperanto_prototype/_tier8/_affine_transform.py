@@ -4,10 +4,11 @@ from .._tier0 import plugin_function
 from .._tier0 import Image
 from .._tier0 import push_zyx
 from ._AffineTransform3D import AffineTransform3D
+from skimage.transform import AffineTransform
 import numpy as np
 
 @plugin_function
-def affine_transform(source : Image, destination : Image = None, transform : Union[np.ndarray, AffineTransform3D] = None, linear_interpolation : bool = False):
+def affine_transform(source : Image, destination : Image = None, transform : Union[np.ndarray, AffineTransform3D, AffineTransform] = None, linear_interpolation : bool = False):
     """
     Applies an affine transform to an image.
 
@@ -31,10 +32,35 @@ def affine_transform(source : Image, destination : Image = None, transform : Uni
     from .._tier0 import empty_image_like
     from .._tier0 import execute
     from .._tier1 import copy
+    from .._tier0 import create
+    from .._tier1 import copy_slice
 
-    # we invert the transform because we go from the target image to the source image to read pixels
+    # deal with 2D input images
+    if len(source.shape) == 2:
+        source_3d = create([1, source.shape[0], source.shape[1]])
+        copy_slice(source, source_3d, 0)
+        source = source_3d
+
+    # deal with 2D output images
+    original_destination = destination
+    copy_back_after_transforming = False
+    if len(destination.shape) == 2:
+        destination = create([1, destination.shape[0], destination.shape[1]])
+        copy_slice(original_destination, destination, 0)
+        copy_back_after_transforming = True
+
+        # we invert the transform because we go from the target image to the source image to read pixels
     if isinstance(transform, AffineTransform3D):
         transform_matrix = np.asarray(transform.copy().inverse())
+    elif isinstance(transform, AffineTransform):
+        matrix = np.asarray(transform.params)
+        matrix = np.asarray([
+            [matrix[0,0], matrix[0,1], 0, matrix[0,2]],
+            [matrix[1,0], matrix[1,1], 0, matrix[1,2]],
+            [0, 0, 1, 0],
+            [matrix[2,0], matrix[2,1], 0, matrix[2,2]]
+        ])
+        transform_matrix = np.linalg.inv(matrix)
     else:
         transform_matrix = np.linalg.inv(transform)
 
@@ -57,5 +83,8 @@ def affine_transform(source : Image, destination : Image = None, transform : Uni
     execute(__file__, '../clij-opencl-kernels/kernels/affine_transform_' + str(len(destination.shape)) + 'd' + kernel_suffix + '_x.cl',
             'affine_transform_' + str(len(destination.shape)) + 'd' + kernel_suffix, destination.shape, parameters)
 
+    # deal with 2D output images
+    if copy_back_after_transforming:
+        copy_slice(destination, original_destination, 0)
 
-    return destination
+    return original_destination
