@@ -8,7 +8,7 @@ class AffineTransform3D:
 
     """
 
-    def __init__(self, transform_as_string : str = None):
+    def __init__(self):
         self._matrix = transforms3d.zooms.zfdir2aff(1)
 
 

@@ -4,7 +4,7 @@ from .._tier0 import push_zyx
 from ._AffineTransform3D import AffineTransform3D
 
 @plugin_function
-def affine_transform(source : Image, destination : Image, transform : AffineTransform3D, linear_interpolation : bool = False):
+def affine_transform(source : Image, destination : Image = None, transform : AffineTransform3D = AffineTransform3D(), linear_interpolation : bool = False):
     """
     Applies an affine transform to an image.
 
