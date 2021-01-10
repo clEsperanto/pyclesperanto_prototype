@@ -14,7 +14,7 @@ setuptools.setup(
     url="https://github.com/clEsperanto/pyclesperanto_prototype",
     packages=setuptools.find_packages(),
     include_package_data=True,
-    install_requires=["numpy", "pyopencl", "toolz", "scikit-image>=0.18.0", "matplotlib"],
+    install_requires=["numpy", "pyopencl", "toolz", "scikit-image>=0.18.0", "matplotlib", "transforms3d"],
     python_requires='>=3.6',
     classifiers=[
         "Programming Language :: Python :: 3",
