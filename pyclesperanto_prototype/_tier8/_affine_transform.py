@@ -8,7 +8,7 @@ from skimage.transform import AffineTransform
 import numpy as np
 
 @plugin_function
-def affine_transform(source : Image, destination : Image = None, transform : Union[np.ndarray, AffineTransform3D, AffineTransform] = None, linear_interpolation : bool = False):
+def affine_transform(source : Image, output : Image = None, transform : Union[np.ndarray, AffineTransform3D, AffineTransform] = None, linear_interpolation : bool = False, matrix : np.ndarray = None):
     """
     Applies an affine transform to an image.
 
@@ -16,12 +16,14 @@ def affine_transform(source : Image, destination : Image = None, transform : Uni
     ----------
     source : Image
         image to be transformed
-    destination : Image, optional
+    output : Image, optional
         image where the transformed image should be written to
     transform : 4x4 numpy array or AffineTransform3D object or skimage.transform.AffineTransform object
-        transform matrix or object describing the transformation
+        transform matrix or object describing the transformation. Internally, this transform is inverted.
     linear_interpolation: bool
         not implemented yet
+    matrix : 4x4 numpy array
+        affine transform matrix, overwrites parameter transform if set
 
     Returns
     -------
@@ -42,27 +44,39 @@ def affine_transform(source : Image, destination : Image = None, transform : Uni
         source = source_3d
 
     # deal with 2D output images
-    original_destination = destination
+    original_destination = output
     copy_back_after_transforming = False
-    if len(destination.shape) == 2:
-        destination = create([1, destination.shape[0], destination.shape[1]])
-        copy_slice(original_destination, destination, 0)
+    if len(output.shape) == 2:
+        output = create([1, output.shape[0], output.shape[1]])
+        copy_slice(original_destination, output, 0)
         copy_back_after_transforming = True
 
+    if matrix is None:
         # we invert the transform because we go from the target image to the source image to read pixels
-    if isinstance(transform, AffineTransform3D):
-        transform_matrix = np.asarray(transform.copy().inverse())
-    elif isinstance(transform, AffineTransform):
-        matrix = np.asarray(transform.params)
-        matrix = np.asarray([
-            [matrix[0,0], matrix[0,1], 0, matrix[0,2]],
-            [matrix[1,0], matrix[1,1], 0, matrix[1,2]],
-            [0, 0, 1, 0],
-            [matrix[2,0], matrix[2,1], 0, matrix[2,2]]
-        ])
-        transform_matrix = np.linalg.inv(matrix)
+        if isinstance(transform, AffineTransform3D):
+            transform_matrix = np.asarray(transform.copy().inverse())
+        elif isinstance(transform, AffineTransform):
+            transform = np.asarray(transform.params)
+            transform = np.asarray([
+                [transform[0,0], transform[0,1], 0, transform[0,2]],
+                [transform[1,0], transform[1,1], 0, transform[1,2]],
+                [0, 0, 1, 0],
+                [transform[2,0], transform[2,1], 0, transform[2,2]]
+            ])
+            transform_matrix = np.linalg.inv(transform)
+        else:
+            transform_matrix = np.linalg.inv(transform)
     else:
-        transform_matrix = np.linalg.inv(transform)
+        # transpose X and Z to make matrix be compatible to scipy
+        transpose_matrix = np.asarray([
+            [0, 0, 1, 0],
+            [0, 1, 0, 0],
+            [1, 0, 0, 0],
+            [0, 0, 0, 1]
+        ])
+        matrix = np.matmul(transpose_matrix, matrix)
+        matrix = np.matmul(matrix, transpose_matrix)
+        transform_matrix = matrix
 
     gpu_transform_matrix = push(transform_matrix)
 
@@ -76,15 +90,15 @@ def affine_transform(source : Image, destination : Image = None, transform : Uni
 
     parameters = {
         "input": source,
-        "output": destination,
+        "output": output,
         "mat": gpu_transform_matrix
     }
 
-    execute(__file__, '../clij-opencl-kernels/kernels/affine_transform_' + str(len(destination.shape)) + 'd' + kernel_suffix + '_x.cl',
-            'affine_transform_' + str(len(destination.shape)) + 'd' + kernel_suffix, destination.shape, parameters)
+    execute(__file__, '../clij-opencl-kernels/kernels/affine_transform_' + str(len(output.shape)) + 'd' + kernel_suffix + '_x.cl',
+            'affine_transform_' + str(len(output.shape)) + 'd' + kernel_suffix, output.shape, parameters)
 
     # deal with 2D output images
     if copy_back_after_transforming:
-        copy_slice(destination, original_destination, 0)
+        copy_slice(output, original_destination, 0)
 
     return original_destination

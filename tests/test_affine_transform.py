@@ -96,6 +96,50 @@ def test_affine_transform_scale_with_transform_matrix():
 
     assert (np.array_equal(a, b))
 
+def test_affine_transform_compare_to_scipy():
+    source = np.asarray([
+        [
+            [1, 1, 0, 0],
+            [1, 1, 0, 0],
+            [0, 0, 0, 0],
+            [0, 0, 0, 0],
+        ], [
+            [1, 1, 0, 0],
+            [1, 1, 0, 0],
+            [0, 0, 0, 0],
+            [0, 0, 0, 0],
+        ], [
+            [0, 0, 0, 0],
+            [0, 0, 0, 0],
+            [0, 0, 0, 0],
+            [0, 0, 0, 0],
+        ], [
+            [0, 0, 0, 0],
+            [0, 0, 0, 0],
+            [0, 0, 0, 0],
+            [0, 0, 0, 0],
+        ]
+    ])
+
+    transform = np.asarray([
+        [1, 0, 0, 0],
+        [0, 2, 0, 0],
+        [0, 0, 1, 0],
+        [0, 0, 0, 1],
+    ])
+
+    import scipy
+
+    reference = scipy.ndimage.affine_transform(source, matrix=transform)
+    result = cle.affine_transform(source, matrix=transform)
+
+    print(result)
+    print(reference)
+
+    assert (np.allclose(reference, result))
+
+
+
 
 def test_affine_transform_rotate():
     source = cle.push(np.asarray([[
