@@ -8,7 +8,7 @@ from skimage.transform import AffineTransform
 import numpy as np
 
 @plugin_function
-def affine_transform(source : Image, output : Image = None, matrix : Union[np.ndarray, AffineTransform3D, AffineTransform] = None, linear_interpolation : bool = False):
+def affine_transform(source : Image, output : Image = None, transform : Union[np.ndarray, AffineTransform3D, AffineTransform] = None, linear_interpolation : bool = False, matrix : np.ndarray = None):
     """
     Applies an affine transform to an image.
 
@@ -18,10 +18,12 @@ def affine_transform(source : Image, output : Image = None, matrix : Union[np.nd
         image to be transformed
     output : Image, optional
         image where the transformed image should be written to
-    matrix : 4x4 numpy array or AffineTransform3D object or skimage.transform.AffineTransform object
-        transform matrix or object describing the transformation
+    transform : 4x4 numpy array or AffineTransform3D object or skimage.transform.AffineTransform object
+        transform matrix or object describing the transformation. Internally, this transform is inverted.
     linear_interpolation: bool
         not implemented yet
+    matrix : 4x4 numpy array
+        affine transform matrix, overwrites parameter transform if set
 
     Returns
     -------
@@ -49,20 +51,23 @@ def affine_transform(source : Image, output : Image = None, matrix : Union[np.nd
         copy_slice(original_destination, output, 0)
         copy_back_after_transforming = True
 
+    if matrix is None:
         # we invert the transform because we go from the target image to the source image to read pixels
-    if isinstance(matrix, AffineTransform3D):
-        transform_matrix = np.asarray(matrix.copy().inverse())
-    elif isinstance(matrix, AffineTransform):
-        matrix = np.asarray(matrix.params)
-        matrix = np.asarray([
-            [matrix[0,0], matrix[0,1], 0, matrix[0,2]],
-            [matrix[1,0], matrix[1,1], 0, matrix[1,2]],
-            [0, 0, 1, 0],
-            [matrix[2,0], matrix[2,1], 0, matrix[2,2]]
-        ])
-        transform_matrix = np.linalg.inv(matrix)
+        if isinstance(transform, AffineTransform3D):
+            transform_matrix = np.asarray(transform.copy().inverse())
+        elif isinstance(transform, AffineTransform):
+            transform = np.asarray(transform.params)
+            transform = np.asarray([
+                [transform[0,0], transform[0,1], 0, transform[0,2]],
+                [transform[1,0], transform[1,1], 0, transform[1,2]],
+                [0, 0, 1, 0],
+                [transform[2,0], transform[2,1], 0, transform[2,2]]
+            ])
+            transform_matrix = np.linalg.inv(transform)
+        else:
+            transform_matrix = np.linalg.inv(transform)
     else:
-        transform_matrix = np.linalg.inv(matrix)
+        transform_matrix = matrix
 
     gpu_transform_matrix = push(transform_matrix)
 
