@@ -43,7 +43,7 @@ def scale(source : Image, output : Image = None, factor_x : float = 1, factor_y 
         if len(dimensions) == 3:
             dimensions[0] = dimensions[0] * factor_z
             dimensions[1] = dimensions[1] * factor_y
-            dimensions[2] = dimensions[2] * factor_z
+            dimensions[2] = dimensions[2] * factor_x
             if zoom is not None:
                 if isinstance(zoom, float) or isinstance(zoom, int):
                     dimensions[0] = dimensions[0] * zoom
