@@ -67,7 +67,7 @@ def scale(source : Image, output : Image = None, factor_x : float = 1, factor_y 
 
     transform = AffineTransform3D()
     if centered:
-        transform.center(output.shape)
+        transform.center(source.shape)
 
     transform.scale(factor_x, factor_y, factor_z)
 
