@@ -39,8 +39,7 @@ def translate(source : Image, destination : Image = None, translate_x : float = 
             else: #  2D image
                 transform.translate(shift, shift)
         else:
-            import numpy as np
-            shift = np.asarray(shift, dtype=np.float32)
+            shift.reverse()
             transform.translate(*shift)
 
     return affine_transform(source, destination, transform)

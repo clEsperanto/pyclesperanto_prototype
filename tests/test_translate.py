@@ -51,49 +51,49 @@ def test_translate_compare_with_scipy():
     vector = [-1, 0, 0]
     reference = scipy.ndimage.shift(source, shift=vector)
     result = cle.shift(source, shift=vector)
-    np.allclose(result, reference, 0.001)
+    assert np.allclose(result, reference, 0.001)
 
     vector = [1, 0, 0]
     reference = scipy.ndimage.shift(source, shift=vector)
     result = cle.shift(source, shift=vector)
-    np.allclose(result, reference, 0.001)
+    assert np.allclose(result, reference, 0.001)
 
     vector = [0, 1, 0]
     reference = scipy.ndimage.shift(source, shift=vector)
     result = cle.shift(source, shift=vector)
-    np.allclose(result, reference, 0.001)
+    assert np.allclose(result, reference, 0.001)
 
     vector = [0, -1, 0]
     reference = scipy.ndimage.shift(source, shift=vector)
     result = cle.shift(source, shift=vector)
-    np.allclose(result, reference, 0.001)
+    assert np.allclose(result, reference, 0.001)
 
     vector = [0, 0, 1]
     reference = scipy.ndimage.shift(source, shift=vector)
     result = cle.shift(source, shift=vector)
-    np.allclose(result, reference, 0.001)
+    assert np.allclose(result, reference, 0.001)
 
     vector = [0, 0, -1]
     reference = scipy.ndimage.shift(source, shift=vector)
     result = cle.shift(source, shift=vector)
-    np.allclose(result, reference, 0.001)
+    assert np.allclose(result, reference, 0.001)
 
     vector = 1.
     reference = scipy.ndimage.shift(source, shift=vector)
     result = cle.shift(source, shift=vector)
-    np.allclose(result, reference, 0.001)
+    assert np.allclose(result, reference, 0.001)
 
     vector = -1.
     reference = scipy.ndimage.shift(source, shift=vector)
     result = cle.shift(source, shift=vector)
-    np.allclose(result, reference, 0.001)
+    assert np.allclose(result, reference, 0.001)
 
     vector = 1
     reference = scipy.ndimage.shift(source, shift=vector)
     result = cle.shift(source, shift=vector)
-    np.allclose(result, reference, 0.001)
+    assert np.allclose(result, reference, 0.001)
 
     vector = -1
     reference = scipy.ndimage.shift(source, shift=vector)
     result = cle.shift(source, shift=vector)
-    np.allclose(result, reference, 0.001)
+    assert np.allclose(result, reference, 0.001)
