@@ -55,3 +55,58 @@ def test_affine_transform_rotate_around_center():
 
     assert (np.array_equal(a, b))
 
+def test_rotate_compare_with_scipy():
+    import numpy as np
+    source = np.asarray([
+        [
+          [0, 0, 0],
+          [0, 0, 0],
+          [0, 1, 1],
+        ], [
+          [0, 0, 0],
+          [0, 0, 0],
+          [0, 1, 1],
+        ], [
+          [0, 0, 0],
+          [0, 0, 0],
+          [0, 0, 0],
+        ]
+    ])
+
+    import scipy
+
+    angle = 90
+    axes = [0, 1]
+    reference = scipy.ndimage.rotate(source, angle=angle, axes=axes)
+    result = cle.rotate(source, angle=angle, axes=axes)
+    np.allclose(result, reference, 0.001)
+
+    angle = 90
+    axes = [1, 0]
+    reference = scipy.ndimage.rotate(source, angle=angle, axes=axes)
+    result = cle.rotate(source, angle=angle, axes=axes)
+    np.allclose(result, reference, 0.001)
+
+    angle = 90
+    axes = [0, 2]
+    reference = scipy.ndimage.rotate(source, angle=angle, axes=axes)
+    result = cle.rotate(source, angle=angle, axes=axes)
+    np.allclose(result, reference, 0.001)
+
+    angle = 90
+    axes = [2, 0]
+    reference = scipy.ndimage.rotate(source, angle=angle, axes=axes)
+    result = cle.rotate(source, angle=angle, axes=axes)
+    np.allclose(result, reference, 0.001)
+
+    angle = 90
+    axes = [1, 2]
+    reference = scipy.ndimage.rotate(source, angle=angle, axes=axes)
+    result = cle.rotate(source, angle=angle, axes=axes)
+    np.allclose(result, reference, 0.001)
+
+    angle = 90
+    axes = [2, 1]
+    reference = scipy.ndimage.rotate(source, angle=angle, axes=axes)
+    result = cle.rotate(source, angle=angle, axes=axes)
+    np.allclose(result, reference, 0.001)
