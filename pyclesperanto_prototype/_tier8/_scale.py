@@ -3,14 +3,14 @@ from .._tier0 import Image
 from .._tier0 import create_none
 
 @plugin_function(output_creator=create_none)
-def scale(source : Image, destination : Image = None, factor_x : float = 1, factor_y : float = 1, factor_z : float = 1, centered=True, zoom = None):
+def scale(source : Image, output : Image = None, factor_x : float = 1, factor_y : float = 1, factor_z : float = 1, centered=True, zoom = None):
     """Scale the image by given factors.
 
     Parameters
     ----------
     source : Image
         image to be translated
-    destination : Image, optional
+    output : Image, optional
         target image
     factor_x : float
         scaling along x
@@ -35,7 +35,7 @@ def scale(source : Image, destination : Image = None, factor_x : float = 1, fact
     from ._affine_transform import affine_transform
     from .._tier0 import create
 
-    if destination is None:
+    if output is None:
         import numpy as np
         dimensions = np.asarray(source.shape)
 
@@ -63,7 +63,7 @@ def scale(source : Image, destination : Image = None, factor_x : float = 1, fact
                 else:
                     dimensions[0] = dimensions[0] * zoom[0]
                     dimensions[1] = dimensions[1] * zoom[1]
-        destination = create(dimensions)
+        output = create(dimensions)
 
     transform = AffineTransform3D()
     if centered:
@@ -87,4 +87,4 @@ def scale(source : Image, destination : Image = None, factor_x : float = 1, fact
             zoom.reverse()
             transform.scale(*zoom)
 
-    return affine_transform(source, destination, transform)
+    return affine_transform(source, output, transform)

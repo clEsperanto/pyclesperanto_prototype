@@ -2,14 +2,14 @@ from .._tier0 import plugin_function
 from .._tier0 import Image
 
 @plugin_function
-def translate(source : Image, destination : Image = None, translate_x : float = 0, translate_y : float = 0, translate_z : float = 0, shift = None):
+def translate(source : Image, output : Image = None, translate_x : float = 0, translate_y : float = 0, translate_z : float = 0, shift = None):
     """Translate the image by a given vector.
 
     Parameters
     ----------
     source : Image
         image to be translated
-    destination : Image, optional
+    output : Image, optional
         target image
     translate_x : float
         translation along x axis in pixels
@@ -42,4 +42,4 @@ def translate(source : Image, destination : Image = None, translate_x : float = 
             shift.reverse()
             transform.translate(*shift)
 
-    return affine_transform(source, destination, transform)
+    return affine_transform(source, output, transform)

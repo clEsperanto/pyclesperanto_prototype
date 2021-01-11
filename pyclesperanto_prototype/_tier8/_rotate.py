@@ -2,7 +2,7 @@ from .._tier0 import plugin_function
 from .._tier0 import Image
 
 @plugin_function
-def rotate(source : Image, destination : Image = None, angle_around_x_in_degrees : float = 0, angle_around_y_in_degrees : float = 0, angle_around_z_in_degrees : float = 0, rotate_around_center=True, angle : float = None, axes = None):
+def rotate(source : Image, output : Image = None, angle_around_x_in_degrees : float = 0, angle_around_y_in_degrees : float = 0, angle_around_z_in_degrees : float = 0, rotate_around_center=True, angle : float = None, axes = None):
     """Rotate the image by given angles.
 
     Angles are given in degrees. To convert radians to degrees, use this formula:
@@ -13,7 +13,7 @@ def rotate(source : Image, destination : Image = None, angle_around_x_in_degrees
     ----------
     source : Image
         image to be translated
-    destination : Image, optional
+    output : Image, optional
         target image
     angle_around_x_in_degrees : float, optional
         rotation around x axis in radians
@@ -83,4 +83,4 @@ def rotate(source : Image, destination : Image = None, angle_around_x_in_degrees
     if rotate_around_center:
         transform.center(source.shape, undo=True)
 
-    return affine_transform(source, destination, transform)
+    return affine_transform(source, output, transform)
