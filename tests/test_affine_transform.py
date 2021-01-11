@@ -21,7 +21,7 @@ def test_affine_transform_translate():
     transform = cle.AffineTransform3D()
     transform.translate(-1, -1, 0)
 
-    result = cle.affine_transform(source, matrix=transform)
+    result = cle.affine_transform(source, transform=transform)
 
     a = cle.pull(result)
     b = cle.pull(reference)
@@ -52,7 +52,7 @@ def test_affine_transform_scale():
     transform = cle.AffineTransform3D()
     transform.scale(1, 2, 1)
 
-    result = cle.affine_transform(source, matrix=transform)
+    result = cle.affine_transform(source, transform=transform)
 
     a = cle.pull(result)
     b = cle.pull(reference)
@@ -161,7 +161,7 @@ def test_affine_transform_rotate():
     transform = cle.AffineTransform3D()
     transform.rotate(2, 45.0)
 
-    result = cle.affine_transform(source, matrix=transform)
+    result = cle.affine_transform(source, transform=transform)
 
     a = cle.pull(result)
     b = cle.pull(reference)
@@ -193,7 +193,7 @@ def test_affine_transform_rotate_around_center():
     transform.rotate(2, 90.0)
     transform.translate(2.5, 2.5)
 
-    result = cle.affine_transform(source, matrix=transform)
+    result = cle.affine_transform(source, transform=transform)
 
     a = cle.pull(result)
     b = cle.pull(reference)
