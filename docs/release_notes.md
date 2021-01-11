@@ -40,7 +40,7 @@ results of the GPU-accelerated statistics are dictionaries which contain the sam
 * `standard_deviation_of_n_nearest_neighbors_map`
 * `standard_deviation_of_proximal_neighbors_map` and alias `standard_deviation_of_distal_neighbors_map`
 * `affine_transform` (yet without shearing)
-* `translate`
+* `translate` and alias `shift`
 * `rotate`
 * `scale`
 * `rigid_transform`
