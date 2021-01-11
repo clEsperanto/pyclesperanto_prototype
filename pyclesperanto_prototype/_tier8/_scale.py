@@ -78,7 +78,7 @@ def scale(source : Image, output : Image = None, factor_x : float = 1, factor_y 
         import numpy as np
         #zoom = np.asarray(zoom, dtype=np.float32)
         #zoom = 1 / zoom
-        if isinstance(zoom, float):
+        if isinstance(zoom, float) or isinstance(zoom, int):
             if len(source.shape) == 3:
                 transform.scale(zoom, zoom, zoom)
             else: # 2D image
