@@ -67,12 +67,12 @@ def scale(source : Image, output : Image = None, factor_x : float = 1, factor_y 
 
     transform = AffineTransform3D()
     if centered:
-        transform.center(source.shape)
+        transform.center(output.shape)
 
     transform.scale(factor_x, factor_y, factor_z)
 
     if centered:
-        transform.center(source.shape, undo=True)
+        transform.center(output.shape, undo=True)
 
     if zoom is not None:
         import numpy as np
