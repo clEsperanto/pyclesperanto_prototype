@@ -48,8 +48,6 @@ def rotate(source : Image, destination : Image = None, angle_around_x_in_degrees
     if angle_around_z_in_degrees != 0:
         transform.rotate(2, angle_around_z_in_degrees)
 
-    if rotate_around_center:
-        transform.center(source.shape, undo=True)
 
     if angle is not None and axes is not None:
         # adapted from https://github.com/scipy/scipy/blob/v1.6.0/scipy/ndimage/interpolation.py#L886
@@ -73,11 +71,16 @@ def rotate(source : Image, destination : Image = None, angle_around_x_in_degrees
         if axes[0] < 0 or axes[1] < 0 or axes[0] >= ndim or axes[1] >= ndim:
             raise ValueError('invalid rotation plane specified')
 
+        axes.sort()
+
         if axes == [0, 1]:
-            transform.rotate(2, angle_around_x_in_degrees)
+            transform.rotate(0, -angle)
         if axes == [0, 2]:
-            transform.rotate(1, angle_around_x_in_degrees)
+            transform.rotate(1, angle)
         if axes == [1, 2]:
-            transform.rotate(0, angle_around_x_in_degrees)
+            transform.rotate(2, -angle)
+
+    if rotate_around_center:
+        transform.center(source.shape, undo=True)
 
     return affine_transform(source, destination, transform)

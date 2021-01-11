@@ -77,36 +77,42 @@ def test_rotate_compare_with_scipy():
 
     angle = 90
     axes = [0, 1]
+    print("Rotation angle ", angle, " axes ", axes)
     reference = scipy.ndimage.rotate(source, angle=angle, axes=axes)
     result = cle.rotate(source, angle=angle, axes=axes)
-    np.allclose(result, reference, 0.001)
+    assert np.allclose(result, reference, 0.001)
 
     angle = 90
     axes = [1, 0]
+    print("Rotation angle ", angle, " axes ", axes)
     reference = scipy.ndimage.rotate(source, angle=angle, axes=axes)
     result = cle.rotate(source, angle=angle, axes=axes)
-    np.allclose(result, reference, 0.001)
+    assert np.allclose(result, reference, 0.001)
 
     angle = 90
     axes = [0, 2]
+    print("Rotation angle ", angle, " axes ", axes)
     reference = scipy.ndimage.rotate(source, angle=angle, axes=axes)
     result = cle.rotate(source, angle=angle, axes=axes)
-    np.allclose(result, reference, 0.001)
+    assert np.allclose(result, reference, 0.001)
 
     angle = 90
     axes = [2, 0]
+    print("Rotation angle ", angle, " axes ", axes)
     reference = scipy.ndimage.rotate(source, angle=angle, axes=axes)
     result = cle.rotate(source, angle=angle, axes=axes)
-    np.allclose(result, reference, 0.001)
+    assert np.allclose(result, reference, 0.001)
 
     angle = 90
     axes = [1, 2]
+    print("Rotation angle ", angle, " axes ", axes)
     reference = scipy.ndimage.rotate(source, angle=angle, axes=axes)
     result = cle.rotate(source, angle=angle, axes=axes)
-    np.allclose(result, reference, 0.001)
+    assert np.allclose(result, reference, 0.001)
 
     angle = 90
     axes = [2, 1]
+    print("Rotation angle ", angle, " axes ", axes)
     reference = scipy.ndimage.rotate(source, angle=angle, axes=axes)
     result = cle.rotate(source, angle=angle, axes=axes)
-    np.allclose(result, reference, 0.001)
+    assert np.allclose(result, reference, 0.001)
