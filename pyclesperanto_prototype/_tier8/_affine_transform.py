@@ -67,6 +67,15 @@ def affine_transform(source : Image, output : Image = None, transform : Union[np
         else:
             transform_matrix = np.linalg.inv(transform)
     else:
+        # transpose X and Z to make matrix be compatible to scipy
+        transpose_matrix = np.asarray([
+            [0, 0, 1, 0],
+            [0, 1, 0, 0],
+            [1, 0, 0, 0],
+            [0, 0, 0, 1]
+        ])
+        matrix = np.matmul(transpose_matrix, matrix)
+        matrix = np.matmul(matrix, transpose_matrix)
         transform_matrix = matrix
 
     gpu_transform_matrix = push(transform_matrix)
