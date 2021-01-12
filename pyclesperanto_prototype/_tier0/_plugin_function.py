@@ -51,14 +51,22 @@ def plugin_function(
     @wraps(function)
     def worker_function(*args, **kwargs):
         sig = inspect.signature(function)
+        # create mapping from position and keyword arguments to parameters
+        # will raise a TypeError if the provided arguments do not match the signature
+        # https://docs.python.org/3/library/inspect.html#inspect.Signature.bind
         bound = sig.bind(*args, **kwargs)
+        # set default values for missing arguments
+        # https://docs.python.org/3/library/inspect.html#inspect.BoundArguments.apply_defaults
         bound.apply_defaults()
+
+        # copy images to GPU, and create output array if necessary
         for key, value in bound.arguments.items():
             if is_image(value):
                 bound.arguments[key] = push(value)
             if sig.parameters[key].annotation is Image and value is None:
-                bound.arguments[key] = output_creator(*bound.args)
+                bound.arguments[key] = output_creator(*bound.args[:len(args)])
 
+        # call the decorated function
         return function(*bound.args, **bound.kwargs)
 
     return worker_function
