@@ -55,3 +55,25 @@ def test_maximum_x_projection():
 
     assert (np.array_equal(a, b))
 
+
+def test_maximum_x_projection_of_pointlist():
+    positions_and_values = cle.push_zyx(np.asarray([
+        [0, 0, 2, 3, 5],
+        [0, 1, 3, 2, 6]
+    ]))
+
+
+    reference = cle.push_zyx(np.asarray([
+        [5],
+        [6]
+    ]))
+
+    result = cle.maximum_x_projection(positions_and_values)
+
+    a = cle.pull_zyx(result)
+    b = cle.pull_zyx(reference)
+
+    print(a)
+    print(b)
+
+    assert (np.array_equal(a, b))

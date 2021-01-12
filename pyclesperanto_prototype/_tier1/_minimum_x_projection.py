@@ -2,9 +2,9 @@ from .._tier0 import radius_to_kernel_size
 from .._tier0 import execute
 from .._tier0 import plugin_function
 from .._tier0 import Image
-from .._tier0 import create_2d_zy
+from .._tier0 import create_2d_yz
 
-@plugin_function(output_creator=create_2d_zy, categories=['projection'])
+@plugin_function(output_creator=create_2d_yz, categories=['projection'])
 def minimum_x_projection(source : Image, destination_min : Image = None):
     """Determines the minimum intensity projection of an image along Y. 
     
