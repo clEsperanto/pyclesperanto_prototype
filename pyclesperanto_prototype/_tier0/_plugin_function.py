@@ -1,9 +1,8 @@
 import inspect
-from typing import Any, Callable, Dict, Optional, Sequence, Set, Type, Union
+from typing import Callable
 from functools import wraps
 from toolz import curry
 
-from ._pycl import OCLArray
 
 from ._create import create_like
 from ._types import Image, is_image
@@ -14,8 +13,8 @@ from ._push import push
 def plugin_function(
     function: Callable,
     output_creator: Callable = create_like,
-    categories : list = None,
-    priority : int = 0
+    categories: list = None,
+    priority: int = 0,
 ) -> Callable:
     """Function decorator to ensure correct types and values of all parameters.
 
@@ -51,54 +50,15 @@ def plugin_function(
 
     @wraps(function)
     def worker_function(*args, **kwargs):
-        # determine argument spec and default values, values are given as args
-        argument_specification = inspect.getfullargspec(function)
-
-        any_ocl_input = None
-
-        for arg_counter, argument in enumerate(argument_specification.args):
-            #print("---\nparsing argument " + argument)
-            if arg_counter < len(args):
-                value = args[arg_counter]
-            else:
-                value = None
-
+        sig = inspect.signature(function)
+        bound = sig.bind(*args, **kwargs)
+        bound.apply_defaults()
+        for key, value in bound.arguments.items():
             if is_image(value):
-                value = push(value)
-                # value is now for sure OpenCL, we keep it in case we have to
-                # create another one of the same size
-                any_ocl_input = value
+                bound.arguments[key] = push(value)
+            if sig.parameters[key].annotation is Image and value is None:
+                bound.arguments[key] = output_creator(*bound.args)
 
-            # default: keep value
-            if value is not None:
-                kwargs[argument] = value
-
-        # accumulate args in a list in case only kwargs were passed
-        args_list = []
-        for argument in enumerate(argument_specification.args):
-            try:
-                value = kwargs[argument[1]]
-                args_list = args_list + [value]
-            except KeyError:
-                break
-
-        # go through all arguments again and check if an image wasn't set,
-        # in which case we create one.
-        for argument in argument_specification.args:
-            # was the argument annotated?
-            type_annotation = argument_specification.annotations.get(argument);
-            if argument not in kwargs:
-                if type_annotation is Image:
-                    # if not set and should be an image, create an image
-                    # create a new output image with specified/default creator
-                    kwargs[argument] = output_creator(*args_list)
-
-        #print("Got arguments")
-        #print(args)
-        #print("Will pass arguments")
-        #print(kwargs)
-
-        # execute function with determined arguments
-        return function(**kwargs)
+        return function(*bound.args, **bound.kwargs)
 
     return worker_function
