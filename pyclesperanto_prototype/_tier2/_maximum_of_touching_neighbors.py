@@ -3,7 +3,7 @@ from .._tier0 import plugin_function
 from .._tier0 import Image
 
 @plugin_function
-def maximum_of_touching_neighbors(values : Image, touch_matrix : Image, maximum_values_destination : Image):
+def maximum_of_touching_neighbors(values : Image, touch_matrix : Image, maximum_values_destination : Image = None):
     """Takes a touch matrix and a vector of values to determine the maximum 
     value among touching neighbors for every object. 
     
