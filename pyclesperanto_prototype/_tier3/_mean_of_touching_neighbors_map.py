@@ -41,7 +41,7 @@ def mean_of_touching_neighbors_map(parametric_map : Image, label_map : Image, pa
     if ignore_touching_background:
         set_column(touch_matrix, 0)
 
-    for i in range(1, radius):
+    for i in range(1, int(radius)):
         touch_matrix = neighbors_of_neighbors(touch_matrix)
         if ignore_touching_background:
             set_column(touch_matrix, 0)
