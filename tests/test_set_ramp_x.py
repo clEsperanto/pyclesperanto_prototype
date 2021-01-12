@@ -16,13 +16,13 @@ def test_set_ramp_x():
 
     reference = cle.push(np.asarray([
         [
-            [0, 0, 0],
-            [0, 0, 0],
-            [0, 0, 0]
+            [0, 1, 2],
+            [0, 1, 2],
+            [0, 1, 2]
         ], [
-            [1, 1, 1],
-            [1, 1, 1],
-            [1, 1, 1]
+            [0, 1, 2],
+            [0, 1, 2],
+            [0, 1, 2]
         ]
     ]))
 
@@ -32,5 +32,6 @@ def test_set_ramp_x():
     b = cle.pull(reference)
 
     print(a)
+    print(b)
 
     assert (np.allclose(a, b, 0.001))

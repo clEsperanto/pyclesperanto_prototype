@@ -27,8 +27,8 @@ def test_exclude_labels_on_edges_2d():
 
     gpu_output = cle.exclude_labels_on_edges(gpu_input)
 
-    a = cle.pull_zyx(gpu_output)
-    b = cle.pull_zyx(gpu_reference)
+    a = cle.pull(gpu_output)
+    b = cle.pull(gpu_reference)
 
     print(a)
     print(b)

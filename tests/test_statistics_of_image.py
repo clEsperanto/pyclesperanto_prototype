@@ -2,7 +2,7 @@ import pyclesperanto_prototype as cle
 import numpy as np
 
 def test_statistics_of_labelled_pixels():
-    intensity = cle.push_zyx(np.asarray([
+    intensity = cle.push(np.asarray([
         [0, 1, 2],
         [1, 2, 3],
         [2, 3, 4]

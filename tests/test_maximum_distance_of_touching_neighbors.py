@@ -3,7 +3,7 @@ import numpy as np
 
 def test_maximum_distance_of_touching_neighbors():
 
-    labels = cle.push_zyx(np.asarray([
+    labels = cle.push(np.asarray([
                     [1, 1, 1, 3, 3, 3],
                     [1, 1, 1, 3, 3, 3],
                     [1, 1, 1, 2, 3, 3],
@@ -12,7 +12,7 @@ def test_maximum_distance_of_touching_neighbors():
                     [0, 0, 0, 2, 2, 2]
     ]))
 
-    reference = cle.push_zyx(np.asarray(
+    reference = cle.push(np.asarray(
                     [[0, 4.031129,  4.031129,  3.1274989]]
     ))
 
@@ -22,8 +22,8 @@ def test_maximum_distance_of_touching_neighbors():
 
     maximum_distance_of_touching_neighbors = cle.maximum_distance_of_touching_neighbors(distance_matrix, touch_matrix)
 
-    a = cle.pull_zyx(maximum_distance_of_touching_neighbors)
-    b = cle.pull_zyx(reference)
+    a = cle.pull(maximum_distance_of_touching_neighbors)
+    b = cle.pull(reference)
 
     print(a)
     print(b)

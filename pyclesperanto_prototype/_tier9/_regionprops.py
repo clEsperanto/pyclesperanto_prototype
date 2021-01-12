@@ -26,14 +26,14 @@ def regionprops(labelmap : Image, intensity_image : Image = None, cache : bool =
     .. [2] https://clij.github.io/clij2-docs/reference_statisticsOfLabelledPixels
     """
 
-    from .._tier0 import pull_zyx
+    from .._tier0 import pull
 
     if labelmap is None:
         raise Exception("A label image must be provided")
 
-    label_image = pull_zyx(labelmap).astype(int)
+    label_image = pull(labelmap).astype(int)
     if intensity_image is not None:
-        intensity_image = pull_zyx(intensity_image)
+        intensity_image = pull(intensity_image)
 
     # Inspired by: https://forum.image.sc/t/how-to-measure-standard-deviation-of-intensities-with-scikit-image-regionprops/46948/2
     import numpy as np

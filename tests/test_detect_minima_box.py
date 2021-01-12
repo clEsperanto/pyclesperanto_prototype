@@ -26,8 +26,8 @@ def test_detect_minima_box():
 
     cle.detect_minima_box(gpu_input, gpu_output)
 
-    a = cle.pull_zyx(gpu_output)
-    b = cle.pull_zyx(gpu_reference)
+    a = cle.pull(gpu_output)
+    b = cle.pull(gpu_reference)
 
     print(a)
     print(b)

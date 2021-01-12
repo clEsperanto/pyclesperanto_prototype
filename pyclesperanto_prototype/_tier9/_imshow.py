@@ -7,7 +7,7 @@ def imshow(image : Image, title : str = None, labels : bool = False, min_display
     if len(image.shape) == 3:
         image = maximum_z_projection(image)
 
-    image = pull_zyx(image)
+    image = pull(image)
 
     cmap = color_map
     if labels:

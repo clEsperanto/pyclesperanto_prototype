@@ -11,7 +11,7 @@ def test_replace_intensities():
         [0, 0, 0, 0, 0]
     ]))
 
-    test2 = cle.push_zyx(np.asarray([
+    test2 = cle.push(np.asarray([
         [0, 9, 8, 7, 6, 5]
     ]))
 

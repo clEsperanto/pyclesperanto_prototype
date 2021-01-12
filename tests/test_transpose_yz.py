@@ -14,11 +14,11 @@ def test_transpose_yz():
 
     reference = cle.push(np.asarray([
         [
-            [0, 2],
-            [1, 3]
+            [0, 1],
+            [4, 5]
         ], [
-            [4, 6],
-            [5, 7]
+            [2, 3],
+            [6, 7]
         ]
     ]))
 
@@ -29,6 +29,7 @@ def test_transpose_yz():
     b = cle.pull(reference)
 
     print(a)
+    print(b)
 
     assert (np.array_equal(a, b))
 

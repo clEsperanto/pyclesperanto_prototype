@@ -3,7 +3,7 @@ import numpy as np
 
 def test_average_distance_of_n_far_off_distances():
 
-    labels = cle.push_zyx(np.asarray([
+    labels = cle.push(np.asarray([
                     [1, 1, 1, 3, 3, 3],
                     [1, 1, 1, 3, 3, 3],
                     [1, 1, 1, 3, 3, 3],
@@ -12,7 +12,7 @@ def test_average_distance_of_n_far_off_distances():
                     [0, 0, 0, 2, 2, 2]
     ]))
 
-    reference = cle.push_zyx(np.asarray(
+    reference = cle.push(np.asarray(
                     [[0, 4.2426, 4.2426, 3]]
     ))
 

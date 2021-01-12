@@ -22,7 +22,7 @@ def test_nonzero_maximum_diamond():
     flag = cle.create((1, 1, 1))
 
     # as nonzero filters don't touch zero values, we need to initialize the result in advance
-    cle.set(result, 0);
+    cle.set(result, 0)
 
     cle.nonzero_maximum_diamond(test, flag, result)
 

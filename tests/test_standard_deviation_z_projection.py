@@ -34,7 +34,7 @@ def test_standard_deviation_z_projection():
             [0, 2, 0, 8, 0],
             [5, 0, 6, 0, 10]
         ]
-    ]))
+    ]).T)
 
     reference = cle.push(np.asarray([
         [3.94, 3.46, 4.21, 3.19, 4.27],
@@ -42,7 +42,7 @@ def test_standard_deviation_z_projection():
         [3.46, 4.21, 3.19, 3.94, 4.27],
         [3.46, 3.94, 3.19, 4.21, 4.27],
         [3.94, 3.19, 4.21, 3.46, 4.27]
-    ]))
+    ]).T)
 
     result = cle.create(reference)
     cle.standard_deviation_z_projection(test1, result)

@@ -28,7 +28,7 @@ def write_values_to_positions(positions_and_values : Image, destination : Image 
     """
 
     if destination is None:
-        max_pos = pull(maximum_x_projection(positions_and_values)).astype(int)
+        max_pos = pull(maximum_x_projection(positions_and_values)).T.astype(int)
         max_pos = max_pos[0]
         
         if len(max_pos) == 4: # 3D image requested

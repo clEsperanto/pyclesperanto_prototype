@@ -23,10 +23,10 @@ from ._create import (
 from ._execute import execute
 from ._operations import operation
 from ._operations import operations
-from ._pull import pull
 from ._pull import pull_zyx
-from ._push import push
+from ._pull import pull
 from ._push import push_zyx
+from ._push import push
 from ._plugin_function import plugin_function
 from ._types import Image
 from ._cl_info import cl_info

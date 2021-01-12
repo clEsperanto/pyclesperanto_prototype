@@ -3,7 +3,7 @@ import numpy as np
 
 def test_exclude_labels_out_of_size_range_2d():
     
-    gpu_input = cle.push_zyx(np.asarray([
+    gpu_input = cle.push(np.asarray([
             [1, 1, 2, 0, 3, 3],
             [1, 1, 2, 0, 3, 3],
             [0, 0, 0, 0, 0, 0],
@@ -11,7 +11,7 @@ def test_exclude_labels_out_of_size_range_2d():
             [4, 4, 5, 6, 6, 6]
     ]))
 
-    gpu_reference = cle.push_zyx(np.asarray([
+    gpu_reference = cle.push(np.asarray([
             [1, 1, 0, 0, 2, 2],
             [1, 1, 0, 0, 2, 2],
             [0, 0, 0, 0, 0, 0],
@@ -21,8 +21,8 @@ def test_exclude_labels_out_of_size_range_2d():
 
     gpu_output = cle.exclude_labels_outside_size_range(gpu_input, gpu_input, minimum_size=4, maximum_size=5)
 
-    a = cle.pull_zyx(gpu_output)
-    b = cle.pull_zyx(gpu_reference)
+    a = cle.pull(gpu_output)
+    b = cle.pull(gpu_reference)
 
     print(a)
     print(b)

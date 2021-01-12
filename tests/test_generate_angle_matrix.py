@@ -3,7 +3,7 @@ import numpy as np
 
 def test_generate_angle_matrix():
 
-    input = cle.push_zyx(np.asarray([
+    input = cle.push(np.asarray([
 
             [5, 0, 4, 0, 3],
             [0, 6, 0, 0, 0],
@@ -12,7 +12,7 @@ def test_generate_angle_matrix():
             [8, 0, 9, 0, 0]
     ]))
 
-    reference = cle.push_zyx(np.asarray([
+    reference = cle.push(np.asarray([
             [0., -45.,  90.,  45.,  45.,   0., -45., -90.]
     ]))
 
@@ -25,8 +25,8 @@ def test_generate_angle_matrix():
 
     angle_from_1 = cle.crop(angle_matrix_degrees, start_x=2, start_y=1, width=8, height=1)
 
-    a = cle.pull_zyx(angle_from_1)
-    b = cle.pull_zyx(reference)
+    a = cle.pull(angle_from_1)
+    b = cle.pull(reference)
 
     print(a)
     print(b)

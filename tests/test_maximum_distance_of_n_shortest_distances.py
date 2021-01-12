@@ -3,7 +3,7 @@ import numpy as np
 
 def test_maximum_distance_of_n_shortest_distances():
 
-    labels = cle.push_zyx(np.asarray([
+    labels = cle.push(np.asarray([
                     [1, 1, 1, 3, 3, 3],
                     [1, 1, 1, 3, 3, 3],
                     [1, 1, 1, 3, 3, 3],
@@ -12,7 +12,7 @@ def test_maximum_distance_of_n_shortest_distances():
                     [0, 0, 0, 2, 2, 2]
     ]))
 
-    reference = cle.push_zyx(np.asarray(
+    reference = cle.push(np.asarray(
                     [[0, 3, 3, 3]]
     ))
 
@@ -21,8 +21,8 @@ def test_maximum_distance_of_n_shortest_distances():
 
     maximum_distance_of_n_far_off_distances = cle.maximum_distance_of_n_shortest_distances(distance_matrix, n=1)
 
-    a = cle.pull_zyx(maximum_distance_of_n_far_off_distances)
-    b = cle.pull_zyx(reference)
+    a = cle.pull(maximum_distance_of_n_far_off_distances)
+    b = cle.pull(reference)
 
     print(a)
     print(b)

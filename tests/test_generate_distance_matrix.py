@@ -26,8 +26,8 @@ def test_generate_distance_matrix():
     gpu_pointlist = cle.labelled_spots_to_pointlist(gpu_input)
     gpu_distance_matrix = cle.generate_distance_matrix(gpu_pointlist, gpu_pointlist)
 
-    a = cle.pull_zyx(gpu_distance_matrix)
-    b = cle.pull_zyx(gpu_reference)
+    a = cle.pull(gpu_distance_matrix)
+    b = cle.pull(gpu_reference)
 
     print(a)
     print(b)

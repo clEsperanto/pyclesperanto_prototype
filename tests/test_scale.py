@@ -3,7 +3,7 @@ import numpy as np
 
 
 def test_scale_centered():
-    source = cle.push_zyx(np.asarray([[
+    source = cle.push(np.asarray([[
           [0, 0, 0, 0, 0],
           [0, 0, 0, 0, 0],
           [0, 0, 1, 1, 0],
@@ -11,7 +11,7 @@ def test_scale_centered():
           [0, 0, 0, 0, 0],
     ]]))
 
-    reference = cle.push_zyx(np.asarray([[
+    reference = cle.push(np.asarray([[
         [0, 0, 0, 0, 0],
         [0, 0, 1, 1, 0],
         [0, 0, 1, 1, 0],
@@ -21,8 +21,8 @@ def test_scale_centered():
 
     result = cle.scale(source, factor_y=2)
 
-    a = cle.pull_zyx(result)
-    b = cle.pull_zyx(reference)
+    a = cle.pull(result)
+    b = cle.pull(reference)
 
     print(a)
     print(b)
@@ -31,7 +31,7 @@ def test_scale_centered():
 
 
 def test_scale_not_centered():
-    source = cle.push_zyx(np.asarray([[
+    source = cle.push(np.asarray([[
           [0, 0, 0, 0, 0],
           [0, 0, 1, 1, 0],
           [0, 0, 0, 0, 0],
@@ -39,7 +39,7 @@ def test_scale_not_centered():
           [0, 0, 0, 0, 0],
     ]]))
 
-    reference = cle.push_zyx(np.asarray([[
+    reference = cle.push(np.asarray([[
         [0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0],
         [0, 0, 1, 1, 0],
@@ -49,8 +49,8 @@ def test_scale_not_centered():
 
     result = cle.scale(source, factor_y=2, centered=False)
 
-    a = cle.pull_zyx(result)
-    b = cle.pull_zyx(reference)
+    a = cle.pull(result)
+    b = cle.pull(reference)
 
     print(a)
     print(b)

@@ -3,13 +3,13 @@ import numpy as np
 
 def test_centroids_of_labels():
 
-    labels = cle.push_zyx(np.asarray([
+    labels = cle.push(np.asarray([
         [1, 1, 2],
         [1, 2, 2],
         [3, 3, 3]
     ]))
 
-    reference = cle.push_zyx(np.asarray([
+    reference = cle.push(np.asarray([
         #     CENTROID_X(25),
         [0.33333334,    1.6666666,    1.],
         #     CENTROID_Y(26),
@@ -19,8 +19,8 @@ def test_centroids_of_labels():
 
     result = cle.centroids_of_labels(labels)
 
-    a = cle.pull_zyx(result)
-    b = cle.pull_zyx(reference)
+    a = cle.pull(result)
+    b = cle.pull(reference)
 
     print(a)
     print(b)
@@ -30,7 +30,7 @@ def test_centroids_of_labels():
 
 def test_centroids_of_labels_3d():
 
-    labels = cle.push_zyx(np.asarray([
+    labels = cle.push(np.asarray([
         [
             [1, 1, 2],
         ], [
@@ -40,7 +40,7 @@ def test_centroids_of_labels_3d():
         ]
     ]))
 
-    reference = cle.push_zyx(np.asarray([
+    reference = cle.push(np.asarray([
         #     CENTROID_X(25),
         [0.33333334,    1.6666666,    1.],
         #     CENTROID_Y(26),
@@ -52,8 +52,8 @@ def test_centroids_of_labels_3d():
 
     result = cle.centroids_of_labels(labels)
 
-    a = cle.pull_zyx(result)
-    b = cle.pull_zyx(reference)
+    a = cle.pull(result)
+    b = cle.pull(reference)
 
     print(a)
     print(b)

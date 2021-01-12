@@ -1,6 +1,5 @@
 from .._tier1 import copy
 from .._tier0 import empty_image_like
-from .._tier0 import push_zyx
 from .._tier0 import push
 from .._tier0 import execute
 from .._tier0 import plugin_function
@@ -58,7 +57,7 @@ def resample(source : Image, destination : Image = None, factor_x : float = 1, f
     if destination is None:
         destination = create(destination_dimensions)
 
-    gpu_transform_matrix = push_zyx(transform_matrix)
+    gpu_transform_matrix = push(transform_matrix)
 
     kernel_suffix = ''
     if linear_interpolation:

@@ -3,7 +3,7 @@ import numpy as np
 
 def test_minimum_distance_of_touching_neighbors():
 
-    labels = cle.push_zyx(np.asarray([
+    labels = cle.push(np.asarray([
                     [1, 1, 1, 3, 3, 3],
                     [1, 1, 1, 3, 3, 3],
                     [1, 1, 1, 2, 3, 3],
@@ -12,7 +12,7 @@ def test_minimum_distance_of_touching_neighbors():
                     [0, 0, 0, 2, 2, 2]
     ]))
 
-    reference = cle.push_zyx(np.asarray(
+    reference = cle.push(np.asarray(
                     [[0, 3.1274989, 2.933641,  2.933641]]
     ))
 
@@ -22,8 +22,8 @@ def test_minimum_distance_of_touching_neighbors():
 
     minimum_distance_of_touching_neighbors = cle.minimum_distance_of_touching_neighbors(distance_matrix, touch_matrix)
 
-    a = cle.pull_zyx(minimum_distance_of_touching_neighbors)
-    b = cle.pull_zyx(reference)
+    a = cle.pull(minimum_distance_of_touching_neighbors)
+    b = cle.pull(reference)
 
     print(a)
     print(b)

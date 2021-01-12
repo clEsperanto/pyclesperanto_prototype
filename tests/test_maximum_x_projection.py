@@ -35,7 +35,7 @@ def test_maximum_x_projection():
             [0, 2, 0, 8, 0],
             [5, 0, 6, 0, 10]
         ]
-    ]))
+    ]).T)
 
     reference = cle.push(np.asarray([
         [1, 3, 3, 3, 5],
@@ -43,7 +43,7 @@ def test_maximum_x_projection():
         [0, 1, 1, 1, 6],
         [8, 8, 7, 8, 0],
         [9, 10, 10, 10, 10]
-    ]))
+    ]).T)
 
     result = cle.create(reference)
     cle.maximum_x_projection(test1, result)

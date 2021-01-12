@@ -3,7 +3,7 @@ import numpy as np
 
 def test_touching_neighbor_count_map():
 
-    labels = cle.push_zyx(np.asarray([
+    labels = cle.push(np.asarray([
                     [1, 1, 0, 3, 3],
                     [1, 1, 2, 3, 3],
                     [0, 2, 2, 2, 0],
@@ -11,7 +11,7 @@ def test_touching_neighbor_count_map():
                     [4, 4, 0, 5, 5]
     ]))
 
-    reference = cle.push_zyx(np.asarray([
+    reference = cle.push(np.asarray([
         [2, 2, 0, 2, 2],
         [2, 2, 5, 2, 2],
         [0, 5, 5, 5, 0],

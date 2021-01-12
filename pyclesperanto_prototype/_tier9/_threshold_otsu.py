@@ -1,5 +1,5 @@
 from .. import minimum_of_all_pixels, maximum_of_all_pixels
-from .._tier0 import pull_zyx
+from .._tier0 import pull
 from .._tier1 import greater_constant
 
 import numpy as np
@@ -49,7 +49,7 @@ def threshold_otsu(input : Image, destination : Image = None):
     bin_centers = np.arange(256) * range / (255)
 
     # Determine histogram on GPU
-    hist = pull_zyx(histogram(input, num_bins=256, minimum_intensity=minimum_intensity, maximum_intensity=maximum_intensity, determine_min_max=False))
+    hist = pull(histogram(input, num_bins=256, minimum_intensity=minimum_intensity, maximum_intensity=maximum_intensity, determine_min_max=False))
 
     # determine threshold using scikit-image
     threshold = scikit_image_threshold_otsu(hist=(hist, bin_centers))

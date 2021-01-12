@@ -24,8 +24,8 @@ def test_close_index_gaps_in_label_maps():
 
     cle.close_index_gaps_in_label_map(gpu_input, gpu_output)
 
-    a = cle.pull_zyx(gpu_output)
-    b = cle.pull_zyx(gpu_reference)
+    a = cle.pull(gpu_output)
+    b = cle.pull(gpu_reference)
 
     print(a)
     print(b)

@@ -35,7 +35,7 @@ def test_mean_z_projection():
             [0, 2, 0, 8, 0],
             [5, 0, 6, 0, 10]
         ]
-    ]))
+    ]).T)
 
     reference = cle.push(np.asarray([
         [2, 2,   2.8, 2.2, 4.2],
@@ -43,7 +43,7 @@ def test_mean_z_projection():
         [2, 2.8, 2.2, 2, 4.2],
         [2, 2,   2.2, 2.8, 4.2],
         [2, 2.2, 2.8, 2, 4.2]
-    ]))
+    ]).T)
 
     result = cle.create(reference)
     cle.mean_z_projection(test1, result)

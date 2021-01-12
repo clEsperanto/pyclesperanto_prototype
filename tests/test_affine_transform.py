@@ -2,7 +2,7 @@ import pyclesperanto_prototype as cle
 import numpy as np
 
 def test_affine_transform_translate():
-    source = cle.push_zyx(np.asarray([[
+    source = cle.push(np.asarray([[
           [0, 0, 0, 0, 0],
           [0, 0, 0, 0, 0],
           [0, 0, 1, 1, 0],
@@ -10,7 +10,7 @@ def test_affine_transform_translate():
           [0, 0, 0, 0, 0],
     ]]))
 
-    reference = cle.push_zyx(np.asarray([[
+    reference = cle.push(np.asarray([[
         [0, 0, 0, 0, 0],
         [0, 1, 1, 0, 0],
         [0, 0, 0, 0, 0],
@@ -23,8 +23,8 @@ def test_affine_transform_translate():
 
     result = cle.affine_transform(source, transform=transform)
 
-    a = cle.pull_zyx(result)
-    b = cle.pull_zyx(reference)
+    a = cle.pull(result)
+    b = cle.pull(reference)
 
     print(a)
     print(b)
@@ -33,7 +33,7 @@ def test_affine_transform_translate():
 
 
 def test_affine_transform_scale():
-    source = cle.push_zyx(np.asarray([[
+    source = cle.push(np.asarray([[
           [0, 0, 0, 0, 0],
           [0, 0, 1, 1, 0],
           [0, 0, 0, 0, 0],
@@ -41,7 +41,7 @@ def test_affine_transform_scale():
           [0, 0, 0, 0, 0],
     ]]))
 
-    reference = cle.push_zyx(np.asarray([[
+    reference = cle.push(np.asarray([[
         [0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0],
         [0, 0, 1, 1, 0],
@@ -54,8 +54,8 @@ def test_affine_transform_scale():
 
     result = cle.affine_transform(source, transform=transform)
 
-    a = cle.pull_zyx(result)
-    b = cle.pull_zyx(reference)
+    a = cle.pull(result)
+    b = cle.pull(reference)
 
     print(a)
     print(b)
@@ -63,7 +63,7 @@ def test_affine_transform_scale():
     assert (np.array_equal(a, b))
 
 def test_affine_transform_scale_with_transform_matrix():
-    source = cle.push_zyx(np.asarray([[
+    source = cle.push(np.asarray([[
           [0, 0, 0, 0, 0],
           [0, 0, 1, 1, 0],
           [0, 0, 0, 0, 0],
@@ -71,7 +71,7 @@ def test_affine_transform_scale_with_transform_matrix():
           [0, 0, 0, 0, 0],
     ]]))
 
-    reference = cle.push_zyx(np.asarray([[
+    reference = cle.push(np.asarray([[
         [0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0],
         [0, 0, 1, 1, 0],
@@ -88,8 +88,8 @@ def test_affine_transform_scale_with_transform_matrix():
 
     result = cle.affine_transform(source, transform=transform)
 
-    a = cle.pull_zyx(result)
-    b = cle.pull_zyx(reference)
+    a = cle.pull(result)
+    b = cle.pull(reference)
 
     print(a)
     print(b)
@@ -98,7 +98,7 @@ def test_affine_transform_scale_with_transform_matrix():
 
 
 def test_affine_transform_rotate():
-    source = cle.push_zyx(np.asarray([[
+    source = cle.push(np.asarray([[
           [0, 0, 0, 1, 1],
           [0, 0, 0, 0, 0],
           [0, 0, 0, 0, 0],
@@ -106,7 +106,7 @@ def test_affine_transform_rotate():
           [0, 0, 0, 0, 0],
     ]]))
 
-    reference = cle.push_zyx(np.asarray([[
+    reference = cle.push(np.asarray([[
         [0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0],
         [0, 0, 1, 0, 0],
@@ -119,8 +119,8 @@ def test_affine_transform_rotate():
 
     result = cle.affine_transform(source, transform=transform)
 
-    a = cle.pull_zyx(result)
-    b = cle.pull_zyx(reference)
+    a = cle.pull(result)
+    b = cle.pull(reference)
 
     print(a)
     print(b)
@@ -128,7 +128,7 @@ def test_affine_transform_rotate():
     assert (np.array_equal(a, b))
 
 def test_affine_transform_rotate_around_center():
-    source = cle.push_zyx(np.asarray([[
+    source = cle.push(np.asarray([[
           [0, 0, 0, 0, 0],
           [0, 0, 0, 0, 0],
           [0, 0, 0, 1, 1],
@@ -136,7 +136,7 @@ def test_affine_transform_rotate_around_center():
           [0, 0, 0, 0, 0],
     ]]))
 
-    reference = cle.push_zyx(np.asarray([[
+    reference = cle.push(np.asarray([[
         [0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0],
@@ -151,8 +151,8 @@ def test_affine_transform_rotate_around_center():
 
     result = cle.affine_transform(source, transform=transform)
 
-    a = cle.pull_zyx(result)
-    b = cle.pull_zyx(reference)
+    a = cle.pull(result)
+    b = cle.pull(reference)
 
     print(a)
     print(b)

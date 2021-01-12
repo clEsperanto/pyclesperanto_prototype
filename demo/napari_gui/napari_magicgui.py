@@ -9,7 +9,7 @@ from napari.layers import Image, Labels
 def process_image(input: Image, sigma: float = 5) -> Labels:
     if input:
         # push image to GPU
-        input = cle.push_zyx(input.data)
+        input = cle.push(input.data)
 
         # process the image
         blurred = cle.gaussian_blur(input, sigma_x=sigma, sigma_y=sigma)
@@ -17,7 +17,7 @@ def process_image(input: Image, sigma: float = 5) -> Labels:
         labels = cle.connected_components_labeling_box(binary)
 
         # pull result back
-        output = cle.pull_zyx(labels)
+        output = cle.pull(labels)
         return output
 
 # load data

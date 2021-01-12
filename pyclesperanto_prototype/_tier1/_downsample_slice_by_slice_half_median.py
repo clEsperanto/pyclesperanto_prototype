@@ -1,6 +1,5 @@
 from .._tier1 import copy
 from .._tier0 import empty_image_like
-from .._tier0 import push_zyx
 from .._tier0 import push
 from .._tier0 import execute
 from .._tier0 import plugin_function

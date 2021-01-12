@@ -8,14 +8,14 @@ def test_set_where_x_smaller_than_y():
         [0, 0, 3, 1],
         [0, 0, 3, 1],
         [1, 1, 1, 1]
-    ]))
+    ]).T)
 
     reference = cle.push(np.asarray([
         [0, 3, 3, 3],
         [0, 0, 3, 3],
         [0, 0, 3, 3],
         [1, 1, 1, 1]
-    ]))
+    ]).T)
 
     cle.set_where_x_smaller_than_y(result, 3)
 

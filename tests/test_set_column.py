@@ -16,7 +16,7 @@ def test_set_column():
         [3, 3, 3, 3, 3],
         [4, 4, 4, 4, 4],
         [3, 3, 3, 3, 3]
-    ]))
+    ]).T)
 
     cle.set_column(result, 3, 4)
 

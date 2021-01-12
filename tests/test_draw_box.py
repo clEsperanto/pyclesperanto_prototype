@@ -3,7 +3,7 @@ import numpy as np
 
 
 def test_draw_box():
-    reference = cle.push_zyx(np.asarray([
+    reference = cle.push(np.asarray([
         [0, 0, 0, 0, 0],
         [0, 2, 2, 2, 0],
         [0, 2, 2, 2, 0],

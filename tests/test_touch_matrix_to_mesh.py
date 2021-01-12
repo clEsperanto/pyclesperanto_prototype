@@ -5,13 +5,13 @@ def test_touch_matrix_to_mesh():
 
     gpu_touch_matrix = cle.push(np.asarray([
                     [0, 0, 0],
-                    [0, 0, 1],
-                    [0, 0, 0]
+                    [0, 0, 0],
+                    [0, 1, 0]
     ]))
 
     gpu_point_list = cle.push(np.asarray([
-                    [1, 2],
-                    [4, 5]
+                    [1, 4],
+                    [2, 5]
     ]))
 
     gpu_output = cle.create([5, 5])
@@ -23,7 +23,7 @@ def test_touch_matrix_to_mesh():
                     [0, 0, 0, 1, 0],
                     [0, 0, 0, 0, 1],
                     [0, 0, 0, 0, 0]
-    ]))
+    ]).T)
 
 
 

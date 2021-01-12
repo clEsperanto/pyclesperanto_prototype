@@ -2,7 +2,7 @@ import pyclesperanto_prototype as cle
 import numpy as np
 
 def test_push_regionprops_column():
-    labels = cle.push_zyx(np.asarray([
+    labels = cle.push(np.asarray([
         [
             [4, 4, 2],
         ], [
@@ -23,7 +23,7 @@ def test_push_regionprops_column():
 
 
 def test_push_regionprops_column_gpu():
-    labels = cle.push_zyx(np.asarray([
+    labels = cle.push(np.asarray([
         [
             [4, 4, 2],
         ], [

@@ -34,7 +34,7 @@ def test_sum_z_projection():
             [0, 2, 0, 8, 0],
             [5, 0, 6, 0, 10]
         ]
-    ]))
+    ]).T)
 
     reference = cle.push(np.asarray([
         [10, 10, 14, 11, 21],
@@ -42,7 +42,7 @@ def test_sum_z_projection():
         [10, 14, 11, 10, 21],
         [10, 10, 11, 14, 21],
         [10, 11, 14, 10, 21]
-    ]))
+    ]).T)
 
     result = cle.create(reference)
     cle.sum_z_projection(test1, result)

@@ -21,8 +21,8 @@ def test_connected_components_labeling_box():
 
     gpu_output = cle.connected_components_labeling_box(gpu_input)
 
-    a = cle.pull_zyx(gpu_output)
-    b = cle.pull_zyx(gpu_reference)
+    a = cle.pull(gpu_output)
+    b = cle.pull(gpu_reference)
 
     print(a)
     print(b)

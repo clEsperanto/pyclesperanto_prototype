@@ -36,7 +36,7 @@ from napari.layers import Image, Labels
 def workflow(input: Image, sigma=3, threshold : float = 30) -> Labels:
     if input:
         # push image to GPU memory and show it
-        gpu_input = cle.push_zyx(input.data)
+        gpu_input = cle.push(input.data)
 
         # Spot detection
         # After some noise removal/smoothing, we perform a local maximum detection
@@ -86,7 +86,7 @@ def workflow(input: Image, sigma=3, threshold : float = 30) -> Labels:
 
         gpu_labels = cle.mask(flip, flap)
 
-        output = cle.pull_zyx(gpu_labels)
+        output = cle.pull(gpu_labels)
         return output
 
 # Start up napari

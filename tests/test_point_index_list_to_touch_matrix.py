@@ -3,17 +3,17 @@ import numpy as np
 
 
 def test_point_index_list_to_touch_matrix():
-    positions = cle.push_zyx(np.asarray([
+    positions = cle.push(np.asarray([
         [1, 1, 4, 4],
         [1, 4, 4, 1]
     ]))
 
-    index_list = cle.push_zyx(np.asarray([
+    index_list = cle.push(np.asarray([
         [2, 3, 4, 1],
         [3,-1,-1,-1]
     ]))
 
-    reference = cle.push_zyx(np.asarray([
+    reference = cle.push(np.asarray([
         [0, 0, 0, 0, 0, 0],
         [0, 1, 1, 1, 1, 0],
         [0, 1, 1, 0, 1, 0],
@@ -29,8 +29,8 @@ def test_point_index_list_to_touch_matrix():
 
     result = cle.touch_matrix_to_mesh(positions, touch_matrix, result)
 
-    a = cle.pull_zyx(result)
-    b = cle.pull_zyx(reference)
+    a = cle.pull(result)
+    b = cle.pull(reference)
 
     print(a)
     print(b)

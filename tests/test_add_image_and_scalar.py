@@ -5,7 +5,7 @@ import pyopencl as cl
 def test_add_image_and_scalar():
     data = np.arange(100).reshape(10, 10)
     # push an array to the GPU
-    flip = cle.push(data)
+    flip = cle.push(data.T)
     assert flip.shape == (10, 10)
     assert isinstance(flip, cl.array.Array)
     # create memory for the output

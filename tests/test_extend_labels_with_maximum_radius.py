@@ -3,7 +3,7 @@ import numpy as np
 
 def test_extend_labels_with_maximum_radius_2d():
     
-    gpu_input = cle.push_zyx(np.asarray([
+    gpu_input = cle.push(np.asarray([
 
             [1, 0, 0, 0, 0, 2],
             [0, 0, 0, 0, 0, 0],
@@ -14,7 +14,7 @@ def test_extend_labels_with_maximum_radius_2d():
 
     ]))
 
-    gpu_reference = cle.push_zyx(np.asarray([
+    gpu_reference = cle.push(np.asarray([
 
             [1, 1, 0, 0, 2, 2],
             [1, 1, 0, 0, 2, 2],
@@ -27,8 +27,8 @@ def test_extend_labels_with_maximum_radius_2d():
 
     gpu_output = cle.extend_labels_with_maximum_radius(gpu_input, radius=1)
 
-    a = cle.pull_zyx(gpu_output)
-    b = cle.pull_zyx(gpu_reference)
+    a = cle.pull(gpu_output)
+    b = cle.pull(gpu_reference)
 
     print(a)
     print(b)
@@ -36,7 +36,7 @@ def test_extend_labels_with_maximum_radius_2d():
     assert (np.array_equal(a, b))
 
 def test_extend_labels_with_maximum_radius_3d():
-    gpu_input = cle.push_zyx(np.asarray([
+    gpu_input = cle.push(np.asarray([
         [
             [0, 0, 0, 0, 0, 2],
             [0, 0, 0, 0, 0, 0],
@@ -54,7 +54,7 @@ def test_extend_labels_with_maximum_radius_3d():
         ]
     ]))
 
-    gpu_reference = cle.push_zyx(np.asarray([
+    gpu_reference = cle.push(np.asarray([
         [
             [1, 1, 0, 0, 2, 2],
             [1, 1, 0, 0, 2, 2],
@@ -74,8 +74,8 @@ def test_extend_labels_with_maximum_radius_3d():
 
     gpu_output = cle.extend_labels_with_maximum_radius(gpu_input, radius=1)
 
-    a = cle.pull_zyx(gpu_output)
-    b = cle.pull_zyx(gpu_reference)
+    a = cle.pull(gpu_output)
+    b = cle.pull(gpu_reference)
 
     print(a)
     print(b)

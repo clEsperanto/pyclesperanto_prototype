@@ -21,12 +21,12 @@ def test_generate_touch_matrix():
             [0, 0, 0, 0, 0],
             [0, 0, 0, 0, 0]
 
-    ]))
+    ]).T)
 
     gpu_touch_matrix = cle.generate_touch_matrix(gpu_input)
 
-    a = cle.pull_zyx(gpu_touch_matrix)
-    b = cle.pull_zyx(gpu_reference)
+    a = cle.pull(gpu_touch_matrix)
+    b = cle.pull(gpu_reference)
 
     print(a)
     print(b)

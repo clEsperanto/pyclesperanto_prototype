@@ -12,7 +12,7 @@ def test_copy_slice_from_3d():
             [1, 3],
             [1, 2]
         ]
-    ]))
+    ]).T)
 
     test2 = cle.create((2, 2))
     cle.copy_slice(test1, test2, 0)
@@ -49,7 +49,7 @@ def test_copy_slice_to3d_with_one_slice():
     print(test1)
     print("shape test1 " + str(test1.shape))
 
-    test2 = cle.create((1, 3, 2))
+    test2 = cle.create((1, 2, 3))
     print("shape test2 " + str(test2.shape))
     print(test2)
 
@@ -62,7 +62,7 @@ def test_copy_slice_to3d_with_one_slice():
     assert (np.mean(a) == 4)
 
 def test_copy_slice_to3d_with_one_slice_zyx():
-    test1 = cle.push_zyx(np.asarray([
+    test1 = cle.push(np.asarray([
         [3, 4, 6],
         [4, 5, 2]
     ]))
@@ -85,7 +85,7 @@ def test_copy_slice_to3d_with_one_slice_zyx():
 def test_copy_slice_mini_y():
     np_input = np.asarray([[1], [2], [3], [4]])
 
-    gpu_input = cle.push_zyx(np_input)
+    gpu_input = cle.push(np_input)
     gpu_output = cle.create((1, 4, 1))
 
     cle.copy_slice(gpu_input, gpu_output, 0)
@@ -99,7 +99,7 @@ def test_copy_slice_mini_y():
 def test_copy_slice_mini_x():
     np_input = np.asarray([[1, 2, 3, 4]])
 
-    gpu_input = cle.push_zyx(np_input)
+    gpu_input = cle.push(np_input)
     gpu_output = cle.create((1, 1, 4))
 
     cle.copy_slice(gpu_input, gpu_output, 0)

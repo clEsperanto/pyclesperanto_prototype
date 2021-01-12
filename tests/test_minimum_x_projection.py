@@ -38,7 +38,7 @@ def test_minimum_x_projection():
             [0, 2, 0, 8, 1],
             [1, 1, 1, 1, 1]
         ]
-    ]))
+    ]).T)
 
     reference = cle.push(np.asarray([
         [0, 0, 0, 0, 1],
@@ -46,7 +46,7 @@ def test_minimum_x_projection():
         [0, 0, 0, 0, 1],
         [0, 0, 0, 0, 1],
         [1, 1, 1, 1, 1]
-    ]))
+    ]).T)
 
     result = cle.create(reference)
     cle.minimum_x_projection(test1, result)

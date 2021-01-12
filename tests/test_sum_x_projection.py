@@ -34,7 +34,7 @@ def test_sum_x_projection():
             [0, 2, 0, 8, 0],
             [5, 0, 6, 0, 10]
         ]
-    ]))
+    ]).T)
 
     reference = cle.push(np.asarray([
         [2, 5, 9, 4, 25],
@@ -42,7 +42,7 @@ def test_sum_x_projection():
         [0, 1, 3, 1, 30],
         [24, 15, 14, 22, 0],
         [18, 28, 30, 19, 50]
-    ]))
+    ]).T)
 
     result = cle.create(reference)
     cle.sum_x_projection(test1, result)

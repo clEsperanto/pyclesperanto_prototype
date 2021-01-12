@@ -36,7 +36,7 @@ def statistics_of_labelled_pixels(intensity_image : Image = None, label_image : 
     from .._tier1 import paste
     from .._tier1 import divide_images
     from .._tier1 import set_plane
-    from .._tier0 import pull_zyx
+    from .._tier0 import pull
     from .._tier1 import power
     from .._tier2 import maximum_of_all_pixels
     import numpy as np
@@ -138,27 +138,27 @@ def statistics_of_labelled_pixels(intensity_image : Image = None, label_image : 
     #     BOUNDING_BOX_HEIGHT = 8
     #     BOUNDING_BOX_DEPTH = 9
     crop(min_per_label, result_vector, measurements_start_x, 10, 0)
-    bbox_min_x = pull_zyx(result_vector)[0]
+    bbox_min_x = pull(result_vector)[0]
     region_props['bbox_min_x'] = bbox_min_x
 
     crop(min_per_label, result_vector, measurements_start_x, 12, 0)
-    bbox_min_y = pull_zyx(result_vector)[0]
+    bbox_min_y = pull(result_vector)[0]
     region_props['bbox_min_y'] = bbox_min_y
 
     crop(min_per_label, result_vector, measurements_start_x, 14, 0)
-    bbox_min_z = pull_zyx(result_vector)[0]
+    bbox_min_z = pull(result_vector)[0]
     region_props['bbox_min_z'] = bbox_min_z
 
     crop(max_per_label, result_vector, measurements_start_x, 11, 0)
-    bbox_max_x = pull_zyx(result_vector)[0]
+    bbox_max_x = pull(result_vector)[0]
     region_props['bbox_max_x'] = bbox_max_x
 
     crop(max_per_label, result_vector, measurements_start_x, 13, 0)
-    bbox_max_y = pull_zyx(result_vector)[0]
+    bbox_max_y = pull(result_vector)[0]
     region_props['bbox_max_y'] = bbox_max_y
 
     crop(max_per_label, result_vector, measurements_start_x, 15, 0)
-    bbox_max_z = pull_zyx(result_vector)[0]
+    bbox_max_z = pull(result_vector)[0]
     region_props['bbox_max_z'] = bbox_max_z
 
     if len(intensity_image.shape) == 2:
@@ -186,22 +186,22 @@ def statistics_of_labelled_pixels(intensity_image : Image = None, label_image : 
     #     MINIMUM_INTENSITY = 10
     #     MAXIMUM_INTENSITY = 11
     crop(min_per_label, result_vector, measurements_start_x, 8, 0)
-    region_props['min_intensity'] = pull_zyx(result_vector)[0]
+    region_props['min_intensity'] = pull(result_vector)[0]
     crop(max_per_label, result_vector, measurements_start_x, 9, 0)
-    region_props['max_intensity'] = pull_zyx(result_vector)[0]
+    region_props['max_intensity'] = pull(result_vector)[0]
 
     #     MEAN_INTENSITY = 12
     #     SUM_INTENSITY = 13
     #     PIXEL_COUNT = 15
     crop(sum_per_label, result_vector, measurements_start_x, 7, 0)
-    region_props['sum_intensity'] = pull_zyx(result_vector)[0]
+    region_props['sum_intensity'] = pull(result_vector)[0]
 
     crop(sum_per_label, sum_dim, measurements_start_x, 3, 0)
-    region_props['area'] = pull_zyx(sum_dim)[0]
+    region_props['area'] = pull(sum_dim)[0]
     paste(sum_dim, label_statistics_image, measurements_start_x, 7, 0)
 
     divide_images(result_vector, sum_dim, avg_dim)
-    region_props['mean_intensity'] = pull_zyx(avg_dim)[0]
+    region_props['mean_intensity'] = pull(avg_dim)[0]
     paste(avg_dim, label_statistics_image, measurements_start_x, 6, 0)
 
     #     SUM_INTENSITY_TIMES_X = 16
@@ -214,9 +214,9 @@ def statistics_of_labelled_pixels(intensity_image : Image = None, label_image : 
     crop(sum_per_label, result_vector, measurements_start_x, 4 + 3, 0)
     for dim in range(0, 3):
         crop(sum_per_label, sum_dim, measurements_start_x, 4 + dim, 0)
-        region_props['sum_intensity_times_' + dim_names[dim]] = pull_zyx(sum_dim)[0]
+        region_props['sum_intensity_times_' + dim_names[dim]] = pull(sum_dim)[0]
         divide_images(sum_dim, result_vector, avg_dim)
-        region_props['mass_center_' + dim_names[dim]] = pull_zyx(avg_dim)[0]
+        region_props['mass_center_' + dim_names[dim]] = pull(avg_dim)[0]
         paste(avg_dim, label_statistics_image, measurements_start_x, 3 + dim, 0)
 
     if len(intensity_image.shape) == 2:
@@ -240,9 +240,9 @@ def statistics_of_labelled_pixels(intensity_image : Image = None, label_image : 
     crop(sum_per_label, result_vector, measurements_start_x, 3, 0)
     for dim in range(0, 3):
         crop(sum_per_label, sum_dim, measurements_start_x, dim, 0)
-        region_props['sum_' + dim_names[dim]] = pull_zyx(sum_dim)[0]
+        region_props['sum_' + dim_names[dim]] = pull(sum_dim)[0]
         divide_images(sum_dim, result_vector, avg_dim)
-        region_props['centroid_' + dim_names[dim]] = pull_zyx(avg_dim)[0]
+        region_props['centroid_' + dim_names[dim]] = pull(avg_dim)[0]
         paste(avg_dim, label_statistics_image, measurements_start_x, dim, 0)
 
     if len(intensity_image.shape) == 2:
@@ -286,25 +286,25 @@ def statistics_of_labelled_pixels(intensity_image : Image = None, label_image : 
 
     # distance to centroid
     crop(sum_statistics, sum_dim, measurements_start_x, 0, 0)
-    region_props['sum_distance_to_centroid'] = pull_zyx(sum_dim)[0]
+    region_props['sum_distance_to_centroid'] = pull(sum_dim)[0]
     divide_images(sum_dim, result_vector, avg_dim)
-    region_props['mean_distance_to_centroid'] = pull_zyx(avg_dim)[0]
+    region_props['mean_distance_to_centroid'] = pull(avg_dim)[0]
 
     # distance to center of mass
     crop(sum_statistics, sum_dim, measurements_start_x, 1, 0)
-    region_props['sum_distance_to_mass_center'] = pull_zyx(sum_dim)[0]
+    region_props['sum_distance_to_mass_center'] = pull(sum_dim)[0]
     divide_images(sum_dim, result_vector, avg_dim)
-    region_props['mean_distance_to_mass_center'] = pull_zyx(avg_dim)[0]
+    region_props['mean_distance_to_mass_center'] = pull(avg_dim)[0]
 
     # standard deviation intensity
     crop(sum_statistics, sum_dim, measurements_start_x, 2, 0)
     power(sum_dim, result_vector, 0.5)
-    region_props['standard_deviation_intensity'] = pull_zyx(result_vector)[0]
+    region_props['standard_deviation_intensity'] = pull(result_vector)[0]
 
     crop(max_statistics, result_vector, measurements_start_x, 4, 0)
-    region_props['max_distance_to_centroid'] = pull_zyx(result_vector)[0]
+    region_props['max_distance_to_centroid'] = pull(result_vector)[0]
     crop(max_statistics, result_vector, measurements_start_x, 5, 0)
-    region_props['max_distance_to_mass_center'] = pull_zyx(result_vector)[0]
+    region_props['max_distance_to_mass_center'] = pull(result_vector)[0]
 
     region_props['mean_max_distance_to_centroid_ratio'] = region_props['max_distance_to_centroid'] / region_props[
         'mean_distance_to_centroid']

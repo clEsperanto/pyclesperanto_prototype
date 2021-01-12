@@ -3,7 +3,6 @@ from .._tier0 import create_none
 from .._tier0 import execute
 from .._tier0 import plugin_function
 from .._tier0 import Image
-from .._tier0 import push
 
 @plugin_function(output_creator=create_none)
 def centroids_of_labels(labels:Image, pointlist_destination :Image = None, include_background :bool = False):

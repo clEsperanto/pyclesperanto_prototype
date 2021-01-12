@@ -11,7 +11,7 @@ with napari.gui_qt():
     viewer.add_image(image, name='blobs')
 
     # push image to GPU
-    input = cle.push_zyx(image)
+    input = cle.push(image)
 
     # process the image
     sigma = 1
@@ -20,7 +20,7 @@ with napari.gui_qt():
     labels = cle.connected_components_labeling_box(binary)
 
     # pull result back
-    output = cle.pull_zyx(labels)
+    output = cle.pull(labels)
 
     # add it to napari
     viewer.add_labels(output)

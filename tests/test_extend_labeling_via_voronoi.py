@@ -27,8 +27,8 @@ def test_extend_labeling_via_voronoi():
 
     gpu_output = cle.extend_labeling_via_voronoi(gpu_input)
 
-    a = cle.pull_zyx(gpu_output)
-    b = cle.pull_zyx(gpu_reference)
+    a = cle.pull(gpu_output)
+    b = cle.pull(gpu_reference)
 
     print(a)
     print(b)

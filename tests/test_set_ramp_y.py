@@ -32,5 +32,6 @@ def test_set_ramp_y():
     b = cle.pull(reference)
 
     print(a)
+    print(b)
 
     assert (np.allclose(a, b, 0.001))

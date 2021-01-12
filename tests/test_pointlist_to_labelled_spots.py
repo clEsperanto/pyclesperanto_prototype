@@ -3,13 +3,13 @@ import numpy as np
 
 
 def test_pointlist_to_labelled_spots_2d():
-    positions_and_values = cle.push_zyx(np.asarray([
+    positions_and_values = cle.push(np.asarray([
         [0, 0, 2, 3, 5],
         [0, 1, 3, 2, 6]
     ]))
 
 
-    reference = cle.push_zyx(np.asarray([
+    reference = cle.push(np.asarray([
         [1, 0, 0, 0, 0, 0],
         [2, 0, 0, 0, 0, 0],
         [0, 0, 0, 4, 0, 0],
@@ -21,8 +21,8 @@ def test_pointlist_to_labelled_spots_2d():
 
     result = cle.pointlist_to_labelled_spots(positions_and_values)
 
-    a = cle.pull_zyx(result)
-    b = cle.pull_zyx(reference)
+    a = cle.pull(result)
+    b = cle.pull(reference)
 
     print(a)
     print(b)
@@ -30,14 +30,14 @@ def test_pointlist_to_labelled_spots_2d():
     assert (np.array_equal(a, b))
 
 def test_pointlist_to_labelled_spots_3d():
-    positions_and_values = cle.push_zyx(np.asarray([
+    positions_and_values = cle.push(np.asarray([
         [0, 0, 2, 3, 5],
         [0, 1, 3, 2, 6],
         [0, 0, 0, 0, 1]
     ]))
 
 
-    reference = cle.push_zyx(np.asarray([
+    reference = cle.push(np.asarray([
         [
             [1, 0, 0, 0, 0, 0],
             [2, 0, 0, 0, 0, 0],
@@ -59,8 +59,8 @@ def test_pointlist_to_labelled_spots_3d():
 
     result = cle.pointlist_to_labelled_spots(positions_and_values)
 
-    a = cle.pull_zyx(result)
-    b = cle.pull_zyx(reference)
+    a = cle.pull(result)
+    b = cle.pull(reference)
 
     print(a)
     print(b)

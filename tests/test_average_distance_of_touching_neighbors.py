@@ -3,7 +3,7 @@ import numpy as np
 
 def test_average_distance_of_touching_neighbors():
 
-    labels = cle.push_zyx(np.asarray([
+    labels = cle.push(np.asarray([
                     [1, 1, 1, 3, 3, 3],
                     [1, 1, 1, 3, 3, 3],
                     [1, 1, 1, 3, 3, 3],
@@ -12,7 +12,7 @@ def test_average_distance_of_touching_neighbors():
                     [0, 0, 0, 2, 2, 2]
     ]))
 
-    reference = cle.push_zyx(np.asarray(
+    reference = cle.push(np.asarray(
                     [[0, 3, 3, 3]]
     ))
 

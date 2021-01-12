@@ -34,7 +34,7 @@ def test_maximum_z_projection():
             [0, 2, 0, 8, 0],
             [5, 0, 6, 0, 10]
         ]
-    ]))
+    ]).T)
 
     reference = cle.push(np.asarray([
         [9, 8, 10, 7, 10],
@@ -42,7 +42,7 @@ def test_maximum_z_projection():
         [8, 10, 7, 9, 10],
         [8, 9, 7, 10, 10],
         [9, 7, 10, 8, 10]
-    ]))
+    ]).T)
 
     result = cle.create(reference)
     cle.maximum_z_projection(test1, result)

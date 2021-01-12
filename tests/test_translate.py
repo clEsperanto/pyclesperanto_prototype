@@ -2,7 +2,7 @@ import pyclesperanto_prototype as cle
 import numpy as np
 
 def test_translate():
-    source = cle.push_zyx(np.asarray([[
+    source = cle.push(np.asarray([[
           [0, 0, 0, 0, 0],
           [0, 0, 0, 0, 0],
           [0, 0, 1, 1, 0],
@@ -10,7 +10,7 @@ def test_translate():
           [0, 0, 0, 0, 0],
     ]]))
 
-    reference = cle.push_zyx(np.asarray([[
+    reference = cle.push(np.asarray([[
         [0, 0, 0, 0, 0],
         [0, 1, 1, 0, 0],
         [0, 0, 0, 0, 0],
@@ -20,8 +20,8 @@ def test_translate():
 
     result = cle.translate(source, translate_x=-1, translate_y=-1)
 
-    a = cle.pull_zyx(result)
-    b = cle.pull_zyx(reference)
+    a = cle.pull(result)
+    b = cle.pull(reference)
 
     print(a)
     print(b)

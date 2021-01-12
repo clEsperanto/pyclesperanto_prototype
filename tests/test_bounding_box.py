@@ -14,11 +14,11 @@ def test_bounding_box_2d():
     bb = cle.bounding_box(test)
     print(bb)
 
-    assert bb[0] == 1
     assert bb[1] == 1
+    assert bb[0] == 1
 
-    assert bb[3] == 2
     assert bb[4] == 2
+    assert bb[3] == 2
 
 def test_bounding_box_3d():
 
@@ -39,10 +39,10 @@ def test_bounding_box_3d():
     bb = cle.bounding_box(test)
     print(bb)
 
-    assert bb[0] == 0
+    assert bb[2] == 0
     assert bb[1] == 1
-    assert bb[2] == 1
+    assert bb[0] == 1
 
-    assert bb[3] == 1
+    assert bb[5] == 1
     assert bb[4] == 2
-    assert bb[5] == 2
+    assert bb[3] == 2

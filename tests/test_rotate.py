@@ -2,7 +2,7 @@ import pyclesperanto_prototype as cle
 import numpy as np
 
 def test_affine_transform_rotate():
-    source = cle.push_zyx(np.asarray([[
+    source = cle.push(np.asarray([[
           [0, 0, 0, 1, 1],
           [0, 0, 0, 0, 0],
           [0, 0, 0, 0, 0],
@@ -10,7 +10,7 @@ def test_affine_transform_rotate():
           [0, 0, 0, 0, 0],
     ]]))
 
-    reference = cle.push_zyx(np.asarray([[
+    reference = cle.push(np.asarray([[
         [0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0],
         [0, 0, 1, 0, 0],
@@ -20,8 +20,8 @@ def test_affine_transform_rotate():
 
     result = cle.rotate(source, angle_around_z_in_degrees=45.0, rotate_around_center=False)
 
-    a = cle.pull_zyx(result)
-    b = cle.pull_zyx(reference)
+    a = cle.pull(result)
+    b = cle.pull(reference)
 
     print(a)
     print(b)
@@ -29,7 +29,7 @@ def test_affine_transform_rotate():
     assert (np.array_equal(a, b))
 
 def test_affine_transform_rotate_around_center():
-    source = cle.push_zyx(np.asarray([[
+    source = cle.push(np.asarray([[
           [0, 0, 0, 0, 0],
           [0, 0, 0, 0, 0],
           [0, 0, 0, 1, 1],
@@ -37,7 +37,7 @@ def test_affine_transform_rotate_around_center():
           [0, 0, 0, 0, 0],
     ]]))
 
-    reference = cle.push_zyx(np.asarray([[
+    reference = cle.push(np.asarray([[
         [0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0],
@@ -47,8 +47,8 @@ def test_affine_transform_rotate_around_center():
 
     result = cle.rotate(source, angle_around_z_in_degrees=90.0, rotate_around_center=True)
 
-    a = cle.pull_zyx(result)
-    b = cle.pull_zyx(reference)
+    a = cle.pull(result)
+    b = cle.pull(reference)
 
     print(a)
     print(b)

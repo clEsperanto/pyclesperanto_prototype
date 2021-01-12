@@ -2,14 +2,14 @@ import pyclesperanto_prototype as cle
 import numpy as np
 
 def test_set_nonzero_pixels_to_pixelindex():
-    test1 = cle.push_zyx(np.asarray([
+    test1 = cle.push(np.asarray([
         [0, 0, 0, 1],
         [0, 0, 3, 1],
         [0, 0, 3, 1],
         [1, 1, 1, 1]
     ]))
 
-    reference = cle.push_zyx(np.asarray([
+    reference = cle.push(np.asarray([
         [0, 0, 0, 13],
         [0, 0, 10, 14],
         [0, 0, 11, 15],

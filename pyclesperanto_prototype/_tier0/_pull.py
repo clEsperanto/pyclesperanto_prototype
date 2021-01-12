@@ -22,14 +22,12 @@ def pull(oclarray):
     ----------
     .. [1] https://clij.github.io/clij2-docs/reference_pull
     """
-    import warnings
-    warnings.warn(
-            "Deprecated: The behaviour of `pull()` will change in a future release. Switch to using push_zyx now to prvent issues in the future.",
-            DeprecationWarning
-        )
-
-    return oclarray.get().T
-
+    return oclarray.get()
 
 def pull_zyx(oclarray):
+    import warnings
+    warnings.warn(
+        "Deprecated: `pull_zyx()` is now deprecated as it does the same as `pull()`.",
+        DeprecationWarning
+    )
     return oclarray.get()

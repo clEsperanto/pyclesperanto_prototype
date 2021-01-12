@@ -35,7 +35,7 @@ def test_mean_y_projection():
             [0, 2, 0, 8, 0],
             [5, 0, 6, 0, 10]
         ]
-    ]))
+    ]).T)
 
     reference = cle.push(np.asarray([
         [1.8, 1.2, 1.4, 3, 5.8],
@@ -43,7 +43,7 @@ def test_mean_y_projection():
         [1.8, 1.2, 1.4, 3, 5.8],
         [1.8, 1.2, 1.4, 3, 5.8],
         [1.8, 1.2, 1.4, 3, 5.8],
-    ]))
+    ]).T)
 
     result = cle.create(reference)
     cle.mean_y_projection(test1, result)

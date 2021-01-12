@@ -25,12 +25,12 @@ def test_exclude_labels_2d():
 
     ]))
 
-    flaglist = cle.push_zyx(np.asarray([[0, 0, 0, 1, 1, 0, 0, 1, 0]]))
+    flaglist = cle.push(np.asarray([[0, 0, 0, 1, 1, 0, 0, 1, 0]]))
 
     gpu_output = cle.exclude_labels(flaglist, gpu_input)
 
-    a = cle.pull_zyx(gpu_output)
-    b = cle.pull_zyx(gpu_reference)
+    a = cle.pull(gpu_output)
+    b = cle.pull(gpu_reference)
 
     print(a)
     print(b)
@@ -63,12 +63,12 @@ def test_exclude_labels_3d():
         ]
     ]))
 
-    flaglist = cle.push_zyx(np.asarray([[0, 0, 0, 1, 1, 0, 0, 1, 0]]))
+    flaglist = cle.push(np.asarray([[0, 0, 0, 1, 1, 0, 0, 1, 0]]))
 
     gpu_output = cle.exclude_labels(flaglist, gpu_input)
 
-    a = cle.pull_zyx(gpu_output)
-    b = cle.pull_zyx(gpu_reference)
+    a = cle.pull(gpu_output)
+    b = cle.pull(gpu_reference)
 
     print(a)
     print(b)

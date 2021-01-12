@@ -26,20 +26,20 @@ def push(any_array):
     ----------
     .. [1] https://clij.github.io/clij2-docs/reference_push
     """
-    import warnings
-    warnings.warn(
-            "Deprecated: The behaviour of `push()` will change in a future release. Switch to using push_zyx now to prevent issues in the future.",
-            DeprecationWarning
-        )
-
     if isinstance(any_array, OCLArray):
         return any_array
 
-    transposed = any_array.astype(np.float32).T
+    transposed = any_array.astype(np.float32)
     return OCLArray.from_array(transposed)
 
 
 def push_zyx(any_array):
+    import warnings
+    warnings.warn(
+        "Deprecated: `push_zyx()` is now deprecated as it does the same as `push()`.",
+        DeprecationWarning
+    )
+
     if isinstance(any_array, OCLArray):
         return any_array
 

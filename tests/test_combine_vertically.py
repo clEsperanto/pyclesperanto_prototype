@@ -3,16 +3,16 @@ import numpy as np
 
 
 def test_combine_vertically():
-    test1 = cle.push_zyx(np.asarray([
+    test1 = cle.push(np.asarray([
         [1, 1],
         [1, 1]
     ]))
-    test2 = cle.push_zyx(np.asarray([
+    test2 = cle.push(np.asarray([
         [2, 2],
         [2, 2]
     ]))
 
-    reference = cle.push_zyx(np.asarray([
+    reference = cle.push(np.asarray([
         [1, 1],
         [1, 1],
         [2, 2],
@@ -21,8 +21,8 @@ def test_combine_vertically():
 
     result = cle.combine_vertically(test1, test2)
 
-    a = cle.pull_zyx(result)
-    b = cle.pull_zyx(reference)
+    a = cle.pull(result)
+    b = cle.pull(reference)
 
     print(a)
     print(b)

@@ -2,14 +2,14 @@ import pyclesperanto_prototype as cle
 import numpy as np
 
 def test_crop():
-    test1 = cle.push_zyx(np.asarray([
+    test1 = cle.push(np.asarray([
         [0, 0, 0, 1],
         [0, 0, 3, 1],
         [0, 0, 3, 1],
         [1, 1, 1, 1]
     ]))
 
-    reference = cle.push_zyx(np.asarray([
+    reference = cle.push(np.asarray([
         [0, 0, 0],
         [0, 0, 3],
         [0, 0, 3]

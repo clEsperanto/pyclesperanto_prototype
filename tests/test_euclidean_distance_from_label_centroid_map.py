@@ -3,14 +3,14 @@ import numpy as np
 
 def test_euclidean_distance_from_label_centroid_map():
 
-    labels = cle.push_zyx(np.asarray([
+    labels = cle.push(np.asarray([
         [1, 1, 1, 2],
         [1, 1, 1, 2],
         [1, 1, 1, 2],
         [2, 2, 2, 2]
     ]))
 
-    reference = cle.push_zyx(np.asarray([
+    reference = cle.push(np.asarray([
         [1.4142135, 1, 1.4142135, 2.3079278],
         [1, 0, 1, 1.4285713],
         [1.4142135, 1, 1.4142135, 0.86896616],
@@ -21,8 +21,8 @@ def test_euclidean_distance_from_label_centroid_map():
 
     result = cle.euclidean_distance_from_label_centroid_map(labels)
 
-    a = cle.pull_zyx(result)
-    b = cle.pull_zyx(reference)
+    a = cle.pull(result)
+    b = cle.pull(reference)
 
     print(a)
     print(b)

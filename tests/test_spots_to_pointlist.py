@@ -15,10 +15,8 @@ def test_labelled_spots_to_pointlist():
 
     gpu_reference = cle.push(np.asarray([
 
-            [1, 1],
-            [3, 2],
-            [1, 3],
-            [4, 4]
+            [1, 3, 2, 4],
+            [1, 1, 3, 4]
 
     ]))
 
@@ -26,8 +24,8 @@ def test_labelled_spots_to_pointlist():
 
     gpu_output = cle.spots_to_pointlist(gpu_input)
 
-    a = cle.pull_zyx(gpu_output)
-    b = cle.pull_zyx(gpu_reference)
+    a = cle.pull(gpu_output)
+    b = cle.pull(gpu_reference)
 
     print(a)
     print(b)

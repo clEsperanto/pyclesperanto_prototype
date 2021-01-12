@@ -3,7 +3,7 @@ import numpy as np
 
 def test_reduce_offset_0():
 
-    test = cle.push_zyx(np.asarray([
+    test = cle.push(np.asarray([
         [
             [0, 0],
             [0, 5]
@@ -22,7 +22,7 @@ def test_reduce_offset_0():
         ],
     ]))
 
-    ref = cle.push_zyx(np.asarray([
+    ref = cle.push(np.asarray([
         [
             [0, 0],
             [0, 5]
@@ -35,8 +35,8 @@ def test_reduce_offset_0():
 
     res = cle.reduce_stack(test, reduction_factor=2)
 
-    a = cle.pull_zyx(res)
-    b = cle.pull_zyx(ref)
+    a = cle.pull(res)
+    b = cle.pull(ref)
 
     print(a)
     print(b)
@@ -45,7 +45,7 @@ def test_reduce_offset_0():
 
 def test_reduce_offset_1():
 
-    test = cle.push_zyx(np.asarray([
+    test = cle.push(np.asarray([
         [
             [0, 0],
             [0, 5]
@@ -64,7 +64,7 @@ def test_reduce_offset_1():
         ],
     ]))
 
-    ref = cle.push_zyx(np.asarray([
+    ref = cle.push(np.asarray([
         [
             [1, 1],
             [1, 5]
@@ -73,8 +73,8 @@ def test_reduce_offset_1():
 
     res = cle.reduce_stack(test, reduction_factor=3, offset=1)
 
-    a = cle.pull_zyx(res)
-    b = cle.pull_zyx(ref)
+    a = cle.pull(res)
+    b = cle.pull(ref)
 
     print(a)
     print(b)
