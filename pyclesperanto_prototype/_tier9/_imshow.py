@@ -1,7 +1,7 @@
 from .._tier0 import Image
 
 def imshow(image : Image, title : str = None, labels : bool = False, min_display_intensity : float = None, max_display_intensity : float = None, color_map = None, plot = None):
-    from .._tier0 import pull_zyx
+    from .._tier0 import pull
     from .._tier1 import maximum_z_projection
 
     if len(image.shape) == 3:
