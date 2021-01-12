@@ -6,15 +6,16 @@ from .._tier4 import extend_labeling_via_voronoi
 
 @plugin_function(categories=['label'])
 def masked_voronoi_labeling(binary_source : Image, mask_image : Image, labeling_destination : Image = None):
-    """Takes a binary image, labels connected components and dilates the 
+    """Takes a binary image, labels connected components and dilates the
     regions using a octagon shape until they touch. The region growing is limited to a masked area.
     
     The resulting label map is written to the output. 
     
     Parameters
     ----------
-    input : Image
-    destination : Image
+    binary_source : Image
+    mask_image : Image
+    labeling_destination : Image
     
     Returns
     -------
@@ -23,30 +24,16 @@ def masked_voronoi_labeling(binary_source : Image, mask_image : Image, labeling_
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
-    >>> cle.voronoi_labeling(input, destination)
+    >>> cle.masked_voronoi_labeling(input, destination)
     
     References
     ----------
-    .. [1] https://clij.github.io/clij2-docs/reference_voronoiLabeling
+    .. [1] https://clij.github.io/clij2-docs/reference_maskedVoronoiLabeling
     """
 
-    #  ClearCLImage flip = clij2.create(dst.getDimensions(), ImageChannelDataType.Float);
-    #         ClearCLImage flop = clij2.create(flip);
-    #         ClearCLImage flup = clij2.create(flip);
-    #         clij2.addImageAndScalar(mask, flup, -1);
-    #         //CLIJx.getInstance().stopWatch("alloc");
-    #
-    #         ClearCLKernel flipKernel = null;
-    #         ClearCLKernel flopKernel = null;
-    #
-    #         //clij2.copy(src, flip);
-    #         ConnectedComponentsLabelingBox.connectedComponentsLabelingBox(clij2, src, flop, false);
-    #         clij2.addImages(flop, flup, flip);
-    #         flup.close();
     from .._tier0 import push
     from .._tier0 import pull
     from .._tier0 import create_like
-    from .._tier1 import copy
     from .._tier1 import set
     from .._tier1 import onlyzero_overwrite_maximum_box
     from .._tier1 import onlyzero_overwrite_maximum_diamond
