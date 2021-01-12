@@ -2,7 +2,7 @@ from .._tier0 import execute
 from .._tier0 import plugin_function
 from .._tier0 import Image
 
-@plugin_function(categories=['combine', 'in assistant'])
+@plugin_function(categories=['combine', 'neighbor', 'map', 'in assistant'])
 def mode_of_touching_neighbors_map(parametric_map : Image, label_map : Image, parametric_map_destination : Image = None, radius : int = 1, ignore_touching_background : bool = True):
     """Takes a label image and a parametric intensity image and will replace each labels value in the parametric image
     by the mode value of neighboring labels. The radius of the neighborhood can be configured:
