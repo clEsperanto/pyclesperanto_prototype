@@ -28,3 +28,4 @@ from ._statistics_of_background_and_labelled_pixels import statistics_of_backgro
 from ._statistics_of_image import statistics_of_image
 from ._statistics_of_labelled_pixels import statistics_of_labelled_pixels
 from ._threshold_otsu import threshold_otsu
+from ._voronoi_otsu_labeling import voronoi_otsu_labeling
