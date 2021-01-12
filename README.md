@@ -113,6 +113,14 @@ imsave("result.tif", cle.pull(labeled))
 
 </td></tr><tr><td>
 
+<img src="https://github.com/clEsperanto/pyclesperanto_prototype/raw/master/docs/images/screenshot_affine_transforms.png" width="300"/>
+
+</td><td>
+
+[Rotation, scaling, translation, affine transforms](https://github.com/clEsperanto/pyclesperanto_prototype/tree/master/demo/transforms/affine_transforms.ipynb)
+
+</td></tr><tr><td>
+
 <img src="https://github.com/clEsperanto/pyclesperanto_prototype/raw/master/docs/images/screenshot_multiply_vectors_and_matrices.png" width="300"/>
 
 </td><td>

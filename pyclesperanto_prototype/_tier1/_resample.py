@@ -30,6 +30,12 @@ def resample(source : Image, destination : Image = None, factor_x : float = 1, f
     ----------
     .. [1] https://clij.github.io/clij2-docs/reference_resample
     """
+    import warnings
+    warnings.warn(
+        "Deprecated: pyclesperanto_prototype.resample() is deprecated. Use scale() instead",
+        DeprecationWarning
+    )
+
     import numpy as np
 
     source_dimensions = source.shape

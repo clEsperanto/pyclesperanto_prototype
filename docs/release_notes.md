@@ -39,6 +39,11 @@ results of the GPU-accelerated statistics are dictionaries which contain the sam
 * `mode_of_proximal_neighbors_map` and alias `mode_of_distal_neighbors_map`
 * `standard_deviation_of_n_nearest_neighbors_map`
 * `standard_deviation_of_proximal_neighbors_map` and alias `standard_deviation_of_distal_neighbors_map`
+* `affine_transform` (yet without shearing)
+* `translate`
+* `rotate`
+* `scale`
+* `rigid_transform`
 
 ### Backwards compatibility breaking changes
 * `statistics_of_labelled_pixels` and `statistics_of_background_and_labelled_pixels` produce different output now. 
@@ -48,6 +53,9 @@ dictionaries,e.g. `stats['area']` instead of `[s.area for s in stats]`. If not p
 `regionprops` retrieve results in the old format
 * `n_closest_points` ignores the background position and the distance to labels themselves per default now. 
   Consider passing `ignore_background=False` and `ignore_self=False` to go back to former functionality.
+
+### Deprecation warnings
+* `resample` has been deprecated. Use `scale` instead.
 
 ### Bug fixes
 * `imshow` in 3D caused an error
