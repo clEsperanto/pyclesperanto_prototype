@@ -8,7 +8,7 @@ from .._tier0 import plugin_function
 from .._tier0 import Image
 from .._tier3 import histogram
 
-@plugin_function(categories=['label', 'in assistant'], priority=1)
+@plugin_function(categories=['label'], priority=1)
 def voronoi_otsu_labeling(source : Image, label_image_destination : Image = None, spot_sigma : float = 2, outline_sigma : float = 2):
     """Applies two Gaussian blurs, spot detection, Otsu-thresholding and Voronoi-labeling.
 
