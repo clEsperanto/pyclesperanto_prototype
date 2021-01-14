@@ -1,52 +1,54 @@
-# upcoming release
+<a name="#060"></a>
+# 0.7.0 - Jan 14th 2021
 
 ## New features
-* `centroids_of_labels` was GPU-accelerated.
-* `statistics_of_labelled_pixels` and `statistics_of_background_and_labelled_pixels` contain the parameter `standard_deviation_intensity` now.
-* `statistics_of_labelled_pixels` and `statistics_of_background_and_labelled_pixels` are now GPU-accelerated. The 
-results of the GPU-accelerated statistics are dictionaries which contain the same measurements as in CLIJ2.
+This update brings many new functions, highlighing affine-transforms (rotation, translation, scaling) and filters based 
+on neighborhood relationships between labels. With those you can convolve measurements of cells in tissues based on their adjacency graph.
+Furthermore, `centroids_of_labels`, `statistics_of_labelled_pixels` and `statistics_of_background_and_labelled_pixels` were GPU-accelerated.
+The `statistics_of_*` functions, measure standard deviation of the intensity` now and results of these functions are 
+dictionaries which contain the same measurements as in CLIJ2.
 
 ### New operations
+* `affine_transform` (yet without shearing and with nearest-neighbor interpolation only for now)
 * `centroids_of_background_and_labels`
 * `detect_minima_box`
 * `euclidean_distance_from_label_centroid_map`
-* `maximum_distance_of_touching_neighbors`
-* `merge_touching_labels`
-* `minimum_distance_of_touching_neighbors`
-* `statistics_of_image`
+* `generate_n_nearest_neighbors_matrix`
+* `generate_proximal_neighbors_matrix` and alias `generate_distal_neighbors_matrix`
 * `label_standard_deviation_intensity_map`
 * `label_mean_extension_map`
 * `label_maximum_extension_map`
 * `label_maximum_extension_ratio_map`
-* `regionprops`
-* `read_intensities_from_map`
-* `read_intensities_from_positions`
-* `mean_of_touching_neighbors_map`
-* `standard_deviation_of_touching_neighbors_map`
-* `mode_of_touching_neighbors_map`
-* `minimum_of_touching_neighbors_map`
-* `maximum_of_touching_neighbors_map`
+* `masked_voronoi_labeling`
 * `maximum_distance_of_n_shortest_distances`
-* `point_index_list_to_touch_matrix`
-* `generate_n_nearest_neighbors_matrix`
-* `generate_proximal_neighbors_matrix` and alias `generate_distal_neighbors_matrix`
+* `maximum_distance_of_touching_neighbors`
 * `maximum_of_n_nearest_neighbors_map`
 * `maximum_of_proximal_neighbors_map` and alias `maximum_of_distal_neighbors_map`
-* `touch_matrix_to_adjacency_matrix`
-* `maximum_of_n_nearest_neighbors_map`
+* `maximum_of_touching_neighbors_map`
+* `mean_of_n_nearest_neighbors_map`
+* `mean_of_proximal_neighbors_map` and alias `alias mean_of_distal_neighbors_map`
+* `mean_of_touching_neighbors_map`
+* `merge_touching_labels`
+* `minimum_distance_of_touching_neighbors`
+* `minimum_of_n_nearest_neighbors_map`
 * `minimum_of_proximal_neighbors_map` and alias `minimum_of_distal_neighbors_map`
+* `minimum_of_touching_neighbors_map`
 * `mode_of_n_nearest_neighbors_map`
 * `mode_of_proximal_neighbors_map` and alias `mode_of_distal_neighbors_map`
-* `standard_deviation_of_n_nearest_neighbors_map`
-* `standard_deviation_of_proximal_neighbors_map` and alias `standard_deviation_of_distal_neighbors_map`
-* `affine_transform` (yet without shearing)
-* `translate`
+* `mode_of_touching_neighbors_map`
+* `point_index_list_to_touch_matrix`
+* `read_intensities_from_map`
+* `read_intensities_from_positions`
+* `regionprops` (based on scikit-image)
+* `rigid_transform`
 * `rotate`
 * `scale`
-* `rigid_transform`
-* `added mean_of_n_nearest_neighbors`
-* `mean_of_proximal_neighbors` and alias `alias mean_of_distal_neighbors`
-* `masked_voronoi_labeling`
+* `standard_deviation_of_n_nearest_neighbors_map`
+* `standard_deviation_of_proximal_neighbors_map` and alias `standard_deviation_of_distal_neighbors_map`
+* `standard_deviation_of_touching_neighbors_map`
+* `statistics_of_image`
+* `touch_matrix_to_adjacency_matrix`
+* `translate`
 * `voronoi_otsu_labeling`
 
 ### Backwards compatibility breaking changes
@@ -68,6 +70,7 @@ dictionaries,e.g. `stats['area']` instead of `[s.area for s in stats]`. If not p
 ### Miscellaneous
 * `flag_existing_intensities` has been renamed to `flag_existing_labels`. An alias to the old method was created to keep backwards-compatibility
 
+<a name="#060"></a>
 # 0.6.0 - Christmas 2020
 
 ## New features
