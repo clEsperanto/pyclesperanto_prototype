@@ -249,9 +249,21 @@ imsave("result.tif", cle.pull(labeled))
 
 </td></tr></table>
 
+## Benchmarking
+We implemented some basic benchmarking notebooks allowing to see performance differences between pyclesperanto and 
+some other image processing libraries, typically using the CPU. Typically, such benchmarking results vary heavily depending on 
+image size, kernel size, used operations, parameters and used hardware. Feel free to use those notebooks, adapt them to 
+your use-case scenario and benchmark on your target hardware. If you have different scenarios or use-cases, you are very 
+welcome to submit your notebook as pull-request!
 
-
-
+* [Gaussian blur](https://github.com/clEsperanto/pyclesperanto_prototype/raw/master/benchmarks/gaussian_blur.ipynb)
+* [Convolution](https://github.com/clEsperanto/pyclesperanto_prototype/raw/master/benchmarks/convolution.ipynb)
+* [Otsu's thresholding](https://github.com/clEsperanto/pyclesperanto_prototype/raw/master/benchmarks/threshold_otsu.ipynb)
+* [Extend labels](https://github.com/clEsperanto/pyclesperanto_prototype/raw/master/benchmarks/extend_labels.ipynb)
+* [Statistics of labeled pixels / regionprops](https://github.com/clEsperanto/pyclesperanto_prototype/raw/master/benchmarks/statistics_of_labeled_pixels.ipynb)
+* [Matrix multiplication](https://github.com/clEsperanto/pyclesperanto_prototype/raw/master/benchmarks/matrix_multiplication.ipynb)
+* [Pixel-wise comparison](https://github.com/clEsperanto/pyclesperanto_prototype/raw/master/benchmarks/pixelwise_comparison.ipynb)
+* [Intensity projections](https://github.com/clEsperanto/pyclesperanto_prototype/raw/master/benchmarks/intensity_projections.ipynb)
 
 ## Feedback welcome!
-clEsperanto is developed in the open because we believe in the [open source community](https://clij.github.io/clij2-docs/community_guidelines). Feel free to drop feedback as [github issue](https://github.com/clEsperanto/pyclesperanto_prototype/issues) or via [image.sc](https://image.sc)
+clEsperanto is developed in the open because we believe in the open source community. See our [community guidelines](https://clij.github.io/clij2-docs/community_guidelines). Feel free to drop feedback as [github issue](https://github.com/clEsperanto/pyclesperanto_prototype/issues) or via [image.sc](https://image.sc)
