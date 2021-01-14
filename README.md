@@ -251,7 +251,7 @@ imsave("result.tif", cle.pull(labeled))
 
 ## Benchmarking
 We implemented some basic benchmarking notebooks allowing to see performance differences between pyclesperanto and 
-some other image processing libraries, typically using the CPU. Typically, such benchmarking results vary heavily depending on 
+some other image processing libraries, typically using the CPU. Such benchmarking results vary heavily depending on 
 image size, kernel size, used operations, parameters and used hardware. Feel free to use those notebooks, adapt them to 
 your use-case scenario and benchmark on your target hardware. If you have different scenarios or use-cases, you are very 
 welcome to submit your notebook as pull-request!
