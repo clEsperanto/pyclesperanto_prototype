@@ -5,16 +5,16 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="pyclesperanto_prototype",
-    version="0.6.0",
+    version="0.7.0",
     author="haesleinhuepf",
-    author_email="rhaase@mpi-cbg.de",
-    description="OpenCL based GPU-accelerated image processing",
+    author_email="robert.haase@tu-dresden.de",
+    description="OpenCL-based GPU-accelerated image processing",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/clEsperanto/pyclesperanto_prototype",
     packages=setuptools.find_packages(),
     include_package_data=True,
-    install_requires=["numpy", "pyopencl", "toolz", "scikit-image>=0.18.0", "matplotlib", "transforms3d"],
+    install_requires=["numpy!=1.19.4", "pyopencl", "toolz", "scikit-image>=0.18.0", "matplotlib", "transforms3d"],
     python_requires='>=3.6',
     classifiers=[
         "Programming Language :: Python :: 3",
