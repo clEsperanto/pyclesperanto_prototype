@@ -256,14 +256,14 @@ image size, kernel size, used operations, parameters and used hardware. Feel fre
 your use-case scenario and benchmark on your target hardware. If you have different scenarios or use-cases, you are very 
 welcome to submit your notebook as pull-request!
 
-* [Gaussian blur](https://github.com/clEsperanto/pyclesperanto_prototype/raw/master/benchmarks/gaussian_blur.ipynb)
-* [Convolution](https://github.com/clEsperanto/pyclesperanto_prototype/raw/master/benchmarks/convolution.ipynb)
-* [Otsu's thresholding](https://github.com/clEsperanto/pyclesperanto_prototype/raw/master/benchmarks/threshold_otsu.ipynb)
-* [Extend labels](https://github.com/clEsperanto/pyclesperanto_prototype/raw/master/benchmarks/extend_labels.ipynb)
-* [Statistics of labeled pixels / regionprops](https://github.com/clEsperanto/pyclesperanto_prototype/raw/master/benchmarks/statistics_of_labeled_pixels.ipynb)
-* [Matrix multiplication](https://github.com/clEsperanto/pyclesperanto_prototype/raw/master/benchmarks/matrix_multiplication.ipynb)
-* [Pixel-wise comparison](https://github.com/clEsperanto/pyclesperanto_prototype/raw/master/benchmarks/pixelwise_comparison.ipynb)
-* [Intensity projections](https://github.com/clEsperanto/pyclesperanto_prototype/raw/master/benchmarks/intensity_projections.ipynb)
+* [Gaussian blur](https://github.com/clEsperanto/pyclesperanto_prototype/blob/master/benchmarks/gaussian_blur.ipynb)
+* [Convolution](https://github.com/clEsperanto/pyclesperanto_prototype/blob/master/benchmarks/convolution.ipynb)
+* [Otsu's thresholding](https://github.com/clEsperanto/pyclesperanto_prototype/blob/master/benchmarks/threshold_otsu.ipynb)
+* [Extend labels](https://github.com/clEsperanto/pyclesperanto_prototype/blob/master/benchmarks/extend_labels.ipynb)
+* [Statistics of labeled pixels / regionprops](https://github.com/clEsperanto/pyclesperanto_prototype/blob/master/benchmarks/statistics_of_labeled_pixels.ipynb)
+* [Matrix multiplication](https://github.com/clEsperanto/pyclesperanto_prototype/blob/master/benchmarks/matrix_multiplication.ipynb)
+* [Pixel-wise comparison](https://github.com/clEsperanto/pyclesperanto_prototype/blob/master/benchmarks/pixelwise_comparison.ipynb)
+* [Intensity projections](https://github.com/clEsperanto/pyclesperanto_prototype/blob/master/benchmarks/intensity_projections.ipynb)
 
 ## Feedback welcome!
 clEsperanto is developed in the open because we believe in the open source community. See our [community guidelines](https://clij.github.io/clij2-docs/community_guidelines). Feel free to drop feedback as [github issue](https://github.com/clEsperanto/pyclesperanto_prototype/issues) or via [image.sc](https://image.sc)
