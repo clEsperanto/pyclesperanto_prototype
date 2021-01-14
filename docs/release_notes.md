@@ -46,6 +46,8 @@ results of the GPU-accelerated statistics are dictionaries which contain the sam
 * `rigid_transform`
 * `added mean_of_n_nearest_neighbors`
 * `mean_of_proximal_neighbors` and alias `alias mean_of_distal_neighbors`
+* `masked_voronoi_labeling`
+* `voronoi_otsu_labeling`
 
 ### Backwards compatibility breaking changes
 * `statistics_of_labelled_pixels` and `statistics_of_background_and_labelled_pixels` produce different output now. 
