@@ -264,6 +264,7 @@ welcome to submit your notebook as pull-request!
 * [Matrix multiplication](https://github.com/clEsperanto/pyclesperanto_prototype/blob/master/benchmarks/matrix_multiplication.ipynb)
 * [Pixel-wise comparison](https://github.com/clEsperanto/pyclesperanto_prototype/blob/master/benchmarks/pixelwise_comparison.ipynb)
 * [Intensity projections](https://github.com/clEsperanto/pyclesperanto_prototype/blob/master/benchmarks/intensity_projections.ipynb)
+* [Axis transposition](https://github.com/clEsperanto/pyclesperanto_prototype/blob/master/benchmarks/transpose.ipynb)
 
 ## Feedback welcome!
 clEsperanto is developed in the open because we believe in the open source community. See our [community guidelines](https://clij.github.io/clij2-docs/community_guidelines). Feel free to drop feedback as [github issue](https://github.com/clEsperanto/pyclesperanto_prototype/issues) or via [image.sc](https://image.sc)
