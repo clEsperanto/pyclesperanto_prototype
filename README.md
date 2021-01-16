@@ -104,6 +104,14 @@ imsave("result.tif", cle.pull(labeled))
 
 </td></tr><tr><td>
 
+<img src="https://github.com/clEsperanto/pyclesperanto_prototype/raw/master/docs/images/segmentation_3d.png" width="300"/>
+
+</td><td>
+
+[3D Image segmentation ](https://github.com/clEsperanto/pyclesperanto_prototype/tree/master/demo/segmentation/Segmentation_3D.ipynb)
+
+</td></tr><tr><td>
+
 <img src="https://github.com/clEsperanto/pyclesperanto_prototype/raw/master/docs/images/screenshot_crop_and_paste_images.png" width="300"/>
 
 
