@@ -17,8 +17,8 @@ def imshow(image : Image, title : str = None, labels : bool = False, min_display
 
     if plot is None:
         import matplotlib.pyplot as plt
-        plt.imshow(image, cmap=cmap, vmin=min_display_intensity, vmax=max_display_intensity)
+        plt.imshow(image, cmap=cmap, vmin=min_display_intensity, vmax=max_display_intensity, interpolation='nearest')
         plt.show()
     else:
-        plot.imshow(image, cmap=cmap, vmin=min_display_intensity, vmax=max_display_intensity)
+        plot.imshow(image, cmap=cmap, vmin=min_display_intensity, vmax=max_display_intensity, interpolation='nearest')
 

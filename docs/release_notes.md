@@ -1,4 +1,9 @@
-<a name="#060"></a>
+# upcoming release
+
+## Bug fixes
+* Turned of interpolation in `imshow`
+
+<a name="#070"></a>
 # 0.7.0 - Jan 14th 2021
 
 ## New features
