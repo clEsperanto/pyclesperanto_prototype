@@ -33,6 +33,17 @@ def generate_n_nearest_neighbors_matrix(distance_matrix :Image, touch_matrix_des
     from .._tier1 import n_closest_points
     from .._tier1 import point_index_list_to_touch_matrix
     from .._tier1 import set
+    from .._tier1 import set_row
+    from .._tier1 import set_column
+    from .._tier1 import set_where_x_equals_y
+    from .._tier1 import copy
+
+    distance_matrix = copy(distance_matrix)
+
+    # ignore background and ignore self
+    set_row(distance_matrix, 0, np.finfo(np.float32).max)
+    set_column(distance_matrix, 0, np.finfo(np.float32).max)
+    set_where_x_equals_y(distance_matrix, np.finfo(np.float32).max)
 
     index_list = n_closest_points(distance_matrix, n=n)
 
