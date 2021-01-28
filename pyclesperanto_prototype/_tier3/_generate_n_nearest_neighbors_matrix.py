@@ -37,6 +37,7 @@ def generate_n_nearest_neighbors_matrix(distance_matrix :Image, touch_matrix_des
     from .._tier1 import set_column
     from .._tier1 import set_where_x_equals_y
     from .._tier1 import copy
+    import numpy as np
 
     distance_matrix = copy(distance_matrix)
 
