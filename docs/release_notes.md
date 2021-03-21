@@ -1,7 +1,8 @@
 # upcoming release
 
 ## Bug fixes
-* Turned of interpolation in `imshow`
+* Turned off interpolation in `imshow`
+* `linear_interpolation=True` caused crashes on NVidida GPUs (#99).
 
 <a name="#070"></a>
 # 0.7.0 - Jan 14th 2021
