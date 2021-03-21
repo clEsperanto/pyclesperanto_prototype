@@ -164,6 +164,7 @@ def test_resample_upsample_3d_with_interpolation():
     print(b)
     assert (np.array_equal(a, b))
 
+@pytest.mark.xfail('LINUX and CI', reason='clImages not supported on CI', raises=ValueError)
 def test_resample_3d_interpolation_x():
     test1 = cle.push(np.asarray([
         [
@@ -186,6 +187,7 @@ def test_resample_3d_interpolation_x():
     print(b)
     assert (np.array_equal(a, b))
 
+@pytest.mark.xfail('LINUX and CI', reason='clImages not supported on CI', raises=ValueError)
 def test_resample_3d_interpolation_y():
     test1 = cle.push(np.asarray([
         [
@@ -208,7 +210,7 @@ def test_resample_3d_interpolation_y():
     print(b)
     assert (np.array_equal(a, b))
 
-
+@pytest.mark.xfail('LINUX and CI', reason='clImages not supported on CI', raises=ValueError)
 def test_resample_3d_interpolation_z():
     test1 = cle.push(np.asarray([
 
