@@ -5,7 +5,7 @@ from pathlib import Path
 import numpy as np
 
 import pyopencl as cl
-from ._pycl import OCLProgram
+from ._pycl import OCLProgram, OCLImage
 
 if not os.getenv("PYOPENCL_COMPILER_OUTPUT"):
     import warnings
@@ -159,7 +159,7 @@ def execute(anchor, opencl_kernel_filename, kernel_name, global_size, parameters
                 defines.extend(SIZE_HEADER.format(**params).split("\n"))
 
 
-        elif isinstance(value, cl.Image):
+        elif isinstance(value, OCLImage):
 
             if value.dtype != np.dtype("float32"):
                 raise TypeError(
@@ -182,7 +182,7 @@ def execute(anchor, opencl_kernel_filename, kernel_name, global_size, parameters
             else:
                 size_parameters = ""
 
-            arguments.append(value)
+            arguments.append(value.data)
 
             if "destination" in key or "output" in key or "dst" in key:
                 type_name = "__write_only image" + str(ndim) + "d_t"
