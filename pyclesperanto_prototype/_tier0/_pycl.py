@@ -326,7 +326,7 @@ def _wrap_OCLArray(cls):
 
 OCLArray = _wrap_OCLArray(array.Array)
 
-class OCLImage:
+class _OCLImage:
     def __init__(self, cl_image : cl.Image):
         self.data = cl_image
         self.shape = cl_image.shape[::-1]

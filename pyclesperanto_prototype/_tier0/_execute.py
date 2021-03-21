@@ -5,7 +5,7 @@ from pathlib import Path
 import numpy as np
 
 import pyopencl as cl
-from ._pycl import OCLProgram, OCLImage
+from ._pycl import OCLProgram, _OCLImage
 
 if not os.getenv("PYOPENCL_COMPILER_OUTPUT"):
     import warnings
@@ -159,7 +159,7 @@ def execute(anchor, opencl_kernel_filename, kernel_name, global_size, parameters
                 defines.extend(SIZE_HEADER.format(**params).split("\n"))
 
 
-        elif isinstance(value, OCLImage):
+        elif isinstance(value, _OCLImage):
 
             if value.dtype != np.dtype("float32"):
                 raise TypeError(
