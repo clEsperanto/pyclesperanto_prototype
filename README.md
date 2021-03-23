@@ -279,6 +279,7 @@ image size, kernel size, used operations, parameters and used hardware. Feel fre
 your use-case scenario and benchmark on your target hardware. If you have different scenarios or use-cases, you are very 
 welcome to submit your notebook as pull-request!
 
+* [Affine transforms](https://github.com/clEsperanto/pyclesperanto_prototype/blob/master/benchmarks/affine_transforms.ipynb)
 * [Gaussian blur](https://github.com/clEsperanto/pyclesperanto_prototype/blob/master/benchmarks/gaussian_blur.ipynb)
 * [Convolution](https://github.com/clEsperanto/pyclesperanto_prototype/blob/master/benchmarks/convolution.ipynb)
 * [Otsu's thresholding](https://github.com/clEsperanto/pyclesperanto_prototype/blob/master/benchmarks/threshold_otsu.ipynb)
