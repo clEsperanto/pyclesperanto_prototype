@@ -60,6 +60,7 @@ def resample(source : Image, destination : Image = None, factor_x : float = 1, f
     gpu_transform_matrix = push(transform_matrix)
 
     kernel_suffix = ''
+
     if linear_interpolation:
         image = empty_image_like(source)
         copy(source, image)

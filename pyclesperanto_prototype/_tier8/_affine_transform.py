@@ -21,7 +21,8 @@ def affine_transform(source : Image, destination : Image = None, transform : Uni
     transform : 4x4 numpy array or AffineTransform3D object or skimage.transform.AffineTransform object
         transform matrix or object describing the transformation
     linear_interpolation: bool
-        not implemented yet
+        If true, bi-/tri-linear interplation will be applied.
+        If false, nearest-neighbor interpolation wille be applied.
 
     Returns
     -------

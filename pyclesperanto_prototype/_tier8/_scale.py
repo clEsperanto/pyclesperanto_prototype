@@ -2,7 +2,7 @@ from .._tier0 import plugin_function
 from .._tier0 import Image
 
 @plugin_function
-def scale(source : Image, destination : Image = None, factor_x : float = 1, factor_y : float = 1, factor_z : float = 1, centered=True):
+def scale(source : Image, destination : Image = None, factor_x : float = 1, factor_y : float = 1, factor_z : float = 1, centered : bool = True, linear_interpolation : bool = False):
     """Scale the image by given factors.
 
     Parameters
@@ -17,7 +17,12 @@ def scale(source : Image, destination : Image = None, factor_x : float = 1, fact
         scaling along y
     factor_z : float
         scaling along z
-    centered
+    centered : bool
+        If true, the image will be scaled to the center of the image.
+        If false, the image will be scaled to the origin of the coordinate system.
+    linear_interpolation: bool
+        If true, bi-/tri-linear interplation will be applied.
+        If false, nearest-neighbor interpolation wille be applied.
 
     Returns
     -------
@@ -34,6 +39,6 @@ def scale(source : Image, destination : Image = None, factor_x : float = 1, fact
     transform.scale(factor_x, factor_y, factor_z)
 
     if centered:
-        transform.center(source.shape, undo=True)
+        transform.center(destination.shape, undo=True)
 
-    return affine_transform(source, destination, transform)
+    return affine_transform(source, destination, transform, linear_interpolation)

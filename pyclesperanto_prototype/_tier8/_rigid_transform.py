@@ -2,7 +2,7 @@ from .._tier0 import plugin_function
 from .._tier0 import Image
 
 @plugin_function
-def rigid_transform(source : Image, destination : Image = None, translate_x : float = 0, translate_y : float = 0, translate_z : float = 0, angle_around_x_in_degrees : float = 0, angle_around_y_in_degrees : float = 0, angle_around_z_in_degrees : float = 0, rotate_around_center=True):
+def rigid_transform(source : Image, destination : Image = None, translate_x : float = 0, translate_y : float = 0, translate_z : float = 0, angle_around_x_in_degrees : float = 0, angle_around_y_in_degrees : float = 0, angle_around_z_in_degrees : float = 0, rotate_around_center : bool = True, linear_interpolation : bool = False):
     """Translate the image by a given vector and rotate it by given angles.
 
     Angles are given in degrees. To convert radians to degrees, use this formula:
@@ -28,8 +28,11 @@ def rigid_transform(source : Image, destination : Image = None, translate_x : fl
     angle_around_z_in_degrees : float
         rotation around z axis in radians
     rotate_around_center : boolean
-        if True: rotate image around center
+        if True: rotate image around center (default)
         if False: rotate image around origin
+    linear_interpolation: bool
+        If true, bi-/tri-linear interplation will be applied.
+        If false, nearest-neighbor interpolation wille be applied.
 
     Returns
     -------
@@ -55,4 +58,4 @@ def rigid_transform(source : Image, destination : Image = None, translate_x : fl
 
     transform.translate(translate_x, translate_y, translate_z)
 
-    return affine_transform(source, destination, transform)
+    return affine_transform(source, destination, transform, linear_interpolation)

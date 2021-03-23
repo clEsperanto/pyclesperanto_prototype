@@ -1,8 +1,12 @@
 # upcoming release
 
+## New features
+* `linear_interpolation` parameter in `affine_transform`, `rigid_transform`, `scale`, `translate` and `rotate` is now functional.
+
 ## Bug fixes
 * Turned off interpolation in `imshow`
 * `linear_interpolation=True` caused crashes on NVidida GPUs (#99).
+* If `scale` was scaling to the image center (as per default) and the output image was not the same size as the input image, parts of the image might have been removed.
 
 <a name="#070"></a>
 # 0.7.0 - Jan 14th 2021

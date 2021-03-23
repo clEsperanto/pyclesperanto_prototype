@@ -2,7 +2,7 @@ from .._tier0 import plugin_function
 from .._tier0 import Image
 
 @plugin_function
-def rotate(source : Image, destination : Image = None, angle_around_x_in_degrees : float = 0, angle_around_y_in_degrees : float = 0, angle_around_z_in_degrees : float = 0, rotate_around_center=True):
+def rotate(source : Image, destination : Image = None, angle_around_x_in_degrees : float = 0, angle_around_y_in_degrees : float = 0, angle_around_z_in_degrees : float = 0, rotate_around_center=True, linear_interpolation : bool = False):
     """Rotate the image by given angles.
 
     Angles are given in degrees. To convert radians to degrees, use this formula:
@@ -24,6 +24,9 @@ def rotate(source : Image, destination : Image = None, angle_around_x_in_degrees
     rotate_around_center : boolean
         if True: rotate image around center
         if False: rotate image around origin
+    linear_interpolation: bool
+        If true, bi-/tri-linear interplation will be applied.
+        If false, nearest-neighbor interpolation wille be applied.
 
     Returns
     -------
@@ -47,4 +50,4 @@ def rotate(source : Image, destination : Image = None, angle_around_x_in_degrees
     if rotate_around_center:
         transform.center(source.shape, undo=True)
 
-    return affine_transform(source, destination, transform)
+    return affine_transform(source, destination, transform, linear_interpolation)
