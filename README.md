@@ -283,6 +283,7 @@ welcome to submit your notebook as pull-request!
 * [Gaussian blur](https://github.com/clEsperanto/pyclesperanto_prototype/blob/master/benchmarks/gaussian_blur.ipynb)
 * [Convolution](https://github.com/clEsperanto/pyclesperanto_prototype/blob/master/benchmarks/convolution.ipynb)
 * [Otsu's thresholding](https://github.com/clEsperanto/pyclesperanto_prototype/blob/master/benchmarks/threshold_otsu.ipynb)
+* [Connected component labeling](https://github.com/clEsperanto/pyclesperanto_prototype/blob/master/benchmarks/connected_component_labeling.ipynb)  
 * [Extend labels](https://github.com/clEsperanto/pyclesperanto_prototype/blob/master/benchmarks/extend_labels.ipynb)
 * [Statistics of labeled pixels / regionprops](https://github.com/clEsperanto/pyclesperanto_prototype/blob/master/benchmarks/statistics_of_labeled_pixels.ipynb)
 * [Matrix multiplication](https://github.com/clEsperanto/pyclesperanto_prototype/blob/master/benchmarks/matrix_multiplication.ipynb)
