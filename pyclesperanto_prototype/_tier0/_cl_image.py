@@ -37,7 +37,8 @@ def empty_image(ctx, shape, dtype, num_channels=1, channel_order=None):
     res = cl.Image(ctx, mem_flags, fmt, shape=shape[::-1])
     res.dtype = dtype
     res.num_channels = num_channels
-    return res
+    from ._pycl import _OCLImage
+    return _OCLImage(res)
 
 
 def empty_image_like(arr, ctx=None):
