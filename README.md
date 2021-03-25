@@ -92,7 +92,7 @@ imsave("result.tif", cle.pull(labeled))
 
 </td><td>
 
-[Counting blobs](https://github.com/clEsperanto/pyclesperanto_prototype/tree/master/demo/basics/count_blobs.ipynb)
+[Counting blobs](http://nbviewer.jupyter.org/github/clEsperanto/pyclesperanto_prototype/tree/master/demo/basics/count_blobs.ipynb)
 
 </td></tr><tr><td>
 
@@ -100,7 +100,7 @@ imsave("result.tif", cle.pull(labeled))
 
 </td><td>
 
-[Voronoi-Otsu labeling](https://github.com/clEsperanto/pyclesperanto_prototype/tree/master/demo/segmentation/voronoi_otsu_labeling.ipynb)
+[Voronoi-Otsu labeling](http://nbviewer.jupyter.org/github/clEsperanto/pyclesperanto_prototype/tree/master/demo/segmentation/voronoi_otsu_labeling.ipynb)
 
 </td></tr><tr><td>
 
@@ -108,7 +108,7 @@ imsave("result.tif", cle.pull(labeled))
 
 </td><td>
 
-[3D Image segmentation ](https://github.com/clEsperanto/pyclesperanto_prototype/tree/master/demo/segmentation/Segmentation_3D.ipynb)
+[3D Image segmentation ](http://nbviewer.jupyter.org/github/clEsperanto/pyclesperanto_prototype/tree/master/demo/segmentation/Segmentation_3D.ipynb)
 
 </td></tr><tr><td>
 
@@ -116,7 +116,7 @@ imsave("result.tif", cle.pull(labeled))
 
 </td><td>
 
-[Cell segmentation based on membranes](https://github.com/clEsperanto/pyclesperanto_prototype/tree/master/demo/segmentation/segmentation_2d_membranes.ipynb)
+[Cell segmentation based on membranes](http://nbviewer.jupyter.org/github/clEsperanto/pyclesperanto_prototype/tree/master/demo/segmentation/segmentation_2d_membranes.ipynb)
 
 </td></tr><tr><td>
 
@@ -124,7 +124,7 @@ imsave("result.tif", cle.pull(labeled))
 
 </td><td>
 
-[Crop and paste images](https://github.com/clEsperanto/pyclesperanto_prototype/tree/master/demo/basics/crop_and_paste_images.ipynb)
+[Crop and paste images](http://nbviewer.jupyter.org/github/clEsperanto/pyclesperanto_prototype/tree/master/demo/basics/crop_and_paste_images.ipynb)
 
 </td></tr><tr><td>
 
@@ -132,7 +132,7 @@ imsave("result.tif", cle.pull(labeled))
 
 </td><td>
 
-[Inspecting 3D image data](https://github.com/clEsperanto/pyclesperanto_prototype/tree/master/demo/basics/inspecting_3d_images.ipynb)
+[Inspecting 3D image data](http://nbviewer.jupyter.org/github/clEsperanto/pyclesperanto_prototype/tree/master/demo/basics/inspecting_3d_images.ipynb)
 
 </td></tr><tr><td>
 
@@ -140,7 +140,7 @@ imsave("result.tif", cle.pull(labeled))
 
 </td><td>
 
-[Rotation, scaling, translation, affine transforms](https://github.com/clEsperanto/pyclesperanto_prototype/tree/master/demo/transforms/affine_transforms.ipynb)
+[Rotation, scaling, translation, affine transforms](http://nbviewer.jupyter.org/github/clEsperanto/pyclesperanto_prototype/tree/master/demo/transforms/affine_transforms.ipynb)
 
 </td></tr><tr><td>
 
@@ -148,7 +148,7 @@ imsave("result.tif", cle.pull(labeled))
 
 </td><td>
 
-[Multiply vectors and matrices](https://github.com/clEsperanto/pyclesperanto_prototype/tree/master/demo/basics/multiply_vectors_and_matrices.ipynb)
+[Multiply vectors and matrices](http://nbviewer.jupyter.org/github/clEsperanto/pyclesperanto_prototype/tree/master/demo/basics/multiply_vectors_and_matrices.ipynb)
 
 </td></tr><tr><td>
 
@@ -156,7 +156,7 @@ imsave("result.tif", cle.pull(labeled))
 
 </td><td>
 
-[Matrix multiplication](https://github.com/clEsperanto/pyclesperanto_prototype/tree/master/demo/basics/multiply_matrices.ipynb)
+[Matrix multiplication](http://nbviewer.jupyter.org/github/clEsperanto/pyclesperanto_prototype/tree/master/demo/basics/multiply_matrices.ipynb)
 
 </td></tr><tr><td>
 
@@ -164,7 +164,7 @@ imsave("result.tif", cle.pull(labeled))
 
 </td><td>
 
-[Working with spots, pointlist and matrices](https://github.com/clEsperanto/pyclesperanto_prototype/tree/master/demo/basics/spots_pointlists_matrices_tables.ipynb)
+[Working with spots, pointlist and matrices](http://nbviewer.jupyter.org/github/clEsperanto/pyclesperanto_prototype/tree/master/demo/basics/spots_pointlists_matrices_tables.ipynb)
 
 </td></tr><tr><td>
 
@@ -172,7 +172,7 @@ imsave("result.tif", cle.pull(labeled))
 
 </td><td>
 
-[Mesh between centroids](https://github.com/clEsperanto/pyclesperanto_prototype/tree/master/demo/neighbors/mesh_between_centroids.ipynb)
+[Mesh between centroids](http://nbviewer.jupyter.org/github/clEsperanto/pyclesperanto_prototype/tree/master/demo/neighbors/mesh_between_centroids.ipynb)
 
 </td></tr><tr><td>
 
@@ -181,7 +181,7 @@ imsave("result.tif", cle.pull(labeled))
 
 </td><td>
 
-[Mesh between touching neighbors](https://github.com/clEsperanto/pyclesperanto_prototype/tree/master/demo/neighbors/mesh_between_touching_neighbors.ipynb)
+[Mesh between touching neighbors](http://nbviewer.jupyter.org/github/clEsperanto/pyclesperanto_prototype/tree/master/demo/neighbors/mesh_between_touching_neighbors.ipynb)
 
 </td></tr><tr><td>
 
@@ -189,7 +189,7 @@ imsave("result.tif", cle.pull(labeled))
 
 </td><td>
 
-[Mesh with distances](https://github.com/clEsperanto/pyclesperanto_prototype/tree/master/demo/neighbors/mesh_with_distances.ipynb)
+[Mesh with distances](http://nbviewer.jupyter.org/github/clEsperanto/pyclesperanto_prototype/tree/master/demo/neighbors/mesh_with_distances.ipynb)
 
 </td></tr><tr><td>
 
@@ -197,7 +197,7 @@ imsave("result.tif", cle.pull(labeled))
 
 </td><td>
 
-[Mesh nearest_neighbors](https://github.com/clEsperanto/pyclesperanto_prototype/tree/master/demo/neighbors/mesh_nearest_neighbors.ipynb)
+[Mesh nearest_neighbors](http://nbviewer.jupyter.org/github/clEsperanto/pyclesperanto_prototype/tree/master/demo/neighbors/mesh_nearest_neighbors.ipynb)
 
 </td></tr><tr><td>
 
@@ -205,7 +205,7 @@ imsave("result.tif", cle.pull(labeled))
 
 </td><td>
 
-[Neighborhood definitions](https://github.com/clEsperanto/pyclesperanto_prototype/tree/master/demo/neighbors/neighborhood_definitions.ipynb)
+[Neighborhood definitions](http://nbviewer.jupyter.org/github/clEsperanto/pyclesperanto_prototype/tree/master/demo/neighbors/neighborhood_definitions.ipynb)
 
 
 </td></tr><tr><td>
@@ -214,7 +214,7 @@ imsave("result.tif", cle.pull(labeled))
 
 </td><td>
 
-[Tissue neighborhood quantification](https://github.com/clEsperanto/pyclesperanto_prototype/tree/master/demo/tissues/tissue_neighborhood_quantification.ipynb)
+[Tissue neighborhood quantification](http://nbviewer.jupyter.org/github/clEsperanto/pyclesperanto_prototype/tree/master/demo/tissues/tissue_neighborhood_quantification.ipynb)
 
 </td></tr><tr><td>
 
@@ -222,7 +222,7 @@ imsave("result.tif", cle.pull(labeled))
 
 </td><td>
 
-[Neighbors of neighbors](https://github.com/clEsperanto/pyclesperanto_prototype/tree/master/demo/neighbors/neighbors_of_neighbors.ipynb)
+[Neighbors of neighbors](http://nbviewer.jupyter.org/github/clEsperanto/pyclesperanto_prototype/tree/master/demo/neighbors/neighbors_of_neighbors.ipynb)
 
 </td></tr><tr><td>
 
@@ -230,13 +230,13 @@ imsave("result.tif", cle.pull(labeled))
 
 </td><td>
 
-[Voronoi diagrams](https://github.com/clEsperanto/pyclesperanto_prototype/tree/master/demo/basics/voronoi_diagrams.ipynb)
+[Voronoi diagrams](http://nbviewer.jupyter.org/github/clEsperanto/pyclesperanto_prototype/tree/master/demo/basics/voronoi_diagrams.ipynb)
 
 </td></tr><tr><td>
 
 </td><td>
 
-[Shape descriptors based on neighborhood graphs](https://github.com/clEsperanto/pyclesperanto_prototype/tree/master/demo/neighbors/shape_descriptors_based_on_neighborhood_graphs.ipynb)
+[Shape descriptors based on neighborhood graphs](http://nbviewer.jupyter.org/github/clEsperanto/pyclesperanto_prototype/tree/master/demo/neighbors/shape_descriptors_based_on_neighborhood_graphs.ipynb)
 
 </td></tr><tr><td>
 
@@ -252,7 +252,7 @@ imsave("result.tif", cle.pull(labeled))
 
 </td><td>
 
-[Tribolium morphometry](https://github.com/clEsperanto/pyclesperanto_prototype/tree/master/demo/tribolium_morphometry/tribolium_morphometry.ipynb)
+[Tribolium morphometry](http://nbviewer.jupyter.org/github/clEsperanto/pyclesperanto_prototype/tree/master/demo/tribolium_morphometry/tribolium_morphometry.ipynb)
 
 </td></tr><tr><td>
 
@@ -260,7 +260,7 @@ imsave("result.tif", cle.pull(labeled))
 
 </td><td>
 
-[napari+dask timelapse processing](https://github.com/clEsperanto/pyclesperanto_prototype/tree/master/demo/napari_gui/napari_dask.ipynb)
+[napari+dask timelapse processing](http://nbviewer.jupyter.org/github/clEsperanto/pyclesperanto_prototype/tree/master/demo/napari_gui/napari_dask.ipynb)
 
 </td></tr><tr><td>
 
@@ -279,17 +279,17 @@ image size, kernel size, used operations, parameters and used hardware. Feel fre
 your use-case scenario and benchmark on your target hardware. If you have different scenarios or use-cases, you are very 
 welcome to submit your notebook as pull-request!
 
-* [Affine transforms](https://github.com/clEsperanto/pyclesperanto_prototype/blob/master/benchmarks/affine_transforms.ipynb)
-* [Gaussian blur](https://github.com/clEsperanto/pyclesperanto_prototype/blob/master/benchmarks/gaussian_blur.ipynb)
-* [Convolution](https://github.com/clEsperanto/pyclesperanto_prototype/blob/master/benchmarks/convolution.ipynb)
-* [Otsu's thresholding](https://github.com/clEsperanto/pyclesperanto_prototype/blob/master/benchmarks/threshold_otsu.ipynb)
-* [Connected component labeling](https://github.com/clEsperanto/pyclesperanto_prototype/blob/master/benchmarks/connected_component_labeling.ipynb)  
-* [Extend labels](https://github.com/clEsperanto/pyclesperanto_prototype/blob/master/benchmarks/extend_labels.ipynb)
-* [Statistics of labeled pixels / regionprops](https://github.com/clEsperanto/pyclesperanto_prototype/blob/master/benchmarks/statistics_of_labeled_pixels.ipynb)
-* [Matrix multiplication](https://github.com/clEsperanto/pyclesperanto_prototype/blob/master/benchmarks/matrix_multiplication.ipynb)
-* [Pixel-wise comparison](https://github.com/clEsperanto/pyclesperanto_prototype/blob/master/benchmarks/pixelwise_comparison.ipynb)
-* [Intensity projections](https://github.com/clEsperanto/pyclesperanto_prototype/blob/master/benchmarks/intensity_projections.ipynb)
-* [Axis transposition](https://github.com/clEsperanto/pyclesperanto_prototype/blob/master/benchmarks/transpose.ipynb)
+* [Affine transforms](http://nbviewer.jupyter.org/github/clEsperanto/pyclesperanto_prototype/blob/master/benchmarks/affine_transforms.ipynb)
+* [Gaussian blur](http://nbviewer.jupyter.org/github/clEsperanto/pyclesperanto_prototype/blob/master/benchmarks/gaussian_blur.ipynb)
+* [Convolution](http://nbviewer.jupyter.org/github/clEsperanto/pyclesperanto_prototype/blob/master/benchmarks/convolution.ipynb)
+* [Otsu's thresholding](http://nbviewer.jupyter.org/github/clEsperanto/pyclesperanto_prototype/blob/master/benchmarks/threshold_otsu.ipynb)
+* [Connected component labeling](http://nbviewer.jupyter.org/github/clEsperanto/pyclesperanto_prototype/blob/master/benchmarks/connected_component_labeling.ipynb)  
+* [Extend labels](http://nbviewer.jupyter.org/github/clEsperanto/pyclesperanto_prototype/blob/master/benchmarks/extend_labels.ipynb)
+* [Statistics of labeled pixels / regionprops](http://nbviewer.jupyter.org/github/clEsperanto/pyclesperanto_prototype/blob/master/benchmarks/statistics_of_labeled_pixels.ipynb)
+* [Matrix multiplication](http://nbviewer.jupyter.org/github/clEsperanto/pyclesperanto_prototype/blob/master/benchmarks/matrix_multiplication.ipynb)
+* [Pixel-wise comparison](http://nbviewer.jupyter.org/github/clEsperanto/pyclesperanto_prototype/blob/master/benchmarks/pixelwise_comparison.ipynb)
+* [Intensity projections](http://nbviewer.jupyter.org/github/clEsperanto/pyclesperanto_prototype/blob/master/benchmarks/intensity_projections.ipynb)
+* [Axis transposition](http://nbviewer.jupyter.org/github/clEsperanto/pyclesperanto_prototype/blob/master/benchmarks/transpose.ipynb)
 
 ## Feedback welcome!
 clEsperanto is developed in the open because we believe in the open source community. See our [community guidelines](https://clij.github.io/clij2-docs/community_guidelines). Feel free to drop feedback as [github issue](https://github.com/clEsperanto/pyclesperanto_prototype/issues) or via [image.sc](https://image.sc)
