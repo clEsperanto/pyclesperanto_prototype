@@ -1,7 +1,8 @@
-# upcoming release
+<a name="#073"></a>
+# 0.7.3 - Mar 26th 2021
 
 ## New features
-* `linear_interpolation` parameter in `affine_transform`, `rigid_transform`, `scale`, `translate` and `rotate` is now functional.
+* The `linear_interpolation` parameter in `affine_transform`, `rigid_transform`, `scale`, `translate` and `rotate` is now functional.
 
 ## Bug fixes
 * Turned off interpolation in `imshow`
