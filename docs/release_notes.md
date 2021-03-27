@@ -1,3 +1,7 @@
+# 0.7.4 - Mar 27th 2021
+## New Features
+* `apply_vector_field` and alias `warp` for warping images
+
 <a name="#073"></a>
 # 0.7.3 - Mar 26th 2021
 
