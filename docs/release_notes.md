@@ -1,6 +1,6 @@
 # 0.7.4 - Mar 27th 2021
 ## New Features
-* `apply_vector_field` and alias `warp` for warping images
+* `apply_vector_field` for warping images
 
 ## Bug fixes
 * `mean_(x/y/z)_projection` parameter `destination` is now optional
