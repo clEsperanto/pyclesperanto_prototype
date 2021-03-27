@@ -2,6 +2,9 @@
 ## New Features
 * `apply_vector_field` and alias `warp` for warping images
 
+## Bug fixes
+* `mean_(x/y/z)_projection` parameter `destination` is now optional
+
 <a name="#073"></a>
 # 0.7.3 - Mar 26th 2021
 
