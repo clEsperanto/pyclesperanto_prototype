@@ -52,7 +52,12 @@ def test_apply_vector_field_3d():
 
     assert (np.array_equal(a, b))
 
+import pytest
+import pyopencl as cl
 
+from . import LINUX, CI
+
+@pytest.mark.xfail('LINUX and CI', reason='clImages not supported on CI', raises=ValueError)
 def test_apply_vector_field_3d_linear_interpolation():
     source = cle.push(np.asarray([[
           [0, 0, 0, 0, 0],
@@ -149,6 +154,8 @@ def test_apply_vector_field_2d():
     assert (np.array_equal(a, b))
 
 
+
+@pytest.mark.xfail('LINUX and CI', reason='clImages not supported on CI', raises=ValueError)
 def test_apply_vector_field_2d_linear_interpolation():
     source = cle.push(np.asarray([
           [0, 0, 0, 0, 0],
