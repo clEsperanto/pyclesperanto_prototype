@@ -4,7 +4,7 @@ from .._tier0 import Image
 from .._tier0 import create_2d_zx
 
 @plugin_function(output_creator=create_2d_zx, categories=['projection'])
-def mean_y_projection(source : Image, destination : Image):
+def mean_y_projection(source : Image, destination : Image = None):
     """Determines the mean average intensity projection of an image along Y. 
     
     Parameters
