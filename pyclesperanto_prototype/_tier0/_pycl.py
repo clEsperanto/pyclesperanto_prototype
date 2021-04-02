@@ -385,6 +385,23 @@ def _wrap_OCLArray(cls):
             return smaller_or_equal(x1, x2)
     cls.__le__ = le
 
+    def eq(x1, x2):
+        if isinstance(x2, (int, float)):
+            from .._tier1 import equal_constant
+            return equal_constant(x1, constant=x2)
+        else:
+            from .._tier1 import equal
+            return equal(x1, x2)
+    cls.__eq__ = eq
+
+    def ne(x1, x2):
+        if isinstance(x2, (int, float)):
+            from .._tier1 import not_equal_constant
+            return not_equal_constant(x1, constant=x2)
+        else:
+            from .._tier1 import not_equal
+            return not_equal(x1, x2)
+    cls.__ne__ = ne
 
     for f in ["sum", "max", "min", "dot", "vdot"]:
         setattr(cls, f, wrap_module_func(array, f))

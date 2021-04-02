@@ -364,3 +364,95 @@ def test_le_with_np():
     print(result)
 
     assert np.array_equal(result, reference)
+
+def test_eq():
+    import numpy as np
+    import pyclesperanto_prototype as cle
+
+    input1 =    cle.push(np.asarray([[4, 2, -8]]))
+    input2 =    cle.push(np.asarray([[2, 2, 2]]))
+    reference = cle.push(np.asarray([[0, 1, 0]]))
+
+    output = input1 == input2
+    result = cle.pull(output)
+
+    print(result)
+
+    assert np.array_equal(result, reference)
+
+
+def test_eq_with_scalar():
+    import numpy as np
+    import pyclesperanto_prototype as cle
+
+    input1 =    cle.push(np.asarray([[4, 2, -8]]))
+    input2 =    2
+    reference = cle.push(np.asarray([[0, 1, 0]]))
+
+    output = input1 == input2
+    result = cle.pull(output)
+
+    print(result)
+
+    assert np.array_equal(result, reference)
+
+def test_eq_with_np():
+    import numpy as np
+    import pyclesperanto_prototype as cle
+
+    input1 =    cle.push(np.asarray([[4, 2, -8]]))
+    input2 =             np.asarray([[2, 2, 2]])
+    reference = cle.push(np.asarray([[0, 1, 0]]))
+
+    output = input1 == input2
+    result = cle.pull(output)
+
+    print(result)
+
+    assert np.array_equal(result, reference)
+
+def test_ne():
+    import numpy as np
+    import pyclesperanto_prototype as cle
+
+    input1 =    cle.push(np.asarray([[4, 2, -8]]))
+    input2 =    cle.push(np.asarray([[2, 2, 2]]))
+    reference = cle.push(np.asarray([[1, 0, 1]]))
+
+    output = input1 != input2
+    result = cle.pull(output)
+
+    print(result)
+
+    assert np.array_equal(result, reference)
+
+
+def test_ne_with_scalar():
+    import numpy as np
+    import pyclesperanto_prototype as cle
+
+    input1 =    cle.push(np.asarray([[4, 2, -8]]))
+    input2 =    2
+    reference = cle.push(np.asarray([[1, 0, 1]]))
+
+    output = input1 != input2
+    result = cle.pull(output)
+
+    print(result)
+
+    assert np.array_equal(result, reference)
+
+def test_ne_with_np():
+    import numpy as np
+    import pyclesperanto_prototype as cle
+
+    input1 =    cle.push(np.asarray([[4, 2, -8]]))
+    input2 =             np.asarray([[2, 2, 2]])
+    reference = cle.push(np.asarray([[1, 0, 1]]))
+
+    output = input1 != input2
+    result = cle.pull(output)
+
+    print(result)
+
+    assert np.array_equal(result, reference)
