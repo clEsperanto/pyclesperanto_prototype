@@ -312,6 +312,45 @@ def _wrap_OCLArray(cls):
 
     cls.__array__ = cls.get
 
+    def add(x1, x2):
+        if isinstance(x2, (int, float)) :
+            from .._tier1 import add_image_and_scalar
+            return add_image_and_scalar(x1, scalar=x2)
+        else:
+            from .._tier1 import add_images_weighted
+            return add_images_weighted(x1, x2)
+    cls.__add__ = add
+
+    def sub(x1, x2):
+        if isinstance(x2, (int, float)):
+            from .._tier1 import add_image_and_scalar
+            return add_image_and_scalar(x1, scalar=-x2)
+        else:
+            from .._tier1 import add_images_weighted
+            return add_images_weighted(x1, x2, factor2=-1)
+    cls.__sub__ = sub
+
+    def mul(x1, x2):
+        if isinstance(x2, (int, float)):
+            from .._tier1 import multiply_image_and_scalar
+            return multiply_image_and_scalar(x1, scalar=x2)
+        else:
+            from .._tier1 import multiply_images
+            return multiply_images(x1, x2)
+    cls.__mul__ = mul
+
+    def div(x1, x2):
+        if isinstance(x2, (int, float)):
+            from .._tier1 import multiply_image_and_scalar
+            return multiply_image_and_scalar(x1, scalar=1.0 / x2)
+        else:
+            from .._tier1 import divide_images
+            return divide_images(x1, x2)
+    cls.__div__ = div
+    cls.__truediv__ = div
+
+
+
     for f in ["sum", "max", "min", "dot", "vdot"]:
         setattr(cls, f, wrap_module_func(array, f))
 
