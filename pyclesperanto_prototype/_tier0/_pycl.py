@@ -349,6 +349,41 @@ def _wrap_OCLArray(cls):
     cls.__div__ = div
     cls.__truediv__ = div
 
+    def gt(x1, x2):
+        if isinstance(x2, (int, float)):
+            from .._tier1 import greater_constant
+            return greater_constant(x1, constant=x2)
+        else:
+            from .._tier1 import greater
+            return greater(x1, x2)
+    cls.__gt__ = gt
+
+    def ge(x1, x2):
+        if isinstance(x2, (int, float)):
+            from .._tier1 import greater_or_equal_constant
+            return greater_or_equal_constant(x1, constant=x2)
+        else:
+            from .._tier1 import greater_or_equal
+            return greater_or_equal(x1, x2)
+    cls.__ge__ = ge
+
+    def lt(x1, x2):
+        if isinstance(x2, (int, float)):
+            from .._tier1 import smaller_constant
+            return smaller_constant(x1, constant=x2)
+        else:
+            from .._tier1 import smaller
+            return smaller(x1, x2)
+    cls.__lt__ = lt
+
+    def le(x1, x2):
+        if isinstance(x2, (int, float)):
+            from .._tier1 import smaller_or_equal_constant
+            return smaller_or_equal_constant(x1, constant=x2)
+        else:
+            from .._tier1 import smaller_or_equal
+            return smaller_or_equal(x1, x2)
+    cls.__le__ = le
 
 
     for f in ["sum", "max", "min", "dot", "vdot"]:
