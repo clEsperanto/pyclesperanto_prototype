@@ -1,3 +1,6 @@
+# Upcoming release
+## New features
+* OpenCL-buffers support now operators such as `+`,`-`,`*`,`/`,`**`,`+=`,`-=`,`*=`,`/=`,`**=`,`<`,`>`,`<=`,`>=`,`==`,`!=` with second operand also OpenCL-buffer, numpy-array or scalar (int/float).
 
 <a name="#074"></a>
 # 0.7.4 - Mar 27th 2021
