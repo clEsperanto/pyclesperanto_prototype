@@ -321,6 +321,17 @@ def _wrap_OCLArray(cls):
             return add_images_weighted(x1, x2)
     cls.__add__ = add
 
+    def iadd(x1, x2):
+        from .._tier1 import copy
+        temp = copy(x1)
+        if isinstance(x2, (int, float)) :
+            from .._tier1 import add_image_and_scalar
+            return add_image_and_scalar(temp, x1, scalar=x2)
+        else:
+            from .._tier1 import add_images_weighted
+            return add_images_weighted(temp, x2, x1)
+    cls.__iadd__ = iadd
+
     def sub(x1, x2):
         if isinstance(x2, (int, float)):
             from .._tier1 import add_image_and_scalar
@@ -329,6 +340,17 @@ def _wrap_OCLArray(cls):
             from .._tier1 import add_images_weighted
             return add_images_weighted(x1, x2, factor2=-1)
     cls.__sub__ = sub
+
+    def isub(x1, x2):
+        from .._tier1 import copy
+        temp = copy(x1)
+        if isinstance(x2, (int, float)) :
+            from .._tier1 import add_image_and_scalar
+            return add_image_and_scalar(temp, x1, scalar=-x2)
+        else:
+            from .._tier1 import add_images_weighted
+            return add_images_weighted(temp, x2, x1, factor2=-1)
+    cls.__isub__ = isub
 
     def mul(x1, x2):
         if isinstance(x2, (int, float)):
@@ -339,6 +361,18 @@ def _wrap_OCLArray(cls):
             return multiply_images(x1, x2)
     cls.__mul__ = mul
 
+    def imul(x1, x2):
+        from .._tier1 import copy
+        temp = copy(x1)
+        if isinstance(x2, (int, float)):
+            from .._tier1 import multiply_image_and_scalar
+            return multiply_image_and_scalar(temp, x1, scalar=x2)
+        else:
+            from .._tier1 import multiply_images
+            return multiply_images(temp, x2, x1)
+
+    cls.__imul__ = imul
+
     def div(x1, x2):
         if isinstance(x2, (int, float)):
             from .._tier1 import multiply_image_and_scalar
@@ -348,6 +382,18 @@ def _wrap_OCLArray(cls):
             return divide_images(x1, x2)
     cls.__div__ = div
     cls.__truediv__ = div
+
+    def idiv(x1, x2):
+        from .._tier1 import copy
+        temp = copy(x1)
+        if isinstance(x2, (int, float)):
+            from .._tier1 import multiply_image_and_scalar
+            return multiply_image_and_scalar(temp, x1, scalar=1.0 / x2)
+        else:
+            from .._tier1 import divide_images
+            return divide_images(temp, x2, x1)
+    cls.__idiv__ = idiv
+    cls.__itruediv__ = idiv
 
     def gt(x1, x2):
         if isinstance(x2, (int, float)):
@@ -422,12 +468,27 @@ def _wrap_OCLArray(cls):
             return power_images(x1, x2)
     cls.__pow__ = pow
 
+    def ipow(x1, x2):
+        from .._tier1 import copy
+        temp = copy(x1)
+        if isinstance(x2, (int, float)):
+            from .._tier1 import power
+            return power(temp, x1, exponent=x2)
+        else:
+            from .._tier1 import power_images
+            return power_images(temp, x2, x1)
+    cls.__ipow__ = ipow
+
+
     # todo:
     #  __floordiv__(x1, x2)
     #  __mod__(x1, x2)
     #  __matmul__(x1, x2)
     #  __inv__(x1, x2)
     #  __invert__(x1, x2)
+    #  __lshift__(x1, x2)
+    #  __rshift__(x1, x2)
+    # and, or, xor
 
     for f in ["sum", "max", "min", "dot", "vdot"]:
         setattr(cls, f, wrap_module_func(array, f))
