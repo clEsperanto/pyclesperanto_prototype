@@ -456,3 +456,31 @@ def test_ne_with_np():
     print(result)
 
     assert np.array_equal(result, reference)
+
+def test_pos():
+    import numpy as np
+    import pyclesperanto_prototype as cle
+
+    input1 =    cle.push(np.asarray([[4, 2, -8]]))
+    reference = cle.push(np.asarray([[4, 2, -8]]))
+
+    output = +input1
+    result = cle.pull(output)
+
+    print(result)
+
+    assert np.array_equal(result, reference)
+
+def test_neg():
+    import numpy as np
+    import pyclesperanto_prototype as cle
+
+    input1 =    cle.push(np.asarray([[4, 2, -8]]))
+    reference = cle.push(np.asarray([[-4, -2, 8]]))
+
+    output = -input1
+    result = cle.pull(output)
+
+    print(result)
+
+    assert np.array_equal(result, reference)

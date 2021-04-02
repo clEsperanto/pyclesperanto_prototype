@@ -403,6 +403,16 @@ def _wrap_OCLArray(cls):
             return not_equal(x1, x2)
     cls.__ne__ = ne
 
+    def pos(x1):
+        from .._tier1 import copy
+        return copy(x1)
+    cls.__pos__ = pos
+
+    def neg(x1):
+        from .._tier1 import subtract_image_from_scalar
+        return subtract_image_from_scalar(x1, scalar=0)
+    cls.__neg__ = neg
+
     for f in ["sum", "max", "min", "dot", "vdot"]:
         setattr(cls, f, wrap_module_func(array, f))
 
