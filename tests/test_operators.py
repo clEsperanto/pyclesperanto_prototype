@@ -484,3 +484,49 @@ def test_neg():
     print(result)
 
     assert np.array_equal(result, reference)
+
+def test_power():
+    import numpy as np
+    import pyclesperanto_prototype as cle
+
+    input1 =    cle.push(np.asarray([[4, 2, -8]]))
+    input2 =    cle.push(np.asarray([[2, 2, 2]]))
+    reference = cle.push(np.asarray([[16, 4, 64]]))
+
+    output = input1 ** input2
+    result = cle.pull(output)
+
+    print(result)
+
+    assert np.array_equal(result, reference)
+
+
+def test_power_with_scalar():
+    import numpy as np
+    import pyclesperanto_prototype as cle
+
+    input1 =    cle.push(np.asarray([[4, 2, -8]]))
+    input2 =    2
+    reference = cle.push(np.asarray([[16, 4, 64]]))
+
+    output = input1 ** input2
+    result = cle.pull(output)
+
+    print(result)
+
+    assert np.array_equal(result, reference)
+
+def test_power_with_np():
+    import numpy as np
+    import pyclesperanto_prototype as cle
+
+    input1 =    cle.push(np.asarray([[4, 2, -8]]))
+    input2 =             np.asarray([[2, 2, 2]])
+    reference = cle.push(np.asarray([[16, 4, 64]]))
+
+    output = input1 ** input2
+    result = cle.pull(output)
+
+    print(result)
+
+    assert np.array_equal(result, reference)

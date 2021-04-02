@@ -413,6 +413,22 @@ def _wrap_OCLArray(cls):
         return subtract_image_from_scalar(x1, scalar=0)
     cls.__neg__ = neg
 
+    def pow(x1, x2):
+        if isinstance(x2, (int, float)):
+            from .._tier1 import power
+            return power(x1, exponent=x2)
+        else:
+            from .._tier1 import power_images
+            return power_images(x1, x2)
+    cls.__pow__ = pow
+
+    # todo:
+    #  __floordiv__(x1, x2)
+    #  __mod__(x1, x2)
+    #  __matmul__(x1, x2)
+    #  __inv__(x1, x2)
+    #  __invert__(x1, x2)
+
     for f in ["sum", "max", "min", "dot", "vdot"]:
         setattr(cls, f, wrap_module_func(array, f))
 
