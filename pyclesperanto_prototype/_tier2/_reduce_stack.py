@@ -5,7 +5,7 @@ from .._tier0 import create_none
 from .._tier0 import create
 from .._tier1 import copy_slice
 
-@plugin_function(output_creator=create_none)
+@plugin_function(output_creator=create_none, categories=['transform', 'in assistant'])
 def reduce_stack(input : Image, destination : Image = None, reduction_factor : int = 2, offset : int = 0):
     """Reduces the number of slices in a stack by a given factor.
     With the offset you have control which slices stay: 
