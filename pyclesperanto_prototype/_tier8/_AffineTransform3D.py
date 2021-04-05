@@ -1,3 +1,5 @@
+from warnings import warn
+
 import numpy as np
 import transforms3d
 
@@ -34,6 +36,15 @@ class AffineTransform3D:
         self
 
         """
+        if scale_x == 0:
+            warn('scale_x must not be 0')
+            scale_x = 1
+        if scale_y == 0:
+            warn('scale_y must not be 0')
+            scale_y = 1
+        if scale_z == 0:
+            warn('scale_z must not be 0')
+            scale_z = 1
         if scale_x is not None:
             self._concatenate(transforms3d.zooms.zfdir2aff(scale_x, direction=(1, 0, 0), origin=(0, 0, 0)))
         if scale_y is not None:
