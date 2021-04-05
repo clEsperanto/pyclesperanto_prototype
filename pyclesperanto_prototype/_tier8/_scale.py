@@ -1,7 +1,7 @@
 from .._tier0 import plugin_function
 from .._tier0 import Image
 
-@plugin_function
+@plugin_function(categories=['transform', 'in assistant'])
 def scale(source : Image, destination : Image = None, factor_x : float = 1, factor_y : float = 1, factor_z : float = 1, centered : bool = True, linear_interpolation : bool = False):
     """Scale the image by given factors.
 
