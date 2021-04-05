@@ -1,3 +1,12 @@
+<a name="#075"></a>
+# 0.7.5 - Apr 4th 2021
+## New Features
+* `sub_stack`
+* activated transforms and projections in the assistant GUI
+* added warnings in case operations get parameters which can cause errors, e.g. scale factor = 0
+
+## Bug fixes
+* `merge_touching_labels` didn't work properly in case labels were circular connected.
 
 <a name="#074"></a>
 # 0.7.4 - Mar 27th 2021
