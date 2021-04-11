@@ -31,6 +31,11 @@ def sub_stack(source : Image, destination : Image = None, start_z : int = 0, end
         warn("In sub_stack, end_z should be equal or larger than start_z as num slices must be at least 1")
         num_slices = 1
 
+    if len(dims) < 3:
+        warn("A 2D image was passed to sub_stack, which is meant to process 3D images. It will just be copied.")
+        from .._tier1 import copy
+        return copy(source, destination)
+
     if destination is None:
         destination = create([num_slices, dims[1], dims[2]])
 
