@@ -1,3 +1,7 @@
+# 0.7.6 - Apr 11th 2021
+## Bug fixes
+* `sub_stack` threw an error when processing 2D images. It now warns and returns a copy.
+
 <a name="#075"></a>
 # 0.7.5 - Apr 4th 2021
 ## New Features
