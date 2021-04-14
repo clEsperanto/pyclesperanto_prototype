@@ -479,6 +479,41 @@ def _wrap_OCLArray(cls):
             return power_images(temp, x2, x1)
     cls.__ipow__ = ipow
 
+    def min(self, axis=None):
+        from .._tier2 import minimum_of_all_pixels
+        from .._tier1 import minimum_x_projection
+        from .._tier1 import minimum_y_projection
+        from .._tier1 import minimum_z_projection
+
+        if axis==0:
+            return minimum_z_projection(self)
+        elif axis==1:
+            return minimum_y_projection(self)
+        elif axis==2:
+            return minimum_x_projection(self)
+        elif axis is None:
+            return minimum_of_all_pixels(self)
+        else:
+            raise ValueError("Axis " + axis + " not supported")
+    cls.min = min
+
+    def max(self, axis=None):
+        from .._tier2 import maximum_of_all_pixels
+        from .._tier1 import maximum_x_projection
+        from .._tier1 import maximum_y_projection
+        from .._tier1 import maximum_z_projection
+
+        if axis==0:
+            return maximum_z_projection(self)
+        elif axis==1:
+            return maximum_y_projection(self)
+        elif axis==2:
+            return maximum_x_projection(self)
+        elif axis is None:
+            return maximum_of_all_pixels(self)
+        else:
+            raise ValueError("Axis " + axis + " not supported")
+    cls.max = max
 
     # todo:
     #  __floordiv__(x1, x2)
@@ -490,7 +525,7 @@ def _wrap_OCLArray(cls):
     #  __rshift__(x1, x2)
     # and, or, xor
 
-    for f in ["sum", "max", "min", "dot", "vdot"]:
+    for f in ["sum", "dot", "vdot"]:
         setattr(cls, f, wrap_module_func(array, f))
 
     # for f in dir(cl_math):
