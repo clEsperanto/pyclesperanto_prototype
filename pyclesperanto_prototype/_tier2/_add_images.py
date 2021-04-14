@@ -2,7 +2,7 @@ from .._tier0 import plugin_function
 from .._tier0 import Image
 from .._tier1 import add_images_weighted
 
-@plugin_function(categories=['combine', 'in assitant'], priority=-1)
+@plugin_function(categories=['combine', 'in assistant'], priority=-1)
 def add_images(summand1 : Image, summand2 : Image, destination : Image = None):
     """Calculates the sum of pairs of pixels x and y of two images X and Y.
     

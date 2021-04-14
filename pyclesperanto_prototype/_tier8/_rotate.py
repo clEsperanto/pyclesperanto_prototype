@@ -1,8 +1,8 @@
 from .._tier0 import plugin_function
 from .._tier0 import Image
 
-@plugin_function
-def rotate(source : Image, destination : Image = None, angle_around_x_in_degrees : float = 0, angle_around_y_in_degrees : float = 0, angle_around_z_in_degrees : float = 0, rotate_around_center=True, linear_interpolation : bool = False):
+@plugin_function(categories=['transform', 'in assistant'])
+def rotate(source : Image, destination : Image = None, angle_around_x_in_degrees : float = 0, angle_around_y_in_degrees : float = 0, angle_around_z_in_degrees : float = 0, rotate_around_center : bool = True, linear_interpolation : bool = False):
     """Rotate the image by given angles.
 
     Angles are given in degrees. To convert radians to degrees, use this formula:

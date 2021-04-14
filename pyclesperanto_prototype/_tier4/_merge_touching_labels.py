@@ -58,4 +58,20 @@ def merge_touching_labels(labels_input: Image, labels_destination: Image = None)
 
     # write the new labels into the label image
     labels_destination = replace_intensities(labels_input, new_labels, labels_destination)
+
+    # todo: the following might be suboptimal with regard to performance.
+    #       Check if there is a faster way of doing this, e.g. in the lines above.
+    # check if labels are still touching
+    touch_matrix2 = generate_touch_matrix(labels_destination)
+    set_row(touch_matrix2, 0, 0)
+    set_column(touch_matrix2, 0, 0)
+    from .._tier2 import sum_of_all_pixels
+    num_touches = sum_of_all_pixels(touch_matrix2)
+
+    # if so, merge again
+    if num_touches > 0:
+        from .._tier1 import copy
+        temp = copy(labels_destination)
+        merge_touching_labels(temp, labels_destination)
+
     return labels_destination
