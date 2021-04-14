@@ -1,6 +1,7 @@
 # Upcoming release
 ## New features
 * OpenCL-buffers support now operators such as `+`,`-`,`*`,`/`,`**`,`+=`,`-=`,`*=`,`/=`,`**=`,`<`,`>`,`<=`,`>=`,`==`,`!=` with second operand also OpenCL-buffer, numpy-array or scalar (int/float).
+* OpenCL-buffers now also support min, max and sum with axes 0, 1 and 2.  
 * Added aliases `asarray` for `push` and `nparray` for `pull`
 
 <a name="#074"></a>

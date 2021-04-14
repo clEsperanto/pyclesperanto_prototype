@@ -53,3 +53,8 @@ def test_min_max_xyz():
     assert np.allclose(gpu_example.max(axis=2), example.max(axis=2))
     assert np.allclose(gpu_example.max(), example.max())
 
+    assert np.allclose(gpu_example.sum(axis=0), example.sum(axis=0))
+    assert np.allclose(gpu_example.sum(axis=1), example.sum(axis=1))
+    assert np.allclose(gpu_example.sum(axis=2), example.sum(axis=2))
+    assert np.allclose(gpu_example.sum(), example.sum())
+

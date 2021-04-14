@@ -515,6 +515,24 @@ def _wrap_OCLArray(cls):
             raise ValueError("Axis " + axis + " not supported")
     cls.max = max
 
+    def sum(self, axis=None):
+        from .._tier2 import sum_of_all_pixels
+        from .._tier1 import sum_x_projection
+        from .._tier1 import sum_y_projection
+        from .._tier1 import sum_z_projection
+
+        if axis==0:
+            return sum_z_projection(self)
+        elif axis==1:
+            return sum_y_projection(self)
+        elif axis==2:
+            return sum_x_projection(self)
+        elif axis is None:
+            return sum_of_all_pixels(self)
+        else:
+            raise ValueError("Axis " + axis + " not supported")
+    cls.sum = sum
+
     # todo:
     #  __floordiv__(x1, x2)
     #  __mod__(x1, x2)
@@ -525,7 +543,7 @@ def _wrap_OCLArray(cls):
     #  __rshift__(x1, x2)
     # and, or, xor
 
-    for f in ["sum", "dot", "vdot"]:
+    for f in ["dot", "vdot"]:
         setattr(cls, f, wrap_module_func(array, f))
 
     # for f in dir(cl_math):
