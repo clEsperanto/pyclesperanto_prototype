@@ -479,58 +479,67 @@ def _wrap_OCLArray(cls):
             return power_images(temp, x2, x1)
     cls.__ipow__ = ipow
 
-    def min(self, axis=None):
+    def min(self, axis=None, out=None):
         from .._tier2 import minimum_of_all_pixels
         from .._tier1 import minimum_x_projection
         from .._tier1 import minimum_y_projection
         from .._tier1 import minimum_z_projection
 
         if axis==0:
-            return minimum_z_projection(self)
+            result = minimum_z_projection(self)
         elif axis==1:
-            return minimum_y_projection(self)
+            result = minimum_y_projection(self)
         elif axis==2:
-            return minimum_x_projection(self)
+            result = minimum_x_projection(self)
         elif axis is None:
-            return minimum_of_all_pixels(self)
+            result = minimum_of_all_pixels(self)
         else:
             raise ValueError("Axis " + axis + " not supported")
+        if out is not None:
+            np.copyto(out, result.get().astype(out.dtype))
+        return result
     cls.min = min
 
-    def max(self, axis=None):
+    def max(self, axis=None, out=None):
         from .._tier2 import maximum_of_all_pixels
         from .._tier1 import maximum_x_projection
         from .._tier1 import maximum_y_projection
         from .._tier1 import maximum_z_projection
 
         if axis==0:
-            return maximum_z_projection(self)
+            result = maximum_z_projection(self)
         elif axis==1:
-            return maximum_y_projection(self)
+            result = maximum_y_projection(self)
         elif axis==2:
-            return maximum_x_projection(self)
+            result = maximum_x_projection(self)
         elif axis is None:
-            return maximum_of_all_pixels(self)
+            result = maximum_of_all_pixels(self)
         else:
             raise ValueError("Axis " + axis + " not supported")
+        if out is not None:
+            np.copyto(out, result.get().astype(out.dtype))
+        return result
     cls.max = max
 
-    def sum(self, axis=None):
+    def sum(self, axis=None, out=None):
         from .._tier2 import sum_of_all_pixels
         from .._tier1 import sum_x_projection
         from .._tier1 import sum_y_projection
         from .._tier1 import sum_z_projection
 
         if axis==0:
-            return sum_z_projection(self)
+            result = sum_z_projection(self)
         elif axis==1:
-            return sum_y_projection(self)
+            result = sum_y_projection(self)
         elif axis==2:
-            return sum_x_projection(self)
+            result = sum_x_projection(self)
         elif axis is None:
-            return sum_of_all_pixels(self)
+            result = sum_of_all_pixels(self)
         else:
             raise ValueError("Axis " + axis + " not supported")
+        if out is not None:
+            np.copyto(out, result.get().astype(out.dtype))
+        return result
     cls.sum = sum
 
     # todo:
