@@ -1,8 +1,8 @@
-from .._tier0 import execute
+from .._tier0 import execute, create_binary_like
 from .._tier0 import plugin_function
 from .._tier0 import Image
 
-@plugin_function(categories=['binary processing', 'in assistant'])
+@plugin_function(categories=['binary processing', 'in assistant'], output_creator=create_binary_like)
 def binary_edge_detection(source : Image, destination : Image = None):
     """Determines pixels/voxels which are on the surface of binary objects and 
     sets only them to 1 in the 

@@ -1,9 +1,8 @@
-from .._tier0 import execute
-
+from .._tier0 import execute, create_binary_like
 from .._tier0 import plugin_function
 from .._tier0 import Image
 
-@plugin_function(categories=['combine', 'binarize', 'in assistant'])
+@plugin_function(categories=['combine', 'binarize', 'in assistant'], output_creator=create_binary_like)
 def greater_or_equal(source1 : Image, source2 : Image, destination : Image = None):
     """Determines if two images A and B greater or equal pixel wise. 
     

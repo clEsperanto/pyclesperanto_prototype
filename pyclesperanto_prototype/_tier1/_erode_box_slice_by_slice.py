@@ -1,8 +1,8 @@
-from .._tier0 import execute
+from .._tier0 import execute, create_binary_like
 from .._tier0 import plugin_function
 from .._tier0 import Image
 
-@plugin_function(categories=['binary processing'])
+@plugin_function(categories=['binary processing'], output_creator=create_binary_like)
 def erode_box_slice_by_slice(source : Image, destination : Image = None):
     """Computes a binary image with pixel values 0 and 1 containing the binary 
     erosion of a given input image. 
