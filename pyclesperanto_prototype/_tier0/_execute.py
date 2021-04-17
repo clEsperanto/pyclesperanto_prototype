@@ -116,19 +116,30 @@ def execute(anchor, opencl_kernel_filename, kernel_name, global_size, parameters
     for key, value in parameters.items():
 
         if isinstance(value, cl.array.Array):
-
             if value.dtype == np.dtype("uint8"):
                 pixel_type = "uchar"
                 type_id = "uc"
             elif value.dtype == np.dtype("uint16"):
                 pixel_type = "ushort"
+                type_id = "us"
+            elif value.dtype == np.dtype("uint32"):
+                pixel_type = "uint"
                 type_id = "ui"
+            elif value.dtype == np.dtype("uint64"):
+                pixel_type = "ulong"
+                type_id = "ul"
             elif value.dtype == np.dtype("int8"):
                 pixel_type = "char"
                 type_id = "c"
             elif value.dtype == np.dtype("int16"):
                 pixel_type = "short"
+                type_id = "s"
+            elif value.dtype == np.dtype("int32"):
+                pixel_type = "int"
                 type_id = "i"
+            elif value.dtype == np.dtype("int64"):
+                pixel_type = "long"
+                type_id = "l"
             elif value.dtype == np.dtype("float32"):
                 pixel_type = "float"
                 type_id = "f"
@@ -182,13 +193,25 @@ def execute(anchor, opencl_kernel_filename, kernel_name, global_size, parameters
                 type_id = "ui"
             elif value.dtype == np.dtype("uint16"):
                 pixel_type = "ushort"
+                type_id = "us"
+            elif value.dtype == np.dtype("uint32"):
+                pixel_type = "uint"
                 type_id = "ui"
+            elif value.dtype == np.dtype("uint64"):
+                pixel_type = "ulong"
+                type_id = "ul"
             elif value.dtype == np.dtype("int8"):
                 pixel_type = "char"
                 type_id = "ui"
             elif value.dtype == np.dtype("int16"):
                 pixel_type = "short"
+                type_id = "us"
+            elif value.dtype == np.dtype("int32"):
+                pixel_type = "int"
                 type_id = "ui"
+            elif value.dtype == np.dtype("int64"):
+                pixel_type = "long"
+                type_id = "ul"
             elif value.dtype == np.dtype("float32"):
                 pixel_type = "float"
                 type_id = "f"
