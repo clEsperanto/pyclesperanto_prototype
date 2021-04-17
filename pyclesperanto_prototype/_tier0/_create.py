@@ -45,7 +45,7 @@ def create_labels_like(*args):
         dimensions = dimensions.shape
     elif isinstance(dimensions, np.ndarray):
         dimensions = dimensions.shape[::-1]
-    return create(dimensions, np.uint16)
+    return create(dimensions, np.uint32)
 
 def create_pointlist_from_labelmap(input:OCLArray, *args):
     from .._tier2 import maximum_of_all_pixels
