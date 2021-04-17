@@ -2,11 +2,11 @@ from .._tier1 import set
 from .._tier0 import plugin_function
 from .._tier0 import create
 from .._tier0 import Image
-from .._tier0 import execute
+from .._tier0 import execute, create_labels_like
 from .._tier1 import sum_x_projection
 from .._tier1 import sum_y_projection
 
-@plugin_function(categories=['label', 'in assistant'])
+@plugin_function(categories=['label', 'in assistant'], output_creator=create_labels_like)
 def label_spots(input_spots : Image, labelled_spots_destination : Image = None):
     """Transforms a binary image with single pixles set to 1 to a labelled 
     spots image. 

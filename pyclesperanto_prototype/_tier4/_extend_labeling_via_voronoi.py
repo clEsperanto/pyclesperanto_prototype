@@ -2,14 +2,14 @@ from .._tier0 import Image
 from .._tier0 import plugin_function
 from .._tier0 import push
 from .._tier0 import pull
-from .._tier0 import create_like
+from .._tier0 import create_like, create_labels_like
 from .._tier1 import copy
 from .._tier1 import set
 from .._tier1 import onlyzero_overwrite_maximum_box
 from .._tier1 import onlyzero_overwrite_maximum_diamond
 import numpy as np
 
-@plugin_function(categories=['label processing', 'in assistant'])
+@plugin_function(categories=['label processing', 'in assistant'], output_creator=create_labels_like)
 def extend_labeling_via_voronoi(labeling_source : Image, labeling_destination : Image = None):
     """Takes a label map image and dilates the regions using a octagon shape 
     until they touch. 

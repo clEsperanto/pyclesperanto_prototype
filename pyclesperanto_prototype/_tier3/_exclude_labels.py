@@ -3,7 +3,7 @@ from pyclesperanto_prototype._tier0 import Image
 from .._tier0 import push
 from .._tier0 import pull
 from .._tier0 import create_none
-from .._tier0 import create_like
+from .._tier0 import create_like, create_labels_like
 from .._tier1 import replace_intensities
 import numpy as np
 
@@ -34,7 +34,7 @@ def exclude_labels(binary_flaglist : Image, label_map_input : Image, label_map_d
     .. [1] https://clij.github.io/clij2-docs/reference_excludeLabels
     """
     if label_map_destination is None:
-        label_map_destination = create_like(label_map_input)
+        label_map_destination = create_labels_like(label_map_input)
 
     num_labels = int(binary_flaglist.shape[-1])
 
