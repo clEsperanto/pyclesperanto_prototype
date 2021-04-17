@@ -312,7 +312,247 @@ def _wrap_OCLArray(cls):
 
     cls.__array__ = cls.get
 
-    for f in ["sum", "max", "min", "dot", "vdot"]:
+    def add(x1, x2):
+        if isinstance(x2, (int, float)) :
+            from .._tier1 import add_image_and_scalar
+            return add_image_and_scalar(x1, scalar=x2)
+        else:
+            from .._tier1 import add_images_weighted
+            return add_images_weighted(x1, x2)
+    cls.__add__ = add
+
+    def iadd(x1, x2):
+        from .._tier1 import copy
+        temp = copy(x1)
+        if isinstance(x2, (int, float)) :
+            from .._tier1 import add_image_and_scalar
+            return add_image_and_scalar(temp, x1, scalar=x2)
+        else:
+            from .._tier1 import add_images_weighted
+            return add_images_weighted(temp, x2, x1)
+    cls.__iadd__ = iadd
+
+    def sub(x1, x2):
+        if isinstance(x2, (int, float)):
+            from .._tier1 import add_image_and_scalar
+            return add_image_and_scalar(x1, scalar=-x2)
+        else:
+            from .._tier1 import add_images_weighted
+            return add_images_weighted(x1, x2, factor2=-1)
+    cls.__sub__ = sub
+
+    def isub(x1, x2):
+        from .._tier1 import copy
+        temp = copy(x1)
+        if isinstance(x2, (int, float)) :
+            from .._tier1 import add_image_and_scalar
+            return add_image_and_scalar(temp, x1, scalar=-x2)
+        else:
+            from .._tier1 import add_images_weighted
+            return add_images_weighted(temp, x2, x1, factor2=-1)
+    cls.__isub__ = isub
+
+    def mul(x1, x2):
+        if isinstance(x2, (int, float)):
+            from .._tier1 import multiply_image_and_scalar
+            return multiply_image_and_scalar(x1, scalar=x2)
+        else:
+            from .._tier1 import multiply_images
+            return multiply_images(x1, x2)
+    cls.__mul__ = mul
+
+    def imul(x1, x2):
+        from .._tier1 import copy
+        temp = copy(x1)
+        if isinstance(x2, (int, float)):
+            from .._tier1 import multiply_image_and_scalar
+            return multiply_image_and_scalar(temp, x1, scalar=x2)
+        else:
+            from .._tier1 import multiply_images
+            return multiply_images(temp, x2, x1)
+
+    cls.__imul__ = imul
+
+    def div(x1, x2):
+        if isinstance(x2, (int, float)):
+            from .._tier1 import multiply_image_and_scalar
+            return multiply_image_and_scalar(x1, scalar=1.0 / x2)
+        else:
+            from .._tier1 import divide_images
+            return divide_images(x1, x2)
+    cls.__div__ = div
+    cls.__truediv__ = div
+
+    def idiv(x1, x2):
+        from .._tier1 import copy
+        temp = copy(x1)
+        if isinstance(x2, (int, float)):
+            from .._tier1 import multiply_image_and_scalar
+            return multiply_image_and_scalar(temp, x1, scalar=1.0 / x2)
+        else:
+            from .._tier1 import divide_images
+            return divide_images(temp, x2, x1)
+    cls.__idiv__ = idiv
+    cls.__itruediv__ = idiv
+
+    def gt(x1, x2):
+        if isinstance(x2, (int, float)):
+            from .._tier1 import greater_constant
+            return greater_constant(x1, constant=x2)
+        else:
+            from .._tier1 import greater
+            return greater(x1, x2)
+    cls.__gt__ = gt
+
+    def ge(x1, x2):
+        if isinstance(x2, (int, float)):
+            from .._tier1 import greater_or_equal_constant
+            return greater_or_equal_constant(x1, constant=x2)
+        else:
+            from .._tier1 import greater_or_equal
+            return greater_or_equal(x1, x2)
+    cls.__ge__ = ge
+
+    def lt(x1, x2):
+        if isinstance(x2, (int, float)):
+            from .._tier1 import smaller_constant
+            return smaller_constant(x1, constant=x2)
+        else:
+            from .._tier1 import smaller
+            return smaller(x1, x2)
+    cls.__lt__ = lt
+
+    def le(x1, x2):
+        if isinstance(x2, (int, float)):
+            from .._tier1 import smaller_or_equal_constant
+            return smaller_or_equal_constant(x1, constant=x2)
+        else:
+            from .._tier1 import smaller_or_equal
+            return smaller_or_equal(x1, x2)
+    cls.__le__ = le
+
+    def eq(x1, x2):
+        if isinstance(x2, (int, float)):
+            from .._tier1 import equal_constant
+            return equal_constant(x1, constant=x2)
+        else:
+            from .._tier1 import equal
+            return equal(x1, x2)
+    cls.__eq__ = eq
+
+    def ne(x1, x2):
+        if isinstance(x2, (int, float)):
+            from .._tier1 import not_equal_constant
+            return not_equal_constant(x1, constant=x2)
+        else:
+            from .._tier1 import not_equal
+            return not_equal(x1, x2)
+    cls.__ne__ = ne
+
+    def pos(x1):
+        from .._tier1 import copy
+        return copy(x1)
+    cls.__pos__ = pos
+
+    def neg(x1):
+        from .._tier1 import subtract_image_from_scalar
+        return subtract_image_from_scalar(x1, scalar=0)
+    cls.__neg__ = neg
+
+    def pow(x1, x2):
+        if isinstance(x2, (int, float)):
+            from .._tier1 import power
+            return power(x1, exponent=x2)
+        else:
+            from .._tier1 import power_images
+            return power_images(x1, x2)
+    cls.__pow__ = pow
+
+    def ipow(x1, x2):
+        from .._tier1 import copy
+        temp = copy(x1)
+        if isinstance(x2, (int, float)):
+            from .._tier1 import power
+            return power(temp, x1, exponent=x2)
+        else:
+            from .._tier1 import power_images
+            return power_images(temp, x2, x1)
+    cls.__ipow__ = ipow
+
+    def min(self, axis=None, out=None):
+        from .._tier2 import minimum_of_all_pixels
+        from .._tier1 import minimum_x_projection
+        from .._tier1 import minimum_y_projection
+        from .._tier1 import minimum_z_projection
+
+        if axis==0:
+            result = minimum_z_projection(self)
+        elif axis==1:
+            result = minimum_y_projection(self)
+        elif axis==2:
+            result = minimum_x_projection(self)
+        elif axis is None:
+            result = minimum_of_all_pixels(self)
+        else:
+            raise ValueError("Axis " + axis + " not supported")
+        if out is not None:
+            np.copyto(out, result.get().astype(out.dtype))
+        return result
+    cls.min = min
+
+    def max(self, axis=None, out=None):
+        from .._tier2 import maximum_of_all_pixels
+        from .._tier1 import maximum_x_projection
+        from .._tier1 import maximum_y_projection
+        from .._tier1 import maximum_z_projection
+
+        if axis==0:
+            result = maximum_z_projection(self)
+        elif axis==1:
+            result = maximum_y_projection(self)
+        elif axis==2:
+            result = maximum_x_projection(self)
+        elif axis is None:
+            result = maximum_of_all_pixels(self)
+        else:
+            raise ValueError("Axis " + axis + " not supported")
+        if out is not None:
+            np.copyto(out, result.get().astype(out.dtype))
+        return result
+    cls.max = max
+
+    def sum(self, axis=None, out=None):
+        from .._tier2 import sum_of_all_pixels
+        from .._tier1 import sum_x_projection
+        from .._tier1 import sum_y_projection
+        from .._tier1 import sum_z_projection
+
+        if axis==0:
+            result = sum_z_projection(self)
+        elif axis==1:
+            result = sum_y_projection(self)
+        elif axis==2:
+            result = sum_x_projection(self)
+        elif axis is None:
+            result = sum_of_all_pixels(self)
+        else:
+            raise ValueError("Axis " + axis + " not supported")
+        if out is not None:
+            np.copyto(out, result.get().astype(out.dtype))
+        return result
+    cls.sum = sum
+
+    # todo:
+    #  __floordiv__(x1, x2)
+    #  __mod__(x1, x2)
+    #  __matmul__(x1, x2)
+    #  __inv__(x1, x2)
+    #  __invert__(x1, x2)
+    #  __lshift__(x1, x2)
+    #  __rshift__(x1, x2)
+    # and, or, xor
+
+    for f in ["dot", "vdot"]:
         setattr(cls, f, wrap_module_func(array, f))
 
     # for f in dir(cl_math):
