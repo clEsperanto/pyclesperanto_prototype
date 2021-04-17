@@ -2,7 +2,7 @@ from ._pycl import OCLArray
 import numpy as np
 
 
-def create(dimensions):
+def create(dimensions, dtype=np.float32):
 
     """
     Convenience method for creating images on the GPU. This method basically does the same as in CLIJ:
@@ -18,7 +18,7 @@ def create(dimensions):
         if isinstance(dimensions, OCLArray)
         else tuple(dimensions)  # reverses a list/tuple
     )
-    return OCLArray.empty(dimensions, np.float32)
+    return OCLArray.empty(dimensions, dtype)
 
 def create_zyx(dimensions):
     return create(dimensions[::-1])
