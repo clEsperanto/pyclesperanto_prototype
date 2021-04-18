@@ -165,7 +165,7 @@ def execute(anchor, opencl_kernel_filename, kernel_name, global_size, parameters
             else:
                 size_parameters = ""
 
-            arguments.append(value.data)
+            arguments.append(value.base_data)
 
 
             params = {
