@@ -3,6 +3,7 @@
 * OpenCL-buffers support now operators such as `+`,`-`,`*`,`/`,`**`,`+=`,`-=`,`*=`,`/=`,`**=`,`<`,`>`,`<=`,`>=`,`==`,`!=` with second operand also OpenCL-buffer, numpy-array or scalar (int/float).
 * OpenCL-buffers now also support min, max and sum with axes 0, 1 and 2.  
 * Added aliases `asarray` for `push` and `nparray` for `pull`
+* New operation `proximal_neighbor_count_map`
 
 # 0.7.6 - Apr 11th 2021
 ## Bug fixes
