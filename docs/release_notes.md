@@ -1,9 +1,12 @@
-# Upcoming release
+# 0.8.0 - Apr 22nd 2021
 ## New features
 * OpenCL-buffers support now operators such as `+`,`-`,`*`,`/`,`**`,`+=`,`-=`,`*=`,`/=`,`**=`,`<`,`>`,`<=`,`>=`,`==`,`!=` with second operand also OpenCL-buffer, numpy-array or scalar (int/float).
 * OpenCL-buffers now also support min, max and sum with axes 0, 1 and 2.  
 * Added aliases `asarray` for `push` and `nparray` for `pull`
 * New operation `proximal_neighbor_count_map`
+
+## Backwards compatibility breaking changes
+* Operations producing label images now automatically generate outout-images of type uint16. Operations producing binary images now automatically produce output images of type uint8. In case this breaks pre-existing workflows, consider using `cle.create_like` to create output-images of type float, which was default before this version.
 
 # 0.7.6 - Apr 11th 2021
 ## Bug fixes
