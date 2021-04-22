@@ -29,8 +29,11 @@ def push(any_array):
     if isinstance(any_array, OCLArray):
         return any_array
 
-    transposed = any_array.astype(np.float32)
-    return OCLArray.from_array(transposed)
+    if isinstance(any_array, list) or isinstance(any_array, tuple):
+        any_array = np.asarray(any_array)
+
+    float_arr = any_array.astype(np.float32)
+    return OCLArray.from_array(float_arr)
 
 
 def push_zyx(any_array):
@@ -39,9 +42,4 @@ def push_zyx(any_array):
         "Deprecated: `push_zyx()` is now deprecated as it does the same as `push()`.",
         DeprecationWarning
     )
-
-    if isinstance(any_array, OCLArray):
-        return any_array
-
-    temp = any_array.astype(np.float32)
-    return OCLArray.from_array(temp)
+    return push(any_array)

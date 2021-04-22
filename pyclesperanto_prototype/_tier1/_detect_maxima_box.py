@@ -1,8 +1,8 @@
-from .._tier0 import execute
+from .._tier0 import execute, create_binary_like
 from .._tier0 import plugin_function
 from .._tier0 import Image
 
-@plugin_function(categories=['binarize', 'in assistant'])
+@plugin_function(categories=['binarize', 'in assistant'], output_creator=create_binary_like)
 def detect_maxima_box(source :Image, destination :Image = None, radius_x : int = 0, radius_y : int = 0, radius_z : int = 0):
     """Detects local maxima in a given square/cubic neighborhood. 
     

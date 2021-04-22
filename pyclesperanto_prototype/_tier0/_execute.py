@@ -41,8 +41,8 @@ def get_ocl_source(anchor, opencl_kernel_filename):
     return "\n".join([preamble(), kernel])
 
 COMMON_HEADER = """
-#define CONVERT_{key}_PIXEL_TYPE clij_convert_float_sat
-#define IMAGE_{key}_PIXEL_TYPE float
+#define CONVERT_{key}_PIXEL_TYPE clij_convert_{pixel_type}_sat
+#define IMAGE_{key}_PIXEL_TYPE {pixel_type}
 #define POS_{key}_TYPE {pos_type}
 #define POS_{key}_INSTANCE(pos0,pos1,pos2,pos3) ({pos_type}){pos}
 """
@@ -54,7 +54,7 @@ SIZE_HEADER = """
 """
 
 ARRAY_HEADER = COMMON_HEADER + """
-#define IMAGE_{key}_TYPE {size_parameters} __global float*
+#define IMAGE_{key}_TYPE {size_parameters} __global {pixel_type}*
 #define READ_{key}_IMAGE(a,b,c) read_buffer{img_dims}d{typeId}(GET_IMAGE_WIDTH(a),GET_IMAGE_HEIGHT(a),GET_IMAGE_DEPTH(a),a,b,c)
 #define WRITE_{key}_IMAGE(a,b,c) write_buffer{img_dims}d{typeId}(GET_IMAGE_WIDTH(a),GET_IMAGE_HEIGHT(a),GET_IMAGE_DEPTH(a),a,b,c)
 """
@@ -116,10 +116,36 @@ def execute(anchor, opencl_kernel_filename, kernel_name, global_size, parameters
     for key, value in parameters.items():
 
         if isinstance(value, cl.array.Array):
-
-            if value.dtype != np.dtype("float32"):
+            if value.dtype == np.dtype("uint8"):
+                pixel_type = "uchar"
+                type_id = "uc"
+            elif value.dtype == np.dtype("uint16"):
+                pixel_type = "ushort"
+                type_id = "us"
+            elif value.dtype == np.dtype("uint32"):
+                pixel_type = "uint"
+                type_id = "ui"
+            elif value.dtype == np.dtype("uint64"):
+                pixel_type = "ulong"
+                type_id = "ul"
+            elif value.dtype == np.dtype("int8"):
+                pixel_type = "char"
+                type_id = "c"
+            elif value.dtype == np.dtype("int16"):
+                pixel_type = "short"
+                type_id = "s"
+            elif value.dtype == np.dtype("int32"):
+                pixel_type = "int"
+                type_id = "i"
+            elif value.dtype == np.dtype("int64"):
+                pixel_type = "long"
+                type_id = "l"
+            elif value.dtype == np.dtype("float32"):
+                pixel_type = "float"
+                type_id = "f"
+            else:
                 raise TypeError(
-                    "Only float32 is currently supported for buffers/arrays"
+                    "Type " + type(value) + " is currently supported for buffers/arrays"
                 )
 
             # image type handling
@@ -139,11 +165,11 @@ def execute(anchor, opencl_kernel_filename, kernel_name, global_size, parameters
             else:
                 size_parameters = ""
 
-            arguments.append(value.data)
+            arguments.append(value.base_data)
 
 
             params = {
-                "typeId": "f",
+                "typeId": type_id,
                 "key": key,
                 "pos_type": "int2" if value.ndim < 3 else "int4",
                 "pos": ["(pos0, 0)", "(pos0, pos1)", "(pos0, pos1, pos2, 0)"][ndim - 1],
@@ -151,7 +177,8 @@ def execute(anchor, opencl_kernel_filename, kernel_name, global_size, parameters
                 "depth": depth,
                 "height": height,
                 "width": width,
-                "size_parameters":size_parameters
+                "size_parameters":size_parameters,
+                "pixel_type":pixel_type
             }
             defines.extend(ARRAY_HEADER.format(**params).split("\n"))
 
@@ -161,9 +188,36 @@ def execute(anchor, opencl_kernel_filename, kernel_name, global_size, parameters
 
         elif isinstance(value, _OCLImage):
 
-            if value.dtype != np.dtype("float32"):
+            if value.dtype == np.dtype("uint8"):
+                pixel_type = "uchar"
+                type_id = "ui"
+            elif value.dtype == np.dtype("uint16"):
+                pixel_type = "ushort"
+                type_id = "us"
+            elif value.dtype == np.dtype("uint32"):
+                pixel_type = "uint"
+                type_id = "ui"
+            elif value.dtype == np.dtype("uint64"):
+                pixel_type = "ulong"
+                type_id = "ul"
+            elif value.dtype == np.dtype("int8"):
+                pixel_type = "char"
+                type_id = "ui"
+            elif value.dtype == np.dtype("int16"):
+                pixel_type = "short"
+                type_id = "us"
+            elif value.dtype == np.dtype("int32"):
+                pixel_type = "int"
+                type_id = "ui"
+            elif value.dtype == np.dtype("int64"):
+                pixel_type = "long"
+                type_id = "ul"
+            elif value.dtype == np.dtype("float32"):
+                pixel_type = "float"
+                type_id = "f"
+            else:
                 raise TypeError(
-                    "Only float32 is currently supported for images"
+                    "Type " + type(value) + " is currently supported for buffers/arrays"
                 )
 
             # image type handling
@@ -190,7 +244,7 @@ def execute(anchor, opencl_kernel_filename, kernel_name, global_size, parameters
                 type_name = "__read_only image" + str(ndim) + "d_t"
 
             params = {
-                "typeId": "f", # can alternatively only be ui
+                "typeId": type_id, # can alternatively only be ui
                 "type_name": type_name,
                 "key": key,
                 "pos_type": "int2" if ndim < 3 else "int4",
@@ -199,7 +253,8 @@ def execute(anchor, opencl_kernel_filename, kernel_name, global_size, parameters
                 "depth": depth,
                 "height": height,
                 "width": width,
-                "size_parameters":size_parameters
+                "size_parameters":size_parameters,
+                "pixel_type":pixel_type
             }
             defines.extend(IMAGE_HEADER.format(**params).split("\n"))
             if not image_size_independent_kernel_compilation:

@@ -2,7 +2,7 @@ from ._pycl import OCLArray
 import numpy as np
 
 
-def create(dimensions):
+def create(dimensions, dtype=np.float32):
 
     """
     Convenience method for creating images on the GPU. This method basically does the same as in CLIJ:
@@ -18,7 +18,7 @@ def create(dimensions):
         if isinstance(dimensions, OCLArray)
         else tuple(dimensions)  # reverses a list/tuple
     )
-    return OCLArray.empty(dimensions, np.float32)
+    return OCLArray.empty(dimensions, dtype)
 
 def create_zyx(dimensions):
     return create(dimensions[::-1])
@@ -30,6 +30,22 @@ def create_like(*args):
     elif isinstance(dimensions, np.ndarray):
         dimensions = dimensions.shape[::-1]
     return create(dimensions)
+
+def create_binary_like(*args):
+    dimensions = args[0]
+    if isinstance(dimensions, OCLArray):
+        dimensions = dimensions.shape
+    elif isinstance(dimensions, np.ndarray):
+        dimensions = dimensions.shape[::-1]
+    return create(dimensions, np.uint8)
+
+def create_labels_like(*args):
+    dimensions = args[0]
+    if isinstance(dimensions, OCLArray):
+        dimensions = dimensions.shape
+    elif isinstance(dimensions, np.ndarray):
+        dimensions = dimensions.shape[::-1]
+    return create(dimensions, np.uint32)
 
 def create_pointlist_from_labelmap(input:OCLArray, *args):
     from .._tier2 import maximum_of_all_pixels

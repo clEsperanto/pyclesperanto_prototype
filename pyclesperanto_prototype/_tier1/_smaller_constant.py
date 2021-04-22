@@ -1,9 +1,9 @@
-from .._tier0 import execute
+from .._tier0 import execute, create_binary_like
 from .._tier0 import plugin_function
 from .._tier0 import Image
 
 @plugin_function(categories=['binarize', 'in assistant'])
-def smaller_constant(source : Image, destination : Image = None, constant : float = 0):
+def smaller_constant(source : Image, destination : Image = None, constant : float = 0, output_creator=create_binary_like):
     """Determines if two images A and B smaller pixel wise.
     
     f(a, b) = 1 if a < b; 0 otherwise. 
