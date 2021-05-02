@@ -1,3 +1,7 @@
+# upcoming release
+## Bug fixes
+* `statistics_of_labelled_pixels` had some entries in the returned dictionary which contained misleading content. Those were removed: `bbox`, `centroid`, `weighted_centroid`
+
 # 0.8.0 - Apr 22nd 2021
 ## New features
 * OpenCL-buffers support now operators such as `+`,`-`,`*`,`/`,`**`,`+=`,`-=`,`*=`,`/=`,`**=`,`<`,`>`,`<=`,`>=`,`==`,`!=` with second operand also OpenCL-buffer, numpy-array or scalar (int/float).

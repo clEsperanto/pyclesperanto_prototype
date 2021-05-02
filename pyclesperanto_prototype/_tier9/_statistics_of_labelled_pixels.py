@@ -181,8 +181,6 @@ def statistics_of_labelled_pixels(intensity_image : Image = None, label_image : 
     region_props['bbox_height'] = bbox_max_y - bbox_min_y + 1
     region_props['bbox_depth'] = bbox_max_z - bbox_min_z + 1
 
-    region_props['bbox'] = bbox
-
     #     MINIMUM_INTENSITY = 10
     #     MAXIMUM_INTENSITY = 11
     crop(min_per_label, result_vector, measurements_start_x, 8, 0)
@@ -219,18 +217,6 @@ def statistics_of_labelled_pixels(intensity_image : Image = None, label_image : 
         region_props['mass_center_' + dim_names[dim]] = pull(avg_dim)[0]
         paste(avg_dim, label_statistics_image, measurements_start_x, 3 + dim, 0)
 
-    if len(intensity_image.shape) == 2:
-        region_props['weighted_centroid'] = [
-            region_props['mass_center_y'],
-            region_props['mass_center_x'],
-        ]
-    else:
-        region_props['weighted_centroid'] = [
-            region_props['mass_center_z'],
-            region_props['mass_center_y'],
-            region_props['mass_center_x'],
-        ]
-
     #     SUM_X = 22
     #     SUM_Y = 23
     #     SUM_Z = 24
@@ -244,18 +230,6 @@ def statistics_of_labelled_pixels(intensity_image : Image = None, label_image : 
         divide_images(sum_dim, result_vector, avg_dim)
         region_props['centroid_' + dim_names[dim]] = pull(avg_dim)[0]
         paste(avg_dim, label_statistics_image, measurements_start_x, dim, 0)
-
-    if len(intensity_image.shape) == 2:
-        region_props['centroid'] = [
-            region_props['centroid_y'],
-            region_props['centroid_x'],
-        ]
-    else:
-        region_props['centroid'] = [
-            region_props['centroid_z'],
-            region_props['centroid_y'],
-            region_props['centroid_x'],
-        ]
 
     # ================================================================
     # second part: determine parmeters which depend on other parameters, such as standard_deviation
