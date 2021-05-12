@@ -37,7 +37,10 @@ def crop(input : Image, output : Image = None, start_x : int = 0, start_y : int 
     """
 
     if output is None:
-        output = create([depth, height, width])
+        if len(input.shape) == 2:
+            output = create([height, width])
+        else:
+            output = create([depth, height, width])
 
     parameters = {
             "dst": output,
