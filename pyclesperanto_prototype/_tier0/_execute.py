@@ -37,7 +37,10 @@ def preamble():
 
 # @lru_cache(maxsize=128)
 def get_ocl_source(anchor, opencl_kernel_filename):
-    kernel = (Path(anchor).parent / opencl_kernel_filename).read_text()
+    if anchor is None:
+        kernel = Path(opencl_kernel_filename).read_text()
+    else:
+        kernel = (Path(anchor).parent / opencl_kernel_filename).read_text()
     return "\n".join([preamble(), kernel])
 
 COMMON_HEADER = """
