@@ -7,4 +7,4 @@ from ._tier5 import *
 from ._tier8 import *
 from ._tier9 import *
 
-__version__ = "0.8.0"
+__version__ = "0.9.0"
