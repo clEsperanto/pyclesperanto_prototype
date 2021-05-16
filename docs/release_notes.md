@@ -1,4 +1,4 @@
-# 0.9.0 - Apr 22nd 2021
+# 0.9.0 - May 16th 2021
 
 ## New features
 * the `execute` function allows providing `None` as anchor. With this, you can execute custom open.cl files located anywhere.
