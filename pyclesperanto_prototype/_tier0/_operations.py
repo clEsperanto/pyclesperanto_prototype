@@ -12,6 +12,11 @@ def operations(must_have_categories : list = None, must_not_have_categories : li
     -------
     dict of str : function
     """
+    if isinstance(must_have_categories, str):
+        must_have_categories = [must_have_categories]
+    if isinstance(must_not_have_categories, str):
+        must_have_categories = [must_not_have_categories]
+
     result = {}
 
     from inspect import getmembers, isfunction
