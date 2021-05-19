@@ -1,3 +1,8 @@
+# 0.9.1 - May 19th 2021
+## New features
+* `cle.operations` now supports strings as parameters and lists of strings (as before)
+* `cle.categories` returns all available categories which can be used in `cle.operations`
+
 # 0.9.0 - May 16th 2021
 
 ## New features
