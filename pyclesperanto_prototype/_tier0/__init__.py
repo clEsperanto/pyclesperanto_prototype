@@ -1,5 +1,6 @@
 from ._radius_to_kernel_size import radius_to_kernel_size
 from ._sigma_to_kernel_size import sigma_to_kernel_size
+from ._categories import categories
 from ._create import (
     create,
     create_zyx,
