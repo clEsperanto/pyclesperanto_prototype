@@ -26,6 +26,7 @@ def minimum_of_proximal_neighbors_map(parametric_map : Image, label_map : Image,
     from .._tier1 import read_intensities_from_map
     from .._tier2 import minimum_of_touching_neighbors
     from .._tier1 import replace_intensities
+    from .._tier1 import set_column
     from .._tier9 import centroids_of_labels
     from .._tier1 import generate_distance_matrix
     from .._tier3 import generate_proximal_neighbors_matrix
@@ -39,6 +40,8 @@ def minimum_of_proximal_neighbors_map(parametric_map : Image, label_map : Image,
     intensities = read_intensities_from_map(label_map, parametric_map)
 
     new_intensities = minimum_of_touching_neighbors(intensities, touch_matrix)
+
+    set_column(new_intensities, 0, 0)
 
     parametric_map_destination = replace_intensities(label_map, new_intensities, parametric_map_destination)
 
