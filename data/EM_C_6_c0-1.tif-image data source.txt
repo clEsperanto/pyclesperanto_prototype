@@ -1,0 +1,15 @@
+Arabidopsis ovule primordium stages 0-I to 2-II, wild-type Col_0, Ws-4 and botero (bot1-7) mutant
+
+Baroux, Célia, University of Zurich, https://orcid.org/0000-0001-6307-2229
+Mendocilla-Sato, Ethel, University of Zurich, https://orcid.org/0000-0003-0339-3535
+Autran, Daphné, IRD Montpellier
+cbaroux@botinst.uzh.ch, ethelyasmin@yahoo.es, daphne.autran@ird.fr
+
+Publication date: January 11, 2021
+Publisher: Dryad
+https://doi.org/10.5061/dryad.02v6wwq2c
+
+
+https://datadryad.org/stash/dataset/doi:10.5061/dryad.02v6wwq2c
+
+License: CC0
