@@ -12,6 +12,7 @@ def push(any_array, dtype=None):
     Parameters
     ----------
     image : numpy array
+    dtype : np.dtype, optional
 
     Returns
     -------
@@ -28,6 +29,7 @@ def push(any_array, dtype=None):
     """
     if isinstance(any_array, OCLArray):
         return any_array
+
     if isinstance(any_array, (list, tuple)):
         any_array = np.asarray(any_array)
 
