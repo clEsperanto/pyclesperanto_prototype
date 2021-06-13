@@ -37,8 +37,8 @@ jobs:
           python --version
           conda install -y pyopencl
           python -m pip install --upgrade pip
-          pip install setuptools wheel pytest pytest-cov pytest-benchmark
-          pip install -e .
+          pip install setuptools wheel pytest pytest-cov pytest-benchmark scipy
+          pip install -e .[fft]
       - name: Test
         shell: bash -l {0}
         run: pytest -v --cov=./ --cov-report=xml
