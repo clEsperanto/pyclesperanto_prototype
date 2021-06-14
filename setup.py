@@ -21,9 +21,9 @@ setuptools.setup(
         "scikit-image>=0.18.0",
         "matplotlib",
         "transforms3d",
+        "reikna",
     ],
     python_requires=">=3.6",
-    extras_require={"fft": ["reikna"]},
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: BSD License",
