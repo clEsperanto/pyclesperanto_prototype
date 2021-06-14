@@ -1,11 +1,11 @@
-from skimage.data import grass
-from scipy.fftpack import fftn, ifftn, fftshift
-import numpy as np
-import numpy.testing as npt
-import pyclesperanto_prototype as cle
 import pytest
 
 _ = pytest.importorskip("reikna")
+import numpy as np
+import numpy.testing as npt
+import pyclesperanto_prototype as cle
+from scipy.fftpack import fftn, fftshift, ifftn
+from skimage.data import grass
 
 GRASS = grass().astype("float32")
 
