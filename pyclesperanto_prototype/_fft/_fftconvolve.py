@@ -3,7 +3,7 @@ from .. import get_device
 from ._fft import fftn, ifftn
 from .._tier0._pycl import OCLArray
 import numpy as np
-
+from .. import push, crop
 
 _mult_complex = ElementwiseKernel(
     get_device().context,
@@ -13,28 +13,44 @@ _mult_complex = ElementwiseKernel(
 )
 
 
+def _fix_shape(arr, shape):
+    if arr.shape == shape:
+        return arr
+    result = np.zeros(shape)
+    result[: arr.shape[0], : arr.shape[1]] = arr
+    return result
+
+
 def fftconvolve(
     data,
     kernel,
-    mode="full",
+    mode="same",
     axes=None,
     output_arr=None,
     inplace=False,
     kernel_is_fft=False,
 ):
+    if mode not in {"valid", "same", "full"}:
+        raise ValueError("acceptable mode flags are 'valid', 'same', or 'full'")
+    if data.ndim != kernel.ndim:
+        raise ValueError("data and kernel should have the same dimensionality")
+
+    # expand arrays
+    s1 = data.shape
+    s2 = kernel.shape
+    axes = tuple(range(len(s1))) if axes is None else tuple(axes)
+    shape = [
+        max((s1[i], s2[i])) if i not in axes else s1[i] + s2[i] - 1
+        for i in range(data.ndim)
+    ]
+    data = _fix_shape(data, shape)
+    kernel = _fix_shape(kernel, shape)
 
     if data.shape != kernel.shape:
-        raise ValueError("in1 and in2 should have the same shape")
+        raise ValueError("in1 and in2 must have the same shape")
 
-    if isinstance(data, np.ndarray):
-        data_g = OCLArray.from_array(data.astype(np.complex64))
-    else:
-        data_g = data
-
-    if isinstance(kernel, np.ndarray):
-        kernel_g = OCLArray.from_array(kernel.astype(np.complex64))
-    else:
-        kernel_g = kernel
+    data_g = push(data, np.complex64)
+    kernel_g = push(kernel, np.complex64)
 
     if inplace:
         output_arr = data_g
@@ -52,6 +68,32 @@ def fftconvolve(
 
     fftn(output_arr, inplace=True, axes=axes)
     _mult_complex(output_arr, kern_g)
-
     ifftn(output_arr, inplace=True, axes=axes)
-    return output_arr
+
+    _out = output_arr.real if np.isrealobj(data) else output_arr
+
+    if mode == "full":
+        return _out
+    elif mode == "same":
+        return _crop_centered(_out, s1)
+    else:
+        shape_valid = [
+            _out.shape[a] if a not in axes else s1[a] - s2[a] + 1
+            for a in range(_out.ndim)
+        ]
+        return _crop_centered(_out, shape_valid)
+    return _out
+
+
+def _crop_centered(arr, newshape):
+    # Return the center newshape portion of the array.
+    newshape = np.asarray(newshape)
+    currshape = np.array(arr.shape)
+    startind = (currshape - newshape) // 2
+    return crop(
+        arr,
+        start_y=startind[0],
+        start_x=startind[1],
+        height=newshape[0],
+        width=newshape[1],
+    )

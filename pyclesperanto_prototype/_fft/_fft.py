@@ -1,11 +1,13 @@
 from typing import Optional, Tuple, Union
+
 import numpy as np
 import reikna.cluda as cluda
-from reikna.core import Annotation, Parameter, Transformation, Type
+from pyopencl.array import Array
+from reikna.core import Type
 from reikna.fft import FFT
+from reikna.transformations import broadcast_const, combine_complex
 
 from .. import create, get_device, push
-from .._tier0._pycl import OCLArray
 
 # FFT plan cache
 _PLAN_CACHE = {}
@@ -18,25 +20,32 @@ def _get_fft_plan(arr, axes=None, fast_math=True):
 
     if plan_key not in _PLAN_CACHE:
         if np.iscomplexobj(arr):
-            fft = FFT(arr, axes=axes)
+            plan = FFT(arr, axes=axes)
         else:
-            trf = _get_complex_trf(arr)
-            fft = FFT(trf.output, axes=axes)
-            fft.parameter.input.connect(trf, trf.output, new_input=trf.input)
+            plan = FFT(Type(cluda.dtypes.complex_for(arr.dtype), arr.shape), axes=axes)
+            # joins two real inputs into complex output
+            cc = combine_complex(plan.parameter.input)
+            # broadcasts 0 to the imaginary component
+            bc = broadcast_const(cc.imag, 0)
+            plan.parameter.input.connect(
+                cc, cc.output, real_input=cc.real, imag_input=cc.imag
+            )
+            plan.parameter.imag_input.connect(bc, bc.output)
 
         thread = cluda.ocl_api().Thread(get_device().queue)
-        _PLAN_CACHE[plan_key] = fft.compile(thread, fast_math=fast_math)
+        _PLAN_CACHE[plan_key] = plan.compile(thread, fast_math=fast_math)
+
     return _PLAN_CACHE[plan_key]
 
 
 def fftn(
-    input_arr: Union[np.ndarray, OCLArray],
-    output_arr: Union[np.ndarray, OCLArray] = None,
+    input_arr: Union[np.ndarray, Array],
+    output_arr: Union[np.ndarray, Array] = None,
     axes: Optional[Tuple[int, ...]] = None,
     inplace: bool = False,
     fast_math: bool = True,
     _inverse: bool = False,
-) -> OCLArray:
+) -> Array:
     """Perform fast Fourier transformation on `input_array`.
 
     Parameters
@@ -75,7 +84,7 @@ def fftn(
         If inplace is used for numpy array, or both `output_arr` and `inplace` are used.
     """
     _isnumpy = isinstance(input_arr, np.ndarray)
-    if isinstance(input_arr, OCLArray):
+    if isinstance(input_arr, Array):
         if input_arr.dtype != np.complex64:
             raise TypeError("OCLArray input_arr has to be of complex64 type")
     elif _isnumpy:
@@ -89,7 +98,7 @@ def fftn(
 
     plan = _get_fft_plan(input_arr, axes=axes, fast_math=fast_math)
 
-    if isinstance(input_arr, np.ndarray):
+    if _isnumpy:
         arr_dev = push(input_arr)
         res_dev = create(arr_dev, np.complex64)
     else:
@@ -116,23 +125,6 @@ def _normalize_axes(dshape, axes):
         return tuple(np.arange(len(dshape))[list(axes)])
     except Exception as e:
         raise TypeError(f"Cannot normalize axes {axes}: {e}")
-
-
-def _get_complex_trf(arr):
-    """On-GPU transformation that transforms a real array to a complex one."""
-    complex_dtype = cluda.dtypes.complex_for(arr.dtype)
-    return Transformation(
-        [
-            Parameter("output", Annotation(Type(complex_dtype, arr.shape), "o")),
-            Parameter("input", Annotation(arr, "i")),
-        ],
-        """
-        ${output.store_same}(
-            COMPLEX_CTR(${output.ctype})(
-                ${input.load_same},
-                0));
-        """,
-    )
 
 
 def ifftn(

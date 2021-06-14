@@ -1,18 +1,20 @@
 import pytest
 
-_ = pytest.importorskip("reikna")
+pytest.importorskip("reikna")  # isort: skip
+
 import numpy as np
 import numpy.testing as npt
 import pyclesperanto_prototype as cle
-from scipy.fftpack import fftn, fftshift, ifftn
+from scipy import fftpack, misc, signal
 from skimage.data import grass
+
 
 GRASS = grass().astype("float32")
 
 
 def test_scipy_fft():
-    scipy_fgrass = fftn(GRASS)
-    scipy_ifgrass = ifftn(scipy_fgrass)
+    scipy_fgrass = fftpack.fftn(GRASS)
+    scipy_ifgrass = fftpack.ifftn(scipy_fgrass)
 
     assert not np.allclose(scipy_fgrass, GRASS, atol=100)
     assert scipy_fgrass.dtype == np.complex64
@@ -26,7 +28,7 @@ def test_cle_fft():
     fgrass = cle.pull(gpu_fgrass)
 
     assert not np.allclose(fgrass, GRASS, atol=100)
-    npt.assert_allclose(fgrass, fftn(GRASS), atol=2e-1)
+    npt.assert_allclose(fgrass, fftpack.fftn(GRASS), atol=2e-1)
 
     gpu_ifgrss = cle.ifftn(gpu_fgrass)
     ifgrss = cle.pull(gpu_ifgrss)
@@ -37,13 +39,13 @@ def test_cle_fft_output_array():
     input = cle.push(GRASS, np.complex64)
     out = cle.create(input, np.complex64)
     cle.fftn(input, out)
-    npt.assert_allclose(cle.pull(out), fftn(GRASS), atol=2e-1)
+    npt.assert_allclose(cle.pull(out), fftpack.fftn(GRASS), atol=2e-1)
 
 
 def test_cle_fft_inplace():
     input = cle.push(GRASS, np.complex64)
     cle.fftn(input, inplace=True)
-    npt.assert_allclose(cle.pull(input), fftn(GRASS), atol=2e-1)
+    npt.assert_allclose(cle.pull(input), fftpack.fftn(GRASS), atol=2e-1)
 
 
 def test_cle_fft_errors():
@@ -68,11 +70,39 @@ def test_cle_fft_errors():
 
 
 def test_cle_fftshift():
-    scp_shift = fftshift(GRASS)
+    scp_shift = fftpack.fftshift(GRASS)
     cle_shift = cle.fftshift(GRASS).get()
     npt.assert_allclose(scp_shift, cle_shift)
 
 
-def test_cle_fftconvolve():
-    out = cle.fftconvolve(GRASS, GRASS).get()
-    print(out.max(), out.mean(), GRASS.mean())
+FACE = misc.face(gray=True).astype("float32")
+KERNEL = np.outer(
+    signal.windows.gaussian(70, 8), signal.windows.gaussian(70, 8)
+).astype("float32")
+
+
+def test_cle_fftconvolve_same():
+    cle_out = cle.fftconvolve(FACE, KERNEL, mode="same").get()
+    scp_out = signal.fftconvolve(FACE, KERNEL, mode="same")
+    assert cle_out.shape == scp_out.shape
+    assert cle_out.dtype == scp_out.dtype
+    npt.assert_allclose(cle_out, scp_out, atol=0.2)
+
+    # cle_out2 = cle.fftconvolve(cle.push(FACE), KERNEL, mode="same").get()
+    # npt.assert_allclose(cle_out, cle_out2, atol=0.2)
+
+
+def test_cle_fftconvolve_full():
+    cle_out = cle.fftconvolve(FACE, KERNEL, mode="full").get()
+    scp_out = signal.fftconvolve(FACE, KERNEL, mode="full")
+    assert cle_out.shape == scp_out.shape
+    assert cle_out.dtype == scp_out.dtype
+    npt.assert_allclose(cle_out, scp_out, atol=0.2)
+
+
+def test_cle_fftconvolve_valid():
+    cle_out = cle.fftconvolve(FACE, KERNEL, mode="valid").get()
+    scp_out = signal.fftconvolve(FACE, KERNEL, mode="valid")
+    assert cle_out.shape == scp_out.shape
+    assert cle_out.dtype == scp_out.dtype
+    npt.assert_allclose(cle_out, scp_out, atol=0.2)
