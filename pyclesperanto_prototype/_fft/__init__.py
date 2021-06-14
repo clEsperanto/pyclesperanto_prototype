@@ -4,7 +4,7 @@ from ._fftconvolve import fftconvolve
 
 # clij2 aliases
 convolve_fft = fftconvolve
-inversere_fft = ifftn
+inverse_fft = ifftn
 forward_fft = fftn
 fft = fftn
 
@@ -15,5 +15,5 @@ __all__ = [
     "fftshift",
     "forward_fft",
     "ifftn",
-    "inversere_fft",
+    "inverse_fft",
 ]
