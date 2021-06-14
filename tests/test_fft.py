@@ -71,3 +71,8 @@ def test_cle_fftshift():
     scp_shift = fftshift(GRASS)
     cle_shift = cle.fftshift(GRASS).get()
     npt.assert_allclose(scp_shift, cle_shift)
+
+
+def test_cle_fftconvolve():
+    out = cle.fftconvolve(GRASS, GRASS).get()
+    print(out.max(), out.mean(), GRASS.mean())
