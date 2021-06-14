@@ -11,6 +11,7 @@ fft = fftn
 __all__ = [
     "convolve_fft",
     "fft",
+    "fftconvolve",
     "fftn",
     "fftshift",
     "forward_fft",
