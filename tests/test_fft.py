@@ -35,6 +35,19 @@ def test_cle_fft():
     npt.assert_allclose(ifgrss.real, GRASS, atol=1e-4)
 
 
+def test_cle_fft3d():
+    img = np.random.rand(128, 128, 128)
+    gpu_fimg = cle.fftn(img)
+    fimg = cle.pull(gpu_fimg)
+
+    assert not np.allclose(fimg, img, atol=100)
+    npt.assert_allclose(fimg, fftpack.fftn(img), atol=2e-1)
+
+    gpu_ifgrss = cle.ifftn(gpu_fimg)
+    ifgrss = cle.pull(gpu_ifgrss)
+    npt.assert_allclose(ifgrss.real, img, atol=1e-4)
+
+
 def test_cle_fft_output_array():
     input = cle.push(GRASS, np.complex64)
     out = cle.create(input, np.complex64)
@@ -88,8 +101,12 @@ def test_cle_fftconvolve_same():
     assert cle_out.dtype == scp_out.dtype
     npt.assert_allclose(cle_out, scp_out, atol=0.2)
 
-    # cle_out2 = cle.fftconvolve(cle.push(FACE), KERNEL, mode="same").get()
-    # npt.assert_allclose(cle_out, cle_out2, atol=0.2)
+
+@pytest.mark.xfail
+def test_cle_fftconvolve_from_oclarray():
+    cle_out = cle.fftconvolve(FACE, KERNEL, mode="same").get()
+    cle_out2 = cle.fftconvolve(cle.push(FACE), KERNEL, mode="same").get()
+    npt.assert_allclose(cle_out, cle_out2, atol=0.2)
 
 
 def test_cle_fftconvolve_full():
