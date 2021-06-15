@@ -16,8 +16,15 @@ _mult_complex = ElementwiseKernel(
 def _fix_shape(arr, shape):
     if arr.shape == shape:
         return arr
-    result = np.zeros(shape)
-    result[: arr.shape[0], : arr.shape[1]] = arr
+    if isinstance(arr, OCLArray):
+        # TODO
+        raise NotImplementedError("Cannot not resize/convert array to complex type..")
+        # result = OCLArray.empty(shape, arr.dtype)
+        # set(result, 0)
+        # paste(arr, result)
+    if isinstance(arr, np.ndarray):
+        result = np.zeros(shape, dtype=arr.dtype)
+        result[tuple(slice(i) for i in arr.shape)] = arr
     return result
 
 

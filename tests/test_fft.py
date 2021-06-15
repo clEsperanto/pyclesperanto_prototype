@@ -105,7 +105,7 @@ def test_cle_fftconvolve_same():
 @pytest.mark.xfail
 def test_cle_fftconvolve_from_oclarray():
     cle_out = cle.fftconvolve(FACE, KERNEL, mode="same").get()
-    cle_out2 = cle.fftconvolve(cle.push(FACE), KERNEL, mode="same").get()
+    cle_out2 = cle.fftconvolve(cle.push(FACE.astype("complex64")), KERNEL, mode="same").get()
     npt.assert_allclose(cle_out, cle_out2, atol=0.2)
 
 
