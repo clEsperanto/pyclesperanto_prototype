@@ -1,9 +1,24 @@
-# upcoming release
+# 0.9.2 - June 26th 2021
 ## New features
+Added aliases for compatibility with [clij 2.5](https://clij.github.io/clij2-docs/clij25_transition_notes)
 * added alias `dilate_labels` for `extend_labels_with_maximum_radius`
+* added alias `mean_intensity_map` for `label_mean_intensity_map`
+* added alias `mean_extension_map` for `label_mean_extension_map`
+* added alias `maximum_extension_map` for `label_maximum_extension_map`
+* added alias `extension_ratio_map` for `label_maximum_extension_ratio_map`
+* added alias `maximum_intensity_map` for `label_maximum_intensity_map`
+* added alias `minimum_intensity_map` for `label_minimum_intensity_map`
+* added alias `pixel_count_map` for `label_pixel_count_map`
+* added alias `standard_deviation_intensity_map` for `label_standard_deviation_intensity_map`
 
 ## Bug fixes
-The `touching_neighbor_count_map` does not count background as neighbor anymore.
+* The `touching_neighbor_count_map` does not count background as neighbor anymore.
+* Removed debug traces in `exclude_labels_with_values_within_range`
+* `mean_sphere` returned always `None`
+
+## Miscellaneous 
+* Standard-deviation-Z-projection is now shown in the assistant user interface
+
 
 # 0.9.1 - May 19th 2021
 ## New features
