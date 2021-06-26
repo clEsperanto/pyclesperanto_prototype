@@ -1,3 +1,10 @@
+# upcoming release
+## New features
+* added alias `dilate_labels` for `extend_labels_with_maximum_radius`
+
+## Bug fixes
+The `touching_neighbor_count_map` does not count background as neighbor anymore.
+
 # 0.9.1 - May 19th 2021
 ## New features
 * `cle.operations` now supports strings as parameters and lists of strings (as before)

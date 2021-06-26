@@ -27,9 +27,10 @@ def touching_neighbor_count_map(input : Image, destination : Image = None):
     from .._tier1 import set_column
 
     touch_matrix = generate_touch_matrix(input)
+    # ignore how many objects touch the background
+    set_column(touch_matrix, 0, 0)
+
     number_of_touching_neighbors_vector = count_touching_neighbors(touch_matrix)
 
-    # ignore how many objects touch the background
-    set_column(number_of_touching_neighbors_vector, 0, 0)
     replace_intensities(input, number_of_touching_neighbors_vector, destination)
     return destination

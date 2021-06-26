@@ -1,7 +1,7 @@
 import pyclesperanto_prototype as cle
 import numpy as np
 
-def test_mean_of_touching_neighbors_map():
+def test_standard_deviation_of_touching_neighbors_map():
 
     intensities = cle.push(np.asarray([
         [1, 1, 2, 2],

@@ -44,6 +44,8 @@ def mean_of_proximal_neighbors_map(parametric_map : Image, label_map : Image, pa
 
     new_intensities = mean_of_touching_neighbors(intensities, touch_matrix)
 
+    set_column(new_intensities, 0, 0)
+
     parametric_map_destination = replace_intensities(label_map, new_intensities, parametric_map_destination)
 
     return parametric_map_destination
