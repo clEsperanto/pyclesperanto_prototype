@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="pyclesperanto_prototype",
-    version="0.9.2",
+    version="0.9.4",
     author="haesleinhuepf",
     author_email="robert.haase@tu-dresden.de",
     description="OpenCL-based GPU-accelerated image processing",
