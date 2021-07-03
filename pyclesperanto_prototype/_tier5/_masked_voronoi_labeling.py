@@ -4,7 +4,7 @@ from .._tier0 import create_like, create_labels_like
 from .._tier4 import connected_components_labeling_box
 from .._tier4 import extend_labeling_via_voronoi
 
-@plugin_function(categories=['label'], output_creator=create_labels_like)
+@plugin_function(categories=['label', 'in assistant'], output_creator=create_labels_like)
 def masked_voronoi_labeling(binary_source : Image, mask_image : Image, labeling_destination : Image = None):
     """Takes a binary image, labels connected components and dilates the
     regions using a octagon shape until they touch. The region growing is limited to a masked area.
