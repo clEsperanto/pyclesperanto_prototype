@@ -1,3 +1,11 @@
+# 0.9.4 - July 3rd 2021
+## Bug fixes
+* Relax dependencies: pyopencl-version is no longer pinned. This should simplify installation.
+
+## New features
+* Improved interoperability with [cupy](https://cupy.dev/). You can now process images from clesperanto and cupy using syntax like `result = cle_image + cupy_image`. Note: This will pull/push the image from cupy to clesperanto. Thus, it might not be very performant.
+* More operations have been marked as compatible with the [assistant](https://www.napari-hub.org/plugins/napari-pyclesperanto-assistant).
+
 # 0.9.2 - June 26th 2021
 ## New features
 Added aliases for compatibility with [clij 2.5](https://clij.github.io/clij2-docs/clij25_transition_notes)

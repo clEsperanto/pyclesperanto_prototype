@@ -32,6 +32,9 @@ def push(any_array):
     if isinstance(any_array, list) or isinstance(any_array, tuple):
         any_array = np.asarray(any_array)
 
+    if hasattr(any_array, 'shape') and hasattr(any_array, 'dtype') and hasattr(any_array, 'get'):
+        any_array = np.asarray(any_array.get())
+
     float_arr = any_array.astype(np.float32)
     return OCLArray.from_array(float_arr)
 

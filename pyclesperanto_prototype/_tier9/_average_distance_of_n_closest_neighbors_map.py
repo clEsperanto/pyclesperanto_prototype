@@ -3,7 +3,7 @@ from .._tier1 import average_distance_of_n_shortest_distances
 from .._tier1 import replace_intensities
 from .._tier0 import Image
 
-@plugin_function
+@plugin_function(categories=['label measurement', 'map', 'in assistant'])
 def average_distance_of_n_closest_neighbors_map(labels : Image, distance_map : Image = None, n : int = 1):
     """Takes a label map, determines distances between all centroids and 
     replaces every label with the average distance to the n closest 
