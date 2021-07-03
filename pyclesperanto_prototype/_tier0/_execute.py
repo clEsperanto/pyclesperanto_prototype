@@ -147,9 +147,7 @@ def execute(anchor, opencl_kernel_filename, kernel_name, global_size, parameters
                 pixel_type = "float"
                 type_id = "f"
             else:
-                raise TypeError(
-                    "Type " + type(value) + " is currently supported for buffers/arrays"
-                )
+                raise TypeError(f"Type {value.dtype} is currently unsupported for buffers/arrays")
 
             # image type handling
             depth_height_width = [1, 1, 1]
@@ -219,9 +217,7 @@ def execute(anchor, opencl_kernel_filename, kernel_name, global_size, parameters
                 pixel_type = "float"
                 type_id = "f"
             else:
-                raise TypeError(
-                    "Type " + type(value) + " is currently supported for buffers/arrays"
-                )
+                raise TypeError(f"Type {value.dtype} is currently unsupported for buffers/arrays")
 
             # image type handling
             depth_height_width = [1, 1, 1]
