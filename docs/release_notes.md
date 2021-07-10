@@ -1,4 +1,7 @@
-# upcoming release
+# 0.9.5 - July 10th 2021
+## Bug fixes
+* `skimage.io.imsave` caused errors with oclarrays, also in napari
+
 ## New features
 * `extended_depth_of_focus_variance_projection`  
 * `variance_box` filter
@@ -7,6 +10,10 @@
 * `z_position_of_minimum_z_projection` and alias `arg_minimum_z_projection`
 * `z_position_projection`
 * `z_position_range_projection`
+
+## Miscellaneous
+* `invert` was removed from the assistant user interface. It does not do the same as in ImageJ and/or scikit-image. Thus, it might change in the future. See also https://github.com/clEsperanto/pyclesperanto_prototype/issues/123
+* better documentation for `threshold_otsu`, `voronoi_otsu_labeling` and minor others
 
 # 0.9.4 - July 3rd 2021
 ## Bug fixes
