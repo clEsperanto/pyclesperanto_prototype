@@ -4,6 +4,8 @@
 * `standard_deviation_z_projection` had wrong output size per default
 
 ## New features
+* `median_box`
+* `median_sphere`
 * `extended_depth_of_focus_variance_projection`  
 * `variance_box` filter
 * `variance_sphere` filter
