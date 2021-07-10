@@ -1,6 +1,5 @@
 # upcoming release
 ## New features
-* `extended_depth_of_focus_sobel_projection`
 * `extended_depth_of_focus_variance_projection`  
 * `variance_box` filter
 * `variance_sphere` filter
