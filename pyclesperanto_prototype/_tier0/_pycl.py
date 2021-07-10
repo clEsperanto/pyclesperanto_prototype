@@ -542,6 +542,14 @@ def _wrap_OCLArray(cls):
         return result
     cls.sum = sum
 
+    cls._former_get = cls._get
+    def _cust_get(self, queue=None, ary=None, async_=None, **kwargs):
+        print("Hello world:", queue)
+        if not isinstance(queue, cl.CommandQueue):
+            queue = None
+        return self._former_get(queue, ary, async_, **kwargs)
+    cls._get = _cust_get
+
     # todo:
     #  __floordiv__(x1, x2)
     #  __mod__(x1, x2)
