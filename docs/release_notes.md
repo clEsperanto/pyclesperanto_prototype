@@ -1,5 +1,7 @@
 # upcoming release
 ## New features
+* `variance_box` filter
+* `variance_sphere` filter
 * `z_position_of_maximum_z_projection` and alias `arg_maximum_z_projection`
 * `z_position_of_minimum_z_projection` and alias `arg_minimum_z_projection`
 * `z_position_projection`
