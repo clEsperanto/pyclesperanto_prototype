@@ -1,3 +1,13 @@
+# upcoming release
+## New features
+* `extended_depth_of_focus_variance_projection`  
+* `variance_box` filter
+* `variance_sphere` filter
+* `z_position_of_maximum_z_projection` and alias `arg_maximum_z_projection`
+* `z_position_of_minimum_z_projection` and alias `arg_minimum_z_projection`
+* `z_position_projection`
+* `z_position_range_projection`
+
 # 0.9.4 - July 3rd 2021
 ## Bug fixes
 * Relax dependencies: pyopencl-version is no longer pinned. This should simplify installation.
