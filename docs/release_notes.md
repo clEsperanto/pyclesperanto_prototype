@@ -1,6 +1,7 @@
 # 0.9.5 - July 10th 2021
 ## Bug fixes
 * `skimage.io.imsave` caused errors with oclarrays, also in napari
+* `standard_deviation_z_projection` had wrong output size per default
 
 ## New features
 * `extended_depth_of_focus_variance_projection`  
