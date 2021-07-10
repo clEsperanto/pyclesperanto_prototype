@@ -10,7 +10,7 @@ from .._tier3 import histogram
 
 @plugin_function(categories=['binarize', 'in assistant'], priority=1, output_creator=create_binary_like)
 def threshold_otsu(input : Image, destination : Image = None):
-    """Binarizes an image using Otsu's threshold method implemented in scikit-image
+    """Binarizes an image using Otsu's threshold method [3] implemented in scikit-image[2]
     using a histogram determined on the GPU to create binary images.
     
     Parameters
@@ -31,6 +31,7 @@ def threshold_otsu(input : Image, destination : Image = None):
     ----------
     .. [1] https://clij.github.io/clij2-docs/reference_thresholdOtsu
     .. [2] https://scikit-image.org/docs/dev/api/skimage.filters.html#skimage.filters.threshold_otsu
+    .. [3] https://ieeexplore.ieee.org/document/4310076
     """
 
     # build a bin-centers array for scikit-image
