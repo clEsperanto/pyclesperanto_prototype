@@ -10,19 +10,22 @@ from .._tier3 import histogram
 
 @plugin_function(categories=['label', 'in assistant'], priority=1, output_creator=create_labels_like)
 def voronoi_otsu_labeling(source : Image, label_image_destination : Image = None, spot_sigma : float = 2, outline_sigma : float = 2):
-    """Applies two Gaussian blurs, spot detection, Otsu-thresholding and Voronoi-labeling.
+    """Labels objects directly from grey-value images.
 
-    The thresholded binary image is flooded using the Voronoi approach starting from the found local maxima.
-    Noise-removal sigma for spot detection and thresholding can be configured separately.
+    The two sigma parameters allow tuning the segmentation result. Under the hood,
+    this filter applies two Gaussian blurs, spot detection, Otsu-thresholding [2] and Voronoi-labeling [3]. The
+    thresholded binary image is flooded using the Voronoi tesselation approach starting from the found local maxima.
     
     Parameters
     ----------
     source : Image
-    label_image_destination : Image
+        Input grey-value image
+    label_image_destination : Image, optional
+        Output image
     spot_sigma : float
-
+        controls how close detected cells can be
     outline_sigma : float
-
+        controls how precise segmented objects are outlined.
     
     Returns
     -------
@@ -36,6 +39,8 @@ def voronoi_otsu_labeling(source : Image, label_image_destination : Image = None
     References
     ----------
     .. [1] https://clij.github.io/clij2-docs/reference_voronoiOtsuLabeling
+    .. [2] https://ieeexplore.ieee.org/document/4310076
+    .. [3] https://en.wikipedia.org/wiki/Voronoi_diagram
     """
     from .._tier0 import create
     from .._tier1 import detect_maxima_box
