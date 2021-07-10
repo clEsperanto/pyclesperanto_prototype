@@ -10,10 +10,12 @@ from .._tier3 import histogram
 
 @plugin_function(categories=['label', 'in assistant'], priority=1, output_creator=create_labels_like)
 def voronoi_otsu_labeling(source : Image, label_image_destination : Image = None, spot_sigma : float = 2, outline_sigma : float = 2):
-    """Applies two Gaussian blurs, spot detection, Otsu-thresholding and Voronoi-labeling.
+    """Labels objects directly from grey-value images.
 
-    The thresholded binary image is flooded using the Voronoi approach starting from the found local maxima.
-    Noise-removal sigma for spot detection and thresholding can be configured separately.
+    The two sigma parameters allow tuning the segmentation result. The first sigma controls how close detected cells can
+    be (spot_sigma) and the second controls how precise segmented objects are outlined (outline_sigma).Under the hood,
+    this filter applies two Gaussian blurs, spot detection, Otsu-thresholding and Voronoi-labeling. The thresholded
+    binary image is flooded using the Voronoi approach starting from the found local maxima.
     
     Parameters
     ----------

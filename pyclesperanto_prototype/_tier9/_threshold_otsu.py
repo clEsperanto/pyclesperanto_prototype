@@ -10,16 +10,8 @@ from .._tier3 import histogram
 
 @plugin_function(categories=['binarize', 'in assistant'], priority=1, output_creator=create_binary_like)
 def threshold_otsu(input : Image, destination : Image = None):
-    """The automatic thresholder utilizes the Otsu threshold method 
-    implemented in ImageJ using a histogram determined on 
-    the GPU to create binary images as similar as possible to ImageJ 'Apply 
-    Threshold' method. 
-    
-    Author(s): Robert Haase based on work by G. Landini and W. Rasband
-    
-    License: The code for the automatic thresholding methods originates from https://github.com/imagej/imagej1/blob/master/ij/process/AutoThresholder.java
-    
-    Detailed documentation on the implemented methods can be found online: https://imagej.net/Auto_Threshold
+    """Binarizes an image using Otsu's threshold method implemented in scikit-image
+    using a histogram determined on the GPU to create binary images.
     
     Parameters
     ----------
@@ -38,6 +30,7 @@ def threshold_otsu(input : Image, destination : Image = None):
     References
     ----------
     .. [1] https://clij.github.io/clij2-docs/reference_thresholdOtsu
+    .. [2] https://scikit-image.org/docs/dev/api/skimage.filters.html#skimage.filters.threshold_otsu
     """
 
     # build a bin-centers array for scikit-image
