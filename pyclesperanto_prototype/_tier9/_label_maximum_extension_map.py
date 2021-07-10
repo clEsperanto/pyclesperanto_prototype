@@ -6,7 +6,8 @@ from .._tier1 import set_column
 
 @plugin_function(categories=['label measurement', 'map', 'in assistant'])
 def label_maximum_extension_map(labels : Image, destination : Image = None):
-    """
+    """Takes a label map, determines for every label the maximum distance
+    of any pixel to the centroid and replaces every label with the that number.
     
     Parameters
     ----------
@@ -19,6 +20,7 @@ def label_maximum_extension_map(labels : Image, destination : Image = None):
     
     References
     ----------
+    .. [1] https://clij.github.io/clij2-docs/reference_maximumExtensionMap
     """
     from .._tier9 import statistics_of_background_and_labelled_pixels
     from .._tier9 import push_regionprops_column

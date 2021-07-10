@@ -21,10 +21,13 @@ def mean_of_touching_neighbors_map(parametric_map : Image, label_map : Image, pa
     radius : int
     ignore_touching_background : bool
 
-    
     Returns
     -------
     parametric_map_destination
+
+    References
+    ----------
+    .. [1] https://clij.github.io/clij2-docs/reference_meanOfTouchingNeighbors
     """
     from .._tier1 import copy
     from .._tier1 import generate_touch_matrix

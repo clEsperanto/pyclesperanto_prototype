@@ -20,6 +20,10 @@ def minimum_of_n_nearest_neighbors_map(parametric_map : Image, label_map : Image
     Returns
     -------
     parametric_map_destination
+
+    References
+    ----------
+    .. [1] https://clij.github.io/clij2-docs/reference_minimumOfNNearestNeighbors
     """
     from .._tier1 import read_intensities_from_map
     from .._tier2 import minimum_of_touching_neighbors

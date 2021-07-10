@@ -23,7 +23,7 @@ def label_mean_intensity_map(input : Image, label_map : Image, destination : Ima
     
     References
     ----------
-    .. [1] https://clij.github.io/clij2-docs/reference_labelMeanIntensityMap
+    .. [1] https://clij.github.io/clij2-docs/reference_meanIntensityMap
     """
     from .._tier9 import statistics_of_background_and_labelled_pixels
     from .._tier9 import push_regionprops_column

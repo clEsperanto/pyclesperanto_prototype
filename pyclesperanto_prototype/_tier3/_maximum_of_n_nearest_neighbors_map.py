@@ -20,6 +20,10 @@ def maximum_of_n_nearest_neighbors_map(parametric_map : Image, label_map : Image
     Returns
     -------
     parametric_map_destination
+
+    References
+    ----------
+    .. [1] https://clij.github.io/clij2-docs/reference_maximumOfNNearestNeighbors
     """
     from .._tier1 import copy
     from .._tier1 import generate_touch_matrix
