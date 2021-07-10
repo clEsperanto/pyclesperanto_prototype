@@ -549,6 +549,15 @@ def _wrap_OCLArray(cls):
         return self._former_get(queue, ary, async_, **kwargs)
     cls._get = _cust_get
 
+    cls._former_get_item = cls.__getitem__
+
+    def _cust_get_item(self, index):
+        try:
+            return self._former_get_item(index)
+        except IndexError:
+            raise IndexError("Accessing individual GPU-backed pixels is not fully supported. If you work in napari, use the menu Plugins > clEsperanto > Make labels editable. If you work in python, use numpy.asarray(image) to retrieve a fully accessible copy of the image.")
+    cls.__getitem__ = _cust_get_item
+
     # todo:
     #  __floordiv__(x1, x2)
     #  __mod__(x1, x2)
