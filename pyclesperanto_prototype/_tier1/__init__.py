@@ -135,6 +135,8 @@ from ._transpose_xy import transpose_xy
 from ._transpose_xz import transpose_xz
 from ._transpose_yz import transpose_yz
 from ._undefined_to_zero import undefined_to_zero
+from ._variance_box import variance_box
+from ._variance_sphere import variance_sphere
 from ._write_values_to_positions import write_values_to_positions
 
 

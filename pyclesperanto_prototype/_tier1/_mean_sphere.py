@@ -7,8 +7,8 @@ from .._tier0 import Image
 def mean_sphere(source : Image, destination : Image = None, radius_x : float = 1, radius_y : float = 1, radius_z : float = 1):
     """Computes the local mean average of a pixels spherical neighborhood. 
     
-    The spheres size is specified by 
-    its half-width, half-height and half-depth (radius). 
+    The spheres size is specified by its half-width, half-height and
+    half-depth (radius).
     
     Parameters
     ----------

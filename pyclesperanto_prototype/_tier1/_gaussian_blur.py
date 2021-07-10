@@ -5,10 +5,10 @@ from ._execute_separable_kernel import execute_separable_kernel
 
 @plugin_function(categories=['filter', 'denoise', 'in assistant'], priority=1)
 def gaussian_blur(source : Image, destination : Image = None, sigma_x : float = 0, sigma_y : float = 0, sigma_z : float = 0):
-    """Computes the Gaussian blurred image of an image given two sigma values 
+    """Computes the Gaussian blurred image of an image given sigma values
     in X, Y and Z. 
     
-    Thus, the filterkernel can have non-isotropic shape.
+    Thus, the filter kernel can have non-isotropic shape.
     
     The implementation is done separable. In case a sigma equals zero, the 
     direction is not blurred. 

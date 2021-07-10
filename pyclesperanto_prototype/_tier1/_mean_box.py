@@ -5,10 +5,10 @@ from .._tier0 import Image
 
 @plugin_function(categories=['filter', 'denoise', 'in assistant'])
 def mean_box(source : Image, destination : Image = None, radius_x : float = 1, radius_y : float = 1, radius_z : float = 1):
-    """Computes the local mean average of a pixels cube neighborhood. 
+    """Computes the local mean average of a pixels box-shaped neighborhood.
     
-    The cubes size is specified by 
-    its half-width, half-height and half-depth (radius). 
+    The cubes size is specified by its half-width, half-height and
+    half-depth (radius).
     
     Parameters
     ----------
