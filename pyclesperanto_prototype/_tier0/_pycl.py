@@ -544,7 +544,6 @@ def _wrap_OCLArray(cls):
 
     cls._former_get = cls._get
     def _cust_get(self, queue=None, ary=None, async_=None, **kwargs):
-        print("Hello world:", queue)
         if not isinstance(queue, cl.CommandQueue):
             queue = None
         return self._former_get(queue, ary, async_, **kwargs)
