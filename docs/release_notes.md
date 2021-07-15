@@ -1,3 +1,7 @@
+# 0.9.7 - July 15th 2021
+## Bug fixes
+* `multiply_matrix` wasn't capable of creating / allocating memory for an output image 
+
 # 0.9.5 - July 11th 2021
 ## Bug fixes
 * `skimage.io.imsave` caused errors with oclarrays, also in napari
