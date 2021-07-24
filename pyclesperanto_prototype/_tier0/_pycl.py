@@ -568,6 +568,17 @@ def _wrap_OCLArray(cls):
     #  __rshift__(x1, x2)
     # and, or, xor
 
+    try:
+        # support default output as image in jupyter notebooks
+        import image_attendant as ia
+
+        def _repr_png_(self):
+            return ia.compress(self.get(), 'png')
+
+        cls._repr_png_ = _repr_png_
+    except ImportError:
+        pass
+
     for f in ["dot", "vdot"]:
         setattr(cls, f, wrap_module_func(array, f))
 
