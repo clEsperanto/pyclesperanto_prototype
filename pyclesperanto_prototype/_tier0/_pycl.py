@@ -573,7 +573,12 @@ def _wrap_OCLArray(cls):
         import image_attendant as ia
 
         def _repr_png_(self):
-            return ia.compress(self.get(), 'png')
+            if len(self.shape) == 2:
+                return ia.compress(self.get(), 'png')
+            elif len(self.shape) == 3:
+                return ia.compress(self.max(axis=0).get(), 'png')
+            else:
+                return None
 
         cls._repr_png_ = _repr_png_
     except ImportError:
