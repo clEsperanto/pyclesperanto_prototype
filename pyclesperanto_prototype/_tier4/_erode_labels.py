@@ -46,11 +46,11 @@ def erode_labels(labels_input : Image, labels_destination : Image = None, radius
     if radius == 1:
         copy(temp, labels_destination)
     else:
-        for i in range(0, radius):
+        for i in range(0, int(radius)):
             if i % 2 == 0:
                 minimum_sphere(temp, labels_destination, 1, 1, 1)
             else:
-                minimum_box(temp, labels_destination, 1, 1, 1)
+                minimum_box(labels_destination, temp, 1, 1, 1)
     if relabel_islands:
         if radius % 2 == 0:
             copy(temp, labels_destination)
