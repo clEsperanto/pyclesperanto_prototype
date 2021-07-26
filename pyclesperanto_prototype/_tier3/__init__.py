@@ -1,7 +1,6 @@
 from ._absolute_difference import absolute_difference
 from ._bounding_box import bounding_box
 from ._center_of_mass import center_of_mass
-
 from ._relabel_sequential import relabel_sequential
 from ._relabel_sequential import relabel_sequential as close_index_gaps_in_label_map
 from ._difference_of_gaussian import difference_of_gaussian
