@@ -1,4 +1,5 @@
 from ._connected_components_labeling_box import connected_components_labeling_box
+from ._erode_labels import erode_labels
 from ._extend_labeling_via_voronoi import extend_labeling_via_voronoi
 from ._extend_labels_with_maximum_radius import extend_labels_with_maximum_radius
 from ._extend_labels_with_maximum_radius import extend_labels_with_maximum_radius as dilate_labels
