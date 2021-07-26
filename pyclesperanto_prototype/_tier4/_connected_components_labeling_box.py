@@ -5,7 +5,7 @@ from .._tier1 import set
 from .._tier1 import set_non_zero_pixels_to_pixel_index
 from .._tier1 import nonzero_minimum_box
 from .._tier1 import nonzero_minimum_diamond
-from .._tier3 import close_index_gaps_in_label_map
+from .._tier3 import relabel_sequential
 
 import numpy as np
 
@@ -59,8 +59,8 @@ def connected_components_labeling_box(binary_input : Image, labeling_destination
         iteration_count += 1
 
     if (iteration_count % 2 == 0):
-        close_index_gaps_in_label_map(temp1, labeling_destination)
+        relabel_sequential(temp1, labeling_destination)
     else:
-        close_index_gaps_in_label_map(temp2, labeling_destination)
+        relabel_sequential(temp2, labeling_destination)
 
     return labeling_destination

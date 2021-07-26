@@ -33,7 +33,7 @@ def erode_labels(labels_input : Image, labels_destination : Image = None, radius
         return labels_destination
 
     from .._tier1 import detect_label_edges, binary_not, mask, minimum_sphere, minimum_box, not_equal_constant
-    from .._tier3 import close_index_gaps_in_label_map
+    from .._tier3 import relabel_sequential
     from .._tier4 import connected_components_labeling_box
 
     # make a gap between labels == erosion by one pixel
@@ -59,6 +59,6 @@ def erode_labels(labels_input : Image, labels_destination : Image = None, radius
     else:
         if radius % 2 != 0:
             copy(labels_destination, temp)
-        close_index_gaps_in_label_map(temp, labels_destination)
+        relabel_sequential(temp, labels_destination)
 
     return labels_destination
