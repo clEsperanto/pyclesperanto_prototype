@@ -1,7 +1,7 @@
 import pyclesperanto_prototype as cle
 import numpy as np
 
-def test_extend_labels_with_maximum_radius_2d():
+def test_dilate_labels_2d():
     
     gpu_input = cle.push(np.asarray([
 
@@ -35,7 +35,7 @@ def test_extend_labels_with_maximum_radius_2d():
 
     assert (np.array_equal(a, b))
 
-def test_extend_labels_with_maximum_radius_3d():
+def test_dilate_labels_3d():
     gpu_input = cle.push(np.asarray([
         [
             [0, 0, 0, 0, 0, 2],

@@ -1,7 +1,7 @@
 import pyclesperanto_prototype as cle
 import numpy as np
 
-def test_close_index_gaps_in_label_maps():
+def test_relabel_sequential():
 
     gpu_input = cle.push(np.asarray([
         [
@@ -22,7 +22,7 @@ def test_close_index_gaps_in_label_maps():
 
 
 
-    cle.close_index_gaps_in_label_map(gpu_input, gpu_output)
+    cle.relabel_sequential(gpu_input, gpu_output)
 
     a = cle.pull(gpu_output)
     b = cle.pull(gpu_reference)

@@ -26,7 +26,7 @@ def merge_touching_labels(labels_input: Image, labels_destination: Image = None)
     from .._tier1 import set_row
     from .._tier1 import multiply_images
     from .._tier1 import maximum_y_projection
-    from .._tier3 import close_index_gaps_in_label_map
+    from .._tier3 import relabel_sequential
     from .._tier1 import replace_intensities
 
     # touch matrices are half-filled. The upper right corner is empth
@@ -52,7 +52,7 @@ def merge_touching_labels(labels_input: Image, labels_destination: Image = None)
     maximum_y_projection(touch_matrix, label_id_vector)
 
     # renumber the labels
-    new_labels = close_index_gaps_in_label_map(label_id_vector)
+    new_labels = relabel_sequential(label_id_vector)
 
     # write the new labels into the label image
     labels_destination = replace_intensities(labels_input, new_labels, labels_destination)
