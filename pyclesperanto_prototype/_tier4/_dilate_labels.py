@@ -11,6 +11,27 @@ import numpy as np
 
 @plugin_function(categories=['label processing', 'in assistant'], output_creator=create_labels_like)
 def dilate_labels(labeling_source : Image, labeling_destination : Image = None, radius: int = 2):
+    """Dilates labels to a larger size. No label overwrites another label.
+    Similar to the implementation in scikit-image [2] and MorpholibJ[3]
+
+    Parameters
+    ----------
+    labels_input : Image
+        label image to erode
+    labels_destination : Image, optional
+        result
+    radius : int, optional
+
+    Returns
+    -------
+    labels_destination
+
+    See Also
+    --------
+    ..[1] https://clij.github.io/clij2-docs/reference_dilateLabels
+    ..[2] https://scikit-image.org/docs/dev/auto_examples/segmentation/plot_expand_labels.html?highlight=expand%20labels
+    ..[3] https://github.com/ijpb/MorphoLibJ
+    """
     flip = create_like(labeling_destination)
     flop = create_like(labeling_destination)
 
