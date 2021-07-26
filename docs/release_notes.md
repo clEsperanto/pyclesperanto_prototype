@@ -3,6 +3,8 @@
 * `relabel_sequential`, similar to scikit-image (formely known as `close_index_gaps_in_label_maps`)
 * `erode_labels`
 * `extend_labels_with_maximum_radius` has been renamed to `dilate_labels`, an alias to the old method is kept as well
+* `exclude_small_labels` as shortcut / convenience function to `exclude_labels_out_of_size_range`
+* `exclude_large_labels` as shortcut / convenience function to `exclude_labels_out_of_size_range`
 
 # 0.9.7 - July 15th 2021
 ## Bug fixes
