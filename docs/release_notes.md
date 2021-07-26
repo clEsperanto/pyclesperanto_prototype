@@ -1,3 +1,9 @@
+# upcoming 
+## New features
+* `relabel_sequential`, similar to scikit-image (formely known as `close_index_gaps_in_label_maps`)
+* `erode_labels`
+* `extend_labels_with_maximum_radius` has been renamed to `dilate_labels`, an alias to the old method is kept as well
+
 # 0.9.7 - July 15th 2021
 ## Bug fixes
 * `multiply_matrix` wasn't capable of creating / allocating memory for an output image 
