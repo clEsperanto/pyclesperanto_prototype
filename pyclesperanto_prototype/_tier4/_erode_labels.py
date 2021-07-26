@@ -34,7 +34,7 @@ def erode_labels(labels_input : Image, labels_destination : Image = None, radius
 
     from .._tier1 import detect_label_edges, binary_not, mask, minimum_sphere, minimum_box, not_equal_constant
     from .._tier3 import relabel_sequential
-    from .._tier4 import connected_components_labeling_box
+    from .._tier5 import connected_components_labeling_diamond
 
     # make a gap between labels == erosion by one pixel
     temp = create_labels_like(labels_input)
@@ -55,7 +55,7 @@ def erode_labels(labels_input : Image, labels_destination : Image = None, radius
         if radius % 2 == 0:
             copy(temp, labels_destination)
         not_equal_constant(labels_destination, temp)
-        connected_components_labeling_box(temp, labels_destination)
+        connected_components_labeling_diamond(temp, labels_destination)
     else:
         if radius % 2 != 0:
             copy(labels_destination, temp)
