@@ -15,6 +15,9 @@ def merge_touching_labels(labels_input: Image, labels_destination: Image = None)
     -------
     labels_destination : Image
 
+    See Also
+    --------
+    ..[1] https://clij.github.io/clij2-docs/reference_mergeTouchingLabels
     """
     from .._tier1 import generate_touch_matrix
     from .._tier1 import set_ramp_y
