@@ -1,112 +1,11 @@
 import os
 import sys
+
 import numpy as np
 import pyopencl as cl
 from pyopencl import characterize
 from pyopencl import array
-from typing import Callable, List, Optional
-from functools import lru_cache
-
-
-# TODO: we should discuss whether this collection is actually the best thing to pass
-# around. might be better to work lower level with contexts...
-class Device:
-    """Just a container for a device, context and queue."""
-
-    def __init__(self, device: cl.Device, context: cl.Context, queue: cl.CommandQueue):
-        self.device = device
-        self.context = context
-        self.queue = queue
-
-    def __repr__(self) -> str:
-        refs = self.context.reference_count
-        return f"<{self.name} on Platform: {self.device.platform.name} ({refs} refs)>"
-
-    @property
-    def name(self) -> str:
-        return self.device.name
-
-
-def score_device(dev: cl.Device) -> float:
-    score = 4e12 if dev.type == cl.device_type.GPU else 2e12
-    score += dev.get_info(cl.device_info.GLOBAL_MEM_SIZE)
-    return score
-
-
-# container for singleton device
-class _current_device:
-    _instance: Optional[Device] = None
-    score_key: Callable[[cl.Device], float] = score_device
-
-
-def get_device() -> Device:
-    """Get the current device GPU class."""
-    return _current_device._instance or select_device()
-
-
-def select_device(name: str = None, dev_type: str = None, score_key=None) -> Device:
-    """Set current GPU device based on optional parameters.
-
-    :param name: First device that contains ``name`` will be returned, defaults to None
-    :type name: str, optional
-    :param dev_type: {'cpu', 'gpu', or None}, defaults to None
-    :type dev_type: str, optional
-    :param score_key: scoring function, accepts device and returns int, defaults to None
-    :type score_key: callable, optional
-    :return: The current GPU instance.
-    :rtype: GPU
-    """
-    device = filter_devices(name, dev_type, score_key)[-1]
-    if _current_device._instance and device == _current_device._instance.device:
-        return _current_device._instance
-    context = cl.Context(devices=[device])
-    queue = cl.CommandQueue(context)
-    _current_device._instance = Device(device, context, queue)
-    return _current_device._instance
-
-
-def filter_devices(
-    name: str = None, dev_type: str = None, score_key=None
-) -> List[cl.Device]:
-    """Filter devices based on various options
-
-    :param name: First device that contains ``name`` will be returned, defaults to None
-    :type name: str, optional
-    :param dev_type: {'cpu', 'gpu', or None}, defaults to None
-    :type dev_type: str, optional
-    :param score_key: scoring function, accepts device and returns int, defaults to None
-    :type score_key: callable, optional
-    :return: list of devices
-    :rtype: List[cl.Device]
-    """
-    devices = []
-    for platform in cl.get_platforms():
-        for device in platform.get_devices():
-            if name and name.lower() in device.name.lower():
-                return [device]
-            if dev_type is not None:
-                if isinstance(dev_type, str):
-                    if dev_type.lower() == "cpu":
-                        dev_type = cl.device_type.CPU
-                    elif dev_type.lower() == "gpu":
-                        dev_type = cl.device_type.GPU
-                if device.type != dev_type:
-                    continue
-            devices.append(device)
-    return sorted(devices, key=score_key or _current_device.score_key)
-
-
-def set_device_scoring_key(func: Callable[[cl.Device], int]) -> None:
-    if not callable(func):
-        raise TypeError(
-            "Scoring key must be a callable that takes a device and returns an int"
-        )
-    try:
-        filter_devices(score_key=func)
-    except Exception as e:
-        raise ValueError(f"Scoring algorithm invalid: {e}")
-    _current_device.score_key = func
-
+from ._device import get_device
 
 """ Below here, vendored from GPUtools
 Copyright (c) 2016, Martin Weigert
@@ -139,43 +38,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 """
 
 
-class OCLProgram(cl.Program):
-    """ a wrapper class representing a CPU/GPU Program
-    example:
-         prog = OCLProgram("mykernels.cl",build_options=["-D FLAG"])
-    """
-    _wait_for_kernel_finish = None
 
-    def __init__(self, file_name=None, src_str=None, build_options=[], dev=None):
-        if file_name is not None:
-            with open(file_name, "r") as f:
-                src_str = f.read()
-
-        if src_str is None:
-            raise ValueError("empty src_str! ")
-
-        if dev is None:
-            dev = get_device()
-
-        self._dev = dev
-        self._kernel_dict = {}
-        super().__init__(self._dev.context, src_str)
-        self.build(options=build_options)
-
-    def run_kernel(self, name, global_size, local_size, *args, **kwargs):
-        if name not in self._kernel_dict:
-            self._kernel_dict[name] = getattr(self, name)
-
-        self._kernel_dict[name](
-            self._dev.queue, global_size, local_size, *args, **kwargs
-        )
-        if OCLProgram._wait_for_kernel_finish:
-            self._dev.queue.finish()
-
-    @classmethod
-    @lru_cache(maxsize=128)
-    def from_source(cls, source):
-        return cls(src_str=source)
 
 
 cl_image_datatype_dict = {

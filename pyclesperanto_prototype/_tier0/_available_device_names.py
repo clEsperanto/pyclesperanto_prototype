@@ -1,4 +1,4 @@
-from .._tier0._pycl import filter_devices
+from .._tier0._device import filter_devices
 from typing import List
 
 def available_device_names(dev_type: str = None, score_key = None) -> List[str]:
