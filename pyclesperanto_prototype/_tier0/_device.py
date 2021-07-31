@@ -1,5 +1,6 @@
 import pyopencl as cl
 from typing import Callable, List, Optional
+from functools import lru_cache
 
 # TODO: we should discuss whether this collection is actually the best thing to pass
 # around. might be better to work lower level with contexts...
@@ -18,6 +19,11 @@ class Device:
     @property
     def name(self) -> str:
         return self.device.name
+
+    @lru_cache(maxsize=128)
+    def program_from_source(self, source):
+        from ._program import OCLProgram
+        return OCLProgram(src_str=source, dev=self)
 
 
 def score_device(dev: cl.Device) -> float:
@@ -57,6 +63,11 @@ def select_device(name: str = None, dev_type: str = None, score_key=None) -> Dev
     _current_device._instance = Device(device, context, queue)
     return _current_device._instance
 
+def new_device(name: str = None, dev_type: str = None, score_key=None) -> Device:
+    device = filter_devices(name, dev_type, score_key)[-1]
+    context = cl.Context(devices=[device])
+    queue = cl.CommandQueue(context)
+    return Device(device, context, queue)
 
 def filter_devices(
     name: str = None, dev_type: str = None, score_key=None
@@ -99,3 +110,4 @@ def set_device_scoring_key(func: Callable[[cl.Device], int]) -> None:
     except Exception as e:
         raise ValueError(f"Scoring algorithm invalid: {e}")
     _current_device.score_key = func
+
