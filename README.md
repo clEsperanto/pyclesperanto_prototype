@@ -393,7 +393,7 @@ welcome to submit your notebook as pull-request!
 * [Axis transposition](http://github.com/clEsperanto/pyclesperanto_prototype/blob/master/benchmarks/transpose.ipynb)
 
 ## See also
-There are other libraries for code acceleration and GPU-acceleration for image processing can also be achieved by others.
+There are other libraries for code acceleration and GPU-acceleration for image processing.
 * [numba](https://numba.pydata.org/)
 * [cupy](https://cupy.dev)
 * [cucim](https://github.com/rapidsai/cucim)
