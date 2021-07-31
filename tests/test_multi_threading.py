@@ -103,5 +103,5 @@ def test_slinge_gpu_multi_threading():
     print("Sequential all done after ", time.time() - start_time, "s")
 
 
-    assert False
+    #assert False
 
