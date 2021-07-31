@@ -1,8 +1,8 @@
 from ._pycl import OCLArray
 import numpy as np
+from ._device import Device, get_device
 
-
-def create(dimensions, dtype=np.float32):
+def create(dimensions, dtype=np.float32, device:Device = None):
 
     """
     Convenience method for creating images on the GPU. This method basically does the same as in CLIJ:
@@ -18,18 +18,20 @@ def create(dimensions, dtype=np.float32):
         if isinstance(dimensions, OCLArray)
         else tuple(dimensions)  # reverses a list/tuple
     )
-    return OCLArray.empty(dimensions, dtype)
+    if device is None:
+        device = get_device()
+    return device.empty(dimensions, dtype)
 
 def create_zyx(dimensions):
     return create(dimensions[::-1])
 
-def create_like(*args):
+def create_like(*args, device:Device = None):
     dimensions = args[0]
     if isinstance(dimensions, OCLArray):
         dimensions = dimensions.shape
     elif isinstance(dimensions, np.ndarray):
         dimensions = dimensions.shape[::-1]
-    return create(dimensions)
+    return create(dimensions, device=device)
 
 def create_binary_like(*args):
     dimensions = args[0]

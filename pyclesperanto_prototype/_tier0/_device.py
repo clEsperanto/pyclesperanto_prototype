@@ -1,6 +1,9 @@
 import pyopencl as cl
+from pyopencl import array
 from typing import Callable, List, Optional
 from functools import lru_cache
+from ._utils import prepare
+import numpy as np
 
 # TODO: we should discuss whether this collection is actually the best thing to pass
 # around. might be better to work lower level with contexts...
@@ -25,6 +28,11 @@ class Device:
         from ._program import OCLProgram
         return OCLProgram(src_str=source, dev=self)
 
+    def from_array(self, arr, *args, **kwargs):
+        return array.to_device(self.queue, prepare(arr), *args, **kwargs)
+
+    def empty(self, shape, dtype=np.float32):
+        return array.empty(self.queue, shape, dtype)
 
 def score_device(dev: cl.Device) -> float:
     score = 4e12 if dev.type == cl.device_type.GPU else 2e12

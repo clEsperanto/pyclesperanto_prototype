@@ -6,6 +6,7 @@ import pyopencl as cl
 from pyopencl import characterize
 from pyopencl import array
 from ._device import get_device
+from ._utils import prepare
 
 """ Below here, vendored from GPUtools
 Copyright (c) 2016, Martin Weigert
@@ -105,8 +106,6 @@ def _wrap_OCLArray(cls):
     WRAPPER
     """
 
-    def prepare(arr):
-        return np.require(arr, None, "C")
 
     @classmethod
     def from_array(cls, arr, *args, **kwargs):
