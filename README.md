@@ -392,5 +392,12 @@ welcome to submit your notebook as pull-request!
 * [Intensity projections](http://github.com/clEsperanto/pyclesperanto_prototype/blob/master/benchmarks/intensity_projections.ipynb)
 * [Axis transposition](http://github.com/clEsperanto/pyclesperanto_prototype/blob/master/benchmarks/transpose.ipynb)
 
+## See also
+There are other libraries for code acceleration and GPU-acceleration for image processing can also be achieved by others.
+* [numba](https://numba.pydata.org/)
+* [cupy](https://cupy.dev)
+* [cucim](https://github.com/rapidsai/cucim)
+* [clij](https://clij.github.io)
+
 ## Feedback welcome!
 clEsperanto is developed in the open because we believe in the open source community. See our [community guidelines](https://clij.github.io/clij2-docs/community_guidelines). Feel free to drop feedback as [github issue](https://github.com/clEsperanto/pyclesperanto_prototype/issues) or via [image.sc](https://image.sc)
