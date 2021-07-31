@@ -6,6 +6,9 @@
 * `exclude_small_labels` as shortcut / convenience function to `exclude_labels_out_of_size_range`
 * `exclude_large_labels` as shortcut / convenience function to `exclude_labels_out_of_size_range`
 
+## Bug fixes
+* Switching GPUs using `select_device` made operations fail that were executed before switching ([#110](https://github.com/clEsperanto/pyclesperanto_prototype/issues/110))
+
 # 0.9.7 - July 15th 2021
 ## Bug fixes
 * `multiply_matrix` wasn't capable of creating / allocating memory for an output image 
