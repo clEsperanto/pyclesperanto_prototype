@@ -60,4 +60,5 @@ def operation(name : str):
     dict = operations()
     return dict[name]
 
-
+def search_operation_names(name):
+    return [a for a in list(operations().keys()) if name in a]

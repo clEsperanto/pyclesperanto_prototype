@@ -5,6 +5,7 @@
 * `extend_labels_with_maximum_radius` has been renamed to `dilate_labels`, an alias to the old method is kept as well
 * `exclude_small_labels` as shortcut / convenience function to `exclude_labels_out_of_size_range`
 * `exclude_large_labels` as shortcut / convenience function to `exclude_labels_out_of_size_range`
+* `search_operation_names` for searching in the clesperanto API
 
 ## Bug fixes
 * Switching GPUs using `select_device` made operations fail that were executed before switching ([#110](https://github.com/clEsperanto/pyclesperanto_prototype/issues/110))

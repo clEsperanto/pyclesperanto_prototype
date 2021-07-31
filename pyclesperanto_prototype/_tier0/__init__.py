@@ -26,6 +26,7 @@ from ._create import (
 from ._execute import execute
 from ._operations import operation
 from ._operations import operations
+from ._operations import search_operation_names
 from ._pull import pull_zyx
 from ._pull import pull
 from ._pull import pull as nparray
