@@ -276,6 +276,14 @@ imsave("result.tif", cle.pull(labeled))
 
 </td></tr><tr><td>
 
+<img src="https://github.com/clEsperanto/pyclesperanto_prototype/raw/master/docs/images/cupy_compatibility.png" width="300"/>
+
+</td><td>
+
+[Interoperability with cupy](http://nbviewer.jupyter.org/github/clEsperanto/pyclesperanto_prototype/tree/master/demo/basics/interoperability_cupy.ipynb)
+
+</td></tr><tr><td>
+
 <img src="https://github.com/clesperanto/napari_pyclesperanto_assistant/raw/master/docs/images/screenshot.png" width="300"/>
 
 </td><td>
