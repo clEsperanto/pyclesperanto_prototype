@@ -118,4 +118,3 @@ def set_device_scoring_key(func: Callable[[cl.Device], int]) -> None:
     except Exception as e:
         raise ValueError(f"Scoring algorithm invalid: {e}")
     _current_device.score_key = func
-

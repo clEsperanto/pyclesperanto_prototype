@@ -7,6 +7,7 @@ from toolz import curry
 from ._create import create_like
 from ._types import Image, is_image
 from ._push import push
+from ._device import get_device
 
 
 @curry
@@ -48,6 +49,8 @@ def plugin_function(
     function.categories = categories
     function.priority = priority
 
+
+
     @wraps(function)
     def worker_function(*args, **kwargs):
         sig = inspect.signature(function)
@@ -59,13 +62,20 @@ def plugin_function(
         # https://docs.python.org/3/library/inspect.html#inspect.BoundArguments.apply_defaults
         bound.apply_defaults()
 
+        # determine on which GPU the operation should be executed and
+        # potentially, output images should be created on
+        if 'device' in kwargs.keys():
+            device = kwargs['device']
+        else:
+            device = get_device()
+
         # copy images to GPU, and create output array if necessary
         for key, value in bound.arguments.items():
             if is_image(value):
                 bound.arguments[key] = push(value)
             if key in sig.parameters and sig.parameters[key].annotation is Image and value is None:
-                sig = inspect.signature(output_creator)
-                bound.arguments[key] = output_creator(*bound.args[:len(sig.parameters)])
+                sig = inspect.signature(output_creator)            # -1 because we add device by hand
+                bound.arguments[key] = output_creator(*bound.args[:len(sig.parameters) - 1], device=device)
 
         # call the decorated function
         return function(*bound.args, **bound.kwargs)
