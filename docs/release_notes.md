@@ -1,4 +1,4 @@
-# upcoming 
+# 0.9.9 - August 1st 2021
 ## New features
 * `relabel_sequential`, similar to scikit-image (formely known as `close_index_gaps_in_label_maps`)
 * `erode_labels`
