@@ -148,7 +148,7 @@ imsave("result.tif", cle.pull(labeled))
 
 </td><td>
 
-[Label statistics](http://github.com/clEsperanto/pyclesperanto_prototype/tree/master/demo/tissues/label_statistics.ipynb)
+[Label statistics](http://github.com/clEsperanto/pyclesperanto_prototype/tree/master/demo/basics/label_statistics.ipynb)
 
 </td></tr>
 
