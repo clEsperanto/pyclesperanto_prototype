@@ -144,6 +144,16 @@ imsave("result.tif", cle.pull(labeled))
 
 <tr><td>
 
+<img src="https://github.com/clEsperanto/pyclesperanto_prototype/raw/master/docs/images/label_statistics.png" width="300"/>
+
+</td><td>
+
+[Label statistics](http://github.com/clEsperanto/pyclesperanto_prototype/tree/master/demo/tissues/label_statistics.ipynb)
+
+</td></tr>
+
+<tr><td>
+
 <img src="https://github.com/clEsperanto/pyclesperanto_prototype/raw/master/docs/images/parametric_maps.png" width="300"/>
 
 </td><td>
