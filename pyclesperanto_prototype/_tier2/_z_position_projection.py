@@ -1,6 +1,6 @@
 from pyclesperanto_prototype._tier0 import plugin_function, Image, create_2d_xy, execute
 
-@plugin_function(output_creator = create_2d_xy, categories=['projection'])
+@plugin_function(output_creator = create_2d_yx, categories=['projection'])
 def z_position_projection(source_stack : Image, z_position : Image, destination : Image = None):
     """Project a defined Z-slice of a 3D stack into a 2D image.
 

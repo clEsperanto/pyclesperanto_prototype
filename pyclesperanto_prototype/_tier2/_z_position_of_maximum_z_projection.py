@@ -1,6 +1,6 @@
 from pyclesperanto_prototype._tier0 import plugin_function, Image, create_2d_xy, execute
 
-@plugin_function(output_creator = create_2d_xy, categories=['projection', 'in assistant'])
+@plugin_function(output_creator = create_2d_yx, categories=['projection', 'in assistant'])
 def z_position_of_maximum_z_projection(source : Image, destination : Image = None):
     """Determines a Z-position of the maximum intensity along Z and writes it into the resulting image.
 
