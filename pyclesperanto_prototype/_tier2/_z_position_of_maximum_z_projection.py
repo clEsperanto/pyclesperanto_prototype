@@ -1,4 +1,4 @@
-from pyclesperanto_prototype._tier0 import plugin_function, Image, create_2d_xy, execute
+from pyclesperanto_prototype._tier0 import plugin_function, Image, create_2d_yx, execute
 
 @plugin_function(output_creator = create_2d_yx, categories=['projection', 'in assistant'])
 def z_position_of_maximum_z_projection(source : Image, destination : Image = None):
