@@ -99,14 +99,159 @@ def assert_bufs_type(mytype, *bufs):
             % (mytype, str([b.dtype.type for b in bufs]))
         )
 
+def prepare(arr):
+    return np.require(arr, None, "C")
+
+class CLEArray(array.Array, np.lib.mixins.NDArrayOperatorsMixin):
+
+    def __init__(self, cq, shape, dtype, order="C", allocator=None,
+                 data=None, offset=0, strides=None, events=None, _flags=None,
+                 _fast=False, _size=None, _context=None, _queue=None):
+        super().__init__(cq, shape, dtype, order, allocator,
+                     data, offset, strides, events, _flags,
+                     _fast, _size, _context, _queue)
+
+    @classmethod
+    def from_array(cls, arr, *args, **kwargs):
+        assert_supported_ndarray_type(arr.dtype.type)
+        queue = get_device().queue
+        return CLEArray.to_device(queue, prepare(arr), *args, **kwargs)
+
+    @classmethod
+    def empty(cls, shape, dtype=np.float32):
+        assert_supported_ndarray_type(dtype)
+        queue = get_device().queue
+        return array.empty(queue, shape, dtype)
+
+    @classmethod
+    def empty_like(cls, arr):
+        assert_supported_ndarray_type(arr.dtype.type)
+        return cls.empty(arr.shape, arr.dtype.type)
+
+    @classmethod
+    def zeros(cls, shape, dtype=np.float32):
+        assert_supported_ndarray_type(dtype)
+        queue = get_device().queue
+        return array.zeros(queue, shape, dtype)
+
+    @classmethod
+    def zeros_like(cls, arr):
+        assert_supported_ndarray_type(arr.dtype.type)
+        queue = get_device().queue
+        return array.zeros(queue, arr.shape, arr.dtype.type)
+
+    def copy_buffer(self, buf, **kwargs):
+        queue = get_device().queue
+        return cl.enqueue_copy(queue, self.data, buf.data, **kwargs)
+
+    def write_array(self, arr, **kwargs):
+        assert_supported_ndarray_type(arr.dtype.type)
+        queue = get_device().queue
+        return cl.enqueue_copy(queue, self.data, prepare(arr), **kwargs)
+
+
+    def __array__(self, dtype=None):
+        return self.get().astype(dtype)
+
+    @classmethod
+    def to_device(cls, queue, ary, *args, **kwargs):
+        if isinstance(ary, CLEArray):
+            return ary
+        cl_a = CLEArray(queue, ary.shape, ary.dtype, strides=ary.strides)
+        cl_a.set(ary, queue=queue)
+        return cl_a
+
+    def __array_ufunc__(self, ufunc, method, *inputs, **kwargs):
+        if method == "__call__":
+            func = getattr(OCLArray, f'__{ufunc.__name__}__', None)
+            if func is not None:
+                return func(*[OCLArray.to_device(self.queue, i) for i in inputs], **kwargs)
+        return NotImplemented
+
+    def copy_image(self, img, **kwargs):
+        queue = get_device().queue
+        return cl.enqueue_copy(
+            queue,
+            self.data,
+            img,
+            offset=0,
+            origin=(0,) * len(img.shape),
+            region=img.shape,
+            **kwargs,
+        )
+
+    def wrap_module_func(mod, f):
+        def func(self, *args, **kwargs):
+            return getattr(mod, f)(self, *args, **kwargs)
+
+        return func
+
+    def min(self, axis=None, out=None):
+        from .._tier2 import minimum_of_all_pixels
+        from .._tier1 import minimum_x_projection
+        from .._tier1 import minimum_y_projection
+        from .._tier1 import minimum_z_projection
+
+        if axis==0:
+            result = minimum_z_projection(self)
+        elif axis==1:
+            result = minimum_y_projection(self)
+        elif axis==2:
+            result = minimum_x_projection(self)
+        elif axis is None:
+            result = minimum_of_all_pixels(self)
+        else:
+            raise ValueError("Axis " + axis + " not supported")
+        if out is not None:
+            np.copyto(out, result.get().astype(out.dtype))
+        return result
+
+    def max(self, axis=None, out=None):
+        from .._tier2 import maximum_of_all_pixels
+        from .._tier1 import maximum_x_projection
+        from .._tier1 import maximum_y_projection
+        from .._tier1 import maximum_z_projection
+
+        if axis==0:
+            result = maximum_z_projection(self)
+        elif axis==1:
+            result = maximum_y_projection(self)
+        elif axis==2:
+            result = maximum_x_projection(self)
+        elif axis is None:
+            result = maximum_of_all_pixels(self)
+        else:
+            raise ValueError("Axis " + axis + " not supported")
+        if out is not None:
+            np.copyto(out, result.get().astype(out.dtype))
+        return result
+
+    def sum(self, axis=None, out=None):
+        from .._tier2 import sum_of_all_pixels
+        from .._tier1 import sum_x_projection
+        from .._tier1 import sum_y_projection
+        from .._tier1 import sum_z_projection
+
+        if axis==0:
+            result = sum_z_projection(self)
+        elif axis==1:
+            result = sum_y_projection(self)
+        elif axis==2:
+            result = sum_x_projection(self)
+        elif axis is None:
+            result = sum_of_all_pixels(self)
+        else:
+            raise ValueError("Axis " + axis + " not supported")
+        if out is not None:
+            np.copyto(out, result.get().astype(out.dtype))
+        return result
 
 def _wrap_OCLArray(cls):
     """
     WRAPPER
     """
 
-    def prepare(arr):
-        return np.require(arr, None, "C")
+
 
     @classmethod
     def from_array(cls, arr, *args, **kwargs):
@@ -443,7 +588,7 @@ def _wrap_OCLArray(cls):
     return cls
 
 
-OCLArray = _wrap_OCLArray(array.Array)
+OCLArray = CLEArray #_wrap_OCLArray(array.Array)
 
 class _OCLImage:
     def __init__(self, cl_image : cl.Image):
