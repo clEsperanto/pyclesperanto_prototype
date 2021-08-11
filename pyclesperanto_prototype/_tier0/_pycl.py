@@ -167,9 +167,9 @@ class CLEArray(array.Array, np.lib.mixins.NDArrayOperatorsMixin):
 
     def __array_ufunc__(self, ufunc, method, *inputs, **kwargs):
         if method == "__call__":
-            func = getattr(OCLArray, f'__{ufunc.__name__}__', None)
+            func = getattr(CLEArray, f'__{ufunc.__name__}__', None)
             if func is not None:
-                return func(*[OCLArray.to_device(self.queue, i) for i in inputs], **kwargs)
+                return func(*[CLEArray.to_device(self.queue, i) for i in inputs], **kwargs)
         return NotImplemented
 
     def copy_image(self, img, **kwargs):
@@ -249,6 +249,138 @@ class CLEArray(array.Array, np.lib.mixins.NDArrayOperatorsMixin):
         if out is not None:
             np.copyto(out, result.get().astype(out.dtype))
         return result
+
+    # TODO: Not sure if the following are necessary / could be circumvented.
+    #       For now tests fail if we remove them.
+    def __iadd__(x1, x2):
+        from .._tier1 import copy
+        temp = copy(x1)
+        if isinstance(x2, (int, float)) :
+            from .._tier1 import add_image_and_scalar
+            return add_image_and_scalar(temp, x1, scalar=x2)
+        else:
+            from .._tier1 import add_images_weighted
+            return add_images_weighted(temp, x2, x1)
+
+    def __sub__(x1, x2):
+        if isinstance(x2, (int, float)):
+            from .._tier1 import add_image_and_scalar
+            return add_image_and_scalar(x1, scalar=-x2)
+        else:
+            from .._tier1 import add_images_weighted
+            return add_images_weighted(x1, x2, factor2=-1)
+
+    def __div__(x1, x2):
+        if isinstance(x2, (int, float)):
+            from .._tier1 import multiply_image_and_scalar
+            return multiply_image_and_scalar(x1, scalar=1.0 / x2)
+        else:
+            from .._tier1 import divide_images
+            return divide_images(x1, x2)
+    def __truediv__(x1, x2):
+        return x1.__div__(x2)
+
+    def __idiv__(x1, x2):
+        from .._tier1 import copy
+        temp = copy(x1)
+        if isinstance(x2, (int, float)):
+            from .._tier1 import multiply_image_and_scalar
+            return multiply_image_and_scalar(temp, x1, scalar=1.0 / x2)
+        else:
+            from .._tier1 import divide_images
+            return divide_images(temp, x2, x1)
+
+    def __itruediv__(x1, x2):
+        return x1.__idiv__(x2)
+
+    def __mul__(x1, x2):
+        if isinstance(x2, (int, float)):
+            from .._tier1 import multiply_image_and_scalar
+            return multiply_image_and_scalar(x1, scalar=x2)
+        else:
+            from .._tier1 import multiply_images
+            return multiply_images(x1, x2)
+
+    def __imul__(x1, x2):
+        from .._tier1 import copy
+        temp = copy(x1)
+        if isinstance(x2, (int, float)):
+            from .._tier1 import multiply_image_and_scalar
+            return multiply_image_and_scalar(temp, x1, scalar=x2)
+        else:
+            from .._tier1 import multiply_images
+            return multiply_images(temp, x2, x1)
+
+    def __gt__(x1, x2):
+        if isinstance(x2, (int, float)):
+            from .._tier1 import greater_constant
+            return greater_constant(x1, constant=x2)
+        else:
+            from .._tier1 import greater
+            return greater(x1, x2)
+
+    def __ge__(x1, x2):
+        if isinstance(x2, (int, float)):
+            from .._tier1 import greater_or_equal_constant
+            return greater_or_equal_constant(x1, constant=x2)
+        else:
+            from .._tier1 import greater_or_equal
+            return greater_or_equal(x1, x2)
+
+    def __lt__(x1, x2):
+        if isinstance(x2, (int, float)):
+            from .._tier1 import smaller_constant
+            return smaller_constant(x1, constant=x2)
+        else:
+            from .._tier1 import smaller
+            return smaller(x1, x2)
+
+    def __le__(x1, x2):
+        if isinstance(x2, (int, float)):
+            from .._tier1 import smaller_or_equal_constant
+            return smaller_or_equal_constant(x1, constant=x2)
+        else:
+            from .._tier1 import smaller_or_equal
+            return smaller_or_equal(x1, x2)
+
+    def __eq__(x1, x2):
+        if isinstance(x2, (int, float)):
+            from .._tier1 import equal_constant
+            return equal_constant(x1, constant=x2)
+        else:
+            from .._tier1 import equal
+            return equal(x1, x2)
+
+    def __ne__(x1, x2):
+        if isinstance(x2, (int, float)):
+            from .._tier1 import not_equal_constant
+            return not_equal_constant(x1, constant=x2)
+        else:
+            from .._tier1 import not_equal
+            return not_equal(x1, x2)
+
+    def __pow__(x1, x2):
+        if isinstance(x2, (int, float)):
+            from .._tier1 import power
+            return power(x1, exponent=x2)
+        else:
+            from .._tier1 import power_images
+            return power_images(x1, x2)
+
+    def __ipow__(x1, x2):
+        from .._tier1 import copy
+        temp = copy(x1)
+        if isinstance(x2, (int, float)):
+            from .._tier1 import power
+            return power(temp, x1, exponent=x2)
+        else:
+            from .._tier1 import power_images
+            return power_images(temp, x2, x1)
+
+
+
+
+
 
 def _wrap_OCLArray(cls):
     """
