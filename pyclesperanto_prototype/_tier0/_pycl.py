@@ -104,10 +104,10 @@ def prepare(arr):
 
 class CLEArray(array.Array, np.lib.mixins.NDArrayOperatorsMixin):
 
-    def __init__(self, cq, shape, dtype, order="C", allocator=None,
+    def __init__(self, queue, shape, dtype, order="C", allocator=None,
                  data=None, offset=0, strides=None, events=None, _flags=None,
                  _fast=False, _size=None, _context=None, _queue=None):
-        super().__init__(cq, shape, dtype, order, allocator,
+        super().__init__(queue, shape, dtype, order, allocator,
                      data, offset, strides, events, _flags,
                      _fast, _size, _context, _queue)
 
@@ -121,24 +121,28 @@ class CLEArray(array.Array, np.lib.mixins.NDArrayOperatorsMixin):
     def empty(cls, shape, dtype=np.float32):
         assert_supported_ndarray_type(dtype)
         queue = get_device().queue
-        return array.empty(queue, shape, dtype)
+        return CLEArray(queue, shape, dtype)
 
     @classmethod
     def empty_like(cls, arr):
         assert_supported_ndarray_type(arr.dtype.type)
-        return cls.empty(arr.shape, arr.dtype.type)
+        queue = get_device().queue # todo: get queue from arr
+        return CLEArray(queue, arr.shape, arr.dtype.type)
 
     @classmethod
     def zeros(cls, shape, dtype=np.float32):
         assert_supported_ndarray_type(dtype)
         queue = get_device().queue
-        return array.zeros(queue, shape, dtype)
+        new_array = CLEArray(queue, shape, dtype)
+        from .._tier1 import set
+        set(new_array, 0)
+        return new_array
 
     @classmethod
     def zeros_like(cls, arr):
         assert_supported_ndarray_type(arr.dtype.type)
         queue = get_device().queue
-        return array.zeros(queue, arr.shape, arr.dtype.type)
+        return cls.zeros(queue, arr.shape, arr.dtype.type)
 
     def copy_buffer(self, buf, **kwargs):
         queue = get_device().queue
