@@ -1,9 +1,6 @@
 def test_dask_compatibility():
-    try:
-        from dask import array
-    except ImportError:
-        # dask may not be installed in the CI
-        return
+    import pytest
+    array = pytest.importorskip('dask.array')
     import pyclesperanto_prototype as cle
     import numpy as np
 
