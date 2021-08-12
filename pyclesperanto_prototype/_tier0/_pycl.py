@@ -104,12 +104,6 @@ def prepare(arr):
 
 class OCLArray(array.Array, np.lib.mixins.NDArrayOperatorsMixin):
 
-    def __init__(self, queue, shape, dtype, order="C", allocator=None,
-                 data=None, offset=0, strides=None, events=None, _flags=None,
-                 _fast=False, _size=None, _context=None, _queue=None):
-        super().__init__(queue, shape, dtype, order, allocator,
-                     data, offset, strides, events, _flags,
-                     _fast, _size, _context, _queue)
 
     @classmethod
     def from_array(cls, arr, *args, **kwargs):
