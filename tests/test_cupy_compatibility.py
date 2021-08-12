@@ -1,9 +1,6 @@
 def test_cupy_compatibility():
-    try:
-        import cupy
-    except ImportError:
-        # cupy may not be installed in the CI
-        return
+    import pytest
+    cupy = pytest.importorskip('cupy')
 
     import pyclesperanto_prototype as cle
     import numpy as np
