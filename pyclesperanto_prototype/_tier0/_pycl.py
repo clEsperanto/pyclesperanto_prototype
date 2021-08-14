@@ -115,7 +115,10 @@ class OCLArray(array.Array, np.lib.mixins.NDArrayOperatorsMixin):
 
 
     def __array__(self, dtype=None):
-        return self.get().astype(dtype)
+        if dtype is None:
+            return self.get()
+        else:
+            return self.get().astype(dtype)
 
     @classmethod
     def to_device(cls, queue, ary, *args, **kwargs):
@@ -337,6 +340,40 @@ class OCLArray(array.Array, np.lib.mixins.NDArrayOperatorsMixin):
             from .._tier1 import power_images
             return power_images(temp, x2, x1)
 
+    def __getitem__(self, index):
+        try:
+            return super().__getitem__(index)
+
+        except IndexError:
+            raise IndexError(
+                "Accessing individual GPU-backed pixels is not fully supported. If you work in napari, use the menu Plugins > clEsperanto > Make labels editable. If you work in python, use numpy.asarray(image) to retrieve a fully accessible copy of the image.")
+
+    def _new_with_changes(
+            self,
+            data,
+            offset,
+            shape=None,
+            dtype=None,
+            strides=None,
+            queue=None,
+            allocator=None,
+    ):
+        """
+        :arg data: *None* means allocate a new array.
+        """
+        # If we're allocating new data, then there's not likely to be
+        # a data dependency. Otherwise, the two arrays should probably
+        # share the same events list.
+        return OCLArray(
+            self.queue if queue is None else queue,
+            self.shape if shape is None else shape,
+            self.dtype if dtype is None else dtype,
+            allocator=self.allocator if allocator is None else allocator,
+            strides=self.strides if strides is None else strides,
+            data=data,
+            offset=offset,
+            events=None if data is None else self.events,
+        )
 
 class _OCLImage:
     def __init__(self, cl_image : cl.Image):
