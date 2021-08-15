@@ -340,19 +340,49 @@ class OCLArray(array.Array, np.lib.mixins.NDArrayOperatorsMixin):
             from .._tier1 import power_images
             return power_images(temp, x2, x1)
 
+    def __setitem__(self, index, value):
+        if isinstance(index, tuple) and isinstance(index[0], np.ndarray):
+            if len(index) == len(self.shape) and len(index[0]) > 1:
+                # switch xy in 2D / xz in 3D, because clesperanto expects a X-Y-Z array;
+                # see also https://github.com/clEsperanto/pyclesperanto_prototype/issues/49
+                index = list(index)
+                index[0], index[-1] = index[-1], index[0]
+                # overwrite pixels
+                coordinates = OCLArray.to_device(self.queue, np.asarray(index))
+                num_coordinates = coordinates.shape[-1]
+                from .._tier1 import write_values_to_positions
+                from .._tier2 import combine_vertically
+                # make an array containing new values for every pixel
+                if isinstance(value, (int, float)):
+                    number = value
+                    from ._create import create
+                    value = create((1, 1, num_coordinates))
+                    from .._tier1 import set
+                    set(value, number)
+                values_and_positions = combine_vertically(coordinates, value)
+                write_values_to_positions(values_and_positions, self)
+
+                return
+        return super().__setitem__(index, value)
+
     def __getitem__(self, index):
         if isinstance(index, tuple) and isinstance(index[0], np.ndarray):
             if len(index) == len(self.shape) and len(index[0]) > 1:
-                raise NotImplementedError(
-                    "Accessing individual GPU-backed pixels is not fully supported. If you work in napari, use the menu Plugins > clEsperanto > Make labels editable. If you work in python, use numpy.asarray(image) to retrieve a fully accessible copy of the image.")
-        try:
-            result = super().__getitem__(index)
-            if result.size == 1:
-                return result.get()
-            else:
-                return result
-        except IndexError:
-            raise NotImplementedError("wtf", str(type(index)), index)
+                # switch xy in 2D / xz in 3D, because clesperanto expects a X-Y-Z array;
+                # see also https://github.com/clEsperanto/pyclesperanto_prototype/issues/49
+                index = list(index)
+                index[0], index[-1] = index[-1], index[0]
+
+                # read values from positions
+                coordinates = OCLArray.to_device(self.queue, np.asarray(index))
+                from .._tier1 import read_intensities_from_positions
+                intensities = read_intensities_from_positions(coordinates, self)
+                return intensities
+        result = super().__getitem__(index)
+        if result.size == 1:
+            return result.get()
+        else:
+            return result
 
     def _new_with_changes(
             self,
