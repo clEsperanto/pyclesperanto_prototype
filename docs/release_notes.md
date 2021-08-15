@@ -1,3 +1,14 @@
+# 0.10.0 - August 15th 2021
+## Bug fixes
+* When importing `pyclesperanto_prototype`, some functions in `pyopencl` stopped working (see [#130](https://github.com/clEsperanto/pyclesperanto_prototype/issues/130))
+* Operations crashed when a [dask](https://dask.org/) array was handed over as image parameter. That can happen in napari for example when opening CZI files.
+* z-position projections automatically created output images had a wrong size (x and y switched).
+
+## Backwards compatiblity breaking changes
+* Instead of manipulating internal sturctures of pyopencl (in particular `cl.array.Array`), we now ship an own image class, `OCLArray`. 
+  Thus, it is possible that operators directly applied to images produced by pyclesperanto don't work anymore. 
+  If you experience any issues, [please report them](https://github.com/clEsperanto/pyclesperanto_prototype/issues).
+
 # 0.9.9 - August 1st 2021
 ## New features
 * `relabel_sequential`, similar to scikit-image (formely known as `close_index_gaps_in_label_maps`)
