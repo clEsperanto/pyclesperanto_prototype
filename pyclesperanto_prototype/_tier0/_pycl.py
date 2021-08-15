@@ -343,22 +343,23 @@ class OCLArray(array.Array, np.lib.mixins.NDArrayOperatorsMixin):
     def __setitem__(self, index, value):
         if isinstance(index, tuple) and isinstance(index[0], np.ndarray):
             if len(index) == len(self.shape) and len(index[0]) > 1:
-                # switch xy in 2D / xz in 3D, because clesperanto expects a X-Y-Z array;
+                # switch xy in 2D / xz in 3D, because clesperanto expects an X-Y-Z array;
                 # see also https://github.com/clEsperanto/pyclesperanto_prototype/issues/49
                 index = list(index)
                 index[0], index[-1] = index[-1], index[0]
-                # overwrite pixels
+                # send coordinates to GPU
                 coordinates = OCLArray.to_device(self.queue, np.asarray(index))
                 num_coordinates = coordinates.shape[-1]
-                from .._tier1 import write_values_to_positions
-                from .._tier2 import combine_vertically
-                # make an array containing new values for every pixel
                 if isinstance(value, (int, float)):
+                    # make an array containing new values for every pixel
                     number = value
                     from ._create import create
                     value = create((1, 1, num_coordinates))
                     from .._tier1 import set
                     set(value, number)
+                # overwrite pixels
+                from .._tier1 import write_values_to_positions
+                from .._tier2 import combine_vertically
                 values_and_positions = combine_vertically(coordinates, value)
                 write_values_to_positions(values_and_positions, self)
 
@@ -368,16 +369,15 @@ class OCLArray(array.Array, np.lib.mixins.NDArrayOperatorsMixin):
     def __getitem__(self, index):
         if isinstance(index, tuple) and isinstance(index[0], np.ndarray):
             if len(index) == len(self.shape) and len(index[0]) > 1:
-                # switch xy in 2D / xz in 3D, because clesperanto expects a X-Y-Z array;
+                # switch xy in 2D / xz in 3D, because clesperanto expects an X-Y-Z array;
                 # see also https://github.com/clEsperanto/pyclesperanto_prototype/issues/49
                 index = list(index)
                 index[0], index[-1] = index[-1], index[0]
-
-                # read values from positions
+                # send coordinates to GPU
                 coordinates = OCLArray.to_device(self.queue, np.asarray(index))
+                # read values from positions
                 from .._tier1 import read_intensities_from_positions
-                intensities = read_intensities_from_positions(coordinates, self)
-                return intensities
+                return read_intensities_from_positions(coordinates, self)
         result = super().__getitem__(index)
         if result.size == 1:
             return result.get()
