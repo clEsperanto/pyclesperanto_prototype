@@ -341,8 +341,10 @@ class OCLArray(array.Array, np.lib.mixins.NDArrayOperatorsMixin):
             return power_images(temp, x2, x1)
 
     def __setitem__(self, index, value):
-        if isinstance(index, tuple) and index and isinstance(index[0], np.ndarray):
-            if len(index) == len(self.shape) and len(index[0]) > 1:
+        if isinstance(index, list):
+            index = tuple(index)
+        if isinstance(index, (tuple, np.ndarray)) and index[0] is not None and isinstance(index[0], (tuple, list, np.ndarray)):
+            if len(index) == len(self.shape) and len(index[0]) > 0:
                 # switch xy in 2D / xz in 3D, because clesperanto expects an X-Y-Z array;
                 # see also https://github.com/clEsperanto/pyclesperanto_prototype/issues/49
                 index = list(index)
@@ -367,8 +369,11 @@ class OCLArray(array.Array, np.lib.mixins.NDArrayOperatorsMixin):
         return super().__setitem__(index, value)
 
     def __getitem__(self, index):
-        if isinstance(index, tuple) and isinstance(index[0], np.ndarray):
-            if len(index) == len(self.shape) and len(index[0]) > 1:
+        result = None
+        if isinstance(index, list):
+            index = tuple(index)
+        if isinstance(index, (tuple, np.ndarray)) and index[0] is not None and isinstance(index[0], (tuple, list, np.ndarray)):
+            if len(index) == len(self.shape) and len(index[0]) > 0:
                 # switch xy in 2D / xz in 3D, because clesperanto expects an X-Y-Z array;
                 # see also https://github.com/clEsperanto/pyclesperanto_prototype/issues/49
                 index = list(index)
@@ -377,12 +382,13 @@ class OCLArray(array.Array, np.lib.mixins.NDArrayOperatorsMixin):
                 coordinates = OCLArray.to_device(self.queue, np.asarray(index))
                 # read values from positions
                 from .._tier1 import read_intensities_from_positions
-                return read_intensities_from_positions(coordinates, self)
-        result = super().__getitem__(index)
-        if result.size == 1:
-            return result.get()
-        else:
-            return result
+                result = read_intensities_from_positions(coordinates, self)
+
+        if result is None:
+            result = super().__getitem__(index)
+        if result.size == 1 and isinstance(result, (OCLArray, cl.array.Array)):
+            result = result.get()
+        return result
 
     def _new_with_changes(
             self,
