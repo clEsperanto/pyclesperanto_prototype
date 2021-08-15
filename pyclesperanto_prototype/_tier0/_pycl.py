@@ -340,13 +340,58 @@ class OCLArray(array.Array, np.lib.mixins.NDArrayOperatorsMixin):
             from .._tier1 import power_images
             return power_images(temp, x2, x1)
 
-    def __getitem__(self, index):
-        try:
-            return super().__getitem__(index)
+    def __setitem__(self, index, value):
+        if isinstance(index, list):
+            index = tuple(index)
+        if isinstance(index, (tuple, np.ndarray)) and index[0] is not None and isinstance(index[0], (tuple, list, np.ndarray)):
+            if len(index) == len(self.shape):
+                if len(index[0]) > 0:
+                    # switch xy in 2D / xz in 3D, because clesperanto expects an X-Y-Z array;
+                    # see also https://github.com/clEsperanto/pyclesperanto_prototype/issues/49
+                    index = list(index)
+                    index[0], index[-1] = index[-1], index[0]
+                    # send coordinates to GPU
+                    coordinates = OCLArray.to_device(self.queue, np.asarray(index))
+                    num_coordinates = coordinates.shape[-1]
+                    if isinstance(value, (int, float)):
+                        # make an array containing new values for every pixel
+                        number = value
+                        from ._create import create
+                        value = create((1, 1, num_coordinates))
+                        from .._tier1 import set
+                        set(value, number)
+                    # overwrite pixels
+                    from .._tier1 import write_values_to_positions
+                    from .._tier2 import combine_vertically
+                    values_and_positions = combine_vertically(coordinates, value)
+                    write_values_to_positions(values_and_positions, self)
+                return
+        return super().__setitem__(index, value)
 
-        except IndexError:
-            raise IndexError(
-                "Accessing individual GPU-backed pixels is not fully supported. If you work in napari, use the menu Plugins > clEsperanto > Make labels editable. If you work in python, use numpy.asarray(image) to retrieve a fully accessible copy of the image.")
+    def __getitem__(self, index):
+        result = None
+        if isinstance(index, list):
+            index = tuple(index)
+        if isinstance(index, (tuple, np.ndarray)) and index[0] is not None and isinstance(index[0], (tuple, list, np.ndarray)):
+            if len(index) == len(self.shape):
+                if len(index[0]) > 0:
+                    # switch xy in 2D / xz in 3D, because clesperanto expects an X-Y-Z array;
+                    # see also https://github.com/clEsperanto/pyclesperanto_prototype/issues/49
+                    index = list(index)
+                    index[0], index[-1] = index[-1], index[0]
+                    # send coordinates to GPU
+                    coordinates = OCLArray.to_device(self.queue, np.asarray(index))
+                    # read values from positions
+                    from .._tier1 import read_intensities_from_positions
+                    result = read_intensities_from_positions(coordinates, self)
+                else:
+                    return []
+
+        if result is None:
+            result = super().__getitem__(index)
+        if result.size == 1 and isinstance(result, (OCLArray, cl.array.Array)):
+            result = result.get()
+        return result
 
     def _new_with_changes(
             self,
