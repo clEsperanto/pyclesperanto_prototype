@@ -341,12 +341,18 @@ class OCLArray(array.Array, np.lib.mixins.NDArrayOperatorsMixin):
             return power_images(temp, x2, x1)
 
     def __getitem__(self, index):
+        if isinstance(index, tuple) and isinstance(index[0], np.ndarray):
+            if len(index[0]) > len(self.shape):
+                raise NotImplementedError(
+                    "Accessing individual GPU-backed pixels is not fully supported. If you work in napari, use the menu Plugins > clEsperanto > Make labels editable. If you work in python, use numpy.asarray(image) to retrieve a fully accessible copy of the image.")
         try:
-            return super().__getitem__(index)
-
+            result = super().__getitem__(index)
+            if result.size == 1:
+                return result.get()
+            else:
+                return result
         except IndexError:
-            raise IndexError(
-                "Accessing individual GPU-backed pixels is not fully supported. If you work in napari, use the menu Plugins > clEsperanto > Make labels editable. If you work in python, use numpy.asarray(image) to retrieve a fully accessible copy of the image.")
+            raise NotImplementedError("wtf", str(type(index)), index)
 
     def _new_with_changes(
             self,
