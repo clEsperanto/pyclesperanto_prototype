@@ -3,7 +3,7 @@
 * It is now possible to read and write pixels in images using the syntax `image[([z1,z2], [y1,y2], [x1,x2])] = new_value`
 
 ## Bug fixes
-* When importing `pyclesperanto_prototype`, some functions in `pyopencl` stopped working (see [#130](https://github.com/clEsperanto/pyclesperanto_prototype/issues/130))
+* When importing `pyclesperanto_prototype`, some functions in `pyopencl` stopped working (see [#130](https://github.com/clEsperanto/pyclesperanto_prototype/issues/130)) (Thanks to Peter Sobolewski for reporting and Talley Lambert for support while fixing)
 * Operations crashed when a [dask](https://dask.org/) array was handed over as image parameter. That can happen in napari for example when opening CZI files.
 * z-position projections automatically created output images had a wrong size (x and y switched).
 
