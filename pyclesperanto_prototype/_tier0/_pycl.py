@@ -342,7 +342,7 @@ class OCLArray(array.Array, np.lib.mixins.NDArrayOperatorsMixin):
 
     def __getitem__(self, index):
         if isinstance(index, tuple) and isinstance(index[0], np.ndarray):
-            if len(index[0]) > len(self.shape):
+            if len(index) == len(self.shape) and len(index[0]) > 1:
                 raise NotImplementedError(
                     "Accessing individual GPU-backed pixels is not fully supported. If you work in napari, use the menu Plugins > clEsperanto > Make labels editable. If you work in python, use numpy.asarray(image) to retrieve a fully accessible copy of the image.")
         try:
