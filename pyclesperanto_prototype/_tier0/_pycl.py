@@ -344,27 +344,27 @@ class OCLArray(array.Array, np.lib.mixins.NDArrayOperatorsMixin):
         if isinstance(index, list):
             index = tuple(index)
         if isinstance(index, (tuple, np.ndarray)) and index[0] is not None and isinstance(index[0], (tuple, list, np.ndarray)):
-            if len(index) == len(self.shape) and len(index[0]) > 0:
-                # switch xy in 2D / xz in 3D, because clesperanto expects an X-Y-Z array;
-                # see also https://github.com/clEsperanto/pyclesperanto_prototype/issues/49
-                index = list(index)
-                index[0], index[-1] = index[-1], index[0]
-                # send coordinates to GPU
-                coordinates = OCLArray.to_device(self.queue, np.asarray(index))
-                num_coordinates = coordinates.shape[-1]
-                if isinstance(value, (int, float)):
-                    # make an array containing new values for every pixel
-                    number = value
-                    from ._create import create
-                    value = create((1, 1, num_coordinates))
-                    from .._tier1 import set
-                    set(value, number)
-                # overwrite pixels
-                from .._tier1 import write_values_to_positions
-                from .._tier2 import combine_vertically
-                values_and_positions = combine_vertically(coordinates, value)
-                write_values_to_positions(values_and_positions, self)
-
+            if len(index) == len(self.shape):
+                if len(index[0]) > 0:
+                    # switch xy in 2D / xz in 3D, because clesperanto expects an X-Y-Z array;
+                    # see also https://github.com/clEsperanto/pyclesperanto_prototype/issues/49
+                    index = list(index)
+                    index[0], index[-1] = index[-1], index[0]
+                    # send coordinates to GPU
+                    coordinates = OCLArray.to_device(self.queue, np.asarray(index))
+                    num_coordinates = coordinates.shape[-1]
+                    if isinstance(value, (int, float)):
+                        # make an array containing new values for every pixel
+                        number = value
+                        from ._create import create
+                        value = create((1, 1, num_coordinates))
+                        from .._tier1 import set
+                        set(value, number)
+                    # overwrite pixels
+                    from .._tier1 import write_values_to_positions
+                    from .._tier2 import combine_vertically
+                    values_and_positions = combine_vertically(coordinates, value)
+                    write_values_to_positions(values_and_positions, self)
                 return
         return super().__setitem__(index, value)
 
@@ -373,16 +373,19 @@ class OCLArray(array.Array, np.lib.mixins.NDArrayOperatorsMixin):
         if isinstance(index, list):
             index = tuple(index)
         if isinstance(index, (tuple, np.ndarray)) and index[0] is not None and isinstance(index[0], (tuple, list, np.ndarray)):
-            if len(index) == len(self.shape) and len(index[0]) > 0:
-                # switch xy in 2D / xz in 3D, because clesperanto expects an X-Y-Z array;
-                # see also https://github.com/clEsperanto/pyclesperanto_prototype/issues/49
-                index = list(index)
-                index[0], index[-1] = index[-1], index[0]
-                # send coordinates to GPU
-                coordinates = OCLArray.to_device(self.queue, np.asarray(index))
-                # read values from positions
-                from .._tier1 import read_intensities_from_positions
-                result = read_intensities_from_positions(coordinates, self)
+            if len(index) == len(self.shape):
+                if len(index[0]) > 0:
+                    # switch xy in 2D / xz in 3D, because clesperanto expects an X-Y-Z array;
+                    # see also https://github.com/clEsperanto/pyclesperanto_prototype/issues/49
+                    index = list(index)
+                    index[0], index[-1] = index[-1], index[0]
+                    # send coordinates to GPU
+                    coordinates = OCLArray.to_device(self.queue, np.asarray(index))
+                    # read values from positions
+                    from .._tier1 import read_intensities_from_positions
+                    result = read_intensities_from_positions(coordinates, self)
+                else:
+                    return []
 
         if result is None:
             result = super().__getitem__(index)
