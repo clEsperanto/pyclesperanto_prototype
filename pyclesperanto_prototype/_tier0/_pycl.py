@@ -341,7 +341,7 @@ class OCLArray(array.Array, np.lib.mixins.NDArrayOperatorsMixin):
             return power_images(temp, x2, x1)
 
     def __setitem__(self, index, value):
-        if isinstance(index, tuple) and isinstance(index[0], np.ndarray):
+        if isinstance(index, tuple) and index and isinstance(index[0], np.ndarray):
             if len(index) == len(self.shape) and len(index[0]) > 1:
                 # switch xy in 2D / xz in 3D, because clesperanto expects an X-Y-Z array;
                 # see also https://github.com/clEsperanto/pyclesperanto_prototype/issues/49
