@@ -8,7 +8,7 @@ def test_np_asarray():
 
     assert data.dtype == cl_data.dtype
 
-    assert data.dtype == np.asarray(cl_data.dtype)
+    assert data.dtype == np.asarray(cl_data).dtype
 
     labels = cle.voronoi_otsu_labeling(cl_data)
     print(labels.dtype)
