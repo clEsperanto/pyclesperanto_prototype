@@ -18,10 +18,13 @@ def _fix_shape(arr, shape):
         return arr
     if isinstance(arr, OCLArray):
         # TODO
-        raise NotImplementedError("Cannot not resize/convert array to complex type..")
-        # result = OCLArray.empty(shape, arr.dtype)
-        # set(result, 0)
-        # paste(arr, result)
+        #raise NotImplementedError("Cannot not resize/convert array to complex type..")
+        from .._tier0 import create
+        from .._tier1 import set, paste
+
+        result = create(shape, arr.dtype)
+        set(result, 0)
+        paste(arr, result)
     if isinstance(arr, np.ndarray):
         result = np.zeros(shape, dtype=arr.dtype)
         result[tuple(slice(i) for i in arr.shape)] = arr

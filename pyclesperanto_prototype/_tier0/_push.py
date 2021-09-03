@@ -27,7 +27,7 @@ def push(any_array, dtype=None):
     ----------
     .. [1] https://clij.github.io/clij2-docs/reference_push
     """
-    if isinstance(any_array, OCLArray):
+    if isinstance(any_array, OCLArray) and (dtype is None or dtype == any_array.dtype):
         return any_array
 
     if isinstance(any_array, (list, tuple)):
