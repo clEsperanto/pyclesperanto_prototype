@@ -140,5 +140,5 @@ cython_debug/
 .vscode/settings.json
 /.idea/
 .DS_STORE
-Untitled.ipynb
+Untitled*
 test.tif
