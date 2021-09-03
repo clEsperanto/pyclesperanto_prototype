@@ -6,7 +6,11 @@ from .._tier1 import set_column
 
 @plugin_function(categories=['combine', 'label measurement', 'map', 'in assistant'], priority=-1)
 def label_minimum_intensity_map(intensity_image : Image, labels : Image, minimum_intensity_map : Image = None):
-    """
+    """Takes an image and a corresponding label map,
+    determines the minimum intensity per label and
+    replaces every label with the that number.
+
+    This results in a parametric image expressing minimum object intensity.
 
     Parameters
     ----------
@@ -17,6 +21,9 @@ def label_minimum_intensity_map(intensity_image : Image, labels : Image, minimum
     Returns
     -------
 
+    References
+    ----------
+    .. [1] https://clij.github.io/clij2-docs/reference_minimumIntensityMap
     """
     from .._tier9 import statistics_of_background_and_labelled_pixels
 

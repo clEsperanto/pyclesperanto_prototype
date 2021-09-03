@@ -8,9 +8,7 @@ from .._tier1 import replace_intensities
 def local_standard_deviation_touching_neighbor_count_map(input : Image, destination : Image = None):
     """Takes a label map, determines which labels touch and replaces every 
     label with the number of touching neighboring labels.
-    
-     
-    
+
     Parameters
     ----------
     input : Image

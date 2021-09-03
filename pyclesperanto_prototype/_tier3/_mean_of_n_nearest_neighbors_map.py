@@ -20,6 +20,10 @@ def mean_of_n_nearest_neighbors_map(parametric_map : Image, label_map : Image, p
     Returns
     -------
     parametric_map_destination
+
+    References
+    ----------
+    .. [1] https://clij.github.io/clij2-docs/reference_meanOfNNearestNeighbors
     """
     from .._tier1 import copy
     from .._tier1 import generate_touch_matrix
@@ -41,6 +45,8 @@ def mean_of_n_nearest_neighbors_map(parametric_map : Image, label_map : Image, p
     intensities = read_intensities_from_map(label_map, parametric_map)
 
     new_intensities = mean_of_touching_neighbors(intensities, touch_matrix)
+
+    set_column(new_intensities, 0, 0)
 
     parametric_map_destination = replace_intensities(label_map, new_intensities, parametric_map_destination)
 

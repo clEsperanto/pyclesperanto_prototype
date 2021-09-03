@@ -26,6 +26,7 @@ from ._create import (
 from ._execute import execute
 from ._operations import operation
 from ._operations import operations
+from ._operations import search_operation_names
 from ._pull import pull_zyx
 from ._pull import pull
 from ._pull import pull as nparray
@@ -35,7 +36,7 @@ from ._push import push as asarray
 from ._plugin_function import plugin_function
 from ._types import Image
 from ._cl_info import cl_info
-from ._pycl import get_device, select_device, set_device_scoring_key
+from ._device import get_device, select_device, set_device_scoring_key
 from ._cl_image import create_image, empty_image_like, empty_image
 from ._available_device_names import available_device_names
 from ._set_wait_for_kernel_finish import set_wait_for_kernel_finish

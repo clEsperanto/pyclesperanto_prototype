@@ -22,7 +22,7 @@ def label_pixel_count_map(input : Image, destination : Image = None):
     
     References
     ----------
-    .. [1] https://clij.github.io/clij2-docs/reference_labelPixelCountMap
+    .. [1] https://clij.github.io/clij2-docs/reference_pixelCountMap
     """
     from .._tier9 import statistics_of_background_and_labelled_pixels
     from .._tier9 import push_regionprops_column

@@ -20,6 +20,10 @@ def mode_of_n_nearest_neighbors_map(parametric_map : Image, label_map : Image, p
     Returns
     -------
     parametric_map_destination
+
+    References
+    ----------
+    .. [1] https://clij.github.io/clij2-docs/reference_modeOfNNearestNeighbors
     """
     from .._tier1 import read_intensities_from_map
     from .._tier2 import mode_of_touching_neighbors

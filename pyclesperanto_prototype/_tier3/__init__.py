@@ -1,7 +1,8 @@
 from ._absolute_difference import absolute_difference
 from ._bounding_box import bounding_box
 from ._center_of_mass import center_of_mass
-from ._close_index_gaps_in_label_map import close_index_gaps_in_label_map
+from ._relabel_sequential import relabel_sequential
+from ._relabel_sequential import relabel_sequential as close_index_gaps_in_label_map
 from ._difference_of_gaussian import difference_of_gaussian
 from ._divide_by_gaussian_background import divide_by_gaussian_background
 from ._exclude_labels import exclude_labels
@@ -40,3 +41,4 @@ from ._standard_deviation_of_proximal_neighbors_map import standard_deviation_of
 from ._standard_deviation_of_proximal_neighbors_map import standard_deviation_of_proximal_neighbors_map as standard_deviation_of_distal_neighbors_map
 
 from ._subtract_gaussian_background import subtract_gaussian_background
+from ._z_position_range_projection import z_position_range_projection

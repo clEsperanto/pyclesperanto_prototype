@@ -6,7 +6,12 @@ from .._tier1 import set_column
 
 @plugin_function(categories=['label measurement', 'map', 'in assistant'])
 def label_maximum_extension_ratio_map(labels : Image, destination : Image = None):
-    """
+    """Takes a label map, determines for every label the extension
+    ratio and replaces every label with the that number.
+
+    The extension ratio is the maximum distance of any pixel in the
+    label to the label centroid divided by the average distance of
+    all pixels in the label to the centroid.
     
     Parameters
     ----------
@@ -19,6 +24,7 @@ def label_maximum_extension_ratio_map(labels : Image, destination : Image = None
     
     References
     ----------
+    .. [1] https://clij.github.io/clij2-docs/reference_extensionRatioMap
     """
     from .._tier9 import statistics_of_background_and_labelled_pixels
     from .._tier9 import push_regionprops_column

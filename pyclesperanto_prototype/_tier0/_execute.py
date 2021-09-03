@@ -5,7 +5,9 @@ from pathlib import Path
 import numpy as np
 
 import pyopencl as cl
-from ._pycl import OCLProgram, _OCLImage
+from ._pycl import _OCLImage
+from ._device import Device
+from ._program import OCLProgram
 
 if not os.getenv("PYOPENCL_COMPILER_OUTPUT"):
     import warnings
@@ -68,7 +70,7 @@ IMAGE_HEADER = COMMON_HEADER + """
 #define WRITE_{key}_IMAGE(a,b,c) write_image{typeId}(a,b,c)
 """
 
-def execute(anchor, opencl_kernel_filename, kernel_name, global_size, parameters, prog : OCLProgram = None, constants = None, image_size_independent_kernel_compilation : bool = True):
+def execute(anchor, opencl_kernel_filename, kernel_name, global_size, parameters, prog : OCLProgram = None, constants = None, image_size_independent_kernel_compilation : bool = True, device: Device = None):
     """
     Convenience method for calling opencl kernel files
 
@@ -147,9 +149,7 @@ def execute(anchor, opencl_kernel_filename, kernel_name, global_size, parameters
                 pixel_type = "float"
                 type_id = "f"
             else:
-                raise TypeError(
-                    "Type " + type(value) + " is currently supported for buffers/arrays"
-                )
+                raise TypeError(f"Type {value.dtype} is currently unsupported for buffers/arrays")
 
             # image type handling
             depth_height_width = [1, 1, 1]
@@ -219,9 +219,7 @@ def execute(anchor, opencl_kernel_filename, kernel_name, global_size, parameters
                 pixel_type = "float"
                 type_id = "f"
             else:
-                raise TypeError(
-                    "Type " + type(value) + " is currently supported for buffers/arrays"
-                )
+                raise TypeError(f"Type {value.dtype} is currently unsupported for buffers/arrays")
 
             # image type handling
             depth_height_width = [1, 1, 1]
@@ -278,8 +276,12 @@ def execute(anchor, opencl_kernel_filename, kernel_name, global_size, parameters
         # time_stamp = time.time()
 
         defines.append(get_ocl_source(anchor, opencl_kernel_filename))
-        
-        prog = OCLProgram.from_source("\n".join(defines))
+
+        if device is None:
+            from ._device import get_device
+            device = get_device()
+        prog = device.program_from_source("\n".join(defines))
+        #prog = OCLProgram.from_source("\n".join(defines))
 
         # Todo: the order of the arguments matters; fix that
         # print("Compilation " + opencl_kernel_filename + " took " + str((time.time() - time_stamp) * 1000) + " ms")

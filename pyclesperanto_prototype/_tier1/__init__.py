@@ -75,6 +75,8 @@ from ._mean_sphere import mean_sphere
 from ._mean_x_projection import mean_x_projection
 from ._mean_y_projection import mean_y_projection
 from ._mean_z_projection import mean_z_projection
+from ._median_box import median_box
+from ._median_sphere import median_sphere
 from ._minimum_box import minimum_box
 from ._minimum_distance_of_touching_neighbors import minimum_distance_of_touching_neighbors
 from ._minimum_image_and_scalar import minimum_image_and_scalar
@@ -135,6 +137,8 @@ from ._transpose_xy import transpose_xy
 from ._transpose_xz import transpose_xz
 from ._transpose_yz import transpose_yz
 from ._undefined_to_zero import undefined_to_zero
+from ._variance_box import variance_box
+from ._variance_sphere import variance_sphere
 from ._write_values_to_positions import write_values_to_positions
 
 

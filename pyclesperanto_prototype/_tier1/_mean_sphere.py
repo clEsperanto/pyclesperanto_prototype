@@ -7,8 +7,8 @@ from .._tier0 import Image
 def mean_sphere(source : Image, destination : Image = None, radius_x : float = 1, radius_y : float = 1, radius_z : float = 1):
     """Computes the local mean average of a pixels spherical neighborhood. 
     
-    The spheres size is specified by 
-    its half-width, half-height and half-depth (radius). 
+    The spheres size is specified by its half-width, half-height and
+    half-depth (radius).
     
     Parameters
     ----------
@@ -47,3 +47,5 @@ def mean_sphere(source : Image, destination : Image = None, radius_x : float = 1
     if (len(destination.shape) == 3):
         parameters.update({"Nz":int(kernel_size_z)});
     execute(__file__, '../clij-opencl-kernels/kernels/mean_sphere_' + str(len(destination.shape)) + 'd_x.cl', 'mean_sphere_' + str(len(destination.shape)) + 'd', destination.shape, parameters);
+
+    return destination

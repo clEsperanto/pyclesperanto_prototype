@@ -3,7 +3,7 @@ from .._tier0 import execute
 from .._tier0 import plugin_function
 from .._tier0 import Image
 
-@plugin_function(categories=['filter'])
+@plugin_function(categories=['filter', 'in assistant'])
 def maximum_image_and_scalar(source : Image, destination : Image = None, scalar : float = 0):
     """Computes the maximum of a constant scalar s and each pixel value x in a 
     given image X. 

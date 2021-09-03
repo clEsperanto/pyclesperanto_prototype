@@ -10,7 +10,7 @@ from .._tier2 import sum_reduction_x
 from .._tier2 import block_enumerate
 
 @plugin_function(output_creator=create_labels_like)
-def close_index_gaps_in_label_map(input : Image, output : Image = None, blocksize = 4096):
+def relabel_sequential(input : Image, output : Image = None, blocksize : int = 4096):
     """Analyses a label map and if there are gaps in the indexing (e.g. label 
     5 is not present) all 
     subsequent labels will be relabelled. 
@@ -22,6 +22,9 @@ def close_index_gaps_in_label_map(input : Image, output : Image = None, blocksiz
     ----------
     labeling_input : Image
     labeling_destination : Image
+    blocksize : int, optional
+        Renumbering is done in blocks for performance reasons.
+        Change the blocksize to adapt to your data and hardware
     
     Returns
     -------
@@ -30,7 +33,7 @@ def close_index_gaps_in_label_map(input : Image, output : Image = None, blocksiz
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
-    >>> cle.close_index_gaps_in_label_map(labeling_input, labeling_destination)
+    >>> cle.relabel_sequential(labeling_input, labeling_destination)
     
     References
     ----------

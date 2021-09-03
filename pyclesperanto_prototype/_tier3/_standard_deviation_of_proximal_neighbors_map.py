@@ -22,6 +22,10 @@ def standard_deviation_of_proximal_neighbors_map(parametric_map : Image, label_m
     Returns
     -------
     parametric_map_destination
+
+    References
+    ----------
+    .. [1] https://clij.github.io/clij2-docs/reference_standardDeviationOfProximalNeighbors
     """
     from .._tier1 import read_intensities_from_map
     from .._tier2 import standard_deviation_of_touching_neighbors

@@ -52,4 +52,6 @@ def generate_n_nearest_neighbors_matrix(distance_matrix :Image, touch_matrix_des
 
     touch_matrix_destination = point_index_list_to_touch_matrix(index_list, touch_matrix_destination)
 
+    set_column(touch_matrix_destination, 0, 0) # no label touches the background
+
     return touch_matrix_destination

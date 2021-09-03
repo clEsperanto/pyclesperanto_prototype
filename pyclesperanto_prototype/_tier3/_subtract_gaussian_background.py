@@ -22,6 +22,7 @@ def subtract_gaussian_background(input : Image, destination : Image = None, sigm
     
     References
     ----------
+    ..[1] https://clij.github.io/clij2-docs/reference_subtractGaussianBackground
     """
     temp1 = create_like(destination)
 

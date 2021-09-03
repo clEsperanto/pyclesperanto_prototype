@@ -1,3 +1,83 @@
+# 0.10.0 - August 15th 2021
+## New features
+* It is now possible to read and write pixels in images using the syntax `image[([z1,z2], [y1,y2], [x1,x2])] = new_value`
+
+## Bug fixes
+* When importing `pyclesperanto_prototype`, some functions in `pyopencl` stopped working (see [#130](https://github.com/clEsperanto/pyclesperanto_prototype/issues/130)) (Thanks to Peter Sobolewski for reporting and Talley Lambert for support while fixing)
+* Operations crashed when a [dask](https://dask.org/) array was handed over as image parameter. That can happen in napari for example when opening CZI files.
+* z-position projections automatically created output images had a wrong size (x and y switched).
+
+## Backwards compatiblity breaking changes
+* Instead of manipulating internal sturctures of pyopencl (in particular `cl.array.Array`), we now ship an own image class, `OCLArray`. 
+  Thus, it is possible that operators directly applied to images produced by pyclesperanto don't work anymore. 
+  If you experience any issues, [please report them](https://github.com/clEsperanto/pyclesperanto_prototype/issues).
+
+# 0.9.9 - August 1st 2021
+## New features
+* `relabel_sequential`, similar to scikit-image (formely known as `close_index_gaps_in_label_maps`)
+* `erode_labels`
+* `extend_labels_with_maximum_radius` has been renamed to `dilate_labels`, an alias to the old method is kept as well
+* `exclude_small_labels` as shortcut / convenience function to `exclude_labels_out_of_size_range`
+* `exclude_large_labels` as shortcut / convenience function to `exclude_labels_out_of_size_range`
+* `search_operation_names` for searching in the clesperanto API
+
+## Bug fixes
+* Switching GPUs using `select_device` made operations fail that were executed before switching ([#110](https://github.com/clEsperanto/pyclesperanto_prototype/issues/110))
+
+# 0.9.7 - July 15th 2021
+## Bug fixes
+* `multiply_matrix` wasn't capable of creating / allocating memory for an output image 
+
+# 0.9.5 - July 11th 2021
+## Bug fixes
+* `skimage.io.imsave` caused errors with oclarrays, also in napari
+* `standard_deviation_z_projection` had wrong output size per default
+
+## New features
+* `median_box`
+* `median_sphere`
+* `extended_depth_of_focus_variance_projection`  
+* `variance_box` filter
+* `variance_sphere` filter
+* `z_position_of_maximum_z_projection` and alias `arg_maximum_z_projection`
+* `z_position_of_minimum_z_projection` and alias `arg_minimum_z_projection`
+* `z_position_projection`
+* `z_position_range_projection`
+
+## Miscellaneous
+* `invert` was removed from the assistant user interface. It does not do the same as in ImageJ and/or scikit-image. Thus, it might change in the future. See also https://github.com/clEsperanto/pyclesperanto_prototype/issues/123
+* better documentation for `threshold_otsu`, `voronoi_otsu_labeling` and minor others
+
+# 0.9.4 - July 3rd 2021
+## Bug fixes
+* Relax dependencies: pyopencl-version is no longer pinned. This should simplify installation.
+
+## New features
+* Improved interoperability with [cupy](https://cupy.dev/). You can now process images from clesperanto and cupy using syntax like `result = cle_image + cupy_image`. Note: This will pull/push the image from cupy to clesperanto. Thus, it might not be very performant.
+* More operations have been marked as compatible with the [assistant](https://www.napari-hub.org/plugins/napari-pyclesperanto-assistant).
+
+# 0.9.2 - June 26th 2021
+## New features
+Added aliases for compatibility with [clij 2.5](https://clij.github.io/clij2-docs/clij25_transition_notes)
+* added alias `dilate_labels` for `extend_labels_with_maximum_radius`
+* added alias `mean_intensity_map` for `label_mean_intensity_map`
+* added alias `mean_extension_map` for `label_mean_extension_map`
+* added alias `maximum_extension_map` for `label_maximum_extension_map`
+* added alias `extension_ratio_map` for `label_maximum_extension_ratio_map`
+* added alias `maximum_intensity_map` for `label_maximum_intensity_map`
+* added alias `minimum_intensity_map` for `label_minimum_intensity_map`
+* added alias `pixel_count_map` for `label_pixel_count_map`
+* added alias `standard_deviation_intensity_map` for `label_standard_deviation_intensity_map`
+
+## Bug fixes
+* The `touching_neighbor_count_map` does not count background as neighbor anymore.
+* Removed debug traces in `exclude_labels_with_values_within_range`
+* `mean_sphere` returned always `None`
+
+## Miscellaneous 
+* Standard-deviation-Z-projection is now shown in the assistant user interface
+
+
 # 0.9.1 - May 19th 2021
 ## New features
 * `cle.operations` now supports strings as parameters and lists of strings (as before)

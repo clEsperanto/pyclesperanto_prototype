@@ -21,10 +21,13 @@ def standard_deviation_of_touching_neighbors_map(parametric_map : Image, label_m
     radius : int
     ignore_touching_background : bool
 
-    
     Returns
     -------
     parametric_map_destination
+
+    References
+    ----------
+    .. [1] https://clij.github.io/clij2-docs/reference_standardDeviationOfTouchingNeighbors
     """
     from .._tier1 import copy
     from .._tier1 import generate_touch_matrix

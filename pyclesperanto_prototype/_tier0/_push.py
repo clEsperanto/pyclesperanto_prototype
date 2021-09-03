@@ -33,9 +33,11 @@ def push(any_array, dtype=None):
     if isinstance(any_array, (list, tuple)):
         any_array = np.asarray(any_array)
 
-    _arr = any_array.astype(np.float32 if dtype is None else dtype)
-    return OCLArray.from_array(_arr)
+    if hasattr(any_array, 'shape') and hasattr(any_array, 'dtype') and hasattr(any_array, 'get'):
+        any_array = np.asarray(any_array.get())
 
+    float_arr = any_array.astype(np.float32 if dtype is None else dtype)
+    return OCLArray.from_array(float_arr)
 
 def push_zyx(any_array):
     import warnings

@@ -37,7 +37,6 @@ def proximal_neighbor_count_map(source : Image, destination : Image = None, min_
     distance_matrix = generate_distance_matrix(pointlist, pointlist)
 
     touch_matrix = generate_proximal_neighbors_matrix(distance_matrix, min_distance=min_distance, max_distance=max_distance)
-    print(touch_matrix)
     number_of_touching_neighbors_vector = count_touching_neighbors(touch_matrix)
 
     # ignore how many objects touch the background
