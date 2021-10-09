@@ -1,3 +1,5 @@
+import numpy as np
+
 def pull(oclarray):
     """Returns an image from GPU memory as numpy compatible array
 
@@ -22,7 +24,7 @@ def pull(oclarray):
     ----------
     .. [1] https://clij.github.io/clij2-docs/reference_pull
     """
-    return oclarray.get()
+    return np.asarray(oclarray)
 
 def pull_zyx(oclarray):
     import warnings
