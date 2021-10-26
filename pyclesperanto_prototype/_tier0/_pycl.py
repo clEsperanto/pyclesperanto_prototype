@@ -1,5 +1,6 @@
 import os
 import sys
+import warnings
 
 import numpy as np
 import pyopencl as cl
@@ -32,12 +33,16 @@ cl_buffer_datatype_dict = {
     np.int64: "long",
     np.float32: "float",
     np.complex64: "cfloat_t",
+    int: "int",
+    float: "float",
+    np.float64: "float",
 }
 
 
 if characterize.has_double_support(get_device().device):
     cl_buffer_datatype_dict[np.float64] = "double"
-
+else:
+    warnings.warn("Data type double is not supported by your GPU. Will use float instead.")
 
 def abspath(myPath):
     """ Get absolute path to resource, works for dev and for PyInstaller """
@@ -146,6 +151,14 @@ class OCLArray(array.Array, np.lib.mixins.NDArrayOperatorsMixin):
             region=img.shape,
             **kwargs,
         )
+
+    def astype(self, dtype, copy=None):
+        from ._create import create
+        if dtype == float or dtype == np.float64:
+            dtype = np.float32
+        copied = create(self.shape, dtype=dtype)
+        from .._tier1 import copy
+        return copy(self, copied)
 
     def wrap_module_func(mod, f):
         def func(self, *args, **kwargs):
