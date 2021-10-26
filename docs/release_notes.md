@@ -1,3 +1,7 @@
+# 0.10.4 - October 26th 2021
+## Bug fixes
+* scikit-image regionprops crashed when passing a pyclesperanto labels image
+
 # 0.10.0 - August 15th 2021
 ## New features
 * It is now possible to read and write pixels in images using the syntax `image[([z1,z2], [y1,y2], [x1,x2])] = new_value`
