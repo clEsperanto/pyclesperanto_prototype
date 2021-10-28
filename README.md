@@ -391,6 +391,7 @@ your use-case scenario and benchmark on your target hardware. If you have differ
 welcome to submit your notebook as pull-request!
 
 * [Affine transforms](http://github.com/clEsperanto/pyclesperanto_prototype/blob/master/benchmarks/affine_transforms.ipynb)
+* [Background subtraction](http://github.com/clEsperanto/pyclesperanto_prototype/blob/master/benchmarks/top_hat.ipynb)
 * [Gaussian blur](http://github.com/clEsperanto/pyclesperanto_prototype/blob/master/benchmarks/gaussian_blur.ipynb)
 * [Convolution](http://github.com/clEsperanto/pyclesperanto_prototype/blob/master/benchmarks/convolution.ipynb)
 * [Otsu's thresholding](http://github.com/clEsperanto/pyclesperanto_prototype/blob/master/benchmarks/threshold_otsu.ipynb)
