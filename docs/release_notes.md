@@ -1,3 +1,17 @@
+# 0.10.7 - October 30th 2021
+## New features
+* `imshow` has a new optional parameter: `colorbar`
+* added `label_nonzero_pixel_count_map`
+* added `label_nonzero_pixel_count_ratio_map`
+* added `label_overlap_count_map`
+
+## Bug fixes
+* `imshow` uses the same colormap when visualizing label images
+
+# 0.10.5 - October 29th 2021
+## Bug fixes
+* imshow(numpy array) crashed
+
 # 0.10.4 - October 26th 2021
 ## Bug fixes
 * scikit-image regionprops crashed when passing a pyclesperanto labels image
