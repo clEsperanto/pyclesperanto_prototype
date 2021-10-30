@@ -13,10 +13,12 @@ def imshow(image : Image, title : str = None, labels : bool = False, min_display
     if labels:
         import matplotlib
         import numpy as np
-        
-        lut = np.random.rand ( 256,3)
-        lut[0,:] = 0
-        cmap = matplotlib.colors.ListedColormap ( lut )
+
+        if not hasattr(imshow, "labels_cmap"):
+            lut = np.random.rand(65537, 3)
+            lut[0, :] = 0
+            imshow.labels_cmap = matplotlib.colors.ListedColormap(lut)
+        cmap = imshow.labels_cmap
 
     if plot is None:
         import matplotlib.pyplot as plt
