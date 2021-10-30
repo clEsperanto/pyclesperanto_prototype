@@ -1,4 +1,5 @@
 from ._connected_components_labeling_box import connected_components_labeling_box
+from ._connected_components_labeling_box import connected_components_labeling_box as label
 from ._erode_labels import erode_labels
 from ._exclude_large_labels import exclude_large_labels
 from ._exclude_small_labels import exclude_small_labels
