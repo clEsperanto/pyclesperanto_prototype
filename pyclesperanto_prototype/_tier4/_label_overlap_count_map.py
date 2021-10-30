@@ -2,7 +2,7 @@ from .._tier0 import Image
 from .._tier0 import plugin_function
 
 
-@plugin_function()
+@plugin_function(categories=['label measurement', 'combine', 'map', 'label comparison', 'in assistant'])
 def label_overlap_count_map(label_map1: Image, label_map2: Image, overlap_count_map_destination: Image = None):
     """
     Takes two label maps, and counts for every label in label map 1 how many labels overlap with it in label map 2.
