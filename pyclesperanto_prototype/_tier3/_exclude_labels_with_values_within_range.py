@@ -36,7 +36,6 @@ def exclude_labels_with_values_within_range(values_vector : Image, label_map_inp
     greater_or_equal_constant(values_vector, above, minimum_value_range)
 
     binary_and(below, above, flaglist_vector)
-    print(flaglist_vector)
 
     from .._tier3 import exclude_labels
     label_map_destination = exclude_labels(flaglist_vector, label_map_input, label_map_destination)
