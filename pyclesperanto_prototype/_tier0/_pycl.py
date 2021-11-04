@@ -73,6 +73,8 @@ def assert_bufs_type(mytype, *bufs):
 def prepare(arr):
     return np.require(arr, None, "C")
 
+_supported_numeric_types = (int, float, np.uint16)
+
 class OCLArray(array.Array, np.lib.mixins.NDArrayOperatorsMixin):
 
 
@@ -231,7 +233,7 @@ class OCLArray(array.Array, np.lib.mixins.NDArrayOperatorsMixin):
     def __iadd__(x1, x2):
         from .._tier1 import copy
         temp = copy(x1)
-        if isinstance(x2, (int, float)) :
+        if isinstance(x2, _supported_numeric_types) :
             from .._tier1 import add_image_and_scalar
             return add_image_and_scalar(temp, x1, scalar=x2)
         else:
@@ -239,7 +241,7 @@ class OCLArray(array.Array, np.lib.mixins.NDArrayOperatorsMixin):
             return add_images_weighted(temp, x2, x1)
 
     def __sub__(x1, x2):
-        if isinstance(x2, (int, float)):
+        if isinstance(x2, _supported_numeric_types):
             from .._tier1 import add_image_and_scalar
             return add_image_and_scalar(x1, scalar=-x2)
         else:
@@ -247,7 +249,7 @@ class OCLArray(array.Array, np.lib.mixins.NDArrayOperatorsMixin):
             return add_images_weighted(x1, x2, factor2=-1)
 
     def __div__(x1, x2):
-        if isinstance(x2, (int, float)):
+        if isinstance(x2, _supported_numeric_types):
             from .._tier1 import multiply_image_and_scalar
             return multiply_image_and_scalar(x1, scalar=1.0 / x2)
         else:
@@ -259,7 +261,7 @@ class OCLArray(array.Array, np.lib.mixins.NDArrayOperatorsMixin):
     def __idiv__(x1, x2):
         from .._tier1 import copy
         temp = copy(x1)
-        if isinstance(x2, (int, float)):
+        if isinstance(x2, _supported_numeric_types):
             from .._tier1 import multiply_image_and_scalar
             return multiply_image_and_scalar(temp, x1, scalar=1.0 / x2)
         else:
@@ -270,7 +272,7 @@ class OCLArray(array.Array, np.lib.mixins.NDArrayOperatorsMixin):
         return x1.__idiv__(x2)
 
     def __mul__(x1, x2):
-        if isinstance(x2, (int, float)):
+        if isinstance(x2, _supported_numeric_types):
             from .._tier1 import multiply_image_and_scalar
             return multiply_image_and_scalar(x1, scalar=x2)
         else:
@@ -280,7 +282,7 @@ class OCLArray(array.Array, np.lib.mixins.NDArrayOperatorsMixin):
     def __imul__(x1, x2):
         from .._tier1 import copy
         temp = copy(x1)
-        if isinstance(x2, (int, float)):
+        if isinstance(x2, _supported_numeric_types):
             from .._tier1 import multiply_image_and_scalar
             return multiply_image_and_scalar(temp, x1, scalar=x2)
         else:
@@ -288,7 +290,7 @@ class OCLArray(array.Array, np.lib.mixins.NDArrayOperatorsMixin):
             return multiply_images(temp, x2, x1)
 
     def __gt__(x1, x2):
-        if isinstance(x2, (int, float)):
+        if isinstance(x2, _supported_numeric_types):
             from .._tier1 import greater_constant
             return greater_constant(x1, constant=x2)
         else:
@@ -296,7 +298,7 @@ class OCLArray(array.Array, np.lib.mixins.NDArrayOperatorsMixin):
             return greater(x1, x2)
 
     def __ge__(x1, x2):
-        if isinstance(x2, (int, float)):
+        if isinstance(x2, _supported_numeric_types):
             from .._tier1 import greater_or_equal_constant
             return greater_or_equal_constant(x1, constant=x2)
         else:
@@ -304,7 +306,7 @@ class OCLArray(array.Array, np.lib.mixins.NDArrayOperatorsMixin):
             return greater_or_equal(x1, x2)
 
     def __lt__(x1, x2):
-        if isinstance(x2, (int, float)):
+        if isinstance(x2, _supported_numeric_types):
             from .._tier1 import smaller_constant
             return smaller_constant(x1, constant=x2)
         else:
@@ -312,7 +314,7 @@ class OCLArray(array.Array, np.lib.mixins.NDArrayOperatorsMixin):
             return smaller(x1, x2)
 
     def __le__(x1, x2):
-        if isinstance(x2, (int, float)):
+        if isinstance(x2, _supported_numeric_types):
             from .._tier1 import smaller_or_equal_constant
             return smaller_or_equal_constant(x1, constant=x2)
         else:
@@ -320,7 +322,7 @@ class OCLArray(array.Array, np.lib.mixins.NDArrayOperatorsMixin):
             return smaller_or_equal(x1, x2)
 
     def __eq__(x1, x2):
-        if isinstance(x2, (int, float)):
+        if isinstance(x2, _supported_numeric_types):
             from .._tier1 import equal_constant
             return equal_constant(x1, constant=x2)
         else:
@@ -328,7 +330,7 @@ class OCLArray(array.Array, np.lib.mixins.NDArrayOperatorsMixin):
             return equal(x1, x2)
 
     def __ne__(x1, x2):
-        if isinstance(x2, (int, float)):
+        if isinstance(x2, _supported_numeric_types):
             from .._tier1 import not_equal_constant
             return not_equal_constant(x1, constant=x2)
         else:
@@ -336,7 +338,7 @@ class OCLArray(array.Array, np.lib.mixins.NDArrayOperatorsMixin):
             return not_equal(x1, x2)
 
     def __pow__(x1, x2):
-        if isinstance(x2, (int, float)):
+        if isinstance(x2, _supported_numeric_types):
             from .._tier1 import power
             return power(x1, exponent=x2)
         else:
@@ -346,7 +348,7 @@ class OCLArray(array.Array, np.lib.mixins.NDArrayOperatorsMixin):
     def __ipow__(x1, x2):
         from .._tier1 import copy
         temp = copy(x1)
-        if isinstance(x2, (int, float)):
+        if isinstance(x2, _supported_numeric_types):
             from .._tier1 import power
             return power(temp, x1, exponent=x2)
         else:

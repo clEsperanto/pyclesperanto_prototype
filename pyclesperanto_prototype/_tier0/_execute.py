@@ -261,14 +261,16 @@ def execute(anchor, opencl_kernel_filename, kernel_name, global_size, parameters
             if not image_size_independent_kernel_compilation:
                 defines.extend(SIZE_HEADER.format(**params).split("\n"))
 
-        elif isinstance(value, int):
+        elif isinstance(value, int) or isinstance(value, np.uint16):
             arguments.append(np.array([value], np.int32))
         elif isinstance(value, float):
             arguments.append(np.array([value], np.float32))
         else:
+            var_type = str(type(value))
             raise TypeError(
                 f"other types than float and int aren`t supported yet for parameters {key} : {value} . \n"
                 f"function {kernel_name}"
+                f"type {var_type}"
             )
 
     # print("Assembling " + opencl_kernel_filename + " took " + str((time.time() - time_stamp) * 1000) + " ms")
