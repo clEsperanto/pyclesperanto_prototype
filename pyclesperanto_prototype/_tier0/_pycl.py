@@ -38,6 +38,8 @@ cl_buffer_datatype_dict = {
     np.float64: "float",
 }
 
+_supported_numeric_types = tuple(cl_buffer_datatype_dict.keys())
+
 
 if characterize.has_double_support(get_device().device):
     cl_buffer_datatype_dict[np.float64] = "double"
@@ -73,7 +75,6 @@ def assert_bufs_type(mytype, *bufs):
 def prepare(arr):
     return np.require(arr, None, "C")
 
-_supported_numeric_types = (int, float, np.uint16)
 
 class OCLArray(array.Array, np.lib.mixins.NDArrayOperatorsMixin):
 

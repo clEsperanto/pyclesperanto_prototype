@@ -762,3 +762,38 @@ def test_ipower_with_np():
     print(result)
 
     assert np.array_equal(result, reference)
+
+def test_ipow_with_types():
+    import numpy as np
+    import pyclesperanto_prototype as cle
+
+    scalars = [
+        2,
+        int(2),
+        float(2),
+        np.asarray([[2]]).astype(np.int8).max(),
+        np.asarray([[2]]).astype(np.uint8).max(),
+        np.asarray([[2]]).astype(np.int16).max(),
+        np.asarray([[2]]).astype(np.uint16).max(),
+        np.asarray([[2]]).astype(np.int32).max(),
+        np.asarray([[2]]).astype(np.uint32).max(),
+        np.asarray([[2]]).astype(np.int64).max(),
+        np.asarray([[2]]).astype(np.uint64).max(),
+        np.asarray([[2]]).astype(np.float32).max(),
+        np.asarray([[2]]).astype(np.float64).max(),
+        np.asarray([[2]]).astype(np.float).max(),
+        2
+    ]
+
+    for input2 in scalars:
+        print("Testing type", type(input2))
+
+        input1 =    cle.push(np.asarray([[4, 2, -8]]))
+        reference = cle.push(np.asarray([[16, 4, 64]]))
+
+        input1 **= input2
+        result = cle.pull(input1)
+
+        print(result)
+
+        assert np.array_equal(result, reference)
