@@ -1,3 +1,11 @@
+# 0.10.8
+
+## New features
+* `standard_deviation_box` / `standard_deviation_sphere` filters (Thanks to Lucrezia Ferme @lcferme and Allyson Ryan @allysonryan for suggesting)
+
+## Bugfixes
+* Kernels were crashing when calling `y = x * x.max()` in case `x` was a GPU-backed image of type uint16 (and others).
+
 # 0.10.7 - October 30th 2021
 ## New features
 * `imshow` has a new optional parameter: `colorbar`
