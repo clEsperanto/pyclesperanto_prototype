@@ -1,4 +1,9 @@
-# 0.10.8
+# 0.10.9 - November 11th 2021
+
+## New features
+* deployment switched from setup.py to setup.cfg
+
+# 0.10.8 - November 6th 2021
 
 ## New features
 * `standard_deviation_box` / `standard_deviation_sphere` filters (Thanks to Lucrezia Ferme @lcferme and Allyson Ryan @allysonryan for suggesting)
