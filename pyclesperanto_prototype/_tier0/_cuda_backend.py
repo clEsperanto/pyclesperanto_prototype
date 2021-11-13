@@ -1,7 +1,6 @@
 import cupy
 import numpy as np
 from ._cuda_execute import execute
-from ._array_operators import ArrayOperators
 
 def cuda_backend():
     return CUDABackend()

@@ -42,11 +42,10 @@ __device__ inline float2 read_buffer2df(int read_buffer_width, int read_buffer_h
     pos.y = min((MINMAX_TYPE)pos.y, (MINMAX_TYPE)read_buffer_height - 1);
     pos.z = min((MINMAX_TYPE)pos.z, (MINMAX_TYPE)read_buffer_depth - 1);
 
-    int pos_in_buffer = pos.x + pos.y * read_buffer_width + pos.z * read_buffer_width * read_buffer_height;
+    int pos_in_buffer = pos.x + pos.y * read_buffer_width;
     if (pos.x < 0 || pos.x >= read_buffer_width || pos.y < 0 || pos.y >= read_buffer_height) {
         return make_float2(0, 0);
     }
-    //printf("Value %d %d %f\\n", pos.x, pos.y, buffer_var[pos_in_buffer]);
     return make_float2(buffer_var[pos_in_buffer],0);
 }
 
@@ -196,4 +195,9 @@ def execute(anchor, opencl_kernel_filename, kernel_name, global_size, parameters
     a_kernel = cp.RawKernel(cuda_kernel, kernel_name)
 
     # run
-    a_kernel(grid, block, arguments)
+    a_kernel(grid, block, tuple(arguments))
+
+    for i, a in enumerate(arguments):
+        print(i, type(a), a)
+
+
