@@ -109,6 +109,10 @@ __device__ inline int get_global_id(int dim) {
     } 
 }
 
+__device__ inline int get_global_size(int dim) {
+    return 1;    
+}
+
 #define READ_IMAGE(a,b,c) READ_ ## a ## _IMAGE(a,b,c)
 #define WRITE_IMAGE(a,b,c) WRITE_ ## a ## _IMAGE(a,b,c)
 
@@ -119,6 +123,11 @@ __device__ inline int get_global_id(int dim) {
 #define CLK_NORMALIZED_COORDS_FALSE 1
 #define CLK_ADDRESS_CLAMP_TO_EDGE 2
 #define CLK_FILTER_NEAREST 4
+
+#define CLK_NORMALIZED_COORDS_TRUE 8
+#define CLK_ADDRESS_CLAMP 16
+#define CLK_FILTER_LINEAR 32
+
 """
 
 preamble_per_type = """
