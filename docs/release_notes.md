@@ -1,3 +1,8 @@
+# 0.11.0
+
+## Backwards compatibility breaking changes
+* `execute()` does not have the parameters `image_size_independent_kernel_compilation`, `prog` and `device` anymore.
+
 # 0.10.9 - November 11th 2021
 
 ## New features

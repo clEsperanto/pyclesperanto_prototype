@@ -1,5 +1,6 @@
 import cupy
 import numpy as np
+from ._cuda_execute import execute
 
 def cuda_backend():
     return CUDABackend()
@@ -18,6 +19,9 @@ class CUDABackend():
     @classmethod
     def empty(cls, shape, dtype=np.float32):
         return cupy.empty(shape, dtype)
+
+    def execute(self, anchor, opencl_kernel_filename, kernel_name, global_size, parameters, constants = None):
+        return execute(anchor, opencl_kernel_filename, kernel_name, global_size, parameters, constants)
 
 class CUDAArray():
 
