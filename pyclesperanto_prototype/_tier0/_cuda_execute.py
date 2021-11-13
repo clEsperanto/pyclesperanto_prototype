@@ -307,26 +307,23 @@ def execute(anchor, opencl_kernel_filename, kernel_name, global_size, parameters
             value = value.get_array()
 
         if isinstance(value, cp.ndarray):
-            width = "image_" + key + "_width"
-            height = "image_" + key + "_height"
-            depth = "image_" + key + "_depth"
+            depth_height_width = [1, 1, 1]
+            depth_height_width[-len(value.shape):] = value.shape
+            depth, height, width = depth_height_width
 
-            arguments.append(cp.int32(value.shape[-1]))
-            if len(value.shape) > 1:
-                arguments.append(cp.int32(value.shape[-2]))
-            else:
-                arguments.append(cp.int32(0))
+
+            arguments.append(cp.int32(width))
+            arguments.append(cp.int32(height))
+            arguments.append(cp.int32(depth))
 
             if len(value.shape) < 3:
                 img_dims =2
                 pos_type ="int2"
                 pos = "(pos0, pos1)"
-                arguments.append(cp.int32(0)) # image depth
             else:
                 img_dims =3
                 pos_type ="int4"
                 pos = "(pos0, pos1, pos2, 0)"
-                arguments.append(cp.int32(value.shape[0]))
 
             if value.dtype == np.dtype("uint8"):
                 pixel_type = "uchar"
@@ -361,6 +358,9 @@ def execute(anchor, opencl_kernel_filename, kernel_name, global_size, parameters
             else:
                 raise TypeError(f"Type {value.dtype} is currently unsupported for buffers/arrays")
 
+            width = "image_" + key + "_width"
+            height = "image_" + key + "_height"
+            depth = "image_" + key + "_depth"
 
             size_params = size_params + "int " + width + ", int " + height + ", int " + depth + ", "
 
@@ -413,7 +413,7 @@ def execute(anchor, opencl_kernel_filename, kernel_name, global_size, parameters
     opencl_code = opencl_code.replace("\nkernel void", "\nextern \"C\" __global__ void")
 
     cuda_kernel = "\n".join([preamble, additional_code, opencl_code])
-    print(cuda_kernel)
+    #print(cuda_kernel)
 
     # CUDA specific stuff
     block_size = (np.ones((len(global_size))) * 8).astype(int)
