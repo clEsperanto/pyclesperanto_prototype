@@ -27,6 +27,21 @@ __device__ inline int2 operator*(int b, int2 a)
     return make_int2(b * a.x, b * a.y);
 }
 
+__device__ inline float4 cross(float4 a, float4 b)
+{ 
+    return make_float4(a.y*b.z - a.z*b.y, a.z*b.x - a.x*b.z, a.x*b.y - a.y*b.x, 0); 
+}
+
+__device__ inline float dot(float4 a, float4 b)
+{ 
+    return a.x * b.x + a.y * b.y + a.z * b.z + a.w * b.w;
+}
+
+__device__ inline float length(float4 v)
+{
+    return sqrtf(dot(v, v));
+}
+
 __device__ inline uchar clij_convert_uchar_sat(float value) {
     if (value > 255) {
         return 255;
@@ -341,6 +356,7 @@ def execute(anchor, opencl_kernel_filename, kernel_name, global_size, parameters
     opencl_code = opencl_code.replace("(int2){", "make_int2(")
     opencl_code = opencl_code.replace("(int4){", "make_int4(")
     opencl_code = opencl_code.replace("(int4)  {", "make_int4(")
+    opencl_code = opencl_code.replace("(float4){", "make_float4(")
     opencl_code = opencl_code.replace("};", ");")
     opencl_code = opencl_code.replace("})", "))")
 
