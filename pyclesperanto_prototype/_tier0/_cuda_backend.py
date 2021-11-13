@@ -39,6 +39,14 @@ class CUDAArray(ArrayOperators, np.lib.mixins.NDArrayOperatorsMixin):
         return self.array.shape
 
     @property
+    def size(self):
+        return self.array.size
+
+    @property
+    def dtype(self):
+        return self.array.dtype
+
+    @property
     def ndims(self):
         return self.array.ndims
 
