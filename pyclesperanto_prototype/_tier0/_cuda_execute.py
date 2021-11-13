@@ -386,7 +386,7 @@ def execute(anchor, opencl_kernel_filename, kernel_name, global_size, parameters
     print(cuda_kernel)
 
     # CUDA specific stuff
-    block_size = (np.ones((len(global_size))) * 16).astype(int)
+    block_size = (np.ones((len(global_size))) * 8).astype(int)
     grid_size = np.ceil(global_size / block_size).astype(int)
     grid = tuple(grid_size.tolist())
     block = tuple(block_size.tolist())
