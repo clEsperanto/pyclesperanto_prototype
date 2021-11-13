@@ -10,6 +10,15 @@ preamble = """
 #define uint unsigned int
 #define ulong unsigned long
 
+inline __device__ int2 operator+(int2 a, int2 b)
+{
+    return make_int2(a.x + b.x, a.y + b.y);
+}
+
+inline __device__ int4 operator+(int4 a, int4 b)
+{
+    return make_int4(a.x + b.x, a.y + b.y, a.z + b.z,  a.w + b.w);
+}
 
 __device__ inline uchar clij_convert_uchar_sat(float value) {
     if (value > 255) {
@@ -325,6 +334,7 @@ def execute(anchor, opencl_kernel_filename, kernel_name, global_size, parameters
     opencl_code = opencl_code.replace("(int2){", "make_int2(")
     opencl_code = opencl_code.replace("(int4){", "make_int4(")
     opencl_code = opencl_code.replace("};", ");")
+    opencl_code = opencl_code.replace("})", "))")
 
     opencl_code = opencl_code.replace("(int2)", "make_int2")
     opencl_code = opencl_code.replace("(int4)", "make_int4")
