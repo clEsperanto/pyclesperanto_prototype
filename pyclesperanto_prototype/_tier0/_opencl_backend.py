@@ -24,3 +24,6 @@ class OpenCLBackend():
 
     def execute(self, anchor, opencl_kernel_filename, kernel_name, global_size, parameters, constants = None):
         return execute(anchor, opencl_kernel_filename, kernel_name, global_size, parameters, constants)
+
+    def from_array(self, *args, **kwargs):
+        return OCLArray.from_array(*args, **kwargs)

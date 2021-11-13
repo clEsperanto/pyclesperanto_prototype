@@ -35,7 +35,7 @@ def push(any_array):
         any_array = np.asarray(any_array.get())
 
     float_arr = any_array.astype(np.float32)
-    return _current_backend.array_type().from_array(float_arr)
+    return _current_backend.from_array(float_arr)
 
 
 def push_zyx(any_array):
