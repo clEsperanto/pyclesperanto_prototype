@@ -14,6 +14,8 @@ class CUDABackend():
         return (CUDAArray, cupy._core.core.ndarray)
 
     def asarray(self, image):
+        if isinstance(image, np.ndarray):
+            return image
         return np.asarray(image.get())
 
     @classmethod
