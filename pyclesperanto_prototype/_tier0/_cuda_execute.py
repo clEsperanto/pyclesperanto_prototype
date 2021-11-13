@@ -29,6 +29,10 @@ __device__ inline int2 operator*(int b, int2 a)
     return make_int2(b * a.x, b * a.y);
 }
 
+__device__ inline float pow ( float  x, int  y ) {
+    return pow(float(x), float(y));
+}
+
 __device__ inline float4 cross(float4 a, float4 b)
 { 
     return make_float4(a.y*b.z - a.z*b.y, a.z*b.x - a.x*b.z, a.x*b.y - a.y*b.x, 0); 
