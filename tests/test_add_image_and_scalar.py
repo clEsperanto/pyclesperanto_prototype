@@ -7,11 +7,11 @@ def test_add_image_and_scalar():
     # push an array to the GPU
     flip = cle.push(data.T)
     assert flip.shape == (10, 10)
-    assert isinstance(flip, cl.array.Array)
+    assert isinstance(flip, cle._tier0._backends._current_backend.array_type())
     # create memory for the output
     flop = cle.create_like(data)
     assert flop.shape == (10, 10)
-    assert isinstance(flop, cl.array.Array)
+    assert isinstance(flop, cle._tier0._backends._current_backend.array_type())
     # add a constant to all pixels
     cle.add_image_and_scalar(flip, flop, 100.0)
     # Note the transposition!
