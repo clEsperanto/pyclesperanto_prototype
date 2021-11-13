@@ -142,9 +142,7 @@ __device__ inline int get_global_id(int dim) {
     } 
 }
 
-__device__ inline int get_global_size(int dim) {
-    return 1;    
-}
+#define get_global_size(dim) global_size_ ## dim ## _size
 
 #define READ_IMAGE(a,b,c) READ_ ## a ## _IMAGE(a,b,c)
 #define WRITE_IMAGE(a,b,c) WRITE_ ## a ## _IMAGE(a,b,c)
@@ -156,11 +154,10 @@ __device__ inline int get_global_size(int dim) {
 #define CLK_NORMALIZED_COORDS_FALSE 1
 #define CLK_ADDRESS_CLAMP_TO_EDGE 2
 #define CLK_FILTER_NEAREST 4
-
 #define CLK_NORMALIZED_COORDS_TRUE 8
 #define CLK_ADDRESS_CLAMP 16
 #define CLK_FILTER_LINEAR 32
-
+#define CLK_ADDRESS_NONE 64
 """
 
 preamble_per_type = """
@@ -205,6 +202,7 @@ __device__ inline {pixel_type}2 read_buffer2d{typeId}(int read_buffer_width, int
     if (pos.x < 0 || pos.x >= read_buffer_width || pos.y < 0 || pos.y >= read_buffer_height) {
         return make_{pixel_type}2(0, 0);
     }
+    //printf("Read2d %d %d %f \\n", pos.x, pos.y, float(buffer_var[pos_in_buffer]));
     return make_{pixel_type}2(buffer_var[pos_in_buffer],0);
 }
 
@@ -271,6 +269,14 @@ def execute(anchor, opencl_kernel_filename, kernel_name, global_size, parameters
 
     arguments = []
 
+    arguments.append(global_size[-1])
+    arguments.append(global_size[-2])
+    if len(global_size) > 2:
+        arguments.append(global_size[0])
+    else:
+        arguments.append(1)
+    size_params = "int global_size_0_size, int global_size_1_size, int global_size_2_size, "
+
     from ._cuda_backend import CUDAArray
     for key, value in parameters.items():
 
@@ -327,7 +333,7 @@ def execute(anchor, opencl_kernel_filename, kernel_name, global_size, parameters
                 pos = "(pos0, pos1, pos2, 0)"
                 arguments.append(cp.int32(value.shape[0]))
 
-            size_params = "int " + width + ", int " + height + ", int " + depth + ", "
+            size_params = size_params + "int " + width + ", int " + height + ", int " + depth + ", "
 
             additional_code = additional_code + SIZE_HEADER.format(
                 key=key,
@@ -345,6 +351,7 @@ def execute(anchor, opencl_kernel_filename, kernel_name, global_size, parameters
                 pos=pos,
                 typeId=type_id
             )
+            size_params = ""
             arguments.append(value)
         elif isinstance(value, int):
             arguments.append(cp.int32(value))
@@ -371,7 +378,7 @@ def execute(anchor, opencl_kernel_filename, kernel_name, global_size, parameters
     opencl_code = opencl_code.replace("__kernel ", "extern \"C\" __global__ ")
 
     cuda_kernel = "\n".join([preamble, additional_code, opencl_code])
-    print(cuda_kernel)
+    #print(cuda_kernel)
 
     # CUDA specific stuff
     block_size = (np.ones((len(global_size))) * 16).astype(int)
