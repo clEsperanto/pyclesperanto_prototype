@@ -11,19 +11,46 @@ class CUDABackend():
         pass
 
     def array_type(self):
-        return cupy._core.core.ndarray
+        return (CUDAArray, cupy._core.core.ndarray)
 
     def asarray(self, image):
         return np.asarray(image.get())
 
     @classmethod
     def empty(cls, shape, dtype=np.float32):
-        return cupy._core.core.ndarray(shape, dtype)
+        return CUDAArray(cupy._core.core.ndarray(shape, dtype))
 
     def execute(self, anchor, opencl_kernel_filename, kernel_name, global_size, parameters, constants = None):
         return execute(anchor, opencl_kernel_filename, kernel_name, global_size, parameters, constants)
 
     def from_array(cls, arr, *args, **kwargs):
-        return cupy.asarray(arr)
+        return CUDAArray(cupy.asarray(arr))
 
+from ._array_operators import ArrayOperators
+class CUDAArray(ArrayOperators, np.lib.mixins.NDArrayOperatorsMixin):
+    def __init__(self, array):
+        self.array = array
+
+    def __get__(self):
+        return self.array
+
+    def get_array(self):
+        return self.array
+
+    @property
+    def shape(self):
+        return self.array.shape
+
+    @property
+    def ndims(self):
+        return self.array.ndims
+
+    def get(self, *args, **kwargs):
+        return self.array.get(*args, **kwargs)
+
+    def __array__(self, dtype=None):
+        if dtype is None:
+            return self.array.get()
+        else:
+            return self.array.get().astype(dtype)
 

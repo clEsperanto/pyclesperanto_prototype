@@ -229,7 +229,12 @@ def execute(anchor, opencl_kernel_filename, kernel_name, global_size, parameters
 
     arguments = []
 
+    from ._cuda_backend import CUDAArray
     for key, value in parameters.items():
+
+        if isinstance(value, CUDAArray):
+            value = value.get_array()
+
         if isinstance(value, cp.ndarray):
             width = "image_" + key + "_width"
             height = "image_" + key + "_height"
