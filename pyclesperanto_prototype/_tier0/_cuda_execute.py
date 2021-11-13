@@ -29,6 +29,11 @@ __device__ inline int2 operator*(int b, int2 a)
     return make_int2(b * a.x, b * a.y);
 }
 
+__device__ inline int4 operator*(int b, int4 a)
+{
+    return make_int4(b * a.x, b * a.y, b * a.z, b * a.w);
+}
+
 __device__ inline float pow ( float  x, int  y ) {
     return pow(float(x), float(y));
 }
@@ -405,7 +410,7 @@ def execute(anchor, opencl_kernel_filename, kernel_name, global_size, parameters
     opencl_code = opencl_code.replace("\nkernel void", "\nextern \"C\" __global__ void")
 
     cuda_kernel = "\n".join([preamble, additional_code, opencl_code])
-    #print(cuda_kernel)
+    print(cuda_kernel)
 
     # CUDA specific stuff
     block_size = (np.ones((len(global_size))) * 8).astype(int)
