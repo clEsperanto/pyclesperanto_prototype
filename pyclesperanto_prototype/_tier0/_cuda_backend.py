@@ -1,6 +1,7 @@
 import cupy
 import numpy as np
 from ._cuda_execute import execute
+from ._array_operators import ArrayOperators
 
 def cuda_backend():
     return CUDABackend()
@@ -18,15 +19,25 @@ class CUDABackend():
 
     @classmethod
     def empty(cls, shape, dtype=np.float32):
-        return cupy.empty(shape, dtype)
+        return CUDAArray(shape, dtype)
 
     def execute(self, anchor, opencl_kernel_filename, kernel_name, global_size, parameters, constants = None):
         return execute(anchor, opencl_kernel_filename, kernel_name, global_size, parameters, constants)
 
-class CUDAArray():
+class CUDAArray(ArrayOperators, cupy._core.core.ndarray, np.lib.mixins.NDArrayOperatorsMixin):
 
     @classmethod
     def from_array(cls, arr, *args, **kwargs):
-        return cupy.asarray(arr)
+        source = cupy.asarray(arr)
+        destination = CUDAArray(source.shape, source.dtype)
+        from .._tier0 import execute
+        parameters = {
+            "dst": destination,
+            "src": source
+        }
+        execute(__file__, '../clij-opencl-kernels/kernels/copy_' + str(len(destination.shape)) + 'd_x.cl',
+                'copy_' + str(len(destination.shape)) + 'd', destination.shape, parameters)
+        return destination
+
 
 

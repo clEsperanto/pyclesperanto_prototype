@@ -3,6 +3,7 @@ import numpy as np
 
 preamble = """
 #define MINMAX_TYPE int
+#define sampler_t int
 
 __device__ inline float2 read_buffer3df(int read_buffer_width, int read_buffer_height, int read_buffer_depth, float * buffer_var, int sampler, int4 position )
 {
