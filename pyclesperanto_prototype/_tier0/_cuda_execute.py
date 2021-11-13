@@ -355,6 +355,9 @@ def execute(anchor, opencl_kernel_filename, kernel_name, global_size, parameters
             elif value.dtype == np.dtype("float32"):
                 pixel_type = "float"
                 type_id = "f"
+            elif value.dtype == np.dtype("float64"):
+                pixel_type = "double"
+                type_id = "d"
             else:
                 raise TypeError(f"Type {value.dtype} is currently unsupported for buffers/arrays")
 
