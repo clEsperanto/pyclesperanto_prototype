@@ -24,15 +24,12 @@ class CUDABackend():
         return execute(anchor, opencl_kernel_filename, kernel_name, global_size, parameters, constants)
 
     def from_array(cls, arr, *args, **kwargs):
-        return CUDAArray(cupy.asarray(arr))
+        return CUDAArray(cupy.asarray(arr).T)
 
 from ._array_operators import ArrayOperators
 class CUDAArray(ArrayOperators, np.lib.mixins.NDArrayOperatorsMixin):
     def __init__(self, array):
         self.array = array
-
-    def __get__(self):
-        return self.array
 
     def get_array(self):
         return self.array
