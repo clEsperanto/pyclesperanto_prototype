@@ -1,5 +1,7 @@
 import numpy as np
-def pull(oclarray):
+from ._backends import _current_backend
+
+def pull(gpu_array):
     """Returns an image from GPU memory as numpy compatible array
 
     .. deprecated:: 0.6.0
@@ -23,12 +25,12 @@ def pull(oclarray):
     ----------
     .. [1] https://clij.github.io/clij2-docs/reference_pull
     """
-    return np.asarray(oclarray)
+    return _current_backend.asarray(gpu_array)
 
-def pull_zyx(oclarray):
+def pull_zyx(gpu_array):
     import warnings
     warnings.warn(
         "Deprecated: `pull_zyx()` is now deprecated as it does the same as `pull()`.",
         DeprecationWarning
     )
-    return np.asarray(oclarray)
+    return pull(gpu_array)
