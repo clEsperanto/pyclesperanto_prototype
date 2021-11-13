@@ -101,6 +101,17 @@ __device__ inline uint clij_convert_uint_sat(float value) {
     return (uint)value;
 }
 
+__device__ inline uint convert_uint_sat(float value) {
+    if (value > 4294967295) {
+        return 4294967295;
+    }
+    if (value < 0) {
+        return 0;
+    }
+    return (uint)value;
+}
+
+
 __device__ inline int clij_convert_int_sat(float value) {
     if (value > 2147483647) {
         return 2147483647;
@@ -274,7 +285,10 @@ def execute(anchor, opencl_kernel_filename, kernel_name, global_size, parameters
     arguments = []
 
     arguments.append(global_size[-1])
-    arguments.append(global_size[-2])
+    if len(global_size) > 1:
+        arguments.append(global_size[-2])
+    else:
+        arguments.append(1)
     if len(global_size) > 2:
         arguments.append(global_size[0])
     else:
@@ -293,7 +307,21 @@ def execute(anchor, opencl_kernel_filename, kernel_name, global_size, parameters
             depth = "image_" + key + "_depth"
 
             arguments.append(cp.int32(value.shape[-1]))
-            arguments.append(cp.int32(value.shape[-2]))
+            if len(value.shape) > 1:
+                arguments.append(cp.int32(value.shape[-2]))
+            else:
+                arguments.append(cp.int32(0))
+
+            if len(value.shape) < 3:
+                img_dims =2
+                pos_type ="int2"
+                pos = "(pos0, pos1)"
+                arguments.append(cp.int32(0)) # image depth
+            else:
+                img_dims =3
+                pos_type ="int4"
+                pos = "(pos0, pos1, pos2, 0)"
+                arguments.append(cp.int32(value.shape[0]))
 
             if value.dtype == np.dtype("uint8"):
                 pixel_type = "uchar"
@@ -326,17 +354,6 @@ def execute(anchor, opencl_kernel_filename, kernel_name, global_size, parameters
                 raise TypeError(f"Type {value.dtype} is currently unsupported for buffers/arrays")
 
 
-            if len(value.shape) < 3:
-                img_dims =2
-                pos_type ="int2"
-                pos = "(pos0, pos1)"
-                arguments.append(cp.int32(0)) # image depth
-            else:
-                img_dims =3
-                pos_type ="int4"
-                pos = "(pos0, pos1, pos2, 0)"
-                arguments.append(cp.int32(value.shape[0]))
-
             size_params = size_params + "int " + width + ", int " + height + ", int " + depth + ", "
 
             additional_code = additional_code + SIZE_HEADER.format(
@@ -362,8 +379,8 @@ def execute(anchor, opencl_kernel_filename, kernel_name, global_size, parameters
         elif isinstance(value, float):
             arguments.append(cp.float32(value))
 
-    for i, a in enumerate(arguments):
-        print(i, type(a), a)
+    #for i, a in enumerate(arguments):
+    #    print(i, type(a), a)
 
     # dirty hacks
     opencl_code = opencl_code.replace("(int2){", "make_int2(")
@@ -371,6 +388,7 @@ def execute(anchor, opencl_kernel_filename, kernel_name, global_size, parameters
     opencl_code = opencl_code.replace("(int4)  {", "make_int4(")
     opencl_code = opencl_code.replace("(float4){", "make_float4(")
     opencl_code = opencl_code.replace("int2 pos = {", "int2 pos = make_int2(")
+    opencl_code = opencl_code.replace("int4 pos = {", "int4 pos = make_int4(")
     opencl_code = opencl_code.replace("};", ");")
     opencl_code = opencl_code.replace("})", "))")
 
@@ -379,19 +397,23 @@ def execute(anchor, opencl_kernel_filename, kernel_name, global_size, parameters
     opencl_code = opencl_code.replace("__constant sampler_t", "__device__ int")
     opencl_code = opencl_code.replace("__const sampler_t", "__device__ int")
     opencl_code = opencl_code.replace("inline", "__device__ inline")
+    opencl_code = opencl_code.replace("#pragma", "// #pragma")
+
+
 
     opencl_code = opencl_code.replace("__kernel ", "extern \"C\" __global__ ")
+    opencl_code = opencl_code.replace("\nkernel void", "\nextern \"C\" __global__ void")
 
     cuda_kernel = "\n".join([preamble, additional_code, opencl_code])
-    print(cuda_kernel)
+    #print(cuda_kernel)
 
     # CUDA specific stuff
     block_size = (np.ones((len(global_size))) * 8).astype(int)
     grid_size = np.ceil(global_size / block_size).astype(int)
     grid = tuple(grid_size.tolist())
     block = tuple(block_size.tolist())
-    print("Grid", grid)
-    print("Block", block)
+    #print("Grid", grid)
+    #print("Block", block)
 
     # load and compile
     a_kernel = cp.RawKernel(cuda_kernel, kernel_name)
@@ -399,7 +421,7 @@ def execute(anchor, opencl_kernel_filename, kernel_name, global_size, parameters
     # run
     a_kernel(grid, block, tuple(arguments))
 
-    for i, a in enumerate(arguments):
-        print(i, type(a), a)
+    #for i, a in enumerate(arguments):
+    #    print(i, type(a), a)
 
 
