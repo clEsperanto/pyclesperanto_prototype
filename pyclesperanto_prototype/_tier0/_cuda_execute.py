@@ -5,57 +5,94 @@ preamble = """
 #define MINMAX_TYPE int
 #define sampler_t int
 
-__device__ inline float2 read_buffer3df(int read_buffer_width, int read_buffer_height, int read_buffer_depth, float * buffer_var, int sampler, int4 position )
-{
-    int4 pos = make_int4(position.x, position.y, position.z, 0);
-    pos.x = max((MINMAX_TYPE)pos.x, (MINMAX_TYPE)0);
-    pos.y = max((MINMAX_TYPE)pos.y, (MINMAX_TYPE)0);
-    pos.z = max((MINMAX_TYPE)pos.z, (MINMAX_TYPE)0);
-    pos.x = min((MINMAX_TYPE)pos.x, (MINMAX_TYPE)read_buffer_width - 1);
-    pos.y = min((MINMAX_TYPE)pos.y, (MINMAX_TYPE)read_buffer_height - 1);
-    pos.z = min((MINMAX_TYPE)pos.z, (MINMAX_TYPE)read_buffer_depth - 1);
+#define uchar unsigned char
+#define ushort unsigned short
+#define uint unsigned int
+#define ulong unsigned long
 
-    int pos_in_buffer = pos.x + pos.y * read_buffer_width + pos.z * read_buffer_width * read_buffer_height;
-    if (pos.x < 0 || pos.x >= read_buffer_width || pos.y < 0 || pos.y >= read_buffer_height || pos.z < 0 || pos.z >= read_buffer_depth) {
-        return make_float2(0, 0);
-    }
-    return make_float2(buffer_var[pos_in_buffer],0);
-}
 
-__device__ inline void write_buffer3df(int write_buffer_width, int write_buffer_height, int write_buffer_depth, float * buffer_var, int4 pos, float value )
-{
-    int pos_in_buffer = pos.x + pos.y * write_buffer_width + pos.z * write_buffer_width * write_buffer_height;
-    if (pos.x < 0 || pos.x >= write_buffer_width || pos.y < 0 || pos.y >= write_buffer_height || pos.z < 0 || pos.z >= write_buffer_depth) {
-        return;
+__device__ inline uchar clij_convert_uchar_sat(float value) {
+    if (value > 255) {
+        return 255;
     }
-    buffer_var[pos_in_buffer] = value;
+    if (value < 0) {
+        return 0;
+    }
+    return (uchar)value;
 }
 
 
-__device__ inline float2 read_buffer2df(int read_buffer_width, int read_buffer_height, int read_buffer_depth, float * buffer_var, int sampler, int2 position )
-{
-    int4 pos = make_int4(position.x, position.y, 0, 0);
-    pos.x = max((MINMAX_TYPE)pos.x, (MINMAX_TYPE)0);
-    pos.y = max((MINMAX_TYPE)pos.y, (MINMAX_TYPE)0);
-    pos.z = max((MINMAX_TYPE)pos.z, (MINMAX_TYPE)0);
-    pos.x = min((MINMAX_TYPE)pos.x, (MINMAX_TYPE)read_buffer_width - 1);
-    pos.y = min((MINMAX_TYPE)pos.y, (MINMAX_TYPE)read_buffer_height - 1);
-    pos.z = min((MINMAX_TYPE)pos.z, (MINMAX_TYPE)read_buffer_depth - 1);
-
-    int pos_in_buffer = pos.x + pos.y * read_buffer_width;
-    if (pos.x < 0 || pos.x >= read_buffer_width || pos.y < 0 || pos.y >= read_buffer_height) {
-        return make_float2(0, 0);
+__device__ inline char clij_convert_char_sat(float value) {
+    if (value > 127) {
+        return 127;
     }
-    return make_float2(buffer_var[pos_in_buffer],0);
+    if (value < -128) {
+        return -128;
+    }
+    return (char)value;
 }
 
-__device__ inline void write_buffer2df(int write_buffer_width, int write_buffer_height, int write_buffer_depth, float * buffer_var, int2 pos, float value )
-{
-    int pos_in_buffer = pos.x + pos.y * write_buffer_width;
-    if (pos.x < 0 || pos.x >= write_buffer_width || pos.y < 0 || pos.y >= write_buffer_height) {
-        return;
+
+__device__ inline ushort clij_convert_ushort_sat(float value) {
+    if (value > 65535) {
+        return 65535;
     }
-    buffer_var[pos_in_buffer] = value;
+    if (value < 0) {
+        return 0;
+    }
+    return (ushort)value;
+}
+
+
+__device__ inline short clij_convert_short_sat(float value) {
+    if (value > 32767) {
+        return 32767;
+    }
+    if (value < -32768) {
+        return -32768;
+    }
+    return (short)value;
+}
+
+__device__ inline uint clij_convert_uint_sat(float value) {
+    if (value > 4294967295) {
+        return 4294967295;
+    }
+    if (value < 0) {
+        return 0;
+    }
+    return (uint)value;
+}
+
+__device__ inline int clij_convert_int_sat(float value) {
+    if (value > 2147483647) {
+        return 2147483647;
+    }
+    if (value < -2147483648) {
+        return -2147483648;
+    }
+    return (int)value;
+}
+
+
+__device__ inline uint clij_convert_ulong_sat(float value) {
+    if (value > 18446744073709551615) {
+        return 18446744073709551615;
+    }
+    if (value < 0) {
+        return 0;
+    }
+    return (ulong)value;
+}
+
+__device__ inline int clij_convert_long_sat(float value) {
+    if (value > 9223372036854775807) {
+        return 9223372036854775807;
+    }
+    if (value < -9223372036854775808 ) {
+        return -9223372036854775808 ;
+    }
+    return (long)value;
 }
 
 __device__ inline float clij_convert_float_sat(float value) {
@@ -84,6 +121,76 @@ __device__ inline int get_global_id(int dim) {
 #define CLK_FILTER_NEAREST 4
 """
 
+preamble_per_type = """
+__device__ inline {pixel_type}2 read_buffer3d{typeId}(int read_buffer_width, int read_buffer_height, int read_buffer_depth, {pixel_type} * buffer_var, int sampler, int4 position )
+{
+    int4 pos = make_int4(position.x, position.y, position.z, 0);
+    pos.x = max((MINMAX_TYPE)pos.x, (MINMAX_TYPE)0);
+    pos.y = max((MINMAX_TYPE)pos.y, (MINMAX_TYPE)0);
+    pos.z = max((MINMAX_TYPE)pos.z, (MINMAX_TYPE)0);
+    pos.x = min((MINMAX_TYPE)pos.x, (MINMAX_TYPE)read_buffer_width - 1);
+    pos.y = min((MINMAX_TYPE)pos.y, (MINMAX_TYPE)read_buffer_height - 1);
+    pos.z = min((MINMAX_TYPE)pos.z, (MINMAX_TYPE)read_buffer_depth - 1);
+
+    int pos_in_buffer = pos.x + pos.y * read_buffer_width + pos.z * read_buffer_width * read_buffer_height;
+    if (pos.x < 0 || pos.x >= read_buffer_width || pos.y < 0 || pos.y >= read_buffer_height || pos.z < 0 || pos.z >= read_buffer_depth) {
+        return make_{pixel_type}2(0, 0);
+    }
+    return make_{pixel_type}2(buffer_var[pos_in_buffer],0);
+}
+
+__device__ inline void write_buffer3d{typeId}(int write_buffer_width, int write_buffer_height, int write_buffer_depth, {pixel_type} * buffer_var, int4 pos, {pixel_type} value )
+{
+    int pos_in_buffer = pos.x + pos.y * write_buffer_width + pos.z * write_buffer_width * write_buffer_height;
+    if (pos.x < 0 || pos.x >= write_buffer_width || pos.y < 0 || pos.y >= write_buffer_height || pos.z < 0 || pos.z >= write_buffer_depth) {
+        return;
+    }
+    buffer_var[pos_in_buffer] = value;
+}
+
+
+__device__ inline {pixel_type}2 read_buffer2d{typeId}(int read_buffer_width, int read_buffer_height, int read_buffer_depth, {pixel_type} * buffer_var, int sampler, int2 position )
+{
+    int4 pos = make_int4(position.x, position.y, 0, 0);
+    pos.x = max((MINMAX_TYPE)pos.x, (MINMAX_TYPE)0);
+    pos.y = max((MINMAX_TYPE)pos.y, (MINMAX_TYPE)0);
+    pos.z = max((MINMAX_TYPE)pos.z, (MINMAX_TYPE)0);
+    pos.x = min((MINMAX_TYPE)pos.x, (MINMAX_TYPE)read_buffer_width - 1);
+    pos.y = min((MINMAX_TYPE)pos.y, (MINMAX_TYPE)read_buffer_height - 1);
+    pos.z = min((MINMAX_TYPE)pos.z, (MINMAX_TYPE)read_buffer_depth - 1);
+
+    int pos_in_buffer = pos.x + pos.y * read_buffer_width;
+    if (pos.x < 0 || pos.x >= read_buffer_width || pos.y < 0 || pos.y >= read_buffer_height) {
+        return make_{pixel_type}2(0, 0);
+    }
+    return make_{pixel_type}2(buffer_var[pos_in_buffer],0);
+}
+
+__device__ inline void write_buffer2d{typeId}(int write_buffer_width, int write_buffer_height, int write_buffer_depth, {pixel_type} * buffer_var, int2 pos, {pixel_type} value )
+{
+    int pos_in_buffer = pos.x + pos.y * write_buffer_width;
+    if (pos.x < 0 || pos.x >= write_buffer_width || pos.y < 0 || pos.y >= write_buffer_height) {
+        return;
+    }
+    buffer_var[pos_in_buffer] = value;
+}
+"""
+
+type_dict = {
+    "f" : "float",
+    "d" : "double",
+    "c" : "char",
+    "uc" : "uchar",
+    "s" : "short",
+    "us" : "ushort",
+    "i" : "int",
+    "ui" : "uint",
+    "l" : "long",
+    "ul" : "ulong"
+    }
+
+for type_id, pixel_type in type_dict.items():
+    preamble = preamble + preamble_per_type.replace("{typeId}",type_id).replace("{pixel_type}", pixel_type)
 
 COMMON_HEADER = """
 #define CONVERT_{key}_PIXEL_TYPE clij_convert_{pixel_type}_sat
@@ -131,6 +238,37 @@ def execute(anchor, opencl_kernel_filename, kernel_name, global_size, parameters
             arguments.append(cp.int32(value.shape[-1]))
             arguments.append(cp.int32(value.shape[-2]))
 
+            if value.dtype == np.dtype("uint8"):
+                pixel_type = "uchar"
+                type_id = "uc"
+            elif value.dtype == np.dtype("uint16"):
+                pixel_type = "ushort"
+                type_id = "us"
+            elif value.dtype == np.dtype("uint32"):
+                pixel_type = "uint"
+                type_id = "ui"
+            elif value.dtype == np.dtype("uint64"):
+                pixel_type = "ulong"
+                type_id = "ul"
+            elif value.dtype == np.dtype("int8"):
+                pixel_type = "char"
+                type_id = "c"
+            elif value.dtype == np.dtype("int16"):
+                pixel_type = "short"
+                type_id = "s"
+            elif value.dtype == np.dtype("int32"):
+                pixel_type = "int"
+                type_id = "i"
+            elif value.dtype == np.dtype("int64"):
+                pixel_type = "long"
+                type_id = "l"
+            elif value.dtype == np.dtype("float32"):
+                pixel_type = "float"
+                type_id = "f"
+            else:
+                raise TypeError(f"Type {value.dtype} is currently unsupported for buffers/arrays")
+
+
             if len(value.shape) < 3:
                 img_dims =2
                 pos_type ="int2"
@@ -154,11 +292,11 @@ def execute(anchor, opencl_kernel_filename, kernel_name, global_size, parameters
             additional_code = additional_code + ARRAY_HEADER.format(
                 key=key,
                 img_dims=img_dims,
-                pixel_type="float",
+                pixel_type=pixel_type,
                 size_parameters=size_params,
                 pos_type=pos_type,
                 pos=pos,
-                typeId="f"
+                typeId=type_id
             )
             arguments.append(value)
         elif isinstance(value, int):
