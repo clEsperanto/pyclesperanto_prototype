@@ -5,6 +5,8 @@ preamble = """
 #define MINMAX_TYPE int
 #define sampler_t int
 
+#define FLT_MIN          1.19209e-07
+
 #define uchar unsigned char
 #define ushort unsigned short
 #define uint unsigned int
@@ -338,6 +340,7 @@ def execute(anchor, opencl_kernel_filename, kernel_name, global_size, parameters
     # dirty hacks
     opencl_code = opencl_code.replace("(int2){", "make_int2(")
     opencl_code = opencl_code.replace("(int4){", "make_int4(")
+    opencl_code = opencl_code.replace("(int4)  {", "make_int4(")
     opencl_code = opencl_code.replace("};", ");")
     opencl_code = opencl_code.replace("})", "))")
 
@@ -349,7 +352,7 @@ def execute(anchor, opencl_kernel_filename, kernel_name, global_size, parameters
     opencl_code = opencl_code.replace("__kernel ", "extern \"C\" __global__ ")
 
     cuda_kernel = "\n".join([preamble, additional_code, opencl_code])
-    #print(cuda_kernel)
+    print(cuda_kernel)
 
     # CUDA specific stuff
     block_size = (np.ones((len(global_size))) * 16).astype(int)
