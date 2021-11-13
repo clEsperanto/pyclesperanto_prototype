@@ -240,7 +240,11 @@ class ArrayOperators():
                     return []
 
         if result is None:
-            result = super().__getitem__(index)
+            if hasattr(super(), "__getitem__"):
+                result = super().__getitem__(index)
+            else:
+                result = self.get().__getitem__(index)
+
         if result.size == 1 and isinstance(result, (ArrayOperators)):
             result = result.get()
         return result
