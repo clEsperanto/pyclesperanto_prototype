@@ -43,7 +43,7 @@ class CUDAArray(ArrayOperators, np.lib.mixins.NDArrayOperatorsMixin):
         return self.array.ndims
 
     def get(self, *args, **kwargs):
-        return self.array.T.get(*args, **kwargs)
+        return self.array.get(*args, **kwargs)
 
     def __array__(self, dtype=None):
         if dtype is None:
