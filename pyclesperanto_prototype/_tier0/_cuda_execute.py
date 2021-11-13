@@ -214,7 +214,7 @@ COMMON_HEADER = """
 #define CONVERT_{key}_PIXEL_TYPE clij_convert_{pixel_type}_sat
 #define IMAGE_{key}_PIXEL_TYPE {pixel_type}
 #define POS_{key}_TYPE {pos_type}
-#define POS_{key}_INSTANCE(pos0,pos1,pos2,pos3) make_{pos_type}({pos})
+#define POS_{key}_INSTANCE(pos0,pos1,pos2,pos3) make_{pos_type}{pos}
 """
 
 SIZE_HEADER = """
@@ -339,11 +339,12 @@ def execute(anchor, opencl_kernel_filename, kernel_name, global_size, parameters
     opencl_code = opencl_code.replace("(int2)", "make_int2")
     opencl_code = opencl_code.replace("(int4)", "make_int4")
     opencl_code = opencl_code.replace("__constant sampler_t", "__device__ int")
+    opencl_code = opencl_code.replace("__const sampler_t", "__device__ int")
 
     opencl_code = opencl_code.replace("__kernel ", "extern \"C\" __global__ ")
 
     cuda_kernel = "\n".join([preamble, additional_code, opencl_code])
-    print(cuda_kernel)
+    #print(cuda_kernel)
 
     # CUDA specific stuff
     block_size = (np.ones((len(global_size))) * 16).astype(int)
