@@ -7,6 +7,8 @@ preamble = """
 
 #define FLT_MIN          1.19209e-07
 
+#define MAX_ARRAY_SIZE 1000
+
 #define uchar unsigned char
 #define ushort unsigned short
 #define uint unsigned int
@@ -364,6 +366,7 @@ def execute(anchor, opencl_kernel_filename, kernel_name, global_size, parameters
     opencl_code = opencl_code.replace("(int4)", "make_int4")
     opencl_code = opencl_code.replace("__constant sampler_t", "__device__ int")
     opencl_code = opencl_code.replace("__const sampler_t", "__device__ int")
+    opencl_code = opencl_code.replace("inline", "__device__ inline")
 
     opencl_code = opencl_code.replace("__kernel ", "extern \"C\" __global__ ")
 
