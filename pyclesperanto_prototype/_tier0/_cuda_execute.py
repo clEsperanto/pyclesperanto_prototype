@@ -10,14 +10,19 @@ preamble = """
 #define uint unsigned int
 #define ulong unsigned long
 
-inline __device__ int2 operator+(int2 a, int2 b)
+__device__ inline int2 operator+(int2 a, int2 b)
 {
     return make_int2(a.x + b.x, a.y + b.y);
 }
 
-inline __device__ int4 operator+(int4 a, int4 b)
+__device__ inline int4 operator+(int4 a, int4 b)
 {
     return make_int4(a.x + b.x, a.y + b.y, a.z + b.z,  a.w + b.w);
+}
+
+__device__ inline int2 operator*(int b, int2 a)
+{
+    return make_int2(b * a.x, b * a.y);
 }
 
 __device__ inline uchar clij_convert_uchar_sat(float value) {
