@@ -33,14 +33,14 @@ test1 = cle.push(np.asarray([
         [0, 2, 0, 8, 0],
         [5, 0, 6, 0, 10]
     ]
-]).T)
+]))
 
 reference = cle.push(np.asarray([
     [1, 0, 0, 0, 1],
-    [0, 1, 1, 1, 0],
-    [1, 1, 0, 0, 1],
-    [0, 0, 1, 1, 0],
-    [1, 1, 1, 1, 1]
+    [0, 1, 0, 1, 0],
+    [2, 0, 2, 0, 2],
+    [0, 2, 0, 2, 0],
+    [0, 0, 0, 0, 0]
 ]))
 
 def test_z_position_of_minimum_z_projection():
