@@ -28,7 +28,7 @@ class CUDABackend():
     def execute(self, anchor, opencl_kernel_filename, kernel_name, global_size, parameters, prog = None, constants = None, image_size_independent_kernel_compilation : bool = None, device = None):
         if self.first_run:
             self.first_run = False
-            warnings.warn("clesperanto's cupy / CUDA backend is experimental. Please use it with care. The following functions are knows to show issues in the CUDA backend:\n" +
+            warnings.warn("clesperanto's cupy / CUDA backend is experimental. Please use it with care. The following functions are known to cause issues in the CUDA backend:\n" +
                           "affine_transform, apply_vector_field, create(uint64), create(int32), create(int64), label_spots, labelled_spots_to_pointlist, resample, scale, spots_to_pointlist, standard_deviation_of_touching_neighbors"
                           )
         return execute(anchor, opencl_kernel_filename, kernel_name, global_size, parameters, constants)
@@ -71,4 +71,7 @@ class CUDAArray(ArrayOperators, np.lib.mixins.NDArrayOperatorsMixin):
             return self.array.get()
         else:
             return self.array.get().astype(dtype)
+
+    def __repr__(self):
+        return "experimental clesperanto CUDAArray(" + str(self.array.get()) + ", dtype=" + str(self.array.dtype) + ")"
 
