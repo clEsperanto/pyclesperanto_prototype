@@ -7,7 +7,6 @@ class Backend():
         # self._current_backend = cuda_backend()
 
     def set(self, backend):
-        print("setting backend", backend)
         self._current_backend = backend
 
     def get(self):
