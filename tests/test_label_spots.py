@@ -11,25 +11,25 @@ def test_label_spots_2d():
             [0, 0, 1, 0, 0],
             [0, 0, 0, 0, 1]
 
-    ]).T)
+    ]))
 
     gpu_reference = cle.push(np.asarray([
 
             [0, 0, 0, 0, 0],
-            [0, 1, 0, 3, 0],
+            [0, 1, 0, 2, 0],
             [0, 0, 0, 0, 0],
-            [0, 0, 2, 0, 0],
+            [0, 0, 3, 0, 0],
             [0, 0, 0, 0, 4]
 
-    ]).T)
+    ]))
 
     gpu_output = cle.label_spots(gpu_input)
 
     a = cle.pull(gpu_output)
     b = cle.pull(gpu_reference)
 
-    print(a)
     print(b)
+    print(a)
 
     assert (np.array_equal(a, b))
 

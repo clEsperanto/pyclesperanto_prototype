@@ -5,7 +5,7 @@ import pyopencl as cl
 def test_add_image_and_scalar():
     data = np.arange(100).reshape(10, 10)
     # push an array to the GPU
-    flip = cle.push(data.T)
+    flip = cle.push(data)
     assert flip.shape == (10, 10)
     assert isinstance(flip, cle._tier0._backends._current_backend.array_type())
     # create memory for the output
@@ -15,4 +15,4 @@ def test_add_image_and_scalar():
     # add a constant to all pixels
     cle.add_image_and_scalar(flip, flop, 100.0)
     # Note the transposition!
-    np.testing.assert_allclose(data + 100, flop.get().T)
+    np.testing.assert_allclose(data + 100, flop.get())
