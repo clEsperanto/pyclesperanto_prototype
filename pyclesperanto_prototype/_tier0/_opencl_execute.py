@@ -267,10 +267,24 @@ def execute(anchor, opencl_kernel_filename, kernel_name, global_size, parameters
             if not image_size_independent_kernel_compilation:
                 defines.extend(SIZE_HEADER.format(**params).split("\n"))
 
-        elif isinstance(value, int) or isinstance(value, np.uint16):
+        elif isinstance(value, np.int8):
+            arguments.append(np.asarray([value]).astype(np.int32))
+        elif isinstance(value, np.uint8):
+            arguments.append(np.array([value], np.uint8))
+        elif isinstance(value, np.int16):
+            arguments.append(np.array([value], np.int16))
+        elif isinstance(value, np.uint16):
+            arguments.append(np.array([value], np.uint16))
+        elif isinstance(value, int) or isinstance(value, np.int32):
             arguments.append(np.array([value], np.int32))
-        elif isinstance(value, float):
+        elif isinstance(value, float) or isinstance(value, np.float32):
             arguments.append(np.array([value], np.float32))
+        elif isinstance(value, np.int64):
+            arguments.append(np.array([value], np.int64))
+        elif isinstance(value, np.uint64):
+            arguments.append(np.array([value], np.uint64))
+        elif isinstance(value, np.float64):
+            arguments.append(np.array([value], np.float64))
         else:
             var_type = str(type(value))
             raise TypeError(

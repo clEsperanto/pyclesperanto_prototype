@@ -1,6 +1,23 @@
 import numpy as np
 
-_supported_numeric_types = (int, float, np.uint16)
+cl_buffer_datatype_dict = {
+    np.bool: "bool",
+    np.uint8: "uchar",
+    np.uint16: "ushort",
+    np.uint32: "uint",
+    np.uint64: "ulong",
+    np.int8: "char",
+    np.int16: "short",
+    np.int32: "int",
+    np.int64: "long",
+    np.float32: "float",
+    np.complex64: "cfloat_t",
+    int: "int",
+    float: "float",
+    np.float64: "float",
+}
+
+_supported_numeric_types = tuple(cl_buffer_datatype_dict.keys())
 
 class ArrayOperators():
     def min(self, axis=None, out=None):

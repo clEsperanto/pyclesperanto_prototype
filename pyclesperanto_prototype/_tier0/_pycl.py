@@ -7,7 +7,7 @@ import pyopencl as cl
 from pyopencl import characterize
 from pyopencl import array
 from ._device import get_device
-from ._array_operators import ArrayOperators
+from ._array_operators import ArrayOperators, cl_buffer_datatype_dict
 
 cl_image_datatype_dict = {
     cl.channel_type.FLOAT: np.float32,
@@ -22,22 +22,6 @@ cl_image_datatype_dict.update(
     {dtype: cltype for cltype, dtype in list(cl_image_datatype_dict.items())}
 )
 
-cl_buffer_datatype_dict = {
-    np.bool: "bool",
-    np.uint8: "uchar",
-    np.uint16: "ushort",
-    np.uint32: "uint",
-    np.uint64: "ulong",
-    np.int8: "char",
-    np.int16: "short",
-    np.int32: "int",
-    np.int64: "long",
-    np.float32: "float",
-    np.complex64: "cfloat_t",
-    int: "int",
-    float: "float",
-    np.float64: "float",
-}
 
 
 if characterize.has_double_support(get_device().device):
