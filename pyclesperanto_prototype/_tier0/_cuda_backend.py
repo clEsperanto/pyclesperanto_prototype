@@ -28,6 +28,9 @@ class CUDABackend():
     def from_array(cls, arr, *args, **kwargs):
         return CUDAArray(cupy.asarray(arr))
 
+    def __str__(self):
+        return "cupy backend (experimental)"
+
 from ._array_operators import ArrayOperators
 class CUDAArray(ArrayOperators, np.lib.mixins.NDArrayOperatorsMixin):
     def __init__(self, array):

@@ -55,6 +55,20 @@ def select_device(name: str = None, dev_type: str = None, score_key=None) -> Dev
     :return: The current GPU instance.
     :rtype: GPU
     """
+
+    # intermediate solution to be able to select cupy
+    try:
+        import cupy
+        from ._cuda_backend import cuda_backend
+        cuda_b = cuda_backend()
+        if name in str(cuda_b) or name == str(cuda_b):
+            from ._backends import Backend
+            Backend.get_instance().set(cuda_b)
+            return str(cuda_b)
+    except:
+        pass
+
+
     device = filter_devices(name, dev_type, score_key)[-1]
     if _current_device._instance and device == _current_device._instance.device:
         return _current_device._instance

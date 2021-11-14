@@ -1,5 +1,5 @@
 import numpy as np
-from ._backends import _current_backend
+from ._backends import Backend
 
 def pull(gpu_array):
     """Returns an image from GPU memory as numpy compatible array
@@ -25,7 +25,7 @@ def pull(gpu_array):
     ----------
     .. [1] https://clij.github.io/clij2-docs/reference_pull
     """
-    return _current_backend.asarray(gpu_array)
+    return Backend.get_instance().get().asarray(gpu_array)
 
 def pull_zyx(gpu_array):
     import warnings

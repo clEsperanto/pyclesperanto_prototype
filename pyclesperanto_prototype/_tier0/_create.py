@@ -1,4 +1,4 @@
-from ._backends import _current_backend
+from ._backends import Backend
 import numpy as np
 
 
@@ -15,17 +15,17 @@ def create(dimensions, dtype=np.float32):
 
     dimensions = (
         dimensions.shape
-        if isinstance(dimensions, _current_backend.array_type())
+        if isinstance(dimensions, Backend.get_instance().get().array_type())
         else tuple(dimensions)  # reverses a list/tuple
     )
-    return _current_backend.empty(dimensions, dtype)
+    return Backend.get_instance().get().empty(dimensions, dtype)
 
 def create_zyx(dimensions):
     return create(dimensions[::-1])
 
 def create_like(*args):
     dimensions = args[0]
-    if isinstance(dimensions, _current_backend.array_type()):
+    if isinstance(dimensions, Backend.get_instance().get().array_type()):
         dimensions = dimensions.shape
     elif isinstance(dimensions, np.ndarray):
         dimensions = dimensions.shape[::-1]
@@ -33,7 +33,7 @@ def create_like(*args):
 
 def create_binary_like(*args):
     dimensions = args[0]
-    if isinstance(dimensions, _current_backend.array_type()):
+    if isinstance(dimensions, Backend.get_instance().get().array_type()):
         dimensions = dimensions.shape
     elif isinstance(dimensions, np.ndarray):
         dimensions = dimensions.shape[::-1]
@@ -41,7 +41,7 @@ def create_binary_like(*args):
 
 def create_labels_like(*args):
     dimensions = args[0]
-    if isinstance(dimensions, _current_backend.array_type()):
+    if isinstance(dimensions, Backend.get_instance().get().array_type()):
         dimensions = dimensions.shape
     elif isinstance(dimensions, np.ndarray):
         dimensions = dimensions.shape[::-1]

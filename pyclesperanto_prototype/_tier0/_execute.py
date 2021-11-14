@@ -1,3 +1,3 @@
-from ._backends import _current_backend
+from ._backends import Backend
 def execute(anchor, opencl_kernel_filename, kernel_name, global_size, parameters, constants = None):
-    return _current_backend.execute(anchor, opencl_kernel_filename, kernel_name, global_size, parameters, constants)
+    return Backend.get_instance().get().execute(anchor, opencl_kernel_filename, kernel_name, global_size, parameters, constants)
