@@ -38,6 +38,10 @@ __device__ inline float pow ( float  x, int  y ) {
     return pow(float(x), float(y));
 }
 
+__device__ inline float2 sqrt ( float2  a ) {
+    return make_float2(sqrt(a.x), sqrt(a.y));
+}
+
 __device__ inline float4 cross(float4 a, float4 b)
 { 
     return make_float4(a.y*b.z - a.z*b.y, a.z*b.x - a.x*b.z, a.x*b.y - a.y*b.x, 0); 
@@ -395,6 +399,7 @@ def execute(anchor, opencl_kernel_filename, kernel_name, global_size, parameters
     opencl_code = opencl_code.replace("(int4){", "make_int4(")
     opencl_code = opencl_code.replace("(int4)  {", "make_int4(")
     opencl_code = opencl_code.replace("(float4){", "make_float4(")
+    opencl_code = opencl_code.replace("(float2){", "make_float2(")
     opencl_code = opencl_code.replace("int2 pos = {", "int2 pos = make_int2(")
     opencl_code = opencl_code.replace("int4 pos = {", "int4 pos = make_int4(")
     opencl_code = opencl_code.replace("};", ");")

@@ -2,7 +2,7 @@
 
 ## New features
 * This version introduces an experimental `cupy` backend. Install [cupy](https://cupy.dev/) and run `cle.select_device('cupy')` to test it. 
-  This feature is experimental yet, please use it with care.
+  This feature is experimental yet, please use it with care. These functions are known to cause issues with the cupy backend: affine_transform, apply_vector_field, create(uint64), create(int32), create(int64), label_spots, labelled_spots_to_pointlist, resample, scale, spots_to_pointlist
 
 ## API deprecations
 * The following parameters of `execute()` are deprecated:
