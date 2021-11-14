@@ -25,7 +25,7 @@ class CUDABackend():
     def empty(cls, shape, dtype=np.float32):
         return CUDAArray(cupy._core.core.ndarray(shape, dtype))
 
-    def execute(self, anchor, opencl_kernel_filename, kernel_name, global_size, parameters, constants = None):
+    def execute(self, anchor, opencl_kernel_filename, kernel_name, global_size, parameters, prog = None, constants = None, image_size_independent_kernel_compilation : bool = None, device = None):
         if self.first_run:
             self.first_run = False
             warnings.warn("clesperanto's cupy / CUDA backend is experimental. Please use it with care. The following functions are knows to show issues in the CUDA backend:\n" +

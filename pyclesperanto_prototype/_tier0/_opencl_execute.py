@@ -70,13 +70,11 @@ IMAGE_HEADER = COMMON_HEADER + """
 #define WRITE_{key}_IMAGE(a,b,c) write_image{typeId}(a,b,c)
 """
 
-def execute(anchor, opencl_kernel_filename, kernel_name, global_size, parameters, constants = None):
+def execute(anchor, opencl_kernel_filename, kernel_name, global_size, parameters, prog : OCLProgram = None, constants = None, image_size_independent_kernel_compilation : bool = None, device: Device = None):
     """
     Convenience method for calling opencl kernel files
-
     This method basically does the same as the CLKernelExecutor in CLIJ:
     https://github.com/clij/clij-clearcl/blob/master/src/main/java/net/haesleinhuepf/clij/clearcl/util/CLKernelExecutor.java
-
     :param anchor: Enter __file__ when calling this method and the corresponding open.cl
                    file lies in the same folder as the python file calling it.
     :param opencl_kernel_filename: Filename of the open.cl file
@@ -97,7 +95,15 @@ def execute(anchor, opencl_kernel_filename, kernel_name, global_size, parameters
     # import time
     # time_stamp = time.time()
     defines = ["#define MAX_ARRAY_SIZE 1000"]
-    image_size_independent_kernel_compilation = True
+
+    if image_size_independent_kernel_compilation != None:
+        warnings.warn(
+            "The `image_size_independent_kernel_compilation` parameter of pyclesperanto_prototype.execute is deprecated since 0.11.0. It will be removed in 0.12.0.",
+            DeprecationWarning
+        )
+    else:
+        image_size_independent_kernel_compilation = True
+
 
     if image_size_independent_kernel_compilation:
         defines.extend([
@@ -274,17 +280,30 @@ def execute(anchor, opencl_kernel_filename, kernel_name, global_size, parameters
             )
 
     # print("Assembling " + opencl_kernel_filename + " took " + str((time.time() - time_stamp) * 1000) + " ms")
+    if prog is None:
+        # time_stamp = time.time()
 
-    defines.append(get_ocl_source(anchor, opencl_kernel_filename))
+        defines.append(get_ocl_source(anchor, opencl_kernel_filename))
 
-    from ._device import get_device
-    device = get_device()
+        if device is None:
+            from ._device import get_device
+            device = get_device()
+        else:
+            warnings.warn(
+                "The `device` parameter of pyclesperanto_prototype.execute is deprecated since 0.11.0. It will be removed in 0.12.0.",
+                DeprecationWarning
+            )
 
-    prog = device.program_from_source("\n".join(defines))
-    #prog = OCLProgram.from_source("\n".join(defines))
+        prog = device.program_from_source("\n".join(defines))
+        #prog = OCLProgram.from_source("\n".join(defines))
 
-    # Todo: the order of the arguments matters; fix that
-    # print("Compilation " + opencl_kernel_filename + " took " + str((time.time() - time_stamp) * 1000) + " ms")
+        # Todo: the order of the arguments matters; fix that
+        # print("Compilation " + opencl_kernel_filename + " took " + str((time.time() - time_stamp) * 1000) + " ms")
+    else:
+        warnings.warn(
+            "The `prog` parameter of pyclesperanto_prototype.execute is deprecated since 0.11.0. It will be removed in 0.12.0.",
+            DeprecationWarning
+        )
 
     prog.run_kernel(kernel_name, tuple(global_size[::-1]), None, *arguments)
 

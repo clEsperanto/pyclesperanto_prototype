@@ -22,8 +22,8 @@ class OpenCLBackend():
         queue = get_device().queue
         return OCLArray(queue, shape, dtype)
 
-    def execute(self, anchor, opencl_kernel_filename, kernel_name, global_size, parameters, constants = None):
-        return execute(anchor, opencl_kernel_filename, kernel_name, global_size, parameters, constants)
+    def execute(self, anchor, opencl_kernel_filename, kernel_name, global_size, parameters, prog = None, constants = None, image_size_independent_kernel_compilation : bool = None, device = None):
+        return execute(anchor, opencl_kernel_filename, kernel_name, global_size, parameters, prog, constants, image_size_independent_kernel_compilation, device)
 
     def from_array(self, *args, **kwargs):
         return OCLArray.from_array(*args, **kwargs)

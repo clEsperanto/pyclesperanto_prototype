@@ -1,7 +1,14 @@
 # 0.11.0
 
-## Backwards compatibility breaking changes
-* `execute()` does not have the parameters `image_size_independent_kernel_compilation`, `prog` and `device` anymore.
+## New features
+* This version introduces an experimental `cupy` backend. Install [cupy](https://cupy.dev/) and run `cle.select_device('cupy')` to test it. 
+  This feature is experimental yet, please use it with care.
+
+## API deprecations
+* The following parameters of `execute()` are deprecated:
+  * `image_size_independent_kernel_compilation` (will always be True in the future), 
+  * `prog` (will no longer be supported, use [pyopencl](https://documen.tician.de/pyopencl/) for those kinds of features) and 
+  * `device` (will no longer be supported, use pyopencl instead)
 
 # 0.10.9 - November 11th 2021
 
