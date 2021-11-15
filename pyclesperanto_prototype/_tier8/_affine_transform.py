@@ -71,8 +71,9 @@ def affine_transform(source : Image, destination : Image = None, transform : Uni
     if linear_interpolation:
         image = empty_image_like(source)
         copy(source, image)
+        if type(source) != type(image):
+            kernel_suffix = '_interpolate'
         source = image
-        kernel_suffix = '_interpolate'
 
 
     parameters = {
