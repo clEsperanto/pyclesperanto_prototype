@@ -37,7 +37,7 @@ class CUDABackend():
         if self.first_run:
             self.first_run = False
             warnings.warn("clesperanto's cupy / CUDA backend is experimental. Please use it with care. The following functions are known to cause issues in the CUDA backend:\n" +
-                          "affine_transform, apply_vector_field, create(uint64), create(int32), create(int64), labelled_spots_to_pointlist, resample, scale, spots_to_pointlist"
+                          "affine_transform, apply_vector_field, create(uint64), create(int32), create(int64), resample, scale, spots_to_pointlist"
                           )
         return execute(anchor, opencl_kernel_filename, kernel_name, global_size, parameters, constants)
 
