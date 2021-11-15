@@ -390,6 +390,13 @@ def execute(anchor, opencl_kernel_filename, kernel_name, global_size, parameters
             arguments.append(cp.int32(value))
         elif isinstance(value, float):
             arguments.append(cp.float32(value))
+        else:
+            var_type = str(type(value))
+            raise TypeError(
+                f"other types than float and int aren`t supported yet for parameters {key} : {value} . \n"
+                f"function {kernel_name}"
+                f"type {var_type}"
+            )
 
     #for i, a in enumerate(arguments):
     #    print(i, type(a), a)
@@ -418,7 +425,7 @@ def execute(anchor, opencl_kernel_filename, kernel_name, global_size, parameters
     opencl_code = opencl_code.replace("\nkernel void", "\nextern \"C\" __global__ void")
 
     cuda_kernel = "\n".join([preamble, additional_code, opencl_code])
-    #print(cuda_kernel)
+    print(cuda_kernel)
 
     # CUDA specific stuff
     block_size = (np.ones((len(global_size))) * 8).astype(int)

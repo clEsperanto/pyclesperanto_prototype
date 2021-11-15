@@ -11,6 +11,7 @@ def cuda_backend():
 class CUDABackend():
     def __init__(self):
         self.first_run = True
+        self.first_image_access = True
         pass
 
     def array_type(self):
@@ -20,6 +21,13 @@ class CUDABackend():
         if isinstance(image, np.ndarray):
             return image
         return np.asarray(image.get())
+
+    def empty_image_like(self, image, *args, **kwargs):
+        from .._tier1 import copy
+        if self.first_image_access:
+            warnings.warn("CUDA image types and linear interpolation are not supported yet.")
+            self.first_image_access = False
+        return copy(image)
 
     @classmethod
     def empty(cls, shape, dtype=np.float32):

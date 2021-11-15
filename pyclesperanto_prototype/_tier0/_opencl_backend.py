@@ -17,6 +17,12 @@ class OpenCLBackend():
     def asarray(self, image):
         return np.asarray(image)
 
+    def empty_image_like(self, arr, ctx=None, *args, **kwargs):
+        if ctx is None:
+            ctx = get_device().context
+        from ._cl_image import empty_image
+        return empty_image(ctx, arr.shape, arr.dtype)
+
     def empty(self, shape, dtype=np.float32):
         assert_supported_ndarray_type(dtype)
         queue = get_device().queue
