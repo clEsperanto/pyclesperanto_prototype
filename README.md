@@ -23,30 +23,17 @@ The [full reference](https://clij.github.io/clij2-docs/reference__pyclesperanto)
 
 ## Installation
 * Get a python environment, e.g. via [mini-conda](https://docs.conda.io/en/latest/miniconda.html). If you never used python/conda environments before, please follow the instructions [here](https://mpicbg-scicomp.github.io/ipf_howtoguides/guides/Python_Conda_Environments) first.
-* Install [pyopencl](https://documen.tician.de/pyopencl/). 
+* Install [pyopencl](https://documen.tician.de/pyopencl/), e.g. via conda:
 
-If installation of pyopencl for Windows fails, consider downloading a precompiled wheel (e.g. from [here](https://www.lfd.uci.edu/~gohlke/pythonlibs/#pyopencl) ) and installing it manually. Note that "cl12" and "cp38" in the filename matter: They allow you using OpenCL 1.2 compatible GPU devices from Python 3.8.
-
-```
-pip install pyopencl-2019.1.1+cl12-cp37-cp37m-win_amd64.whl
-```
-Alternatively, installing via conda also works:
 ```
 conda install -c conda-forge pyopencl=2020.3.1
 ```
 
-Afterwards, install pyclesperanto:
+Afterwards, install pyclesperanto using pip:
 
 ```
 pip install pyclesperanto-prototype
 ```
-
-### Troubleshooting installation
-If you receive an error like 
-```
-DLL load failed: The specified procedure could not be found.
-```
-Try downloading and installing a pyopencl with a lower cl version, e.g. cl12 : pyopencl-2020.1+cl12-cp37-cp37m-win_amd64
 
 ## Example code
 A basic image procressing workflow loads blobs.gif and counts the number of gold particles:
