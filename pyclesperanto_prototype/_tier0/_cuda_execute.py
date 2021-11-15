@@ -425,7 +425,7 @@ def execute(anchor, opencl_kernel_filename, kernel_name, global_size, parameters
     opencl_code = opencl_code.replace("\nkernel void", "\nextern \"C\" __global__ void")
 
     cuda_kernel = "\n".join([preamble, additional_code, opencl_code])
-    print(cuda_kernel)
+    #print(cuda_kernel)
 
     # CUDA specific stuff
     block_size = (np.ones((len(global_size))) * 8).astype(int)

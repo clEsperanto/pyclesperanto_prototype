@@ -6,7 +6,6 @@
   * affine_transform (linear interpolation not supported), 
   * apply_vector_field (linear interpolation not supported), 
   * create(uint64), create(int32), create(int64), 
-  * label_spots, 
   * labelled_spots_to_pointlist, 
   * resample (linear interpolation not supported),  
   * scale (linear interpolation not supported), 
