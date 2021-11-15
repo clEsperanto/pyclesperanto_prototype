@@ -26,7 +26,7 @@ The [full reference](https://clij.github.io/clij2-docs/reference__pyclesperanto)
 * Install [pyopencl](https://documen.tician.de/pyopencl/), e.g. via conda:
 
 ```
-conda install -c conda-forge pyopencl=2020.3.1
+conda install -c conda-forge pyopencl
 ```
 
 Afterwards, install pyclesperanto using pip:
