@@ -13,7 +13,7 @@
 
 py-clesperanto is a prototype for [clesperanto](http://clesperanto.net) - a multi-platform multi-language framework for GPU-accelerated image processing. 
 It uses [OpenCL kernels](https://github.com/clEsperanto/clij-opencl-kernels/tree/development/src/main/java/net/haesleinhuepf/clij/kernels) from [CLIJ](http://clij.github.io/).
-Since version 0.11.0 py-clesperanto comes with a yet experimental [cupy](https://cupy.dev)-based [CUDA](https://en.wikipedia.org/wiki/CUDA) backend.
+Since version 0.11.1 py-clesperanto comes with a yet experimental [cupy](https://cupy.dev)-based [CUDA](https://en.wikipedia.org/wiki/CUDA) backend.
 
 For users convenience, there are code generators available for [napari](https://clesperanto.github.io/napari_pyclesperanto_assistant/) and [Fiji](https://clij.github.io/assistant/).
 

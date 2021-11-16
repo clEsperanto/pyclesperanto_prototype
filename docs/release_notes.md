@@ -1,3 +1,8 @@
+# 0.11.1 - November 16th 2021
+
+## Bug fixes
+* Deployment was broken. Version 0.11.0 may not have worked under any circumstance.
+
 # 0.11.0 - November 16th 2021
 
 ## New features
