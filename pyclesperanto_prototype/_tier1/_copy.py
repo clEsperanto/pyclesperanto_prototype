@@ -1,9 +1,9 @@
 from .._tier0 import execute
 from .._tier0 import plugin_function
-from .._tier0 import Image
+from .._tier0 import Image, Device
 
 @plugin_function
-def copy(source : Image, destination : Image = None):
+def copy(source : Image, destination : Image = None, device: Device = None):
     """Copies an image.
     
     <pre>f(x) = x</pre> 
@@ -12,6 +12,8 @@ def copy(source : Image, destination : Image = None):
     ----------
     source : Image
     destination : Image
+    device : Device, optional
+        OpenCL-device to operate on
     
     Returns
     -------
@@ -33,5 +35,5 @@ def copy(source : Image, destination : Image = None):
         "src":source
     }
 
-    execute(__file__, '../clij-opencl-kernels/kernels/copy_' + str(len(destination.shape)) + 'd_x.cl', 'copy_' + str(len(destination.shape)) + 'd', destination.shape, parameters)
+    execute(__file__, '../clij-opencl-kernels/kernels/copy_' + str(len(destination.shape)) + 'd_x.cl', 'copy_' + str(len(destination.shape)) + 'd', destination.shape, parameters, device=device)
     return destination

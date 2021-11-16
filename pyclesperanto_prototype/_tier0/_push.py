@@ -1,8 +1,8 @@
 import numpy as np
 from ._pycl import OCLArray
+from ._device import Device, get_device
 
-
-def push(any_array):
+def push(any_array, device : Device = None):
     """Copies an image to GPU memory and returns its handle
 
     .. deprecated:: 0.6.0
@@ -36,7 +36,9 @@ def push(any_array):
         any_array = np.asarray(any_array.get())
 
     float_arr = any_array.astype(np.float32)
-    return OCLArray.from_array(float_arr)
+    if device is None:
+        device = get_device()
+    return device.from_array(float_arr)
 
 
 def push_zyx(any_array):

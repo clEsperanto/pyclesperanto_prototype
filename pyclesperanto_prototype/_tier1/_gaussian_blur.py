@@ -1,10 +1,10 @@
 from .._tier0 import sigma_to_kernel_size
 from .._tier0 import plugin_function
-from .._tier0 import Image
+from .._tier0 import Image, Device
 from ._execute_separable_kernel import execute_separable_kernel
 
 @plugin_function(categories=['filter', 'denoise', 'in assistant'], priority=1)
-def gaussian_blur(source : Image, destination : Image = None, sigma_x : float = 0, sigma_y : float = 0, sigma_z : float = 0):
+def gaussian_blur(source : Image, destination : Image = None, sigma_x : float = 0, sigma_y : float = 0, sigma_z : float = 0, device : Device = None):
     """Computes the Gaussian blurred image of an image given sigma values
     in X, Y and Z. 
     
@@ -34,8 +34,6 @@ def gaussian_blur(source : Image, destination : Image = None, sigma_x : float = 
     ----------
     .. [1] https://clij.github.io/clij2-docs/reference_gaussianBlur3D
     """
-
-
     kernel_size_x = sigma_to_kernel_size(sigma_x)
     kernel_size_y = sigma_to_kernel_size(sigma_y)
     kernel_size_z = sigma_to_kernel_size(sigma_z)
@@ -52,7 +50,8 @@ def gaussian_blur(source : Image, destination : Image = None, sigma_x : float = 
         sigma_x,
         sigma_y,
         sigma_z,
-        len(destination.shape)
+        len(destination.shape),
+        device=device
     )
 
     return destination

@@ -7,6 +7,7 @@ import pyopencl as cl
 from pyopencl import characterize
 from pyopencl import array
 from ._device import get_device
+from ._utils import prepare
 
 cl_image_datatype_dict = {
     cl.channel_type.FLOAT: np.float32,

@@ -98,7 +98,6 @@ def execute(anchor, opencl_kernel_filename, kernel_name, global_size, parameters
     # time_stamp = time.time()
     defines = ["#define MAX_ARRAY_SIZE 1000"]
 
-
     if image_size_independent_kernel_compilation:
         defines.extend([
             "#define GET_IMAGE_WIDTH(image_key) image_size_ ## image_key ## _width",

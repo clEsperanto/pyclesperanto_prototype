@@ -1,19 +1,21 @@
 from pyclesperanto_prototype._tier0._create import create_like
 from pyclesperanto_prototype._tier1 import copy
 from pyclesperanto_prototype._tier0._execute import execute
+from pyclesperanto_prototype._tier0._device import Device
+
 from ._set import set
 
-def execute_separable_kernel(src, dst, anchor, opencl_kernel_filename, kernel_name, kernel_size_x, kernel_size_y, kernel_size_z, sigma_x, sigma_y, sigma_z, dimensions) :
+def execute_separable_kernel(src, dst, anchor, opencl_kernel_filename, kernel_name, kernel_size_x, kernel_size_y, kernel_size_z, sigma_x, sigma_y, sigma_z, dimensions, device : Device = None) :
 
     n = [kernel_size_x, kernel_size_y, kernel_size_z]
     sigma = [sigma_x, sigma_y, sigma_z]
 
     # todo: ensure that temp1 and temp2 become of type float
-    temp1 = create_like(src);
-    temp2 = create_like(src);
+    temp1 = create_like(src, device=device)
+    temp2 = create_like(src, device=device)
 
     if (sigma[0] > 0) :
-        param_src = src;
+        param_src = src
         if (dimensions == 2):
             param_dst = temp1
         else :
@@ -27,13 +29,13 @@ def execute_separable_kernel(src, dst, anchor, opencl_kernel_filename, kernel_na
             "s": float(sigma[0])
         }
 
-        execute(anchor, opencl_kernel_filename, kernel_name, src.shape, parameters)
+        execute(anchor, opencl_kernel_filename, kernel_name, src.shape, parameters, device=device)
 
     else :
         if (dimensions == 2):
-            copy(src, temp1)
+            copy(src, temp1, device=device)
         else :
-            copy(src, temp2)
+            copy(src, temp2, device=device)
 
     if (sigma[1] > 0) :
         if (dimensions == 2):
@@ -51,12 +53,12 @@ def execute_separable_kernel(src, dst, anchor, opencl_kernel_filename, kernel_na
             "s": float(sigma[1])
         }
 
-        execute(anchor, opencl_kernel_filename, kernel_name, src.shape, parameters)
+        execute(anchor, opencl_kernel_filename, kernel_name, src.shape, parameters, device=device)
     else :
         if (dimensions == 2):
-            copy(temp1, dst)
+            copy(temp1, dst, device=device)
         else :
-            copy(temp2, temp1)
+            copy(temp2, temp1, device=device)
 
     if (dimensions == 3):
         if (sigma[2] > 0):
@@ -68,8 +70,8 @@ def execute_separable_kernel(src, dst, anchor, opencl_kernel_filename, kernel_na
                 "N": int(n[2]),
                 "s": float(sigma[2])
             }
-            execute(anchor, opencl_kernel_filename, kernel_name, src.shape, parameters)
+            execute(anchor, opencl_kernel_filename, kernel_name, src.shape, parameters, device=device)
         else:
-            copy(temp1, dst)
+            copy(temp1, dst, device=device)
 
     return dst
