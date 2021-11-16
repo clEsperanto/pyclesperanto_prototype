@@ -24,3 +24,13 @@ def test_maximum_of_all_pixels():
     result = cle.maximum_of_all_pixels(gpu_input)
     print(result)
     assert (result == 15)
+
+def test_maximum_of_all_pixels_against_numpy():
+    from skimage.data import camera
+    image = camera()
+
+    max_cle = cle.maximum_of_all_pixels(image)
+    max_np = image.max()
+
+    assert max_cle == max_np
+

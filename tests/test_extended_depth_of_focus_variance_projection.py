@@ -33,14 +33,14 @@ test1 = cle.push(np.asarray([
         [0, 2, 0, 8, 0],
         [5, 0, 6, 0, 10]
     ]
-]).T)
+]))
 
 reference = cle.push(np.asarray([
-    [9, 0, 0, 0, 9],
-    [0, 9, 10, 9, 0],
-    [10, 10, 0, 0, 10],
-    [0, 0, 9, 10, 0],
-    [10, 10, 10, 10, 10]
+    [0, 2, 0, 8, 0],
+    [3, 0, 1, 0, 10],
+    [0, 4, 0, 0, 10],
+    [0, 0, 1, 8, 0],
+    [5, 0, 6, 0, 10]
 ]))
 
 def test_extended_depth_of_focus_variance_projection_projection():

@@ -21,7 +21,8 @@ def test_flip():
     result = cle.create(test)
     cle.flip(test, result, True, False, False)
 
-    print(result)
+    print(reference.get())
+    print(result.get())
 
     a = cle.pull(result)
     b = cle.pull(reference)

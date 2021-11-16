@@ -37,8 +37,9 @@ def apply_vector_field(source : Image, vector_x : Image, vector_y : Image, vecto
     if linear_interpolation:
         image = empty_image_like(source)
         copy(source, image)
+        if type(source) != type(image):
+            kernel_suffix = '_interpolate'
         source = image
-        kernel_suffix = '_interpolate'
 
     if len(destination.shape) == 2:
         parameters = {

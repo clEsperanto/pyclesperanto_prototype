@@ -64,8 +64,9 @@ def resample(source : Image, destination : Image = None, factor_x : float = 1, f
     if linear_interpolation:
         image = empty_image_like(source)
         copy(source, image)
+        if type(source) != type(image):
+            kernel_suffix = '_interpolate'
         source = image
-        kernel_suffix = '_interpolate'
 
 
     parameters = {

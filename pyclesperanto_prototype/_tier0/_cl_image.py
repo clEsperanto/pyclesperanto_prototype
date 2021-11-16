@@ -42,9 +42,8 @@ def empty_image(ctx, shape, dtype, num_channels=1, channel_order=None):
 
 
 def empty_image_like(arr, ctx=None):
-    if ctx is None:
-        ctx = get_device().context
-    return empty_image(ctx, arr.shape, arr.dtype)
+    from ._backends import Backend
+    return Backend.get_instance().get().empty_image_like(arr, ctx)
 
 
 def create_image(arr: np.ndarray, ctx: cl.Context = None, *args, **kwargs) -> cl.Image:

@@ -12,7 +12,7 @@ def test_copy_slice_from_3d():
             [1, 3],
             [1, 2]
         ]
-    ]).T)
+    ]))
 
     test2 = cle.create((2, 2))
     cle.copy_slice(test1, test2, 0)
@@ -20,8 +20,8 @@ def test_copy_slice_from_3d():
     print(test2)
     a = cle.pull(test2)
     assert (np.min(a) == 0)
-    assert (np.max(a) == 1)
-    assert (np.mean(a) == 0.75)
+    assert (np.max(a) == 4)
+    assert (np.mean(a) == 2.25)
 
 
 def test_copy_slice_to_3d():

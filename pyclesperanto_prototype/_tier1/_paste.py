@@ -40,5 +40,5 @@ def paste (source : Image, destination : Image = None, destination_x : int = 0, 
     if (len(destination.shape) == 3):
         parameters.update({"destination_z": int(destination_z)});
 
-    execute(__file__, '../clij-opencl-kernels/kernels/paste_' + str(len(destination.shape)) + 'd_x.cl', 'paste_' + str(len(destination.shape)) + 'd', source.shape, parameters)
+    execute(__file__, 'paste_' + str(len(destination.shape)) + 'd_x.cl', 'paste_' + str(len(destination.shape)) + 'd', source.shape, parameters)
     return destination

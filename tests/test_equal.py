@@ -30,7 +30,8 @@ def test_equal():
     result = cle.create(test1)
     cle.equal(test1, test2, result)
 
-    print(result)
+    print(reference.get())
+    print(result.get())
 
     a = cle.pull(result)
     b = cle.pull(reference)

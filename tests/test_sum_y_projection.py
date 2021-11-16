@@ -34,7 +34,7 @@ def test_sum_y_projection():
             [0, 2, 0, 8, 0],
             [5, 0, 6, 0, 10]
         ]
-    ]).T)
+    ]))
 
     reference = cle.push(np.asarray([
         [9, 6, 7, 15, 29],
@@ -42,7 +42,7 @@ def test_sum_y_projection():
         [9, 6, 7, 15, 29],
         [9, 6, 7, 15, 29],
         [9, 6, 7, 15, 29]
-    ]).T)
+    ]))
 
     result = cle.create(reference)
     cle.sum_y_projection(test1, result)
@@ -53,3 +53,4 @@ def test_sum_y_projection():
     print(a)
 
     assert (np.allclose(a, b, 0.01))
+

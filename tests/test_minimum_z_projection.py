@@ -34,15 +34,15 @@ def test_minimum_z_projection():
             [0, 2, 0, 8, 1],
             [1, 1, 1, 1, 1]
         ]
-    ]).T)
+    ]))
 
     reference = cle.push(np.asarray([
         [0, 0, 0, 0, 1],
         [0, 0, 0, 0, 1],
         [0, 0, 0, 0, 1],
         [0, 0, 0, 0, 1],
-        [0, 0, 0, 0, 1]
-    ]).T)
+        [1, 1, 1, 1, 1]
+    ]))
 
     result = cle.create(reference)
     cle.minimum_z_projection(test1, result)
@@ -50,6 +50,7 @@ def test_minimum_z_projection():
     a = cle.pull(result)
     b = cle.pull(reference)
 
+    print(b)
     print(a)
 
     assert (np.allclose(a, b, 0.001))

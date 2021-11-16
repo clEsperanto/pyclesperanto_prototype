@@ -35,15 +35,15 @@ def test_mean_x_projection():
             [0, 2, 0, 8, 0],
             [5, 0, 6, 0, 10]
         ]
-    ]).T)
+    ]))
 
     reference = cle.push(np.asarray([
-        [0.4, 1.0, 1.8, 0.8, 5.],
-        [1.2, 1.2, 1.6, 2.0, 0.],
-        [0.,  0.2, 0.6, 0.2, 6.],
-        [4.8, 3.0, 2.8, 4.4, 0.],
-        [3.6, 5.6, 6.0, 3.8, 10.]
-    ]).T)
+        [2,   2.0, 2.0, 2.0, 2.],
+        [2,   2.0, 2.8, 2.0, 2.2],
+        [2.8, 2.8, 2.2, 2.2, 2.8],
+        [2.2, 2.2, 2.0, 2.8, 2.],
+        [4.2, 4.2, 4.2, 4.2, 4.2]
+    ]))
 
     result = cle.create(reference)
     cle.mean_x_projection(test1, result)
@@ -52,8 +52,8 @@ def test_mean_x_projection():
     a = cle.pull(result)
     b = cle.pull(reference)
 
-    print(a)
     print(b)
+    print(a)
 
     assert (np.allclose(a, b, 0.001))
 

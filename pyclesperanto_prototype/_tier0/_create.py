@@ -1,4 +1,4 @@
-from ._pycl import OCLArray
+from ._backends import Backend
 import numpy as np
 
 
@@ -15,17 +15,17 @@ def create(dimensions, dtype=np.float32):
 
     dimensions = (
         dimensions.shape
-        if isinstance(dimensions, OCLArray)
+        if isinstance(dimensions, Backend.get_instance().get().array_type())
         else tuple(dimensions)  # reverses a list/tuple
     )
-    return OCLArray.empty(dimensions, dtype)
+    return Backend.get_instance().get().empty(dimensions, dtype)
 
 def create_zyx(dimensions):
     return create(dimensions[::-1])
 
 def create_like(*args):
     dimensions = args[0]
-    if isinstance(dimensions, OCLArray):
+    if isinstance(dimensions, Backend.get_instance().get().array_type()):
         dimensions = dimensions.shape
     elif isinstance(dimensions, np.ndarray):
         dimensions = dimensions.shape[::-1]
@@ -33,7 +33,7 @@ def create_like(*args):
 
 def create_binary_like(*args):
     dimensions = args[0]
-    if isinstance(dimensions, OCLArray):
+    if isinstance(dimensions, Backend.get_instance().get().array_type()):
         dimensions = dimensions.shape
     elif isinstance(dimensions, np.ndarray):
         dimensions = dimensions.shape[::-1]
@@ -41,32 +41,32 @@ def create_binary_like(*args):
 
 def create_labels_like(*args):
     dimensions = args[0]
-    if isinstance(dimensions, OCLArray):
+    if isinstance(dimensions, Backend.get_instance().get().array_type()):
         dimensions = dimensions.shape
     elif isinstance(dimensions, np.ndarray):
         dimensions = dimensions.shape[::-1]
     return create(dimensions, np.uint32)
 
-def create_pointlist_from_labelmap(input:OCLArray, *args):
+def create_pointlist_from_labelmap(input, *args):
     from .._tier2 import maximum_of_all_pixels
     number_of_labels = int(maximum_of_all_pixels(input))
     number_of_dimensions = len(input.shape)
     
     return create([number_of_dimensions, number_of_labels])
 
-def create_vector_from_labelmap(input: OCLArray, *args):
+def create_vector_from_labelmap(input, *args):
     from .._tier2 import maximum_of_all_pixels
     number_of_labels = int(maximum_of_all_pixels(input)) + 1
 
     return create([1, number_of_labels])
 
-def create_matrix_from_pointlists(pointlist1:OCLArray, pointlist2:OCLArray):
+def create_matrix_from_pointlists(pointlist1, pointlist2):
     width = pointlist1.shape[1] + 1
     height = pointlist2.shape[1] + 1
 
     return create([width, height])
 
-def create_from_pointlist(pointlist: OCLArray, *args):
+def create_from_pointlist(pointlist, *args):
     from .._tier1 import maximum_x_projection
     from .._tier0 import pull
 
@@ -81,20 +81,20 @@ def create_from_pointlist(pointlist: OCLArray, *args):
         raise Exception("Size not supported: " + str(max_pos))
     return destination
 
-def create_square_matrix_from_pointlist(pointlist1:OCLArray):
+def create_square_matrix_from_pointlist(pointlist1):
     width = pointlist1.shape[1] + 1
 
     return create([width, width])
 
 
-def create_square_matrix_from_labelmap(labelmap: OCLArray):
+def create_square_matrix_from_labelmap(labelmap):
     from .._tier2 import maximum_of_all_pixels
     width = int(maximum_of_all_pixels(labelmap) + 1)
 
     return create([width, width])
 
 
-def create_square_matrix_from_two_labelmaps(labelmap1: OCLArray, labelmap2: OCLArray):
+def create_square_matrix_from_two_labelmaps(labelmap1, labelmap2):
     from .._tier2 import maximum_of_all_pixels
     width = int(maximum_of_all_pixels(labelmap1) + 1)
     height = int(maximum_of_all_pixels(labelmap2) + 1)
@@ -102,7 +102,7 @@ def create_square_matrix_from_two_labelmaps(labelmap1: OCLArray, labelmap2: OCLA
     return create([height, width])
 
 
-def create_vector_from_square_matrix(square_matrix : OCLArray, *args):
+def create_vector_from_square_matrix(square_matrix, *args):
     return create([1, square_matrix.shape[0]])
 
 

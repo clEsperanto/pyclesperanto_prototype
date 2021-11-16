@@ -34,15 +34,15 @@ def test_sum_z_projection():
             [0, 2, 0, 8, 0],
             [5, 0, 6, 0, 10]
         ]
-    ]).T)
+    ]))
 
     reference = cle.push(np.asarray([
-        [10, 10, 14, 11, 21],
-        [10, 10, 14, 11, 21],
-        [10, 14, 11, 10, 21],
-        [10, 10, 11, 14, 21],
-        [10, 11, 14, 10, 21]
-    ]).T)
+        [ 2.,  6.,  0., 24., 18.],
+         [ 5.,  6.,  1., 15., 28.],
+         [ 9.,  8.,  3., 14., 30.],
+         [ 4., 10.,  1., 22., 19.],
+         [25.,  0., 30.,  0., 50.]
+    ]))
 
     result = cle.create(reference)
     cle.sum_z_projection(test1, result)
@@ -50,6 +50,36 @@ def test_sum_z_projection():
     a = cle.pull(result)
     b = cle.pull(reference)
 
+    print(b)
+    print(a)
+
+    assert (np.allclose(a, b, 0.01))
+
+def test_sum_z_projection2():
+    test1 = cle.push(np.asarray([
+        [
+            [1, 0],
+        ], [
+            [0, 2],
+        ], [
+            [0, 2],
+        ], [
+            [0, 2],
+        ], [
+            [1, 0],
+        ]
+    ]))
+
+    reference = cle.push(np.asarray([
+        [2, 6]
+    ]))
+
+    result = cle.sum_z_projection(test1)
+
+    a = cle.pull(result)
+    b = cle.pull(reference)
+
+    print(b)
     print(a)
 
     assert (np.allclose(a, b, 0.01))

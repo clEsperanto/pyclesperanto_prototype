@@ -1,6 +1,5 @@
 import numpy as np
-from ._pycl import OCLArray
-
+from ._backends import Backend
 
 def push(any_array):
     """Copies an image to GPU memory and returns its handle
@@ -15,7 +14,7 @@ def push(any_array):
 
     Returns
     -------
-    OCLArray
+    object of type backend.array_type()
     
     Examples
     --------
@@ -26,7 +25,7 @@ def push(any_array):
     ----------
     .. [1] https://clij.github.io/clij2-docs/reference_push
     """
-    if isinstance(any_array, OCLArray):
+    if isinstance(any_array, Backend.get_instance().get().array_type()):
         return any_array
 
     if isinstance(any_array, list) or isinstance(any_array, tuple):
@@ -36,7 +35,7 @@ def push(any_array):
         any_array = np.asarray(any_array.get())
 
     float_arr = any_array.astype(np.float32)
-    return OCLArray.from_array(float_arr)
+    return Backend.get_instance().get().from_array(float_arr)
 
 
 def push_zyx(any_array):

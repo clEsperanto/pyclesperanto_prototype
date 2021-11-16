@@ -31,4 +31,13 @@ def available_device_names(dev_type: str = None, score_key = None) -> List[str]:
 
     devices = filter_devices(dev_type=dev_type, score_key=score_key)
     device_names = [device.name for device in devices]
+
+    # intermediate solution to add cupy
+    try:
+        import cupy
+        from ._cuda_backend import cuda_backend
+        device_names = device_names + [str(cuda_backend())]
+    except ImportError:
+        pass
+
     return device_names
