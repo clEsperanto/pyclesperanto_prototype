@@ -1,4 +1,4 @@
-# 0.11.0
+# 0.11.0 - November 16th 2021
 
 ## New features
 * This version introduces an experimental `cupy` backend. Install [cupy](https://cupy.dev/) and run `cle.select_device('cupy')` to test it. 
@@ -7,14 +7,17 @@
   * apply_vector_field (linear interpolation not supported), 
   * create(uint64), create(int32), create(int64), 
   * resample (linear interpolation not supported),  
-  * scale (linear interpolation not supported), 
-  * spots_to_pointlist
+  * scale (linear interpolation not supported),  
+  * translate (linear interpolation not supported).
 
 ## API deprecations
-* The following parameters of `execute()` are deprecated:
+* The following parameters of `execute()` are deprecated and will disappear with version 0.12.0.
   * `image_size_independent_kernel_compilation` (will always be True in the future), 
   * `prog` (will no longer be supported, use [pyopencl](https://documen.tician.de/pyopencl/) for those kinds of features) and 
-  * `device` (will no longer be supported, use pyopencl instead)
+  * `device` (will no longer be supported, use pyopencl instead.
+
+The next version, 0.12.0 will bring larger internal changes, especially in the context of tier0. 
+If you used private functions such as in `_tier0._pycl`, please get in touch, e.g. via github issue.
 
 # 0.10.9 - November 11th 2021
 

@@ -11,8 +11,9 @@
 [![codecov](https://codecov.io/gh/clesperanto/pyclesperanto_prototype/branch/master/graph/badge.svg)](https://codecov.io/gh/clesperanto/pyclesperanto_prototype)
 
 
-py-clEsperanto is a prototype for [clEsperanto](http://clesperanto.net) - a multi-platform multi-language framework for GPU-accelerated image processing. 
+py-clesperanto is a prototype for [clEsperanto](http://clesperanto.net) - a multi-platform multi-language framework for GPU-accelerated image processing. 
 It uses [OpenCL kernels](https://github.com/clEsperanto/clij-opencl-kernels/tree/development/src/main/java/net/haesleinhuepf/clij/kernels) from [CLIJ](http://clij.github.io/).
+Since version 0.11.0 py-clesperanto comes with a yet experimental [cupy](https://cupy.dev)-based [CUDA](https://en.wikipedia.org/wiki/CUDA) backend.
 
 For users convenience, there are code generators available for [napari](https://clesperanto.github.io/napari_pyclesperanto_assistant/) and [Fiji](https://clij.github.io/assistant/).
 
@@ -337,6 +338,8 @@ imsave("result.tif", cle.pull(labeled))
 
 [Interoperability with cupy](http://github.com/clEsperanto/pyclesperanto_prototype/tree/master/demo/basics/interoperability_cupy.ipynb)
 
+[Using the cupy backend](http://github.com/clEsperanto/pyclesperanto_prototype/tree/master/demo/basics/select_backend.ipynb)
+
 </td></tr>
 </table>
 
@@ -353,12 +356,21 @@ A graphical user interface for general purpose GPU-accelerated image processing 
 
 </td></tr><tr><td>
 
-<img src="https://github.com/haesleinhuepf/napari-oclrfc/raw/master/images/screenshot.png" width="300"/>
+<img src="https://github.com/haesleinhuepf/napari-accelerated-pixel-and-object-classification/raw/main/images/screenshot.png" width="300"/>
 
 </td><td>
 
-[napari-oclrfc](https://github.com/haesleinhuepf/napari-oclrfc):
+[napari-accelerated-pixel-and-object-classification](https://github.com/haesleinhuepf/napari-accelerated-pixel-and-object-classification):
 GPU-accelerated Random Forest Classifiers for pixel and labeled object classification
+
+</td></tr><tr><td>
+
+<img src="https://github.com/clEsperanto/pyclesperanto_prototype/raw/master/docs/images/napari-clusters-plotter.png" width="300"/>
+
+</td><td>
+
+[napari-clusters-plotter](https://github.com/BiAPoL/napari-clusters-plotter):
+Clustering of objects according to their quantitative properties
 
 </td></tr></table>
 
