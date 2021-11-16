@@ -1,4 +1,5 @@
 recursive-include pyclesperanto_prototype *.cl
+recursive-include pyclesperanto_prototype *.py
 
 recursive-exclude tests *
 recursive-exclude build *
