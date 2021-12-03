@@ -4,7 +4,7 @@ import numpy as np
 
 def to_networkx(adjacency_matrix:Image, centroids:Image=None):
     """
-    Converts a given adjaceny matrix to a networkx [1] graph data structure.
+    Converts a given adjacency matrix to a networkx [1] graph data structure.
 
     Note: the given centroids typically have one entry less than the adjacency matrix is wide, because
     those matrices contain a first row and column representing background. When exporting the igraph graph,
@@ -19,7 +19,7 @@ def to_networkx(adjacency_matrix:Image, centroids:Image=None):
 
     Returns
     -------
-    igraph graph
+    networkx graph
 
     See Also
     --------

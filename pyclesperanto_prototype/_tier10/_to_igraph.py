@@ -4,7 +4,7 @@ from .._tier0 import Image
 
 def to_igraph(adjacency_matrix:Image, centroids:Image=None):
     """
-    Converts a given adjaceny matrix to a iGraph [1] graph data structure.
+    Converts a given adjacency matrix to a iGraph [1] graph data structure.
 
     Note: the given centroids typically have one entry less than the adjacency matrix is wide, because
     those matrices contain a first row and column representing background. When exporting the networkx graph,
