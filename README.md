@@ -395,6 +395,7 @@ welcome to submit your notebook as pull-request!
 * [Pixel-wise comparison](http://github.com/clEsperanto/pyclesperanto_prototype/blob/master/benchmarks/pixelwise_comparison.ipynb)
 * [Intensity projections](http://github.com/clEsperanto/pyclesperanto_prototype/blob/master/benchmarks/intensity_projections.ipynb)
 * [Axis transposition](http://github.com/clEsperanto/pyclesperanto_prototype/blob/master/benchmarks/transpose.ipynb)
+* [Nonzero](http://github.com/clEsperanto/pyclesperanto_prototype/blob/master/benchmarks/nonzero.ipynb)
 
 ## See also
 There are other libraries for code acceleration and GPU-acceleration for image processing.
