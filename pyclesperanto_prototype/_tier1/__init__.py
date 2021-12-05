@@ -104,6 +104,7 @@ from ._power_images import power_images
 from ._read_intensities_from_map import read_intensities_from_map
 from ._read_intensities_from_positions import read_intensities_from_positions
 from ._replace_intensities import replace_intensities
+from ._replace_intensities import replace_intensities as map_array
 from ._replace_intensity import replace_intensity
 from ._resample import resample
 from ._touch_matrix_to_mesh import touch_matrix_to_mesh
