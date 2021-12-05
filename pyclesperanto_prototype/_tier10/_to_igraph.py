@@ -1,5 +1,4 @@
 import numpy as np
-from .._tier0 import plugin_function
 from .._tier0 import Image
 
 def to_igraph(adjacency_matrix:Image, centroids:Image=None):
