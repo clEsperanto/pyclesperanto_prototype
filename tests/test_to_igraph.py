@@ -37,3 +37,37 @@ def test_to_igraph_without_centroids():
 
     igraph = cle.to_igraph(adjacency_matrix, centroids)
     assert len(igraph.vs) == 3
+
+
+def test_proximal_labels_to_igraph():
+    import pyclesperanto_prototype as cle
+    labels = cle.push(np.asarray([
+        [0, 1],
+        [2, 3]
+    ]))
+
+    igraph = cle.proximal_labels_to_igraph(labels, maximum_distance=50)
+    assert len(igraph.vs) == 3
+
+
+def test_n_nearest_labels_to_igraph():
+    import pyclesperanto_prototype as cle
+    labels = cle.push(np.asarray([
+        [0, 1],
+        [2, 3]
+    ]))
+
+    igraph = cle.n_nearest_labels_to_igraph(labels, n=1)
+    assert len(igraph.vs) == 3
+
+
+def test_touching_labels_to_igraph():
+    import pyclesperanto_prototype as cle
+    labels = cle.push(np.asarray([
+        [0, 1],
+        [2, 3]
+    ]))
+
+    igraph = cle.touching_labels_to_igraph(labels)
+    assert len(igraph.vs) == 3
+
