@@ -9,7 +9,7 @@ from .._tier2 import maximum_of_all_pixels
 from .._tier2 import sum_reduction_x
 from .._tier2 import block_enumerate
 
-@plugin_function(output_creator=create_labels_like)
+@plugin_function(output_creator=create_labels_like, categories=['label processing', 'in assistant'])
 def relabel_sequential(input : Image, output : Image = None, blocksize : int = 4096):
     """Analyses a label map and if there are gaps in the indexing (e.g. label 
     5 is not present) all 
