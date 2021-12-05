@@ -4,7 +4,7 @@ from .._tier0 import create_none
 from .._tier0 import Image
 from .._tier1 import paste
 
-@plugin_function(output_creator=create_none, categories=['combine', 'transform'])
+@plugin_function(output_creator=create_none, categories=['combine', 'transform', 'in assistant'])
 def combine_vertically(stack1 : Image, stack2 : Image, destination : Image = None):
     """Combines two images or stacks in Y. 
     
