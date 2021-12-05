@@ -6,5 +6,6 @@ from ._tier4 import *
 from ._tier5 import *
 from ._tier8 import *
 from ._tier9 import *
+from ._tier10 import *
 
 __version__ = "0.11.1"

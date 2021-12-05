@@ -1,3 +1,16 @@
+# 0.11.2 (upcoming)
+
+## New features
+* Interoperability with [igraph](https://igraph.org) and [networkx](https://networkx.org)
+  * `n_nearest_labels_to_igraph`
+  * `n_nearest_labels_to_networkx`
+  * `proximal_labels_to_igraph`
+  * `proximal_labels_to_networkx`
+  * `to_igraph`
+  * `to_networkx`
+  * `touching_labels_to_igraph`
+  * `touching_labels_to_networkx`
+
 # 0.11.1 - November 16th 2021
 
 ## Bug fixes
