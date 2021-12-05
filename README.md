@@ -189,7 +189,8 @@ imsave("result.tif", cle.pull(labeled))
 
 </td><td>
 
-[Working with spots, pointlist and matrices](http://github.com/clEsperanto/pyclesperanto_prototype/tree/master/demo/basics/spots_pointlists_matrices_tables.ipynb)
+* [Working with spots, pointlist and matrices](http://github.com/clEsperanto/pyclesperanto_prototype/tree/master/demo/basics/spots_pointlists_matrices_tables.ipynb)
+* [Lists of nonzero pixel coordinates](http://github.com/clEsperanto/pyclesperanto_prototype/tree/master/demo/basics/nonzero.ipynb)
 
 </td></tr><tr><td>
 
