@@ -70,4 +70,7 @@ def plugin_function(
         # call the decorated function
         return function(*bound.args, **bound.kwargs)
 
+    # this is necessary to obfuscate pyclesperanto's internal structure
+    worker_function.__module__ = "pyclesperanto_prototype"
+
     return worker_function
