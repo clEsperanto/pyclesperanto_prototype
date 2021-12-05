@@ -30,16 +30,14 @@ def to_igraph(adjacency_matrix:Image, centroids:Image=None):
     except ImportError:
         raise ImportError("igraph is not installed. Please refer to the documentation https://igraph.org/python/")
 
-    igraph_graph = igraph.Graph.Adjacency(np.asarray(adjacency_matrix)[1:,1:].tolist())
+    igraph_graph = igraph.Graph(adjacency_matrix.shape[0] - 1)
+    edge_list = np.nonzero(np.asarray(adjacency_matrix)[1:,1:])
+    igraph_graph.add_edges(np.asarray(edge_list).T)
 
     if centroids is not None:
-        from .._tier1 import transpose_xy
-        centroid_positions = transpose_xy(centroids)
-
-        for n in range(len(igraph_graph.vs)):
-            igraph_graph.vs[n]['x'] = centroid_positions[n][0]
-            igraph_graph.vs[n]['y'] = centroid_positions[n][1]
-            if centroids.shape[0] > 2: # 3D data
-                igraph_graph.vs[n]['z'] = centroid_positions[n][2]
+        igraph_graph.vs['x'] = centroids[0]
+        igraph_graph.vs['y'] = centroids[1]
+        if centroids.shape[0] > 2: # 3D data
+            igraph_graph.vs['z'] = centroids[2]
 
     return igraph_graph
