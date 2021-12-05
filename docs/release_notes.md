@@ -1,4 +1,4 @@
-# 0.11.2 (upcoming)
+# 0.11.2 - December 5th 2021
 
 ## New features
 * Interoperability with [igraph](https://igraph.org) and [networkx](https://networkx.org)
@@ -10,6 +10,13 @@
   * `to_networkx`
   * `touching_labels_to_igraph`
   * `touching_labels_to_networkx`
+* Functions made available in the napari-pyclesperanto-assistant
+  * `combine_vertically`
+  * `combine_horizontally`
+  * `concatentate_stacks`
+  * `relabel_sequential `
+* added `map_array` alias to `replace_intensities`; scikit-image users may be used to it
+* obfuscate pyclesperanto's internal structure. The `__module__` of all functions is now the core package. Hence, one can no longer know from which `_tier` a function is by printing out the module. This is supposed to increase the quality of generated code.
 
 # 0.11.1 - November 16th 2021
 
