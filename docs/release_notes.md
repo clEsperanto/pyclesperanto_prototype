@@ -1,3 +1,8 @@
+# 0.11.3 - December 12th 2021
+
+## New features
+* For improved code generation, pyclesperanto_prototype as now a `__common_alias__` attribute.
+
 # 0.11.2 - December 5th 2021
 
 ## New features
