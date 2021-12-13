@@ -33,6 +33,6 @@ def point_index_list_to_mesh(pointlist: Image, indexlist : Image, mesh_destinati
 
     dimensions = [1, 1, indexlist.shape[-1]]
 
-    execute(__file__, "../clij-opencl-kernels/kernels/pointindexlist_to_mesh_3d_x.cl", "pointindexlist_to_mesh_3d", dimensions, parameters)
+    execute(__file__, "pointindexlist_to_mesh_3d_x.cl", "pointindexlist_to_mesh_3d", dimensions, parameters)
 
     return mesh_destination
