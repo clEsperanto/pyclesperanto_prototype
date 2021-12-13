@@ -34,7 +34,7 @@ def draw_mesh_between_n_closest_labels(labels : Image, mesh_target : Image = Non
     distance_matrix = generate_distance_matrix(pointlist, pointlist)
 
     import numpy as np
-    max_float = np.finfo(np.float).max
+    max_float = np.finfo(float).max
 
     set_where_x_equals_y(distance_matrix, max_float)
     set_row(distance_matrix, 0, max_float)
