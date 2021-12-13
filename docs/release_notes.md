@@ -1,3 +1,8 @@
+# 0.11.4 - December 13th 2021
+
+## Bug fix
+* Draw mesh to nearest neighbors drawing was incorrect in 3D
+
 # 0.11.3 - December 12th 2021
 
 ## New features
