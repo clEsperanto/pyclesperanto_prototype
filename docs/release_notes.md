@@ -1,3 +1,19 @@
+# (upcoming release)
+
+## New features
+New functions for processing and comparing label images were added.
+* `proximal_other_labels_count`
+* `proximal_other_labels_count_map`
+* `exclude_labels_with_values_equal_to_constant`
+* `exclude_labels_with_values_not_equal_to_constant`
+* `exclude_labels_with_map_values_equal_to_constant`
+* `exclude_labels_with_map_values_not_equal_to_constant`
+* `exclude_labels_with_map_values_out_of_range`
+* `exclude_labels_with_map_values_within_range`
+
+## Bug fixes
+* `generate_distance_map` had wrong output shape in case two centroid lists with different sizes were passed
+
 # 0.11.4 - December 13th 2021
 
 ## Bug fix
