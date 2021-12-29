@@ -22,6 +22,25 @@ def test_push_regionprops_column():
     assert np.allclose(reference, areas, 0.001)
 
 
+def test_push_skimage_regionprops_column():
+    labels = np.asarray([
+            [4, 4, 2],
+            [4, 1, 2],
+            [3, 3, 4]
+    ]).astype(int)
+    reference = [0, 1, 2, 2, 4]
+
+    from skimage.measure import regionprops
+    regionprops = regionprops(labels, labels)
+    print([r.area for r in regionprops])
+    areas = cle.push_regionprops_column(regionprops, 'area')
+
+    print(reference)
+    print(areas)
+
+    assert np.allclose(reference, areas, 0.001)
+
+
 def test_push_regionprops_column_gpu():
     labels = cle.push(np.asarray([
         [
