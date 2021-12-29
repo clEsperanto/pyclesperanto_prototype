@@ -4,7 +4,7 @@ from .._tier0 import plugin_function
 from .._tier0 import Image
 
 @plugin_function(output_creator=create_matrix_from_pointlists)
-def generate_distance_matrix(coordindate_list1 :Image, coordinate_list2 :Image, distance_matrix_destination :Image = None):
+def generate_distance_matrix(coordinate_list1 :Image, coordinate_list2 :Image, distance_matrix_destination :Image = None):
     """Computes the distance between all point coordinates given in two point lists.
     
     Takes two images containing pointlists (dimensionality n * d, n: number of 
@@ -43,7 +43,7 @@ def generate_distance_matrix(coordindate_list1 :Image, coordinate_list2 :Image, 
 
     parameters = {
         "dst_matrix": distance_matrix_destination,
-        "src_point_list1": coordindate_list1,
+        "src_point_list1": coordinate_list1,
         "src_point_list2": coordinate_list2
     }
 
