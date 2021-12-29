@@ -9,6 +9,7 @@
 [![Python Version](https://img.shields.io/pypi/pyversions/pyclesperanto-prototype.svg?color=green)](https://python.org)
 [![tests](https://github.com/clesperanto/pyclesperanto_prototype/workflows/tests/badge.svg)](https://github.com/clesperanto/pyclesperanto_prototype/actions)
 [![codecov](https://codecov.io/gh/clesperanto/pyclesperanto_prototype/branch/master/graph/badge.svg)](https://codecov.io/gh/clesperanto/pyclesperanto_prototype)
+[![Development Status](https://img.shields.io/pypi/status/pyclesperanto_prototype.svg)](https://en.wikipedia.org/wiki/Software_release_life_cycle#Alpha)
 
 
 py-clesperanto is a prototype for [clesperanto](http://clesperanto.net) - a multi-platform multi-language framework for GPU-accelerated image processing. 
