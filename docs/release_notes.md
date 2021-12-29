@@ -2,6 +2,8 @@
 
 ## New features
 New functions for processing and comparing label images were added.
+* `average_distance_of_n_shortest_distances`
+* `average_distance_to_n_nearest_other_labels_map`
 * `proximal_other_labels_count`
 * `proximal_other_labels_count_map`
 * `exclude_labels_with_values_equal_to_constant`
