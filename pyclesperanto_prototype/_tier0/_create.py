@@ -64,7 +64,7 @@ def create_matrix_from_pointlists(pointlist1, pointlist2):
     width = pointlist1.shape[1] + 1
     height = pointlist2.shape[1] + 1
 
-    return create([width, height])
+    return create([height, width])
 
 def create_from_pointlist(pointlist, *args):
     from .._tier1 import maximum_x_projection
