@@ -22,7 +22,7 @@ def test_draw_mesh_between_touching_labels():
     ]))
 
 
-    distance_mesh_between_touching_labels = cle.draw_mesh_between_touching_labels(labels, maximum_distance=5)
+    distance_mesh_between_touching_labels = cle.draw_mesh_between_touching_labels(labels)
 
     a = cle.pull(distance_mesh_between_touching_labels)
     b = cle.pull(reference)
