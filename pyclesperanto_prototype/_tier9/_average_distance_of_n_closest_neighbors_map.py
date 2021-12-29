@@ -11,13 +11,13 @@ def average_distance_of_n_closest_neighbors_map(labels : Image, distance_map : I
     
     Parameters
     ----------
-    input : Image
-    destination : Image
+    labels : Image
+    distance_map : Image
     n : Number
     
     Returns
     -------
-    destination
+    distance_map
     
     References
     ----------
