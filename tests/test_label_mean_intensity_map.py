@@ -30,7 +30,7 @@ def test_label_mean_intensity_map_2d():
     print(a)
     print(b)
 
-    assert (np.array_equal(a, b))
+    assert (np.allclose(a, b, 0.001))
 
 
 def test_label_mean_intensity_map_3d():
@@ -75,7 +75,7 @@ def test_label_mean_intensity_map_3d():
     print(a)
     print(b)
 
-    assert (np.array_equal(a, b))
+    assert (np.allclose(a, b, 0.001))
 
 
 
