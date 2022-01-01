@@ -1,7 +1,7 @@
-# (upcoming release)
+# 0.11.10 - January 1st 2022
 
 ## New features
-New functions for processing and comparing label images were added.
+New functions for processing and comparing label images:
 * `average_distance_of_n_shortest_distances`
 * `average_distance_to_n_nearest_other_labels_map`
 * `proximal_other_labels_count`
@@ -14,7 +14,7 @@ New functions for processing and comparing label images were added.
 * `exclude_labels_with_map_values_within_range`
 
 ## Bug fixes
-* `generate_distance_map` had wrong output shape in case two centroid lists with different sizes were passed
+* `generate_distance_map` had wrong output shape in case two centroid lists with different sizes were given
 
 # 0.11.4 - December 13th 2021
 
