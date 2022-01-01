@@ -16,15 +16,12 @@ We mostly use it in the life sciences for analysing 3/4-dimensional microsopy da
 their individual properties as well as properties of compounds of cells froming tissues.
 
 ![](https://github.com/clEsperanto/pyclesperanto_prototype/raw/master/docs/images/banner.png)
-![](https://github.com/clij/assistant/blob/master/images/script_export.png)
 
 It uses [OpenCL kernels](https://github.com/clEsperanto/clij-opencl-kernels/tree/development/src/main/java/net/haesleinhuepf/clij/kernels) from [CLIJ](http://clij.github.io/).
 Since version 0.11.1 py-clesperanto comes with a yet experimental [cupy](https://cupy.dev)-based [CUDA](https://en.wikipedia.org/wiki/CUDA) backend.
 
 For users convenience, there are code generators available for [napari](https://clesperanto.github.io/napari_pyclesperanto_assistant/) and [Fiji](https://clij.github.io/assistant/).
 Also check out the [napari workflow optimizer](https://github.com/haesleinhuepf/napari-workflow-optimizer) for semi-automatic parameter tuning of clesperanto-functions.
-
-![](https://clesperanto.github.io/napari_pyclesperanto_assistant/docs/images/script_editor.png)
 
 ## Reference
 The [full reference](https://clij.github.io/clij2-docs/reference__pyclesperanto) is available as part of the CLIJ2 documentation.
