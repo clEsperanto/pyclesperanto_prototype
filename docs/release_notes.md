@@ -1,4 +1,4 @@
-# 0.11.10 - January 1st 2022
+# 0.12.0 - January 1st 2022
 
 ## New features
 New functions for processing and comparing label images:
@@ -15,6 +15,9 @@ New functions for processing and comparing label images:
 
 ## Bug fixes
 * `generate_distance_map` had wrong output shape in case two centroid lists with different sizes were given
+
+## Backwards compatibility breaking bug fixes
+* `generate_distance_matrix` had a typo in the parameter "coordindate_list1": it's now "coordinate_list1".
 
 # 0.11.4 - December 13th 2021
 
