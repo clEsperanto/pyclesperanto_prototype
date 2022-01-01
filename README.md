@@ -3,6 +3,7 @@
 [![website](https://img.shields.io/website?url=http%3A%2F%2Fclesperanto.net)](http://clesperanto.net)
 [![PyPI](https://img.shields.io/pypi/v/pyclesperanto-prototype.svg?color=green)](https://pypi.org/project/pyclesperanto-prototype)
 [![Contributors](https://img.shields.io/github/contributors-anon/clEsperanto/pyclesperanto_prototype)](https://github.com/clEsperanto/pyclesperanto_prototype/graphs/contributors)
+[![PyPI - Downloads](https://img.shields.io/pypi/dm/pyclesperanto_prototype)](https://pypistats.org/packages/pyclesperanto_prototype)
 [![GitHub stars](https://img.shields.io/github/stars/clEsperanto/pyclesperanto_prototype?style=social)](https://github.com/clEsperanto/pyclesperanto_prototype/)
 [![GitHub forks](https://img.shields.io/github/forks/clEsperanto/pyclesperanto_prototype?style=social)](https://github.com/clEsperanto/pyclesperanto_prototype/)
 [![License](https://img.shields.io/pypi/l/pyclesperanto_prototype.svg?color=green)](https://github.com/haesleinhuepf/pyclesperanto_prototype/raw/master/LICENSE)
