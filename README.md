@@ -234,6 +234,14 @@ imsave("result.tif", cle.pull(labeled))
 
 </td></tr><tr><td>
 
+<img src="https://github.com/clEsperanto/pyclesperanto_prototype/raw/master/docs/images/ipgraph_networkx.png" width="300"/>
+
+</td><td>
+
+[Export to igraph and networkx](http://github.com/clEsperanto/pyclesperanto_prototype/tree/master/demo/neighbors/ipgraph_networkx.ipynb)
+
+</td></tr><tr><td>
+
 <img src="https://github.com/clEsperanto/pyclesperanto_prototype/raw/master/docs/images/neighborhood_definitions.png" width="300"/>
 
 </td><td>
@@ -267,9 +275,19 @@ imsave("result.tif", cle.pull(labeled))
 
 </td></tr><tr><td>
 
+<img src="https://github.com/clEsperanto/pyclesperanto_prototype/raw/master/docs/images/shape_descriptors_based_on_neighborhood_graphs.png" width="300"/>
+
 </td><td>
 
 [Shape descriptors based on neighborhood graphs](http://github.com/clEsperanto/pyclesperanto_prototype/tree/master/demo/neighbors/shape_descriptors_based_on_neighborhood_graphs.ipynb)
+
+</td></tr><tr><td>
+
+<img src="https://github.com/clEsperanto/pyclesperanto_prototype/raw/master/docs/images/distance_to_other_labels.png" width="300"/>
+
+</td><td>
+
+[Measuring distances between labels in two label images](http://github.com/clEsperanto/pyclesperanto_prototype/tree/master/demo/neighbors/distance_to_other_labels.ipynb)
 
 </td></tr><tr><td>
 
