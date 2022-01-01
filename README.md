@@ -18,7 +18,7 @@ We mostly use it in the life sciences for analysing 3/4-dimensional microsopy da
 their individual properties as well as properties of compounds of cells froming tissues.
 
 ![](https://github.com/clEsperanto/pyclesperanto_prototype/raw/master/docs/images/banner.png)
-<small>Image date source: Daniela Vorkel, Myers lab, MPI-CBG, rendered using [napari](https://github.com/napari/napari) </small>
+<small>Image data source: Daniela Vorkel, Myers lab, MPI-CBG, rendered using [napari](https://github.com/napari/napari) </small>
 
 clesperanto uses [OpenCL kernels](https://github.com/clEsperanto/clij-opencl-kernels/tree/development/src/main/java/net/haesleinhuepf/clij/kernels) from [CLIJ](http://clij.github.io/).
 Since version 0.11.1 py-clesperanto comes with a yet experimental [cupy](https://cupy.dev)-based [CUDA](https://en.wikipedia.org/wiki/CUDA) backend.
