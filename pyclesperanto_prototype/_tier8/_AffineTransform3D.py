@@ -147,8 +147,8 @@ class AffineTransform3D:
            Typically used for deskewing in lattice lightsheet microscopy
 
         Args:
-            rotation_angle_x (float, optional): rotation angle in X. Defaults to 0.
-            rotation_angle_y (float, optional): rotation angle in Y. Defaults to 0.
+            angle_x_in_degrees (float, optional): rotation angle in X in degrees. Defaults to 0.
+            angle_y_in_degrees (float, optional): rotation angle in Y in degrees. Defaults to 0.
 
         Returns:
             self
