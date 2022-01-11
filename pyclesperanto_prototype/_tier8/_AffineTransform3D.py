@@ -141,20 +141,88 @@ class AffineTransform3D:
 
         return self
 
-    def shear(self):
-        raise NotImplementedError("Shearing has not been implemented yet. \n"
-                                  "See https://github.com/clEsperanto/pyclesperanto_prototype/issues/90")
+    def shear_z(self,rotation_angle_x: float = 0, rotation_angle_y: float = 0 ):
+        """Shear image in Z along X and/or Y direction
+           Uses angle to calculate the shear factor
+           Typically used for deskewing in lattice lightsheet microscopy
+
+        Args:
+            rotation_angle_x (float, optional): rotation angle in X. Defaults to 0.
+            rotation_angle_y (float, optional): rotation angle in Y. Defaults to 0.
+
+        Returns:
+            self
+        """          
+        import math
+        try:
+            shear_factor_xz = 1.0 / math.tan(rotation_angle_x * math.pi / 180)
+        except ZeroDivisionError:
+            shear_factor_xz = 0
+        
+        try:
+            shear_factor_yz = 1.0 / math.tan(rotation_angle_y * math.pi / 180)
+        except ZeroDivisionError:
+            shear_factor_yz = 0
+
+        # shearing
+        self._concatenate(np.asarray([
+            [1, 0, shear_factor_xz, 0],
+            [0, 1, shear_factor_yz, 0],
+            [0, 0 , 1, 0],
+            [0, 0, 0, 1],
+        ]))
+        return self
+
+    def shear_x(self,rotation_angle_y: float = 0, rotation_angle_z: float = 0 ):
+        
+        import math
+        try:
+            shear_factor_yx = 1.0 / math.tan(rotation_angle_y * math.pi / 180)
+        except ZeroDivisionError:
+            shear_factor_yx = 0
+        
+        try:
+            shear_factor_zx = 1.0 / math.tan(rotation_angle_z * math.pi / 180)
+        except ZeroDivisionError:
+            shear_factor_zx = 0
+
+        # shearing
+        self._concatenate(np.asarray([
+            [1, 0, 0, 0],
+            [shear_factor_yx, 1, 0, 0],
+            [shear_factor_zx, 0 , 1, 0],
+            [0, 0, 0, 1],
+        ]))
+        return self
+
+    def shear_y(self,rotation_angle_x: float = 0, rotation_angle_z: float = 0 ):
+        
+        import math
+        try:
+            shear_factor_xy = 1.0 / math.tan(rotation_angle_x * math.pi / 180)
+        except ZeroDivisionError:
+            shear_factor_xy = 0
+        
+        try:
+            shear_factor_zy = 1.0 / math.tan(rotation_angle_z * math.pi / 180)
+        except ZeroDivisionError:
+            shear_factor_zy = 0
+
+        # shearing
+        self._concatenate(np.asarray([
+            [1, shear_factor_xy, 0, 0],
+            [0, 1, 0, 0],
+            [0, shear_factor_zy , 1, 0],
+            [0, 0, 0, 1],
+        ]))
+        return self
 
     def _3x3_to_4x4(self, matrix):
-        # I bet there is an easier way to do this.
-        # But I don't know what to google for :D
-        #                            haesleinhuepf
-        return np.asarray([
-            [matrix[0,0], matrix[0,1], matrix[0,2], 0],
-            [matrix[1,0], matrix[1,1], matrix[1,2], 0],
-            [matrix[2,0], matrix[2,1], matrix[2,2], 0],
-            [0, 0, 0, 1]
-        ])
+        """Pads 3x3 affine transformation matrix to convert it to 4x4
+        """        
+        mat = np.pad(matrix,(0,1),'constant', constant_values = (0,0))
+        mat[3,3] = 1
+        return mat
 
     def _concatenate(self, matrix):
         self._matrix = np.matmul(matrix, self._matrix)
