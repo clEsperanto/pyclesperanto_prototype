@@ -155,12 +155,12 @@ class AffineTransform3D:
         """          
         import math
         try:
-            shear_factor_xz = 1.0 / math.tan(rotation_angle_x * math.pi / 180)
+            shear_factor_xz = 1.0 / math.tan(angle_x_in_degrees * math.pi / 180)
         except ZeroDivisionError:
             shear_factor_xz = 0
         
         try:
-            shear_factor_yz = 1.0 / math.tan(rotation_angle_y * math.pi / 180)
+            shear_factor_yz = 1.0 / math.tan(angle_y_in_degrees * math.pi / 180)
         except ZeroDivisionError:
             shear_factor_yz = 0
 
