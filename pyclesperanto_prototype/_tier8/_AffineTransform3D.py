@@ -141,7 +141,7 @@ class AffineTransform3D:
 
         return self
 
-    def shear_z(self,rotation_angle_x: float = 0, rotation_angle_y: float = 0 ):
+    def shear_z(self,angle_x_in_degrees: float = 0, angle_y_in_degrees: float = 0 ):
         """Shear image in Z along X and/or Y direction
            Uses angle to calculate the shear factor
            Typically used for deskewing in lattice lightsheet microscopy
