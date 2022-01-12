@@ -149,6 +149,8 @@ class AffineTransform3D:
         Args:
             angle_x_in_degrees (float, optional): shear angle in X in degrees. Defaults to 0.
             angle_y_in_degrees (float, optional): shear angle in Y in degrees. Defaults to 0.
+                    angle in degrees. To convert radians to degrees use this formula:
+                    angle_in_deg = angle_in_rad / numpy.pi * 180.0
 
         Returns:
             self
@@ -180,6 +182,8 @@ class AffineTransform3D:
         Args:
             angle_y_in_degrees (float, optional): shear angle in X in degrees. Defaults to 0.
             angle_z_in_degrees (float, optional): shear angle in Z in degrees. Defaults to 0.
+                    angle in degrees. To convert radians to degrees use this formula:
+                    angle_in_deg = angle_in_rad / numpy.pi * 180.0
 
         Returns:
             self
@@ -212,6 +216,8 @@ class AffineTransform3D:
         Args:
             angle_x_in_degrees (float, optional): shear angle in X in degrees. Defaults to 0.
             angle_z_in_degrees (float, optional): shear angle in Z in degrees. Defaults to 0.
+                        angle in degrees. To convert radians to degrees use this formula:
+                        angle_in_deg = angle_in_rad / numpy.pi * 180.0
 
         Returns:
             self
