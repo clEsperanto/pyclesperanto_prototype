@@ -143,12 +143,12 @@ class AffineTransform3D:
 
     def shear_z(self,angle_x_in_degrees: float = 0, angle_y_in_degrees: float = 0 ):
         """Shear image in Z along X and/or Y direction
-           Uses angle to calculate the shear factor
-           Typically used for deskewing in lattice lightsheet microscopy
+           Uses angle in degrees to calculate the shear
+           Tip: Used for lattice lightsheet deskewing. For Janelia lattice, use angle_x_in_degrees and for Zeiss lattice, use angle_y_in_degrees
 
         Args:
-            angle_x_in_degrees (float, optional): rotation angle in X in degrees. Defaults to 0.
-            angle_y_in_degrees (float, optional): rotation angle in Y in degrees. Defaults to 0.
+            angle_x_in_degrees (float, optional): shear angle in X in degrees. Defaults to 0.
+            angle_y_in_degrees (float, optional): shear angle in Y in degrees. Defaults to 0.
 
         Returns:
             self
@@ -174,6 +174,16 @@ class AffineTransform3D:
         return self
 
     def shear_x(self,angle_y_in_degrees: float = 0, angle_z_in_degrees: float = 0 ):
+        """Shear image in x along Y and/or Z direction
+           Uses angle in degrees to calculate the shear
+
+        Args:
+            angle_y_in_degrees (float, optional): shear angle in X in degrees. Defaults to 0.
+            angle_z_in_degrees (float, optional): shear angle in Z in degrees. Defaults to 0.
+
+        Returns:
+            self
+        """        
         
         import math
         try:
@@ -196,6 +206,16 @@ class AffineTransform3D:
         return self
 
     def shear_y(self,angle_x_in_degrees: float = 0, angle_z_in_degrees: float = 0 ):
+        """Shear image in Y along X and/or Z direction
+           Uses angle in degrees to calculate the shear
+
+        Args:
+            angle_x_in_degrees (float, optional): shear angle in X in degrees. Defaults to 0.
+            angle_z_in_degrees (float, optional): shear angle in Z in degrees. Defaults to 0.
+
+        Returns:
+            self
+        """        
         
         import math
         try:
