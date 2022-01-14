@@ -141,20 +141,114 @@ class AffineTransform3D:
 
         return self
 
-    def shear(self):
-        raise NotImplementedError("Shearing has not been implemented yet. \n"
-                                  "See https://github.com/clEsperanto/pyclesperanto_prototype/issues/90")
+    def shear_z(self,angle_x_in_degrees: float = 0, angle_y_in_degrees: float = 0 ):
+        """Shear image in Z along X and/or Y direction
+           Uses angle in degrees to calculate the shear
+           Tip: Used for lattice lightsheet deskewing. For Janelia lattice, use angle_x_in_degrees and for Zeiss lattice, use angle_y_in_degrees
+
+        Args:
+            angle_x_in_degrees (float, optional): shear angle in X in degrees. Defaults to 0.
+            angle_y_in_degrees (float, optional): shear angle in Y in degrees. Defaults to 0.
+                    angle in degrees. To convert radians to degrees use this formula:
+                    angle_in_deg = angle_in_rad / numpy.pi * 180.0
+
+        Returns:
+            self
+        """          
+        import math
+        try:
+            shear_factor_xz = 1.0 / math.tan(angle_x_in_degrees * math.pi / 180)
+        except ZeroDivisionError:
+            shear_factor_xz = 0
+        
+        try:
+            shear_factor_yz = 1.0 / math.tan(angle_y_in_degrees * math.pi / 180)
+        except ZeroDivisionError:
+            shear_factor_yz = 0
+
+        # shearing
+        self._concatenate(np.asarray([
+            [1, 0, shear_factor_xz, 0],
+            [0, 1, shear_factor_yz, 0],
+            [0, 0 , 1, 0],
+            [0, 0, 0, 1],
+        ]))
+        return self
+
+    def shear_x(self,angle_y_in_degrees: float = 0, angle_z_in_degrees: float = 0 ):
+        """Shear image in x along Y and/or Z direction
+           Uses angle in degrees to calculate the shear
+
+        Args:
+            angle_y_in_degrees (float, optional): shear angle in X in degrees. Defaults to 0.
+            angle_z_in_degrees (float, optional): shear angle in Z in degrees. Defaults to 0.
+                    angle in degrees. To convert radians to degrees use this formula:
+                    angle_in_deg = angle_in_rad / numpy.pi * 180.0
+
+        Returns:
+            self
+        """        
+        
+        import math
+        try:
+            shear_factor_yx = 1.0 / math.tan(angle_y_in_degrees * math.pi / 180)
+        except ZeroDivisionError:
+            shear_factor_yx = 0
+        
+        try:
+            shear_factor_zx = 1.0 / math.tan(angle_z_in_degrees * math.pi / 180)
+        except ZeroDivisionError:
+            shear_factor_zx = 0
+
+        # shearing
+        self._concatenate(np.asarray([
+            [1, 0, 0, 0],
+            [shear_factor_yx, 1, 0, 0],
+            [shear_factor_zx, 0 , 1, 0],
+            [0, 0, 0, 1],
+        ]))
+        return self
+
+    def shear_y(self,angle_x_in_degrees: float = 0, angle_z_in_degrees: float = 0 ):
+        """Shear image in Y along X and/or Z direction
+           Uses angle in degrees to calculate the shear
+
+        Args:
+            angle_x_in_degrees (float, optional): shear angle in X in degrees. Defaults to 0.
+            angle_z_in_degrees (float, optional): shear angle in Z in degrees. Defaults to 0.
+                        angle in degrees. To convert radians to degrees use this formula:
+                        angle_in_deg = angle_in_rad / numpy.pi * 180.0
+
+        Returns:
+            self
+        """        
+        
+        import math
+        try:
+            shear_factor_xy = 1.0 / math.tan(angle_x_in_degrees * math.pi / 180)
+        except ZeroDivisionError:
+            shear_factor_xy = 0
+        
+        try:
+            shear_factor_zy = 1.0 / math.tan(angle_z_in_degrees * math.pi / 180)
+        except ZeroDivisionError:
+            shear_factor_zy = 0
+
+        # shearing
+        self._concatenate(np.asarray([
+            [1, shear_factor_xy, 0, 0],
+            [0, 1, 0, 0],
+            [0, shear_factor_zy , 1, 0],
+            [0, 0, 0, 1],
+        ]))
+        return self
 
     def _3x3_to_4x4(self, matrix):
-        # I bet there is an easier way to do this.
-        # But I don't know what to google for :D
-        #                            haesleinhuepf
-        return np.asarray([
-            [matrix[0,0], matrix[0,1], matrix[0,2], 0],
-            [matrix[1,0], matrix[1,1], matrix[1,2], 0],
-            [matrix[2,0], matrix[2,1], matrix[2,2], 0],
-            [0, 0, 0, 1]
-        ])
+        """Pads 3x3 affine transformation matrix to convert it to 4x4
+        """        
+        mat = np.pad(matrix,(0,1),'constant', constant_values = (0,0))
+        mat[3,3] = 1
+        return mat
 
     def _concatenate(self, matrix):
         self._matrix = np.matmul(matrix, self._matrix)
