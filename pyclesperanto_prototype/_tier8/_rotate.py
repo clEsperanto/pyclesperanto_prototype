@@ -16,16 +16,16 @@ def rotate(source : Image, destination : Image = None, angle_around_x_in_degrees
     destination : Image, optional
         target image
     angle_around_x_in_degrees : float
-        rotation around x axis in radians
+        rotation around x axis in degrees
     angle_around_y_in_degrees : float
-        rotation around y axis in radians
+        rotation around y axis in degrees
     angle_around_z_in_degrees : float
-        rotation around z axis in radians
+        rotation around z axis in degrees
     rotate_around_center : boolean
         if True: rotate image around center
         if False: rotate image around origin
     linear_interpolation: bool
-        If true, bi-/tri-linear interplation will be applied.
+        If true, bi-/tri-linear interpolation will be applied.
         If false, nearest-neighbor interpolation wille be applied.
 
     Returns
