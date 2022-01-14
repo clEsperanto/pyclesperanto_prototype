@@ -141,8 +141,8 @@ class AffineTransform3D:
 
         return self
 
-    def shear_z(self,angle_x_in_degrees: float = 0, angle_y_in_degrees: float = 0 ):
-        """Shear image in Z along X and/or Y direction
+    def shear_in_z_plane(self,angle_x_in_degrees: float = 0, angle_y_in_degrees: float = 0 ):
+        """Shear image in Z-plane along X and/or Y direction
            Uses angle in degrees to calculate the shear
            Tip: Used for lattice lightsheet deskewing. For Janelia lattice, use angle_x_in_degrees and for Zeiss lattice, use angle_y_in_degrees
 
@@ -157,20 +157,22 @@ class AffineTransform3D:
         """          
         import math
         try:
-            shear_factor_xz = 1.0 / math.tan(angle_x_in_degrees * math.pi / 180)
+            shear_factor_xz = 1.0 / math.tan((angle_x_in_degrees-90) * math.pi / 180)
         except ZeroDivisionError:
-            shear_factor_xz = 0
+            print("Error1")
+            shear_factor_xz = math.pi
         
         try:
-            shear_factor_yz = 1.0 / math.tan(angle_y_in_degrees * math.pi / 180)
+            shear_factor_yz = 1.0 / math.tan((angle_y_in_degrees-90) * math.pi / 180)
         except ZeroDivisionError:
-            shear_factor_yz = 0
+            print("Error2")
+            shear_factor_yz = math.pi
 
         # shearing
-        self._concatenate(np.asarray([
-            [1, 0, shear_factor_xz, 0],
-            [0, 1, shear_factor_yz, 0],
-            [0, 0 , 1, 0],
+        self._pre_concatenate(np.asarray([
+            [1, shear_factor_xz, 0, 0],
+            [shear_factor_yz, 1, 0, 0],
+            [0, 0, 1, 0],
             [0, 0, 0, 1],
         ]))
         return self
@@ -252,6 +254,9 @@ class AffineTransform3D:
 
     def _concatenate(self, matrix):
         self._matrix = np.matmul(matrix, self._matrix)
+
+    def _pre_concatenate(self, matrix):
+        self._matrix = np.matmul(self._matrix, matrix)
 
     def inverse(self):
         """Computes the inverse of the transformation.
