@@ -134,6 +134,17 @@ imsave("result.tif", cle.pull(labeled))
 
 <tr><td>
 
+<img src="https://github.com/clEsperanto/pyclesperanto_prototype/raw/master/docs/images/differentiate_nuclei_intensity.png" width="300"/>
+
+</td><td>
+
+[Differentiating nuclei according to signal intensity](http://github.com/clEsperanto/pyclesperanto_prototype/tree/master/demo/measurement/differentiate_nuclei_intensity.ipynb)
+
+</td></tr>
+
+
+<tr><td>
+
 <img src="https://github.com/clEsperanto/pyclesperanto_prototype/raw/master/docs/images/bead_segmentation.png" width="300"/>
 
 </td><td>
