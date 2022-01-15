@@ -1,3 +1,11 @@
+# 0.14.0 (upcoming)
+
+## New features
+* Added `auto_size` parameter to the functions `scale`, `rotate`, `rigid_transform` and `affine_transform`
+  which will automatically determine the size of the destination image if it is not provided. With this, no pixels will 
+  be transformed out of the image anymore (Thanks to Pradeep Rajasekhar @pr4deepr).
+* Added `shear` operation (Thanks to Pradeep Rajasekhar @pr4deepr).
+
 # 0.12.0 - January 1st 2022
 
 ## New features
