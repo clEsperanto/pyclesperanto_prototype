@@ -76,8 +76,8 @@ def rigid_transform(
     if angle_around_z_in_degrees != 0:
         transform.rotate(2, angle_around_z_in_degrees)
 
-    if rotate_around_center:
-        transform.center(source.shape, undo=True)
+    if rotate_around_center and not auto_size:
+        transform.center(destination.shape, undo=True)
 
     transform.translate(translate_x, translate_y, translate_z)
 
