@@ -24,10 +24,10 @@ cl_image_datatype_dict.update(
 
 
 
-if characterize.has_double_support(get_device().device):
-    cl_buffer_datatype_dict[np.float64] = "double"
-else:
-    warnings.warn("Data type double is not supported by your GPU. Will use float instead.")
+#if characterize.has_double_support(get_device().device):
+#    cl_buffer_datatype_dict[np.float64] = "double"
+#else:
+#    warnings.warn("Data type double is not supported by your GPU. Will use float instead.")
 
 def abspath(myPath):
     """ Get absolute path to resource, works for dev and for PyInstaller """
