@@ -5,6 +5,7 @@
   which will automatically determine the size of the destination image if it is not provided. With this, no pixels will 
   be transformed out of the image anymore (Thanks to Pradeep Rajasekhar @pr4deepr).
 * Added `shear` operation (Thanks to Pradeep Rajasekhar @pr4deepr).
+* `rigid_transform` is now also available in the [assistant](https://github.com/clesperanto/napari_pyclesperanto_assistant).
 
 # 0.12.0 - January 1st 2022
 
