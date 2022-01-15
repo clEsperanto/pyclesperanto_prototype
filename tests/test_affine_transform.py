@@ -159,7 +159,7 @@ def test_affine_transform_rotate_around_center():
 
     assert (np.array_equal(a, b))
 
-def test_rotation_auto_scale():
+def test_affine_transform_rotation_auto_size():
     source = cle.push(np.asarray([[
         [0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0],
