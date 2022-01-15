@@ -19,7 +19,8 @@ def read_intensities_from_map(labels : Image, map_image : Image, values_destinat
 
     Returns
     -------
-
+    vector of intensity values with 0th element corresponding to background and subsequent entries corresponding to
+        the intensity in the given labeled object
     """
     from .._tier0 import execute
     from .._tier1 import set
