@@ -9,7 +9,7 @@ from skimage.transform import AffineTransform
 import numpy as np
 
 @plugin_function(output_creator=create_none)
-def affine_transform(source : Image, destination : Image = None, transform : Union[np.ndarray, AffineTransform3D, AffineTransform] = None, linear_interpolation : bool = False):
+def affine_transform(source : Image, destination : Image = None, transform : Union[np.ndarray, AffineTransform3D, AffineTransform] = None, linear_interpolation : bool = False, auto_size:bool = False):
     """
     Applies an affine transform to an image.
 
@@ -19,11 +19,20 @@ def affine_transform(source : Image, destination : Image = None, transform : Uni
         image to be transformed
     destination : Image, optional
         image where the transformed image should be written to
-    transform : 4x4 numpy array or AffineTransform3D object or skimage.transform.AffineTransform object
+    transform : 4x4 numpy array or AffineTransform3D object or skimage.transform.AffineTransform object, optional
         transform matrix or object describing the transformation
-    linear_interpolation: bool
+    linear_interpolation: bool, optional
         If true, bi-/tri-linear interplation will be applied; if hardware supports it.
         If false, nearest-neighbor interpolation wille be applied.
+    auto_size:bool, optional
+        If true, the destination image size will be determined automatically, depending on the provided transform.
+        the transform might be modified so that all voxels of the result image have positions x>=0, y>=0, z>=0 and sit
+        tight to the coordinate origin. No voxels will cropped, the result image will fit in the returned destination.
+        Hence, the applied transform may have an additional translation vector that was not explicitly provided. This
+        also means that any given translation vector will be neglected.
+        If false, the destination image will have the same size as the input image.
+        Note: The value of auto-size is ignored if: destination is not None or transform is not an instance of
+        AffineTransform3D.
 
     Returns
     -------
@@ -45,7 +54,14 @@ def affine_transform(source : Image, destination : Image = None, transform : Uni
 
     # handle output creation
     if destination is None:
-        destination = create_like(source)
+        if auto_size and isinstance(transform, AffineTransform3D):
+            # This modifies the given transform
+            new_size, transform, _ = _determine_translation_and_bounding_box(source, transform)
+            print("determined translation", _)
+            print("determined new_size", new_size)
+            destination = create(new_size)
+        else:
+            destination = create_like(source)
 
     # deal with 2D output images
     original_destination = destination
@@ -81,7 +97,6 @@ def affine_transform(source : Image, destination : Image = None, transform : Uni
             kernel_suffix = '_interpolate'
         source = image
 
-
     parameters = {
         "input": source,
         "output": destination,
@@ -97,33 +112,33 @@ def affine_transform(source : Image, destination : Image = None, transform : Uni
 
     return original_destination
 
-def _determine_translation_and_bounding_box(source: Image, at: AffineTransform3D):
+
+def _determine_translation_and_bounding_box(source: Image, affine_transform: AffineTransform3D):
 
     # define coordinates of all corners of the current stack
     from itertools import product
     nx, ny, nz = source.shape
     original_bounding_box = [list(x) + [1] for x in product((0, nz), (0, ny), (0, nx))]
     # transform the corners using the given affine transform
-    transformed_bounding_box = np.asarray(list(map(lambda x: at._matrix @ x, original_bounding_box)))
+    transformed_bounding_box = np.asarray(list(map(lambda x: affine_transform._matrix @ x, original_bounding_box)))
 
     # the min and max coordinates tell us from where to where the image ranges (bounding box)
     min_coordinate = transformed_bounding_box.min(axis=0)
     max_coordinate = transformed_bounding_box.max(axis=0)
-    # determin the size of the transformed bounding box
+    # determine the size of the transformed bounding box
     new_size = (max_coordinate - min_coordinate)[0:3].astype(int).tolist()[::-1]
 
-    # create a new stack on GPU
-    destination = cle.create(new_size)
-
     # we make a copy to not modify the original transform
-    transform_copy = cle.AffineTransform3D()
-    transform_copy._concatenate(at._matrix)
+    new_affine_transform = AffineTransform3D()
+    new_affine_transform.concatenate(affine_transform)
 
     # if the new minimum-coordinate is `-x`, we need to
     # translate the stack by `x` so that the new origin is (0,0,0)
     translation = -min_coordinate
-    transform_copy.translate(
+    new_affine_transform.translate(
         translate_x=translation[0],
         translate_y=translation[1],
         translate_z=translation[2]
     )
+
+    return new_size, new_affine_transform, translation[0:3]
