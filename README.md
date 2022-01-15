@@ -109,7 +109,9 @@ imsave("result.tif", cle.pull(labeled))
 
 [3D Image segmentation ](http://github.com/clEsperanto/pyclesperanto_prototype/tree/master/demo/segmentation/Segmentation_3D.ipynb)
 
-</td></tr><tr><td>
+</td></tr>
+
+<tr><td>
 
 <img src="https://github.com/clEsperanto/pyclesperanto_prototype/raw/master/docs/images/segmentation_2d_membranes.png" width="300"/>
 
@@ -118,6 +120,17 @@ imsave("result.tif", cle.pull(labeled))
 [Cell segmentation based on membranes](http://github.com/clEsperanto/pyclesperanto_prototype/tree/master/demo/segmentation/segmentation_2d_membranes.ipynb)
 
 </td></tr>
+
+<tr><td>
+
+<img src="https://github.com/clEsperanto/pyclesperanto_prototype/raw/master/docs/images/counting_nuclei_multichannel.png" width="300"/>
+
+</td><td>
+
+[Counting nuclei according to expression in multiple channels](http://github.com/clEsperanto/pyclesperanto_prototype/tree/master/demo/measurement/counting_nuclei_multichannel.ipynb)
+
+</td></tr>
+
 
 <tr><td>
 
