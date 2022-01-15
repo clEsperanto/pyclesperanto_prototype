@@ -21,7 +21,16 @@ class OpenCLBackend():
         if ctx is None:
             ctx = get_device().context
         from ._cl_image import empty_image
-        return empty_image(ctx, arr.shape, arr.dtype)
+        import pyopencl
+
+        try:
+            return empty_image(ctx, arr.shape, arr.dtype)
+        except pyopencl._cl.RuntimeError as e: # assuming this is clCreateImage failed: IMAGE_FORMAT_NOT_SUPPORTED
+            from .._tier0 import _warn_of_interpolation_not_available
+            _warn_of_interpolation_not_available()
+            print(e)
+            from ._create import create
+            return create(arr.shape, arr.dtype)
 
     def empty(self, shape, dtype=np.float32):
         assert_supported_ndarray_type(dtype)
