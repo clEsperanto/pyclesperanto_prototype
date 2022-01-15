@@ -11,8 +11,7 @@ def proximal_other_labels_count_map(label_image:Image, other_label_image:Image, 
     label_image: Image
     other_label_image: Image
     count_map: Image, optional
-        vector (num_labels + 1 long) where the values will be written in. The first column (index 0, value 0)
-        corresponds to background.
+        parametric image where the values will be written in.
     maximum_distance: Number, optional
         maximum distance in pixels
 

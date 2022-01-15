@@ -7,6 +7,9 @@
 * Added `shear` operation (Thanks to Pradeep Rajasekhar @pr4deepr).
 * `rigid_transform` is now also available in the [assistant](https://github.com/clesperanto/napari_pyclesperanto_assistant).
 
+## Backwards compatibility breaking changes
+* Removed support for float64 (double) pixel types. Float32 will be used instead.
+
 # 0.12.0 - January 1st 2022
 
 ## New features
