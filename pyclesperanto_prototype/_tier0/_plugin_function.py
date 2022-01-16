@@ -64,8 +64,8 @@ def plugin_function(
             if is_image(value):
                 bound.arguments[key] = push(value)
             if key in sig.parameters and sig.parameters[key].annotation is Image and value is None:
-                sig = inspect.signature(output_creator)
-                bound.arguments[key] = output_creator(*bound.args[:len(sig.parameters)])
+                sig2 = inspect.signature(output_creator)
+                bound.arguments[key] = output_creator(*bound.args[:len(sig2.parameters)])
 
         # call the decorated function
         return function(*bound.args, **bound.kwargs)
