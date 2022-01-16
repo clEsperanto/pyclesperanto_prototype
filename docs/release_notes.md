@@ -1,6 +1,11 @@
 # 0.14.0 (upcoming)
 
 ## New features
+* `reduce_labels_to_centroids` method
+* `artificial_objects_2d` method, for providing a synthetic dataset
+* `hessian_eigenvalues` filter (yet with multiple outputs)
+* `small_hessian_eigenvalue` filter
+* `large_hessian_eigenvalue` filter
 * Added `auto_size` parameter to the functions `scale`, `rotate`, `rigid_transform` and `affine_transform`
   which will automatically determine the size of the destination image if it is not provided. With this, no pixels will 
   be transformed out of the image anymore (Thanks to Pradeep Rajasekhar @pr4deepr).
@@ -9,6 +14,7 @@
 
 ## Backwards compatibility breaking changes
 * Removed support for float64 (double) pixel types. Float32 will be used instead.
+* If `Image` type annotated parameters of any clesperanto function are passed as tuples or lists, they are automatically converted using `np.asarray()` and pushed to the GPU.
 
 # 0.12.0 - January 1st 2022
 
