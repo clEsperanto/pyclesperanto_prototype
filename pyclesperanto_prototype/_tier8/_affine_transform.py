@@ -46,12 +46,6 @@ def affine_transform(source : Image, destination : Image = None, transform : Uni
     from .._tier0 import create
     from .._tier1 import copy_slice
 
-    # deal with 2D input images
-    if len(source.shape) == 2:
-        source_3d = create([1, source.shape[0], source.shape[1]])
-        copy_slice(source, source_3d, 0)
-        source = source_3d
-
     # handle output creation
     if destination is None:
         if auto_size and isinstance(transform, AffineTransform3D):
@@ -62,6 +56,12 @@ def affine_transform(source : Image, destination : Image = None, transform : Uni
             destination = create(new_size)
         else:
             destination = create_like(source)
+
+    # deal with 2D input images
+    if len(source.shape) == 2:
+        source_3d = create([1, source.shape[0], source.shape[1]])
+        copy_slice(source, source_3d, 0)
+        source = source_3d
 
     # deal with 2D output images
     original_destination = destination
@@ -106,11 +106,15 @@ def affine_transform(source : Image, destination : Image = None, transform : Uni
         "mat": gpu_transform_matrix
     }
 
+    print(source.shape)
+    print(destination.shape)
+
     execute(__file__, '../clij-opencl-kernels/kernels/affine_transform_' + str(len(destination.shape)) + 'd' + kernel_suffix + '_x.cl',
             'affine_transform_' + str(len(destination.shape)) + 'd' + kernel_suffix, destination.shape, parameters)
 
     # deal with 2D output images
     if copy_back_after_transforming:
+        print("copy back")
         copy_slice(destination, original_destination, 0)
 
     return original_destination
@@ -139,7 +143,12 @@ def _determine_translation_and_bounding_box(source: Image, affine_transformation
 
     # define coordinates of all corners of the current stack
     from itertools import product
-    nx, ny, nz = source.shape
+    if len(source.shape) == 2:
+        ny, nz = source.shape
+        nx = 1
+    else:
+        nx, ny, nz = source.shape
+
     original_bounding_box = [list(x) + [1] for x in product((0, nz), (0, ny), (0, nx))]
     # transform the corners using the given affine transform
     transformed_bounding_box = np.asarray(list(map(lambda x: affine_transformation._matrix @ x, original_bounding_box)))
@@ -163,4 +172,7 @@ def _determine_translation_and_bounding_box(source: Image, affine_transformation
         translate_z=translation[2]
     )
 
-    return new_shape, new_affine_transform, translation[0:3]
+    if len(source.shape) == 2:
+        return new_shape[1:], new_affine_transform, translation[1:3]
+    else:
+        return new_shape, new_affine_transform, translation[0:3]

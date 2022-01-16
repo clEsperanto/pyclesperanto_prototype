@@ -190,3 +190,55 @@ def test_affine_transform_rotation_auto_size():
     print(b)
 
     assert (np.array_equal(a, b))
+
+
+def test_affine_transform_make_sure_2d_images_become_2d_results():
+    source = cle.push(np.asarray([
+        [0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0],
+        [0, 0, 1, 1, 0],
+        [0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0],
+    ]))
+
+    reference = cle.push(np.asarray([
+        [0, 0, 0, 0, 0],
+        [0, 1, 1, 0, 0],
+        [0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0],
+    ]))
+
+    transform = cle.AffineTransform3D()
+    transform.translate(-1, -1, 0)
+
+    result = cle.affine_transform(source, transform=transform)
+
+    a = cle.pull(result)
+    b = cle.pull(reference)
+
+    print(a)
+    print(b)
+
+    assert (np.array_equal(a, b))
+
+def test_affine_transform_make_sure_2d_images_become_2d_results_autosize():
+    source = cle.push(np.asarray([
+        [0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0],
+        [0, 0, 1, 1, 0],
+        [0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0],
+    ]))
+
+    transform = cle.AffineTransform3D()
+
+    result = cle.affine_transform(source, transform=transform, auto_size=True)
+
+    a = cle.pull(result)
+    b = cle.pull(source)
+
+    print(a)
+    print(b)
+
+    assert (np.array_equal(a, b))

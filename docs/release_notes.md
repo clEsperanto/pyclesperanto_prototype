@@ -3,7 +3,7 @@
 ## New features
 * `reduce_labels_to_centroids` method
 * `artificial_objects_2d` method, for providing a synthetic dataset
-* `hessian_eigenvalues` filter (yet with multiple outputs)
+* `hessian_eigenvalues` filter (yet with multiple outputs, based on code by Matthias Arzt @maarzt)
 * `small_hessian_eigenvalue` filter
 * `large_hessian_eigenvalue` filter
 * Added `auto_size` parameter to the functions `scale`, `rotate`, `rigid_transform` and `affine_transform`
