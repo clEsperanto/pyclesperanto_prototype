@@ -1,5 +1,8 @@
 # 0.14.0 (upcoming)
 
+## New features
+* `reduce_labels_to_centroids` method
+
 ## Backwards compatibility breaking changes
 * Removed support for float64 (double) pixel types. Float32 will be used instead.
 
