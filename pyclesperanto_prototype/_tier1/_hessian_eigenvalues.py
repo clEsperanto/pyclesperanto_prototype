@@ -60,7 +60,6 @@ def hessian_eigenvalues(source: Image,
             "large_eigenvalue": large_eigenvalue_destination,
         }
 
-    print('hessian_eigenvalues_' + str(len(source.shape)) + 'd.cl')
     execute(__file__, 'hessian_eigenvalues_' + str(len(source.shape)) + 'd.cl', 'hessian_eigenvalues_' + str(len(source.shape)) + 'd', source.shape, parameters)
 
     if len(source.shape) == 2:

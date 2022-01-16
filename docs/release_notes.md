@@ -3,6 +3,9 @@
 ## New features
 * `reduce_labels_to_centroids` method
 * `artificial_objects_2d` method, for providing a synthetic dataset
+* `hessian_eigenvalues` filter (yet with multiple outputs)
+* `small_hessian_eigenvalue` filter
+* `large_hessian_eigenvalue` filter
 
 ## Backwards compatibility breaking changes
 * Removed support for float64 (double) pixel types. Float32 will be used instead.
