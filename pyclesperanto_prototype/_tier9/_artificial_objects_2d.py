@@ -9,12 +9,12 @@ def artificial_objects_2d():
     image: Image
 
     """
-    from .._tier0 import create
-    from .._tier1 import set, detect_label_edges, draw_line, draw_sphere, maximum_sphere, paste
+    from .._tier0 import create, create_like
+    from .._tier1 import set, detect_label_edges, draw_line, draw_sphere, maximum_sphere, paste, set_ramp_y
     from .._tier11 import reduce_labels_to_centroids
     from ._artificial_tissue_2d import artificial_tissue_2d
 
-    image = create((256, 512))
+    image = create((512, 512))
     set(image, 0)
 
     for t in range(0, 5):
@@ -38,7 +38,43 @@ def artificial_objects_2d():
 
     nuclei = reduce_labels_to_centroids(cells)
 
+    # remove nuclei from upper half
+    binary = create_like(nuclei)
+    set_ramp_y(binary)
+    binary = binary > 128
+    nuclei = nuclei * binary
+
     membranes = membranes + (maximum_sphere(nuclei, radius_x=3, radius_y=3) > 0) * 2
 
     paste(membranes * 256, image, destination_x=225)
+
+    for t in range(1, 10):
+        draw_sphere(image, x=20, y=255 + (t-1) * 30, radius_x=5+t, radius_y=5+t, value=255)
+        draw_sphere(image, x=60, y=255 + (t-1) * 30, radius_x=5+t, radius_y=5+t, value=255)
+        draw_sphere(image, x=60, y=255 + (t-1) * 30, radius_x=4+t, radius_y=4+t, value=0)
+        draw_sphere(image, x=100, y=255 + (t-1) * 30, radius_x=5+t, radius_y=5+t, value=255)
+        draw_sphere(image, x=100, y=255 + (t-1) * 30, radius_x=3+t, radius_y=3+t, value=0)
+        draw_sphere(image, x=140, y=255 + (t-1) * 30, radius_x=5+t, radius_y=5+t, value=255)
+        draw_sphere(image, x=140, y=255 + (t-1) * 30, radius_x=2+t, radius_y=2+t, value=0)
+
+    for y in range(1, 9):
+        for x in range(1, 9):
+            draw_sphere(image, x=180 + (x-1) * 30, y=255 + (y-0.25) * 30, radius_x=max(x,y) * 2, radius_y=max(x,y) * 2, value=255)
+
+    draw_line(image, x1=438, y1=438, x2=502, y2=502, thickness=3, value=255)
+    draw_line(image, x1=502, y1=438, x2=438, y2=502, thickness=3, value=255)
+
+    draw_line(image, x1=438, y1=438, x2=470, y2=396, thickness=3, value=255)
+    draw_line(image, x1=502, y1=438, x2=470, y2=396, thickness=3, value=255)
+    draw_line(image, x1=470, y1=364, x2=470, y2=396, thickness=3, value=255)
+
+    draw_line(image, x1=470, y1=364, x2=470, y2=256, thickness=3, value=255)
+    draw_line(image, x1=438, y1=256, x2=502, y2=256, thickness=3, value=255)
+
+    draw_line(image, x1=438, y1=272, x2=502, y2=338, thickness=3, value=255)
+    draw_line(image, x1=502, y1=272, x2=438, y2=338, thickness=3, value=255)
+
+    draw_line(image, x1=438, y1=354, x2=502, y2=354, thickness=3, value=255)
+    draw_line(image, x1=438, y1=370, x2=502, y2=370, thickness=3, value=255)
+
     return image
