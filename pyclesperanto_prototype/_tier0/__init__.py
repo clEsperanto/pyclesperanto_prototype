@@ -42,3 +42,9 @@ from ._available_device_names import available_device_names
 from ._set_wait_for_kernel_finish import set_wait_for_kernel_finish
 
 from ._backends import Backend
+
+
+def _warn_of_interpolation_not_available():
+    import warnings
+    warnings.warn("Creating an OpenCL image failed on the GPU. Hence, linear interpolation is not possible.\n"
+                  "Nearest-neighbor interpolation will be used instead.")
