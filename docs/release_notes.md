@@ -1,5 +1,12 @@
 # 0.14.0 (upcoming)
 
+## New features
+* Added `auto_size` parameter to the functions `scale`, `rotate`, `rigid_transform` and `affine_transform`
+  which will automatically determine the size of the destination image if it is not provided. With this, no pixels will 
+  be transformed out of the image anymore (Thanks to Pradeep Rajasekhar @pr4deepr).
+* Added `shear` operation (Thanks to Pradeep Rajasekhar @pr4deepr).
+* `rigid_transform` is now also available in the [assistant](https://github.com/clesperanto/napari_pyclesperanto_assistant).
+
 ## Backwards compatibility breaking changes
 * Removed support for float64 (double) pixel types. Float32 will be used instead.
 
