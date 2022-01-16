@@ -15,7 +15,7 @@ def artificial_tissue_2d(width: int = 256, height: int = 256, delta_x=24, delta_
     -------
 
     """
-    from .._tier0 import push
+    from .._tier0 import push, create
     from .._tier2 import pointlist_to_labelled_spots
     from .._tier4 import extend_labeling_via_voronoi
     import numpy as np
@@ -59,6 +59,7 @@ def artificial_tissue_2d(width: int = 256, height: int = 256, delta_x=24, delta_
 
     centroids = pointlist_to_labelled_spots(pointlist)
 
-    cells = extend_labeling_via_voronoi(centroids)
+    cells = create((height, width))
+    extend_labeling_via_voronoi(centroids, cells)
 
     return cells
