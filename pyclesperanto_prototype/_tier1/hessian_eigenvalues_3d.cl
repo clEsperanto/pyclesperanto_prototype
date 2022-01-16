@@ -1,11 +1,15 @@
 #define PRECISION ldexp(1.0f, -22)
 
+// I did this because double isn't supported on Mac M1.
+//                                            haesleinhuepf
+#define DOUBLE_TYPE float
+
 // Returns 1 / sqrt(value)
-inline double precise_rsqrt(double value) {
+inline DOUBLE_TYPE precise_rsqrt(DOUBLE_TYPE value) {
     // The opencl function rsqrt, might not give precise results.
     // This function uses the Newton method to improve the results precision.
-    double x2 = value * 0.5;
-    double y = rsqrt(value);
+    DOUBLE_TYPE x2 = value * 0.5;
+    DOUBLE_TYPE y = rsqrt(value);
     y = y * ( 1.5 - ( x2 * y * y ) );   // Newton
     y = y * ( 1.5 - ( x2 * y * y ) );   // Newton
     y = y * ( 1.5 - ( x2 * y * y ) );   // Newton
@@ -16,21 +20,21 @@ inline double precise_rsqrt(double value) {
 
 // Return the square root of value.
 // This method has higher precision than opencl's sqrt() method.
-inline double precise_sqrt(double value) {
+inline DOUBLE_TYPE precise_sqrt(DOUBLE_TYPE value) {
     return value * precise_rsqrt(value);
 }
 
-inline void swap(double x[], int a, int b) {
-    double tmp = x[a];
+inline void swap(DOUBLE_TYPE x[], int a, int b) {
+    DOUBLE_TYPE tmp = x[a];
     x[a] = x[b];
     x[b] = tmp;
 }
 
 // Calculates the two solutions of the equation: x^2 + c1 * x + c0 == 0
 // The results are written to x[], smaller value first.
-inline void solve_quadratic_equation(double c0, double c1, double x[]) {
-    double p = 0.5 * c1;
-    double dis = p * p - c0;
+inline void solve_quadratic_equation(DOUBLE_TYPE c0, DOUBLE_TYPE c1, DOUBLE_TYPE x[]) {
+    DOUBLE_TYPE p = 0.5 * c1;
+    DOUBLE_TYPE dis = p * p - c0;
     dis = (dis > 0) ? precise_sqrt(dis) : 0;
     x[0] = (-p - dis);
     x[1] = (-p + dis);
@@ -38,21 +42,21 @@ inline void solve_quadratic_equation(double c0, double c1, double x[]) {
 
 // One iteration of Halleys method applied to the depressed cubic equation:
 //  x^3 + b1 * x + b0 == 0
-inline double halleys_method(double b0, double b1, double x) {
-    double dy = 3 * x * x + b1;
-    double y = (x * x + b1) * x + b0;	/* ...looks odd, but saves CPU time */
-    double dx = y * dy / (dy * dy - 3 * y * x);
+inline DOUBLE_TYPE halleys_method(DOUBLE_TYPE b0, DOUBLE_TYPE b1, DOUBLE_TYPE x) {
+    DOUBLE_TYPE dy = 3 * x * x + b1;
+    DOUBLE_TYPE y = (x * x + b1) * x + b0;	/* ...looks odd, but saves CPU time */
+    DOUBLE_TYPE dx = y * dy / (dy * dy - 3 * y * x);
     return dx;
 }
 
 // Returns one solution to the depressed cubic equation:
 //  x^3 + b1 * x + b0 == 0
-inline double find_root(double b0, double b1) {
+inline DOUBLE_TYPE find_root(DOUBLE_TYPE b0, DOUBLE_TYPE b1) {
     if(b0 == 0)
         return 0;
-    double w = max(fabs(b0), fabs(b1)) + 1.0; /* radius of root circle */
-    double h = (b0 > 0.0) ? -w : w;
-    double dx;
+    DOUBLE_TYPE w = max(fabs(b0), fabs(b1)) + 1.0; /* radius of root circle */
+    DOUBLE_TYPE h = (b0 > 0.0) ? -w : w;
+    DOUBLE_TYPE dx;
     do {					/* find 1st root by Halley's method */
         dx = halleys_method(b0, b1, h);
         h -= dx;
@@ -63,11 +67,11 @@ inline double find_root(double b0, double b1) {
 // Returns all three real solutions of the depressed cubic equation:
 //  x^3 + b1 * x + b0 == 0
 // The solutions are written to x[]. Smallest solution first.
-inline void solve_cubic_scaled_equation(double b0, double b1, double x[]) {
-    double h = find_root(b0, b1);
+inline void solve_cubic_scaled_equation(DOUBLE_TYPE b0, DOUBLE_TYPE b1, DOUBLE_TYPE x[]) {
+    DOUBLE_TYPE h = find_root(b0, b1);
     x[2] = h;
-    double c1 = h;			/* deflation; c2 is 1 */
-    double c0 = c1 * h + b1;
+    DOUBLE_TYPE c1 = h;			/* deflation; c2 is 1 */
+    DOUBLE_TYPE c0 = c1 * h + b1;
     solve_quadratic_equation(c0, c1, x);
     if (x[1] > x[2]) {			/* sort results */
         swap(x, 1, 2);
@@ -75,7 +79,7 @@ inline void solve_cubic_scaled_equation(double b0, double b1, double x[]) {
     }
 }
 
-inline int exponent_of(double f) {
+inline int exponent_of(DOUBLE_TYPE f) {
     int exponent;
     frexp(f, &exponent);
     return exponent;
@@ -84,11 +88,11 @@ inline int exponent_of(double f) {
 // Returns all three real solutions of the depressed cubic equation:
 //  x^3 + b1 * x + b0 == 0
 // The solutions are written to x[]. Smallest solution first.
-inline void solve_depressed_cubic_equation(double b0, double b1, double x[]) {
+inline void solve_depressed_cubic_equation(DOUBLE_TYPE b0, DOUBLE_TYPE b1, DOUBLE_TYPE x[]) {
     int e0 = exponent_of(b0) / 3;
     int e1 = exponent_of(b1) / 2;
     int e = - max(e0, e1);
-    double scaleFactor = ldexp(1.0, -e);
+    DOUBLE_TYPE scaleFactor = ldexp(1.0, -e);
     b1 = ldexp(b1, 2*e);
     b0 = ldexp(b0, 3*e);
     solve_cubic_scaled_equation(b0, b1, x);
@@ -100,10 +104,10 @@ inline void solve_depressed_cubic_equation(double b0, double b1, double x[]) {
 // Returns all three real solutions of the cubic equation:
 //  x^3 + b2 * x^2 + b1 * x + b0 == 0
 // The solutions are written to x[]. Smallest solution first.
-inline void solve_cubic_equation(double b0, double b1, double b2, double x[]) {
-    double s = 1.0 / 3.0 * b2;
-    double q = (2. * s * s - b1) * s + b0;
-    double p = b1 - b2 * s;
+inline void solve_cubic_equation(DOUBLE_TYPE b0, DOUBLE_TYPE b1, DOUBLE_TYPE b2, DOUBLE_TYPE x[]) {
+    DOUBLE_TYPE s = 1.0 / 3.0 * b2;
+    DOUBLE_TYPE q = (2. * s * s - b1) * s + b0;
+    DOUBLE_TYPE p = b1 - b2 * s;
     solve_depressed_cubic_equation(q, p, x);
     x[0] = x[0] - s;
     x[1] = x[1] - s;
@@ -159,16 +163,16 @@ __kernel void hessian_eigenvalues_3d(
   float cbb = PIXEL(x + 1, y, z);
   float cbc = PIXEL(x + 1, y, z + 1);
   float ccb = PIXEL(x + 1, y + 1, z);
-  double g_xx = abb - 2 * bbb + cbb;
-  double g_yy = bab - 2 * bbb + bcb;
-  double g_zz = bba - 2 * bbb + bbc;
-  double g_xy = (aab + ccb - acb - cab) * 0.25;
-  double g_xz = (aba + cbc - abc - cba) * 0.25;
-  double g_yz = (baa + bcc - bac - bca) * 0.25;
-  double a = -(g_xx + g_yy + g_zz);
-  double b = g_xx * g_yy + g_xx * g_zz + g_yy * g_zz - g_xy * g_xy - g_xz * g_xz - g_yz * g_yz;
-  double c = g_xx * (g_yz * g_yz - g_yy * g_zz) + g_yy * g_xz * g_xz + g_zz * g_xy * g_xy - 2 * g_xy * g_xz * g_yz;
-  double eigenvalues[3];
+  DOUBLE_TYPE g_xx = abb - 2 * bbb + cbb;
+  DOUBLE_TYPE g_yy = bab - 2 * bbb + bcb;
+  DOUBLE_TYPE g_zz = bba - 2 * bbb + bbc;
+  DOUBLE_TYPE g_xy = (aab + ccb - acb - cab) * 0.25;
+  DOUBLE_TYPE g_xz = (aba + cbc - abc - cba) * 0.25;
+  DOUBLE_TYPE g_yz = (baa + bcc - bac - bca) * 0.25;
+  DOUBLE_TYPE a = -(g_xx + g_yy + g_zz);
+  DOUBLE_TYPE b = g_xx * g_yy + g_xx * g_zz + g_yy * g_zz - g_xy * g_xy - g_xz * g_xz - g_yz * g_yz;
+  DOUBLE_TYPE c = g_xx * (g_yz * g_yz - g_yy * g_zz) + g_yy * g_xz * g_xz + g_zz * g_xy * g_xy - 2 * g_xy * g_xz * g_yz;
+  DOUBLE_TYPE eigenvalues[3];
   solve_cubic_equation(c, b, a, eigenvalues);
   WRITE_PIXEL(small_eigenvalue, x, y, z, eigenvalues[0]);
   WRITE_PIXEL(middle_eigenvalue, x, y, z, eigenvalues[1]);
