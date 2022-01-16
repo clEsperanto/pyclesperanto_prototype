@@ -2,6 +2,7 @@
 
 ## New features
 * `reduce_labels_to_centroids` method
+* `artificial_objects_2d` method, for providing a synthetic dataset
 
 ## Backwards compatibility breaking changes
 * Removed support for float64 (double) pixel types. Float32 will be used instead.
