@@ -373,6 +373,16 @@ imsave("result.tif", cle.pull(labeled))
 
 <tr><td>
 
+<img src="https://github.com/clEsperanto/pyclesperanto_prototype/raw/master/docs/images/memory_management.png" width="300"/>
+
+</td><td>
+
+[Tracing memory consumtion on NVidia GPUs](https://github.com/clEsperanto/pyclesperanto_prototype/blob/master/demo/optimization/memory_management.ipynb)
+
+</td></tr>
+
+<tr><td>
+
 <img src="https://github.com/clEsperanto/pyclesperanto_prototype/raw/master/docs/images/switching_gpus.png" width="300"/>
 
 </td><td>
