@@ -157,21 +157,23 @@ class AffineTransform3D:
         """          
         import math
         try:
-            shear_factor_xz = 1.0 / math.tan((angle_x_in_degrees-90) * math.pi / 180)
+            shear_factor_xz = 1.0 / math.tan(angle_x_in_degrees * math.pi / 180)
         except ZeroDivisionError:
             print("Error1")
-            shear_factor_xz = math.pi
+            shear_factor_xz = 0
+            #If angle is 90, it will give zerodivision, so angle should be 0. I'm not sure about math.pi?
+            #If angle is 0, it will give a small value, but isn't it better to be zero? 
         
         try:
-            shear_factor_yz = 1.0 / math.tan((angle_y_in_degrees-90) * math.pi / 180)
+            shear_factor_yz = 1.0 / math.tan(angle_y_in_degrees * math.pi / 180)
         except ZeroDivisionError:
             print("Error2")
-            shear_factor_yz = math.pi
+            shear_factor_yz = 0
 
         # shearing
         self._pre_concatenate(np.asarray([
-            [1, shear_factor_xz, 0, 0],
-            [shear_factor_yz, 1, 0, 0],
+            [1, 0, shear_factor_xz, 0],
+            [0, 1, shear_factor_yz, 0],
             [0, 0, 1, 0],
             [0, 0, 0, 1],
         ]))
