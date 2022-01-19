@@ -142,7 +142,7 @@ class AffineTransform3D:
         return self
 
     def shear_in_z_plane(self,angle_x_in_degrees: float = 0, angle_y_in_degrees: float = 0 ):
-        """Shear image in Z-plane along X and/or Y direction
+        """Shear image in Z-plane along X and/or Y direction update
            Uses angle in degrees to calculate the shear
            Tip: Used for lattice lightsheet deskewing. For Janelia lattice, use angle_x_in_degrees and for Zeiss lattice, use angle_y_in_degrees
 
@@ -154,20 +154,28 @@ class AffineTransform3D:
 
         Returns:
             self
-        """          
+        """
+        assert(angle_x_in_degrees >=-90 and angle_x_in_degrees<=90), "shear angle in X must be between 90 and -90 degrees"
+        assert(angle_y_in_degrees >=-90 and angle_y_in_degrees<=90), "shear angle in Y must be between 90 and -90 degrees"          
+
         import math
         try:
-            shear_factor_xz = 1.0 / math.tan(angle_x_in_degrees * math.pi / 180)
+            if angle_x_in_degrees in [90,-90]:
+                shear_factor_xz = 0
+            else:
+                shear_factor_xz = 1.0 / math.tan(angle_x_in_degrees * math.pi / 180)
         except ZeroDivisionError:
-            print("Error1")
+            print("Zero div error_xz")
             shear_factor_xz = 0
-            #If angle is 90, it will give zerodivision, so angle should be 0. I'm not sure about math.pi?
-            #If angle is 0, it will give a small value, but isn't it better to be zero? 
+
         
         try:
-            shear_factor_yz = 1.0 / math.tan(angle_y_in_degrees * math.pi / 180)
+            if angle_y_in_degrees in [90,-90]:
+                shear_factor_yz = 0
+            else:
+                shear_factor_yz = 1.0 / math.tan(angle_y_in_degrees * math.pi / 180)
         except ZeroDivisionError:
-            print("Error2")
+            print("Zero div error_yz")
             shear_factor_yz = 0
 
         # shearing
