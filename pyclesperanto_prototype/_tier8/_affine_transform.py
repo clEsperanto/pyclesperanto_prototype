@@ -8,7 +8,7 @@ from skimage.transform import AffineTransform
 import numpy as np
 
 @plugin_function
-def affine_transform(source : Image, destination : Image = None, transform : Union[np.ndarray, AffineTransform3D, AffineTransform] = None, linear_interpolation : bool = False):
+def affine_transform(source : Image, destination : Image = None, transform : Union[np.ndarray, AffineTransform3D, AffineTransform, str] = None, linear_interpolation : bool = False):
     """
     Applies an affine transform to an image.
 
@@ -18,7 +18,7 @@ def affine_transform(source : Image, destination : Image = None, transform : Uni
         image to be transformed
     destination : Image, optional
         image where the transformed image should be written to
-    transform : 4x4 numpy array or AffineTransform3D object or skimage.transform.AffineTransform object
+    transform : 4x4 numpy array or AffineTransform3D object or skimage.transform.AffineTransform object or str
         transform matrix or object describing the transformation
     linear_interpolation: bool
         If true, bi-/tri-linear interplation will be applied.
@@ -50,7 +50,10 @@ def affine_transform(source : Image, destination : Image = None, transform : Uni
         copy_slice(original_destination, destination, 0)
         copy_back_after_transforming = True
 
-        # we invert the transform because we go from the target image to the source image to read pixels
+    if isinstance(transform, str):
+        print("transform is string")
+        transform = AffineTransform3D(transform, source)
+    # we invert the transform because we go from the target image to the source image to read pixels
     if isinstance(transform, AffineTransform3D):
         transform_matrix = np.asarray(transform.copy().inverse())
     elif isinstance(transform, AffineTransform):
