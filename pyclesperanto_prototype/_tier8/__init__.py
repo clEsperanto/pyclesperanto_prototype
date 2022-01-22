@@ -5,6 +5,5 @@ from ._rigid_transform import rigid_transform
 from ._rotate import rotate
 from ._scale import scale
 from ._translate import translate
-from ._shear import shear
 
 
