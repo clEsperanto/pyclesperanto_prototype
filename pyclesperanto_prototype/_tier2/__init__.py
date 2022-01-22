@@ -12,6 +12,7 @@ from ._degrees_to_radians import degrees_to_radians
 from ._gamma_correction import gamma_correction
 from ._invert import invert
 from ._label_spots import label_spots
+from ._large_hessian_eigenvalue import large_hessian_eigenvalue
 from ._maximum_of_all_pixels import maximum_of_all_pixels
 from ._maximum_of_touching_neighbors import maximum_of_touching_neighbors
 from ._mean_of_touching_neighbors import mean_of_touching_neighbors
@@ -24,6 +25,7 @@ from ._neighbors_of_neighbors import neighbors_of_neighbors
 from ._pointlist_to_labelled_spots import pointlist_to_labelled_spots
 from ._radians_to_degrees import radians_to_degrees
 from ._reduce_stack import reduce_stack
+from ._small_hessian_eigenvalue import small_hessian_eigenvalue
 from ._standard_deviation_box import standard_deviation_box
 from ._standard_deviation_of_touching_neighbors import standard_deviation_of_touching_neighbors
 from ._standard_deviation_sphere import standard_deviation_sphere

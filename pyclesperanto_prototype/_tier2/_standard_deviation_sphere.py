@@ -1,5 +1,7 @@
 from pyclesperanto_prototype._tier0 import plugin_function
 from pyclesperanto_prototype._tier0 import Image
+
+@plugin_function(categories=['filter', 'edge detection', 'in assistant'])
 def standard_deviation_sphere(source: Image, destination: Image = None, radius_x : int = 1, radius_y : int = 1, radius_z : int = 1):
     """Computes the local standard deviation of a pixels sphere neighborhood. The box size is specified by
     its half-width, half-height and half-depth (radius). If 2D images are given, radius_z will be ignored.

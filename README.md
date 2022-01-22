@@ -109,7 +109,9 @@ imsave("result.tif", cle.pull(labeled))
 
 [3D Image segmentation ](http://github.com/clEsperanto/pyclesperanto_prototype/tree/master/demo/segmentation/Segmentation_3D.ipynb)
 
-</td></tr><tr><td>
+</td></tr>
+
+<tr><td>
 
 <img src="https://github.com/clEsperanto/pyclesperanto_prototype/raw/master/docs/images/segmentation_2d_membranes.png" width="300"/>
 
@@ -118,6 +120,28 @@ imsave("result.tif", cle.pull(labeled))
 [Cell segmentation based on membranes](http://github.com/clEsperanto/pyclesperanto_prototype/tree/master/demo/segmentation/segmentation_2d_membranes.ipynb)
 
 </td></tr>
+
+<tr><td>
+
+<img src="https://github.com/clEsperanto/pyclesperanto_prototype/raw/master/docs/images/counting_nuclei_multichannel.png" width="300"/>
+
+</td><td>
+
+[Counting nuclei according to expression in multiple channels](http://github.com/clEsperanto/pyclesperanto_prototype/tree/master/demo/measurement/counting_nuclei_multichannel.ipynb)
+
+</td></tr>
+
+
+<tr><td>
+
+<img src="https://github.com/clEsperanto/pyclesperanto_prototype/raw/master/docs/images/differentiate_nuclei_intensity.png" width="300"/>
+
+</td><td>
+
+[Differentiating nuclei according to signal intensity](http://github.com/clEsperanto/pyclesperanto_prototype/tree/master/demo/measurement/differentiate_nuclei_intensity.ipynb)
+
+</td></tr>
+
 
 <tr><td>
 
@@ -344,6 +368,16 @@ imsave("result.tif", cle.pull(labeled))
 </td><td>
 
 [Automatic workflow optimization](https://colab.research.google.com/github/clEsperanto/pyclesperanto_prototype/tree/master/demo/optimization/optimize_blobs_segmentation.ipynb)
+
+</td></tr>
+
+<tr><td>
+
+<img src="https://github.com/clEsperanto/pyclesperanto_prototype/raw/master/docs/images/memory_management.png" width="300"/>
+
+</td><td>
+
+[Tracing memory consumtion on NVidia GPUs](https://github.com/clEsperanto/pyclesperanto_prototype/blob/master/demo/optimization/memory_management.ipynb)
 
 </td></tr>
 

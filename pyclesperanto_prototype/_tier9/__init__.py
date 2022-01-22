@@ -1,3 +1,4 @@
+from ._artificial_objects_2d import artificial_objects_2d
 from ._artificial_tissue_2d import artificial_tissue_2d
 from ._average_distance_of_n_closest_neighbors_map import average_distance_of_n_closest_neighbors_map
 from ._average_distance_to_n_nearest_other_labels_map import average_distance_to_n_nearest_other_labels_map

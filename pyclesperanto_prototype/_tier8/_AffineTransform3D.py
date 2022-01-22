@@ -258,6 +258,20 @@ class AffineTransform3D:
         mat[3,3] = 1
         return mat
 
+    def concatenate(self, transform):
+        """Concatenate an AffineTransform3D with another.
+
+        Parameters
+        ----------
+        transform: AffineTransform3D
+
+        Returns
+        -------
+        self
+        """
+        self._concatenate(transform._matrix)
+        return self
+
     def _concatenate(self, matrix):
         self._matrix = np.matmul(matrix, self._matrix)
 

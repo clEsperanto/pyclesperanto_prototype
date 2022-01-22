@@ -28,3 +28,32 @@ def test_rigid_transform():
 
     assert (np.array_equal(a, b))
 
+
+def test_rigid_transform_auto_size():
+    source = cle.push(np.asarray([[
+          [0, 0, 0, 1, 1],
+          [0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0],
+    ]]))
+
+    reference = cle.push(np.asarray([[
+        [0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 1, 0],
+        [0, 0, 0, 0, 0, 0, 1],
+        [0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0],
+    ]]))
+
+    result = cle.rigid_transform(source, angle_around_z_in_degrees=45, auto_size=True)
+
+    a = cle.pull(result)
+    b = cle.pull(reference)
+
+    print(a)
+    print(b)
+
+    assert (np.array_equal(a, b))

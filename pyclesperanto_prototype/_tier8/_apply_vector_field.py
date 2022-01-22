@@ -39,6 +39,9 @@ def apply_vector_field(source : Image, vector_x : Image, vector_y : Image, vecto
         copy(source, image)
         if type(source) != type(image):
             kernel_suffix = '_interpolate'
+        else:
+            from .._tier0 import _warn_of_interpolation_not_available
+            _warn_of_interpolation_not_available()
         source = image
 
     if len(destination.shape) == 2:

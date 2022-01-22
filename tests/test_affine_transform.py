@@ -198,7 +198,59 @@ def test_affine_shear_z_in_x_plane():
 
     assert (np.array_equal(a, b))
 
+    
+def test_affine_shear_x_in_y_plane():
+    source = np.zeros((5, 5, 5))
+    source[1, 1, 1] = 1
 
+    reference = np.zeros((5, 5, 5))
+    reference[1, 1, 2] = 1
+
+    transform = cle.AffineTransform3D()
+    transform.shear_in_y_plane(angle_x_in_degrees=45)
+
+    a = cle.pull(result)
+    b = cle.pull(reference)
+
+    print(a)
+    print(b)
+
+    assert (np.array_equal(a, b))
+    
+    
+def test_affine_transform_rotation_auto_size():
+    source = cle.push(np.asarray([[
+        [0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0],
+        [0, 0, 1, 1, 0],
+        [0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0],
+    ]]))
+
+    reference = cle.push(np.asarray([[
+        [0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 1, 0, 0, 0],
+        [0, 0, 0, 0, 1, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0],
+    ]]))
+
+    transform = cle.AffineTransform3D()
+    transform.rotate(angle_in_degrees=45)
+
+    result = cle.affine_transform(source, transform=transform, auto_size=True)
+
+    a = cle.pull(result)
+    b = cle.pull(reference)
+
+    print(a)
+    print(b)
+
+    assert (np.array_equal(a, b))
+
+    
 def test_affine_shear_z_in_y_plane():
     source = np.zeros((5, 5, 5))
     source[1, 1, 1] = 1
@@ -217,16 +269,28 @@ def test_affine_shear_z_in_y_plane():
     print(b)
 
     assert (np.array_equal(a, b))
+    
+    
+def test_affine_transform_make_sure_2d_images_become_2d_results():
+    source = cle.push(np.asarray([
+        [0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0],
+        [0, 0, 1, 1, 0],
+        [0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0],
+    ]))
 
-def test_affine_shear_x_in_y_plane():
-    source = np.zeros((5, 5, 5))
-    source[1, 1, 1] = 1
-
-    reference = np.zeros((5, 5, 5))
-    reference[1, 1, 2] = 1
+    reference = cle.push(np.asarray([
+        [0, 0, 0, 0, 0],
+        [0, 1, 1, 0, 0],
+        [0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0],
+    ]))
 
     transform = cle.AffineTransform3D()
-    transform.shear_in_y_plane(angle_x_in_degrees=45)
+    transform.translate(-1, -1, 0)
+
     result = cle.affine_transform(source, transform=transform)
 
     a = cle.pull(result)
@@ -237,7 +301,7 @@ def test_affine_shear_x_in_y_plane():
 
     assert (np.array_equal(a, b))
 
-
+    
 def test_affine_shear_x_in_z_plane():
     source = np.zeros((5, 5, 5))
     source[1, 1, 1] = 1
@@ -271,9 +335,30 @@ def test_affine_shear_y_in_z_plane():
 
     a = cle.pull(result)
     b = cle.pull(reference)
-
+    
     print(a)
     print(b)
 
     assert (np.array_equal(a, b))
 
+    
+def test_affine_transform_make_sure_2d_images_become_2d_results_autosize():
+    source = cle.push(np.asarray([
+        [0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0],
+        [0, 0, 1, 1, 0],
+        [0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0],
+    ]))
+
+    transform = cle.AffineTransform3D()
+
+    result = cle.affine_transform(source, transform=transform, auto_size=True)
+
+    a = cle.pull(result)
+    b = cle.pull(source)
+
+    print(a)
+    print(b)
+
+    assert (np.array_equal(a, b))
