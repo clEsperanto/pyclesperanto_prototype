@@ -2,6 +2,7 @@ from warnings import warn
 
 import numpy as np
 import transforms3d
+import math
 
 class AffineTransform3D:
     """This class is a convenience class to setup affine transform matrices.
@@ -144,10 +145,6 @@ class AffineTransform3D:
     def shear_in_z_plane(self,angle_x_in_degrees: float = 0, angle_y_in_degrees: float = 0 ):
         """Shear image in Z-plane (a.k.a. XY-plane) along X and/or Y direction.
 
-        Uses angle in degrees to calculate the shear
-        Tip: This can be used for single objective lightsheet image reconstruction / deskewing.
-        For Janelia lattice, use angle_x_in_degrees and for Zeiss lattice, use angle_y_in_degrees.
-
         Angles need to be specified in degrees. To convert radians to degrees use this formula:
             angle_in_deg = angle_in_rad / numpy.pi * 180.0
 
@@ -165,22 +162,82 @@ class AffineTransform3D:
         assert(angle_x_in_degrees >-90 and angle_x_in_degrees<90), "shear angle must be between 90 and -90 degrees"
         assert(angle_y_in_degrees >-90 and angle_y_in_degrees<90), "shear angle must be between 90 and -90 degrees"
 
-        import math
-        if angle_x_in_degrees in [90,-90]:
-            shear_factor_xz = 0
-        else:
-            shear_factor_xz = 1.0 / math.tan((90 - angle_x_in_degrees) * math.pi / 180)
-
-        if angle_y_in_degrees in [90,-90]:
-            shear_factor_yz = 0
-        else:
-            shear_factor_yz = 1.0 / math.tan((90 - angle_y_in_degrees) * math.pi / 180)
+        shear_factor_xz = 1.0 / math.tan((90 - angle_x_in_degrees) * math.pi / 180)
+        shear_factor_yz = 1.0 / math.tan((90 - angle_y_in_degrees) * math.pi / 180)
 
         # shearing
         self._pre_concatenate(np.asarray([
             [1, shear_factor_xz, 0, 0],
             [shear_factor_yz, 1, 0, 0],
             [0, 0, 1, 0],
+            [0, 0, 0, 1],
+        ]))
+        return self
+
+    def shear_in_y_plane(self,angle_x_in_degrees: float = 0, angle_z_in_degrees: float = 0 ):
+        """Shear image in Y-plane (a.k.a. XZ-plane) along X and/or Z direction.
+
+        Angles need to be specified in degrees. To convert radians to degrees use this formula:
+            angle_in_deg = angle_in_rad / numpy.pi * 180.0
+
+        Parameters
+        ----------
+        angle_y_in_degrees (float, optional):
+            shear angle along Y-axis in degrees. Defaults to 0.
+        angle_z_in_degrees (float, optional):
+            shear angle along Z-axis in degrees. Defaults to 0.
+
+        Returns
+        -------
+        self
+        """
+        assert(angle_x_in_degrees >-90 and angle_x_in_degrees<90), "shear angle must be between 90 and -90 degrees"
+        assert(angle_z_in_degrees >-90 and angle_z_in_degrees<90), "shear angle must be between 90 and -90 degrees"
+
+        shear_factor_xy = 1.0 / math.tan((90 - angle_x_in_degrees) * math.pi / 180)
+        shear_factor_zy = 1.0 / math.tan((90 - angle_z_in_degrees) * math.pi / 180)
+
+        # shearing
+        self._pre_concatenate(np.asarray([
+            [1, 0, shear_factor_xy, 0],
+            [0, 1, 0, 0],
+            [shear_factor_zy, 0, 1, 0],
+            [0, 0, 0, 1],
+        ]))
+        return self
+
+    def shear_in_x_plane(self,angle_y_in_degrees: float = 0, angle_z_in_degrees: float = 0 ):
+        """Shear image in X-plane (a.k.a. YZ-plane) along Y and/or Z direction.
+
+        Uses angle in degrees to calculate the shear
+        Tip: This can be used for single objective lightsheet image reconstruction / deskewing.
+        For Janelia lattice, use angle_x_in_degrees and for Zeiss lattice, use angle_y_in_degrees.
+
+        Angles need to be specified in degrees. To convert radians to degrees use this formula:
+            angle_in_deg = angle_in_rad / numpy.pi * 180.0
+
+        Parameters
+        ----------
+        angle_y_in_degrees (float, optional):
+            shear angle along Y-axis in degrees. Defaults to 0.
+        angle_z_in_degrees (float, optional):
+            shear angle along Z-axis in degrees. Defaults to 0.
+
+        Returns
+        -------
+        self
+        """
+        assert(angle_y_in_degrees >-90 and angle_y_in_degrees<90), "shear angle must be between 90 and -90 degrees"
+        assert(angle_z_in_degrees >-90 and angle_z_in_degrees<90), "shear angle must be between 90 and -90 degrees"
+
+        shear_factor_yx = 1.0 / math.tan((90 - angle_y_in_degrees) * math.pi / 180)
+        shear_factor_zx = 1.0 / math.tan((90 - angle_z_in_degrees) * math.pi / 180)
+
+        # shearing
+        self._pre_concatenate(np.asarray([
+            [1, 0, 0, 0],
+            [0, 1, shear_factor_yx, 0],
+            [0, shear_factor_zx, 1, 0],
             [0, 0, 0, 1],
         ]))
         return self
