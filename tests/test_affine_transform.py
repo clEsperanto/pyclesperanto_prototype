@@ -209,6 +209,8 @@ def test_affine_shear_x_in_y_plane():
     transform = cle.AffineTransform3D()
     transform.shear_in_y_plane(angle_x_in_degrees=45)
 
+    result = cle.affine_transform(source, transform=transform, auto_size=True)
+
     a = cle.pull(result)
     b = cle.pull(reference)
 
