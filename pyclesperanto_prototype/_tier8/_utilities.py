@@ -37,23 +37,23 @@ def transform_from_string(text: str, image: np.ndarray):
             at.center(image.shape, undo=True)
         elif command_parts[0] == "scale":
             at.scale(scale_x=number, scale_y=number, scale_z=number)
-        elif command_parts[0] == "scalex":
+        elif command_parts[0] == "scalex" or command_parts[0] == "scale_x":
             at.scale(scale_x=number)
-        elif command_parts[0] == "scaley":
+        elif command_parts[0] == "scaley" or command_parts[0] == "scale_y":
             at.scale(scale_y=number)
-        elif command_parts[0] == "scalez":
+        elif command_parts[0] == "scalez" or command_parts[0] == "scale_z":
             at.scale(scale_z=number)
-        elif command_parts[0] == "rotatex":
+        elif command_parts[0] == "rotatex" or command_parts[0] == "rotate_x":
             at.rotate(axis=0, angle_in_degrees=number)
-        elif command_parts[0] == "rotatey":
+        elif command_parts[0] == "rotatey" or command_parts[0] == "rotate_y":
             at.rotate(axis=1, angle_in_degrees=number)
-        elif command_parts[0] == "rotatez":
+        elif command_parts[0] == "rotatez" or command_parts[0] == "rotate_z" or command_parts[0] == "rotate":
             at.rotate(axis=2, angle_in_degrees=number)
-        elif command_parts[0] == "translatex":
+        elif command_parts[0] == "translatex" or command_parts[0] == "translate_x":
             at.translate(translate_x=number)
-        elif command_parts[0] == "translatey":
+        elif command_parts[0] == "translatey" or command_parts[0] == "translate_y":
             at.translate(translate_y=number)
-        elif command_parts[0] == "translatez":
+        elif command_parts[0] == "translatez" or command_parts[0] == "translate_z":
             at.translate(translate_z=number)
         elif command_parts[0] == "shearxy":
             at.shear_in_z_plane(angle_x_in_degrees=-shear_factor_to_shear_angle(number))
