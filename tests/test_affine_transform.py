@@ -159,6 +159,7 @@ def test_affine_transform_rotate_around_center():
 
     assert (np.array_equal(a, b))
 
+
 def test_affine_transform_rotation_auto_size():
     source = cle.push(np.asarray([[
         [0, 0, 0, 0, 0],
@@ -192,6 +193,7 @@ def test_affine_transform_rotation_auto_size():
     assert (np.array_equal(a, b))
 
 
+    
 def test_affine_transform_make_sure_2d_images_become_2d_results():
     source = cle.push(np.asarray([
         [0, 0, 0, 0, 0],
@@ -222,6 +224,9 @@ def test_affine_transform_make_sure_2d_images_become_2d_results():
 
     assert (np.array_equal(a, b))
 
+    
+
+    
 def test_affine_transform_make_sure_2d_images_become_2d_results_autosize():
     source = cle.push(np.asarray([
         [0, 0, 0, 0, 0],

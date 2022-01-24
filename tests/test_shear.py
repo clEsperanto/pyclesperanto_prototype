@@ -1,21 +1,18 @@
 import pyclesperanto_prototype as cle
 import numpy as np
 
-def test_shear_x():
-    arr = np.zeros((5,5,5),dtype = float)
-    arr[2][2][2] =1
 
-    source = cle.push(arr)
+def test_affine_shear_y_in_x_plane():
+    source = np.zeros((5, 5, 5))
+    source[1, 1, 1] = 1
 
-    arr = np.zeros((5,5,5),dtype = float)
-    arr[4][4][2] =1
-    
-    reference = cle.push(arr)
+    reference = np.zeros((5, 5, 5))
+    reference[1, 2, 1] = 1
 
     transform = cle.AffineTransform3D()
-    transform.shear_x(angle_z_in_degrees=45,angle_y_in_degrees=45)
-    
+    transform.shear_in_x_plane(angle_y_in_degrees=45)
     result = cle.affine_transform(source, transform=transform)
+
     a = cle.pull(result)
     b = cle.pull(reference)
 
@@ -24,21 +21,18 @@ def test_shear_x():
 
     assert (np.array_equal(a, b))
 
-def test_shear_y():
-    arr = np.zeros((5,5,5),dtype = float)
-    arr[2][2][2] =1
 
-    source = cle.push(arr)
+def test_affine_shear_z_in_x_plane():
+    source = np.zeros((5, 5, 5))
+    source[1, 1, 1] = 1
 
-    arr = np.zeros((5,5,5),dtype = float)
-    arr[4][2][4] =1
-    
-    reference = cle.push(arr)
+    reference = np.zeros((5, 5, 5))
+    reference[2, 1, 1] = 1
 
     transform = cle.AffineTransform3D()
-    transform.shear_y(angle_z_in_degrees=45,angle_x_in_degrees=45)
-    
+    transform.shear_in_x_plane(angle_z_in_degrees=45)
     result = cle.affine_transform(source, transform=transform)
+
     a = cle.pull(result)
     b = cle.pull(reference)
 
@@ -47,21 +41,79 @@ def test_shear_y():
 
     assert (np.array_equal(a, b))
 
-def test_shear_z():
-    arr = np.zeros((5,5,5),dtype = float)
-    arr[2][2][2] =1
 
-    source = cle.push(arr)
+def test_affine_shear_x_in_y_plane():
+    source = np.zeros((5, 5, 5))
+    source[1, 1, 1] = 1
 
-    arr = np.zeros((5,5,5),dtype = float)
-    arr[2][4][4] =1
-    
-    reference = cle.push(arr)
+    reference = np.zeros((5, 5, 5))
+    reference[1, 1, 2] = 1
 
     transform = cle.AffineTransform3D()
-    transform.shear_z(angle_y_in_degrees=45,angle_x_in_degrees=45)
-    
+    transform.shear_in_y_plane(angle_x_in_degrees=45)
+
     result = cle.affine_transform(source, transform=transform)
+
+    a = cle.pull(result)
+    b = cle.pull(reference)
+
+    print(a)
+    print(b)
+
+    assert (np.array_equal(a, b))
+
+
+def test_affine_shear_z_in_y_plane():
+    source = np.zeros((5, 5, 5))
+    source[1, 1, 1] = 1
+
+    reference = np.zeros((5, 5, 5))
+    reference[2, 1, 1] = 1
+
+    transform = cle.AffineTransform3D()
+    transform.shear_in_y_plane(angle_z_in_degrees=45)
+    result = cle.affine_transform(source, transform=transform)
+
+    a = cle.pull(result)
+    b = cle.pull(reference)
+
+    print(a)
+    print(b)
+
+    assert (np.array_equal(a, b))
+
+
+def test_affine_shear_x_in_z_plane():
+    source = np.zeros((5, 5, 5))
+    source[1, 1, 1] = 1
+
+    reference = np.zeros((5, 5, 5))
+    reference[1, 1, 2] = 1
+
+    transform = cle.AffineTransform3D()
+    transform.shear_in_z_plane(angle_x_in_degrees=45)
+    result = cle.affine_transform(source, transform=transform)
+
+    a = cle.pull(result)
+    b = cle.pull(reference)
+
+    print(a)
+    print(b)
+
+    assert (np.array_equal(a, b))
+
+
+def test_affine_shear_y_in_z_plane():
+    source = np.zeros((5, 5, 5))
+    source[1, 1, 1] = 1
+
+    reference = np.zeros((5, 5, 5))
+    reference[1, 2, 1] = 1
+
+    transform = cle.AffineTransform3D()
+    transform.shear_in_z_plane(angle_y_in_degrees=45)
+    result = cle.affine_transform(source, transform=transform)
+
     a = cle.pull(result)
     b = cle.pull(reference)
 

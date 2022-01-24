@@ -30,6 +30,31 @@ New functions for processing and comparing label images:
 * `exclude_labels_with_map_values_not_equal_to_constant`
 * `exclude_labels_with_map_values_out_of_range`
 * `exclude_labels_with_map_values_within_range`
+New API for affine transforms
+* `transform.shear_in_x_plane`
+* `transform.shear_in_y_plane`
+* `transform.shear_in_z_plane`
+* The `transform` parameter can now also be a string containing these definitions for transforms (similar to the CLIJ2 affine transforms API):
+  * -center: translate the coordinate origin to the center of the image
+  * center: translate the coordinate origin back to the initial origin
+  * rotate=[angle]: rotate in Z-plane (around Z-axis) by the given angle in degrees
+  * rotate_X=[angle]: rotate in X-plane (around X-axis) by the given angle in degrees
+  * rotate_Y=[angle]: rotate in Y-plane (around Y-axis) by the given angle in degrees
+  * rotate_Z=[angle]: rotate in Z-plane (around Z-axis) by the given angle in degrees
+  * scale=[factor]: isotropic scaling according to given zoom factor
+  * scale_X=[factor]: scaling along X-axis according to given zoom factor
+  * scale_Y=[factor]: scaling along Y-axis according to given zoom factor
+  * scale_Z=[factor]: scaling along Z-axis according to given zoom factor
+  * shear_in_Z_plane_along_X=[angle]: shearing along X-axis in Z plane according to given angle in degrees
+  * shear_in_Z_plane_along_Y=[angle]: shearing along Y-axis in Z plane according to given angle in degrees
+  * shear_in_Y_plane_along_X=[angle]: shearing along X-axis in Y plane according to given angle in degrees
+  * shear_in_Y_plane_along_Z=[angle]: shearing along Z-axis in Y plane according to given angle in degrees
+  * shear_in_X_plane_along_Y=[angle]: shearing along Y-axis in X plane according to given angle in degrees
+  * shear_in_X_plane_along_Z=[angle]: shearing along Z-axis in X plane according to given angle in degrees
+  * translate_X=[distance]: translate along X-axis by distance given in pixels
+  * translate_Y=[distance]: translate along Y-axis by distance given in pixels
+  * translate_Z=[distance]: translate along Z-axis by distance given in pixels
+
 
 ## Bug fixes
 * `generate_distance_map` had wrong output shape in case two centroid lists with different sizes were given

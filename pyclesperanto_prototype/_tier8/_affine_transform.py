@@ -19,8 +19,8 @@ def affine_transform(source : Image, destination : Image = None, transform : Uni
         image to be transformed
     destination : Image, optional
         image where the transformed image should be written to
-    transform : 4x4 numpy array or AffineTransform3D object or skimage.transform.AffineTransform object, optional
-        transform matrix or object describing the transformation
+    transform : 4x4 numpy array or AffineTransform3D object or skimage.transform.AffineTransform object or str, optional
+        transform matrix or object or string describing the transformation
     linear_interpolation: bool, optional
         If true, bi-/tri-linear interplation will be applied; if hardware supports it.
         If false, nearest-neighbor interpolation wille be applied.
@@ -70,6 +70,10 @@ def affine_transform(source : Image, destination : Image = None, transform : Uni
         destination = create([1, destination.shape[0], destination.shape[1]])
         copy_slice(original_destination, destination, 0)
         copy_back_after_transforming = True
+
+    if isinstance(transform, str):
+        print("transform is string")
+        transform = AffineTransform3D(transform, source)
 
     # we invert the transform because we go from the target image to the source image to read pixels
     if isinstance(transform, AffineTransform3D):
