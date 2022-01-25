@@ -1,0 +1,4 @@
+The example image data was kindly provided by
+[Dr George Ashdown](https://au.linkedin.com/in/george-ashdown-33559947?trk=public_post_share-update_update-text) and
+[Dr Niall Geoghegan](https://uk.linkedin.com/in/niall-geoghegan-72aa2446?trk=public_post_share-update_update-text) who
+used lattice light sheet microscopy to capture immune cells called neutrophils self-destructing.
