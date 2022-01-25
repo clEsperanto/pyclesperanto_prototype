@@ -12,16 +12,15 @@ def deskew_y(input_image: Image, output_image: Image = None, angle_in_degrees: f
     ----------
     input_image: Image
         raw image data with Z-planes representing the swept acquisition plane
-    output_image
-        reconstructed image data with Z-planes
-    angle_in_degrees
+    output_image: Image, optional
+        reconstructed image data with Z-planes in proximal-distal oriental from the objective
+    angle_in_degrees: float, optional
+        default: 30 degrees
 
     Returns
     -------
-
+    output_image
     """
-
-
 
     from ._AffineTransform3D import AffineTransform3D
     from ._affine_transform import affine_transform
