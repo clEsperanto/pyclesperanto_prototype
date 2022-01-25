@@ -51,8 +51,6 @@ def affine_transform(source : Image, destination : Image = None, transform : Uni
         if auto_size and isinstance(transform, AffineTransform3D):
             # This modifies the given transform
             new_size, transform, _ = _determine_translation_and_bounding_box(source, transform)
-            print("determined translation", _)
-            print("determined new_size", new_size)
             destination = create(new_size)
         else:
             destination = create_like(source)
@@ -72,7 +70,6 @@ def affine_transform(source : Image, destination : Image = None, transform : Uni
         copy_back_after_transforming = True
 
     if isinstance(transform, str):
-        print("transform is string")
         transform = AffineTransform3D(transform, source)
 
     # we invert the transform because we go from the target image to the source image to read pixels
@@ -109,9 +106,6 @@ def affine_transform(source : Image, destination : Image = None, transform : Uni
         "output": destination,
         "mat": gpu_transform_matrix
     }
-
-    print(source.shape)
-    print(destination.shape)
 
     execute(__file__, '../clij-opencl-kernels/kernels/affine_transform_' + str(len(destination.shape)) + 'd' + kernel_suffix + '_x.cl',
             'affine_transform_' + str(len(destination.shape)) + 'd' + kernel_suffix, destination.shape, parameters)
