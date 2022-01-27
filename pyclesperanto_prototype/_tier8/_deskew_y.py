@@ -10,7 +10,8 @@ def deskew_y(input_image: Image,
              angle_in_degrees: float = 30,
              voxel_size_x: float = 1,
              voxel_size_y: float = 1,
-             voxel_size_z: float = 1
+             voxel_size_z: float = 1,
+             scaling_factor: float = 1
              ) -> Image:
     """
     Deskew an image stack as aquired with single-objective light-sheet microscopy.
@@ -28,6 +29,10 @@ def deskew_y(input_image: Image,
     voxel_size_z: float, optional
          default: 1 micron
          Voxel size, typically provided in microns
+    scaling_factor: float, optional
+        default: 1
+        If the resulting image becomes too huge, it is possible to reduce output image size by this factor.
+        The voxel size of the output image will then be voxel_size_x / scaling_factor.
 
     Returns
     -------
@@ -45,9 +50,9 @@ def deskew_y(input_image: Image,
     transform.rotate(angle_in_degrees=angle_in_degrees, axis=0)
 
     # make voxels isotropic, equal to voxel size to raw image in X. (TBD)
-    scaling_factor_y = voxel_size_y / voxel_size_x
-    scaling_factor_z = voxel_size_z / voxel_size_x
-    transform.scale(scale_x=1, scale_y=scaling_factor_y, scale_z=scaling_factor_z)
+    scaling_factor_y = voxel_size_y / voxel_size_x * scaling_factor
+    scaling_factor_z = voxel_size_z / voxel_size_x * scaling_factor
+    transform.scale(scale_x=scaling_factor, scale_y=scaling_factor_y, scale_z=scaling_factor_z)
 
     # correct orientation so that the new Z-plane goes proximal-distal from the objective.
     transform.rotate(angle_in_degrees=90, axis=0)
