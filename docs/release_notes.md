@@ -15,9 +15,9 @@
 
 ## New example data
 * The example image data "RBC_tiny" for deskewing was kindly provided by
-[Dr George Ashdown](https://au.linkedin.com/in/george-ashdown-33559947?trk=public_post_share-update_update-text) and
-[Dr Niall Geoghegan](https://uk.linkedin.com/in/niall-geoghegan-72aa2446?trk=public_post_share-update_update-text) who
-used lattice light sheet microscopy to capture immune cells called neutrophils.
+[Ms Cindy Evelyn](https://imaging.wehi.edu.au/about-us/cindy-evelyn) and
+[Dr Niall Geoghegan](https://imaging.wehi.edu.au/about-us/niall-geoghegan) and who
+used lattice light sheet microscopy (Zeiss) to capture red blood cells and investigate the malaria parasite invasion process.
 
 ## Backwards compatibility breaking changes
 * Removed support for float64 (double) pixel types. Float32 will be used instead.
@@ -37,6 +37,7 @@ New functions for processing and comparing label images:
 * `exclude_labels_with_map_values_not_equal_to_constant`
 * `exclude_labels_with_map_values_out_of_range`
 * `exclude_labels_with_map_values_within_range`
+* 
 New API for affine transforms
 * `transform.shear_in_x_plane`
 * `transform.shear_in_y_plane`
