@@ -112,15 +112,3 @@ def shear_factor_to_shear_angle(shear_factor):
     float
     """
     return  - math.atan(1.0 / shear_factor) * 180 / math.pi + 90
-
-    
-def scale_in_z(self, angle_in_degrees: float = 0, pixel_size_xy: float = 0, pixel_size_z: float = 0 ):
-    """Scales the image in Z-plane (a.k.a. YZ-plane) using pixel sizes in microns
-    Args:
-        angle_y_in_degrees (float): Shearing angle in Y
-        pixel_size_xy (float, optional): [description]. Defaults to 0.
-        pixel_size_z (float, optional): [description]. Defaults to 0.
-    """        
-    new_dz = math.sin(angle_in_degrees * math.pi / 180.0) * pixel_size_z
-    scale_factor = new_dz/pixel_size_xy
-    return self.scale(scale_z = scale_factor)
