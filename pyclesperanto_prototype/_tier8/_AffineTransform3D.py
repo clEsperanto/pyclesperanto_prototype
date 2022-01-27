@@ -250,6 +250,21 @@ class AffineTransform3D:
         ]))
         return self
 
+    def scale_in_z_with_pixel_size(self, angle_in_degrees: float = 0, pixel_size_xy: float = 0, pixel_size_z: float = 0 ):
+        """Scales the image in Z-plane (a.k.a. YZ-plane) to create isotropic pixels. 
+        Use this in combination with shear_in_x_plane
+
+        Args:
+            angle_y_in_degrees (float): Shearing angle in Y
+            pixel_size_xy (float, optional): [description]. Defaults to 0.
+            pixel_size_z (float, optional): [description]. Defaults to 0.
+        """        
+        new_dz = math.sin(angle_in_degrees * math.pi / 180.0) * pixel_size_z
+        try:
+            scale_factor = new_dz/pixel_size_xy
+        except ZeroDivisionError:
+            scale_factor = None
+        return self.scale(scale_z = scale_factor)
 
     def _3x3_to_4x4(self, matrix):
         """Pads 3x3 affine transformation matrix to convert it to 4x4

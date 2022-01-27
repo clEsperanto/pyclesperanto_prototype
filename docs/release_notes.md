@@ -37,6 +37,7 @@ New functions for processing and comparing label images:
 * `exclude_labels_with_map_values_not_equal_to_constant`
 * `exclude_labels_with_map_values_out_of_range`
 * `exclude_labels_with_map_values_within_range`
+* 
 New API for affine transforms
 * `transform.shear_in_x_plane`
 * `transform.shear_in_y_plane`
