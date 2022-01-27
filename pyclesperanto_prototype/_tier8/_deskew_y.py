@@ -49,7 +49,7 @@ def deskew_y(input_image: Image,
     # rotate the stack to get proper Z-planes
     transform.rotate(angle_in_degrees=angle_in_degrees, axis=0)
 
-    # make voxels isotropic, equal to voxel size to raw image in X. (TBD)
+    # make voxels isotropic, equal to voxel size to raw image in X times scaling_factor.
     scaling_factor_y = voxel_size_y / voxel_size_x * scaling_factor
     scaling_factor_z = voxel_size_z / voxel_size_x * scaling_factor
     transform.scale(scale_x=scaling_factor, scale_y=scaling_factor_y, scale_z=scaling_factor_z)
