@@ -237,7 +237,7 @@ class AffineTransform3D:
         """
         assert(angle_y_in_degrees >-90 and angle_y_in_degrees<90), "shear angle must be between 90 and -90 degrees"
         assert(angle_z_in_degrees >-90 and angle_z_in_degrees<90), "shear angle must be between 90 and -90 degrees"
-
+        
         shear_factor_yx = shear_angle_to_shear_factor(angle_y_in_degrees)
         shear_factor_zx = shear_angle_to_shear_factor(angle_z_in_degrees)
 

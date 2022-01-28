@@ -97,7 +97,11 @@ def shear_angle_to_shear_factor(angle_in_degrees):
     -------
     float
     """
-    return 1.0 / math.tan((90 - angle_in_degrees) * math.pi / 180)
+    try:
+        shear_factor = 1/math.tan((angle_in_degrees) * math.pi / 180)
+    except ZeroDivisionError:
+        shear_factor = 0
+    return shear_factor
 
 def shear_factor_to_shear_angle(shear_factor):
     """
