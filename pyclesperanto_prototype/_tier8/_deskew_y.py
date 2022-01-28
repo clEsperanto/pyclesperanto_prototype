@@ -45,7 +45,7 @@ def deskew_y(input_image: Image,
     
     # shear in the X plane towards Y
     transform = AffineTransform3D()
-    transform.shear_in_x_plane(angle_y_in_degrees=angle_in_degrees)
+    transform.shear_in_x_plane(angle_y_in_degrees=90 - angle_in_degrees)
 
     # rotate the stack to get proper Z-planes; rotate 90 - angle around X-axis
     transform.rotate(angle_in_degrees=90-angle_in_degrees, axis=0)
