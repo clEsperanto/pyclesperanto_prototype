@@ -34,8 +34,7 @@ def push(any_array):
     if hasattr(any_array, 'shape') and hasattr(any_array, 'dtype') and hasattr(any_array, 'get'):
         any_array = np.asarray(any_array.get())
 
-    float_arr = any_array.astype(np.float32)
-    return Backend.get_instance().get().from_array(float_arr)
+    return Backend.get_instance().get().from_array(np.float32(any_array))
 
 
 def push_zyx(any_array):
@@ -45,3 +44,4 @@ def push_zyx(any_array):
         DeprecationWarning
     )
     return push(any_array)
+
