@@ -3,7 +3,7 @@ from .._tier0 import plugin_function
 from .._tier0 import Image
 
 @plugin_function(categories=['filter', 'in assistant'])
-def add_image_and_scalar(source : Image, destination : Image = None, scalar : float = 1):
+def add_image_and_scalar(source : Image, destination : Image = None, scalar : float = 1) -> Image:
     """Adds a scalar value s to all pixels x of a given image X.
     
     <pre>f(x, s) = x + s</pre>

@@ -8,7 +8,7 @@ from .._tier1 import set
 import numpy as np
 
 @plugin_function(categories=['label processing', 'in assistant'], output_creator=create_labels_like)
-def reduce_labels_to_centroids(source:Image, destination:Image=None):
+def reduce_labels_to_centroids(source:Image, destination:Image=None) -> Image:
     """Takes a label map and reduces all labels to their center spots. Label IDs stay and background will be zero.
 
     Parameters

@@ -9,7 +9,7 @@ from .._tier0 import create
 from .._tier0 import create_image
 
 @plugin_function(output_creator=create_none, categories=['transform'])
-def downsample_slice_by_slice_half_median(source : Image, destination : Image = None):
+def downsample_slice_by_slice_half_median(source : Image, destination : Image = None) -> Image:
     """Scales an image using scaling factors 0.5 for X and Y dimensions. The Z 
     dimension stays untouched. 
     

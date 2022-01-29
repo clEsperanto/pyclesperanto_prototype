@@ -1,6 +1,9 @@
 from .._tier0 import execute
+from .._tier0 import plugin_function
+from .._tier0 import Image
 
-def nonzero_maximum_box (input, flag_dst, destination):
+@plugin_function
+def nonzero_maximum_box(input: Image, flag_dst: Image, destination: Image = None) -> Image:
     """Apply a maximum filter (box shape) to the input image. 
     
     The radius is fixed to 1 and pixels with value 0 are ignored.

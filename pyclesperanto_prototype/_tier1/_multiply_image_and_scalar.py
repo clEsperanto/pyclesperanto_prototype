@@ -3,7 +3,7 @@ from .._tier0 import plugin_function
 from .._tier0 import Image
 
 @plugin_function(categories=['filter', 'in assistant'])
-def multiply_image_and_scalar(source : Image, destination : Image = None, scalar : float = 0):
+def multiply_image_and_scalar(source : Image, destination : Image = None, scalar : float = 0) -> Image:
     """Multiplies all pixels value x in a given image X with a constant scalar s.
     
     <pre>f(x, s) = x * s</pre>

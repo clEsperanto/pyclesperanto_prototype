@@ -5,7 +5,7 @@ from pyclesperanto_prototype._tier2 import subtract_images
 from pyclesperanto_prototype._tier1 import absolute
 
 @plugin_function(categories=['combine', 'in assistant'])
-def absolute_difference(source1 : Image, source2 : Image, destination : Image = None):
+def absolute_difference(source1 : Image, source2 : Image, destination : Image = None) -> Image:
     """Determines the absolute difference pixel by pixel between two images.
     
     <pre>f(x, y) = |x - y| </pre>

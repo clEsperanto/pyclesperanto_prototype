@@ -3,7 +3,7 @@ from .._tier0 import plugin_function
 from .._tier0 import Image
 
 @plugin_function(categories=['filter', 'edge detection', 'in assistant'])
-def gradient_y(source : Image, destination : Image = None):
+def gradient_y(source : Image, destination : Image = None) -> Image:
     """Computes the gradient of gray values along Y. 
     
     Assuming a, b and c are three adjacent

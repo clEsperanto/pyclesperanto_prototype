@@ -3,7 +3,7 @@ from .._tier0 import plugin_function
 from .._tier0 import Image
 
 @plugin_function(categories=['filter', 'combine', 'in assistant'])
-def convolve(source : Image, convolution_kernel : Image, destination : Image = None):
+def convolve(source : Image, convolution_kernel : Image, destination : Image = None) -> Image:
     """Convolve the image with a given kernel image.
     
     It is recommended that the kernel image has an odd size in X, Y and Z. 

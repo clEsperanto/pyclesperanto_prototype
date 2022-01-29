@@ -9,7 +9,7 @@ from .._tier1 import set_ramp_x
 from .._tier1 import add_image_and_scalar
 
 @plugin_function(output_creator=create_from_pointlist)
-def pointlist_to_labelled_spots(pointlist : Image, spots_destination : Image = None):
+def pointlist_to_labelled_spots(pointlist : Image, spots_destination : Image = None) -> Image:
     """Takes a pointlist with dimensions n times d with n point coordinates in 
     d dimensions and labels corresponding pixels. 
     

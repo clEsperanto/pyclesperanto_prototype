@@ -3,7 +3,7 @@ from .._tier0 import plugin_function
 from .._tier0 import Image
 
 @plugin_function
-def set(source : Image, scalar : float = 0):
+def set(source : Image, scalar : float = 0) -> Image:
     """Sets all pixel values x of a given image X to a constant value v.
     
     <pre>f(x) = v</pre> 

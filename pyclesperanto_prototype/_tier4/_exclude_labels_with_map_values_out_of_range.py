@@ -3,7 +3,7 @@ from .._tier0 import Image
 from .._tier0 import create_labels_like
 
 @plugin_function(output_creator=create_labels_like, categories=['label processing', 'combine', 'in assistant'])
-def exclude_labels_with_map_values_out_of_range(values_map : Image, label_map_input: Image, label_map_destination: Image = None, minimum_value_range : float = 0, maximum_value_range : float = 100):
+def exclude_labels_with_map_values_out_of_range(values_map : Image, label_map_input: Image, label_map_destination: Image = None, minimum_value_range : float = 0, maximum_value_range : float = 100) -> Image:
     """This operation removes labels from a labelmap and renumbers the
     remaining labels.
 

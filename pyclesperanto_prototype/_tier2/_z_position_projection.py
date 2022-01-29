@@ -1,7 +1,7 @@
 from pyclesperanto_prototype._tier0 import plugin_function, Image, create_2d_yx, execute
 
 @plugin_function(output_creator = create_2d_yx, categories=['projection'])
-def z_position_projection(source_stack : Image, z_position : Image, destination : Image = None):
+def z_position_projection(source_stack : Image, z_position : Image, destination : Image = None) -> Image:
     """Project a defined Z-slice of a 3D stack into a 2D image.
 
     Which Z-slice is defined as the z_position image, which represents an altitude map.

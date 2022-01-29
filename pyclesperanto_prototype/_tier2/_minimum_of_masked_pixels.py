@@ -9,7 +9,7 @@ from .._tier0 import pull
 from .._tier1 import copy_slice
 from .._tier0 import plugin_function
 
-def __minimum_of_masked_pixels_reduction(source : Image, source_mask : Image, output : Image, output_mask : Image):
+def __minimum_of_masked_pixels_reduction(source : Image, source_mask : Image, output : Image, output_mask : Image) -> Image:
     parameters = {
         "dst_min": output,
         "dst_mask": output_mask,

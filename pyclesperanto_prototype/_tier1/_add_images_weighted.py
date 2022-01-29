@@ -5,7 +5,7 @@ from .._tier0 import plugin_function
 from .._tier0 import Image
 
 @plugin_function(categories=['combine', 'in assistant'])
-def add_images_weighted(summand1:Image, summand2:Image, destination :Image = None, factor1:float=1, factor2:float=1):
+def add_images_weighted(summand1:Image, summand2:Image, destination :Image = None, factor1:float=1, factor2:float=1) -> Image:
     """Calculates the sum of pairs of pixels x and y from images X and Y 
     weighted with factors a and b.
     

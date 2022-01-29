@@ -3,7 +3,7 @@ from .._tier0 import plugin_function
 from .._tier0 import Image
 
 @plugin_function(categories=['combine', 'binary processing', 'in assistant'], output_creator=create_binary_like)
-def binary_subtract(minuend : Image, subtrahend : Image, destination : Image = None):
+def binary_subtract(minuend : Image, subtrahend : Image, destination : Image = None) -> Image:
     """Subtracts one binary image from another.
     
     Parameters

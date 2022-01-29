@@ -5,7 +5,7 @@ from .._tier0 import plugin_function
 from .._tier0 import Image
 
 @plugin_function(output_creator=create_none)
-def centroids_of_labels(labels:Image, pointlist_destination :Image = None, include_background :bool = False):
+def centroids_of_labels(labels:Image, pointlist_destination :Image = None, include_background :bool = False) -> Image:
     """Determines the centroids of all labels in a label image or image stack. 
     
     It writes the resulting  coordinates in a pointlist image. Depending on 

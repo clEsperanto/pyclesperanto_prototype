@@ -4,7 +4,7 @@ from .._tier0 import Image
 from .._tier0 import execute
 
 @plugin_function(output_creator=create_from_pointlist)
-def point_index_list_to_mesh(pointlist: Image, indexlist : Image, mesh_destination : Image = None):
+def point_index_list_to_mesh(pointlist: Image, indexlist : Image, mesh_destination : Image = None) -> Image:
     """Meshes all points in a given point list which are indiced in a 
     corresponding index list. 
     

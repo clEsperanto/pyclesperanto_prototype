@@ -8,7 +8,7 @@ def hessian_eigenvalues(source: Image,
                         small_eigenvalue_destination: Image = None,
                         middle_eigenvalue_destination: Image = None,
                         large_eigenvalue_destination: Image = None,
-                        ):
+                        ) -> Image:
     """Computes the eigenvalues of the hessian matrix of a 2d or 3d image.
 
     Hessian matrix or 2D images:

@@ -1,5 +1,5 @@
-
-def artificial_tissue_2d(width: int = 256, height: int = 256, delta_x=24, delta_y=16, random_sigma_x=3, random_sigma_y=3):
+from .._tier0 import Image
+def artificial_tissue_2d(width: int = 256, height: int = 256, delta_x=24, delta_y=16, random_sigma_x=3, random_sigma_y=3) -> Image:
     """
 
     Parameters

@@ -5,7 +5,7 @@ from pyclesperanto_prototype._tier0 import plugin_function
 from pyclesperanto_prototype._tier1 import divide_images
 
 @plugin_function(categories=['filter', 'background removal', 'in assistant'])
-def divide_by_gaussian_background(input : Image, destination : Image = None, sigma_x : float = 2, sigma_y : float = 2, sigma_z : float = 2):
+def divide_by_gaussian_background(input : Image, destination : Image = None, sigma_x : float = 2, sigma_y : float = 2, sigma_z : float = 2) -> Image:
     """Applies Gaussian blur to the input image and divides the original by 
     the result. 
     

@@ -1,7 +1,7 @@
 from .._tier0 import execute, plugin_function, create_none, create, Image
 
 @plugin_function(output_creator=create_none)
-def multiply_matrix(matrix1 : Image, matrix2 : Image, matrix_destination : Image = None):
+def multiply_matrix(matrix1 : Image, matrix2 : Image, matrix_destination : Image = None) -> Image:
     """Multiplies two matrices with each other.
 
     Shape of matrix1 should be equal to shape of matrix2 transposed.

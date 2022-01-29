@@ -5,7 +5,7 @@ from pyclesperanto_prototype._tier0 import radius_to_kernel_size
 
 
 @plugin_function(categories=['filter', 'edge detection', 'in assistant'])
-def variance_box(source: Image, destination: Image = None, radius_x : int = 1, radius_y : int = 1, radius_z : int = 1):
+def variance_box(source: Image, destination: Image = None, radius_x : int = 1, radius_y : int = 1, radius_z : int = 1) -> Image:
     """Computes the local variance of a pixels box neighborhood. \n\nThe box size is specified by
     its half-width, half-height and half-depth (radius). If 2D images are given, radius_z will be ignored.
 

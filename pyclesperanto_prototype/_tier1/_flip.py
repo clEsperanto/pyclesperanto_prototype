@@ -4,7 +4,7 @@ from .._tier0 import plugin_function
 from .._tier0 import Image
 
 @plugin_function
-def flip(source : Image, destination : Image = None, flip_x : bool = True, flip_y : bool = True, flip_z : bool = True):
+def flip(source : Image, destination : Image = None, flip_x : bool = True, flip_y : bool = True, flip_z : bool = True) -> Image:
     """Flips an image in X, Y and/or Z direction depending on boolean flags. 
     
     Parameters

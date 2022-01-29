@@ -3,7 +3,7 @@ from .._tier1 import replace_intensities
 from .._tier0 import Image
 
 @plugin_function(categories=['label measurement', 'map', 'in assistant'])
-def average_distance_to_n_nearest_other_labels_map(labels : Image, other_labels : Image, distance_map : Image = None, n : int = 1):
+def average_distance_to_n_nearest_other_labels_map(labels : Image, other_labels : Image, distance_map : Image = None, n : int = 1) -> Image:
     """Takes two label maps and determines the centroid distances from each label in the first label image
     to the labels in the second. The average distance of the n nearest neighbors is then averaged and
     stored in a parametric distance map image.

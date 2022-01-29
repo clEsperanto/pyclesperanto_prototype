@@ -7,7 +7,7 @@ from .._tier2 import label_spots
 from .._tier3 import labelled_spots_to_pointlist
 
 @plugin_function(output_creator=create_none)
-def spots_to_pointlist(input_spots:Image, destination_pointlist :Image = None):
+def spots_to_pointlist(input_spots:Image, destination_pointlist :Image = None) -> Image:
     """Transforms a spots image as resulting from maximum/minimum detection in 
     an image where every column contains d 
     pixels (with d = dimensionality of the original image) with the coordinates of 

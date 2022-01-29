@@ -1,6 +1,9 @@
 from .._tier0 import execute
+from .._tier0 import plugin_function
+from .._tier0 import Image
 
-def onlyzero_overwrite_maximum_diamond(input, flag_dst, destination):
+@plugin_function
+def onlyzero_overwrite_maximum_diamond(input: Image, flag_dst: Image, destination: Image = None) -> Image:
     """Apply a local maximum filter to an image which only overwrites pixels 
     with value 0. 
     

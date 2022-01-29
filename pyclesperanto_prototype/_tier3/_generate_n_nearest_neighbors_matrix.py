@@ -4,8 +4,7 @@ from .._tier0 import plugin_function
 from .._tier0 import Image
 
 @plugin_function
-def generate_n_nearest_neighbors_matrix(distance_matrix :Image, touch_matrix_destination :Image = None, n : int = 1):
-    from .._tier1 import set
+def generate_n_nearest_neighbors_matrix(distance_matrix :Image, touch_matrix_destination :Image = None, n : int = 1) -> Image:
     """Produces a touch-matrix where the n nearest neighbors are marked as touching neighbors. 
     
     Takes a distance matrix (e.g. derived from a pointlist of centroids) and marks for every column the n smallest

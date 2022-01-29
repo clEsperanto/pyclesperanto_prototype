@@ -4,7 +4,7 @@ from .._tier0 import Image
 from .._tier0 import create_2d_yx
 
 @plugin_function(output_creator=create_2d_yx, categories=['projection', 'in assistant'])
-def standard_deviation_z_projection(source : Image, destination : Image = None):
+def standard_deviation_z_projection(source : Image, destination : Image = None) -> Image:
     """Determines the standard deviation intensity projection of an image 
     stack along Z. 
     

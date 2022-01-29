@@ -4,7 +4,7 @@ from .._tier0 import Image
 from .._tier0 import create_vector_from_square_matrix
 
 @plugin_function(output_creator=create_vector_from_square_matrix)
-def maximum_distance_of_touching_neighbors(distance_matrix : Image, touch_matrix: Image, distancelist_destination: Image = None):
+def maximum_distance_of_touching_neighbors(distance_matrix : Image, touch_matrix: Image, distancelist_destination: Image = None) -> Image:
     """Takes a touch matrix and a distance matrix to determine the maximum
     distance of touching neighbors for every object.
     

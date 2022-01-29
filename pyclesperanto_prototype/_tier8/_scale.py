@@ -10,7 +10,7 @@ def scale(source: Image,
           factor_z: float = 1,
           centered: bool = True,
           linear_interpolation: bool = False,
-          auto_size: bool = False):
+          auto_size: bool = False) -> Image:
     """Scale the image by given factors.
 
     Parameters

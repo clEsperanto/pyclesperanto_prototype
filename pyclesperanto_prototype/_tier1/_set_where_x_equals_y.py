@@ -3,7 +3,7 @@ from .._tier0 import plugin_function
 from .._tier0 import Image
 
 @plugin_function
-def set_where_x_equals_y(source : Image, value : float = 0):
+def set_where_x_equals_y(source : Image, value : float = 0) -> Image:
     """Sets all pixel values a of a given image A to a constant value v in 
     case its coordinates x == y. 
     

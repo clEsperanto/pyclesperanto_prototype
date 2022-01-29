@@ -3,7 +3,7 @@ from .._tier0 import plugin_function
 from .._tier0 import create_labels_like
 
 @plugin_function(categories=['label processing', 'in assistant'], output_creator=create_labels_like)
-def erode_labels(labels_input : Image, labels_destination : Image = None, radius: int = 1, relabel_islands : bool = False):
+def erode_labels(labels_input : Image, labels_destination : Image = None, radius: int = 1, relabel_islands : bool = False) -> Image:
     """Erodes labels to a smaller size. Note: Depending on the label image and the radius,
     labels may disappear and labels may split into multiple islands. Thus, overlapping labels of input and output may
     not have the same identifier.

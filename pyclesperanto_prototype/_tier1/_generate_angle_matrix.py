@@ -4,7 +4,7 @@ from .._tier0 import plugin_function
 from .._tier0 import Image
 
 @plugin_function(output_creator=create_matrix_from_pointlists)
-def generate_angle_matrix(coordinate_list1 :Image, coordinate_list2 :Image, angle_matrix_destination :Image = None):
+def generate_angle_matrix(coordinate_list1 :Image, coordinate_list2 :Image, angle_matrix_destination :Image = None) -> Image:
     """Computes the angle in radians between all point coordinates given in two point lists.
     
     Takes two images containing pointlists (dimensionality n * d, n: number of 

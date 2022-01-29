@@ -3,7 +3,7 @@ from .._tier0 import plugin_function
 from .._tier0 import Image
 
 @plugin_function
-def copy(source : Image, destination : Image = None):
+def copy(source : Image, destination : Image = None) -> Image:
     """Copies an image.
     
     <pre>f(x) = x</pre> 

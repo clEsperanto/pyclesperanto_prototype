@@ -4,7 +4,7 @@ from .._tier0 import plugin_function
 from .._tier0 import Image
 
 @plugin_function(categories=['filter', 'denoise', 'in assistant'])
-def mean_sphere(source : Image, destination : Image = None, radius_x : float = 1, radius_y : float = 1, radius_z : float = 1):
+def mean_sphere(source : Image, destination : Image = None, radius_x : float = 1, radius_y : float = 1, radius_z : float = 1) -> Image:
     """Computes the local mean average of a pixels spherical neighborhood. 
     
     The spheres size is specified by its half-width, half-height and

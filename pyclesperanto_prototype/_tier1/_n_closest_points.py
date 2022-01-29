@@ -5,7 +5,7 @@ from .._tier0 import Image
 from .._tier0 import execute
 
 @plugin_function(output_creator=create_none)
-def n_closest_points(distance_matrix : Image, indexlist_destination : Image = None, n : int = 1, ignore_background : bool = True, ignore_self : bool = True):
+def n_closest_points(distance_matrix : Image, indexlist_destination : Image = None, n : int = 1, ignore_background : bool = True, ignore_self : bool = True) -> Image:
     """Determine the n point indices with shortest distance for all points in 
     a distance matrix. 
     

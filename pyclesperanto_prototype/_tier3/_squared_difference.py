@@ -5,7 +5,7 @@ from pyclesperanto_prototype._tier2 import subtract_images
 from pyclesperanto_prototype._tier1 import power
 
 @plugin_function(categories=['combine', 'in assistant'])
-def squared_difference(source1 : Image, source2 : Image, destination : Image = None):
+def squared_difference(source1 : Image, source2 : Image, destination : Image = None) -> Image:
     """Determines the squared difference pixel by pixel between two images. 
     
     Parameters
