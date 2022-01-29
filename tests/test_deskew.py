@@ -6,8 +6,8 @@ def test_deskew_y():
     source = np.zeros((5, 5, 5))
     source[1, 1, 1] = 1
 
-    reference = np.zeros((4, 8, 5))
-    reference[1, 5, 1] = 1
+    reference = np.zeros((2, 7, 5))
+    reference[0, 5, 1] = 1
 
     result = cle.deskew_y(source, angle_in_degrees=30)
 
