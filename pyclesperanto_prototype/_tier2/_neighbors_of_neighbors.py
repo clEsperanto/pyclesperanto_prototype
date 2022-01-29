@@ -6,7 +6,7 @@ from .._tier1 import greater_constant
 from .._tier0 import create_like
 
 @plugin_function
-def neighbors_of_neighbors(touch_matrix : Image, neighbor_matrix_destination : Image = None):
+def neighbors_of_neighbors(touch_matrix : Image, neighbor_matrix_destination : Image = None) -> Image:
     """Determines neighbors of neigbors from touch matrix and saves the result 
     as a new touch matrix. 
     

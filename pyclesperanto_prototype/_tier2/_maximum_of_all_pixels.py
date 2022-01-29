@@ -4,7 +4,7 @@ from .._tier0 import plugin_function
 from .._tier0 import Image
 
 @plugin_function
-def maximum_of_all_pixels(source  : Image):
+def maximum_of_all_pixels(source : Image) -> float:
     """Determines the maximum of all pixels in a given image. 
     
     It will be stored in a new row of ImageJs

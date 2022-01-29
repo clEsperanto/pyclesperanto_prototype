@@ -3,7 +3,7 @@ from .._tier0 import Image
 from .._tier0 import plugin_function
 
 @plugin_function
-def block_enumerate(src : Image, src_sums : Image, dst : Image = sum, blocksize : int = 256):
+def block_enumerate(src : Image, src_sums : Image, dst : Image = None, blocksize : int = 256) -> Image:
     """Enumerates pixels with value 1 in a one-dimensional image
 
     For example handing over the image

@@ -4,7 +4,7 @@ from .._tier0 import plugin_function
 from .._tier0 import create_none
 
 @plugin_function(output_creator=create_none)
-def sum_reduction_x(src : Image, dst : Image = None, blocksize : int = 256):
+def sum_reduction_x(src : Image, dst : Image = None, blocksize : int = 256) -> Image:
     """Takes an image and reduces it in width by factor blocksize.
     The new pixels contain the sum of the reduced pixels. For example,
     given the following image and block size 4:

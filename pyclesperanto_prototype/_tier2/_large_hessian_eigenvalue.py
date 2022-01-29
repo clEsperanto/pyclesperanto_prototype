@@ -3,7 +3,7 @@ from .._tier0 import Image
 from .._tier1 import add_images_weighted
 
 @plugin_function(categories=['filter', 'in assistant'], priority=-1)
-def large_hessian_eigenvalue(source : Image, destination : Image = None):
+def large_hessian_eigenvalue(source : Image, destination : Image = None) -> Image:
     """Determines the Hessian eigenvalues and returns the large eigenvalue image.
     
     Parameters
