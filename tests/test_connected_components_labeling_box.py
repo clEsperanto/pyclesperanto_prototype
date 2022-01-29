@@ -61,4 +61,4 @@ def test_connected_components_labeling_box_blobs():
     # print out result
     print("Num objects in the image: " + str(num_labels))
 
-    assert num_labels == 63
+    assert num_labels == 62

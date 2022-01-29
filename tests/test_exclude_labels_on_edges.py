@@ -131,4 +131,4 @@ def test_exclude_labels_on_edges_blobs():
     # print out result
     print("Num objects in the image: " + str(num_labels))
 
-    assert num_labels == 45 
+    assert num_labels == 44
