@@ -23,6 +23,9 @@ used lattice light sheet microscopy (Zeiss) to capture red blood cells and inves
 * `threshold_otsu` delivered different results compared to CLIJ and scikit-image, in case the minimum intensity in the input image was different from zero. (Thanks to Christophe Avenel @cavenel for reporting and fixing this bug!)
 * `touch_matrix_to_mesh` and `distance_matrix_to_mesh` crashed when no destination image was provided.
 
+## Miscellaneous
+* Performance optimization in the `push` command (Thanks to Elissavet Sandaltzopoulou @elsandal for implementing this!)
+
 ## Backwards compatibility breaking changes
 * Removed support for float64 (double) pixel types. Float32 will be used instead.
 * If `Image` type annotated parameters of any clesperanto function are passed as tuples or lists, they are automatically converted using `np.asarray()` and pushed to the GPU.
