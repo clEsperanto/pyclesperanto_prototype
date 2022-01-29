@@ -8,7 +8,7 @@ from .._tier1 import replace_intensities
 import numpy as np
 
 @plugin_function(output_creator=create_none)
-def exclude_labels(binary_flaglist : Image, label_map_input : Image, label_map_destination : Image = None):
+def exclude_labels(binary_flaglist : Image, label_map_input : Image, label_map_destination : Image = None) -> Image:
     """This operation removes labels from a labelmap and renumbers the 
     remaining labels. 
     

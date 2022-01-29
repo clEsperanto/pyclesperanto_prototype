@@ -5,7 +5,7 @@ from .._tier0 import create_none
 from .._tier0 import create_like
 
 @plugin_function(output_creator=create_none, categories=['label processing', 'combine'])
-def exclude_labels_with_values_equal_to_constant(values_vector : Image, label_map_input : Image, label_map_destination : Image = None, constant : float = 0):
+def exclude_labels_with_values_equal_to_constant(values_vector : Image, label_map_input : Image, label_map_destination : Image = None, constant : float = 0) -> Image:
     """This operation removes labels from a labelmap and renumbers the 
     remaining labels.
     

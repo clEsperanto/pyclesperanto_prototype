@@ -2,7 +2,7 @@ from pyclesperanto_prototype._tier0 import plugin_function, Image, create_none, 
 
 
 @plugin_function(output_creator=create_none, categories=['projection'])
-def z_position_range_projection(source_stack: Image, z_position: Image, destination: Image = None, start_z : int = -5, end_z : int = 5):
+def z_position_range_projection(source_stack: Image, z_position: Image, destination: Image = None, start_z : int = -5, end_z : int = 5) -> Image:
     """Project multiple Z-slices of a 3D stack into a new 3D stack.
     Which Z-slice is defined as the z_position image, which represents an altitude map.
     The two additional numbers define the range relative to the given z-position.

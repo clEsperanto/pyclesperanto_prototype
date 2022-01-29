@@ -4,7 +4,7 @@ from .._tier0 import Image
 import numpy as np
 
 @plugin_function(categories=['combine', 'neighbor', 'map', 'in assistant'])
-def standard_deviation_of_proximal_neighbors_map(parametric_map : Image, label_map : Image, parametric_map_destination : Image = None, min_distance : float = 0, max_distance : float = np.finfo(np.float32).max):
+def standard_deviation_of_proximal_neighbors_map(parametric_map : Image, label_map : Image, parametric_map_destination : Image = None, min_distance : float = 0, max_distance : float = np.finfo(np.float32).max) -> Image:
     """Takes a label image and a parametric intensity image and will replace each labels value in the parametric image
     by the standard deviation value of neighboring labels. The distance range of the centroids of the neighborhood can be configured.
     Note: Values of all pixels in a label each must be identical.
