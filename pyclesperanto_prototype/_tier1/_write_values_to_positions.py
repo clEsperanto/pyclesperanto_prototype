@@ -7,7 +7,7 @@ from .._tier1 import maximum_x_projection
 from .._tier0 import pull
 
 @plugin_function(output_creator=create_none)
-def write_values_to_positions(positions_and_values : Image, destination : Image = None):
+def write_values_to_positions(positions_and_values : Image, destination : Image = None) -> Image:
     """Takes an image with three/four rows (2D: height = 3; 3D: height = 4): 
     x, y [, z] and v and target image. 
     

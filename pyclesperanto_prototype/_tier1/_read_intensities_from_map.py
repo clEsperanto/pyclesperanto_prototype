@@ -5,7 +5,7 @@ from .._tier0 import plugin_function
 from .._tier0 import create_vector_from_labelmap
 
 @plugin_function(output_creator=create_vector_from_labelmap)
-def read_intensities_from_map(labels : Image, map_image : Image, values_destination : Image = None):
+def read_intensities_from_map(labels : Image, map_image : Image, values_destination : Image = None) -> Image:
     """Takes a label image and a parametric image to read parametric values from the labels positions.
     The read intensity values are stored in a new vector.
 

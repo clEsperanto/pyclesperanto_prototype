@@ -3,7 +3,7 @@ from .._tier0 import plugin_function
 from .._tier0 import Image
 
 @plugin_function
-def undefined_to_zero(source : Image, destination : Image = None):
+def undefined_to_zero(source : Image, destination : Image = None) -> Image:
     """Copies all pixels instead those which are not a number (NaN) or 
     infinity (inf), which are replaced by 0. 
     
