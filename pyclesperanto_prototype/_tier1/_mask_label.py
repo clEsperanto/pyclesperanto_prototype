@@ -3,7 +3,7 @@ from .._tier0 import plugin_function
 from .._tier0 import Image
 
 @plugin_function
-def mask_label(source : Image, label_map : Image, destination : Image = None, label_index : int = 1):
+def mask_label(source : Image, label_map : Image, destination : Image = None, label_index : int = 1) -> Image:
     """Computes a masked image by applying a label mask to an image. 
     
     All pixel values x of image X will be copied

@@ -4,7 +4,7 @@ from .._tier0 import plugin_function
 from .._tier0 import Image
 
 @plugin_function
-def multiply_image_and_coordinate(source : Image, destination : Image = None, dimension = 0):
+def multiply_image_and_coordinate(source : Image, destination : Image = None, dimension = 0) -> Image:
     """Multiplies all pixel intensities with the x, y or z coordinate, 
     depending on specified dimension. 
     

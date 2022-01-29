@@ -4,7 +4,7 @@ from .._tier0 import plugin_function
 from .._tier0 import Image
 
 @plugin_function(categories=['filter', 'edge detection', 'in assistant'])
-def laplace_box(input : Image, destination : Image = None):
+def laplace_box(input : Image, destination : Image = None) -> Image:
     """Applies the Laplace operator (Box neighborhood) to an image. 
     
     Parameters

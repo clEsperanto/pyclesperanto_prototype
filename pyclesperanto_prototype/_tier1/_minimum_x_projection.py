@@ -5,7 +5,7 @@ from .._tier0 import Image
 from .._tier0 import create_2d_yz
 
 @plugin_function(output_creator=create_2d_yz, categories=['projection'])
-def minimum_x_projection(source : Image, destination_min : Image = None):
+def minimum_x_projection(source : Image, destination_min : Image = None) -> Image:
     """Determines the minimum intensity projection of an image along Y. 
     
     Parameters

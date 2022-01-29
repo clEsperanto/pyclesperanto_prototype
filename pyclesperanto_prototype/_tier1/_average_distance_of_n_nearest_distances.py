@@ -4,7 +4,7 @@ from .._tier0 import Image
 from .._tier0 import create_none
 
 @plugin_function(output_creator=create_none)
-def average_distance_of_n_nearest_distances(distance_matrix : Image, distance_vector_destination: Image = None, n : int = 1):
+def average_distance_of_n_nearest_distances(distance_matrix : Image, distance_vector_destination: Image = None, n : int = 1) -> Image:
     """Determines the n shortest distances for each column in a distance matrix and puts the average of these in a
     vector.
 

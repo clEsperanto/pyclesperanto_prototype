@@ -5,7 +5,7 @@ from .._tier0 import plugin_function
 from .._tier0 import Image
 
 @plugin_function(output_creator=create_none)
-def crop(input : Image, output : Image = None, start_x : int = 0, start_y : int = 0, start_z : int = 0, width : int = 1, height : int = 1, depth : int = 1):
+def crop(input : Image, output : Image = None, start_x : int = 0, start_y : int = 0, start_z : int = 0, width : int = 1, height : int = 1, depth : int = 1) -> Image:
     """Crops a given sub-stack out of a given image stack. 
     
     Note: If the destination image pre-exists already, it will be overwritten and 

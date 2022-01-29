@@ -3,7 +3,7 @@ from .._tier0 import plugin_function
 from .._tier0 import Image
 
 @plugin_function
-def copy_slice(source : Image, destination : Image = None, slice_index : int = 0):
+def copy_slice(source : Image, destination : Image = None, slice_index : int = 0) -> Image:
     """This method has two purposes: 
     It copies a 2D image to a given slice z position in a 3D image stack or 
     It copies a given slice at position z in an image stack to a 2D image.

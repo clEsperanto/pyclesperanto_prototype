@@ -4,7 +4,7 @@ from .._tier0 import plugin_function
 from .._tier0 import Image
 
 @plugin_function(categories=['filter', 'in assistant'])
-def minimum_box(source : Image, destination : Image = None, radius_x : float = 0, radius_y : float = 0, radius_z : float = 0):
+def minimum_box(source : Image, destination : Image = None, radius_x : float = 0, radius_y : float = 0, radius_z : float = 0) -> Image:
     """Computes the local minimum of a pixels cube neighborhood. 
     
     The cubes size is specified by 

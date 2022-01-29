@@ -3,7 +3,7 @@ from .._tier0 import plugin_function
 from .._tier0 import Image
 
 @plugin_function(categories=['combine', 'in assistant'], priority=-1)
-def divide_images(divident : Image, divisor : Image, destination : Image = None):
+def divide_images(divident : Image, divisor : Image, destination : Image = None) -> Image:
     """Divides two images X and Y by each other pixel wise. 
     
     <pre>f(x, y) = x / y</pre> 

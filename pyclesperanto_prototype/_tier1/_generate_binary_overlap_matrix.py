@@ -4,7 +4,7 @@ from .._tier0 import create_square_matrix_from_two_labelmaps
 from .._tier0 import execute
 
 @plugin_function(output_creator=create_square_matrix_from_two_labelmaps)
-def generate_binary_overlap_matrix(label_map1 : Image, label_map2 : Image, binary_overlap_matrix_destination : Image = None):
+def generate_binary_overlap_matrix(label_map1 : Image, label_map2 : Image, binary_overlap_matrix_destination : Image = None) -> Image:
     """Takes two labelmaps with n and m labels and generates a (n+1)*(m+1) 
     matrix where all pixels are set to 0 exept those where labels overlap 
     between the label maps. 
