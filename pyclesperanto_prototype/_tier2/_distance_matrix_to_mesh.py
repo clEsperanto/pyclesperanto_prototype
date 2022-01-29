@@ -4,7 +4,7 @@ from pyclesperanto_prototype._tier0 import Image
 from pyclesperanto_prototype._tier0 import create_from_pointlist
 
 @plugin_function(output_creator=create_from_pointlist)
-def distance_matrix_to_mesh(pointlist : Image, distance_matrix : Image, mesh_destination : Image, maximum_distance : float = 1):
+def distance_matrix_to_mesh(pointlist : Image, distance_matrix : Image, mesh_destination : Image = None, maximum_distance : float = 1):
     """Generates a mesh from a distance matric and a list of point coordinates.
     
     Takes a pointlist with dimensions n*d with n point coordinates in d 
