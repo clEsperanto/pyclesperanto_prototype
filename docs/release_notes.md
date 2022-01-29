@@ -9,8 +9,15 @@
 * Added `auto_size` parameter to the functions `scale`, `rotate`, `rigid_transform` and `affine_transform`
   which will automatically determine the size of the destination image if it is not provided. With this, no pixels will 
   be transformed out of the image anymore (Thanks to Pradeep Rajasekhar @pr4deepr).
-* Added `shear` operation (Thanks to Pradeep Rajasekhar @pr4deepr).
+* Added `shear_in_?_plane` affine transforms (Thanks to Pradeep Rajasekhar @pr4deepr).
+* Added `deskew_y` operation (Thanks to inspiration and support by Pradeep Rajasekhar @pr4deepr).
 * `rigid_transform` is now also available in the [assistant](https://github.com/clesperanto/napari_pyclesperanto_assistant).
+
+## New example data
+* The example image data "RBC_tiny" for deskewing was kindly provided by
+[Ms Cindy Evelyn](https://imaging.wehi.edu.au/about-us/cindy-evelyn) and
+[Dr Niall Geoghegan](https://imaging.wehi.edu.au/about-us/niall-geoghegan) and who
+used lattice light sheet microscopy (Zeiss) to capture red blood cells and investigate the malaria parasite invasion process.
 
 ## Backwards compatibility breaking changes
 * Removed support for float64 (double) pixel types. Float32 will be used instead.
@@ -30,6 +37,7 @@ New functions for processing and comparing label images:
 * `exclude_labels_with_map_values_not_equal_to_constant`
 * `exclude_labels_with_map_values_out_of_range`
 * `exclude_labels_with_map_values_within_range`
+* 
 New API for affine transforms
 * `transform.shear_in_x_plane`
 * `transform.shear_in_y_plane`
