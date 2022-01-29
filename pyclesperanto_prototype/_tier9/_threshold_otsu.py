@@ -40,7 +40,7 @@ def threshold_otsu(input : Image, destination : Image = None) -> Image:
 
     range = maximum_intensity - minimum_intensity
 
-    bin_centers = np.arange(256) * range / (255)
+    bin_centers = np.arange(256) * range / (255) + minimum_intensity
 
     # Determine histogram on GPU
     hist = pull(histogram(input, num_bins=256, minimum_intensity=minimum_intensity, maximum_intensity=maximum_intensity, determine_min_max=False))
