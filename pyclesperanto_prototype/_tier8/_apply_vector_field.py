@@ -3,7 +3,7 @@ from .._tier0 import Image
 from .._tier0 import create_none
 
 @plugin_function(output_creator=create_none)
-def apply_vector_field(source : Image, vector_x : Image, vector_y : Image, vector_z : Image = None, destination : Image = None, linear_interpolation : bool = False):
+def apply_vector_field(source : Image, vector_x : Image, vector_y : Image, vector_z : Image = None, destination : Image = None, linear_interpolation : bool = False) -> Image:
     """
     Deforms an image stack according to distances provided in the given vector image stacks.
 

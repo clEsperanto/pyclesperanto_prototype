@@ -5,7 +5,7 @@ from .._tier1 import replace_intensities
 from .._tier1 import set_column
 
 @plugin_function(categories=['combine', 'label measurement', 'map', 'in assistant'], priority=-1)
-def label_standard_deviation_intensity_map(intensity_image : Image, labels : Image, standard_deviation_intensity_map : Image = None):
+def label_standard_deviation_intensity_map(intensity_image : Image, labels : Image, standard_deviation_intensity_map : Image = None) -> Image:
     """Takes an image and a corresponding label map, determines
     the standard deviation of the intensity per label and replaces
     every label with the that number.

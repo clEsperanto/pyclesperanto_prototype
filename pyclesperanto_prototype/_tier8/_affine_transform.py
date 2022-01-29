@@ -9,7 +9,7 @@ from skimage.transform import AffineTransform
 import numpy as np
 
 @plugin_function(output_creator=create_none)
-def affine_transform(source : Image, destination : Image = None, transform : Union[np.ndarray, AffineTransform3D, AffineTransform] = None, linear_interpolation : bool = False, auto_size:bool = False):
+def affine_transform(source : Image, destination : Image = None, transform : Union[np.ndarray, AffineTransform3D, AffineTransform] = None, linear_interpolation : bool = False, auto_size:bool = False) -> Image:
     """
     Applies an affine transform to an image.
 

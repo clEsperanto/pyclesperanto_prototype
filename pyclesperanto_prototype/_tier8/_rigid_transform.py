@@ -13,7 +13,7 @@ def rigid_transform(
         angle_around_z_in_degrees: float = 0,
         rotate_around_center: bool = True,
         linear_interpolation: bool = False,
-        auto_size: bool = False):
+        auto_size: bool = False) -> Image:
     """Translate the image by a given vector and rotate it by given angles.
 
     Angles are given in degrees. To convert radians to degrees, use this formula:

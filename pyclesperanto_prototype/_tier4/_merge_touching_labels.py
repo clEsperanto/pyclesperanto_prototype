@@ -1,7 +1,7 @@
 from .._tier0 import plugin_function, Image, create_labels_like
 
 @plugin_function(categories=['label processing', 'in assistant'], output_creator=create_labels_like)
-def merge_touching_labels(labels_input: Image, labels_destination: Image = None):
+def merge_touching_labels(labels_input: Image, labels_destination: Image = None) -> Image:
     """
     Takes a label image, determines which labels are touching, merges them, renumbers them and produces a new label
     image.

@@ -1,7 +1,7 @@
 from .._tier0 import plugin_function, Image, create_2d_xy
 
 @plugin_function(output_creator = create_2d_xy, categories=['projection'])
-def extended_depth_of_focus_variance_projection(source : Image, destination : Image = None, radius_x : int = 10, radius_y : int = 10, sigma : float = 5):
+def extended_depth_of_focus_variance_projection(source : Image, destination : Image = None, radius_x : int = 10, radius_y : int = 10, sigma : float = 5) -> Image:
     """Extended depth of focus projection maximizing local pixel intensity variance.
 
     Parameters

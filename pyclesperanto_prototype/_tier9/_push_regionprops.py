@@ -3,8 +3,9 @@ from warnings import warn
 
 from skimage.measure._regionprops import RegionProperties
 import numpy as np
+from .._tier0 import Image
 
-def push_regionprops(props : Union[dict, RegionProperties], first_row_index : int = 0):
+def push_regionprops(props : Union[dict, RegionProperties], first_row_index : int = 0) -> Image:
     """
     
     See Also

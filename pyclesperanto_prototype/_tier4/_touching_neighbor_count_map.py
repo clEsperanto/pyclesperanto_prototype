@@ -5,7 +5,7 @@ from .._tier1 import count_touching_neighbors
 from .._tier1 import replace_intensities
 
 @plugin_function(categories=['label measurement', 'map', 'in assistant'], priority=1)
-def touching_neighbor_count_map(input : Image, destination : Image = None):
+def touching_neighbor_count_map(input : Image, destination : Image = None) -> Image:
     """Takes a label map, determines which labels touch and replaces every 
     label with the number of touching neighboring labels.
     

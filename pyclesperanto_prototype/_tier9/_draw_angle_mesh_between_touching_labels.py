@@ -2,7 +2,7 @@ from pyclesperanto_prototype._tier0 import Image
 from pyclesperanto_prototype._tier0 import plugin_function
 
 @plugin_function(categories=['label measurement', 'mesh'])
-def draw_angle_mesh_between_touching_labels(labels : Image, angle_mesh_destination : Image = None):
+def draw_angle_mesh_between_touching_labels(labels : Image, angle_mesh_destination : Image = None) -> Image:
     """Starting from a label map, draw lines between touching neighbors 
     resulting in a mesh.
     

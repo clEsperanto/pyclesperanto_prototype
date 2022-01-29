@@ -3,7 +3,7 @@ from .._tier0 import create_none
 from .._tier0 import plugin_function
 
 @plugin_function(output_creator=create_none)
-def regionprops(labelmap : Image, intensity_image : Image = None, cache : bool = True, extra_properties = []):
+def regionprops(labelmap : Image, intensity_image : Image = None, cache : bool = True, extra_properties = []) -> Image:
     """Convert the intensity image and the corresponding label image to numpy arrays (via pull) and calls scikit-image
     regionprops [1]. Hence, this operation runs on the CPU. A faster, GPU-accelerated function with limited measurements
     is available as statistics_of_labelled_pixels [2].

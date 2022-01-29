@@ -5,7 +5,7 @@ from .._tier1 import replace_intensities
 from .._tier1 import set_column
 
 @plugin_function(categories=['label measurement', 'map', 'in assistant'])
-def label_pixel_count_map(input : Image, destination : Image = None):
+def label_pixel_count_map(input : Image, destination : Image = None) -> Image:
     """Takes a label map, determines the number of pixels per label and 
     replaces every label with the that number.
     
