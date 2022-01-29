@@ -22,6 +22,7 @@ used lattice light sheet microscopy (Zeiss) to capture red blood cells and inves
 ## Backwards compatibility breaking changes
 * Removed support for float64 (double) pixel types. Float32 will be used instead.
 * If `Image` type annotated parameters of any clesperanto function are passed as tuples or lists, they are automatically converted using `np.asarray()` and pushed to the GPU.
+* Almost all functions have annotated return types now. While this should not affect functionality, code-parsers may perceive the API differently with this change.
 
 # 0.12.0 - January 1st 2022
 
