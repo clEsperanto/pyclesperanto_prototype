@@ -3,7 +3,7 @@ from pyclesperanto_prototype._tier0 import plugin_function
 from pyclesperanto_prototype._tier0 import create_none
 
 @plugin_function(output_creator=create_none)
-def euclidean_distance_from_label_centroid_map(labels:Image, centroids_pointlist:Image = None, distance_map_destination:Image = None):
+def euclidean_distance_from_label_centroid_map(labels:Image, centroids_pointlist:Image = None, distance_map_destination:Image = None) -> Image:
     """Takes a label map, determines the centroids of all labels and writes the distance of all labelled pixels to
     their centroid in the result image. Background pixels stay zero.
     """

@@ -4,7 +4,7 @@ from pyclesperanto_prototype._tier0 import Image
 import numpy as np
 
 @plugin_function
-def mean_of_all_pixels(source : Image):
+def mean_of_all_pixels(source : Image) -> float:
     """Determines the mean average of all pixels in a given image. 
     
     It will be stored in a new row of ImageJs

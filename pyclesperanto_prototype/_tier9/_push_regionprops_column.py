@@ -1,7 +1,7 @@
 from typing import Union
+from .._tier0 import Image
 
-
-def push_regionprops_column(regionprops : Union[list, dict], column : str):
+def push_regionprops_column(regionprops : Union[list, dict], column : str) -> Image:
     from .._tier0 import push
     import numpy as np
 

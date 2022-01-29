@@ -1,9 +1,10 @@
-from pyclesperanto_prototype._tier0._create import create_like
-from pyclesperanto_prototype._tier1 import copy
-from pyclesperanto_prototype._tier0._execute import execute
+from .._tier0 import create_like
+from .._tier1 import copy
+from .._tier0 import execute
+from .._tier0 import Image
 from ._set import set
 
-def execute_separable_kernel(src, dst, anchor, opencl_kernel_filename, kernel_name, kernel_size_x, kernel_size_y, kernel_size_z, sigma_x, sigma_y, sigma_z, dimensions) :
+def execute_separable_kernel(src, dst, anchor, opencl_kernel_filename, kernel_name, kernel_size_x, kernel_size_y, kernel_size_z, sigma_x, sigma_y, sigma_z, dimensions)  -> Image:
 
     n = [kernel_size_x, kernel_size_y, kernel_size_z]
     sigma = [sigma_x, sigma_y, sigma_z]

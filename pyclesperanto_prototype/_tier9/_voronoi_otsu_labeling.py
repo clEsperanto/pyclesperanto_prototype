@@ -9,7 +9,7 @@ from .._tier0 import Image
 from .._tier3 import histogram
 
 @plugin_function(categories=['label', 'in assistant'], priority=1, output_creator=create_labels_like)
-def voronoi_otsu_labeling(source : Image, label_image_destination : Image = None, spot_sigma : float = 2, outline_sigma : float = 2):
+def voronoi_otsu_labeling(source : Image, label_image_destination : Image = None, spot_sigma : float = 2, outline_sigma : float = 2) -> Image:
     """Labels objects directly from grey-value images.
 
     The two sigma parameters allow tuning the segmentation result. Under the hood,

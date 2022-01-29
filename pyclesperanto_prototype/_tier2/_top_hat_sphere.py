@@ -6,7 +6,7 @@ from .._tier0 import plugin_function
 from .._tier0 import Image
 
 @plugin_function(categories=['filter', 'background removal', 'in assistant'])
-def top_hat_sphere(input : Image, destination : Image = None, radius_x : float = 1, radius_y : float = 1, radius_z : float = 1):
+def top_hat_sphere(input : Image, destination : Image = None, radius_x : float = 1, radius_y : float = 1, radius_z : float = 1) -> Image:
     """Applies a top-hat filter for background subtraction to the input image.
     
     Parameters

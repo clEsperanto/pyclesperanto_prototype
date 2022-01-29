@@ -4,7 +4,7 @@ from pyclesperanto_prototype._tier0 import plugin_function
 from pyclesperanto_prototype._tier0 import Image
 
 @plugin_function
-def touch_matrix_to_adjacency_matrix(touch_matrix :Image, adjacency_matrix_destination :Image = None, self_adjacent : bool = True):
+def touch_matrix_to_adjacency_matrix(touch_matrix :Image, adjacency_matrix_destination :Image = None, self_adjacent : bool = True) -> Image:
     from .._tier1 import set
     """Takes touch matrix (which is typically just half-filled) and makes a symmetrical adjacency matrix out of it.
     

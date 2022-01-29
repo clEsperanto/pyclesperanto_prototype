@@ -3,7 +3,7 @@ from .._tier0 import plugin_function
 from .._tier0 import Image
 
 @plugin_function
-def median_of_touching_neighbors(values : Image, touch_matrix : Image, median_values_destination : Image = None):
+def median_of_touching_neighbors(values : Image, touch_matrix : Image, median_values_destination : Image = None) -> Image:
     """Takes a touch matrix and a vector of values to determine the median 
     value among touching neighbors for every object. 
     

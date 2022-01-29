@@ -5,7 +5,7 @@ from .._tier0 import Image
 from .._tier1 import paste
 
 @plugin_function(output_creator=create_none, categories=['combine', 'transform', 'in assistant'])
-def combine_horizontally(stack1 : Image, stack2 : Image, destination : Image = None):
+def combine_horizontally(stack1 : Image, stack2 : Image, destination : Image = None) -> Image:
     """Combines two images or stacks in X. 
     
     Parameters

@@ -5,7 +5,7 @@ from .._tier0 import plugin_function
 from .._tier0 import Image
 
 @plugin_function
-def center_of_mass(source : Image):
+def center_of_mass(source : Image) -> Image:
     """Determines the center of mass of an image or image stack. 
     
     It writes the result in the results table

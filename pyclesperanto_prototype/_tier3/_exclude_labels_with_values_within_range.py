@@ -5,7 +5,7 @@ from .._tier0 import create_none
 from .._tier0 import create_like
 
 @plugin_function(output_creator=create_none, categories=['label processing', 'combine'])
-def exclude_labels_with_values_within_range(values_vector : Image, label_map_input : Image, label_map_destination : Image = None, minimum_value_range : float = 0, maximum_value_range : float = 100):
+def exclude_labels_with_values_within_range(values_vector : Image, label_map_input : Image, label_map_destination : Image = None, minimum_value_range : float = 0, maximum_value_range : float = 100) -> Image:
     """This operation removes labels from a labelmap and renumbers the 
     remaining labels. 
     

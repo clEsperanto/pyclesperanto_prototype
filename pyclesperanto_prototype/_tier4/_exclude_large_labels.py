@@ -3,7 +3,7 @@ from .._tier0 import Image
 from .._tier0 import create_none
 
 @plugin_function(output_creator=create_none, categories=['label processing', 'in assistant'])
-def exclude_large_labels(input: Image, destination: Image = None, minimum_size: float = 100):
+def exclude_large_labels(input: Image, destination: Image = None, minimum_size: float = 100) -> Image:
     """Removes labels from a label map which are above a given maximum size.
 
     Size of the labels is given as the number of pixel or voxels per label.

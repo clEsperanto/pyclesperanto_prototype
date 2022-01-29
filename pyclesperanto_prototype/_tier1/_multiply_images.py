@@ -4,7 +4,7 @@ from .._tier0 import Image
 from .._tier0 import plugin_function
 
 @plugin_function(categories=['combine', 'in assistant'])
-def multiply_images(factor1 : Image, factor2 : Image, destination : Image = None):
+def multiply_images(factor1 : Image, factor2 : Image, destination : Image = None) -> Image:
     """Multiplies all pairs of pixel values x and y from two image X and Y.
     
     <pre>f(x, y) = x * y</pre>

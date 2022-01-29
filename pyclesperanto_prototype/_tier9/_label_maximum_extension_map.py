@@ -5,7 +5,7 @@ from .._tier1 import replace_intensities
 from .._tier1 import set_column
 
 @plugin_function(categories=['label measurement', 'map', 'in assistant'])
-def label_maximum_extension_map(labels : Image, destination : Image = None):
+def label_maximum_extension_map(labels : Image, destination : Image = None) -> Image:
     """Takes a label map, determines for every label the maximum distance
     of any pixel to the centroid and replaces every label with the that number.
     

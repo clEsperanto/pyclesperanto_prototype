@@ -4,7 +4,7 @@ from .._tier0 import Image
 from .._tier0 import create_from_pointlist
 
 @plugin_function(output_creator=create_from_pointlist)
-def touch_matrix_to_mesh(pointlist  : Image, touch_matrix : Image, mesh_destination : Image):
+def touch_matrix_to_mesh(pointlist  : Image, touch_matrix : Image, mesh_destination : Image = None) -> Image:
     """Takes a pointlist with dimensions n*d with n point coordinates in d 
     dimensions and a touch matrix of 
     size n*n to draw lines from all points to points if the corresponding pixel 

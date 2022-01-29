@@ -3,7 +3,7 @@ from .._tier0 import create_like
 from .._tier0 import Image
 
 @plugin_function(categories=['filter', 'in assistant'])
-def gamma_correction(source : Image, target : Image = None, gamma : float = 1):
+def gamma_correction(source : Image, target : Image = None, gamma : float = 1) -> Image:
     """Applies a gamma correction to an image.
     
     Therefore, all pixels x of the Image X are normalized and the power to gamma g is 

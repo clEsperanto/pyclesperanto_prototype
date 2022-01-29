@@ -6,7 +6,7 @@ from .._tier0 import plugin_function
 from .._tier0 import Image
 
 @plugin_function
-def bounding_box(source : Image):
+def bounding_box(source : Image) -> Image:
     """Determines the bounding box of all non-zero pixels in a binary image. 
     
     If called from macro, the positions will be stored in a new row of ImageJs 

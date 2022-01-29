@@ -3,7 +3,7 @@ from .._tier0 import plugin_function
 from .._tier0 import Image
 
 @plugin_function(categories=['filter', 'in assistant'])
-def absolute(source : Image, destintation : Image = None):
+def absolute(source : Image, destintation : Image = None) -> Image:
     """Computes the absolute value of every individual pixel x in a given image.
     
     <pre>f(x) = |x| </pre>

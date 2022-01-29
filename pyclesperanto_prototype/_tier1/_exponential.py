@@ -3,7 +3,7 @@ from .._tier0 import plugin_function
 from .._tier0 import Image
 
 @plugin_function(categories=['filter', 'in assistant'], priority=-1)
-def exponential(source : Image, destination : Image = None):
+def exponential(source : Image, destination : Image = None) -> Image:
     """Computes base exponential of all pixels values.
     
     f(x) = exp(x) 

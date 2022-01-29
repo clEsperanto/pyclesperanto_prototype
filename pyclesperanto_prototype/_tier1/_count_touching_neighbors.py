@@ -4,7 +4,7 @@ from .._tier0 import Image
 from .._tier0 import create_vector_from_square_matrix
 
 @plugin_function(output_creator=create_vector_from_square_matrix)
-def count_touching_neighbors(touch_matrix: Image, touching_neighbors_count_destination: Image = None):
+def count_touching_neighbors(touch_matrix: Image, touching_neighbors_count_destination: Image = None) -> Image:
     """Takes a touch matrix as input and delivers a vector with number of 
     touching neighbors per label as a vector.
 

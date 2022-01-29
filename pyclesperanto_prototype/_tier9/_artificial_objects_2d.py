@@ -1,4 +1,5 @@
-def artificial_objects_2d():
+from .._tier0 import Image
+def artificial_objects_2d() -> Image:
     """
     Creates an image showing artificial objects such as lines, blobs, membranes and nuclei.
 

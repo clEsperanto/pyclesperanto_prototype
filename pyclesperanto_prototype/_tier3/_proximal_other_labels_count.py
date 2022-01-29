@@ -2,7 +2,7 @@ from .._tier0 import plugin_function, Image, create_none
 import numpy as np
 
 @plugin_function(categories=['label measurement', 'combine', 'map', 'label comparison'], output_creator=create_none)
-def proximal_other_labels_count(label_image:Image, other_label_image:Image, count_vector:Image = None, maximum_distance=25):
+def proximal_other_labels_count(label_image:Image, other_label_image:Image, count_vector:Image = None, maximum_distance:float = 25) -> Image:
     """
     Count number of labels within a given radius in an other label image and returns the result as vector.
 

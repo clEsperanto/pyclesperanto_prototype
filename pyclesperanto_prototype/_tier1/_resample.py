@@ -9,7 +9,7 @@ from .._tier0 import create
 from .._tier0 import create_image
 
 @plugin_function(output_creator=create_none, categories=['transform'])
-def resample(source : Image, destination : Image = None, factor_x : float = 1, factor_y : float = 1, factor_z : float = 1, linear_interpolation : bool = False):
+def resample(source : Image, destination : Image = None, factor_x : float = 1, factor_y : float = 1, factor_z : float = 1, linear_interpolation : bool = False) -> Image:
     """Resamples an image with given size factors using an affine transform. 
     
     Parameters

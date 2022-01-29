@@ -3,7 +3,7 @@ from .._tier0 import plugin_function
 from .._tier0 import Image
 
 @plugin_function
-def mode_of_touching_neighbors(src_values : Image, touch_matrix : Image, dst_values : Image = None):
+def mode_of_touching_neighbors(src_values : Image, touch_matrix : Image, dst_values : Image = None) -> Image:
     """
 
     Parameters

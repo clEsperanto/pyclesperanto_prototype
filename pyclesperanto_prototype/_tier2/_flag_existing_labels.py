@@ -3,7 +3,7 @@ from .._tier0 import Image
 from .._tier0 import create_vector_from_labelmap
 
 @plugin_function(output_creator=create_vector_from_labelmap)
-def flag_existing_labels(label_src : Image, flag_vector_destination : Image = None):
+def flag_existing_labels(label_src : Image, flag_vector_destination : Image = None) -> Image:
     """
     Given a label map this function will generate a binary vector where all pixels are set to 1 if label with given
     x-coordinate in the vector exists. For example a label image such as

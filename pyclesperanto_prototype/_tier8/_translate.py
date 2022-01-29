@@ -2,7 +2,7 @@ from .._tier0 import plugin_function
 from .._tier0 import Image
 
 @plugin_function(categories=['transform', 'in assistant'])
-def translate(source : Image, destination : Image = None, translate_x : float = 0, translate_y : float = 0, translate_z : float = 0, linear_interpolation : bool = False):
+def translate(source : Image, destination : Image = None, translate_x : float = 0, translate_y : float = 0, translate_z : float = 0, linear_interpolation : bool = False) -> Image:
     """Translate the image by a given vector.
 
     Parameters

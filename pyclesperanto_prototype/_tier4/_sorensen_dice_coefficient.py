@@ -3,7 +3,7 @@ from .._tier0 import plugin_function
 from .._tier0 import Image
 
 @plugin_function
-def sorensen_dice_coefficient(source1 : Image, source2 : Image):
+def sorensen_dice_coefficient(source1 : Image, source2 : Image) -> float:
     """Determines the overlap of two binary images using the Sorensen-Dice 
     coefficent. 
     

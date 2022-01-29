@@ -3,7 +3,7 @@ from .._tier0 import plugin_function
 from .._tier0 import Image
 
 @plugin_function
-def minimum_of_touching_neighbors(values : Image, touch_matrix : Image, minimum_values_destination : Image = None):
+def minimum_of_touching_neighbors(values : Image, touch_matrix : Image, minimum_values_destination : Image = None) -> Image:
     """Takes a touch matrix and a vector of values to determine the minimum 
     value among touching neighbors for every object. 
     

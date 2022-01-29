@@ -23,7 +23,7 @@ from .._tier1 import sum_z_projection
 from .._tier1 import copy_slice
 
 @plugin_function(output_creator=create_none)
-def histogram(source : Image, destination : Image = None, num_bins = 256, minimum_intensity : float = None, maximum_intensity : float = None, determine_min_max : bool = True):
+def histogram(source : Image, destination : Image = None, num_bins:int = 256, minimum_intensity : float = None, maximum_intensity : float = None, determine_min_max : bool = True) -> Image:
     """Determines the histogram of a given image.
     
     The histogram image is of dimensions number_of_bins/1/1; a 3D image with 

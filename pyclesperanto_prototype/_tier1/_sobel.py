@@ -3,7 +3,7 @@ from .._tier0 import plugin_function
 from .._tier0 import Image
 
 @plugin_function(categories=['filter', 'edge detection', 'in assistant'])
-def sobel(source : Image, destination : Image = None):
+def sobel(source : Image, destination : Image = None) -> Image:
     """Convolve the image with the Sobel kernel. 
     
     Author(s): Ruth Whelan-Jeans, Robert Haase
