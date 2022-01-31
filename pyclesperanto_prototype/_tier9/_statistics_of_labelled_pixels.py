@@ -161,25 +161,28 @@ def statistics_of_labelled_pixels(intensity_image : Image = None, label_image : 
     bbox_max_z = pull(result_vector)[0]
     region_props['bbox_max_z'] = bbox_max_z
 
-    if len(intensity_image.shape) == 2:
-        bbox = [
-            bbox_min_y,
-            bbox_min_x,
-            bbox_max_y - bbox_min_y + 1,
-            bbox_max_x - bbox_min_x + 1,
-        ]
-    else: # 3-dimensional image
-        bbox = [
-            bbox_min_z,
-            bbox_min_y,
-            bbox_min_x,
-            bbox_max_z - bbox_min_z + 1,
-            bbox_max_y - bbox_min_y + 1,
-            bbox_max_x - bbox_min_x + 1,
-        ]
-    region_props['bbox_width'] = bbox_max_x - bbox_min_x + 1
-    region_props['bbox_height'] = bbox_max_y - bbox_min_y + 1
-    region_props['bbox_depth'] = bbox_max_z - bbox_min_z + 1
+    import warnings
+    with warnings.catch_warnings():
+        warnings.simplefilter("ignore")
+        if len(intensity_image.shape) == 2:
+            bbox = [
+                bbox_min_y,
+                bbox_min_x,
+                bbox_max_y - bbox_min_y + 1,
+                bbox_max_x - bbox_min_x + 1,
+            ]
+        else: # 3-dimensional image
+            bbox = [
+                bbox_min_z,
+                bbox_min_y,
+                bbox_min_x,
+                bbox_max_z - bbox_min_z + 1,
+                bbox_max_y - bbox_min_y + 1,
+                bbox_max_x - bbox_min_x + 1,
+            ]
+        region_props['bbox_width'] = bbox_max_x - bbox_min_x + 1
+        region_props['bbox_height'] = bbox_max_y - bbox_min_y + 1
+        region_props['bbox_depth'] = bbox_max_z - bbox_min_z + 1
 
     #     MINIMUM_INTENSITY = 10
     #     MAXIMUM_INTENSITY = 11
