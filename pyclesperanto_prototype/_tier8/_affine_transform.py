@@ -112,7 +112,6 @@ def affine_transform(source : Image, destination : Image = None, transform : Uni
 
     # deal with 2D output images
     if copy_back_after_transforming:
-        print("copy back")
         copy_slice(destination, original_destination, 0)
 
     return original_destination
