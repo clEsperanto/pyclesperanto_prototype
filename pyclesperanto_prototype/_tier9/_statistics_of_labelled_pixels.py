@@ -280,9 +280,13 @@ def statistics_of_labelled_pixels(intensity_image : Image = None, label_image : 
     crop(max_statistics, result_vector, measurements_start_x, 5, 0)
     region_props['max_distance_to_mass_center'] = pull(result_vector)[0]
 
-    region_props['mean_max_distance_to_centroid_ratio'] = region_props['max_distance_to_centroid'] / region_props[
-        'mean_distance_to_centroid']
-    region_props['mean_max_distance_to_mass_center_ratio'] = region_props['max_distance_to_mass_center'] / region_props[
-        'mean_distance_to_mass_center']
+    import warnings
+    with warnings.catch_warnings():
+        warnings.simplefilter("ignore")
+        
+        region_props['mean_max_distance_to_centroid_ratio'] = region_props['max_distance_to_centroid'] / region_props[
+            'mean_distance_to_centroid']
+        region_props['mean_max_distance_to_mass_center_ratio'] = region_props['max_distance_to_mass_center'] / region_props[
+            'mean_distance_to_mass_center']
 
     return region_props
