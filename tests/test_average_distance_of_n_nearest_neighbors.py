@@ -21,7 +21,7 @@ def test_average_distance_of_n_nearest_neighbors_map():
                     [0, 0, 0, 3.62, 3.62, 3.62]
     ]))
 
-    average_distance_of_n_nearest_neighbors_map = cle.average_distance_of_n_closest_neighbors_map(labels, n=2)
+    average_distance_of_n_nearest_neighbors_map = cle.average_distance_of_n_nearest_neighbors_map(labels, n=2)
 
     a = cle.pull(average_distance_of_n_nearest_neighbors_map)
     b = cle.pull(reference)

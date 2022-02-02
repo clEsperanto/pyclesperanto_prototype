@@ -27,6 +27,9 @@ used lattice light sheet microscopy (Zeiss) to capture red blood cells and inves
 ## Miscellaneous
 * Performance optimization in the `push` command (Thanks to Elissavet Sandaltzopoulou @elsandal for implementing this!)
 
+## Deprecated methods
+* `average_distance_of_n_closest_neighbors_map` was renamed to `average_distance_of_n_nearest_neighbors_map`. An alias for backwards compatibility was set. This alias will be removed in a later release.
+
 ## Backwards compatibility breaking changes
 * Removed support for float64 (double) pixel types. Float32 will be used instead.
 * If `Image` type annotated parameters of any clesperanto function are passed as tuples or lists, they are automatically converted using `np.asarray()` and pushed to the GPU.
