@@ -17,9 +17,9 @@ def draw_mesh_between_n_closest_labels(labels : Image, mesh_target : Image = Non
     
     Parameters
     ----------
-    input : Image
-    destination : Image
-    number_of_closest_labels : Number
+    labels : Image
+    mesh_target : Image
+    n : Number
     
     Returns
     -------
