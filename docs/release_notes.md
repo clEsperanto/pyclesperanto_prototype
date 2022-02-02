@@ -12,6 +12,7 @@
 * Added `shear_in_?_plane` affine transforms (Thanks to Pradeep Rajasekhar @pr4deepr).
 * Added `deskew_y` operation (Thanks to inspiration and support by Pradeep Rajasekhar @pr4deepr).
 * `rigid_transform` is now also available in the [assistant](https://github.com/clesperanto/napari_pyclesperanto_assistant).
+* `draw_distance_mesh_between_proximal_labels`
 
 ## New example data
 * The example image data "RBC_tiny" for deskewing was kindly provided by
