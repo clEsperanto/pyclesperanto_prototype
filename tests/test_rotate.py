@@ -83,3 +83,73 @@ def test_rotation_auto_size():
     print(b)
 
     assert (np.array_equal(a, b))
+
+
+def test_rotate_around_z_center():
+    source = np.zeros((5,5,5))
+    source[2, 2, 4] = 1
+
+    reference = np.zeros((5,5,5))
+    reference[2,4,2] = 1
+
+    transform = cle.AffineTransform3D()
+    transform.center(source.shape)
+    transform.rotate_around_z_axis(90)
+    transform.center(source.shape, undo=True)
+
+    result = cle.affine_transform(source, transform=transform)
+
+    a = cle.pull(result)
+    b = cle.pull(reference)
+
+    print(a)
+    print(b)
+
+    assert (np.array_equal(a, b))
+
+
+def test_rotate_around_y_center():
+    source = np.zeros((5,5,5))
+    source[2, 2, 0] = 1
+
+    reference = np.zeros((5,5,5))
+    reference[4,2,2] = 1
+
+    transform = cle.AffineTransform3D()
+    transform.center(source.shape)
+    transform.rotate_around_y_axis(90)
+    transform.center(source.shape, undo=True)
+
+    result = cle.affine_transform(source, transform=transform)
+
+    a = cle.pull(result)
+    b = cle.pull(reference)
+
+    print(a)
+    print(b)
+
+    assert (np.array_equal(a, b))
+
+
+def test_rotate_around_x_center():
+    source = np.zeros((5,5,5))
+    source[2, 0, 2] = 1
+
+    reference = np.zeros((5,5,5))
+    reference[0,2,2] = 1
+
+    transform = cle.AffineTransform3D()
+    transform.center(source.shape)
+    transform.rotate_around_x_axis(90)
+    transform.center(source.shape, undo=True)
+
+    result = cle.affine_transform(source, transform=transform)
+
+    a = cle.pull(result)
+    b = cle.pull(reference)
+
+    print(a)
+    print(b)
+
+    assert (np.array_equal(a, b))
+
