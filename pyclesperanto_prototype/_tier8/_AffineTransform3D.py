@@ -284,6 +284,7 @@ class AffineTransform3D:
 
         # correct orientation so that the new Z-plane goes proximal-distal from the objective.
         self.rotate(angle_in_degrees=-90, axis=1)
+        self.rotate(angle_in_degrees=90, axis=2)
 
         return self
 
