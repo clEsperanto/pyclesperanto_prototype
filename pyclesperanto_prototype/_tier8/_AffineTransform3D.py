@@ -273,7 +273,7 @@ class AffineTransform3D:
         
         self.shear_in_y_plane(angle_x_in_degrees = 90 - angle_in_degrees)
 
-        # rotate the stack to get proper Z-planes; rotate 90 - angle around X-axis
+        # rotate the stack to get proper Z-planes; rotate 90 - angle around Y-axis
         self.rotate(angle_in_degrees=-(90 - angle_in_degrees), axis=1)
 
         # make voxels isotropic, calculate the new scaling factor for Z after shearing
