@@ -91,6 +91,54 @@ class AffineTransform3D:
 
         return self
 
+    def rotate_around_x_axis(self, angle_in_degrees:float):
+        """
+        Rotation around the X-axis.
+
+        Parameters
+        ----------
+        angle_in_degrees : int
+            angle in degrees. To convert radians to degrees use this formula:
+            angle_in_deg = angle_in_rad / numpy.pi * 180.0
+
+        Returns
+        -------
+        self
+        """
+        return self.rotate(0, angle_in_degrees)
+
+    def rotate_around_y_axis(self, angle_in_degrees:float):
+        """
+        Rotation around the Y-axis.
+
+        Parameters
+        ----------
+        angle_in_degrees : int
+            angle in degrees. To convert radians to degrees use this formula:
+            angle_in_deg = angle_in_rad / numpy.pi * 180.0
+
+        Returns
+        -------
+        self
+        """
+        return self.rotate(1, angle_in_degrees)
+
+    def rotate_around_z_axis(self, angle_in_degrees:float):
+        """
+        Rotation around the Z-axis.
+
+        Parameters
+        ----------
+        angle_in_degrees : int
+            angle in degrees. To convert radians to degrees use this formula:
+            angle_in_deg = angle_in_rad / numpy.pi * 180.0
+
+        Returns
+        -------
+        self
+        """
+        return self.rotate(2, angle_in_degrees)
+
     def translate(self, translate_x: float = 0, translate_y: float = 0, translate_z : float = 0):
         """Translation along axes.
 
