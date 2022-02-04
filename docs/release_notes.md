@@ -1,11 +1,11 @@
 # 0.14.0 (upcoming)
 
 ## New features
-* `reduce_labels_to_centroids` method
-* `artificial_objects_2d` method, for providing a synthetic dataset
+* `reduce_labels_to_centroids` method added
+* `artificial_objects_2d` method added, for providing a synthetic dataset
 * `hessian_eigenvalues` filter (yet with multiple outputs, based on code by Matthias Arzt @maarzt)
-* `small_hessian_eigenvalue` filter
-* `large_hessian_eigenvalue` filter
+* `small_hessian_eigenvalue` filter added
+* `large_hessian_eigenvalue` filter added
 * Added `auto_size` parameter to the functions `scale`, `rotate`, `rigid_transform` and `affine_transform`
   which will automatically determine the size of the destination image if it is not provided. With this, no pixels will 
   be transformed out of the image anymore (Thanks to Pradeep Rajasekhar @pr4deepr).
