@@ -45,19 +45,8 @@ def deskew_y(input_image: Image,
     
     # shear in the X plane towards Y
     transform = AffineTransform3D()
-    transform.shear_in_x_plane(angle_y_in_degrees=90 - angle_in_degrees)
-
-    # rotate the stack to get proper Z-planes; rotate 90 - angle around X-axis
-    transform.rotate(angle_in_degrees=90-angle_in_degrees, axis=0)
-
-    # make voxels isotropic, calculate the new scaling factor for Z after shearing
-    #https://github.com/tlambert03/napari-ndtiffs/blob/092acbd92bfdbf3ecb1eb9c7fc146411ad9e6aae/napari_ndtiffs/affine.py#L57
-    new_dz=math.sin(angle_in_degrees * math.pi/180.0)*voxel_size_z
-    scale_factor_z=(new_dz/voxel_size_y)*scaling_factor
-    transform.scale(scale_x = scaling_factor, scale_y = scaling_factor, scale_z=scale_factor_z)
-
-    # correct orientation so that the new Z-plane goes proximal-distal from the objective.
-    transform.rotate(angle_in_degrees=90, axis=0)
+    transform._deskew_y(angle_in_degrees=angle_in_degrees, voxel_size_x=voxel_size_x, voxel_size_y=voxel_size_y,
+                       voxel_size_z=voxel_size_z, scaling_factor=scaling_factor)
 
     # apply transform
     return affine_transform(input_image, output_image, transform=transform, auto_size=True)
