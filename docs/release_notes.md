@@ -10,7 +10,7 @@
   which will automatically determine the size of the destination image if it is not provided. With this, no pixels will 
   be transformed out of the image anymore (Thanks to Pradeep Rajasekhar @pr4deepr).
 * Added `shear_in_?_plane` affine transforms (Thanks to Pradeep Rajasekhar @pr4deepr).
-* Added `deskew_y` operation (Thanks to inspiration and support by Pradeep Rajasekhar @pr4deepr).
+* Added `deskew_x` and `deskew_y` operation (Thanks to inspiration and support by Pradeep Rajasekhar @pr4deepr).
 * `rigid_transform` is now also available in the [assistant](https://github.com/clesperanto/napari_pyclesperanto_assistant).
 * `draw_distance_mesh_between_proximal_labels`
 
@@ -19,6 +19,8 @@
 [Ms Cindy Evelyn](https://imaging.wehi.edu.au/about-us/cindy-evelyn) and
 [Dr Niall Geoghegan](https://imaging.wehi.edu.au/about-us/niall-geoghegan) and who
 used lattice light sheet microscopy (Zeiss) to capture red blood cells and investigate the malaria parasite invasion process.
+* The example image data "45_CamA_ch0_stack0006_488nm_0016799msec_0013438399msecAbs-1.tif" kindly provided by 
+[Ms Cindy Evelyn](https://imaging.wehi.edu.au/about-us/cindy-evelyn) , [Dr Niall Geoghegan](https://imaging.wehi.edu.au/about-us/niall-geoghegan) and [Dr. Kelly Rogers](https://imaging.wehi.edu.au/about-us/kelly-rogers) from the [Centre for Dynamic Imaging, WEHI, Melbourne, Australia](https://imaging.wehi.edu.au/) who used lattice light sheet microscopy to capture red blood cells and study the [malaria parasite invasion process](https://www.nature.com/articles/s41467-021-23626-7). 
 
 ## Bug fixes
 * `threshold_otsu` delivered different results compared to CLIJ and scikit-image, in case the minimum intensity in the input image was different from zero. (Thanks to Christophe Avenel @cavenel for reporting and fixing this bug!)
