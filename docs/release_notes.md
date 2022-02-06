@@ -1,4 +1,4 @@
-# 0.14.0 (upcoming)
+# 0.14.0 - February 6th, 2022
 
 ## New features
 * `reduce_labels_to_centroids` method added
@@ -30,7 +30,7 @@ used lattice light sheet microscopy (Zeiss) to capture red blood cells and inves
 * `touch_matrix_to_mesh` and `distance_matrix_to_mesh` crashed when no destination image was provided.
 
 ## Miscellaneous
-* Performance optimization in the `push` command (Thanks to Elissavet Sandaltzopoulou @elsandal for implementing this!)
+* Performance optimization of the `push` command (Thanks to Elissavet Sandaltzopoulou @elsandal for implementing this)
 * The colormap / lookup table of the label-maps used in the `imshow` function is no longer random. It will now allow reproducible visualizations.
 
 ## Deprecated methods
