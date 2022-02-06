@@ -14,12 +14,12 @@ def deskew_x(input_image: Image,
              scale_factor: float = 1
              ) -> Image:
     """
-    Deskew an image stack as aquired with single-objective light-sheet microscopy.
+    Deskew an image stack as acquired with oblique plane light-sheet microscopy.
 
     Parameters
     ----------
     input_image: Image
-        raw image data with Z-planes representing the swept acquisition plane
+        raw image data with Z-planes representing the tilted / swept acquisition plane
     output_image: Image, optional
         reconstructed image data with Z-planes in proximal-distal oriental from the objective
     angle_in_degrees: float, optional
@@ -32,7 +32,7 @@ def deskew_x(input_image: Image,
     scale_factor: float, optional
         default: 1
         If the resulting image becomes too huge, it is possible to reduce output image size by this factor.
-        The voxel size of the output image will then be voxel_size_x / scaling_factor.
+        The isotropic voxel size of the output image will then be voxel_size_x / scaling_factor.
 
     Returns
     -------
@@ -41,7 +41,6 @@ def deskew_x(input_image: Image,
 
     from ._AffineTransform3D import AffineTransform3D
     from ._affine_transform import affine_transform
-    import math
     
     # shear in the X plane towards Y
     transform = AffineTransform3D()
