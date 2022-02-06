@@ -15,7 +15,10 @@ def imshow(image : Image, title : str = None, labels : bool = False, min_display
         import numpy as np
 
         if not hasattr(imshow, "labels_cmap"):
-            lut = np.random.rand(65537, 3)
+            from numpy.random import MT19937
+            from numpy.random import RandomState, SeedSequence
+            rs = RandomState(MT19937(SeedSequence(73)))
+            lut = rs.rand(65537, 3)
             lut[0, :] = 0
             imshow.labels_cmap = matplotlib.colors.ListedColormap(lut)
         cmap = imshow.labels_cmap

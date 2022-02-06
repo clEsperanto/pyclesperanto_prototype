@@ -31,6 +31,7 @@ used lattice light sheet microscopy (Zeiss) to capture red blood cells and inves
 
 ## Miscellaneous
 * Performance optimization in the `push` command (Thanks to Elissavet Sandaltzopoulou @elsandal for implementing this!)
+* The colormap / lookup table of the label-maps used in the `imshow` function is no longer random. It will now allow reproducible visualizations.
 
 ## Deprecated methods
 * `average_distance_of_n_closest_neighbors_map` was renamed to `average_distance_of_n_nearest_neighbors_map`. An alias for backwards compatibility was set. This alias will be removed in a later release.
