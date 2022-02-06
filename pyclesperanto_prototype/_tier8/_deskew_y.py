@@ -11,7 +11,7 @@ def deskew_y(input_image: Image,
              voxel_size_x: float = 1,
              voxel_size_y: float = 1,
              voxel_size_z: float = 1,
-             scaling_factor: float = 1
+             scale_factor: float = 1
              ) -> Image:
     """
     Deskew an image stack as aquired with single-objective light-sheet microscopy.
@@ -29,7 +29,7 @@ def deskew_y(input_image: Image,
     voxel_size_z: float, optional
          default: 1 micron
          Voxel size, typically provided in microns
-    scaling_factor: float, optional
+    scale_factor: float, optional
         default: 1
         If the resulting image becomes too huge, it is possible to reduce output image size by this factor.
         The voxel size of the output image will then be voxel_size_x / scaling_factor.
@@ -46,7 +46,7 @@ def deskew_y(input_image: Image,
     # shear in the X plane towards Y
     transform = AffineTransform3D()
     transform._deskew_y(angle_in_degrees=angle_in_degrees, voxel_size_x=voxel_size_x, voxel_size_y=voxel_size_y,
-                       voxel_size_z=voxel_size_z, scaling_factor=scaling_factor)
+                        voxel_size_z=voxel_size_z, scale_factor=scale_factor)
 
     # apply transform
     return affine_transform(input_image, output_image, transform=transform, auto_size=True)
