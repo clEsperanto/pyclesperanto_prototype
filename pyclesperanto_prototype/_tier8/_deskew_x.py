@@ -4,7 +4,7 @@ from .._tier0 import Image
 from .._tier0 import create_none
 
 
-@plugin_function(output_creator=create_none)
+@plugin_function(output_creator=create_none, categories=['transform', 'in assistant'])
 def deskew_x(input_image: Image,
              output_image: Image = None,
              angle_in_degrees: float = 31.8,
