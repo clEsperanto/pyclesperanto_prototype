@@ -1,6 +1,6 @@
 from .._tier0 import Image
 
-def imshow(image : Image, title : str = None, labels : bool = False, min_display_intensity : float = None, max_display_intensity : float = None, color_map = None, plot = None, colorbar:bool = False):
+def imshow(image : Image, title : str = None, labels : bool = False, min_display_intensity : float = None, max_display_intensity : float = None, color_map = None, plot = None, colorbar:bool = False, alpha:float = None, continue_drawing:bool = False):
     from .._tier0 import pull
     from .._tier1 import maximum_z_projection
 
@@ -28,12 +28,13 @@ def imshow(image : Image, title : str = None, labels : bool = False, min_display
 
     if plot is None:
         import matplotlib.pyplot as plt
-        plt.imshow(image, cmap=cmap, vmin=min_display_intensity, vmax=max_display_intensity, interpolation='nearest')
+        plt.imshow(image, cmap=cmap, vmin=min_display_intensity, vmax=max_display_intensity, interpolation='nearest', alpha=alpha)
         if colorbar:
             plt.colorbar()
-        plt.show()
+        if not continue_drawing:
+            plt.show()
     else:
-        plot.imshow(image, cmap=cmap, vmin=min_display_intensity, vmax=max_display_intensity, interpolation='nearest')
+        plot.imshow(image, cmap=cmap, vmin=min_display_intensity, vmax=max_display_intensity, interpolation='nearest', alpha=alpha)
         if colorbar:
             plot.colorbar()
 
