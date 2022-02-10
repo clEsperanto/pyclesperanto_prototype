@@ -32,6 +32,7 @@ from ._label_pixel_count_map import label_pixel_count_map
 from ._label_pixel_count_map import label_pixel_count_map as pixel_count_map
 from ._label_standard_deviation_intensity_map import label_standard_deviation_intensity_map
 from ._label_standard_deviation_intensity_map import label_standard_deviation_intensity_map as standard_deviation_intensity_map
+from ._object_splitting_otsu_labeling import object_splitting_otsu_labeling
 from ._push_regionprops import push_regionprops
 from ._push_regionprops_column import push_regionprops_column
 from ._regionprops import regionprops
