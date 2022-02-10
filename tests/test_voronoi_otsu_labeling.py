@@ -1,7 +1,7 @@
 import pyclesperanto_prototype as cle
 import numpy as np
 
-def test_masked_voronoi_labeling():
+def test_voronoi_otsu_labeling():
     
     gpu_input = cle.push(np.asarray([
 
