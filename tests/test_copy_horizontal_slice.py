@@ -58,9 +58,9 @@ def test_copy_horizontal_slice_to_3d_b():
     ]))
 
     reference = cle.push(np.asarray([
-        [2,4,5],
-        [12,14,15],
-        [22,24,25]
+        [3,4,5],
+        [13,14,15],
+        [23,24,25]
     ]))
 
     result = cle.create([3,3])
