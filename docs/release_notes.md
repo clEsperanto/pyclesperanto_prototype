@@ -1,3 +1,8 @@
+# 0.14.1 - upcoming
+
+## New features
+* `range()` function for fancy indexing
+
 # 0.14.0 - February 6th, 2022
 
 ## New features
