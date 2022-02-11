@@ -237,14 +237,12 @@ class ArrayOperators():
         return super().__setitem__(index, value)
 
     def __getitem__(self, index):
-        print("__getitem__")
         result = None
         if isinstance(index, list):
             index = tuple(index)
         if isinstance(index, (tuple, np.ndarray)) and index[0] is not None and isinstance(index[0], (tuple, list, np.ndarray)):
             if len(index) == len(self.shape):
                 if len(index[0]) > 0:
-                    print("wtf")
                     # switch xy in 2D / xz in 3D, because clesperanto expects an X-Y-Z array;
                     # see also https://github.com/clEsperanto/pyclesperanto_prototype/issues/49
                     index = list(index)
@@ -260,7 +258,6 @@ class ArrayOperators():
 
         if result is None:
             if isinstance(index, tuple):
-                print(index)
                 if not all(isinstance(x, int) for x in index):
 
                     if len(self.shape) > 2:  # 3D image
@@ -304,8 +301,6 @@ class ArrayOperators():
                         z_range = slice(z_range, z_range + 1, 1)
                         eliminate_z = True
 
-                    print("Cropping ranges", x_range, y_range, z_range)
-
                     from .._tier1 import range
                     result = range(self, start_x=x_range.start, stop_x=x_range.stop, step_x=x_range.step,
                                    start_y=y_range.start, stop_y=y_range.stop, step_y=y_range.step,
@@ -320,19 +315,14 @@ class ArrayOperators():
                         output = create((result.shape[0],result.shape[2]))
                         result = copy_horizontal_slice(result, output)
                     if eliminate_z:
-                        print("eliminating z")
                         output = create(result.shape[1:])
                         result = copy_slice(result, output)
 
         if result is None:
 
             if hasattr(super(), "__getitem__"):
-                print(type(index))
-                print(index)
-                print("to pyopencl")
                 result = super().__getitem__(index)
             else:
-                print("to numpy")
                 result = self.get().__getitem__(index)
 
         if result.size == 1 and isinstance(result, (ArrayOperators)):
