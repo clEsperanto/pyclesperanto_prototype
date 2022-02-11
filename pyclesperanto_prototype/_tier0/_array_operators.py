@@ -258,7 +258,7 @@ class ArrayOperators():
 
         if result is None:
             if isinstance(index, tuple):
-                if not all(isinstance(x, int) for x in index):
+                if any(isinstance(x, slice) for x in index):
 
                     if len(self.shape) > 2:  # 3D image
                         if len(index) > 2:
@@ -291,13 +291,13 @@ class ArrayOperators():
                     eliminate_x = False
                     eliminate_y = False
                     eliminate_z = False
-                    if isinstance(x_range, int):
+                    if not isinstance(x_range, slice) and np.issubdtype(type(x_range), np.integer):
                         x_range = slice(x_range, x_range + 1, 1)
                         eliminate_x = True
-                    if isinstance(y_range, int):
+                    if not isinstance(y_range, slice) and np.issubdtype(type(y_range), np.integer):
                         y_range = slice(y_range, y_range + 1, 1)
                         eliminate_y = True
-                    if isinstance(z_range, int):
+                    if not isinstance(z_range, slice) and np.issubdtype(type(z_range), np.integer):
                         z_range = slice(z_range, z_range + 1, 1)
                         eliminate_z = True
 

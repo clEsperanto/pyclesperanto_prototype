@@ -355,3 +355,18 @@ def test_range_against_numpy_15():
     print(result)
 
     assert np.allclose(reference, result, 0.0001)
+
+def test_range_against_numpy_16():
+    import numpy as np
+    import pyclesperanto_prototype as cle
+
+    input = np.random.random((10,20,30))
+    input_gpu = cle.push(input)
+
+    reference = input[:,:,np.int32(5)]
+    result = input_gpu[:,:,np.int32(5)]
+
+    print(reference)
+    print(result)
+
+    assert np.allclose(reference, result, 0.0001)
