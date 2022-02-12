@@ -14,6 +14,7 @@ from ._draw_distance_mesh_between_touching_labels import draw_distance_mesh_betw
 from ._draw_mesh_between_n_closest_labels import draw_mesh_between_n_closest_labels
 from ._draw_mesh_between_proximal_labels import draw_mesh_between_proximal_labels
 from ._draw_mesh_between_touching_labels import draw_mesh_between_touching_labels
+from ._gauss_otsu_labeling import gauss_otsu_labeling
 from ._imread import imread
 from ._imshow import imshow
 from ._label_mean_intensity_map import label_mean_intensity_map
