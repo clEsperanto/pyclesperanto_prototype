@@ -9,7 +9,7 @@ def close_labels(labels_input: Image, labels_destination: Image = None, radius: 
     """Apply a morphological closing operation to a label image.
 
     The operation consists of iterative dilation and erosion of the labels.
-    With every iteration, box and diamind/sphere structuring elements are used
+    With every iteration, box and diamond/sphere structuring elements are used
     and thus, the operation has an octagon as structuring element.
 
     Parameters
