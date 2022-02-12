@@ -1,4 +1,4 @@
-# 0.15.0 - upcoming
+# 0.15.0 - February 12th, 2022
 
 ## New features
 * Slicing works now in Y and X, not just in Z. E.g.: x = y[:, 5, 2:7]
@@ -14,6 +14,12 @@
 ## Potentially backwards compatibility breaking changes
 * `maximum_box` and `maximum_sphere` had wrong parameter type annotations which were corrected. Functionality remains unchanged.
 * The new slicing techniques above are intended to improve interoperability with numpy. The changes may lead to old workflows fail.
+
+## Miscellaneous
+* The default colormap for `imshow` has been changed to 'Greys_r'
+
+## Deprecations
+* The `color_map` parameter for imshow has been deprecated. Use `colormap` instead.
 
 # 0.14.0 - February 6th, 2022
 
