@@ -1,3 +1,10 @@
+# 0.14.1 - upcoming
+
+## New features
+* `range()` function for fancy indexing
+* `copy_vertical_slice()` similar to `copy_slice()` function for fancy indexing
+* `copy_horizontal_slice()` similar to `copy_slice()` function for fancy indexing
+
 # 0.14.0 - February 6th, 2022
 
 ## New features

@@ -257,6 +257,69 @@ class ArrayOperators():
                     return []
 
         if result is None:
+            if isinstance(index, tuple):
+                if any(isinstance(x, slice) for x in index):
+
+                    if len(self.shape) > 2:  # 3D image
+                        if len(index) > 2:
+                            x_range = index[2]
+                        else:
+                            x_range = slice(None, None, None)
+
+                        if len(index) > 1:
+                            y_range = index[1]
+                        else:
+                            y_range = slice(None, None, None)
+
+                        if len(index) > 0:
+                            z_range = index[0]
+                        else:
+                            z_range = slice(None, None, None)
+                    else:
+                        if len(index) > 1:
+                            x_range = index[1]
+                        else:
+                            x_range = slice(None, None, None)
+
+                        if len(index) > 0:
+                            y_range = index[0]
+                        else:
+                            y_range = slice(None, None, None)
+
+                        z_range = slice(None, None, None)
+
+                    eliminate_x = False
+                    eliminate_y = False
+                    eliminate_z = False
+                    if not isinstance(x_range, slice) and np.issubdtype(type(x_range), np.integer):
+                        x_range = slice(x_range, x_range + 1, 1)
+                        eliminate_x = True
+                    if not isinstance(y_range, slice) and np.issubdtype(type(y_range), np.integer):
+                        y_range = slice(y_range, y_range + 1, 1)
+                        eliminate_y = True
+                    if not isinstance(z_range, slice) and np.issubdtype(type(z_range), np.integer):
+                        z_range = slice(z_range, z_range + 1, 1)
+                        eliminate_z = True
+
+                    from .._tier1 import range
+                    result = range(self, start_x=x_range.start, stop_x=x_range.stop, step_x=x_range.step,
+                                   start_y=y_range.start, stop_y=y_range.stop, step_y=y_range.step,
+                                   start_z=z_range.start, stop_z=z_range.stop, step_z=z_range.step)
+
+                    from .._tier0 import create
+                    from .._tier1 import copy_slice, copy_vertical_slice, copy_horizontal_slice
+                    if eliminate_x:
+                        output = create(result.shape[:2])
+                        result = copy_vertical_slice(result, output)
+                    if eliminate_y:
+                        output = create((result.shape[0],result.shape[2]))
+                        result = copy_horizontal_slice(result, output)
+                    if eliminate_z:
+                        output = create(result.shape[1:])
+                        result = copy_slice(result, output)
+
+        if result is None:
+
             if hasattr(super(), "__getitem__"):
                 result = super().__getitem__(index)
             else:
