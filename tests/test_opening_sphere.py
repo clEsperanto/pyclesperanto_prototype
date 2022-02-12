@@ -2,7 +2,7 @@ import pyclesperanto_prototype as cle
 import numpy as np
 
 
-def test_close_box_2d():
+def test_opening_sphere_2d():
     gpu_input = cle.push(np.asarray([
 
         [0, 0, 0, 0, 0, 0],
@@ -16,16 +16,16 @@ def test_close_box_2d():
 
     gpu_reference = cle.push(np.asarray([
 
+        [0, 0, 0, 0, 0, 0],
+        [1, 1, 0, 0, 0, 0],
         [1, 1, 1, 0, 0, 0],
-        [1, 1, 1, 0, 0, 0],
-        [1, 1, 1, 1, 2, 2],
-        [1, 1, 1, 1, 2, 2],
-        [1, 0, 0, 0, 2, 2],
-        [3, 0, 0, 0, 2, 2],
+        [1, 1, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0],
 
     ]))
 
-    gpu_output = cle.closing_box(gpu_input, radius_x=1, radius_y=1)
+    gpu_output = cle.opening_sphere(gpu_input, radius_x=1, radius_y=1)
 
     a = cle.pull(gpu_output)
     b = cle.pull(gpu_reference)
@@ -36,7 +36,7 @@ def test_close_box_2d():
     assert (np.array_equal(a, b))
 
 
-def test_close_box_3d():
+def test_opening_sphere_3d():
     gpu_input = cle.push(np.asarray([
         [
             [0, 0, 0, 0, 0, 0],
@@ -59,24 +59,24 @@ def test_close_box_3d():
 
     gpu_reference = cle.push(np.asarray([
         [
+            [0, 0, 0, 0, 0, 0],
+            [1, 1, 0, 0, 0, 0],
             [1, 1, 1, 0, 0, 0],
-            [1, 1, 1, 0, 0, 0],
-            [1, 1, 1, 1, 2, 2],
-            [1, 1, 1, 1, 2, 2],
-            [1, 0, 0, 0, 2, 2],
-            [3, 0, 0, 0, 2, 2],
+            [1, 1, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0],
         ],
         [
+            [0, 0, 0, 0, 0, 0],
+            [1, 1, 0, 0, 0, 0],
             [1, 1, 1, 0, 0, 0],
-            [1, 1, 1, 0, 0, 0],
-            [1, 1, 1, 1, 2, 2],
-            [1, 1, 1, 1, 2, 2],
-            [1, 0, 0, 0, 2, 2],
-            [3, 0, 0, 0, 2, 2],
+            [1, 1, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0],
         ],
     ]))
 
-    gpu_output = cle.closing_box(gpu_input, radius_x=1, radius_y=1)
+    gpu_output = cle.opening_sphere(gpu_input, radius_x=1, radius_y=1)
 
     a = cle.pull(gpu_output)
     b = cle.pull(gpu_reference)

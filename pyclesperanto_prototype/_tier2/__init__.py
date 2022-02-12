@@ -24,6 +24,8 @@ from ._minimum_of_masked_pixels import minimum_of_masked_pixels
 from ._minimum_of_touching_neighbors import minimum_of_touching_neighbors
 from ._mode_of_touching_neighbors import mode_of_touching_neighbors
 from ._neighbors_of_neighbors import neighbors_of_neighbors
+from ._opening_box import opening_box
+from ._opening_sphere import opening_sphere
 from ._pointlist_to_labelled_spots import pointlist_to_labelled_spots
 from ._radians_to_degrees import radians_to_degrees
 from ._reduce_stack import reduce_stack
