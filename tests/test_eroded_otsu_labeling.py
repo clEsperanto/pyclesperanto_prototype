@@ -28,7 +28,7 @@ def test_object_splitting_otsu_labeling():
 
     ]))
 
-    gpu_output = cle.eroded_otsu_labeling(gpu_input, number_of_erosions=1, outline_sigma=1)
+    gpu_output = cle.eroded_otsu_labeling(gpu_input, number_of_erosions=1.0, outline_sigma=1)
 
     a = cle.pull(gpu_output)
     b = cle.pull(gpu_reference)

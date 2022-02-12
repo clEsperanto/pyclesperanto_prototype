@@ -50,7 +50,7 @@ def eroded_otsu_labeling(image: Image, labels_destination: Image = None, number_
     # iterative erosion
     eroded = copy(binary)
     eroded1 = create_like(binary)
-    for i in range(number_of_erosions):
+    for i in range(int(number_of_erosions)):
         eroded1 = erode_box(eroded, eroded1)
         eroded, eroded1 = eroded1, eroded
 
