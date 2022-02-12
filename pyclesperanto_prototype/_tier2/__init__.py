@@ -2,6 +2,8 @@ from ._add_images import add_images
 from ._block_enumerate import block_enumerate
 from ._bottom_hat_box import bottom_hat_box
 from ._bottom_hat_sphere import bottom_hat_sphere
+from ._closing_box import closing_box
+from ._closing_sphere import closing_sphere
 from ._combine_horizontally import combine_horizontally
 from ._combine_vertically import combine_vertically
 from ._concatenate_stacks import concatenate_stacks
