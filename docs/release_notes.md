@@ -5,9 +5,15 @@
 * `range()` function for fancy indexing
 * `copy_vertical_slice()` similar to `copy_slice()` function for fancy indexing
 * `copy_horizontal_slice()` similar to `copy_slice()` function for fancy indexing
+* `eroded_otsu_labeling` has been added as potentially better alternative to Voronoi-Otsu-Labeling (Thanks to Jan Brocher @biovoxxel for inspiration and support)
+* `gauss_otsu_labeling` has been added as simpler and faster alternative to Voronoi-Otsu-Labeling
+* `closing_labels` and `opening_labels` have been added for post-processing label images
+* `closing_`/`opening_` `box`/`sphere` have been added for background removal and binary image post-processing
+* `alpha` and `continue_drawing` parameters were added to the `imshow` function to enable overlaying intensity images and label images
 
 ## Potentially backwards compatibility breaking changes
 * `maximum_box` and `maximum_sphere` had wrong parameter type annotations which were corrected. Functionality remains unchanged.
+* The new slicing techniques above are intended to improve interoperability with numpy. The changes may lead to old workflows fail.
 
 # 0.14.0 - February 6th, 2022
 
