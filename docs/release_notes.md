@@ -1,9 +1,13 @@
-# 0.14.1 - upcoming
+# 0.15.0 - upcoming
 
 ## New features
+* Slicing works now in Y and X, not just in Z. E.g.: x = y[:, 5, 2:7]
 * `range()` function for fancy indexing
 * `copy_vertical_slice()` similar to `copy_slice()` function for fancy indexing
 * `copy_horizontal_slice()` similar to `copy_slice()` function for fancy indexing
+
+## Potentially backwards compatibility breaking changes
+* `maximum_box` and `maximum_sphere` had wrong parameter type annotations which were corrected. Functionality remains unchanged.
 
 # 0.14.0 - February 6th, 2022
 

@@ -2,6 +2,8 @@ from ._add_images import add_images
 from ._block_enumerate import block_enumerate
 from ._bottom_hat_box import bottom_hat_box
 from ._bottom_hat_sphere import bottom_hat_sphere
+from ._closing_box import closing_box
+from ._closing_sphere import closing_sphere
 from ._combine_horizontally import combine_horizontally
 from ._combine_vertically import combine_vertically
 from ._concatenate_stacks import concatenate_stacks
@@ -22,6 +24,8 @@ from ._minimum_of_masked_pixels import minimum_of_masked_pixels
 from ._minimum_of_touching_neighbors import minimum_of_touching_neighbors
 from ._mode_of_touching_neighbors import mode_of_touching_neighbors
 from ._neighbors_of_neighbors import neighbors_of_neighbors
+from ._opening_box import opening_box
+from ._opening_sphere import opening_sphere
 from ._pointlist_to_labelled_spots import pointlist_to_labelled_spots
 from ._radians_to_degrees import radians_to_degrees
 from ._reduce_stack import reduce_stack
