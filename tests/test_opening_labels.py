@@ -25,7 +25,7 @@ def test_open_labels_2d():
 
     ]))
 
-    gpu_output = cle.open_labels(gpu_input, radius=1)
+    gpu_output = cle.opening_labels(gpu_input, radius=1)
 
     a = cle.pull(gpu_output)
     b = cle.pull(gpu_reference)
@@ -74,7 +74,7 @@ def test_open_labels_3d():
         ],
     ]))
 
-    gpu_output = cle.open_labels(gpu_input, radius=1)
+    gpu_output = cle.opening_labels(gpu_input, radius=1)
 
     a = cle.pull(gpu_output)
     b = cle.pull(gpu_reference)

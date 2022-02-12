@@ -5,7 +5,7 @@ from .._tier4 import dilate_labels, erode_labels
 
 
 @plugin_function(categories=['label processing', 'in assistant'], output_creator=create_labels_like)
-def open_labels(labels_input: Image, labels_destination: Image = None, radius: int = 0) -> Image:
+def opening_labels(labels_input: Image, labels_destination: Image = None, radius: int = 0) -> Image:
     """Apply a morphological opening operation to a label image.
 
     The operation consists of iterative erosion and dilation of the labels.
