@@ -1,6 +1,6 @@
 from .._tier0 import Image
 
-def imshow(image : Image, title : str = None, labels : bool = False, min_display_intensity : float = None, max_display_intensity : float = None, color_map = None, plot = None, colorbar:bool = False, alpha:float = None, continue_drawing:bool = False):
+def imshow(image : Image, title : str = None, labels : bool = False, min_display_intensity : float = None, max_display_intensity : float = None, color_map = None, plot = None, colorbar:bool = False, colormap = None, alpha:float = None, continue_drawing:bool = False):
     from .._tier0 import pull
     from .._tier1 import maximum_z_projection
 
@@ -9,7 +9,16 @@ def imshow(image : Image, title : str = None, labels : bool = False, min_display
 
     image = pull(image)
 
-    cmap = color_map
+    if color_map is not None:
+        import warnings
+        warnings.warn("The imshow parameter color_map is deprecated. Use colormap instead.")
+        if colormap is None:
+            colormap = color_map
+
+    if colormap is None:
+        colormap = "Greys_r"
+
+    cmap = colormap
     if labels:
         import matplotlib
         import numpy as np
