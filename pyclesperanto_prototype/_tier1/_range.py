@@ -43,9 +43,9 @@ def range(source : Image,
 
     if destination is None:
         if len(source.shape) > 2:
-            destination = create((stop_z - start_z, stop_y - start_y, stop_x - start_x))
+            destination = create((stop_z - start_z, stop_y - start_y, stop_x - start_x), source.dtype)
         else:
-            destination = create((stop_y - start_y, stop_x - start_x))
+            destination = create((stop_y - start_y, stop_x - start_x), source.dtype)
 
     parameters = {
         "dst":destination,

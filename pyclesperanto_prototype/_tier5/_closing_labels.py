@@ -29,7 +29,7 @@ def closing_labels(labels_input: Image, labels_destination: Image = None, radius
 
     flip = temp > 0
     flop = create_like(temp)
-    for i in range(radius):
+    for i in range(int(radius)):
         if i % 2 == 0:
             erode_sphere(flip, flop)
         else:

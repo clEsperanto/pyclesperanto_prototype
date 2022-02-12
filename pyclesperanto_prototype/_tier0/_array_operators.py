@@ -309,13 +309,13 @@ class ArrayOperators():
                     from .._tier0 import create
                     from .._tier1 import copy_slice, copy_vertical_slice, copy_horizontal_slice
                     if eliminate_x:
-                        output = create(result.shape[:2])
+                        output = create(result.shape[:2], self.dtype)
                         result = copy_vertical_slice(result, output)
                     if eliminate_y:
-                        output = create((result.shape[0],result.shape[2]))
+                        output = create((result.shape[0],result.shape[2]), self.dtype)
                         result = copy_horizontal_slice(result, output)
                     if eliminate_z:
-                        output = create(result.shape[1:])
+                        output = create(result.shape[1:], self.dtype)
                         result = copy_slice(result, output)
 
         if result is None:

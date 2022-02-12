@@ -47,6 +47,14 @@ def create_labels_like(*args):
         dimensions = dimensions.shape[::-1]
     return create(dimensions, np.uint32)
 
+def create_same_type_like(*args):
+    dimensions = args[0]
+    if isinstance(dimensions, Backend.get_instance().get().array_type()):
+        dimensions = dimensions.shape
+    elif isinstance(dimensions, np.ndarray):
+        dimensions = dimensions.shape[::-1]
+    return create(dimensions, dimensions.dtype)
+
 def create_pointlist_from_labelmap(input, *args):
     from .._tier2 import maximum_of_all_pixels
     number_of_labels = int(maximum_of_all_pixels(input))

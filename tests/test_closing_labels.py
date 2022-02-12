@@ -75,7 +75,7 @@ def test_close_labels_3d():
         ],
     ]))
 
-    gpu_output = cle.closing_labels(gpu_input, radius=1)
+    gpu_output = cle.closing_labels(gpu_input, radius=1.0)
 
     a = cle.pull(gpu_output)
     b = cle.pull(gpu_reference)
