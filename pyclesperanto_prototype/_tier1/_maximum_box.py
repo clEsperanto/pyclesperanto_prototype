@@ -5,8 +5,8 @@ from .._tier0 import plugin_function
 from .._tier0 import Image
 
 @plugin_function(categories=['filter', 'in assistant'])
-def maximum_box(source : Image, destination : Image = None, radius_x : int = 1, radius_y : int = 1, radius_z : int = 1) -> Image:
-    """Computes the local maximum of a pixels cube neighborhood. 
+def maximum_box(source : Image, destination : Image = None, radius_x: float = 1, radius_y: float = 1, radius_z: float = 1) -> Image:
+    """Computes the local maximum of a pixels cube neighborhood.
     
     The cubes size is specified by 
     its half-width, half-height and half-depth (radius). 

@@ -1,3 +1,7 @@
+
+## Potentially backwards compatibility breaking changes
+* `maximum_box` and `maximum_sphere` had wrong parameter type annotations which were corrected. Functionality remains unchanged.
+
 # 0.14.0 - February 6th, 2022
 
 ## New features
