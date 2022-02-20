@@ -9,5 +9,5 @@ from ._tier9 import *
 from ._tier10 import *
 from ._tier11 import *
 
-__version__ = "0.15.1"
+__version__ = "0.15.4"
 __common_alias__ = "cle"
