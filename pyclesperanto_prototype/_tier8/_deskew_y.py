@@ -39,6 +39,11 @@ def deskew_y(input_image: Image,
     output_image
     """
 
+    # this is a workaround step, see https://github.com/clEsperanto/pyclesperanto_prototype/issues/172
+    from ._scale import scale
+    scaled_image = scale(input_image, factor_z=voxel_size_z / 0.3, auto_size=True)
+    voxel_size_z = 0.3
+
     from ._AffineTransform3D import AffineTransform3D
     from ._affine_transform import affine_transform
     
@@ -48,4 +53,4 @@ def deskew_y(input_image: Image,
                         voxel_size_z=voxel_size_z, scale_factor=scale_factor)
 
     # apply transform
-    return affine_transform(input_image, output_image, transform=transform, auto_size=True)
+    return affine_transform(scaled_image, output_image, transform=transform, auto_size=True)
