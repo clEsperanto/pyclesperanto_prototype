@@ -307,7 +307,7 @@ class AffineTransform3D:
         # This could potentially go into shear_in_x_plane ?
         shear_factor = math.sin((90 - angle_in_degrees) * math.pi / 180.0) * (voxel_size_z / voxel_size_y)
         self._matrix[1, 2] = shear_factor
-        print(shear_factor)
+
         # rotate the stack to get proper Z-planes; rotate 90 - angle around X-axis
         # self.rotate(angle_in_degrees = 90 -angle_in_degrees, axis=0)
 
@@ -318,7 +318,8 @@ class AffineTransform3D:
         self.scale(scale_x=scale_factor, scale_y=scale_factor, scale_z=scale_factor_z)
 
         # correct orientation so that the new Z-plane goes proximal-distal from the objective.
-        self.rotate(angle_in_degrees=180 - angle_in_degrees, axis=0)
+        self.rotate(angle_in_degrees = 0 - angle_in_degrees, axis=0)
+
 
         return self
 
