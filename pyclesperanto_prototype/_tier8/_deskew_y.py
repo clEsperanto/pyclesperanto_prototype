@@ -40,7 +40,7 @@ def deskew_y(input_image: Image,
     """
 
     # this is a workaround step, see https://github.com/clEsperanto/pyclesperanto_prototype/issues/172
-    #resolved?
+    # resolved by defining shear factor based on voxel in _deskew_y()
     #from ._scale import scale
     #scaled_image = scale(input_image, factor_z=voxel_size_z / 0.3, auto_size=True)
     #voxel_size_z = 0.3
