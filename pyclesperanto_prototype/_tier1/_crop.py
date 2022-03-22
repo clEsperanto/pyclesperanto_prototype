@@ -14,13 +14,13 @@ def crop(input : Image, output : Image = None, start_x : int = 0, start_y : int 
     Parameters
     ----------
     source : Image
-    destination : Image
-    start_x : Number
-    start_y : Number
-    start_z : Number
-    width : Number
-    height : Number
-    depth : Number
+    destination : Image, optional
+    start_x : Number, optional
+    start_y : Number, optional
+    start_z : Number, optional
+    width : Number, optional
+    height : Number, optional
+    depth : Number, optional
     
     Returns
     -------

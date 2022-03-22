@@ -26,9 +26,9 @@ def block_enumerate(src : Image, src_sums : Image, dst : Image = None, blocksize
         input binary vector image
     src_sums: Image
         pre-computed sums of blocks
-    dst : Image
+    dst : Image, optional
         output enumerated vector image
-    blocksize : int
+    blocksize : int, optional
         blocksize; must correspond correctly to how the
         block sums were computed
 

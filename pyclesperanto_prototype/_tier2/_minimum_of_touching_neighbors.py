@@ -15,9 +15,8 @@ def minimum_of_touching_neighbors(values : Image, touch_matrix : Image, minimum_
     touch_matrix : Image
         A touch_matrix specifying which labels are taken into account for 
     neighborhood relationships.
-    minimum_values_destination : Image
+    minimum_values_destination : Image, optional
         A the resulting vector of minimum values in the neighborhood.
-     
     
     Returns
     -------

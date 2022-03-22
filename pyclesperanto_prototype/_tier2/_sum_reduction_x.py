@@ -14,9 +14,9 @@ def sum_reduction_x(src : Image, dst : Image = None, blocksize : int = 256) -> I
 
     Parameters
     ----------
-    src
-    dst
-    blocksize
+    src:Image
+    dst:Image, optional
+    blocksize:int, optional
 
     Returns
     -------

@@ -16,7 +16,7 @@ def absolute_difference(source1 : Image, source2 : Image, destination : Image = 
         The input image to be subtracted from.
     source2 : Image
         The input image which is subtracted.
-    destination : Image
+    destination : Image, optional
         The output image  where results are written into.
      
     

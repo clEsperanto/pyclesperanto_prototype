@@ -13,7 +13,7 @@ def standard_deviation_of_touching_neighbors(values : Image, touch_matrix : Imag
     ----------
     values : Image
     touch_matrix : Image
-    standard_deviation_values_destination : Image
+    standard_deviation_values_destination : Image, optional
     
     Returns
     -------

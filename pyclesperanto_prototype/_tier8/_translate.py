@@ -11,13 +11,13 @@ def translate(source : Image, destination : Image = None, translate_x : float = 
         image to be translated
     destination : Image, optional
         target image
-    translate_x : float
+    translate_x : float, optional
         translation along x axis in pixels
-    translate_y : float
+    translate_y : float, optional
         translation along y axis in pixels
-    translate_z : float
+    translate_z : float, optional
         translation along z axis in pixels
-    linear_interpolation: bool
+    linear_interpolation: bool, optional
         If true, bi-/tri-linear interplation will be applied.
         If false, nearest-neighbor interpolation wille be applied.
 

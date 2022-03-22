@@ -4,17 +4,20 @@ from .._tier0 import Image
 
 @plugin_function
 def mode_of_touching_neighbors(src_values : Image, touch_matrix : Image, dst_values : Image = None) -> Image:
-    """
+    """Determines the most popular value of labeled neighboring objects for each object.
 
     Parameters
     ----------
-    src_values
-    touch_matrix
-    dst_values
+    src_values: Image
+        Vector of values
+    touch_matrix: Image
+        Touch matrix describing neighborhood relationships
+    dst_values: Image, optional
+        Resulting vector of values
 
     Returns
     -------
-
+    dst_values
     """
 
     # it is possible to use measurent vectors, which have one element less because they don't

@@ -18,12 +18,12 @@ def extend_labeling_via_voronoi(labeling_source : Image, labeling_destination : 
     
     Parameters
     ----------
-    input : Image
-    destination : Image
+    labeling_source : Image
+    labeling_destination : Image, optional
     
     Returns
     -------
-    destination
+    labeling_destination
     
     Examples
     --------

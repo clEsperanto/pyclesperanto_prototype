@@ -13,8 +13,8 @@ def minimum_of_n_nearest_neighbors_map(parametric_map : Image, label_map : Image
     ----------
     parametric_map : Image
     label_map : Image
-    parametric_map_destination : Image
-    n : int
+    parametric_map_destination : Image, optional
+    n : int, optional
         number of nearest neighbors
     
     Returns

@@ -21,7 +21,7 @@ def flag_existing_labels(label_src : Image, flag_vector_destination : Image = No
     ----------
     label_src : Image
         a label image
-    flag_vector_destination, : Image optional
+    flag_vector_destination, : Image, optional
         binary vector, if given should have size 1*n with n = maximum label + 1
 
     Returns

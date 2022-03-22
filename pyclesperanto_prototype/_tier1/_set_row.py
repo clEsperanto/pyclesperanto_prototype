@@ -9,8 +9,8 @@ def set_row(source : Image, row_index : int = 0, value : float = 0) -> Image:
     Parameters
     ----------
     source : Image
-    row_index : Number
-    value : Number
+    row_index : Number, optional
+    value : Number, optional
     
     Examples
     --------

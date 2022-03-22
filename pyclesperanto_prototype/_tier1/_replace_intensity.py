@@ -9,9 +9,9 @@ def replace_intensity(input : Image, destination : Image = None, value_to_replac
     Parameters
     ----------
     input : Image
-    destination : Image
-    value_to_replace : Number
-    value_replacement : Number
+    destination : Image, optional
+    value_to_replace : Number, optional
+    value_replacement : Number, optional
     
     Returns
     -------

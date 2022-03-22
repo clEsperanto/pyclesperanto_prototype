@@ -11,7 +11,7 @@ def minimum_z_projection(source : Image, destination_min : Image = None) -> Imag
     Parameters
     ----------
     source : Image
-    destination_min : Image
+    destination_min : Image, optional
     
     Returns
     -------

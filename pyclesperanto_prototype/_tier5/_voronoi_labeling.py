@@ -14,7 +14,7 @@ def voronoi_labeling(binary_source : Image, labeling_destination : Image = None)
     Parameters
     ----------
     input : Image
-    destination : Image
+    destination : Image, optional
     
     Returns
     -------

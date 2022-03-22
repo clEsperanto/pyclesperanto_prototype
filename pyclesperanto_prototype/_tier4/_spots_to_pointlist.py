@@ -16,7 +16,7 @@ def spots_to_pointlist(input_spots:Image, destination_pointlist :Image = None) -
     Parameters
     ----------
     input_spots : Image
-    destination_pointlist : Image
+    destination_pointlist : Image, optional
     
     Returns
     -------

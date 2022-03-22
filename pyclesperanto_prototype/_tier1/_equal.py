@@ -14,7 +14,7 @@ def equal(source1 : Image, source2 : Image, destination : Image = None) -> Image
         The first image to be compared with.
     source2 : Image
         The second image to be compared with the first.
-    destination : Image
+    destination : Image, optional
         The resulting binary image where pixels will be 1 only if source1 
     and source2 equal in the given pixel.
      

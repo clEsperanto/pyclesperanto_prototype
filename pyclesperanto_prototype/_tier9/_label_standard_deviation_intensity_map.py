@@ -15,12 +15,13 @@ def label_standard_deviation_intensity_map(intensity_image : Image, labels : Ima
 
     Parameters
     ----------
-    intensity_image
-    labels
-    standard_deviation_intensity_map
+    intensity_image: Image
+    labels: Image
+    standard_deviation_intensity_map: Image, optional
 
     Returns
     -------
+    standard_deviation_intensity_map
 
     References
     ----------

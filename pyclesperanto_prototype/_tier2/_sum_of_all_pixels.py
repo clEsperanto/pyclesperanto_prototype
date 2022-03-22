@@ -14,7 +14,10 @@ def sum_of_all_pixels(source : Image) -> float:
     ----------
     source : Image
         The image of which all pixels or voxels will be summed.
-     
+
+    Returns
+    -------
+    float
     
     Examples
     --------

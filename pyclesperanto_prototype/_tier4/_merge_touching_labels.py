@@ -9,7 +9,7 @@ def merge_touching_labels(labels_input: Image, labels_destination: Image = None)
     Parameters
     ----------
     labels_input : Image
-    labels_destination : Image
+    labels_destination : Image, optional
 
     Returns
     -------

@@ -15,9 +15,8 @@ def maximum_of_touching_neighbors(values : Image, touch_matrix : Image, maximum_
     touch_matrix : Image
         A touch_matrix specifying which labels are taken into account for 
     neighborhood relationships.
-    maximum_values_destination : Image
+    maximum_values_destination : Image, optional
         A the resulting vector of maximum values in the neighborhood.
-     
     
     Returns
     -------

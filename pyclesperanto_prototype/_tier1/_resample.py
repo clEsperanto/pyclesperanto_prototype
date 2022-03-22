@@ -15,11 +15,11 @@ def resample(source : Image, destination : Image = None, factor_x : float = 1, f
     Parameters
     ----------
     source : Image
-    destination : Image
-    factor_x : Number
-    factor_y : Number
-    factor_z : Number
-    linear_interpolation : Boolean
+    destination : Image, optional
+    factor_x : Number, optional
+    factor_y : Number, optional
+    factor_z : Number, optional
+    linear_interpolation : Boolean, optional
     
     Returns
     -------

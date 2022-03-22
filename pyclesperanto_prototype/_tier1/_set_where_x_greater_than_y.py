@@ -14,7 +14,7 @@ def set_where_x_greater_than_y(source : Image, value : float = 0) -> Image:
     Parameters
     ----------
     source : Image
-    value : Number
+    value : Number, optional
     
     References
     ----------

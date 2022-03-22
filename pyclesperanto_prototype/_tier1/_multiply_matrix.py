@@ -10,7 +10,7 @@ def multiply_matrix(matrix1 : Image, matrix2 : Image, matrix_destination : Image
     ----------
     matrix1 : Image
     matrix2 : Image
-    matrix_destination : Image
+    matrix_destination : Image, optional
     
     Returns
     -------

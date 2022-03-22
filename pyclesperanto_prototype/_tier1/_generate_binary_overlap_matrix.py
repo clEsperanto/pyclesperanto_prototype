@@ -16,7 +16,7 @@ def generate_binary_overlap_matrix(label_map1 : Image, label_map2 : Image, binar
     ----------
     label_map1 : Image
     label_map2 : Image
-    binary_overlap_matrix_destination : Image
+    binary_overlap_matrix_destination : Image, optional
     
     Returns
     -------

@@ -12,9 +12,9 @@ def average_distance_of_n_shortest_distances(distance_matrix : Image, distance_v
 
     Parameters
     ----------
-    distance_matrix
-    distance_vector_destination
-    n
+    distance_matrix: Image
+    distance_vector_destination: Image, optional
+    n: int
 
     Returns
     -------

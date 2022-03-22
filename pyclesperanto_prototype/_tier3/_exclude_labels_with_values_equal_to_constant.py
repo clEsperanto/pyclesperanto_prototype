@@ -13,8 +13,8 @@ def exclude_labels_with_values_equal_to_constant(values_vector : Image, label_ma
     ----------
     values_vector : Image
     label_map_input : Image
-    label_map_destination : Image
-    constant : Number
+    label_map_destination : Image, optional
+    constant : Number, optional
 
     Returns
     -------

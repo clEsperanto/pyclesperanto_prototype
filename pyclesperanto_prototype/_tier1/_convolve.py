@@ -12,7 +12,7 @@ def convolve(source : Image, convolution_kernel : Image, destination : Image = N
     ----------
     source : Image
     convolution_kernel : Image
-    destination : Image
+    destination : Image, optional
     
     Returns
     -------

@@ -10,7 +10,7 @@ def onlyzero_overwrite_maximum_diamond(input: Image, flag_dst: Image, destinatio
     Parameters
     ----------
     input : Image
-    destination : Image
+    destination : Image, optional
     
     Returns
     -------

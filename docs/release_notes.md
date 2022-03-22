@@ -1,6 +1,24 @@
+# 0.16.0 - March 16th, 2022
+
+## New features
+* reduce_labels_to_label_edges
+
+## Bug fixes
+* `deskew_y` produced wrong results in case voxel_size_z was != 0.3. (Thanks to @DrLachie for reporting and fixing)
+
+## Backwards compatibility breaking changes
+* The parameter 'destintation' in `absolute()` was renamed to `destination`
+
+## Miscellaneous
+* optional parameters are now marked as such in the docstrings
+
+# 0.15.5 - March 15th, 2022
+
+* Deskewing produced wrong results in case voxel_size_z was != 0.3. This release contains a temporary workaround for fixing this. The workaround leads to higher memory consumption, longer compute time and tiny interpolation artefacts. A future release will fix those issues. (Thanks to @DrLachie for reporting and also for demonstrating the potential workaround)
+
 # 0.15.4 - February 20th, 2022
 
-New features:
+## New features
 * Support for pushing XArrays (thanks to @psobolewskiPhD for reporting a related issue)
 
 # 0.15.0 - February 12th, 2022

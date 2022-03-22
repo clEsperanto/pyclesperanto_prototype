@@ -19,9 +19,9 @@ def draw_mesh_between_proximal_labels(labels : Image, mesh_target : Image = None
     Parameters
     ----------
     labels : Image
-    mesh_target : Image
-    maximum_distance : Number
-    
+    mesh_target : Image, optional
+    maximum_distance : Number, optional
+
     Returns
     -------
     destination

@@ -12,10 +12,10 @@ def variance_sphere(source: Image, destination: Image = None, radius_x : int = 1
     Parameters
     ----------
     source : Image
-    destination : Image
-    radius_x : int
-    radius_y : int
-    radius_z : int
+    destination : Image, optional
+    radius_x : int, optional
+    radius_y : int, optional
+    radius_z : int, optional
 
     Returns
     -------

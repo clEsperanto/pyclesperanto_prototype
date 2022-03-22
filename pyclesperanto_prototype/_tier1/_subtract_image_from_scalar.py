@@ -11,8 +11,8 @@ def subtract_image_from_scalar(input : Image, destination : Image = None, scalar
     Parameters
     ----------
     input : Image
-    destination : Image
-    scalar : Number
+    destination : Image, optional
+    scalar : Number, optional
     
     Returns
     -------

@@ -17,8 +17,8 @@ def copy_slice(source : Image, destination : Image = None, slice_index : int = 0
     Parameters
     ----------
     source : Image
-    destination : Image
-    slice_index : Number
+    destination : Image, optional
+    slice_index : Number, optional
     
     Returns
     -------

@@ -13,9 +13,9 @@ def sub_stack(source : Image, destination : Image = None, start_z : int = 0, end
     Parameters
     ----------
     input : Image
-    destination : Image
-    start_z : Number
-    end_z : Number
+    destination : Image, optional
+    start_z : Number, optional
+    end_z : Number, optional
     
     Returns
     -------

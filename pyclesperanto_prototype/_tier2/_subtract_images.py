@@ -12,7 +12,7 @@ def subtract_images(subtrahend : Image, minuend : Image, destination : Image = N
     ----------
     subtrahend : Image
     minuend : Image
-    destination : Image
+    destination : Image, optional
     
     Returns
     -------

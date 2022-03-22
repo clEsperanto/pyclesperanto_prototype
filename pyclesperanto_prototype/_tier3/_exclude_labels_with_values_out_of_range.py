@@ -16,9 +16,9 @@ def exclude_labels_with_values_out_of_range(values_vector : Image, label_map_inp
     ----------
     values_vector : Image
     label_map_input : Image
-    label_map_destination : Image
-    minimum_value_range : Number
-    maximum_value_range : Number
+    label_map_destination : Image, optional
+    minimum_value_range : Number, optional
+    maximum_value_range : Number, optional
     
     Returns
     -------

@@ -14,7 +14,10 @@ def minimum_of_all_pixels(source : Image) -> float:
     ----------
     source : Image
         The image of which the minimum of all pixels or voxels will be determined.
-     
+
+    Returns
+    -------
+    float
     
     Examples
     --------

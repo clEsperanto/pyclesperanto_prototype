@@ -16,17 +16,12 @@ def centroids_of_labels(labels:Image, pointlist_destination :Image = None, inclu
     ----------
     labels : Image
         input label image
-    pointlist_destination : Image
+    pointlist_destination : Image, optional
         target image of size d*n for a d-dimensional label image with n labels. In case the background should be
         determined as well, this image needs to be one pixel wider
-    include_background : bool
+    include_background : bool, optional
         measure the centroid of the background as well
-    regionprops : list of skimage.measure._regionprops.RegionProperties
-        in case regionprops of the label image were determined earlier, one can hand them over to prevent re-generation
-    use_gpu : bool
-        in case the centroid determination can't handle a large number of labels, one can turn this flag of and let
-        the centroid determination be done by scikit-image regionprops
-    
+
     Returns
     -------
     pointlist_destination

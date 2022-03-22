@@ -1,1 +1,2 @@
 from ._reduce_labels_to_centroids import reduce_labels_to_centroids
+from ._reduce_labels_to_label_edges import reduce_labels_to_label_edges

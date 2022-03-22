@@ -16,8 +16,8 @@ def distance_matrix_to_mesh(pointlist : Image, distance_matrix : Image, mesh_des
     ----------
     pointlist : Image
     distance_matrix : Image
-    mesh_destination : Image
-    maximum_distance : Number
+    mesh_destination : Image, optional
+    maximum_distance : Number, optional
     
     Returns
     -------

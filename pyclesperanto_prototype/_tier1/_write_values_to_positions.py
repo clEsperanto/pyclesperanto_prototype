@@ -16,7 +16,7 @@ def write_values_to_positions(positions_and_values : Image, destination : Image 
     Parameters
     ----------
     positions_and_values : Image
-    destination : Image
+    destination : Image, optional
     
     Returns
     -------

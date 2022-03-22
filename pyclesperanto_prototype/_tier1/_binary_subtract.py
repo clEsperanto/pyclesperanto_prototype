@@ -10,9 +10,9 @@ def binary_subtract(minuend : Image, subtrahend : Image, destination : Image = N
     ----------
     minuend : Image
         The first binary input image to be processed.
-    suubtrahend : Image
+    subtrahend : Image
         The second binary input image to be subtracted from the first.
-    destination : Image
+    destination : Image, optional
         The output image where results are written into.
      
     

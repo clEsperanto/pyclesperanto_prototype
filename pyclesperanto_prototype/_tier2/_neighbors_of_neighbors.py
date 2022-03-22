@@ -13,7 +13,7 @@ def neighbors_of_neighbors(touch_matrix : Image, neighbor_matrix_destination : I
     Parameters
     ----------
     touch_matrix : Image
-    neighbor_matrix_destination : Image
+    neighbor_matrix_destination : Image, optional
 
     Returns
     -------

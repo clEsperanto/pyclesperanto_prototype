@@ -11,8 +11,8 @@ def smaller_constant(source : Image, destination : Image = None, constant : floa
     Parameters
     ----------
     source : Image
-    destination : Image
-    constant : Number
+    destination : Image, optional
+    constant : Number, optional
     
     Returns
     -------

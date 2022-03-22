@@ -13,7 +13,7 @@ def average_neighbor_distance_map(labels : Image, distance_map : Image = None) -
     Parameters
     ----------
     input : Image
-    destination : Image
+    destination : Image, optional
     
     Returns
     -------

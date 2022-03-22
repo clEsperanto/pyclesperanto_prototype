@@ -57,11 +57,11 @@ def histogram(source : Image, destination : Image = None, num_bins:int = 256, mi
     Parameters
     ----------
     source : Image
-    destination : Image
-    number_of_bins : Number
-    minimum_intensity : Number
-    maximum_intensity : Number
-    determine_min_max : Boolean
+    destination : Image, optional
+    num_bins : Number, optional
+    minimum_intensity : Number, optional
+    maximum_intensity : Number, optional
+    determine_min_max : Boolean, optional
     
     Returns
     -------
@@ -70,7 +70,7 @@ def histogram(source : Image, destination : Image = None, num_bins:int = 256, mi
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
-    >>> cle.histogram(source, destination, number_of_bins, minimum_intensity, maximum_intensity, determine_min_max)
+    >>> cle.histogram(source, destination, num_bins, minimum_intensity, maximum_intensity, determine_min_max)
     
     References
     ----------

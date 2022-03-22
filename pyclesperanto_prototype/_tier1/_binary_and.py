@@ -18,7 +18,7 @@ def binary_and(operand1 : Image, operand2 : Image, destination : Image = None) -
         The first binary input image to be processed.
     operand2 : Image
         The second binary input image to be processed.
-    destination : Image
+    destination : Image, optional
         The output image where results are written into.
      
     

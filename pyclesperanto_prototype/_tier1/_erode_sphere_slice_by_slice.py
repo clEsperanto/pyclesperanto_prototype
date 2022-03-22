@@ -17,7 +17,7 @@ def erode_sphere_slice_by_slice(source : Image, destination : Image = None) -> I
     Parameters
     ----------
     source : Image
-    destination : Image
+    destination : Image, optional
     
     Returns
     -------

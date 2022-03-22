@@ -3,7 +3,7 @@ from .._tier0 import plugin_function
 from .._tier0 import Image
 
 @plugin_function(categories=['filter', 'in assistant'])
-def absolute(source : Image, destintation : Image = None) -> Image:
+def absolute(source : Image, destination : Image = None) -> Image:
     """Computes the absolute value of every individual pixel x in a given image.
     
     <pre>f(x) = |x| </pre>
@@ -12,7 +12,7 @@ def absolute(source : Image, destintation : Image = None) -> Image:
     ----------
     source : Image
         The input image to be processed.
-    destination : Image
+    destination : Image, optional
         The output image where results are written into.
      
     
@@ -33,8 +33,8 @@ def absolute(source : Image, destintation : Image = None) -> Image:
 
     parameters = {
         "src":source,
-        "dst":destintation
+        "dst":destination
     }
 
-    execute(__file__, '../clij-opencl-kernels/kernels/absolute_' + str(len(destintation.shape)) + 'd_x.cl', 'absolute_' + str(len(destintation.shape)) + 'd', destintation.shape, parameters)
-    return destintation
+    execute(__file__, '../clij-opencl-kernels/kernels/absolute_' + str(len(destination.shape)) + 'd_x.cl', 'absolute_' + str(len(destination.shape)) + 'd', destination.shape, parameters)
+    return destination

@@ -13,9 +13,9 @@ def exclude_labels_outside_size_range(input : Image, destination : Image = None,
     Parameters
     ----------
     input : Image
-    destination : Image
-    minimum_size : Number
-    maximum_size : Number
+    destination : Image, optional
+    minimum_size : Number, optional
+    maximum_size : Number, optional
     
     Returns
     -------

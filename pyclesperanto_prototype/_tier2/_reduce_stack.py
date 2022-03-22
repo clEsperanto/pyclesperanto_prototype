@@ -16,9 +16,9 @@ def reduce_stack(input : Image, destination : Image = None, reduction_factor : i
     Parameters
     ----------
     input : Image
-    destination : Image
-    reduction_factor : Number
-    offset : Number
+    destination : Image, optional
+    reduction_factor : Number, optional
+    offset : Number, optional
     
     Returns
     -------

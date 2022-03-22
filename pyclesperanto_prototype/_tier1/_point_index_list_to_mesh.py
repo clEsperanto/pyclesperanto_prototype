@@ -12,7 +12,7 @@ def point_index_list_to_mesh(pointlist: Image, indexlist : Image, mesh_destinati
     ----------
     pointlist : Image
     indexlist : Image
-    mesh_destination : Image
+    mesh_destination : Image, optional
     
     Returns
     -------

@@ -11,9 +11,9 @@ def average_distance_to_n_nearest_other_labels_map(labels : Image, other_labels 
     Parameters
     ----------
     labels : Image
-    other_labels
-    distance_map : Image
-    n : Number
+    other_labels: Image
+    distance_map : Image, optional
+    n : Number, optional
     
     Returns
     -------

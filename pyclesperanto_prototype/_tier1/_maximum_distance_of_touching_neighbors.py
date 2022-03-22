@@ -12,7 +12,7 @@ def maximum_distance_of_touching_neighbors(distance_matrix : Image, touch_matrix
     ----------
     distance_matrix : Image
     touch_matrix : Image
-    distancelist_destination : Image
+    distancelist_destination : Image, optional
     
     Returns
     -------

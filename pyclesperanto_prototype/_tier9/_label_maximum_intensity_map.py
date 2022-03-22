@@ -14,12 +14,13 @@ def label_maximum_intensity_map(intensity_image : Image, labels : Image, maximum
 
     Parameters
     ----------
-    intensity_image
-    labels
-    mean_intensity_map
+    intensity_image: Image
+    labels: Image
+    mean_intensity_map: Image, optional
 
     Returns
     -------
+    maximum_intensity_map
 
     References
     ----------

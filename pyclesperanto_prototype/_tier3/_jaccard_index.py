@@ -4,7 +4,7 @@ from pyclesperanto_prototype._tier1 import binary_and
 from pyclesperanto_prototype._tier1 import binary_or
 from pyclesperanto_prototype._tier2 import sum_of_all_pixels
 
-def jaccard_index(source1 : Image, source2 : Image) -> Image:
+def jaccard_index(source1 : Image, source2 : Image):
     """Determines the overlap of two binary images using the Jaccard index. 
     
     A value of 0 suggests no overlap, 1 means perfect overlap.
@@ -18,6 +18,10 @@ def jaccard_index(source1 : Image, source2 : Image) -> Image:
     ----------
     source1 : Image
     source2 : Image
+
+    Returns
+    -------
+    float (between 0 and 1)
     
     Examples
     --------

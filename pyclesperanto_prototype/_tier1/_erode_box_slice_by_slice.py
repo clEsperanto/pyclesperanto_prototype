@@ -21,7 +21,7 @@ def erode_box_slice_by_slice(source : Image, destination : Image = None) -> Imag
     Parameters
     ----------
     source : Image
-    destination : Image
+    destination : Image, optional
     
     Returns
     -------

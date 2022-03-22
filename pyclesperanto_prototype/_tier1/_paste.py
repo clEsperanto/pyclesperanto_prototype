@@ -9,10 +9,10 @@ def paste (source : Image, destination : Image = None, destination_x : int = 0, 
     Parameters
     ----------
     source : Image
-    destination : Image
-    destination_x : Number
-    destination_y : Number
-    destination_z : Number
+    destination : Image, optional
+    destination_x : Number, optional
+    destination_y : Number, optional
+    destination_z : Number, optional
     
     Returns
     -------

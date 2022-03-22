@@ -10,7 +10,7 @@ def detect_label_edges(label_source :Image, binary_destination :Image = None) ->
     Parameters
     ----------
     label_map : Image
-    edge_image_destination : Image
+    edge_image_destination : Image, optional
     
     Returns
     -------

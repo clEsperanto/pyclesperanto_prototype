@@ -16,8 +16,8 @@ def mask_label(source : Image, label_map : Image, destination : Image = None, la
     ----------
     source : Image
     label_map : Image
-    destination : Image
-    label_index : Number
+    destination : Image, optional
+    label_index : Number, optional
     
     Returns
     -------

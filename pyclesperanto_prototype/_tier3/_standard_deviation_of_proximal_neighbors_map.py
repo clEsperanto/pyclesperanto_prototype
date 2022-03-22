@@ -13,7 +13,7 @@ def standard_deviation_of_proximal_neighbors_map(parametric_map : Image, label_m
     ----------
     parametric_map : Image
     label_map : Image
-    parametric_map_destination : Image
+    parametric_map_destination : Image, optional
     min_distance : float, optional
         default : 0
     max_distance : float, optional

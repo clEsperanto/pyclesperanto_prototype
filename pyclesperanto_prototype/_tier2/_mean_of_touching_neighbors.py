@@ -15,9 +15,8 @@ def mean_of_touching_neighbors(values : Image, touch_matrix : Image, mean_values
     touch_matrix : Image
         A touch_matrix specifying which labels are taken into account for 
     neighborhood relationships.
-    mean_values_destination : Image
+    mean_values_destination : Image, optional
         A the resulting vector of mean average values in the neighborhood.
-     
     
     Returns
     -------

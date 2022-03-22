@@ -12,7 +12,7 @@ def divide_images(divident : Image, divisor : Image, destination : Image = None)
     ----------
     divident : Image
     divisor : Image
-    destination : Image
+    destination : Image, optional
     
     Returns
     -------

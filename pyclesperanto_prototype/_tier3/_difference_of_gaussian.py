@@ -16,19 +16,19 @@ def difference_of_gaussian(input : Image, destination : Image = None, sigma1_x :
     ----------
     input : Image
         The input image to be processed.
-    destination : Image
+    destination : Image, optional
         The output image where results are written into.
-    sigma1_x : float
+    sigma1_x : float, optional
         Sigma of the first Gaussian filter in x
-    sigma1_y : float
+    sigma1_y : float, optional
         Sigma of the first Gaussian filter in y
-    sigma1_z : float
+    sigma1_z : float, optional
         Sigma of the first Gaussian filter in z
-    sigma2_x : float
+    sigma2_x : float, optional
         Sigma of the second Gaussian filter in x
-    sigma2_y : float
+    sigma2_y : float, optional
         Sigma of the second Gaussian filter in y
-    sigma2_z : float
+    sigma2_z : float, optional
         Sigma of the second Gaussian filter in z 
     
     Returns

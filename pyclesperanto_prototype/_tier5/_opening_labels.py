@@ -15,8 +15,8 @@ def opening_labels(labels_input: Image, labels_destination: Image = None, radius
     Parameters
     ----------
     labels_input: Image
-    labels_destination: Image
-    radius: int
+    labels_destination: Image, optional
+    radius: int, optional
 
     Returns
     -------

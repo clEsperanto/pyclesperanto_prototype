@@ -19,7 +19,7 @@ def eroded_otsu_labeling(image: Image, labels_destination: Image = None, number_
     ----------
     image: Image
         intensity image
-    labels_destination: Image,optional
+    labels_destination: Image, optional
         output label image
     number_of_erosions: int, optional
         Number of iterations for an erosion. This number must be smaller than the smallest radius

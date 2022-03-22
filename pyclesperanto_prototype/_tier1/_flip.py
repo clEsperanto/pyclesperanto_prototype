@@ -10,10 +10,10 @@ def flip(source : Image, destination : Image = None, flip_x : bool = True, flip_
     Parameters
     ----------
     source : Image
-    destination : Image
-    flip_x : Boolean
-    flip_y : Boolean
-    flip_z : Boolean
+    destination : Image, optional
+    flip_x : Boolean, optional
+    flip_y : Boolean, optional
+    flip_z : Boolean, optional
     
     Returns
     -------

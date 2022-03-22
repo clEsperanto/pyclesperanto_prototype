@@ -12,7 +12,7 @@ def greater_or_equal(source1 : Image, source2 : Image, destination : Image = Non
     ----------
     source1 : Image
     source2 : Image
-    destination : Image
+    destination : Image, optional
     
     Returns
     -------

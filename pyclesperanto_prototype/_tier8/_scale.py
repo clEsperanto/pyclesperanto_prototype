@@ -19,16 +19,16 @@ def scale(source: Image,
         image to be translated
     destination : Image, optional
         target image
-    factor_x : float
+    factor_x : float, optional
         scaling along x
-    factor_y : float
+    factor_y : float, optional
         scaling along y
-    factor_z : float
+    factor_z : float, optional
         scaling along z
-    centered : bool
+    centered : bool, optional
         If true, the image will be scaled to the center of the image.
         If false, the image will be scaled to the origin of the coordinate system.
-    linear_interpolation: bool
+    linear_interpolation: bool, optional
         If true, bi-/tri-linear interplation will be applied.
         If false, nearest-neighbor interpolation wille be applied.
     auto_size: bool, optional

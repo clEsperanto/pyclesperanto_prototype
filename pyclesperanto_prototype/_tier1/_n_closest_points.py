@@ -15,12 +15,12 @@ def n_closest_points(distance_matrix : Image, indexlist_destination : Image = No
     Parameters
     ----------
     distance_matrix : Image
-    indexlist_destination : Image
-    n : Number
-    ignore_background : bool
+    indexlist_destination : Image, optional
+    n : Number, optional
+    ignore_background : bool, optional
         The first column and row of the distance matrix will be ignored because they represent the background object.
-    ignore_self : bool
-        The x==y diagonale will be ignored because it represents the distance of the object to itself.
+    ignore_self : bool, optional
+        The x==y diagonal will be ignored because it represents the distance of the object to itself.
     
     Returns
     -------

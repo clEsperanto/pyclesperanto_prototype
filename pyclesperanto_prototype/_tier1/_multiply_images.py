@@ -15,7 +15,7 @@ def multiply_images(factor1 : Image, factor2 : Image, destination : Image = None
         The first input image to be multiplied.
     factor2 : Image
         The second image to be multiplied.
-    destination : Image
+    destination : Image, optional
         The output image where results are written into.
      
     

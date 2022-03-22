@@ -15,7 +15,7 @@ def proximal_neighbor_count_map(source : Image, destination : Image = None, min_
     Parameters
     ----------
     source : Image
-    destination : Image
+    destination : Image, optional
     min_distance : float, optional
         default : 0
     max_distance : float, optional

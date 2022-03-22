@@ -12,9 +12,9 @@ def add_image_and_scalar(source : Image, destination : Image = None, scalar : fl
     ----------
     source : Image
         The input image where scalare should be added.
-    destination : Image
+    destination : Image, optional
         The output image where results are written into.
-    scalar : float
+    scalar : float, optional
         The constant number which will be added to all pixels.
      
     

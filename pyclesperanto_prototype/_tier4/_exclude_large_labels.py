@@ -11,8 +11,8 @@ def exclude_large_labels(input: Image, destination: Image = None, minimum_size: 
     Parameters
     ----------
     input : Image
-    destination : Image
-    minimum_size : Number
+    destination : Image, optional
+    minimum_size : Number, optional
 
     Returns
     -------

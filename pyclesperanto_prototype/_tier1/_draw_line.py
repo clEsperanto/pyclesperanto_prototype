@@ -12,14 +12,15 @@ def draw_line(destination : Image, x1 : float = 0, y1 : float = 0, z1 : float = 
     Parameters
     ----------
     destination : Image
-    x1 : Number
-    y1 : Number
-    z1 : Number
-    x2 : Number
-    y2 : Number
-    z2 : Number
-    thickness : Number
-    value : Number
+    x1 : Number, optional
+    y1 : Number, optional
+    z1 : Number, optional
+    x2 : Number, optional
+    y2 : Number, optional
+    z2 : Number, optional
+    thickness : Number, optional
+        technically specifying the radius including pixels around an inifitely thin line
+    value : Number, optional
     
     Returns
     -------

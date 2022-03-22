@@ -13,7 +13,7 @@ def standard_deviation_of_n_nearest_neighbors_map(parametric_map : Image, label_
     ----------
     parametric_map : Image
     label_map : Image
-    parametric_map_destination : Image
+    parametric_map_destination : Image, optional
     n : int
         number of nearest neighbors
     

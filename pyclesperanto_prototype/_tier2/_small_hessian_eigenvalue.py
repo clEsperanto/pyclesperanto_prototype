@@ -9,12 +9,11 @@ def small_hessian_eigenvalue(source : Image, destination : Image = None) -> Imag
     Parameters
     ----------
     source : Image
-    destination : Image
+    destination : Image, optional
 
     Returns
     -------
     destination
-    
     """
     from .._tier1 import hessian_eigenvalues
     destination, middle, large = hessian_eigenvalues(source, destination)

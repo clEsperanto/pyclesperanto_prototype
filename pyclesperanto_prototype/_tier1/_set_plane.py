@@ -9,8 +9,8 @@ def set_plane(source : Image, plane_index : int = 0, value : float = 0) -> Image
     Parameters
     ----------
     source : Image
-    plane_index : Number
-    value : Number
+    plane_index : Number, optional
+    value : Number, optional
     
     Examples
     --------

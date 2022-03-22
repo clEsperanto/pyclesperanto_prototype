@@ -9,10 +9,10 @@ def standard_deviation_box(source: Image, destination: Image = None, radius_x : 
     Parameters
     ----------
     source : Image
-    destination : Image
-    radius_x : int
-    radius_y : int
-    radius_z : int
+    destination : Image, optional
+    radius_x : int, optional
+    radius_y : int, optional
+    radius_z : int, optional
 
     Returns
     -------

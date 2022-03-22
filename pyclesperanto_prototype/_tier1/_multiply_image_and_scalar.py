@@ -12,9 +12,9 @@ def multiply_image_and_scalar(source : Image, destination : Image = None, scalar
     ----------
     source : Image
         The input image to be multiplied with a constant.
-    destination : Image
+    destination : Image, optional
         The output image where results are written into.
-    scalar : float
+    scalar : float, optional
         The number with which every pixel will be multiplied with.
      
     

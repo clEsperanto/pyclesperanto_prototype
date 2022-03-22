@@ -11,8 +11,8 @@ def multiply_image_and_coordinate(source : Image, destination : Image = None, di
     Parameters
     ----------
     source : Image
-    destination : Image
-    dimension : Number
+    destination : Image, optional
+    dimension : Number, optional
     
     Returns
     -------

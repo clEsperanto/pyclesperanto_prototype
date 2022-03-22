@@ -17,7 +17,7 @@ def touch_matrix_to_mesh(pointlist  : Image, touch_matrix : Image, mesh_destinat
     touch_matrix : Image
         A 2D binary matrix with 1 in pixels (i,j) where label i touches 
     label j.
-    mesh_destination : Image
+    mesh_destination : Image, optional
         The output image where results are written into.
      
     

@@ -17,7 +17,7 @@ def mask(source : Image, mask : Image, destination : Image = None) -> Image:
     ----------
     source : Image
     mask : Image
-    destination : Image
+    destination : Image, optional
     
     Returns
     -------

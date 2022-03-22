@@ -14,7 +14,7 @@ def touching_neighbor_count_map(input : Image, destination : Image = None) -> Im
     Parameters
     ----------
     input : Image
-    destination : Image
+    destination : Image, optional
     
     Returns
     -------

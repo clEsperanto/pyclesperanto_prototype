@@ -15,7 +15,7 @@ def nonzero_minimum_box(input: Image, flag_dst: Image, destination: Image = None
     Parameters
     ----------
     input : Image
-    destination : Image
+    destination : Image, optional
     
     Returns
     -------

@@ -17,9 +17,9 @@ def mode_of_touching_neighbors_map(parametric_map : Image, label_map : Image, pa
     ----------
     parametric_map : Image
     label_map : Image
-    parametric_map_destination : Image
-    radius : int
-    ignore_touching_background : bool
+    parametric_map_destination : Image, optional
+    radius : int, optional
+    ignore_touching_background : bool, optional
 
     
     Returns

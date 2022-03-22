@@ -15,6 +15,10 @@ def mean_squared_error(source1 : Image, source2 : Image) -> float:
     ----------
     source1 : Image
     source2 : Image
+
+    Returns
+    -------
+    float
     
     Examples
     --------

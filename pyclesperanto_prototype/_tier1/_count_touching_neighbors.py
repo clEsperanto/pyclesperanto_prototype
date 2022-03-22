@@ -15,7 +15,7 @@ def count_touching_neighbors(touch_matrix: Image, touching_neighbors_count_desti
     Parameters
     ----------
     touch_matrix : Image
-    touching_neighbors_count_destination : Image
+    touching_neighbors_count_destination : Image, optional
     
     Returns
     -------

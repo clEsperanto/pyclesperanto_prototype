@@ -12,7 +12,7 @@ def binary_edge_detection(source : Image, destination : Image = None) -> Image:
     ----------
     source : Image
         The binary input image where edges will be searched.
-    destination : Image
+    destination : Image, optional
         The output image where edge pixels will be 1.
      
     

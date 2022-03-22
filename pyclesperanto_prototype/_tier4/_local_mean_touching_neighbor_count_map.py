@@ -12,7 +12,7 @@ def local_mean_touching_neighbor_count_map(input : Image, destination : Image = 
     Parameters
     ----------
     input : Image
-    destination : Image
+    destination : Image, optional
     
     Returns
     -------

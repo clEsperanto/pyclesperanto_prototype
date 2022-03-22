@@ -12,7 +12,7 @@ def transpose_xy(input : Image, destination : Image = None) -> Image:
     ----------
     input : Image
         The input image.
-    destination : Image
+    destination : Image, optional
         The output image where results are written into.
      
     

@@ -11,13 +11,13 @@ def draw_box(destination: Image, x: int = 0, y: int = 0, z: int = 0, width: int 
     Parameters
     ----------
     destination : Image
-    x : Number
-    y : Number
-    z : Number
-    width : Number
-    height : Number
-    depth : Number
-    value : Number
+    x : Number, optional
+    y : Number, optional
+    z : Number, optional
+    width : Number, optional
+    height : Number, optional
+    depth : Number, optional
+    value : Number, optional
     
     Returns
     -------

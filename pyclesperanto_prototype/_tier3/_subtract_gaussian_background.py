@@ -11,10 +11,10 @@ def subtract_gaussian_background(input : Image, destination : Image = None, sigm
     Parameters
     ----------
     input : Image
-    destination : Image
-    sigmaX : Number
-    sigmaY : Number
-    sigmaZ : Number
+    destination : Image, optional
+    sigma_x : Number, optional
+    sigma_y : Number, optional
+    sigma_z : Number, optional
     
     Returns
     -------

@@ -13,8 +13,8 @@ def reduce_labels_to_centroids(source:Image, destination:Image=None) -> Image:
 
     Parameters
     ----------
-    source
-    destination
+    source: Image
+    destination: Image, optional
 
     Returns
     -------

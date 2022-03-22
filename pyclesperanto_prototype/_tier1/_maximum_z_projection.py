@@ -10,7 +10,7 @@ def maximum_z_projection(source :Image, destination_max :Image = None) -> Image:
     Parameters
     ----------
     source : Image
-    destination_max : Image
+    destination_max : Image, optional
     
     Returns
     -------

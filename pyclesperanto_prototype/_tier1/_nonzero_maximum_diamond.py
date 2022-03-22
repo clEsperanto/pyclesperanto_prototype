@@ -15,7 +15,7 @@ def nonzero_maximum_diamond(input: Image, flag_dst: Image, destination: Image = 
     Parameters
     ----------
     input : Image
-    destination : Image
+    destination : Image, optional
     
     Returns
     -------

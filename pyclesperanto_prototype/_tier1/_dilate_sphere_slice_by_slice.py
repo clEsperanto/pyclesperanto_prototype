@@ -17,7 +17,7 @@ def dilate_sphere_slice_by_slice(src : Image, dst : Image = None) -> Image:
     Parameters
     ----------
     source : Image
-    destination : Image
+    destination : Image, optional
     
     Returns
     -------
