@@ -10,7 +10,7 @@ from .._tier2 import sum_reduction_x
 from .._tier2 import block_enumerate
 
 @plugin_function(output_creator=create_labels_like, categories=['label processing', 'in assistant'])
-def relabel_sequential(input : Image, output : Image = None, blocksize : int = 4096) -> Image:
+def relabel_sequential(source : Image, output : Image = None, blocksize : int = 4096) -> Image:
     """Analyses a label map and if there are gaps in the indexing (e.g. label 
     5 is not present) all 
     subsequent labels will be relabelled. 
@@ -39,11 +39,11 @@ def relabel_sequential(input : Image, output : Image = None, blocksize : int = 4
     ----------
     .. [1] https://clij.github.io/clij2-docs/reference_closeIndexGapsInLabelMap
     """
-    max_label = maximum_of_all_pixels(input)
+    max_label = maximum_of_all_pixels(source)
 
     flagged_indices = create([1, int(max_label) + 1])
     set(flagged_indices, 0)
-    flag_existing_intensities(input, flagged_indices)
+    flag_existing_intensities(source, flagged_indices)
     set_column(flagged_indices, 0, 0) # background shouldn't be relabelled
 
     # sum existing labels per blocks
@@ -54,6 +54,6 @@ def relabel_sequential(input : Image, output : Image = None, blocksize : int = 4
     new_indices = create([1, int(max_label) + 1])
     block_enumerate(flagged_indices, block_sums, new_indices, blocksize)
 
-    replace_intensities(input, new_indices, output)
+    replace_intensities(source, new_indices, output)
 
     return output

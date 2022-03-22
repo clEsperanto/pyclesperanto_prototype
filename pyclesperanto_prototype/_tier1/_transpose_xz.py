@@ -5,12 +5,12 @@ from .._tier0 import create
 from .._tier0 import Image
 
 @plugin_function(output_creator=create_none, categories=['transform'])
-def transpose_xz(input : Image, destination : Image = None) -> Image:
+def transpose_xz(source : Image, destination : Image = None) -> Image:
     """Transpose X and Z axes of an image.
     
     Parameters
     ----------
-    input : Image
+    source : Image
         The input image.
     destination : Image, optional
         The output image where results are written into.
@@ -31,7 +31,7 @@ def transpose_xz(input : Image, destination : Image = None) -> Image:
     """
 
     if destination is None:
-        dimensions = input.shape
+        dimensions = source.shape
         if len(dimensions) == 3:
             destination = create(dimensions[::-1])
         elif len(dimensions) == 2:
@@ -40,7 +40,7 @@ def transpose_xz(input : Image, destination : Image = None) -> Image:
             destination = create([dimensions[0], 1, 1])
 
     parameters = {
-        "src":input,
+        "src":source,
         "dst":destination
     }
 

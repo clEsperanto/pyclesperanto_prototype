@@ -6,12 +6,12 @@ from .._tier0 import plugin_function
 from .._tier0 import Image
 
 @plugin_function(categories=['filter', 'background removal', 'in assistant'], priority=1)
-def top_hat_box(input : Image, destination : Image = None, radius_x : float = 1, radius_y : float = 1, radius_z : float = 1) -> Image:
+def top_hat_box(source : Image, destination : Image = None, radius_x : float = 1, radius_y : float = 1, radius_z : float = 1) -> Image:
     """Applies a top-hat filter for background subtraction to the input image.
     
     Parameters
     ----------
-    input : Image
+    source : Image
         The input image where the background is subtracted from.
     destination : Image, optional
         The output image where results are written into.
@@ -37,10 +37,10 @@ def top_hat_box(input : Image, destination : Image = None, radius_x : float = 1,
     """
 
 
-    temp1 = create(input.shape)
-    temp2 = create(input.shape)
+    temp1 = create(source.shape)
+    temp2 = create(source.shape)
 
-    minimum_box(input, temp1, radius_x, radius_y, radius_z)
+    minimum_box(source, temp1, radius_x, radius_y, radius_z)
     maximum_box(temp1, temp2, radius_x, radius_y, radius_z)
-    add_images_weighted(input, temp2, destination, 1, -1)
+    add_images_weighted(source, temp2, destination, 1, -1)
     return destination

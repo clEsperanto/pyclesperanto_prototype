@@ -5,13 +5,13 @@ from .._tier1 import count_touching_neighbors
 from .._tier1 import replace_intensities
 
 @plugin_function(categories=['label measurement', 'map'])
-def local_standard_deviation_touching_neighbor_count_map(input : Image, destination : Image = None) -> Image:
+def local_standard_deviation_touching_neighbor_count_map(source : Image, destination : Image = None) -> Image:
     """Takes a label map, determines which labels touch and replaces every 
     label with the number of touching neighboring labels.
 
     Parameters
     ----------
-    input : Image
+    source : Image
     destination : Image, optional
     
     Returns
@@ -25,12 +25,12 @@ def local_standard_deviation_touching_neighbor_count_map(input : Image, destinat
     from .._tier1 import set_column
     from .._tier2 import standard_deviation_of_touching_neighbors
 
-    touch_matrix = generate_touch_matrix(input)
+    touch_matrix = generate_touch_matrix(source)
     number_of_touching_neighbors_vector = count_touching_neighbors(touch_matrix)
 
     local_stddev_vector = standard_deviation_of_touching_neighbors(number_of_touching_neighbors_vector, touch_matrix)
 
     # ignore how many objects touch the background
     set_column(number_of_touching_neighbors_vector, 0, 0)
-    replace_intensities(input, local_stddev_vector, destination)
+    replace_intensities(source, local_stddev_vector, destination)
     return destination

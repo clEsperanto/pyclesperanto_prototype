@@ -3,12 +3,12 @@ from .._tier0 import plugin_function
 from .._tier0 import Image
 
 @plugin_function
-def replace_intensity(input : Image, destination : Image = None, value_to_replace : float = 0, value_replacement : float = 1) -> Image:
+def replace_intensity(source : Image, destination : Image = None, value_to_replace : float = 0, value_replacement : float = 1) -> Image:
     """Replaces a specific intensity in an image with a given new value. 
     
     Parameters
     ----------
-    input : Image
+    source : Image
     destination : Image, optional
     value_to_replace : Number, optional
     value_replacement : Number, optional
@@ -30,7 +30,7 @@ def replace_intensity(input : Image, destination : Image = None, value_to_replac
 
     parameters = {
         "dst": destination,
-        "src":input,
+        "src":source,
         "in":float(value_to_replace),
         "out":float(value_replacement)
     }

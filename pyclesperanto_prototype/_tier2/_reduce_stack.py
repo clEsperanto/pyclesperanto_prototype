@@ -7,7 +7,7 @@ from .._tier0 import create
 from .._tier1 import copy_slice
 
 @plugin_function(output_creator=create_none, categories=['transform', 'in assistant'])
-def reduce_stack(input : Image, destination : Image = None, reduction_factor : int = 2, offset : int = 0) -> Image:
+def reduce_stack(source : Image, destination : Image = None, reduction_factor : int = 2, offset : int = 0) -> Image:
     """Reduces the number of slices in a stack by a given factor.
     With the offset you have control which slices stay: 
     * With factor 3 and offset 0, slices 0, 3, 6,... are kept. * With factor 
@@ -15,7 +15,7 @@ def reduce_stack(input : Image, destination : Image = None, reduction_factor : i
     
     Parameters
     ----------
-    input : Image
+    source : Image
     destination : Image, optional
     reduction_factor : Number, optional
     offset : Number, optional
@@ -28,7 +28,7 @@ def reduce_stack(input : Image, destination : Image = None, reduction_factor : i
     ----------
     .. [1] https://clij.github.io/clij2-docs/reference_reduceStack
     """
-    dims = input.shape
+    dims = source.shape
     if reduction_factor < 1:
         warnings.warn("In sub_stack, reduction_factor must be larger than 0")
         reduction_factor = 1
@@ -40,7 +40,7 @@ def reduce_stack(input : Image, destination : Image = None, reduction_factor : i
     slice = create([dims[1], dims[2]])
 
     for z in range(0, num_slices):
-        copy_slice(input, slice, z * reduction_factor + offset)
+        copy_slice(source, slice, z * reduction_factor + offset)
         copy_slice(slice, destination, z)
 
     return destination
