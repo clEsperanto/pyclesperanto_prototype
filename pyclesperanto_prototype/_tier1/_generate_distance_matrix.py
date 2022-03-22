@@ -23,7 +23,7 @@ def generate_distance_matrix(coordinate_list1 :Image, coordinate_list2 :Image, d
     ----------
     coordinate_list1 : Image
     coordinate_list2 : Image
-    distance_matrix_destination : Image
+    distance_matrix_destination : Image, optional
     
     Returns
     -------

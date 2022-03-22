@@ -13,7 +13,7 @@ def average_distance_of_touching_neighbors(distance_matrix : Image, touch_matrix
     ----------
     distance_matrix : Image
     touch_matrix : Image
-    average_distancelist_destination : Image
+    average_distancelist_destination : Image, optional
     
     Returns
     -------

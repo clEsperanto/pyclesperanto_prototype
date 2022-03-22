@@ -13,10 +13,10 @@ def mean_box(source : Image, destination : Image = None, radius_x : float = 1, r
     Parameters
     ----------
     source : Image
-    destination : Image
-    radius_x : Number
-    radius_y : Number
-    radius_z : Number
+    destination : Image, optional
+    radius_x : Number, optional
+    radius_y : Number, optional
+    radius_z : Number, optional
     
     Returns
     -------

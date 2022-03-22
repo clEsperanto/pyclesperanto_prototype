@@ -9,7 +9,7 @@ def set_image_borders(destination : Image, value : float = 0) -> Image:
     Parameters
     ----------
     destination : Image
-    value : Number
+    value : Number, optional
     
     Examples
     --------

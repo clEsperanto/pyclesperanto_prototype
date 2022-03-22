@@ -11,8 +11,8 @@ def greater_constant(source : Image, destination :Image = None, constant :float 
     Parameters
     ----------
     source : Image
-    destination : Image
-    constant : Number
+    destination : Image, optional
+    constant : Number, optional
     
     Returns
     -------

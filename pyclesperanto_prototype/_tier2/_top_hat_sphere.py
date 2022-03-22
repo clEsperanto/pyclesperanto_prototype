@@ -13,15 +13,14 @@ def top_hat_sphere(input : Image, destination : Image = None, radius_x : float =
     ----------
     input : Image
         The input image where the background is subtracted from.
-    destination : Image
+    destination : Image, optional
         The output image where results are written into.
-    radius_x : Image
+    radius_x : Image, optional
         Radius of the background determination region in X.
-    radius_y : Image
+    radius_y : Image, optional
         Radius of the background determination region in Y.
-    radius_z : Image
+    radius_z : Image, optional
         Radius of the background determination region in Z.
-     
     
     Returns
     -------

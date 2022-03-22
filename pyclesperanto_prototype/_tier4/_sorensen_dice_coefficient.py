@@ -17,6 +17,10 @@ def sorensen_dice_coefficient(source1 : Image, source2 : Image) -> float:
     ----------
     source1 : Image
     source2 : Image
+
+    Returns
+    -------
+    float
     
     Examples
     --------

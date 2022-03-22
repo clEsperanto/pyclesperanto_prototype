@@ -13,7 +13,7 @@ def label_mean_extension_map(labels : Image, destination : Image = None) -> Imag
     Parameters
     ----------
     labels : Image
-    destination : Image
+    destination : Image, optional
     
     Returns
     -------

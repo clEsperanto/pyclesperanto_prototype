@@ -16,7 +16,7 @@ def pointlist_to_labelled_spots(pointlist : Image, spots_destination : Image = N
     Parameters
     ----------
     pointlist : Image
-    spots_destination : Image
+    spots_destination : Image, optional
     
     Returns
     -------

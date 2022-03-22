@@ -18,8 +18,8 @@ def draw_mesh_between_n_closest_labels(labels : Image, mesh_target : Image = Non
     Parameters
     ----------
     labels : Image
-    mesh_target : Image
-    n : Number
+    mesh_target : Image, optional
+    n : Number, optional
     
     Returns
     -------

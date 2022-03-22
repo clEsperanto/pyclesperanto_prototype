@@ -12,7 +12,7 @@ def point_index_list_to_touch_matrix(indexlist : Image, matrix_destination : Ima
     Parameters
     ----------
     indexlist : Image
-    matrix_destination : Image
+    matrix_destination : Image, optional
     
     Returns
     -------

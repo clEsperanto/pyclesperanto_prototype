@@ -13,8 +13,8 @@ def gamma_correction(source : Image, target : Image = None, gamma : float = 1) -
     Parameters
     ----------
     input : Image
-    destination : Image
-    gamma : Number
+    destination : Image, optional
+    gamma : Number, optional
     
     Returns
     -------

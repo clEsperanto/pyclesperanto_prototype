@@ -16,10 +16,10 @@ def gaussian_blur(source : Image, destination : Image = None, sigma_x : float = 
     Parameters
     ----------
     source : Image
-    destination : Image
-    sigma_x : Number
-    sigma_y : Number
-    sigma_z : Number
+    destination : Image, optional
+    sigma_x : Number, optional
+    sigma_y : Number, optional
+    sigma_z : Number, optional
     
     Returns
     -------

@@ -12,7 +12,7 @@ def label_maximum_extension_map(labels : Image, destination : Image = None) -> I
     Parameters
     ----------
     labels : Image
-    destination : Image
+    destination : Image, optional
     
     Returns
     -------

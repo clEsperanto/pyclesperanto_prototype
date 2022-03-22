@@ -15,7 +15,7 @@ def masked_voronoi_labeling(binary_source : Image, mask_image : Image, labeling_
     ----------
     binary_source : Image
     mask_image : Image
-    labeling_destination : Image
+    labeling_destination : Image, optional
     
     Returns
     -------

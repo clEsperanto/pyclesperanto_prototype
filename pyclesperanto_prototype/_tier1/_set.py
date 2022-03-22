@@ -11,7 +11,7 @@ def set(source : Image, scalar : float = 0) -> Image:
     Parameters
     ----------
     source : Image
-    value : Number
+    value : Number, optional
     
     Examples
     --------

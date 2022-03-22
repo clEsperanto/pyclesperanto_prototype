@@ -17,14 +17,12 @@ def add_images_weighted(summand1:Image, summand2:Image, destination :Image = Non
         The first input image to added.
     summand2 : Image
         The second image to be added.
-    destination : Image
+    destination : Image, optional
         The output image where results are written into.
-    factor1 : float
-        The constant number which will be multiplied with each pixel of 
-    summand1 before adding it.
-    factor2 : float
-        The constant number which will be multiplied with each pixel of 
-    summand2 before adding it.
+    factor1 : float, optional
+        The constant number which will be multiplied with each pixel of summand1 before adding it.
+    factor2 : float, optional
+        The constant number which will be multiplied with each pixel of summand2 before adding it.
      
     
     Returns

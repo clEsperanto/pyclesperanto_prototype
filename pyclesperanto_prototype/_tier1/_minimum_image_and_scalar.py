@@ -12,8 +12,8 @@ def minimum_image_and_scalar(source : Image, destination : Image = None, scalar 
     Parameters
     ----------
     source : Image
-    destination : Image
-    scalar : Number
+    destination : Image, optional
+    scalar : Number, optional
     
     Returns
     -------

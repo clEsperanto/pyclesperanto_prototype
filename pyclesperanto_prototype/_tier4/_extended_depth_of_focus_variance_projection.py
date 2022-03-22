@@ -8,11 +8,11 @@ def extended_depth_of_focus_variance_projection(source : Image, destination : Im
     ----------
     source : Image
     destination : Image, optional
-    radius_x : int
+    radius_x : int, optional
         radius of a sphere where the variance should be determined
-    radius_y : int
+    radius_y : int, optional
         radius of a sphere where the variance should be determined
-    sigma : float
+    sigma : float, optional
         The sigma parameter allows controlling a Gaussian blur which smoothes the altitude map.
 
     Returns

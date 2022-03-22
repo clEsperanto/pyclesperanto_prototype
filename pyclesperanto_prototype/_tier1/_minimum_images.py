@@ -13,7 +13,7 @@ def minimum_images(source1 : Image, source2 : Image, destination : Image = None)
     ----------
     source1 : Image
     source2 : Image
-    destination : Image
+    destination : Image, optional
     
     Returns
     -------

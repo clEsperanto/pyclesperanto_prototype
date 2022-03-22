@@ -9,7 +9,7 @@ def large_hessian_eigenvalue(source : Image, destination : Image = None) -> Imag
     Parameters
     ----------
     source : Image
-    destination : Image
+    destination : Image, optional
 
     Returns
     -------

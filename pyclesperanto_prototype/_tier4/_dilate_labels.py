@@ -18,7 +18,7 @@ def dilate_labels(labeling_source : Image, labeling_destination : Image = None, 
     ----------
     labels_input : Image
         label image to erode
-    labels_destination : Image, optional
+    labels_destination : Image, optional, optional
         result
     radius : int, optional
 

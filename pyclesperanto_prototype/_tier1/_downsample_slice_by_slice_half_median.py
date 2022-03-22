@@ -21,7 +21,7 @@ def downsample_slice_by_slice_half_median(source : Image, destination : Image = 
     Parameters
     ----------
     source : Image
-    destination : Image
+    destination : Image, optional
     
     Returns
     -------

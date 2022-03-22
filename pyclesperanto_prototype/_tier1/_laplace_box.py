@@ -10,7 +10,7 @@ def laplace_box(input : Image, destination : Image = None) -> Image:
     Parameters
     ----------
     input : Image
-    destination : Image
+    destination : Image, optional
     
     Returns
     -------

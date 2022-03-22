@@ -20,7 +20,7 @@ def connected_components_labeling_box(binary_input : Image, labeling_destination
     Parameters
     ----------
     binary_input : Image
-    labeling_destination : Image
+    labeling_destination : Image, optional
     
     Returns
     -------

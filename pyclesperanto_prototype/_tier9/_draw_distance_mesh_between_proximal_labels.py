@@ -13,8 +13,8 @@ def draw_distance_mesh_between_proximal_labels(labels: Image, distance_mesh_dest
     Parameters
     ----------
     labels : Image
-    distance_mesh_destination : Image
-    maximum_distance : float
+    distance_mesh_destination : Image, optional
+    maximum_distance : float, optional
     
     Returns
     -------

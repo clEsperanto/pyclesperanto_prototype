@@ -14,7 +14,7 @@ def add_images(summand1 : Image, summand2 : Image, destination : Image = None) -
         The first input image to added.
     summand2 : Image
         The second image to be added.
-    destination : Image
+    destination : Image, optional
         The output image where results are written into.
      
     

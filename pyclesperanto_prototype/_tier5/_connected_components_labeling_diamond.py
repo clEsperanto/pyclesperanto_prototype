@@ -14,7 +14,7 @@ def connected_components_labeling_diamond(binary_input: Image, labeling_destinat
     Parameters
     ----------
     binary_input : Image
-    labeling_destination : Image
+    labeling_destination : Image, optional
     
     Returns
     -------

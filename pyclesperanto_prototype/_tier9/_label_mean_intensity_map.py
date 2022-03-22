@@ -15,7 +15,7 @@ def label_mean_intensity_map(input : Image, label_map : Image, destination : Ima
     ----------
     input : Image
     label_map : Image
-    destination : Image
+    destination : Image, optional
     
     Returns
     -------

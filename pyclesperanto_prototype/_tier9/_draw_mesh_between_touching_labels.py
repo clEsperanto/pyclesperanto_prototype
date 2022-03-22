@@ -11,7 +11,7 @@ def draw_mesh_between_touching_labels(labels : Image, distance_mesh_destination 
     Parameters
     ----------
     labels : Image
-    distance_mesh_destination : Image
+    distance_mesh_destination : Image, optional
     
     Returns
     -------

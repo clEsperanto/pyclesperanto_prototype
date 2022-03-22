@@ -11,8 +11,8 @@ def power(source : Image, destination : Image = None, exponent : float = 1) -> I
     Parameters
     ----------
     source : Image
-    destination : Image
-    exponent : Number
+    destination : Image, optional
+    exponent : Number, optional
     
     Returns
     -------

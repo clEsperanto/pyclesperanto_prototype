@@ -12,7 +12,7 @@ def absolute(source : Image, destintation : Image = None) -> Image:
     ----------
     source : Image
         The input image to be processed.
-    destination : Image
+    destination : Image, optional
         The output image where results are written into.
      
     

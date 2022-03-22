@@ -12,7 +12,7 @@ def squared_difference(source1 : Image, source2 : Image, destination : Image = N
     ----------
     source1 : Image
     source2 : Image
-    destination : Image
+    destination : Image, optional
     
     Returns
     -------

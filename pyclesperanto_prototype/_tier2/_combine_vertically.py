@@ -12,7 +12,7 @@ def combine_vertically(stack1 : Image, stack2 : Image, destination : Image = Non
     ----------
     stack1 : Image
     stack2 : Image
-    destination : Image
+    destination : Image, optional
     
     Returns
     -------

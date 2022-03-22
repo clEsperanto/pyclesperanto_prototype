@@ -10,9 +10,9 @@ def average_distance_of_n_far_off_distances(distance_matrix : Image, distance_ve
 
     Parameters
     ----------
-    distance_matrix
-    distance_vector_destination
-    n
+    distance_matrix: Image
+    distance_vector_destination: Image, optional
+    n: int
 
     Returns
     -------

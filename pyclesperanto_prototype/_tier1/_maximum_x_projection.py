@@ -10,7 +10,7 @@ def maximum_x_projection(source : Image, destination_max : Image = None) -> Imag
     Parameters
     ----------
     source : Image
-    destination_max : Image
+    destination_max : Image, optional
     
     Returns
     -------

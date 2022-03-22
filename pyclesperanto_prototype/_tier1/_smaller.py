@@ -12,7 +12,7 @@ def smaller(source1 : Image, source2 : Image, destination : Image = None) -> Ima
     ----------
     source1 : Image
     source2 : Image
-    destination : Image
+    destination : Image, optional
     
     Returns
     -------

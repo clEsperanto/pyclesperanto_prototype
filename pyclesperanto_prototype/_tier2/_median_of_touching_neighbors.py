@@ -6,14 +6,12 @@ from .._tier0 import Image
 def median_of_touching_neighbors(values : Image, touch_matrix : Image, median_values_destination : Image = None) -> Image:
     """Takes a touch matrix and a vector of values to determine the median 
     value among touching neighbors for every object. 
-    
-     
-    
+
     Parameters
     ----------
     values : Image
     touch_matrix : Image
-    median_values_destination : Image
+    median_values_destination : Image, optional
     
     Returns
     -------

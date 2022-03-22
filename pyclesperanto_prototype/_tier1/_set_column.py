@@ -10,8 +10,8 @@ def set_column(source : Image, column_index : int = 0, value : float = 0) -> Ima
     Parameters
     ----------
     source : Image
-    column_index : Number
-    value : Number
+    column_index : Number, optional
+    value : Number, optional
     
     Examples
     --------

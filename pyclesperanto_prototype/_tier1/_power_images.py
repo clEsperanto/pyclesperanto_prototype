@@ -10,7 +10,7 @@ def power_images(input : Image, exponent : Image, destination : Image = None) ->
     ----------
     input : Image
     exponent : Image
-    destination : Image
+    destination : Image, optional
     
     Returns
     -------

@@ -23,7 +23,7 @@ def exclude_labels(binary_flaglist : Image, label_map_input : Image, label_map_d
     ----------
     binary_flaglist : Image
     label_map_input : Image
-    label_map_destination : Image
+    label_map_destination : Image, optional
     
     Returns
     -------

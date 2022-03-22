@@ -15,10 +15,10 @@ def generate_proximal_neighbors_matrix(distance_matrix :Image, touch_matrix_dest
     Parameters
     ----------
     distance_matrix : Image
-    touch_matrix_destination : Image
-    min_distance : float, optional
+    touch_matrix_destination : Image, optional
+    min_distance : float, optional, optional
         default : 0
-    max_distance : float, optional
+    max_distance : float, optional, optional
         default: maximum float value 
     
     Returns

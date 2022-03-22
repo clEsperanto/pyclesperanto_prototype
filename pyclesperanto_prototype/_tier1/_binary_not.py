@@ -16,7 +16,7 @@ def binary_not(source : Image, destination : Image = None) -> Image:
     ----------
     source : Image
         The binary input image to be inverted.
-    destination : Image
+    destination : Image, optional
         The output image where results are written into.
      
     

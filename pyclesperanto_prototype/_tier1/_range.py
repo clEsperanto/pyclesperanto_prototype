@@ -15,6 +15,26 @@ def range(source : Image,
           stop_z: int = None,
           step_z: int = None
           ) -> Image:
+    """Crops an image according to a defined range and step size
+
+    Parameters
+    ----------
+    source: Image
+    destination: Image, optional
+    start_x: int, optional
+    stop_x: int, optional
+    step_x: int, optional
+    start_y: int, optional
+    stop_y: int, optional
+    step_y: int, optional
+    start_z: int, optional
+    stop_z: int, optional
+    step_z: int, optional
+
+    Returns
+    -------
+    destination
+    """
 
     if start_x is None:
         start_x = 0

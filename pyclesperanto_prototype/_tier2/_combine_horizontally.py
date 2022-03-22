@@ -12,7 +12,7 @@ def combine_horizontally(stack1 : Image, stack2 : Image, destination : Image = N
     ----------
     stack1 : Image
     stack2 : Image
-    destination : Image
+    destination : Image, optional
     
     Returns
     -------

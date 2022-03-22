@@ -18,7 +18,7 @@ def exclude_labels_on_edges(label_map_input : Image, label_map_destination : Ima
     Parameters
     ----------
     label_map_input : Image
-    label_map_destination : Image
+    label_map_destination : Image, optional
     
     Returns
     -------

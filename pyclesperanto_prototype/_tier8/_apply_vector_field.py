@@ -15,10 +15,11 @@ def apply_vector_field(source : Image, vector_x : Image, vector_y : Image, vecto
         Pixels in this image describe the distance in X direction pixels should be shifted during warping.
     vector_y : Image
         Pixels in this image describe the distance in Y direction pixels should be shifted during warping.
-    vector_z : Image
+    vector_z : Image, optional
         Pixels in this image describe the distance in Z direction pixels should be shifted during warping.
-    destination : Image
+    destination : Image, optional
         The output image where results are written into.
+    linear_interpolation: bool, optional
 
     Returns
     -------

@@ -10,7 +10,7 @@ def sum_z_projection(source : Image, destination : Image = None) -> Image:
     Parameters
     ----------
     source : Image
-    destination_sum : Image
+    destination_sum : Image, optional
     
     Returns
     -------

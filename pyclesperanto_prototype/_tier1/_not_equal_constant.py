@@ -10,10 +10,10 @@ def not_equal_constant(source : Image, destination : Image = None, constant : fl
     ----------
     source : Image
         The image where every pixel is compared to the constant.
-    destination : Image
+    destination : Image, optional
         The resulting binary image where pixels will be 1 only if source1 
     and source2 equal in the given pixel.
-    constant : float
+    constant : float, optional
         The constant where every pixel is compared to.
      
     

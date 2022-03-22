@@ -6,7 +6,7 @@ from .._tier0 import plugin_function
 from .._tier0 import Image
 
 @plugin_function
-def bounding_box(source : Image) -> Image:
+def bounding_box(source : Image):
     """Determines the bounding box of all non-zero pixels in a binary image. 
     
     If called from macro, the positions will be stored in a new row of ImageJs 
@@ -17,7 +17,13 @@ def bounding_box(source : Image) -> Image:
     Parameters
     ----------
     source : Image
-    
+
+    Returns
+    -------
+    list of ints
+        in 2D: min_x, min_y, max_x, max_y
+        in 3D: min_x, min_y, min_z, max_x, max_y, max_z
+
     Examples
     --------
     >>> import pyclesperanto_prototype as cle

@@ -11,7 +11,7 @@ def standard_deviation_z_projection(source : Image, destination : Image = None) 
     Parameters
     ----------
     source : Image
-    destination : Image
+    destination : Image, optional
     
     Returns
     -------

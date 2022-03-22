@@ -16,7 +16,7 @@ def label_maximum_extension_ratio_map(labels : Image, destination : Image = None
     Parameters
     ----------
     labels : Image
-    destination : Image
+    destination : Image, optional
     
     Returns
     -------

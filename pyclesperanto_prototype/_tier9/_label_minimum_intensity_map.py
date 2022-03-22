@@ -14,12 +14,13 @@ def label_minimum_intensity_map(intensity_image : Image, labels : Image, minimum
 
     Parameters
     ----------
-    intensity_image
-    labels
-    minimum_intensity_map
+    intensity_image: Image
+    labels: Image
+    minimum_intensity_map: Image, optional
 
     Returns
     -------
+    minimum_intensity_map
 
     References
     ----------

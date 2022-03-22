@@ -21,7 +21,7 @@ def relabel_sequential(input : Image, output : Image = None, blocksize : int = 4
     Parameters
     ----------
     labeling_input : Image
-    labeling_destination : Image
+    labeling_destination : Image, optional
     blocksize : int, optional
         Renumbering is done in blocks for performance reasons.
         Change the blocksize to adapt to your data and hardware

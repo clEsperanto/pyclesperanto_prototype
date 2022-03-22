@@ -19,7 +19,7 @@ def replace_intensities(input : Image, new_values_vector : Image, destination : 
     ----------
     input : Image
     new_values_vector : Image
-    destination : Image
+    destination : Image, optional
     
     Returns
     -------

@@ -15,6 +15,8 @@ def z_position_range_projection(source_stack: Image, z_position: Image, destinat
         altitude map
     destination : Image, optional
         Projected image
+    start_z:int, optional
+    end_z:int, optional
 
     Returns
     -------

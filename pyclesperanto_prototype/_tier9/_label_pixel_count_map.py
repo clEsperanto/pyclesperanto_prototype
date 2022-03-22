@@ -14,7 +14,7 @@ def label_pixel_count_map(input : Image, destination : Image = None) -> Image:
     Parameters
     ----------
     input : Image
-    destination : Image
+    destination : Image, optional
     
     Returns
     -------

@@ -5,7 +5,6 @@ from .._tier0 import Image
 
 @plugin_function(output_creator=create_square_matrix_from_labelmap)
 def generate_touch_matrix(label_map :Image, touch_matrix_destination :Image = None) -> Image:
-    from .._tier1 import set
     """Takes a labelmap with n labels and generates a (n+1)*(n+1) matrix where 
     all pixels are set to 0 exept those where labels are touching. 
     
@@ -17,7 +16,7 @@ def generate_touch_matrix(label_map :Image, touch_matrix_destination :Image = No
     Parameters
     ----------
     label_map : Image
-    touch_matrix_destination : Image
+    touch_matrix_destination : Image, optional
     
     Returns
     -------
@@ -32,6 +31,8 @@ def generate_touch_matrix(label_map :Image, touch_matrix_destination :Image = No
     ----------
     .. [1] https://clij.github.io/clij2-docs/reference_generateTouchMatrix
     """
+    from .._tier1 import set
+
     set(touch_matrix_destination, 0)
 
     parameters = {

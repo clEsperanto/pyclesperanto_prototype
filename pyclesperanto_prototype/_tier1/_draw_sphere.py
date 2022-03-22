@@ -15,13 +15,13 @@ def draw_sphere(destination : Image, x : float = 0, y : float = 0, z : float = 0
     Parameters
     ----------
     destination : Image
-    x : Number
-    y : Number
-    z : Number
-    radius_x : Number
-    radius_y : Number
-    radius_z : Number
-    value : Number
+    x : Number, optional
+    y : Number, optional
+    z : Number, optional
+    radius_x : Number, optional
+    radius_y : Number, optional
+    radius_z : Number, optional
+    value : Number, optional
     
     Returns
     -------

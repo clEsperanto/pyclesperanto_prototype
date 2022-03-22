@@ -17,7 +17,7 @@ def gauss_otsu_labeling(source : Image, label_image_destination : Image = None, 
         Input grey-value image
     label_image_destination : Image, optional
         Output image
-    outline_sigma : float
+    outline_sigma : float, optional
         controls how precise segmented objects are outlined.
     
     Returns

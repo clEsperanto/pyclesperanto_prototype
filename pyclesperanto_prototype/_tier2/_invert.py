@@ -16,7 +16,7 @@ def invert(source : Image, destination :Image = None) -> Image:
     Parameters
     ----------
     source : Image
-    destination : Image
+    destination : Image, optional
     
     Returns
     -------

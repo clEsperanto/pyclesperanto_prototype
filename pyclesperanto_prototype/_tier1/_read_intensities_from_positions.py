@@ -10,13 +10,13 @@ def read_intensities_from_positions(pointlist : Image, intensity_image : Image, 
 
     Parameters
     ----------
-    pointlist
-    intensity_image
-    values_destination
+    pointlist: Image
+    intensity_image: Image
+    values_destination: Image, optional
 
     Returns
     -------
-
+    values_destination
     """
     from .._tier0 import execute
     from .._tier0 import create

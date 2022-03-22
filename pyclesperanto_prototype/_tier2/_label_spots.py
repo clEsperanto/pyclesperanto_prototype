@@ -17,7 +17,7 @@ def label_spots(input_spots : Image, labelled_spots_destination : Image = None) 
     Parameters
     ----------
     input_spots : Image
-    labelled_spots_destination : Image
+    labelled_spots_destination : Image, optional
     
     Returns
     -------
