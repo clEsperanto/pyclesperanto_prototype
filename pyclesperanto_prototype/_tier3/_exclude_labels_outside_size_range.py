@@ -5,14 +5,14 @@ from .._tier0 import create_none
 from .._tier0 import create_like
 
 @plugin_function(output_creator=create_none, categories=['label processing', 'in assistant'])
-def exclude_labels_outside_size_range(input : Image, destination : Image = None, minimum_size : float = 0, maximum_size : float = 100) -> Image:
+def exclude_labels_outside_size_range(source : Image, destination : Image = None, minimum_size : float = 0, maximum_size : float = 100) -> Image:
     """Removes labels from a label map which are not within a certain size range.
     
     Size of the labels is given as the number of pixel or voxels per label. 
     
     Parameters
     ----------
-    input : Image
+    source : Image
     destination : Image, optional
     minimum_size : Number, optional
     maximum_size : Number, optional
@@ -28,7 +28,7 @@ def exclude_labels_outside_size_range(input : Image, destination : Image = None,
     from .._tier9 import statistics_of_background_and_labelled_pixels
     from .._tier9 import push_regionprops_column
 
-    regionprops = statistics_of_background_and_labelled_pixels(None, input)
+    regionprops = statistics_of_background_and_labelled_pixels(None, source)
 
     values_vector = push_regionprops_column(regionprops, 'area')
 
@@ -43,6 +43,6 @@ def exclude_labels_outside_size_range(input : Image, destination : Image = None,
     binary_or(below, above, flaglist_vector)
 
     from .._tier3 import exclude_labels
-    destination = exclude_labels(flaglist_vector, input, destination)
+    destination = exclude_labels(flaglist_vector, source, destination)
 
     return destination

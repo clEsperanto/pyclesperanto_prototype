@@ -55,16 +55,16 @@ def create_same_type_like(*args):
         dimensions = dimensions.shape[::-1]
     return create(dimensions, dimensions.dtype)
 
-def create_pointlist_from_labelmap(input, *args):
+def create_pointlist_from_labelmap(source, *args):
     from .._tier2 import maximum_of_all_pixels
-    number_of_labels = int(maximum_of_all_pixels(input))
-    number_of_dimensions = len(input.shape)
+    number_of_labels = int(maximum_of_all_pixels(source))
+    number_of_dimensions = len(source.shape)
     
     return create([number_of_dimensions, number_of_labels])
 
-def create_vector_from_labelmap(input, *args):
+def create_vector_from_labelmap(source, *args):
     from .._tier2 import maximum_of_all_pixels
-    number_of_labels = int(maximum_of_all_pixels(input)) + 1
+    number_of_labels = int(maximum_of_all_pixels(source)) + 1
 
     return create([1, number_of_labels])
 
@@ -114,41 +114,41 @@ def create_vector_from_square_matrix(square_matrix, *args):
     return create([1, square_matrix.shape[0]])
 
 
-def create_2d_xy(input):
-    if len(input.shape) == 3:
-        return create([input.shape[2], input.shape[1]])
+def create_2d_xy(source):
+    if len(source.shape) == 3:
+        return create([source.shape[2], source.shape[1]])
     else:
-        return create([input.shape[1], input.shape[0]])
+        return create([source.shape[1], source.shape[0]])
 
-def create_2d_yx(input):
-    if len(input.shape) == 3:
-        return create([input.shape[1], input.shape[2]])
+def create_2d_yx(source):
+    if len(source.shape) == 3:
+        return create([source.shape[1], source.shape[2]])
     else:
-        return create([input.shape[0], 1])
+        return create([source.shape[0], 1])
 
-def create_2d_zy(input):
-    if len(input.shape) == 3:
-        return create([input.shape[0], input.shape[1]])
+def create_2d_zy(source):
+    if len(source.shape) == 3:
+        return create([source.shape[0], source.shape[1]])
     else:
-        return create([1, input.shape[0]])
+        return create([1, source.shape[0]])
 
-def create_2d_yz(input):
-    if len(input.shape) == 3:
-        return create([input.shape[1], input.shape[0]])
+def create_2d_yz(source):
+    if len(source.shape) == 3:
+        return create([source.shape[1], source.shape[0]])
     else:
-        return create([input.shape[0], 1])
+        return create([source.shape[0], 1])
 
-def create_2d_zx(input):
-    if len(input.shape) == 3:
-        return create([input.shape[0], input.shape[2]])
+def create_2d_zx(source):
+    if len(source.shape) == 3:
+        return create([source.shape[0], source.shape[2]])
     else:
-        return create([1, input.shape[1]])
+        return create([1, source.shape[1]])
 
-def create_2d_xz(input):
-    if len(input.shape) == 3:
-        return create([input.shape[2], input.shape[0]])
+def create_2d_xz(source):
+    if len(source.shape) == 3:
+        return create([source.shape[2], source.shape[0]])
     else:
-        return create([input.shape[1], 1])
+        return create([source.shape[1], 1])
 
 def create_none(*args):
     return None

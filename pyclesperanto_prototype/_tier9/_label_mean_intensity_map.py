@@ -5,7 +5,7 @@ from .._tier1 import replace_intensities
 from .._tier1 import set_column
 
 @plugin_function(categories=['combine', 'label measurement', 'map', 'in assistant'], priority=-1)
-def label_mean_intensity_map(input : Image, label_map : Image, destination : Image = None) -> Image:
+def label_mean_intensity_map(source : Image, label_map : Image, destination : Image = None) -> Image:
     """Takes an image and a corresponding label map, determines the mean 
     intensity per label and replaces every label with the that number.
     
@@ -13,7 +13,7 @@ def label_mean_intensity_map(input : Image, label_map : Image, destination : Ima
     
     Parameters
     ----------
-    input : Image
+    source : Image
     label_map : Image
     destination : Image, optional
     
@@ -28,7 +28,7 @@ def label_mean_intensity_map(input : Image, label_map : Image, destination : Ima
     from .._tier9 import statistics_of_background_and_labelled_pixels
     from .._tier9 import push_regionprops_column
 
-    regionprops = statistics_of_background_and_labelled_pixels(input, label_map)
+    regionprops = statistics_of_background_and_labelled_pixels(source, label_map)
 
     values_vector = push_regionprops_column(regionprops, 'mean_intensity')
     set_column(values_vector, 0, 0)

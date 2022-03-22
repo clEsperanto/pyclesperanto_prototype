@@ -3,12 +3,12 @@ from .._tier0 import plugin_function
 from .._tier0 import Image
 
 @plugin_function
-def set_non_zero_pixels_to_pixel_index(input : Image, output : Image = None, offset : float = 1) -> Image:
+def set_non_zero_pixels_to_pixel_index(source : Image, output : Image = None, offset : float = 1) -> Image:
     """Replaces all 0 value pixels in an image with the index of a pixel.
 
     Parameters
     ----------
-    input: Image
+    source: Image
     output: Image, optional
     offset: int, optional
 
@@ -20,7 +20,7 @@ def set_non_zero_pixels_to_pixel_index(input : Image, output : Image = None, off
 
     parameters = {
         "dst":output,
-        "src":input,
+        "src":source,
         "offset":int(offset)
     }
 

@@ -3,14 +3,14 @@ from .._tier0 import plugin_function
 from .._tier0 import Image
 
 @plugin_function(categories=['filter', 'in assistant'])
-def subtract_image_from_scalar(input : Image, destination : Image = None, scalar : float = 0) -> Image:
+def subtract_image_from_scalar(source : Image, destination : Image = None, scalar : float = 0) -> Image:
     """Subtracts one image X from a scalar s pixel wise.
     
     <pre>f(x, s) = s - x</pre> 
     
     Parameters
     ----------
-    input : Image
+    source : Image
     destination : Image, optional
     scalar : Number, optional
     
@@ -30,7 +30,7 @@ def subtract_image_from_scalar(input : Image, destination : Image = None, scalar
 
 
     parameters = {
-        "src":input,
+        "src":source,
         "dst":destination,
         "scalar":float(scalar)
     }

@@ -9,13 +9,13 @@ from .._tier0 import Image
 from .._tier3 import histogram
 
 @plugin_function(categories=['binarize', 'in assistant'], priority=1, output_creator=create_binary_like)
-def threshold_otsu(input : Image, destination : Image = None) -> Image:
+def threshold_otsu(source : Image, destination : Image = None) -> Image:
     """Binarizes an image using Otsu's threshold method [3] implemented in scikit-image[2]
     using a histogram determined on the GPU to create binary images.
     
     Parameters
     ----------
-    input : Image
+    source : Image
     destination : Image, optional
     
     Returns
@@ -35,15 +35,15 @@ def threshold_otsu(input : Image, destination : Image = None) -> Image:
     """
 
     # build a bin-centers array for scikit-image
-    minimum_intensity = minimum_of_all_pixels(input)
-    maximum_intensity = maximum_of_all_pixels(input)
+    minimum_intensity = minimum_of_all_pixels(source)
+    maximum_intensity = maximum_of_all_pixels(source)
 
     range = maximum_intensity - minimum_intensity
 
     bin_centers = np.arange(256) * range / (255) + minimum_intensity
 
     # Determine histogram on GPU
-    hist = pull(histogram(input, num_bins=256, minimum_intensity=minimum_intensity, maximum_intensity=maximum_intensity, determine_min_max=False))
+    hist = pull(histogram(source, num_bins=256, minimum_intensity=minimum_intensity, maximum_intensity=maximum_intensity, determine_min_max=False))
 
     # determine threshold using scikit-image
     threshold = scikit_image_threshold_otsu(hist=(hist, bin_centers))
@@ -51,7 +51,7 @@ def threshold_otsu(input : Image, destination : Image = None) -> Image:
     # print(str(threshold))
 
     # apply the threshold on the GPU
-    destination = greater_constant(input, destination, threshold)
+    destination = greater_constant(source, destination, threshold)
 
     return destination
 

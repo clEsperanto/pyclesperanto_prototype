@@ -8,6 +8,58 @@
 
 ## Backwards compatibility breaking changes
 * The parameter 'destintation' in `absolute()` was renamed to `destination`
+* The parameter 'input' of the following functions were renamed to 'source':
+  * `bottom_hat_box`
+  * `bottom_hat_sphere`
+  * `create_pointlist_from_labelmap`
+  * `create_vector_from_labelmap`
+  * `create_2d_xy`
+  * `create_2d_yx`
+  * `create_2d_zy`
+  * `create_2d_yz`
+  * `create_2d_zx`
+  * `create_2d_xz`
+  * `crop`
+  * `difference_of_gaussian`
+  * `divide_by_gaussian_background`
+  * `exclude_labels_outside_size_range`
+  * `exclude_large_labels`
+  * `exclude_small_labels`
+  * `laplace_box`
+  * `local_maximum_touching_neighbor_count_map`
+  * `label_mean_intensity_map`
+  * `local_mean_touching_neighbor_count_map`
+  * `local_median_touching_neighbor_count_map`
+  * `local_minimum_touching_neighbor_count_map`
+  * `label_pixel_count_map`
+  * `local_standard_deviation_touching_neighbor_count_map`
+  * `nonzero_maximum_box`
+  * `nonzero_maximum_diamond`
+  * `nonzero_minimum_box`
+  * `nonzero_minimum_diamond`
+  * `onlyzero_overwrite_maximum_box`
+  * `onlyzero_overwrite_maximum_diamond`
+  * `power_images`
+  * `reduce_stack`
+  * `relabel_sequential`
+  * `replace_intensities`
+  * `replace_intensity`
+  * `set_non_zero_pixels_to_pixel_index`
+  * `statistics_of_background_and_labelled_pixels`  
+  * `subtract_gaussian_background`
+  * `subtract_image_from_scalar`
+  * `threshold_otsu`
+  * `top_hat_box`
+  * `top_hat_sphere`
+  * `transpose_xy`
+  * `transpose_xz`
+  * `transpose_yz`
+  * `touching_neighbor_count_map`
+  * ``
+  * ``
+  * ``
+  * ``
+  * ``
 
 ## Miscellaneous
 * optional parameters are now marked as such in the docstrings
