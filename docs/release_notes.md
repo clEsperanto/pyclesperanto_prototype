@@ -3,6 +3,12 @@
 ## New features
 * reduce_labels_to_label_edges
 
+## Bug fixes
+* deskew_y didn't work if slice distance was different from 0.3 (Thanks to @DrLachie for reporting and fixing)
+
+## Backwards compatibility breaking changes
+* The parameter 'destintation' in `absolute()` was renamed to `destination`
+
 # 0.15.4 - February 20th, 2022
 
 ## New features
