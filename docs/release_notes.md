@@ -1,6 +1,11 @@
+# upcoming
+
+## New features
+* reduce_labels_to_label_edges
+
 # 0.15.4 - February 20th, 2022
 
-New features:
+## New features
 * Support for pushing XArrays (thanks to @psobolewskiPhD for reporting a related issue)
 
 # 0.15.0 - February 12th, 2022
