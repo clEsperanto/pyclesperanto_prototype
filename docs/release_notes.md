@@ -1,7 +1,7 @@
 # 0.16.0 - March 16th, 2022
 
 ## New features
-* reduce_labels_to_label_edges
+* `reduce_labels_to_label_edges`
 
 ## Bug fixes
 * `deskew_y` produced wrong results in case voxel_size_z was != 0.3. (Thanks to @DrLachie for reporting and fixing)
@@ -55,11 +55,6 @@
   * `transpose_xz`
   * `transpose_yz`
   * `touching_neighbor_count_map`
-  * ``
-  * ``
-  * ``
-  * ``
-  * ``
 
 ## Miscellaneous
 * optional parameters are now marked as such in the docstrings
