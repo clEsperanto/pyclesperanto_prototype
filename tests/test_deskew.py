@@ -3,11 +3,11 @@ import numpy as np
 
 
 def test_deskew_y():
-    source = np.zeros((5, 5, 5))
+    source = np.zeros((10, 10, 10))
     source[1, 1, 1] = 1
 
-    reference = np.zeros((2, 5, 5))
-    reference[0, 3, 1] = 1
+    reference = np.zeros((5, 18, 10))
+    reference[4, 2, 1] = 1
 
     result = cle.deskew_y(source, angle_in_degrees=30)
 
