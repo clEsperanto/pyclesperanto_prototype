@@ -22,5 +22,10 @@ def test_ellipsis():
     assert np.array_equal(   image[..., 0],
                           np_image[..., 0])
 
+    assert np.array_equal(   image[0, ..., 0],
+                          np_image[0, ..., 0])
+
+    assert np.array_equal(   image[0, ..., :],
+                          np_image[0, ..., :])
 
 

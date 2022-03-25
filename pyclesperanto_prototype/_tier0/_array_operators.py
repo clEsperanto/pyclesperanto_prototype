@@ -259,8 +259,6 @@ class ArrayOperators():
         if result is None:
             if isinstance(index, tuple):
                 if any(x is Ellipsis for x in index):
-                    print("Before", index)
-
                     # handle img[1, ..., 1] or img[1, ...]
                     new_index = []
                     for x in index:
@@ -271,8 +269,6 @@ class ArrayOperators():
                         else:
                             new_index.append(x)
                     index = tuple(new_index)
-
-                    print("After", index)
 
                 if any(isinstance(x, slice) for x in index):
                     for i, x in enumerate(index):
@@ -324,17 +320,21 @@ class ArrayOperators():
                                    start_y=y_range.start, stop_y=y_range.stop, step_y=y_range.step,
                                    start_z=z_range.start, stop_z=z_range.stop, step_z=z_range.step)
 
-                    from .._tier0 import create
-                    from .._tier1 import copy_slice, copy_vertical_slice, copy_horizontal_slice
-                    if eliminate_x:
-                        output = create(result.shape[:2], self.dtype)
-                        result = copy_vertical_slice(result, output)
-                    if eliminate_y:
-                        output = create((result.shape[0],result.shape[2]), self.dtype)
-                        result = copy_horizontal_slice(result, output)
-                    if eliminate_z:
-                        output = create(result.shape[1:], self.dtype)
-                        result = copy_slice(result, output)
+                    if (eliminate_x * 1) + (eliminate_y * 1) + (eliminate_z * 1) <= 1:
+                        from .._tier0 import create
+                        from .._tier1 import copy_slice, copy_vertical_slice, copy_horizontal_slice, copy
+                        if eliminate_x:
+                            output = create(result.shape[:2], self.dtype)
+                            result = copy_vertical_slice(result, output)
+                        if eliminate_y:
+                            output = create((result.shape[0],result.shape[2]), self.dtype)
+                            result = copy_horizontal_slice(result, output)
+                        if eliminate_z:
+                            output = create(result.shape[1:], self.dtype)
+                            result = copy_slice(result, output)
+                    else:
+                        from .._tier0 import push, pull
+                        result = push(pull(self).__getitem__(index))
 
         if result is None:
 
