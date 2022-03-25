@@ -271,8 +271,6 @@ class ArrayOperators():
                     index = tuple(new_index)
 
                 if any(isinstance(x, slice) for x in index):
-                    for i, x in enumerate(index):
-                        print(i, x)
 
                     if len(self.shape) > 2:  # 3D image
                         if len(index) > 2:
