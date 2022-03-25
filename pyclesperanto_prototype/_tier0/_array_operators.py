@@ -332,6 +332,7 @@ class ArrayOperators():
                             result = copy_slice(result, output)
                     else:
                         from .._tier0 import push, pull
+                        # todo: this is a necessary workaround because we can't handle 1d-arrays in pyclesperanto yet
                         result = push(pull(self).__getitem__(index))
 
         if result is None:
