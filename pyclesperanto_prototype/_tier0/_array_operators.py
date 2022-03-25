@@ -258,7 +258,25 @@ class ArrayOperators():
 
         if result is None:
             if isinstance(index, tuple):
+                if any(x is Ellipsis for x in index):
+                    print("Before", index)
+
+                    # handle img[1, ..., 1] or img[1, ...]
+                    new_index = []
+                    for x in index:
+                        if x is Ellipsis:
+                            print(len(self.shape), len(index), "lens")
+                            for i in range(len(self.shape) - len(index) + 1):
+                                new_index.append(slice(None, None, None))
+                        else:
+                            new_index.append(x)
+                    index = tuple(new_index)
+
+                    print("After", index)
+
                 if any(isinstance(x, slice) for x in index):
+                    for i, x in enumerate(index):
+                        print(i, x)
 
                     if len(self.shape) > 2:  # 3D image
                         if len(index) > 2:
@@ -301,8 +319,8 @@ class ArrayOperators():
                         z_range = slice(z_range, z_range + 1, 1)
                         eliminate_z = True
 
-                    from .._tier1 import range
-                    result = range(self, start_x=x_range.start, stop_x=x_range.stop, step_x=x_range.step,
+                    from .._tier1 import range as arange
+                    result = arange(self, start_x=x_range.start, stop_x=x_range.stop, step_x=x_range.step,
                                    start_y=y_range.start, stop_y=y_range.stop, step_y=y_range.step,
                                    start_z=z_range.start, stop_z=z_range.stop, step_z=z_range.step)
 
