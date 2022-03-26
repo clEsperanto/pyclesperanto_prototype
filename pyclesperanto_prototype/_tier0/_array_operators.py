@@ -258,6 +258,18 @@ class ArrayOperators():
 
         if result is None:
             if isinstance(index, tuple):
+                if any(x is Ellipsis for x in index):
+                    # handle img[1, ..., 1] or img[1, ...]
+                    new_index = []
+                    for x in index:
+                        if x is Ellipsis:
+                            print(len(self.shape), len(index), "lens")
+                            for i in range(len(self.shape) - len(index) + 1):
+                                new_index.append(slice(None, None, None))
+                        else:
+                            new_index.append(x)
+                    index = tuple(new_index)
+
                 if any(isinstance(x, slice) for x in index):
 
                     if len(self.shape) > 2:  # 3D image
@@ -301,22 +313,27 @@ class ArrayOperators():
                         z_range = slice(z_range, z_range + 1, 1)
                         eliminate_z = True
 
-                    from .._tier1 import range
-                    result = range(self, start_x=x_range.start, stop_x=x_range.stop, step_x=x_range.step,
+                    from .._tier1 import range as arange
+                    result = arange(self, start_x=x_range.start, stop_x=x_range.stop, step_x=x_range.step,
                                    start_y=y_range.start, stop_y=y_range.stop, step_y=y_range.step,
                                    start_z=z_range.start, stop_z=z_range.stop, step_z=z_range.step)
 
-                    from .._tier0 import create
-                    from .._tier1 import copy_slice, copy_vertical_slice, copy_horizontal_slice
-                    if eliminate_x:
-                        output = create(result.shape[:2], self.dtype)
-                        result = copy_vertical_slice(result, output)
-                    if eliminate_y:
-                        output = create((result.shape[0],result.shape[2]), self.dtype)
-                        result = copy_horizontal_slice(result, output)
-                    if eliminate_z:
-                        output = create(result.shape[1:], self.dtype)
-                        result = copy_slice(result, output)
+                    if (eliminate_x * 1) + (eliminate_y * 1) + (eliminate_z * 1) <= 1:
+                        from .._tier0 import create
+                        from .._tier1 import copy_slice, copy_vertical_slice, copy_horizontal_slice, copy
+                        if eliminate_x:
+                            output = create(result.shape[:2], self.dtype)
+                            result = copy_vertical_slice(result, output)
+                        if eliminate_y:
+                            output = create((result.shape[0],result.shape[2]), self.dtype)
+                            result = copy_horizontal_slice(result, output)
+                        if eliminate_z:
+                            output = create(result.shape[1:], self.dtype)
+                            result = copy_slice(result, output)
+                    else:
+                        from .._tier0 import push, pull
+                        # todo: this is a necessary workaround because we can't handle 1d-arrays in pyclesperanto yet
+                        result = push(pull(self).__getitem__(index))
 
         if result is None:
 
