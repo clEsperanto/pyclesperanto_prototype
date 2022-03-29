@@ -85,7 +85,7 @@ def transform_from_string(text: str, image: np.ndarray):
     return at
 
 
-def shear_angle_to_shear_factor(angle_in_degrees):
+def shear_angle_to_shear_factor(angle_in_degrees,voxel_size_1:float=1,voxel_size_2:float=1):
     """
     Converts a shearing angle into a shearing factor
 
@@ -97,8 +97,9 @@ def shear_angle_to_shear_factor(angle_in_degrees):
     -------
     float
     """
-    return 1.0 / math.tan((90 - angle_in_degrees) * math.pi / 180)
+    return math.sin((90 - angle_in_degrees) * math.pi / 180.0) * (voxel_size_2 / voxel_size_1)
 
+#TODO: MODIFY
 def shear_factor_to_shear_angle(shear_factor):
     """
     Converts a shearing angle into a shearing factor

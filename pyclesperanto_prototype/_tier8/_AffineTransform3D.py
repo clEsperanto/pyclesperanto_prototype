@@ -263,7 +263,7 @@ class AffineTransform3D:
         ]))
         return self
 
-    def shear_in_x_plane(self,angle_y_in_degrees: float = 0, angle_z_in_degrees: float = 0 ):
+    def shear_in_x_plane(self,angle_y_in_degrees: float = 0, angle_z_in_degrees: float = 0,voxel_size_y:float = 1,voxel_size_z:float = 1):
         """Shear image in X-plane (a.k.a. YZ-plane) along Y and/or Z direction.
 
         Tip: This can be used for single objective lightsheet image reconstruction / deskewing.
@@ -286,8 +286,8 @@ class AffineTransform3D:
         assert(angle_y_in_degrees >-90 and angle_y_in_degrees<90), "shear angle must be between 90 and -90 degrees"
         assert(angle_z_in_degrees >-90 and angle_z_in_degrees<90), "shear angle must be between 90 and -90 degrees"
         
-        shear_factor_yx = shear_angle_to_shear_factor(angle_y_in_degrees)
-        shear_factor_zx = shear_angle_to_shear_factor(angle_z_in_degrees)
+        shear_factor_yx = shear_angle_to_shear_factor(angle_y_in_degrees,voxel_size_y,voxel_size_z)
+        shear_factor_zx = shear_angle_to_shear_factor(angle_z_in_degrees,voxel_size_y,voxel_size_z)
 
         # shearing
         self._pre_concatenate(np.asarray([
