@@ -199,7 +199,7 @@ class AffineTransform3D:
 
         return self
 
-    def shear_in_z_plane(self,angle_x_in_degrees: float = 0, angle_y_in_degrees: float = 0 ):
+    def shear_in_z_plane(self,angle_x_in_degrees: float = 90, angle_y_in_degrees: float = 90,voxel_size_x:float = 1,voxel_size_y:float = 1,voxel_size_z:float = 1):
         """Shear image in Z-plane (a.k.a. XY-plane) along X and/or Y direction.
 
         Angles need to be specified in degrees. To convert radians to degrees use this formula:
@@ -216,11 +216,11 @@ class AffineTransform3D:
         -------
         self
         """
-        assert(angle_x_in_degrees >-90 and angle_x_in_degrees<90), "shear angle must be between 90 and -90 degrees"
-        assert(angle_y_in_degrees >-90 and angle_y_in_degrees<90), "shear angle must be between 90 and -90 degrees"
+        assert(angle_x_in_degrees >=-90 and angle_x_in_degrees<=90), "shear angle must be between 90 and -90 degrees"
+        assert(angle_y_in_degrees >=-90 and angle_y_in_degrees<=90), "shear angle must be between 90 and -90 degrees"
 
-        shear_factor_xz = shear_angle_to_shear_factor(angle_x_in_degrees)
-        shear_factor_yz = shear_angle_to_shear_factor(angle_y_in_degrees)
+        shear_factor_xz = shear_angle_to_shear_factor(angle_x_in_degrees,voxel_size_x, voxel_size_y)
+        shear_factor_yz = shear_angle_to_shear_factor(angle_y_in_degrees,voxel_size_y, voxel_size_x)
 
         # shearing
         self._pre_concatenate(np.asarray([
