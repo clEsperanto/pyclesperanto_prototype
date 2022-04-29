@@ -85,34 +85,26 @@ def transform_from_string(text: str, image: np.ndarray):
     return at
 
 
-def shear_angle_to_shear_factor(angle_in_degrees,lateral_voxel_size:float=1,axial_voxel_size:float=1):
+def shear_angle_to_shear_factor(angle_in_degrees):
     """
     Converts a shearing angle into a shearing factor
-
     Parameters
     ----------
     angle_in_degrees: float
-    lateral_voxel_size (float, optional):voxel size in lateral axis in reference to plane being processed. Defaults to 1.
-    axial_voxel_size (float, optional): voxel size in axial axis in reference to plane being processed. Defaults to 1.
     Returns
     -------
     float
     """
-    return math.sin((90 - angle_in_degrees) * math.pi / 180.0) * (axial_voxel_size / lateral_voxel_size)
+    return 1.0 / math.tan((90 - angle_in_degrees) * math.pi / 180)
 
-
-def shear_factor_to_shear_angle(shear_factor:float,lateral_voxel_size:float=1,axial_voxel_size:float=1):
+def shear_factor_to_shear_angle(shear_factor):
     """
     Converts a shearing angle into a shearing factor
-
-    Args:
-        shear_factor (float)
-        lateral_voxel_size (float, optional):voxel size in lateral axis in reference to plane being processed. Defaults to 1.
-        axial_voxel_size (float, optional): voxel size in axial axis in reference to plane being processed. Defaults to 1.
-
-    Returns:
-        shear_angle(float)
+    Parameters
+    ----------
+    shear_factor: float
+    Returns
+    -------
+    float
     """
-
-    
-    return  round((90 - math.asin(shear_factor*(lateral_voxel_size/axial_voxel_size))*180/math.pi),2)
+    return  - math.atan(1.0 / shear_factor) * 180 / math.pi + 90
