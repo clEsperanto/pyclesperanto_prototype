@@ -88,11 +88,9 @@ def transform_from_string(text: str, image: np.ndarray):
 def shear_angle_to_shear_factor(angle_in_degrees):
     """
     Converts a shearing angle into a shearing factor
-
     Parameters
     ----------
     angle_in_degrees: float
-
     Returns
     -------
     float
@@ -102,11 +100,9 @@ def shear_angle_to_shear_factor(angle_in_degrees):
 def shear_factor_to_shear_angle(shear_factor):
     """
     Converts a shearing angle into a shearing factor
-
     Parameters
     ----------
     shear_factor: float
-
     Returns
     -------
     float
