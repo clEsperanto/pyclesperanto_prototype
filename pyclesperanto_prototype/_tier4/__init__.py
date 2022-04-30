@@ -1,3 +1,4 @@
+from ._combine_labels import combine_labels
 from ._connected_components_labeling_box import connected_components_labeling_box
 from ._connected_components_labeling_box import connected_components_labeling_box as label
 from ._proximal_other_labels_count_map import proximal_other_labels_count_map
