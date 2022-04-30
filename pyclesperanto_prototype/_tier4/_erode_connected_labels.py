@@ -19,10 +19,6 @@ def erode_connected_labels(labels_input : Image, labels_destination : Image = No
     Returns
     -------
     labels_destination
-
-    See Also
-    --------
-    ..[1] https://clij.github.io/clij2-docs/reference_erodeLabels
     """
     from .._tier1 import greater_constant
     from .._tier1 import copy
