@@ -1,3 +1,13 @@
+# 0.17.0 - April 30th, 2022
+
+## Bug fixes
+* Support ellipsis `a[1:, ...]` when accessing GPU-backed images (thanks for reporting the issue [@tlambert03](https://github.com/tlambert03))
+* Solved issue in deskew_x (thanks to [@pr4deepr](https://github.com/pr4deepr))
+
+## Backwards comptatibiltiy breaking changes
+
+* Due to changes in how indexing arrays are handled, it is possible that in special cases, numpy arrays are returned where former versions of pyclesperanto_prototype raised an error. Example: An array-access that results in a 1d array will return a numpy array.
+
 # 0.16.0 - March 16th, 2022
 
 ## New features
