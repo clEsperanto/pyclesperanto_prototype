@@ -1,3 +1,12 @@
+# 0.17.1 - May 1st, 2022
+
+## New features
+* `combine_labels`
+* `erode_connected_labels`  
+* `exclude_labels_with_average_values_out_of_range`
+* `exclude_labels_with_average_values_with_range`
+* `subtract_labels`
+
 # 0.17.0 - April 30th, 2022
 
 ## Bug fixes
