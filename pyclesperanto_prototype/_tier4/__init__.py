@@ -29,4 +29,5 @@ from ._merge_touching_labels import merge_touching_labels
 from ._proximal_neighbor_count_map import proximal_neighbor_count_map
 from ._sorensen_dice_coefficient import sorensen_dice_coefficient
 from ._spots_to_pointlist import spots_to_pointlist
+from ._subtract_labels import subtract_labels
 from ._touching_neighbor_count_map import touching_neighbor_count_map
