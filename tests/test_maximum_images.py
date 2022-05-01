@@ -45,7 +45,7 @@ def test_maximum_images_with_types():
     ])
 
     reference = cle.push(np.asarray([
-        [0, 2, 1, 3, 0],
+        [0, 3, 3, 4, 0],
     ]))
 
     result1 = cle.maximum_images(test1.astype(int), test2.astype(int))
