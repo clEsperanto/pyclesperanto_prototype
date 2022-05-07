@@ -1,6 +1,34 @@
 from .._tier0 import Image
 
 def imshow(image : Image, title : str = None, labels : bool = False, min_display_intensity : float = None, max_display_intensity : float = None, color_map = None, plot = None, colorbar:bool = False, colormap = None, alpha:float = None, continue_drawing:bool = False):
+    """Visualize an image, e.g. in Jupyter notebooks.
+
+    Parameters
+    ----------
+    image: np.ndarray
+        numpy or OpenCL-backed image to visualize
+    title: str
+        Obsolete (kept for ImageJ-compatibility)
+    labels: bool
+        True: integer labels will be visualized with colors
+        False: Specified or default colormap will be used to display intensities.
+    min_display_intensity: float
+        lower limit for display range
+    max_display_intensity: float
+        upper limit for display range
+    color_map: str
+        deprecated, use colormap instead
+    plot: matplotlib axis
+        Plot object where the image should be shown. Useful for putting multiple images in subfigures.
+    colorbar: bool
+        True puts a colorbar next to the image. Will not work with label images and when visualizing multiple
+        images (continue_drawing=True).
+    colormap: str or matplotlib colormap
+    alpha: float
+        alpha blending value
+    continue_drawing: float
+        True: the next shown image can be visualized on top of the current one, e.g. with alpha = 0.5
+    """
     from .._tier0 import pull
     from .._tier1 import maximum_z_projection
 
