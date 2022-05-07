@@ -1,3 +1,8 @@
+# 0.17.2 - May 7th, 2022
+
+## Bug fix
+* pushing pyopencl-arrays caused error (thanks to @psobolewskiPhD for reporting)
+
 # 0.17.1 - May 1st, 2022
 
 ## New features
