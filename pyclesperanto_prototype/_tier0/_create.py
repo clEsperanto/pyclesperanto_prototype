@@ -29,6 +29,8 @@ def create_like(*args):
         dimensions = dimensions.shape
     elif isinstance(dimensions, np.ndarray):
         dimensions = dimensions.shape[::-1]
+    elif hasattr(dimensions, "shape"):
+        dimensions = dimensions.shape
     return create(dimensions)
 
 def create_binary_like(*args):
@@ -37,6 +39,8 @@ def create_binary_like(*args):
         dimensions = dimensions.shape
     elif isinstance(dimensions, np.ndarray):
         dimensions = dimensions.shape[::-1]
+    elif hasattr(dimensions, "shape"):
+        dimensions = dimensions.shape
     return create(dimensions, np.uint8)
 
 def create_labels_like(*args):
@@ -45,6 +49,8 @@ def create_labels_like(*args):
         dimensions = dimensions.shape
     elif isinstance(dimensions, np.ndarray):
         dimensions = dimensions.shape[::-1]
+    elif hasattr(dimensions, "shape"):
+        dimensions = dimensions.shape
     return create(dimensions, np.uint32)
 
 def create_same_type_like(*args):
@@ -53,6 +59,8 @@ def create_same_type_like(*args):
         dimensions = dimensions.shape
     elif isinstance(dimensions, np.ndarray):
         dimensions = dimensions.shape[::-1]
+    elif hasattr(dimensions, "shape"):
+        dimensions = dimensions.shape
     return create(dimensions, dimensions.dtype)
 
 def create_pointlist_from_labelmap(source, *args):
