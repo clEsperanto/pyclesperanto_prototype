@@ -271,7 +271,6 @@ class ArrayOperators():
                     index = tuple(new_index)
 
                 if any(isinstance(x, slice) for x in index):
-
                     if len(self.shape) > 2:  # 3D image
                         if len(index) > 2:
                             x_range = index[2]
@@ -298,6 +297,13 @@ class ArrayOperators():
                         else:
                             y_range = slice(None, None, None)
 
+                        z_range = slice(None, None, None)
+
+                    if x_range is None:
+                        x_range = slice(None, None, None)
+                    if y_range is None:
+                        y_range = slice(None, None, None)
+                    if z_range is None:
                         z_range = slice(None, None, None)
 
                     eliminate_x = False
