@@ -30,14 +30,20 @@ Also check out the [napari workflow optimizer](https://github.com/haesleinhuepf/
 The [full reference](https://clij.github.io/clij2-docs/reference__pyclesperanto) is available as part of the CLIJ2 documentation.
 
 ## Installation
-* Get a python environment, e.g. via [mini-conda](https://docs.conda.io/en/latest/miniconda.html). If you never used python/conda environments before, please follow the instructions [here](https://mpicbg-scicomp.github.io/ipf_howtoguides/guides/Python_Conda_Environments) first.
-* Install [pyopencl](https://documen.tician.de/pyopencl/), e.g. via conda:
+* Get a conda/python environment, e.g. via [mini-conda](https://docs.conda.io/en/latest/miniconda.html). If you never used python/conda environments before, please follow the instructions [here](https://biapol.github.io/blog/johannes_mueller/anaconda_getting_started/) first.
 
 ```
-conda install -c conda-forge pyopencl
+conda create --name cle_39 python=3.9
+conda activate cle_39
 ```
 
-Afterwards, install py-clesperanto using pip:
+* Install pyclesperanto-prototype using conda:
+
+```
+conda install -c conda-forge pyclesperanto-prototype
+```
+
+OR using pip:
 
 ```
 pip install pyclesperanto-prototype
