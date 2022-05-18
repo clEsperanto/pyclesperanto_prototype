@@ -49,6 +49,14 @@ OR using pip:
 pip install pyclesperanto-prototype
 ```
 
+Mac-users please also install this:
+
+    conda install -c conda-forge ocl_icd_wrapper_apple
+    
+Linux users please also install this:
+    
+    conda install -c conda-forge ocl-icd-system
+
 ## Example code
 A basic image procressing workflow loads blobs.gif and counts the number of gold particles:
 
