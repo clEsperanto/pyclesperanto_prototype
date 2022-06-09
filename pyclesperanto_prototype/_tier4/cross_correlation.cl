@@ -19,37 +19,33 @@ __kernel void cross_correlation(IMAGE_src1_TYPE src1,
 
     const POS_src1_TYPE pos = POS_src1_INSTANCE(x, y, z, 0);
 
-    printf(" ");
-    if (x == 0 && y == 0) {
-        printf("%d %d", kernelWidth, kernelHeight);
-    }
 
     float sum1 = 0;
     float sum2 = 0;
     float sum3 = 0;
 
-      for (int cx = -c.x; cx < (-c.x + kernelWidth); ++cx) {
-        for (int cy = -c.y; cy < (-c.y + kernelHeight); ++cy) {
-          for (int cz = -c.z; cz < (-c.z + kernelDepth); ++cz) {
+      for (int cx = -c.x; cx <= c.x; ++cx) {
+        for (int cy = -c.y; cy <= c.y; ++cy) {
+          for (int cz = -c.z; cz <= c.z; ++cz) {
 
-            POS_src2_TYPE coord_kernel = POS_src2_INSTANCE(cx,cy,cz,0);
-            POS_src1_TYPE coord_image = pos + POS_src1_INSTANCE(cx,cy,cz,0);
+            POS_src2_TYPE coord_kernel = POS_src2_INSTANCE(cx + c.x, cy + c.y, cz + c.z, 0);
+            POS_src1_TYPE coord_image = pos + POS_src1_INSTANCE(cx, cy, cz, 0);
 
             float Ia = READ_IMAGE(src1, sampler, coord_image).x;
             float mean_Ia = READ_IMAGE(mean_src1, sampler, coord_image).x;
 
             float Ib = READ_IMAGE(src2, sampler, coord_kernel).x;
 
+            //sum1 = sum1 + (Ia - mean_Ia) * (Ib - mean_src2);
+            //sum2 = sum2 + pow((float)(Ia - mean_Ia), (float)2.0);
+            //sum3 = sum3 + pow((float)(Ib - mean_src2), (float)2.0);
 
-            sum1 = sum1 + (Ia - mean_Ia) * (Ib - mean_src2);
-            sum2 = sum2 + pow((float)(Ia - mean_Ia), (float)2.0);
-            sum3 = sum3 + pow((float)(Ib - mean_src2), (float)2.0);
+            sum1 = sum1 + (Ia) * (Ib);
+            sum2 = sum2 + pow((float)(Ia), (float)2.0);
+            sum3 = sum3 + pow((float)(Ib), (float)2.0);
           }
         }
       }
-      if (x == 0 && y == 0) {
-        printf("%f %f", sum2, sum3);
-    }
 
       float result = sum1 / pow((float)(sum2 * sum3), (float)0.5);
       float n = kernelWidth * kernelHeight * kernelDepth;
