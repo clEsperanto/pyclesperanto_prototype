@@ -1,9 +1,7 @@
 const sampler_t sampler = CLK_NORMALIZED_COORDS_FALSE | CLK_ADDRESS_CLAMP_TO_EDGE | CLK_FILTER_NEAREST;
 
-__kernel void cross_correlation(IMAGE_src1_TYPE src1,
-                                    IMAGE_mean_src1_TYPE mean_src1,
+__kernel void local_cross_correlation(IMAGE_src1_TYPE src1,
                                     IMAGE_src2_TYPE src2,
-                                    float mean_src2,
                                     IMAGE_dst_TYPE dst)
 {
 
@@ -19,7 +17,6 @@ __kernel void cross_correlation(IMAGE_src1_TYPE src1,
 
     const POS_src1_TYPE pos = POS_src1_INSTANCE(x, y, z, 0);
 
-
     float sum1 = 0;
     float sum2 = 0;
     float sum3 = 0;
@@ -32,14 +29,9 @@ __kernel void cross_correlation(IMAGE_src1_TYPE src1,
             POS_src1_TYPE coord_image = pos + POS_src1_INSTANCE(cx, cy, cz, 0);
 
             float Ia = READ_IMAGE(src1, sampler, coord_image).x;
-            float mean_Ia = READ_IMAGE(mean_src1, sampler, coord_image).x;
-
             float Ib = READ_IMAGE(src2, sampler, coord_kernel).x;
 
-            //sum1 = sum1 + (Ia - mean_Ia) * (Ib - mean_src2);
-            //sum2 = sum2 + pow((float)(Ia - mean_Ia), (float)2.0);
-            //sum3 = sum3 + pow((float)(Ib - mean_src2), (float)2.0);
-
+            // https://anomaly.io/understand-auto-cross-correlation-normalized-shift/index.html
             sum1 = sum1 + (Ia) * (Ib);
             sum2 = sum2 + pow((float)(Ia), (float)2.0);
             sum3 = sum3 + pow((float)(Ib), (float)2.0);
@@ -48,12 +40,7 @@ __kernel void cross_correlation(IMAGE_src1_TYPE src1,
       }
 
       float result = sum1 / pow((float)(sum2 * sum3), (float)0.5);
-      float n = kernelWidth * kernelHeight * kernelDepth;
 
       WRITE_IMAGE(dst, POS_dst_INSTANCE(x, y, z, 0), CONVERT_dst_PIXEL_TYPE(result));
 
 }
-
-
-// Go back to Robert's code
-// Set radius to kernel size (mean image for source and one value for kernel)
