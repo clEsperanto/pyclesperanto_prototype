@@ -25,5 +25,5 @@ def local_cross_correlation(source: Image, kernel: Image, destination: Image = N
         "dst": destination,
     }
 
-    execute(__file__, 'local_cross_correlation.cl', 'local_cross_correlation', destination.shape, parameters)
+    execute(__file__, '../clij-opencl-kernels/kernels/local_cross_correlation.cl', 'local_cross_correlation', destination.shape, parameters)
     return destination
