@@ -154,7 +154,7 @@ def _determine_translation_and_bounding_box(source: Image, affine_transformation
     min_coordinate = transformed_bounding_box.min(axis=0)
     max_coordinate = transformed_bounding_box.max(axis=0)
     # determine the size of the transformed bounding box
-    new_shape = (max_coordinate - min_coordinate)[0:3].astype(int).tolist()[::-1]
+    new_shape = np.around((max_coordinate - min_coordinate)[0:3]).astype(int).tolist()[::-1]
 
     # we make a copy to not modify the original transform
     new_affine_transform = AffineTransform3D()
