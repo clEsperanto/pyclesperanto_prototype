@@ -1,4 +1,5 @@
 from pyclesperanto_prototype._tier0 import Image, plugin_function, execute
+from pyclesperanto_prototype._tier9 import imshow
 
 @plugin_function(categories=['filter', 'combine', 'in assistant'])
 def local_cross_correlation(source: Image, kernel: Image, destination: Image = None) -> Image:
@@ -25,5 +26,5 @@ def local_cross_correlation(source: Image, kernel: Image, destination: Image = N
         "dst": destination,
     }
 
-    execute(__file__, '../clij-opencl-kernels/kernels/local_cross_correlation.cl', 'local_cross_correlation', destination.shape, parameters)
+    execute(__file__, './local_cross_correlation.cl', 'local_cross_correlation', destination.shape, parameters)
     return destination
