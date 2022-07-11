@@ -1,0 +1,12 @@
+services:
+    pyclesperanto:
+        build:
+            context: .
+            dockerfile: pyclesperanto.dockerfile
+        deploy:
+            resources:
+                reservations:
+                    devices:
+                        - capabilities: [gpu]
+        volumes:
+            - ./src:/data

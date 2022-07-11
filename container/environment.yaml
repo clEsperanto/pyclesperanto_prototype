@@ -1,0 +1,11 @@
+name: pyclesperanto
+
+channels:
+  - conda-forge
+  - anaconda
+  
+dependencies:
+  - pyopencl
+  - pip
+  - pip:
+    - pyclesperanto-prototype
