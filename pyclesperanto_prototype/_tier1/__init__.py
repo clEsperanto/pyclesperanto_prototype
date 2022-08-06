@@ -9,13 +9,17 @@ from ._average_distance_of_n_shortest_distances import average_distance_of_n_sho
 from ._average_distance_of_n_nearest_distances import average_distance_of_n_nearest_distances
 from ._average_distance_of_touching_neighbors import average_distance_of_touching_neighbors
 from ._binary_and import binary_and
+from ._binary_and import binary_and as logical_and
 from ._binary_and import binary_and as binary_intersection
 from ._binary_edge_detection import binary_edge_detection
 from ._binary_not import binary_not
+from ._binary_not import binary_not as logical_not
 from ._binary_or import binary_or
+from ._binary_or import binary_or as logical_or
 from ._binary_or import binary_or as binary_union
 from ._binary_subtract import binary_subtract
 from ._binary_xor import binary_xor
+from ._binary_xor import binary_xor as logical_xor
 from ._convolve import convolve
 from ._copy import copy
 from ._copy_slice import copy_slice
