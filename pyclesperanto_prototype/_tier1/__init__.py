@@ -125,6 +125,7 @@ from ._touch_matrix_to_mesh import touch_matrix_to_mesh
 from ._maximum_sphere import maximum_sphere
 from ._minimum_sphere import minimum_sphere
 from ._multiply_matrix import multiply_matrix
+from ._reciprocal import reciprocal
 from ._set import set
 from ._set_column import set_column
 from ._set_image_borders import set_image_borders
