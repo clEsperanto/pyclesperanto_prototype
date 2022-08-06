@@ -70,6 +70,7 @@ from ._mask import mask
 from ._mask_label import mask_label
 from ._maximum_image_and_scalar import maximum_image_and_scalar
 from ._maximum_images import maximum_images
+from ._maximum_images import maximum_images as maximum
 from ._maximum_box import maximum_box
 from ._maximum_distance_of_touching_neighbors import maximum_distance_of_touching_neighbors
 from ._maximum_distance_of_n_shortest_distances import maximum_distance_of_n_shortest_distances
@@ -88,6 +89,7 @@ from ._minimum_box import minimum_box
 from ._minimum_distance_of_touching_neighbors import minimum_distance_of_touching_neighbors
 from ._minimum_image_and_scalar import minimum_image_and_scalar
 from ._minimum_images import minimum_images
+from ._minimum_images import minimum_images as minimum
 from ._minimum_x_projection import minimum_x_projection
 from ._minimum_y_projection import minimum_y_projection
 from ._minimum_z_projection import minimum_z_projection
