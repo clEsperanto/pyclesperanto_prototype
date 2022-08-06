@@ -33,9 +33,6 @@ def nan_to_num(source : Image, destination : Image = None, nan : float = 0, posi
     --------
     ..[1] https://numpy.org/doc/stable/reference/generated/numpy.nan_to_num.html
     """
-    print("posinf", float(posinf))
-    print("neginf", neginf)
-
     parameters = {
         "dst":destination,
         "src":source,
