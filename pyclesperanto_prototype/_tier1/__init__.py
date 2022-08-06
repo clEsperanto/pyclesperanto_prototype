@@ -1,4 +1,5 @@
 from ._absolute import absolute
+from ._absolute import absolute as fabs
 from ._add_images_weighted import add_images_weighted
 from ._add_image_and_scalar import add_image_and_scalar
 from ._average_distance_of_n_far_off_distances import average_distance_of_n_far_off_distances
