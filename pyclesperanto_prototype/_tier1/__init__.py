@@ -23,6 +23,8 @@ from ._copy_horizontal_slice import copy_horizontal_slice
 from ._copy_vertical_slice import copy_vertical_slice
 from ._count_touching_neighbors import count_touching_neighbors
 from ._crop import crop
+from ._cubic_root import cubic_root
+from ._cubic_root import cubic_root as cbrt
 from ._detect_label_edges import detect_label_edges
 from ._detect_maxima_box import detect_maxima_box
 from ._detect_minima_box import detect_minima_box
