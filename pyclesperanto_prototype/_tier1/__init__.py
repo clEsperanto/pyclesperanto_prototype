@@ -137,6 +137,8 @@ from ._smaller_constant import smaller_constant
 from ._smaller_or_equal import smaller_or_equal
 from ._smaller_or_equal_constant import smaller_or_equal_constant
 from ._sobel import sobel
+from ._square_root import square_root
+from ._square_root import square_root as sqrt
 from ._standard_deviation_z_projection import standard_deviation_z_projection
 from ._subtract_image_from_scalar import subtract_image_from_scalar
 from ._sum_x_projection import sum_x_projection
