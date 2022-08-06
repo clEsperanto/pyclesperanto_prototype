@@ -46,6 +46,7 @@ from ._erode_box_slice_by_slice import erode_box_slice_by_slice
 from ._erode_sphere import erode_sphere
 from ._erode_sphere_slice_by_slice import erode_sphere_slice_by_slice
 from ._exponential import exponential
+from ._exponential import exponential as exp
 from ._execute_separable_kernel import execute_separable_kernel
 from ._flip import flip
 from ._gaussian_blur import gaussian_blur
@@ -66,6 +67,7 @@ from ._hessian_eigenvalues import hessian_eigenvalues
 from ._laplace_box import laplace_box
 from ._laplace_diamond import laplace_diamond
 from ._logarithm import logarithm
+from ._logarithm import logarithm as log
 from ._mask import mask
 from ._mask_label import mask_label
 from ._maximum_image_and_scalar import maximum_image_and_scalar
