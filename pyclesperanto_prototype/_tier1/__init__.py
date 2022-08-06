@@ -130,6 +130,7 @@ from ._set_non_zero_pixels_to_pixel_index import set_non_zero_pixels_to_pixel_in
 from ._set_where_x_equals_y import set_where_x_equals_y
 from ._set_where_x_greater_than_y import set_where_x_greater_than_y
 from ._set_where_x_smaller_than_y import set_where_x_smaller_than_y
+from ._sign import sign
 from ._smaller import smaller
 from ._smaller_constant import smaller_constant
 from ._smaller_or_equal import smaller_or_equal
