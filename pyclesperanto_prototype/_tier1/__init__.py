@@ -93,6 +93,8 @@ from ._minimum_images import minimum_images as minimum
 from ._minimum_x_projection import minimum_x_projection
 from ._minimum_y_projection import minimum_y_projection
 from ._minimum_z_projection import minimum_z_projection
+from ._modulo_images import modulo_images
+from ._modulo_images import modulo_images as mod
 from ._multiply_image_and_coordinate import multiply_image_and_coordinate
 from ._multiply_image_and_scalar import multiply_image_and_scalar
 from ._multiply_images import multiply_images
