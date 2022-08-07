@@ -351,3 +351,83 @@ class ArrayOperators():
         if result.size == 1 and isinstance(result, (ArrayOperators)):
             result = result.get()
         return result
+
+    # adapted from https://github.com/napari/napari/blob/d6bc683b019c4a3a3c6e936526e29bbd59cca2f4/napari/utils/notebook_display.py#L54-L73
+    def _repr_png_(self):
+        """PNG representation of the image object for IPython.
+        Returns
+        -------
+        In memory binary stream containing a PNG matplotlib image.
+        """
+        import numpy as np
+        from io import BytesIO
+        from .._tier9 import imshow
+
+        labels = (self.dtype == np.uint32)
+
+        import matplotlib.pyplot as plt
+        imshow(self,
+               labels=labels,
+               continue_drawing=True,
+               colorbar=not labels)
+
+        with BytesIO() as file_obj:
+            plt.savefig(file_obj, format='png')
+            plt.close() # supress plot output
+            file_obj.seek(0)
+            png = file_obj.read()
+        return png
+
+    def _repr_html_(self):
+        """HTML representation of the image object for IPython.
+        Returns
+        -------
+        HTML text with the image and some properties.
+        """
+        import base64
+        png = self._repr_png_()
+        url = 'data:image/png;base64,' + base64.b64encode(png).decode('utf-8')
+        image = f'<img src="{url}"></img>'
+
+        size_in_pixels = np.prod(self.shape)
+        size_in_bytes = size_in_pixels * self.dtype.itemsize
+
+        if size_in_bytes > 1024:
+            size_in_bytes = size_in_bytes / 1024
+            if size_in_bytes > 1024:
+                size_in_bytes = size_in_bytes / 1024
+                if size_in_bytes > 1024:
+                    size_in_bytes = size_in_bytes / 1024
+                    size = "{:.1f}".format(size_in_bytes) + " GB"
+                else:
+                    size = "{:.1f}".format(size_in_bytes) + " MB"
+            else:
+                size = "{:.1f}".format(size_in_bytes) + " kB"
+        else:
+            size = "{:.1f}".format(size_in_bytes) + " B"
+
+        if size_in_pixels < 100:
+            data = "<pre>" + str(self) + "</pre>"
+        else:
+            data = ""
+
+        all = [
+            "<table>",
+            "<tr>",
+            "<td>",
+            image,
+            "</td>",
+            "<td style=\"text-align: left; vertical-align: top;\">",
+            "<b><a href=\"https://github.com/clEsperanto/pyclesperanto_prototype\" target=\"_blank\">cle._</a> image</b><br/>",
+            "<table>",
+            "<tr><td>shape</td><td>" + str(self.shape).replace(" ", "&nbsp;") + "</td></tr>",
+            "<tr><td>dtype</td><td>" + str(self.dtype) + "</td></tr>",
+            "<tr><td>size</td><td>" + size + "</td></tr>",
+            "</table>",
+            data,
+            "</td>",
+            "</tr>",
+            "</table>",
+        ]
+
+        return "\n".join(all)

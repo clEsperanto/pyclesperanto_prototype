@@ -1,5 +1,6 @@
-from .._tier0 import Image
+from .._tier0 import Image, plugin_function
 
+@plugin_function
 def imshow(image : Image, title : str = None, labels : bool = False, min_display_intensity : float = None, max_display_intensity : float = None, color_map = None, plot = None, colorbar:bool = False, colormap = None, alpha:float = None, continue_drawing:bool = False):
     """Visualize an image, e.g. in Jupyter notebooks.
 

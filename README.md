@@ -99,6 +99,15 @@ imsave("result.tif", labeled)
 
 [Select GPU](https://github.com/clEsperanto/pyclesperanto_prototype/tree/master/demo/basics/select_GPU.py)
 
+
+</td></tr><tr><td>
+
+<img src="https://github.com/clEsperanto/pyclesperanto_prototype/raw/master/docs/images/jupyter.png" width="300"/>
+
+</td><td>
+
+[Image processing in Jupyter Notebooks](http://github.com/clEsperanto/pyclesperanto_prototype/tree/master/demo/interoperability/jupyter.ipynb)
+
 </td></tr><tr><td>
 
 <img src="https://github.com/clEsperanto/pyclesperanto_prototype/raw/master/docs/images/screenshot_count_blobs.png" width="300"/>
