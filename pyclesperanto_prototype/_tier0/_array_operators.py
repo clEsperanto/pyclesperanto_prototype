@@ -353,23 +353,14 @@ class ArrayOperators():
         return result
 
     # adapted from https://github.com/napari/napari/blob/d6bc683b019c4a3a3c6e936526e29bbd59cca2f4/napari/utils/notebook_display.py#L54-L73
-    def _repr_png_(self):
+    def _plt_to_png(self):
         """PNG representation of the image object for IPython.
         Returns
         -------
         In memory binary stream containing a PNG matplotlib image.
         """
-        import numpy as np
-        from io import BytesIO
-        from .._tier9 import imshow
-
-        labels = (self.dtype == np.uint32)
-
         import matplotlib.pyplot as plt
-        imshow(self,
-               labels=labels,
-               continue_drawing=True,
-               colorbar=not labels)
+        from io import BytesIO
 
         with BytesIO() as file_obj:
             plt.savefig(file_obj, format='png')
@@ -378,16 +369,35 @@ class ArrayOperators():
             png = file_obj.read()
         return png
 
+
+    def _png_to_html(self, png):
+        import base64
+        url = 'data:image/png;base64,' + base64.b64encode(png).decode('utf-8')
+        return f'<img src="{url}"></img>'
+
+
     def _repr_html_(self):
         """HTML representation of the image object for IPython.
         Returns
         -------
         HTML text with the image and some properties.
         """
-        import base64
-        png = self._repr_png_()
-        url = 'data:image/png;base64,' + base64.b64encode(png).decode('utf-8')
-        image = f'<img src="{url}"></img>'
+
+        import numpy as np
+        import matplotlib.pyplot as plt
+        from .._tier9 import imshow
+
+        labels = (self.dtype == np.uint32)
+
+        if len(self.shape) in (2, 3):
+            import matplotlib.pyplot as plt
+            imshow(self,
+                   labels=labels,
+                   continue_drawing=True,
+                   colorbar=not labels)
+            image = self._png_to_html(self._plt_to_png())
+        else:
+            image = "<pre>" + str(self) + "</pre>"
 
         size_in_pixels = np.prod(self.shape)
         size_in_bytes = size_in_pixels * self.dtype.itemsize
@@ -405,6 +415,30 @@ class ArrayOperators():
                 size = "{:.1f}".format(size_in_bytes) + " kB"
         else:
             size = "{:.1f}".format(size_in_bytes) + " B"
+
+        if size_in_bytes < 100 * 1024 * 1024 and not labels:
+
+            import numpy as np
+            from .._tier2 import minimum_of_all_pixels, maximum_of_all_pixels
+            from .._tier3 import histogram
+
+            num_bins = 32
+
+            h = np.asarray(histogram(self, num_bins=num_bins))
+
+            plt.figure(figsize=(1.8, 1.2))
+            plt.bar(range(0, len(h)), h)
+
+            # hide axis text
+            # https://stackoverflow.com/questions/2176424/hiding-axis-text-in-matplotlib-plots
+            frame1 = plt.gca()
+            frame1.axes.xaxis.set_ticklabels([])
+            frame1.axes.yaxis.set_ticklabels([])
+
+            histogram = self._png_to_html(self._plt_to_png())
+
+        else:
+            histogram = ""
 
         if size_in_pixels < 100:
             data = "<pre>" + str(self) + "</pre>"
@@ -424,10 +458,11 @@ class ArrayOperators():
             "<tr><td>dtype</td><td>" + str(self.dtype) + "</td></tr>",
             "<tr><td>size</td><td>" + size + "</td></tr>",
             "</table>",
-            data,
+            histogram,
             "</td>",
             "</tr>",
             "</table>",
+            data,
         ]
 
         return "\n".join(all)
