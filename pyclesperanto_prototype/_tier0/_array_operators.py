@@ -387,9 +387,14 @@ class ArrayOperators():
         import matplotlib.pyplot as plt
         from .._tier9 import imshow
 
+
+        size_in_pixels = np.prod(self.shape)
+        size_in_bytes = size_in_pixels * self.dtype.itemsize
+
         labels = (self.dtype == np.uint32)
 
-        if len(self.shape) in (2, 3):
+        # In case the image is 2D, 3D and larger than 100 pixels, turn on fancy view
+        if len(self.shape) in (2, 3) and size_in_pixels >= 100:
             import matplotlib.pyplot as plt
             imshow(self,
                    labels=labels,
@@ -397,10 +402,8 @@ class ArrayOperators():
                    colorbar=not labels)
             image = self._png_to_html(self._plt_to_png())
         else:
-            image = "<pre>" + str(self) + "</pre>"
+            return "<pre>cle.array(" + str(np.asarray(self)) + ", dtype=" + str(self.dtype) + ")</pre>"
 
-        size_in_pixels = np.prod(self.shape)
-        size_in_bytes = size_in_pixels * self.dtype.itemsize
 
         if size_in_bytes > 1024:
             size_in_bytes = size_in_bytes / 1024
@@ -449,11 +452,6 @@ class ArrayOperators():
 
             min_max = ""
 
-        if size_in_pixels < 100:
-            data = "<pre>" + str(self) + "</pre>"
-        else:
-            data = ""
-
         all = [
             "<table>",
             "<tr>",
@@ -472,7 +470,6 @@ class ArrayOperators():
             "</td>",
             "</tr>",
             "</table>",
-            data,
         ]
 
         return "\n".join(all)
