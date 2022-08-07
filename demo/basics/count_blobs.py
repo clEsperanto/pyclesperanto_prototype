@@ -10,10 +10,6 @@ print("Used GPU: " + cle.get_device().name)
 image = imread('https://imagej.nih.gov/ij/images/blobs.gif')
 print("Loaded image size: " + str(image.shape))
 
-# push image to GPU memory
-input = cle.push(image)
-print("Image size in GPU: " + str(input.shape))
-
 # process the image
 inverted = cle.subtract_image_from_scalar(image, scalar=255)
 blurred = cle.gaussian_blur(inverted, sigma_x=1, sigma_y=1)
@@ -30,4 +26,4 @@ print("Num objects in the image: " + str(num_labels))
 print(labeled)
 
 # for debugging: save image to disc
-imsave("result.tif", cle.pull(labeled))
+imsave("result.tif", labeled)
