@@ -1,4 +1,5 @@
 from ._absolute import absolute
+from ._absolute import absolute as fabs
 from ._add_images_weighted import add_images_weighted
 from ._add_image_and_scalar import add_image_and_scalar
 from ._average_distance_of_n_far_off_distances import average_distance_of_n_far_off_distances
@@ -8,13 +9,17 @@ from ._average_distance_of_n_shortest_distances import average_distance_of_n_sho
 from ._average_distance_of_n_nearest_distances import average_distance_of_n_nearest_distances
 from ._average_distance_of_touching_neighbors import average_distance_of_touching_neighbors
 from ._binary_and import binary_and
+from ._binary_and import binary_and as logical_and
 from ._binary_and import binary_and as binary_intersection
 from ._binary_edge_detection import binary_edge_detection
 from ._binary_not import binary_not
+from ._binary_not import binary_not as logical_not
 from ._binary_or import binary_or
+from ._binary_or import binary_or as logical_or
 from ._binary_or import binary_or as binary_union
 from ._binary_subtract import binary_subtract
 from ._binary_xor import binary_xor
+from ._binary_xor import binary_xor as logical_xor
 from ._convolve import convolve
 from ._copy import copy
 from ._copy_slice import copy_slice
@@ -22,6 +27,8 @@ from ._copy_horizontal_slice import copy_horizontal_slice
 from ._copy_vertical_slice import copy_vertical_slice
 from ._count_touching_neighbors import count_touching_neighbors
 from ._crop import crop
+from ._cubic_root import cubic_root
+from ._cubic_root import cubic_root as cbrt
 from ._detect_label_edges import detect_label_edges
 from ._detect_maxima_box import detect_maxima_box
 from ._detect_minima_box import detect_minima_box
@@ -43,6 +50,7 @@ from ._erode_box_slice_by_slice import erode_box_slice_by_slice
 from ._erode_sphere import erode_sphere
 from ._erode_sphere_slice_by_slice import erode_sphere_slice_by_slice
 from ._exponential import exponential
+from ._exponential import exponential as exp
 from ._execute_separable_kernel import execute_separable_kernel
 from ._flip import flip
 from ._gaussian_blur import gaussian_blur
@@ -63,10 +71,12 @@ from ._hessian_eigenvalues import hessian_eigenvalues
 from ._laplace_box import laplace_box
 from ._laplace_diamond import laplace_diamond
 from ._logarithm import logarithm
+from ._logarithm import logarithm as log
 from ._mask import mask
 from ._mask_label import mask_label
 from ._maximum_image_and_scalar import maximum_image_and_scalar
 from ._maximum_images import maximum_images
+from ._maximum_images import maximum_images as maximum
 from ._maximum_box import maximum_box
 from ._maximum_distance_of_touching_neighbors import maximum_distance_of_touching_neighbors
 from ._maximum_distance_of_n_shortest_distances import maximum_distance_of_n_shortest_distances
@@ -85,13 +95,18 @@ from ._minimum_box import minimum_box
 from ._minimum_distance_of_touching_neighbors import minimum_distance_of_touching_neighbors
 from ._minimum_image_and_scalar import minimum_image_and_scalar
 from ._minimum_images import minimum_images
+from ._minimum_images import minimum_images as minimum
 from ._minimum_x_projection import minimum_x_projection
 from ._minimum_y_projection import minimum_y_projection
 from ._minimum_z_projection import minimum_z_projection
+from ._modulo_images import modulo_images
+from ._modulo_images import modulo_images as mod
+from ._modulo_images import modulo_images as remainder
 from ._multiply_image_and_coordinate import multiply_image_and_coordinate
 from ._multiply_image_and_scalar import multiply_image_and_scalar
 from ._multiply_images import multiply_images
 from ._n_closest_points import n_closest_points
+from ._nan_to_num import nan_to_num
 from ._nonzero_maximum_box import nonzero_maximum_box
 from ._nonzero_maximum_diamond import nonzero_maximum_diamond
 from ._nonzero_minimum_box import nonzero_minimum_box
@@ -116,6 +131,7 @@ from ._touch_matrix_to_mesh import touch_matrix_to_mesh
 from ._maximum_sphere import maximum_sphere
 from ._minimum_sphere import minimum_sphere
 from ._multiply_matrix import multiply_matrix
+from ._reciprocal import reciprocal
 from ._set import set
 from ._set_column import set_column
 from ._set_image_borders import set_image_borders
@@ -129,11 +145,14 @@ from ._set_non_zero_pixels_to_pixel_index import set_non_zero_pixels_to_pixel_in
 from ._set_where_x_equals_y import set_where_x_equals_y
 from ._set_where_x_greater_than_y import set_where_x_greater_than_y
 from ._set_where_x_smaller_than_y import set_where_x_smaller_than_y
+from ._sign import sign
 from ._smaller import smaller
 from ._smaller_constant import smaller_constant
 from ._smaller_or_equal import smaller_or_equal
 from ._smaller_or_equal_constant import smaller_or_equal_constant
 from ._sobel import sobel
+from ._square_root import square_root
+from ._square_root import square_root as sqrt
 from ._standard_deviation_z_projection import standard_deviation_z_projection
 from ._subtract_image_from_scalar import subtract_image_from_scalar
 from ._sum_x_projection import sum_x_projection

@@ -2,6 +2,7 @@ from ._add_images import add_images
 from ._block_enumerate import block_enumerate
 from ._bottom_hat_box import bottom_hat_box
 from ._bottom_hat_sphere import bottom_hat_sphere
+from ._clip import clip
 from ._closing_box import closing_box
 from ._closing_sphere import closing_sphere
 from ._combine_horizontally import combine_horizontally
@@ -30,6 +31,7 @@ from ._pointlist_to_labelled_spots import pointlist_to_labelled_spots
 from ._radians_to_degrees import radians_to_degrees
 from ._reduce_stack import reduce_stack
 from ._small_hessian_eigenvalue import small_hessian_eigenvalue
+from ._square import square
 from ._standard_deviation_box import standard_deviation_box
 from ._standard_deviation_of_touching_neighbors import standard_deviation_of_touching_neighbors
 from ._standard_deviation_sphere import standard_deviation_sphere

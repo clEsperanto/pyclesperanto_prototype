@@ -85,7 +85,7 @@ num_labels = cle.maximum_of_all_pixels(labeled)
 print("Num objects in the image: " + str(num_labels))
 
 # save image to disc
-imsave("result.tif", cle.pull(labeled))
+imsave("result.tif", labeled)
 ```
 
 ## Example gallery 
