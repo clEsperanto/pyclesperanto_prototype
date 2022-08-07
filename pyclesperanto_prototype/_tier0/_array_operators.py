@@ -416,29 +416,38 @@ class ArrayOperators():
         else:
             size = "{:.1f}".format(size_in_bytes) + " B"
 
-        if size_in_bytes < 100 * 1024 * 1024 and not labels:
+        histogram = ""
 
-            import numpy as np
-            from .._tier2 import minimum_of_all_pixels, maximum_of_all_pixels
-            from .._tier3 import histogram
+        if size_in_bytes < 100 * 1024 * 1024:
+            if not labels:
 
-            num_bins = 32
+                import numpy as np
+                from .._tier2 import minimum_of_all_pixels, maximum_of_all_pixels
+                from .._tier3 import histogram
 
-            h = np.asarray(histogram(self, num_bins=num_bins))
+                num_bins = 32
 
-            plt.figure(figsize=(1.8, 1.2))
-            plt.bar(range(0, len(h)), h)
+                h = np.asarray(histogram(self, num_bins=num_bins))
 
-            # hide axis text
-            # https://stackoverflow.com/questions/2176424/hiding-axis-text-in-matplotlib-plots
-            frame1 = plt.gca()
-            frame1.axes.xaxis.set_ticklabels([])
-            frame1.axes.yaxis.set_ticklabels([])
+                plt.figure(figsize=(1.8, 1.2))
+                plt.bar(range(0, len(h)), h)
 
-            histogram = self._png_to_html(self._plt_to_png())
+                # hide axis text
+                # https://stackoverflow.com/questions/2176424/hiding-axis-text-in-matplotlib-plots
+                # https://pythonguides.com/matplotlib-remove-tick-labels
+                frame1 = plt.gca()
+                frame1.axes.xaxis.set_ticklabels([])
+                frame1.axes.yaxis.set_ticklabels([])
+                plt.tick_params(left=False, bottom=False)
+
+                histogram = self._png_to_html(self._plt_to_png())
+
+            min_max = "<tr><td>min</td><td>" + str(self.min()) + "</td></tr>" + \
+                      "<tr><td>max</td><td>" + str(self.max()) + "</td></tr>"
 
         else:
-            histogram = ""
+
+            min_max = ""
 
         if size_in_pixels < 100:
             data = "<pre>" + str(self) + "</pre>"
@@ -451,12 +460,13 @@ class ArrayOperators():
             "<td>",
             image,
             "</td>",
-            "<td style=\"text-align: left; vertical-align: top;\">",
+            "<td style=\"text-align: center; vertical-align: top;\">",
             "<b><a href=\"https://github.com/clEsperanto/pyclesperanto_prototype\" target=\"_blank\">cle._</a> image</b><br/>",
             "<table>",
             "<tr><td>shape</td><td>" + str(self.shape).replace(" ", "&nbsp;") + "</td></tr>",
             "<tr><td>dtype</td><td>" + str(self.dtype) + "</td></tr>",
             "<tr><td>size</td><td>" + size + "</td></tr>",
+            min_max,
             "</table>",
             histogram,
             "</td>",
