@@ -30,6 +30,7 @@ def imshow(image : Image, title : str = None, labels : bool = False, min_display
     continue_drawing: float
         True: the next shown image can be visualized on top of the current one, e.g. with alpha = 0.5
     """
+    import numpy as np
     from .._tier0 import pull
     from .._tier1 import maximum_z_projection
 
@@ -37,6 +38,8 @@ def imshow(image : Image, title : str = None, labels : bool = False, min_display
         image = maximum_z_projection(image)
 
     image = pull(image)
+    if len(image.shape) == 1:
+        image = image[np.newaxis]
 
     if color_map is not None:
         import warnings
