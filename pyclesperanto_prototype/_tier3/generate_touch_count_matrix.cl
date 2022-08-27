@@ -20,7 +20,6 @@ __kernel void generate_touch_count_matrix (
     int other_label = READ_IMAGE(src_label,sampler,POS_src_label_INSTANCE(x-1,y,z,0)).x;
     if (label_c != other_label) {
       int pos_in_buffer = label_c + other_label * matrix_width;
-      printf("%d %d %d: %d %d => %d\n", x, y, z, label_c, other_label, pos_in_buffer);
       atomic_add(&dst_neighbor_touching_count_matrix[pos_in_buffer], 1);
     } 
   }
@@ -28,7 +27,6 @@ __kernel void generate_touch_count_matrix (
     int other_label = READ_IMAGE(src_label,sampler,POS_src_label_INSTANCE(x,y-1,z,0)).x;
     if (label_c != other_label) {
       int pos_in_buffer = label_c + other_label * matrix_width;
-      printf("%d %d %d: %d %d => %d\n", x, y, z, label_c, other_label, pos_in_buffer);
       atomic_add(&dst_neighbor_touching_count_matrix[pos_in_buffer], 1);
     }
   }
@@ -36,7 +34,6 @@ __kernel void generate_touch_count_matrix (
     int other_label = READ_IMAGE(src_label,sampler,POS_src_label_INSTANCE(x,y,z-1,0)).x;
     if (label_c != other_label) {
       int pos_in_buffer = label_c + other_label * matrix_width;
-      printf("%d %d %d: %d %d => %d\n", x, y, z, label_c, other_label, pos_in_buffer);
       atomic_add(&dst_neighbor_touching_count_matrix[pos_in_buffer], 1);
     }
   }

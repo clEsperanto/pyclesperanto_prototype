@@ -17,6 +17,7 @@ from ._extend_labeling_via_voronoi import extend_labeling_via_voronoi
 from ._dilate_labels import dilate_labels
 from ._dilate_labels import dilate_labels as extend_labels_with_maximum_radius
 from ._extended_depth_of_focus_variance_projection import extended_depth_of_focus_variance_projection
+from ._generate_touch_portion_matrix import generate_touch_portion_matrix
 from ._mean_squared_error import mean_squared_error
 from ._label_nonzero_pixel_count_map import label_nonzero_pixel_count_map
 from ._label_nonzero_pixel_count_ratio_map import label_nonzero_pixel_count_ratio_map

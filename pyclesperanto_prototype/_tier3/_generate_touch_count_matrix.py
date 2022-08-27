@@ -6,7 +6,7 @@ import numpy as np
 
 @plugin_function(output_creator=create_none)
 def generate_touch_count_matrix(label_map:Image, touch_count_matrix_destination:Image = None) -> Image:
-    """Take a label image an measure how often labels X and Y touch. Put these numbers in a symmetric
+    """Take a label image and measure how often labels X and Y touch. Put these numbers in a symmetric
     touch count matrix.
 
     Parameters
