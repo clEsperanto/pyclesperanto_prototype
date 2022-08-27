@@ -27,4 +27,4 @@ def test_standard_deviation_touch_portion():
 
     print(std_touch_portion)
 
-    assert cle.array_equal(std_touch_portion, reference)
+    assert np.allclose(std_touch_portion, reference, 0.001)
