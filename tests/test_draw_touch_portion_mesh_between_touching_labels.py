@@ -24,4 +24,7 @@ def test_draw_touch_portion_mesh_between_touching_labels():
 
     touch_portion_mesh_between_touching_labels = cle.draw_touch_portion_mesh_between_touching_labels(labels)
 
+    print(reference)
+    print(touch_portion_mesh_between_touching_labels)
+
     assert np.allclose(touch_portion_mesh_between_touching_labels, reference, 0.001)
