@@ -23,20 +23,13 @@ def standard_deviation_touch_portion(labels : Image, std_touch_portion_vector_de
     from .._tier4 import generate_touch_portion_matrix
 
     touch_portion_matrix = generate_touch_portion_matrix(labels)
-    print("touch_portion_matrix", touch_portion_matrix)
 
     # determine which objects touch
     touch_matrix = touch_matrix_to_adjacency_matrix(generate_touch_matrix(labels))
-
-    # eliminate touches with background
-    #set_row(touch_matrix, 0, 0)
-    #set_column(touch_matrix, 0, 0)
     set_where_x_equals_y(touch_matrix, 0)
-    print("touch_matrix", touch_matrix)
 
     # count how many neigbors every label has, including background
     touch_count_vector = sum_y_projection(touch_matrix)
-    print("touch_count_vector", touch_count_vector)
 
     # the average touch portion is per definition 1 / neighbor_count
     average_touch_portion = reciprocal(touch_count_vector)
