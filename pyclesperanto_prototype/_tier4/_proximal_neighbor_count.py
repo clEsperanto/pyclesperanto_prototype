@@ -1,8 +1,5 @@
 from .._tier0 import plugin_function
 from .._tier0 import Image
-from .._tier3 import generate_proximal_neighbors_matrix
-from .._tier1 import count_touching_neighbors
-from .._tier1 import replace_intensities
 import numpy as np
 from .._tier0 import create_none
 
@@ -27,6 +24,8 @@ def proximal_neighbor_count(source : Image, destination : Image = None, min_dist
     from .._tier1 import set_column
     from .._tier9 import centroids_of_labels
     from .._tier1 import generate_distance_matrix
+    from .._tier3 import generate_proximal_neighbors_matrix
+    from .._tier1 import count_touching_neighbors
 
     pointlist = centroids_of_labels(source)
     distance_matrix = generate_distance_matrix(pointlist, pointlist)

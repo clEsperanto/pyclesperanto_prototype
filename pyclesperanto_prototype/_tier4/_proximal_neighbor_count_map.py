@@ -1,8 +1,5 @@
 from .._tier0 import plugin_function
 from .._tier0 import Image
-from .._tier3 import generate_proximal_neighbors_matrix
-from .._tier1 import count_touching_neighbors
-from .._tier1 import replace_intensities
 import numpy as np
 
 @plugin_function(categories=['label measurement', 'map', 'in assistant'], priority=1)
@@ -28,6 +25,8 @@ def proximal_neighbor_count_map(source : Image, destination : Image = None, min_
     .. [1] https://clij.github.io/clij2-docs/reference_proximalNeighborCountMap
     """
     from ._proximal_neighbor_count import proximal_neighbor_count
+    from .._tier1 import replace_intensities
+
     number_of_touching_neighbors_vector = proximal_neighbor_count(source, max_distance=max_distance, min_distance=min_distance)
 
     replace_intensities(source, number_of_touching_neighbors_vector, destination)
