@@ -62,6 +62,8 @@ def statistics_of_labelled_neighbors(label_image: Image,
                                                                        data=maximum_distance_of_touching_neighbors(
                                                                            distance_matrix, touch_matrix))
 
+    all_stats["max_min_distance_ratio_of_touching_neighbors"] = all_stats["maximum_distance_of_touching_neighbors"] / all_stats["minimum_distance_of_touching_neighbors"]
+
     # number of neighbors within given radii
     for d in proximal_distances:
         proximal_touch_matrix = generate_proximal_neighbors_matrix(distance_matrix,
