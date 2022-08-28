@@ -4,21 +4,20 @@ import pyclesperanto_prototype
 from .._tier0 import Image
 from .._tier0 import create_none
 from .._tier0 import plugin_function
-from collections.abc import Iterable
 
 @plugin_function(output_creator=create_none)
 def statistics_of_labelled_neighbors(label_image: Image,
-                                     proximal_distances: Iterable[float] = (10, 20, 40, 80, 160),
-                                     nearest_neighbor_ns: Iterable[int] = (1, 2, 3, 4, 5, 6, 7, 8, 10, 20)):
+                                     proximal_distances = (10, 20, 40, 80, 160),
+                                     nearest_neighbor_ns = (1, 2, 3, 4, 5, 6, 7, 8, 10, 20)):
     """Determine statistics of labeled objects such as average/min/mas neighbor distances, number of neighbors in a
     given radius, touch portion etc.
 
     Parameters
     ----------
     label_image: Image
-    proximal_distances: list of float
+    proximal_distances: list of float, optional
         will determine statistics for neighbors within specified distances
-    nearest_neighbor_ns: list of int
+    nearest_neighbor_ns: list of int, optional
         will determine statistics of specified n nearest neighbors
 
     Returns
