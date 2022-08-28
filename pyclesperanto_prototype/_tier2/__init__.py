@@ -28,6 +28,7 @@ from ._neighbors_of_neighbors import neighbors_of_neighbors
 from ._opening_box import opening_box
 from ._opening_sphere import opening_sphere
 from ._pointlist_to_labelled_spots import pointlist_to_labelled_spots
+from ._prefix_in_x import prefix_in_x
 from ._radians_to_degrees import radians_to_degrees
 from ._reduce_stack import reduce_stack
 from ._small_hessian_eigenvalue import small_hessian_eigenvalue
