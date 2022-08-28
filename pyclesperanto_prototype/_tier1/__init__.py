@@ -37,6 +37,7 @@ from ._dilate_box_slice_by_slice import dilate_box_slice_by_slice
 from ._dilate_sphere import dilate_sphere
 from ._dilate_sphere_slice_by_slice import dilate_sphere_slice_by_slice
 from ._divide_images import divide_images
+from ._divide_scalar_by_image import divide_scalar_by_image
 from ._draw_box import draw_box
 from ._draw_sphere import draw_sphere
 from ._draw_line import draw_line

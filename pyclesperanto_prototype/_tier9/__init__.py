@@ -14,6 +14,8 @@ from ._draw_distance_mesh_between_touching_labels import draw_distance_mesh_betw
 from ._draw_mesh_between_n_closest_labels import draw_mesh_between_n_closest_labels
 from ._draw_mesh_between_proximal_labels import draw_mesh_between_proximal_labels
 from ._draw_mesh_between_touching_labels import draw_mesh_between_touching_labels
+from ._draw_touch_portion_mesh_between_touching_labels import draw_touch_portion_mesh_between_touching_labels
+from ._draw_touch_portion_ratio_mesh_between_touching_labels import draw_touch_portion_ratio_mesh_between_touching_labels
 from ._gauss_otsu_labeling import gauss_otsu_labeling
 from ._imread import imread
 from ._imshow import imshow
@@ -40,6 +42,7 @@ from ._regionprops import regionprops
 from ._statistics_entry import STATISTICS_ENTRY
 from ._statistics_of_background_and_labelled_pixels import statistics_of_background_and_labelled_pixels
 from ._statistics_of_image import statistics_of_image
+from ._statistics_of_labelled_neighbors import statistics_of_labelled_neighbors
 from ._statistics_of_labelled_pixels import statistics_of_labelled_pixels
 from ._threshold_otsu import threshold_otsu
 from ._voronoi_otsu_labeling import voronoi_otsu_labeling

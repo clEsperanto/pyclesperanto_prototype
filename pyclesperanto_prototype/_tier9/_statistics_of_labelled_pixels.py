@@ -1,7 +1,5 @@
 from warnings import warn
 
-from skimage.measure import regionprops
-
 from .._tier0 import Image
 from .._tier0 import create_none
 from .._tier0 import plugin_function

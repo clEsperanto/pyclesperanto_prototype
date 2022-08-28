@@ -59,7 +59,7 @@ def artificial_tissue_2d(width: int = 256, height: int = 256, delta_x=24, delta_
 
     centroids = pointlist_to_labelled_spots(pointlist)
 
-    cells = create((height, width))
+    cells = create((height, width), dtype=np.uint32)
     extend_labeling_via_voronoi(centroids, cells)
 
     return cells
