@@ -24,8 +24,6 @@ def statistics_of_labelled_neighbors(label_image: Image,
     -------
     pandas.DataFrame
     """
-    import pandas as pd
-
     from .._tier1 import generate_distance_matrix, generate_touch_matrix, replace_intensity, sum_y_projection
     from .._tier1 import minimum_distance_of_touching_neighbors, average_distance_of_touching_neighbors, maximum_distance_of_touching_neighbors
     from .._tier1 import average_distance_of_n_nearest_distances, maximum_distance_of_n_shortest_distances
@@ -124,7 +122,7 @@ def statistics_of_labelled_neighbors(label_image: Image,
     all_stats["standard_deviation_touch_portion"] = cle_to_numpy(remove_first=True,
                                                                  data=standard_deviation_touch_portion(label_image))
 
-    return pd.DataFrame(all_stats)
+    return all_stats
 
 
 def cle_to_numpy(data, remove_first=False):
