@@ -42,6 +42,7 @@ from ._regionprops import regionprops
 from ._statistics_entry import STATISTICS_ENTRY
 from ._statistics_of_background_and_labelled_pixels import statistics_of_background_and_labelled_pixels
 from ._statistics_of_image import statistics_of_image
+from ._statistics_of_labelled_neighbors import statistics_of_labelled_neighbors
 from ._statistics_of_labelled_pixels import statistics_of_labelled_pixels
 from ._threshold_otsu import threshold_otsu
 from ._voronoi_otsu_labeling import voronoi_otsu_labeling
