@@ -1,3 +1,4 @@
+import warnings
 from warnings import warn
 
 from .._tier0 import Image
@@ -294,11 +295,24 @@ def statistics_of_labelled_pixels(intensity_image : Image = None, label_image : 
     min_intensity = region_props['min_intensity']
     max_intensity = region_props['max_intensity']
     mask = min_intensity <= max_intensity
-    print("mask", mask)
 
     # remove the other labels from the measurements
     for key in region_props.keys():
         region_props[key] = region_props[key][mask]
 
+    regionprops = MyDict(regionprops)
 
-    return region_props
+    return regionprops
+
+# source: https://stackoverflow.com/questions/54095279/how-to-make-a-dict-key-deprecated
+class MyDict(dict):
+    old_keys_to_new_keys = {'area': 'pixel_count'}
+    old_keys_to_new_keys = {'original_label': 'label'}
+
+    def __getitem__(self, key):
+        if key in self.old_keys_to_new_keys:
+            msg = 'The key `{}` in statistics_of_labelled_pixels is deprecated. Use `{}` instead.'.format(self.old_keys_to_new_keys[key], key)
+            warnings.warn(msg, FutureWarning)
+        return super().__getitem__(key)
+
+
