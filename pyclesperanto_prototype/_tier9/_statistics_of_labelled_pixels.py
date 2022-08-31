@@ -300,9 +300,9 @@ def statistics_of_labelled_pixels(intensity_image : Image = None, label_image : 
     for key in region_props.keys():
         region_props[key] = region_props[key][mask]
 
-    regionprops = MyDict(regionprops)
+    region_props = MyDict(region_props)
 
-    return regionprops
+    return region_props
 
 # source: https://stackoverflow.com/questions/54095279/how-to-make-a-dict-key-deprecated
 class MyDict(dict):
