@@ -311,7 +311,7 @@ class MyDict(dict):
 
     def __getitem__(self, key):
         if key in self.old_keys_to_new_keys:
-            msg = 'The key `{}` in statistics_of_labelled_pixels is deprecated. Use `{}` instead.'.format(self.old_keys_to_new_keys[key], key)
+            msg = 'The key `{}` in statistics_of_labelled_pixels is deprecated. Use `{}` instead.'.format(key, self.old_keys_to_new_keys[key])
             warnings.warn(msg, FutureWarning)
         return super().__getitem__(key)
 
