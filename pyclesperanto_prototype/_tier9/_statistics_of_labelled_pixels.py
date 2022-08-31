@@ -290,4 +290,15 @@ def statistics_of_labelled_pixels(intensity_image : Image = None, label_image : 
         region_props['mean_max_distance_to_mass_center_ratio'] = region_props['max_distance_to_mass_center'] / region_props[
             'mean_distance_to_mass_center']
 
+    # determine which labels were actually present in the label image
+    min_intensity = region_props['min_intensity']
+    max_intensity = region_props['max_intensity']
+    mask = min_intensity <= max_intensity
+    print("mask", mask)
+
+    # remove the other labels from the measurements
+    for key in region_props.keys():
+        region_props[key] = region_props[key][mask]
+
+
     return region_props
