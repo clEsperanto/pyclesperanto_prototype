@@ -27,7 +27,7 @@ def statistics_of_labelled_neighbors(label_image: Image,
     from .._tier1 import generate_distance_matrix, generate_touch_matrix, replace_intensity, sum_y_projection
     from .._tier1 import minimum_distance_of_touching_neighbors, average_distance_of_touching_neighbors, maximum_distance_of_touching_neighbors
     from .._tier1 import average_distance_of_n_nearest_distances, maximum_distance_of_n_shortest_distances
-    from .._tier1 import count_touching_neighbors, average_distance_of_n_far_off_distances
+    from .._tier1 import count_touching_neighbors, average_distance_of_n_far_off_distances, set_column, set_row
     from .._tier1 import maximum_y_projection, minimum_y_projection, copy, set_where_x_equals_y, nan_to_num
 
     from .._tier3 import generate_proximal_neighbors_matrix
@@ -46,6 +46,10 @@ def statistics_of_labelled_neighbors(label_image: Image,
     #print("distance matrix", distance_matrix.shape)
 
     touch_matrix = generate_touch_matrix(label_image)
+    # ignore touching background
+    set_column(touch_matrix, 0, 0)
+    set_row(touch_matrix, 0, 0)
+
     #print("touch matrix", touch_matrix.shape)
 
     all_stats["touching_neighbor_count"] = cle_to_numpy(remove_first=True,
