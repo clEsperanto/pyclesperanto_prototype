@@ -34,7 +34,7 @@ def push(any_array):
     if hasattr(any_array, 'shape') and hasattr(any_array, 'dtype') and hasattr(any_array, 'get'):
         any_array = np.asarray(any_array.get())
 
-    return Backend.get_instance().get().from_array(np.float32(any_array))
+    return Backend.get_instance().get().from_array(any_array)
 
 
 def push_zyx(any_array):
