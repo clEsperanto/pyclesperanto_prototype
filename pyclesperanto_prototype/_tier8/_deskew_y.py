@@ -11,7 +11,8 @@ def deskew_y(input_image: Image,
              voxel_size_x: float = 1,
              voxel_size_y: float = 1,
              voxel_size_z: float = 1,
-             scale_factor: float = 1
+             scale_factor: float = 1,
+             linear_interpolation: bool = False,
              ) -> Image:
     """
     Deskew an image stack as acquired with oblique plane light-sheet microscopy.
@@ -33,6 +34,9 @@ def deskew_y(input_image: Image,
         default: 1
         If the resulting image becomes too huge, it is possible to reduce output image size by this factor.
         The isotropic voxel size of the output image will then be voxel_size_x / scaling_factor.
+    linear_interpolation: bool, optional
+        If true, bi-/tri-linear interpolation will be applied, if hardware supports it.
+        If false, nearest-neighbor interpolation wille be applied.
 
     Returns
     -------
@@ -54,5 +58,5 @@ def deskew_y(input_image: Image,
                         voxel_size_z=voxel_size_z, scale_factor=scale_factor)
 
     # apply transform
-    return affine_transform(input_image, output_image, transform=transform, auto_size=True,linear_interpolation=True)
+    return affine_transform(input_image, output_image, transform=transform, auto_size=True,linear_interpolation=linear_interpolation)
 
