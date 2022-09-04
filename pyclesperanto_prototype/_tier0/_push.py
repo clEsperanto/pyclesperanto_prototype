@@ -34,6 +34,9 @@ def push(any_array):
     if hasattr(any_array, 'shape') and hasattr(any_array, 'dtype') and hasattr(any_array, 'get'):
         any_array = np.asarray(any_array.get())
 
+    if any_array.dtype in [np.float64]:
+        any_array = any_array.astype(np.float32)
+
     return Backend.get_instance().get().from_array(any_array)
 
 
