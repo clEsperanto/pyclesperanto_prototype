@@ -48,4 +48,4 @@ def deskew_x(input_image: Image,
                         voxel_size_z=voxel_size_z, scale_factor=scale_factor)
 
     # apply transform
-    return affine_transform(input_image, output_image, transform=transform, auto_size=True)
+    return affine_transform(input_image, output_image, transform=transform, auto_size=True,linear_interpolation=True)
