@@ -21,6 +21,7 @@ from ._generate_touch_count_matrix import generate_touch_count_matrix
 from ._histogram import histogram
 from ._jaccard_index import jaccard_index
 from ._labelled_spots_to_pointlist import labelled_spots_to_pointlist
+from ._maximum_of_n_most_touching_neighbors_map import maximum_of_n_most_touching_neighbors_map
 from ._maximum_of_n_nearest_neighbors_map import maximum_of_n_nearest_neighbors_map
 from ._maximum_of_touching_neighbors_map import maximum_of_touching_neighbors_map
 from ._maximum_of_proximal_neighbors_map import maximum_of_proximal_neighbors_map

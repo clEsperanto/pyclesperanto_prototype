@@ -1,4 +1,4 @@
-def test_minimum_of_n_most_touching_neighbors_map():
+def test_maximum_of_n_most_touching_neighbors_map():
     import numpy as np
     import pyclesperanto_prototype as cle
 
@@ -18,9 +18,9 @@ def test_minimum_of_n_most_touching_neighbors_map():
         [0, 0, 3, 3, 3, 3, 0],
         [0, 0, 4, 4, 4, 0, 0],
         [0, 0, 0, 0, 0, 0, 0],
-    ]), [0, 1, 1, 1, 3])
+    ]), [0, 3, 3, 4, 4])
 
-    result = cle.minimum_of_n_most_touching_neighbors_map(labels, labels, n=2)
+    result = cle.maximum_of_n_most_touching_neighbors_map(labels, labels, n=2)
 
     assert np.allclose(result, reference, 0.01)
 
