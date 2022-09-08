@@ -40,6 +40,9 @@ from ._sub_stack import sub_stack
 from ._subtract_images import subtract_images
 from ._sum_of_all_pixels import sum_of_all_pixels
 from ._sum_reduction_x import sum_reduction_x
+from ._symmetric_maximum_matrix import symmetric_maximum_matrix
+from ._symmetric_mean_matrix import symmetric_mean_matrix
+from ._symmetric_minimum_matrix import symmetric_minimum_matrix
 from ._top_hat_box import top_hat_box
 from ._top_hat_sphere import top_hat_sphere
 from ._touch_matrix_to_adjacency_matrix import touch_matrix_to_adjacency_matrix
