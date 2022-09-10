@@ -46,18 +46,18 @@ def erode_labels(labels_input : Image, labels_destination : Image = None, radius
     if radius == 1:
         copy(temp, labels_destination)
     else:
-        for i in range(0, int(radius)):
+        for i in range(0, int(radius) - 1):
             if i % 2 == 0:
                 minimum_sphere(temp, labels_destination, 1, 1, 1)
             else:
                 minimum_box(labels_destination, temp, 1, 1, 1)
     if relabel_islands:
-        if radius % 2 == 0:
+        if radius % 2 != 0:
             copy(temp, labels_destination)
         not_equal_constant(labels_destination, temp)
         connected_components_labeling_diamond(temp, labels_destination)
     else:
-        if radius % 2 != 0:
+        if radius % 2 == 0:
             copy(labels_destination, temp)
         relabel_sequential(temp, labels_destination)
 
