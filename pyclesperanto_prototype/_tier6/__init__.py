@@ -1,1 +1,1 @@
-from ._iron_labels import iron_labels
+from ._smooth_labels import smooth_labels

@@ -1,7 +1,7 @@
 import pyclesperanto_prototype as cle
 import numpy as np
 
-def test_iron_labels_2d():
+def test_smooth_labels_2d():
     
     gpu_input = cle.push(np.asarray([
         [1, 1, 1, 1, 2, 2, 2, 2],
@@ -27,7 +27,7 @@ def test_iron_labels_2d():
         [1, 1, 1, 1, 2, 2, 2, 2],
     ]))
 
-    gpu_output = cle.iron_labels(gpu_input, radius=2)
+    gpu_output = cle.smooth_labels(gpu_input, radius=3)
 
     a = cle.pull(gpu_output)
     b = cle.pull(gpu_reference)
