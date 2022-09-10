@@ -17,12 +17,15 @@ def draw_mesh_between_labels_with_touch_portion_in_range(labels:Image, mesh_dest
     mesh_destination
     """
     from .._tier1 import set_column, set_row, binary_and, touch_matrix_to_mesh
-    from .._tier4 import generate_touch_portion_matrix
+    from .._tier4 import generate_touch_portion_matrix, generate_touch_portion_within_range_neighbors_matrix
     from .._tier9 import centroids_of_labels
 
     touch_portion_matrix = generate_touch_portion_matrix(labels)
-    constrained_matrix = binary_and(touch_portion_matrix > minimum_touch_portion,
-                                    touch_portion_matrix < maximum_touch_portion)
+    constrained_matrix = generate_touch_portion_within_range_neighbors_matrix(
+                            touch_portion_matrix,
+                            minimum_touch_portion=minimum_touch_portion,
+                            maximum_touch_portion=maximum_touch_portion
+                         )
 
     # ignore background
     set_column(constrained_matrix, 0, 0)
