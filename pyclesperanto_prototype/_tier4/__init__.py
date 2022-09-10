@@ -36,4 +36,6 @@ from ._sorensen_dice_coefficient import sorensen_dice_coefficient
 from ._spots_to_pointlist import spots_to_pointlist
 from ._subtract_labels import subtract_labels
 from ._touch_portion_within_range_neighbor_count import touch_portion_within_range_neighbor_count
+from ._touch_portion_within_range_neighbor_count_map import touch_portion_within_range_neighbor_count_map
 from ._touching_neighbor_count_map import touching_neighbor_count_map
+
