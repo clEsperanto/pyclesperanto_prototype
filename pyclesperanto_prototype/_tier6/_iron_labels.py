@@ -24,7 +24,7 @@ def iron_labels(labels_input: Image, labels_destination: Image = None, radius: i
     from .._tier4 import extend_labeling_via_voronoi
     from .._tier5 import opening_labels
 
-    if radius == 0:
+    if radius < 1:
         return copy(labels_input, labels_destination)
 
     binary = greater_constant(labels_input, constant=0)
