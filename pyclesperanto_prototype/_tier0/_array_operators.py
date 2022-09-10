@@ -1,7 +1,7 @@
 import numpy as np
 
 cl_buffer_datatype_dict = {
-    np.bool: "bool",
+    bool: "bool",
     np.uint8: "uchar",
     np.uint16: "ushort",
     np.uint32: "uint",
