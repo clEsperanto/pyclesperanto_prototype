@@ -1,4 +1,4 @@
-def test_mean_of_touch_portion_with_range_neighbors_map():
+def test_mean_of_touch_portion_within_range_neighbors_map():
     import numpy as np
     import pyclesperanto_prototype as cle
 
@@ -20,7 +20,7 @@ def test_mean_of_touch_portion_with_range_neighbors_map():
         [0, 0, 0, 0, 0, 0, 0],
     ]), [0, 2, 2, 2.5, 3.5])
 
-    result = cle.mean_of_touch_portion_with_range_neighbors_map(labels, labels, minimum_touch_portion=0.09)
+    result = cle.mean_of_touch_portion_within_range_neighbors_map(labels, labels, minimum_touch_portion=0.09)
 
     print(result)
     print(reference)
