@@ -9,7 +9,11 @@ def draw_touch_portion_ratio_mesh_between_touching_labels(labels : Image, touch_
     to the ratio between the amount the two labels touch divided by the number of border voxels on both labels.
     The smaller touch portion is divided by the larger touch portion. Thus, lines in this mesh have values larger or
     equal to 1. Note: label borders at image borders are ignored in this calculation.
-    
+
+    Notes
+    -----
+    * This operation assumes input images are isotropic.
+
     Parameters
     ----------
     labels : Image

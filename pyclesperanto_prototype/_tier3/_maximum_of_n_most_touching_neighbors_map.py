@@ -6,7 +6,11 @@ from .._tier0 import Image
 def maximum_of_n_most_touching_neighbors_map(parametric_map : Image, label_map : Image, parametric_map_destination : Image = None, n : int = 1, ignore_touching_background : bool = True) -> Image:
     """Takes a label image and a parametric intensity image and will replace each labels value in the parametric image
     by the maximum value of most touching neighboring labels. The number of most touching neighbors can be configured.
-    Note: Values of all pixels in a label each must be identical.
+
+    Notes
+    -----
+    * Values of all pixels in a label each must be identical.
+    * This operation assumes input images are isotropic.
 
     Parameters
     ----------

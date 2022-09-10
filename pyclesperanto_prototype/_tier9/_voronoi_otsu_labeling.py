@@ -15,7 +15,11 @@ def voronoi_otsu_labeling(source : Image, label_image_destination : Image = None
     The two sigma parameters allow tuning the segmentation result. Under the hood,
     this filter applies two Gaussian blurs, spot detection, Otsu-thresholding [2] and Voronoi-labeling [3]. The
     thresholded binary image is flooded using the Voronoi tesselation approach starting from the found local maxima.
-    
+
+    Notes
+    -----
+    * This operation assumes input images are isotropic.
+
     Parameters
     ----------
     source : Image

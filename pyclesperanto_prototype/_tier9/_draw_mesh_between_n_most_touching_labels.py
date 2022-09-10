@@ -4,7 +4,18 @@ from .._tier0 import Image
 
 @plugin_function
 def draw_mesh_between_n_most_touching_labels(labels: Image, mesh_destination: Image = None, n: int = 1) -> Image:
-    """Draws a mesh between most touching neighbors"""
+    """Draws a mesh between most touching neighbors
+
+    Notes
+    -----
+    * This operation assumes input images are isotropic.
+
+    Parameters
+    ----------
+    labels: Image
+    mesh_destination:Image, optional
+    n: int
+    """
     from .._tier1 import touch_matrix_to_mesh, set
     from .._tier3 import generate_touch_count_matrix
     from .._tier4 import generate_n_most_touching_neighbors_matrix

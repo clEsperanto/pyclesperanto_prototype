@@ -12,6 +12,10 @@ def statistics_of_labelled_neighbors(label_image: Image,
     """Determine statistics of labeled objects such as average/min/mas neighbor distances, number of neighbors in a
     given radius, touch portion etc.
 
+    Notes
+    -----
+    * This operation assumes input images are isotropic.
+
     Parameters
     ----------
     label_image: Image

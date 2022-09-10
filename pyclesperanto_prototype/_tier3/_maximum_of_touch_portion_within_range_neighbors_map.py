@@ -12,7 +12,11 @@ def maximum_of_touch_portion_within_range_neighbors_map(parametric_map : Image,
     """Takes a label image and a parametric intensity image and will replace each labels value in the parametric image
     by the maximum value of neighboring labels whose touch portion lies within a specified range. The number of most
     touching neighbors can be configured. Minimum and maximum of that specified range are excluded.
-    Note: Values of all pixels in a label each must be identical.
+
+    Notes
+    -----
+    * Values of all pixels in a label each must be identical.
+    * This operation assumes input images are isotropic.
 
     Parameters
     ----------

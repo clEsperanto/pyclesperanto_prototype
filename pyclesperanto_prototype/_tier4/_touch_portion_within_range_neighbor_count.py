@@ -12,6 +12,10 @@ def touch_portion_within_range_neighbor_count(labels: Image,
     """Takes a label map, determines which labels are touch within a given portion range
     and returns the number of those in a vector.
 
+    Notes
+    -----
+    * This operation assumes input images are isotropic.
+
     Parameters
     ----------
     labels : Image
