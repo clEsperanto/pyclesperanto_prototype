@@ -37,9 +37,9 @@ def count_touching_neighbors(touch_matrix: Image, touching_neighbors_count_desti
     #print("tm", touch_matrix)
 
     binary_matrix = touch_matrix > 0
-    set_row(binary_matrix, 0, 0)
-    set_column(binary_matrix, 0, 0)
-    set_where_x_equals_y(binary_matrix, 0)
+    #set_row(binary_matrix, 0, 0)
+    #set_column(binary_matrix, 0, 0)
+    #set_where_x_equals_y(binary_matrix, 0)
 
     #print("bin_matrix", binary_matrix)
 
