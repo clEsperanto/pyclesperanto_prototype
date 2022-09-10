@@ -14,6 +14,10 @@ def dilate_labels(labeling_source : Image, labeling_destination : Image = None, 
     """Dilates labels to a larger size. No label overwrites another label.
     Similar to the implementation in scikit-image [2] and MorpholibJ[3]
 
+    Notes
+    -----
+    * This operation assumes input images are isotropic.
+
     Parameters
     ----------
     labels_input : Image

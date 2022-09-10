@@ -11,6 +11,10 @@ def touch_portion_within_range_neighbor_count_map(labels: Image,
     """Takes a label map, determines which labels are touching within a given portion range
     and replaces every label with the number of neighboring labels.
 
+    Notes
+    -----
+    * This operation assumes input images are isotropic.
+
     Parameters
     ----------
     labels : Image

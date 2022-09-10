@@ -11,7 +11,9 @@ def mode_of_touching_neighbors_map(parametric_map : Image, label_map : Image, pa
     * radius 2: neighbors and neighbors or neighbors are taken into account
     * radius n: ...
 
-    Note: Values of all pixels in a label each must be identical.
+    Notes
+    -----
+    * Values of all pixels in a label each must be identical.
 
     Parameters
     ----------

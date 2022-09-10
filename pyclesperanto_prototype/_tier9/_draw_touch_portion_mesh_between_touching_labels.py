@@ -8,7 +8,11 @@ def draw_touch_portion_mesh_between_touching_labels(labels : Image, touch_portio
     The end points of the lines correspond to the centroids of the labels. The intensity of the lines corresponds
     to the amount the two labels touch divided by the number of border voxels on both labels. Note: label borders at
     image borders are ignored in this calculation.
-    
+
+    Notes
+    -----
+    * This operation assumes input images are isotropic.
+
     Parameters
     ----------
     labels : Image

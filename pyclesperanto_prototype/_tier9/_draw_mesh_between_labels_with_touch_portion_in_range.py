@@ -5,6 +5,10 @@ def draw_mesh_between_labels_with_touch_portion_in_range(labels:Image, mesh_dest
     """Draws a mesh between label centroids where the labels touch portion lies within a given range.
     Minimum and maximum of that specified range are excluded.
 
+    Notes
+    -----
+    * This operation assumes input images are isotropic.
+
     Parameters
     ----------
     labels: Image

@@ -8,6 +8,10 @@ def erode_labels(labels_input : Image, labels_destination : Image = None, radius
     labels may disappear and labels may split into multiple islands. Thus, overlapping labels of input and output may
     not have the same identifier.
 
+    Notes
+    -----
+    * This operation assumes input images are isotropic.
+
     Parameters
     ----------
     labels_input : Image

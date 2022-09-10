@@ -6,7 +6,11 @@ def standard_deviation_of_n_most_touching_neighbors_map(parametric_map: Image, l
                                                         ignore_touching_background: bool = True) -> Image:
     """Takes a label image and a parametric intensity image and will replace each labels value in the parametric image
     by the standard_deviation value of most touching neighboring labels. The number of most touching neighbors can be configured.
-    Note: Values of all pixels in a label each must be identical.
+
+    Notes
+    -----
+    * Values of all pixels in a label each must be identical.
+    * This operation assumes input images are isotropic.
 
     Parameters
     ----------

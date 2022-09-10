@@ -6,6 +6,10 @@ def proximal_other_labels_count(label_image:Image, other_label_image:Image, coun
     """
     Count number of labels within a given radius in an other label image and returns the result as vector.
 
+    Notes
+    -----
+    * This operation assumes input images are isotropic.
+
     Parameters
     ----------
     label_image: Image
