@@ -12,6 +12,10 @@ def statistics_of_labelled_neighbors(label_image: Image,
     """Determine statistics of labeled objects such as average/min/mas neighbor distances, number of neighbors in a
     given radius, touch portion etc.
 
+    Notes
+    -----
+    * This operation assumes input images are isotropic.
+
     Parameters
     ----------
     label_image: Image
@@ -32,7 +36,7 @@ def statistics_of_labelled_neighbors(label_image: Image,
 
     from .._tier3 import generate_proximal_neighbors_matrix
     from .._tier3 import generate_touch_count_matrix
-    from .._tier4 import generate_touch_portion_matrix
+    from .._tier4 import generate_touch_portion_matrix, generate_touch_portion_within_range_neighbors_matrix
     from .._tier9 import centroids_of_labels
     from .._tier11 import standard_deviation_touch_portion
 
@@ -50,10 +54,12 @@ def statistics_of_labelled_neighbors(label_image: Image,
     set_column(touch_matrix, 0, 0)
     set_row(touch_matrix, 0, 0)
 
-    #print("touch matrix", touch_matrix.shape)
+    #print("touch matrix", touch_matrix)
 
     all_stats["touching_neighbor_count"] = cle_to_numpy(remove_first=True,
                                                                        data=count_touching_neighbors(touch_matrix))
+
+    #print("tnc", all_stats["touching_neighbor_count"])
 
     # distances of touching neighbors
     all_stats["minimum_distance_of_touching_neighbors"] = cle_to_numpy(remove_first=True,
@@ -68,14 +74,20 @@ def statistics_of_labelled_neighbors(label_image: Image,
 
     all_stats["max_min_distance_ratio_of_touching_neighbors"] = all_stats["maximum_distance_of_touching_neighbors"] / all_stats["minimum_distance_of_touching_neighbors"]
 
+    #print("distance_matrix", distance_matrix)
+
     # number of neighbors within given radii
     for d in proximal_distances:
         proximal_touch_matrix = generate_proximal_neighbors_matrix(distance_matrix,
                                                               min_distance=0,
                                                               max_distance=d)
+        #print("proximal_touch_matrix", d,"\n", proximal_touch_matrix)
 
         all_stats["proximal_neighbor_count_d" + str(d)] = cle_to_numpy(remove_first=True,
                                                                        data=count_touching_neighbors(proximal_touch_matrix))
+        #print("count", all_stats["proximal_neighbor_count_d" + str(d)])
+
+    #print("----------------------")
 
     # for determining nearest neighbors, we need to set distance-to-self to a
     # large number so that we do not find ourselves
@@ -105,6 +117,21 @@ def statistics_of_labelled_neighbors(label_image: Image,
     touch_count_matrix_0_set_to_high = replace_intensity(touch_count_matrix,
                                                              value_to_replace=0,
                                                              value_replacement=touch_count_matrix.max())
+
+    #print("touch_portion_matrix", touch_portion_matrix)
+
+    for touch_portion_threshold in [0, 0.16, 0.2, 0.33, 0.5, 0.75]:
+        touch_portion_within_range_neighbors_matrix = generate_touch_portion_within_range_neighbors_matrix(touch_portion_matrix,
+                                                             minimum_touch_portion=touch_portion_threshold)
+
+        #print("> ", touch_portion_threshold, touch_portion_within_range_neighbors_matrix)
+
+        all_stats["touch_portion_above_" + str(touch_portion_threshold) + "_neighbor_count"] = cle_to_numpy(remove_first=True,
+                                                                       data=count_touching_neighbors(
+                                                                           touch_portion_within_range_neighbors_matrix))
+
+        #print("count", all_stats["touch_portion_above_" + str(touch_portion_threshold) + "_neighbor_count"])
+
 
     temp = nan_to_num(touch_portion_matrix)
     touch_portion_matrix_0_set_to_high = replace_intensity(

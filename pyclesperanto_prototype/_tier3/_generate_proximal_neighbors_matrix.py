@@ -27,16 +27,17 @@ def generate_proximal_neighbors_matrix(distance_matrix :Image, touch_matrix_dest
     """
     from .._tier1 import smaller_or_equal_constant
     from .._tier1 import greater_or_equal_constant
-    from .._tier1 import binary_and
-    from .._tier1 import set_where_x_greater_than_y
+    from .._tier1 import binary_and, set_row
     from .._tier1 import set_where_x_equals_y
     from .._tier1 import set_column
 
     above_min_distance = greater_or_equal_constant(distance_matrix, constant=min_distance)
     below_max_distance = smaller_or_equal_constant(distance_matrix, constant=max_distance)
     touch_matrix_destination = binary_and(above_min_distance, below_max_distance, touch_matrix_destination)
-    set_where_x_greater_than_y(touch_matrix_destination, 0)
+
+    # no label touches the background or itself
     set_where_x_equals_y(touch_matrix_destination, 0)
-    set_column(touch_matrix_destination, 0, 0) # no label touches the background
+    set_row(touch_matrix_destination, 0, 0)
+    set_column(touch_matrix_destination, 0, 0)
 
     return touch_matrix_destination

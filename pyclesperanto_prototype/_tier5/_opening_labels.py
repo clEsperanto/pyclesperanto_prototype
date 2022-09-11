@@ -12,6 +12,10 @@ def opening_labels(labels_input: Image, labels_destination: Image = None, radius
     With every iteration, box and diamond/sphere structuring elements are used
     and thus, the operation has an octagon as structuring element.
 
+    Notes
+    -----
+    * This operation assumes input images are isotropic.
+
     Parameters
     ----------
     labels_input: Image

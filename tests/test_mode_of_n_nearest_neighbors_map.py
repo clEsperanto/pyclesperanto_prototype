@@ -25,7 +25,7 @@ def test_mode_of_n_nearest_neighbors_map():
     ]
     )) # not sure if this is deterministically always those values... let's see over time
 
-    result = cle.mode_of_n_nearest_neighbors_map(intensities, labels, n=2)
+    result = cle.mode_of_n_most_touching_neighbors_map(intensities, labels, n=2)
 
     a = cle.pull(result)
     b = cle.pull(reference)

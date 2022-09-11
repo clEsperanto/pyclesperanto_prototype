@@ -8,6 +8,10 @@ def standard_deviation_touch_portion(labels : Image, std_touch_portion_vector_de
     """Measure touch portion of all labels to each other and determine the standard deviation of the touch portion for
     each label and write it into a vector.
 
+    Notes
+    -----
+    * This operation assumes input images are isotropic.
+
     Parameters
     ----------
     labels: Image

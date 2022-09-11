@@ -7,6 +7,10 @@ def exclude_labels_with_map_values_equal_to_constant(values_map : Image, label_m
     """This operation removes labels from a labelmap and renumbers the
     remaining labels.
 
+    Notes
+    -----
+    * Values of all pixels in a label each must be identical.
+
     Parameters
     ----------
     values_map : Image

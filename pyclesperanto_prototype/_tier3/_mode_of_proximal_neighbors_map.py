@@ -7,7 +7,11 @@ import numpy as np
 def mode_of_proximal_neighbors_map(parametric_map : Image, label_map : Image, parametric_map_destination : Image = None, min_distance : float = 0, max_distance : float = np.finfo(np.float32).max) -> Image:
     """Takes a label image and a parametric intensity image and will replace each labels value in the parametric image
     by the mode value of neighboring labels. The distance range of the centroids of the neighborhood can be configured.
-    Note: Values of all pixels in a label each must be identical.
+
+    Notes
+    -----
+    * Values of all pixels in a label each must be identical.
+    * This operation assumes input images are isotropic.
 
     Parameters
     ----------

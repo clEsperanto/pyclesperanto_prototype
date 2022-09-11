@@ -14,7 +14,11 @@ def draw_mesh_between_n_closest_labels(labels : Image, mesh_target : Image = Non
     label resulting in a mesh.
     
     The end points of the lines correspond to the centroids of the labels. 
-    
+
+    Notes
+    -----
+    * This operation assumes input images are isotropic.
+
     Parameters
     ----------
     labels : Image

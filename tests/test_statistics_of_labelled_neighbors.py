@@ -42,4 +42,9 @@ def test_statistics_of_labelled_neighbors():
     assert abs(stats["maximum_touch_count"].tolist()[-1] - 40) < 0.001
     assert abs(stats["minimum_touch_portion"].tolist()[-1] - 0.125) < 0.001
     assert abs(stats["maximum_touch_portion"].tolist()[-1] - 0.25) < 0.001
-
+    assert abs(stats["touch_portion_above_0_neighbor_count"].tolist()[-1] - 6) < 0.001
+    assert abs(stats["touch_portion_above_0.16_neighbor_count"].tolist()[-1] - 2) < 0.001
+    assert abs(stats["touch_portion_above_0.2_neighbor_count"].tolist()[-1] - 2) < 0.001
+    assert abs(stats["touch_portion_above_0.33_neighbor_count"].tolist()[-1] - 0) < 0.001
+    assert abs(stats["touch_portion_above_0.5_neighbor_count"].tolist()[-1] - 0) < 0.001
+    assert abs(stats["touch_portion_above_0.75_neighbor_count"].tolist()[-1] - 0) < 0.001
