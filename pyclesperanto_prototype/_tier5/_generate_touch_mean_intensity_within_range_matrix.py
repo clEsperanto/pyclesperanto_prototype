@@ -22,11 +22,11 @@ def generate_touch_mean_intensity_within_range_matrix(image: Image,
     labels:Image
     touch_matrix_destination:Image, optional
     minimum_intensity: float, optional
-    maximum_intensity: floar, optional
+    maximum_intensity: float, optional
 
     Returns
     -------
-
+    touch_matrix_destination
     """
     from .._tier1 import set_row, set_column, nan_to_num, replace_intensity, binary_and
     from .._tier3 import generate_touch_mean_intensity_matrix
@@ -34,7 +34,7 @@ def generate_touch_mean_intensity_within_range_matrix(image: Image,
 
     # measure intensity along borders
     tmi_matrix = generate_touch_mean_intensity_matrix(image, labels)
-    # print("tmi2426", tmi_matrix[24, 26])
+    #print("tmi2225", tmi_matrix[22,25])
 
     # do not merge anything with background
     set_column(tmi_matrix, 0, minimum_intensity - 1)
@@ -45,5 +45,10 @@ def generate_touch_mean_intensity_within_range_matrix(image: Image,
     temp = replace_intensity(temp, value_to_replace=0, value_replacement=minimum_intensity - 1)
 
     # determine which should be merged
+
+    #print("maximum_intensity_", maximum_intensity)
     touch_matrix_destination = binary_and(temp >= minimum_intensity, temp <= maximum_intensity, touch_matrix_destination)
+
+    #print("bm2225", touch_matrix_destination[22,25])
+
     return touch_matrix_destination
