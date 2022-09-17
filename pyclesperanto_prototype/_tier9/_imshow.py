@@ -61,6 +61,12 @@ def imshow(image : Image, title : str = None, labels : bool = False, min_display
             rs = RandomState(MT19937(SeedSequence(3)))
             lut = rs.rand(65537, 3)
             lut[0, :] = 0
+            # these are the first four colours from matplotlib's default
+            lut[1] = [1.0, 0.4980392156862745, 0.054901960784313725]
+            lut[2] = [0.12156862745098039, 0.4666666666666667, 0.7058823529411765]
+            lut[3] = [0.17254901960784313, 0.6274509803921569, 0.17254901960784313]
+            lut[4] = [0.8392156862745098, 0.15294117647058825, 0.1568627450980392]
+            
             imshow.labels_cmap = matplotlib.colors.ListedColormap(lut)
         cmap = imshow.labels_cmap
 
