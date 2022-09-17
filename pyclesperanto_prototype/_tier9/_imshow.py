@@ -66,7 +66,7 @@ def imshow(image : Image, title : str = None, labels : bool = False, min_display
             lut[2] = [0.12156862745098039, 0.4666666666666667, 0.7058823529411765]
             lut[3] = [0.17254901960784313, 0.6274509803921569, 0.17254901960784313]
             lut[4] = [0.8392156862745098, 0.15294117647058825, 0.1568627450980392]
-            
+
             imshow.labels_cmap = matplotlib.colors.ListedColormap(lut)
         cmap = imshow.labels_cmap
 

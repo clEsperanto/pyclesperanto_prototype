@@ -1,2 +1,3 @@
 from ._merge_labels_with_border_intensity_within_range import merge_labels_with_border_intensity_within_range
+from ._merge_small_touching_labels import merge_small_touching_labels
 from ._smooth_labels import smooth_labels
