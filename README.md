@@ -27,7 +27,7 @@ For users convenience, there are code generators available for [napari](https://
 Also check out the [napari workflow optimizer](https://github.com/haesleinhuepf/napari-workflow-optimizer) for semi-automatic parameter tuning of clesperanto-functions.
 
 ## Reference
-The preliminary API reference is available [here](https://pyclesperanto-prototype.github.io/).
+The preliminary API reference is available [here](https://clesperanto.github.io/pyclesperanto_prototype/docs/_build/html/).
 Furthermore, parts of the [reference](https://clij.github.io/clij2-docs/reference__pyclesperanto) are also available within the CLIJ2 documentation.
 
 ## Installation
