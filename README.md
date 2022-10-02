@@ -15,20 +15,20 @@
 [![DOI](https://zenodo.org/badge/248206619.svg)](https://zenodo.org/badge/latestdoi/248206619)
 
 py-clesperanto is a prototype for [clesperanto](http://clesperanto.net) - a multi-platform multi-language framework for GPU-accelerated image processing. 
-We mostly use it in the life sciences for analysing 3/4-dimensional microsopy data, e.g. as we face it developmental biology when segmenting cells and studying
+We mostly use it in the life sciences for analysing 3- and 4-dimensional microsopy data, e.g. as we face it developmental biology when segmenting cells and studying
 their individual properties as well as properties of compounds of cells forming tissues.
 
 ![](https://github.com/clEsperanto/pyclesperanto_prototype/raw/master/docs/images/banner.png)
-<small>Image data source: Daniela Vorkel, Myers lab, MPI-CBG, rendered using [napari](https://github.com/napari/napari) </small>
+Image data source: Daniela Vorkel, Myers lab, MPI-CBG, rendered using [napari](https://github.com/napari/napari)
 
 clesperanto uses [OpenCL kernels](https://github.com/clEsperanto/clij-opencl-kernels/tree/development/src/main/java/net/haesleinhuepf/clij/kernels) from [CLIJ](http://clij.github.io/).
-Since version 0.11.1 py-clesperanto comes with a yet experimental [cupy](https://cupy.dev)-based [CUDA](https://en.wikipedia.org/wiki/CUDA) backend.
 
 For users convenience, there are code generators available for [napari](https://clesperanto.github.io/napari_pyclesperanto_assistant/) and [Fiji](https://clij.github.io/assistant/).
 Also check out the [napari workflow optimizer](https://github.com/haesleinhuepf/napari-workflow-optimizer) for semi-automatic parameter tuning of clesperanto-functions.
 
 ## Reference
-The [full reference](https://clij.github.io/clij2-docs/reference__pyclesperanto) is available as part of the CLIJ2 documentation.
+The preliminary API reference is available [here](https://clesperanto.github.io/pyclesperanto_prototype/docs/_build/html/).
+Furthermore, parts of the [reference](https://clij.github.io/clij2-docs/reference__pyclesperanto) are also available within the CLIJ2 documentation.
 
 ## Installation
 * Get a conda/python environment, e.g. via [mini-conda](https://docs.conda.io/en/latest/miniconda.html). If you never used python/conda environments before, please follow the instructions [here](https://biapol.github.io/blog/johannes_mueller/anaconda_getting_started/) first.
