@@ -21,3 +21,6 @@ make.bat html
 make.bat clean
 ```
 
+## See also
+
+https://biapol.github.io/blog/johannes_mueller/entry_sphinx/
