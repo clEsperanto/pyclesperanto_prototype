@@ -1,6 +1,5 @@
 import numpy as np
 
-import pyclesperanto_prototype
 from .._tier0 import Image
 from .._tier0 import create_none
 from .._tier0 import plugin_function
@@ -115,6 +114,11 @@ def statistics_of_labelled_neighbors(label_image: Image,
     # touch count / portion
     touch_count_matrix = generate_touch_count_matrix(label_image)
     touch_portion_matrix = generate_touch_portion_matrix(label_image)
+    # ignore touching background
+    set_column(touch_count_matrix, 0, 0)
+    set_row(touch_count_matrix, 0, 0)
+    set_column(touch_portion_matrix, 0, 0)
+    set_row(touch_portion_matrix, 0, 0)
 
     # To detect the minimum touch count/portion, we need to set all 0 pixels to a high value
     touch_count_matrix_0_set_to_high = replace_intensity(touch_count_matrix,
