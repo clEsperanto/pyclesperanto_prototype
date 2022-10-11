@@ -38,7 +38,7 @@
 #define SAMPLER_ADDRESS CLK_ADDRESS_CLAMP
 #endif
 
-__kernel void affine_transform_3d(
+__kernel void affine_transform_3d_interpolate(
     IMAGE_input_TYPE input,
 	IMAGE_output_TYPE output,
 	IMAGE_mat_TYPE mat,
@@ -77,15 +77,18 @@ __kernel void affine_transform_3d(
   float z2 = k+0.5f;
 
   //coordinates on raw data that will be transformed
+  //use inverse transform to go from output to input space
   float z = (mat[8]*x2+mat[9]*y2+mat[10]*z2+mat[11]);
   float y = (mat[4]*x2+mat[5]*y2+mat[6]*z2+mat[7]);
   float x = (mat[0]*x2+mat[1]*y2+mat[2]*z2+mat[3]);
 
   //coordinates on intermediate image, apply the translate_rotate matrix transform to get sheared image coordinates
-  //use this to get neighbours
-  float zi = (trans_rotate_mat[8]*x+trans_rotate_mat[9]*y+trans_rotate_mat[10]*z+trans_rotate_mat[11]);
-  float yi = (trans_rotate_mat[4]*x+trans_rotate_mat[5]*y+trans_rotate_mat[6]*z+trans_rotate_mat[7]);
-  float xi = (trans_rotate_mat[0]*x+trans_rotate_mat[1]*y+trans_rotate_mat[2]*z+trans_rotate_mat[3]);
+  //inverse of translate_rotate on output image
+  //use this to get neighbours in the intermediate image space
+  
+  float zi = (trans_rotate_mat[8]*x2+trans_rotate_mat[9]*y2+trans_rotate_mat[10]*z2+trans_rotate_mat[11]);
+  float yi = (trans_rotate_mat[4]*x2+trans_rotate_mat[5]*y2+trans_rotate_mat[6]*z2+trans_rotate_mat[7]);
+  float xi = (trans_rotate_mat[0]*x2+trans_rotate_mat[1]*y2+trans_rotate_mat[2]*z2+trans_rotate_mat[3]);
 
   //int4 coord_norm = (int4)(x2 * GET_IMAGE_WIDTH(input) / GET_IMAGE_WIDTH(output),y2 * GET_IMAGE_HEIGHT(input) / GET_IMAGE_HEIGHT(output), z2  * GET_IMAGE_DEPTH(input) / GET_IMAGE_DEPTH(output),0.f);
   int4 coord_norm = (int4)(x,y, z,0.f);
@@ -120,22 +123,22 @@ __kernel void affine_transform_3d(
     x_after = (shear_mat[0]*x_after+shear_mat[1]*y_after+shear_mat[2]*z_after+shear_mat[3]);
 
     
-    float pix_1 = (float)(READ_input_IMAGE(input, sampler, POS_input_INSTANCE(x_before, z_before, y_before, 0)).x);
-    float pix_2 = (float)(READ_input_IMAGE(input, sampler, POS_input_INSTANCE(x_after, z_before, y_before, 0)).x);
+    float pix_1 = (float)(READ_input_IMAGE(input, sampler, POS_input_INSTANCE(x_before, y_before,z_before , 0)).x);
+    float pix_2 = (float)(READ_input_IMAGE(input, sampler, POS_input_INSTANCE(x_before, y_before,z_after , 0)).x);
     
-    float pix_3 = (float)(READ_input_IMAGE(input, sampler, POS_input_INSTANCE(x_before, z_after, y_before, 0)).x);
-    float pix_4 = (float)(READ_input_IMAGE(input, sampler, POS_input_INSTANCE(x_after, z_after, y_before, 0)).x);
+    float pix_3 = (float)(READ_input_IMAGE(input, sampler, POS_input_INSTANCE(x_after, y_after,z_before , 0)).x);
+    float pix_4 = (float)(READ_input_IMAGE(input, sampler, POS_input_INSTANCE(x_after, y_after,z_before , 0)).x);
 
     //value at coordinate in raw image
     //pix = (float)(READ_input_IMAGE(input, sampler, POS_input_INSTANCE(x, y, z, 0)).x);
 
     //interpolate x direction
-    float f1 = ((x_after - x)* pix_1/(x_after - x_before)) + ((x - x_before)* pix_2/(x_after - x_before));
-    float f2 = ((x_after - x)* pix_3/(x_after - x_before)) + ((x - x_before)* pix_4/(x_after - x_before));
+    float f1 = ((z_after - z)* pix_1/(z_before - z_before)) + ((z - z_before)* pix_2/(z_after - z_before));
+    float f2 = ((z_after - z)* pix_3/(z_before - z_before)) + ((z - z_before)* pix_4/(z_after - z_before));
 
-    pix = ((z_after - y)* f1/(z_after - z_before)) + ((y - z_before)* f2/(z_after - z_before));
+    pix = ((y_after - y)* f1/(y_after - y_before)) + ((y - y_before)* f2/(y_after - y_before));
+    pix = (float)(READ_input_IMAGE(input, sampler, POS_input_INSTANCE(x, y, z, 0)).x);
     
-
   }
 
 
