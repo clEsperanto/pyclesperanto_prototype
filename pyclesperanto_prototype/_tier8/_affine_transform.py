@@ -9,7 +9,9 @@ from skimage.transform import AffineTransform
 import numpy as np
 
 @plugin_function(output_creator=create_none)
-def affine_transform(source : Image, destination : Image = None, transform : Union[np.ndarray, AffineTransform3D, AffineTransform] = None, linear_interpolation : bool = False, auto_size:bool = False) -> Image:
+def affine_transform(source : Image, destination : Image = None,
+                     transform : Union[np.ndarray, AffineTransform3D, AffineTransform] = None,
+                     linear_interpolation : bool = False, auto_size:bool = False) -> Image:
     """
     Applies an affine transform to an image.
 
@@ -106,7 +108,6 @@ def affine_transform(source : Image, destination : Image = None, transform : Uni
         "input": source,
         "output": destination,
         "mat": gpu_transform_matrix,
-        "mat2": gpu_transform_matrix
     }
     #print("parameters", parameters)
     #adding line for testing kernel
@@ -198,6 +199,7 @@ def affine_transform_deskew(source : Image,
     if isinstance(transform, AffineTransform3D):
         transform_matrix = np.asarray(transform.copy().inverse())
         shear_mat_1 = np.asarray(shear_transform.copy().inverse())
+        shear_mat_inv = np.asarray(shear_transform.copy())
         trans_rotate_mat_1 = np.asarray(trans_rotate_mat.copy().inverse())
         translatex_mat = np.asarray(translatex.copy())
         translatey_mat = np.asarray(translatey.copy())
@@ -221,13 +223,14 @@ def affine_transform_deskew(source : Image,
     translatey_mat= push(translatey_mat)
     translatex_mat = push(translatex_mat)
     trans_rotate_mat_1 = push(trans_rotate_mat_1)
+    shear_mat_inv = push(shear_mat_inv)
     
     kernel_suffix = ''
     if linear_interpolation:
         image = empty_image_like(source)
         copy(source, image)
         if type(source) != type(image):
-            kernel_suffix = '_interpolate'
+            kernel_suffix = '_interpolate_test'
         else:
             from .._tier0 import _warn_of_interpolation_not_available
             _warn_of_interpolation_not_available()
@@ -237,8 +240,9 @@ def affine_transform_deskew(source : Image,
         "input": source,
         "output": destination,
         "mat": gpu_transform_matrix,
-        "shear_mat": shear_mat_1,
         "trans_rotate_mat": trans_rotate_mat_1,
+        "shear_mat": shear_mat_1,
+        "shear_mat_inv": shear_mat_inv,
         "translate_z_mat": translatez_mat,
         "translate_y_mat": translatey_mat,
         "translate_x_mat": translatex_mat
