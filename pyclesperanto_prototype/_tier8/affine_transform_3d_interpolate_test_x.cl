@@ -82,11 +82,11 @@ __kernel void affine_transform_3d_interpolate_test(
   float y = (mat[4]*x2+mat[5]*y2+mat[6]*z2+mat[7]);
   float x = (mat[0]*x2+mat[1]*y2+mat[2]*z2+mat[3]);
 
-  //coordinates on intermediate image, apply the translate_rotate matrix transform to get sheared image coordinates
+  //coordinates on intermediate image, apply the shear matrix to raw data(inverse of matrix passed) to get sheared image coordinates
   //use this to get neighbours
-  float zi = (shear_mat_inv[8]*x2+shear_mat_inv[9]*y2+shear_mat_inv[10]*z2+shear_mat_inv[11]);
-  float yi = (shear_mat_inv[4]*x2+shear_mat_inv[5]*y2+shear_mat_inv[6]*z2+shear_mat_inv[7]);
-  float xi = (shear_mat_inv[0]*x2+shear_mat_inv[1]*y2+shear_mat_inv[2]*z2+shear_mat_inv[3]);
+  float zi = (shear_mat_inv[8]*x+shear_mat_inv[9]*y+shear_mat_inv[10]*z+shear_mat_inv[11]);
+  float yi = (shear_mat_inv[4]*x+shear_mat_inv[5]*y+shear_mat_inv[6]*z+shear_mat_inv[7]);
+  float xi = (shear_mat_inv[0]*x+shear_mat_inv[1]*y+shear_mat_inv[2]*z+shear_mat_inv[3]);
 
   //int4 coord_norm = (int4)(x2 * GET_IMAGE_WIDTH(input) / GET_IMAGE_WIDTH(output),y2 * GET_IMAGE_HEIGHT(input) / GET_IMAGE_HEIGHT(output), z2  * GET_IMAGE_DEPTH(input) / GET_IMAGE_DEPTH(output),0.f);
   int4 coord_norm = (int4)(x,y, z,0.f);
@@ -134,8 +134,10 @@ __kernel void affine_transform_3d_interpolate_test(
     float f1 = ((x_after - x)* pix_1/(x_after - x_before)) + ((x - x_before)* pix_2/(x_after - x_before));
     float f2 = ((x_after - x)* pix_3/(x_after - x_before)) + ((x - x_before)* pix_4/(x_after - x_before));
 
-    //pix = f1+f2;//((z_after - y)* f1/(z_after - z_before)) + ((y - z_before)* f2/(z_after - z_before));
-    pix = (float)(READ_input_IMAGE(input, sampler, POS_input_INSTANCE(x_after, y_after, z_after, 0)).x);
+    float f3 = ((y_after - y)* f1/(y_after - y_before)) + ((y - y_before)* f2/(y_after - y_before));
+
+    pix = pix_1;//+f2;//((z_after - y)* f1/(z_after - z_before)) + ((y - z_before)* f2/(z_after - z_before));
+    //pix = pix_1;//(float)(READ_input_IMAGE(input, sampler, POS_input_INSTANCE(x_after, y_after, z_after, 0)).x);
 
   }
 
