@@ -42,7 +42,6 @@ __kernel void affine_transform_3d_interpolate_test(
     IMAGE_input_TYPE input,
 	IMAGE_output_TYPE output,
 	IMAGE_mat_TYPE mat,
-  IMAGE_trans_rotate_mat_TYPE trans_rotate_mat,
   IMAGE_shear_mat_TYPE shear_mat,
   IMAGE_shear_mat_inv_TYPE shear_mat_inv,
   IMAGE_translate_x_mat_TYPE translate_x_mat,
@@ -50,7 +49,7 @@ __kernel void affine_transform_3d_interpolate_test(
   IMAGE_translate_z_mat_TYPE translate_z_mat)
 {
 
-  const sampler_t sampler = CLK_NORMALIZED_COORDS_FALSE|
+  const sampler_t sampler = CLK_NORMALIZED_COORDS_TRUE|
       SAMPLER_ADDRESS |	SAMPLER_FILTER;
 
   //dataset ussually divided into N parts, each work item processes on part.
@@ -77,7 +76,7 @@ __kernel void affine_transform_3d_interpolate_test(
   float y2 = j+0.5f;
   float z2 = k+0.5f;
 
-  //coordinates on raw data that will be transformed
+  //get coordinates on raw data that will be transformed
   float z = (mat[8]*x2+mat[9]*y2+mat[10]*z2+mat[11]);
   float y = (mat[4]*x2+mat[5]*y2+mat[6]*z2+mat[7]);
   float x = (mat[0]*x2+mat[1]*y2+mat[2]*z2+mat[3]);
@@ -121,22 +120,23 @@ __kernel void affine_transform_3d_interpolate_test(
     x_after = (shear_mat[0]*x_after+shear_mat[1]*y_after+shear_mat[2]*z_after+shear_mat[3]);
 
     
-    float pix_1 = (float)(READ_input_IMAGE(input, sampler, POS_input_INSTANCE(x_before, y_before, z_before, 0)).x);
-    float pix_2 = (float)(READ_input_IMAGE(input, sampler, POS_input_INSTANCE(x_after, y_before, z_before, 0)).x);
+    float pix_1 = (float)(READ_input_IMAGE(input, sampler, POS_input_INSTANCE(xi, y_before, z_before, 0)).x);
+    float pix_2 = (float)(READ_input_IMAGE(input, sampler, POS_input_INSTANCE(xi, y_before, z_after, 0)).x);
     
-    float pix_3 = (float)(READ_input_IMAGE(input, sampler, POS_input_INSTANCE(x_before, y_after, z_before, 0)).x);
-    float pix_4 = (float)(READ_input_IMAGE(input, sampler, POS_input_INSTANCE(x_after, y_after, z_before, 0)).x);
+    float pix_3 = (float)(READ_input_IMAGE(input, sampler, POS_input_INSTANCE(xi, y_after, z_before, 0)).x);
+    float pix_4 = (float)(READ_input_IMAGE(input, sampler, POS_input_INSTANCE(xi, y_after, z_after, 0)).x);
 
     //value at coordinate in raw image
     //pix = (float)(READ_input_IMAGE(input, sampler, POS_input_INSTANCE(x, y, z, 0)).x);
 
-    //interpolate x direction
+    //interpolate in z and y direction?
     float f1 = ((x_after - x)* pix_1/(x_after - x_before)) + ((x - x_before)* pix_2/(x_after - x_before));
     float f2 = ((x_after - x)* pix_3/(x_after - x_before)) + ((x - x_before)* pix_4/(x_after - x_before));
 
     float f3 = ((y_after - y)* f1/(y_after - y_before)) + ((y - y_before)* f2/(y_after - y_before));
 
-    pix = pix_1;//+f2;//((z_after - y)* f1/(z_after - z_before)) + ((y - z_before)* f2/(z_after - z_before));
+    pix = pix_1;//((x_after - x)* pix_1/(x_after - x_before));
+    //f1;//+f2;//((z_after - y)* f1/(z_after - z_before)) + ((y - z_before)* f2/(z_after - z_before));
     //pix = pix_1;//(float)(READ_input_IMAGE(input, sampler, POS_input_INSTANCE(x_after, y_after, z_after, 0)).x);
 
   }

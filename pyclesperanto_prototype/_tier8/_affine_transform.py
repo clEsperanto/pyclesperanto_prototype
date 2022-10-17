@@ -125,7 +125,6 @@ def affine_transform(source : Image, destination : Image = None,
 def affine_transform_deskew(source : Image,
                             destination : Image = None,
                             transform : Union[np.ndarray, AffineTransform3D, AffineTransform] = None,
-                            trans_rotate_mat : Union[np.ndarray, AffineTransform3D, AffineTransform] = None,
                             shear_transform : Union[np.ndarray, AffineTransform3D, AffineTransform] = None,
                             translatez : Union[np.ndarray, AffineTransform3D, AffineTransform] = None,
                             translatey : Union[np.ndarray, AffineTransform3D, AffineTransform] = None,
@@ -200,7 +199,6 @@ def affine_transform_deskew(source : Image,
         transform_matrix = np.asarray(transform.copy().inverse())
         shear_mat_1 = np.asarray(shear_transform.copy().inverse())
         shear_mat_inv = np.asarray(shear_transform.copy())
-        trans_rotate_mat_1 = np.asarray(trans_rotate_mat.copy().inverse())
         translatex_mat = np.asarray(translatex.copy())
         translatey_mat = np.asarray(translatey.copy())
         translatez_mat = np.asarray(translatez.copy())
@@ -222,7 +220,7 @@ def affine_transform_deskew(source : Image,
     translatez_mat = push(translatez_mat)
     translatey_mat= push(translatey_mat)
     translatex_mat = push(translatex_mat)
-    trans_rotate_mat_1 = push(trans_rotate_mat_1)
+    #trans_rotate_mat_1 = push(trans_rotate_mat_1)
     shear_mat_inv = push(shear_mat_inv)
     
     kernel_suffix = ''
@@ -240,7 +238,6 @@ def affine_transform_deskew(source : Image,
         "input": source,
         "output": destination,
         "mat": gpu_transform_matrix,
-        "trans_rotate_mat": trans_rotate_mat_1,
         "shear_mat": shear_mat_1,
         "shear_mat_inv": shear_mat_inv,
         "translate_z_mat": translatez_mat,
