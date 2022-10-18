@@ -126,9 +126,10 @@ def affine_transform_deskew(source : Image,
                             destination : Image = None,
                             transform : Union[np.ndarray, AffineTransform3D, AffineTransform] = None,
                             shear_transform : Union[np.ndarray, AffineTransform3D, AffineTransform] = None,
-                            translatez : Union[np.ndarray, AffineTransform3D, AffineTransform] = None,
-                            translatey : Union[np.ndarray, AffineTransform3D, AffineTransform] = None,
-                            translatex : Union[np.ndarray, AffineTransform3D, AffineTransform] = None,
+                            translate_mat_1 : Union[np.ndarray, AffineTransform3D, AffineTransform] = None,
+                            translate_mat_2 : Union[np.ndarray, AffineTransform3D, AffineTransform] = None,
+                            translate_mat_3 : Union[np.ndarray, AffineTransform3D, AffineTransform] = None,
+                            translate_mat_4 : Union[np.ndarray, AffineTransform3D, AffineTransform] = None,
                             linear_interpolation : bool = False,
                             auto_size:bool = False) -> Image:
     """
@@ -197,11 +198,13 @@ def affine_transform_deskew(source : Image,
     # we invert the transform because we go from the target image to the source image to read pixels
     if isinstance(transform, AffineTransform3D):
         transform_matrix = np.asarray(transform.copy().inverse())
-        shear_mat_1 = np.asarray(shear_transform.copy().inverse())
-        shear_mat_inv = np.asarray(shear_transform.copy())
-        translatex_mat = np.asarray(translatex.copy())
-        translatey_mat = np.asarray(translatey.copy())
-        translatez_mat = np.asarray(translatez.copy())
+        shear_mat_inv = np.asarray(shear_transform.copy().inverse())
+        shear_mat = np.asarray(shear_transform.copy())
+        translate_mat_yz1 = np.asarray(translate_mat_1.copy())
+        translate_mat_yz2 = np.asarray(translate_mat_2.copy())
+        translate_mat_yz3 = np.asarray(translate_mat_3.copy())
+        translate_mat_yz4 = np.asarray(translate_mat_4.copy())
+        
     elif isinstance(transform, AffineTransform):
         # Question: Don't we have to invert this one as well? haesleinhuepf
         matrix = np.asarray(transform.params)
@@ -216,11 +219,11 @@ def affine_transform_deskew(source : Image,
         transform_matrix = np.linalg.inv(transform)
 
     gpu_transform_matrix = push(transform_matrix)
-    shear_mat_1 = push(shear_mat_1)
-    translatez_mat = push(translatez_mat)
-    translatey_mat= push(translatey_mat)
-    translatex_mat = push(translatex_mat)
-    #trans_rotate_mat_1 = push(trans_rotate_mat_1)
+    shear_mat = push(shear_mat)
+    translate_mat_yz1 = push(translate_mat_yz1)
+    translate_mat_yz2= push(translate_mat_yz2)
+    translate_mat_yz3 = push(translate_mat_yz3)
+    translate_mat_yz4 = push(translate_mat_yz4)
     shear_mat_inv = push(shear_mat_inv)
     
     kernel_suffix = ''
@@ -238,11 +241,12 @@ def affine_transform_deskew(source : Image,
         "input": source,
         "output": destination,
         "mat": gpu_transform_matrix,
-        "shear_mat": shear_mat_1,
+        "shear_mat": shear_mat,
         "shear_mat_inv": shear_mat_inv,
-        "translate_z_mat": translatez_mat,
-        "translate_y_mat": translatey_mat,
-        "translate_x_mat": translatex_mat
+        "translate_mat_yz1": translate_mat_yz1,
+        "translate_mat_yz2": translate_mat_yz2,
+        "translate_mat_yz3": translate_mat_yz3,
+        "translate_mat_yz4": translate_mat_yz4
     }
     #print("parameters", parameters)
     #adding line for testing kernel

@@ -29,7 +29,7 @@
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
-
+//pass a yz transform image
 #ifndef SAMPLER_FILTER
 #define SAMPLER_FILTER CLK_FILTER_LINEAR
 #endif
@@ -44,9 +44,10 @@ __kernel void affine_transform_3d_interpolate_test(
 	IMAGE_mat_TYPE mat,
   IMAGE_shear_mat_TYPE shear_mat,
   IMAGE_shear_mat_inv_TYPE shear_mat_inv,
-  IMAGE_translate_x_mat_TYPE translate_x_mat,
-  IMAGE_translate_y_mat_TYPE translate_y_mat,
-  IMAGE_translate_z_mat_TYPE translate_z_mat)
+  IMAGE_translate_mat_yz1_TYPE translate_mat_yz1,
+  IMAGE_translate_mat_yz2_TYPE translate_mat_yz2,
+  IMAGE_translate_mat_yz3_TYPE translate_mat_yz3,
+  IMAGE_translate_mat_yz4_TYPE translate_mat_yz4)
 {
 
   const sampler_t sampler = CLK_NORMALIZED_COORDS_TRUE|
@@ -63,29 +64,21 @@ __kernel void affine_transform_3d_interpolate_test(
   uint Ny = get_global_size(1);
   uint Nz = get_global_size(2);
 
-  //float x = (mat[0]*i+mat[1]*j+mat[2]*k+mat[3]);
-  //float y = (mat[4]*i+mat[5]*j+mat[6]*k+mat[7]);
-  //float z = (mat[8]*i+mat[9]*j+mat[10]*k+mat[11]);
-  ////ensure correct sampling, see opencl 1.2 specification pg. 329
-  //x += 0.5f;
-  //y += 0.5f;
-  //z += 0.5f;
-
-  //virtual plane coordinates
+  //virtual plane coordinates, deskewed coord
   float x2 = i+0.5f;
   float y2 = j+0.5f;
   float z2 = k+0.5f;
 
-  //get coordinates on raw data that will be transformed
+  //corresponding coordinates on raw data 
   float z = (mat[8]*x2+mat[9]*y2+mat[10]*z2+mat[11]);
   float y = (mat[4]*x2+mat[5]*y2+mat[6]*z2+mat[7]);
   float x = (mat[0]*x2+mat[1]*y2+mat[2]*z2+mat[3]);
 
-  //coordinates on intermediate image, apply the shear matrix to raw data(inverse of matrix passed) to get sheared image coordinates
-  //use this to get neighbours
-  float zi = (shear_mat_inv[8]*x+shear_mat_inv[9]*y+shear_mat_inv[10]*z+shear_mat_inv[11]);
-  float yi = (shear_mat_inv[4]*x+shear_mat_inv[5]*y+shear_mat_inv[6]*z+shear_mat_inv[7]);
-  float xi = (shear_mat_inv[0]*x+shear_mat_inv[1]*y+shear_mat_inv[2]*z+shear_mat_inv[3]);
+  //coordinates on intermediate sheared image,  multiply coord from raw skewed raw data with shear matrix
+  
+  float zi = (shear_mat[8]*x+shear_mat[9]*y+shear_mat[10]*z+shear_mat[11]);
+  float yi = (shear_mat[4]*x+shear_mat[5]*y+shear_mat[6]*z+shear_mat[7]);
+  float xi = (shear_mat[0]*x+shear_mat[1]*y+shear_mat[2]*z+shear_mat[3]);
 
   //int4 coord_norm = (int4)(x2 * GET_IMAGE_WIDTH(input) / GET_IMAGE_WIDTH(output),y2 * GET_IMAGE_HEIGHT(input) / GET_IMAGE_HEIGHT(output), z2  * GET_IMAGE_DEPTH(input) / GET_IMAGE_DEPTH(output),0.f);
   int4 coord_norm = (int4)(x,y, z,0.f);
@@ -100,44 +93,54 @@ __kernel void affine_transform_3d_interpolate_test(
     
 
 
-    //get neighbouring pixels 
-    float z_before = (translate_z_mat[8]*xi+translate_z_mat[9]*yi+translate_z_mat[10]*zi-translate_z_mat[11]);
-    float z_after = (translate_z_mat[8]*xi+translate_z_mat[9]*yi+translate_z_mat[10]*zi+translate_z_mat[11]);
+    //get neighbouring pixels by using a translation matrix for y and z coordinates
+    float z1_shear  = (translate_mat_yz1[8]*xi+translate_mat_yz1[9]*yi+translate_mat_yz1[10]*zi+translate_mat_yz1[11]);
+    float y1_shear = (translate_mat_yz1[4]*xi+translate_mat_yz1[5]*yi+translate_mat_yz1[6]*zi+translate_mat_yz1[7]);
+    float x1_shear  = (translate_mat_yz1[0]*xi+translate_mat_yz1[1]*yi+translate_mat_yz1[2]*zi+translate_mat_yz1[3]);
 
-    float y_before = (translate_y_mat[4]*xi+translate_y_mat[5]*yi+translate_y_mat[6]*zi-translate_y_mat[7]);
-    float y_after =  (translate_y_mat[4]*xi+translate_y_mat[5]*yi+translate_y_mat[6]*zi+translate_y_mat[7]);
+    float z2_shear  = (translate_mat_yz2[8]*xi+translate_mat_yz2[9]*yi+translate_mat_yz2[10]*zi+translate_mat_yz2[11]);
+    float y2_shear = (translate_mat_yz2[4]*xi+translate_mat_yz2[5]*yi+translate_mat_yz2[6]*zi+translate_mat_yz2[7]);
+    float x2_shear  = (translate_mat_yz2[0]*xi+translate_mat_yz2[1]*yi+translate_mat_yz2[2]*zi+translate_mat_yz2[3]);
 
-    float x_before = (translate_x_mat[0]*xi+translate_x_mat[1]*yi+translate_x_mat[2]*zi-translate_x_mat[3]);
-    float x_after = (translate_x_mat[0]*xi+translate_x_mat[1]*yi+translate_x_mat[2]*zi+translate_x_mat[3]);
+    float z3_shear  = (translate_mat_yz3[8]*xi+translate_mat_yz3[9]*yi+translate_mat_yz3[10]*zi+translate_mat_yz3[11]);
+    float y3_shear = (translate_mat_yz3[4]*xi+translate_mat_yz3[5]*yi+translate_mat_yz3[6]*zi+translate_mat_yz3[7]);
+    float x3_shear  = (translate_mat_yz3[0]*xi+translate_mat_yz3[1]*yi+translate_mat_yz3[2]*zi+translate_mat_yz3[3]);
+
+    float z4_shear  = (translate_mat_yz4[8]*xi+translate_mat_yz4[9]*yi+translate_mat_yz4[10]*zi+translate_mat_yz4[11]);
+    float y4_shear = (translate_mat_yz4[4]*xi+translate_mat_yz4[5]*yi+translate_mat_yz4[6]*zi+translate_mat_yz4[7]);
+    float x4_shear  = (translate_mat_yz4[0]*xi+translate_mat_yz4[1]*yi+translate_mat_yz4[2]*zi+translate_mat_yz4[3]);
     
-    //apply shear transform from shear to original image to get values at neighbour coordinates
-    z_before = (shear_mat[8]*x_before+shear_mat[9]*y_before+shear_mat[10]*z_before+shear_mat[11]);
-    y_before = (shear_mat[4]*x_before+shear_mat[5]*y_before+shear_mat[6]*z_before+shear_mat[7]);
-    x_before = (shear_mat[0]*x_before+shear_mat[1]*y_before+shear_mat[2]*z_before+shear_mat[3]);
+    //apply inverse shear transform to sheared image to obtain original image // get actual neighbour coordinates
+    float z1 = (shear_mat_inv[8]*x1_shear+shear_mat_inv[9]*y1_shear+shear_mat_inv[10]*z1_shear+shear_mat_inv[11]);
+    float y1 = (shear_mat_inv[4]*x1_shear+shear_mat_inv[5]*y1_shear+shear_mat_inv[6]*z1_shear+shear_mat_inv[7]);
+    float x1 = (shear_mat_inv[0]*x1_shear+shear_mat_inv[1]*y1_shear+shear_mat_inv[2]*z1_shear+shear_mat_inv[3]);
 
-    z_after = (shear_mat[8]*x_after+shear_mat[9]*y_after+shear_mat[10]*z_after+shear_mat[11]);
-    y_after = (shear_mat[4]*x_after+shear_mat[5]*y_after+shear_mat[6]*z_after+shear_mat[7]);
-    x_after = (shear_mat[0]*x_after+shear_mat[1]*y_after+shear_mat[2]*z_after+shear_mat[3]);
+    float z2 = (shear_mat_inv[8]*x2_shear+shear_mat_inv[9]*y2_shear+shear_mat_inv[10]*z2_shear+shear_mat_inv[11]);
+    float y2 = (shear_mat_inv[4]*x2_shear+shear_mat_inv[5]*y2_shear+shear_mat_inv[6]*z2_shear+shear_mat_inv[7]);
+    float x2 = (shear_mat_inv[0]*x2_shear+shear_mat_inv[1]*y2_shear+shear_mat_inv[2]*z2_shear+shear_mat_inv[3]);
 
+    float z3 = (shear_mat_inv[8]*x3_shear+shear_mat_inv[9]*y3_shear+shear_mat_inv[10]*z3_shear+shear_mat_inv[11]);
+    float y3 = (shear_mat_inv[4]*x3_shear+shear_mat_inv[5]*y3_shear+shear_mat_inv[6]*z3_shear+shear_mat_inv[7]);
+    float x3 = (shear_mat_inv[0]*x3_shear+shear_mat_inv[1]*y3_shear+shear_mat_inv[2]*z3_shear+shear_mat_inv[3]);
+
+    float z4 = (shear_mat_inv[8]*x4_shear+shear_mat_inv[9]*y4_shear+shear_mat_inv[10]*z4_shear+shear_mat_inv[11]); 
+    float y4 = (shear_mat_inv[4]*x4_shear+shear_mat_inv[5]*y4_shear+shear_mat_inv[6]*z4_shear+shear_mat_inv[7]);
+    float x4 = (shear_mat_inv[0]*x4_shear+shear_mat_inv[1]*y4_shear+shear_mat_inv[2]*z4_shear+shear_mat_inv[3]);
+
+    //get pixel values at neighbour coordinates
+    float pix_1 = (float)(READ_input_IMAGE(input, sampler, POS_input_INSTANCE(xi, y1, z1, 0)).x);
+    float pix_2 = (float)(READ_input_IMAGE(input, sampler, POS_input_INSTANCE(xi, y2, z2, 0)).x);
     
-    float pix_1 = (float)(READ_input_IMAGE(input, sampler, POS_input_INSTANCE(xi, y_before, z_before, 0)).x);
-    float pix_2 = (float)(READ_input_IMAGE(input, sampler, POS_input_INSTANCE(xi, y_before, z_after, 0)).x);
+    float pix_3 = (float)(READ_input_IMAGE(input, sampler, POS_input_INSTANCE(xi, y3, z1, 0)).x);
+    float pix_4 = (float)(READ_input_IMAGE(input, sampler, POS_input_INSTANCE(xi, y4, z2, 0)).x);
+
+
+    //interpolate z direction
+    float f1 = ((z2 - z)* pix_1 + (z - z1)* pix_2)/(z2 - z1);
+    float f2 = ((z2 - z)* pix_3 + (z - z1)* pix_4)/(z2 - z1);
     
-    float pix_3 = (float)(READ_input_IMAGE(input, sampler, POS_input_INSTANCE(xi, y_after, z_before, 0)).x);
-    float pix_4 = (float)(READ_input_IMAGE(input, sampler, POS_input_INSTANCE(xi, y_after, z_after, 0)).x);
-
-    //value at coordinate in raw image
-    //pix = (float)(READ_input_IMAGE(input, sampler, POS_input_INSTANCE(x, y, z, 0)).x);
-
-    //interpolate in z and y direction?
-    float f1 = ((x_after - x)* pix_1/(x_after - x_before)) + ((x - x_before)* pix_2/(x_after - x_before));
-    float f2 = ((x_after - x)* pix_3/(x_after - x_before)) + ((x - x_before)* pix_4/(x_after - x_before));
-
-    float f3 = ((y_after - y)* f1/(y_after - y_before)) + ((y - y_before)* f2/(y_after - y_before));
-
-    pix = pix_1;//((x_after - x)* pix_1/(x_after - x_before));
-    //f1;//+f2;//((z_after - y)* f1/(z_after - z_before)) + ((y - z_before)* f2/(z_after - z_before));
-    //pix = pix_1;//(float)(READ_input_IMAGE(input, sampler, POS_input_INSTANCE(x_after, y_after, z_after, 0)).x);
+    //interpolate y direction
+    pix = ((y3 - y)* f1 + (y - y1)* f2)/(y3 - y1);
 
   }
 
