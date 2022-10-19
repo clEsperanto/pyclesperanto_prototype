@@ -53,6 +53,7 @@ __kernel void affine_transform_3d_interpolate_test(
   const sampler_t sampler = CLK_NORMALIZED_COORDS_TRUE|
       SAMPLER_ADDRESS|	SAMPLER_FILTER;// 
 
+
   //dataset ussually divided into N parts, each work item processes on part.
   //get_global_id will get the global ID that 
   uint i = get_global_id(0);
@@ -128,18 +129,25 @@ __kernel void affine_transform_3d_interpolate_test(
     float x4_n = (shear_mat_inv[0]*x4_shear+shear_mat_inv[1]*y4_shear+shear_mat_inv[2]*z4_shear+shear_mat_inv[3]);
 
     //get pixel values at neighbour coordinates
-    float pix_1 = (float)(READ_input_IMAGE(input, sampler, (float4)(x/Nx, y/Ny, z1_n/Nz, 0.f)).x);
-    float pix_2 = (float)(READ_input_IMAGE(input, sampler, (float4)(x/Nx, y2_n/Ny, z/Nz, 0.f)).x);
+    float left = (READ_input_IMAGE(input, sampler, (float4)(x/Nx, y1_n/Ny, z1_n/Nz, 0.f)).x);
+    float top = (READ_input_IMAGE(input, sampler, (float4)(x/Nx, y2_n/Ny, z2_n/Nz, 0.f)).x);
     
-    float pix_3 = (float)(READ_input_IMAGE(input, sampler, (float4)(x/Nx, y/Ny, z3_n/Nz, 0.f)).x);
-    float pix_4 = (float)(READ_input_IMAGE(input, sampler, (float4)(x/Nx, y4_n/Ny, z/Nz, 0.f)).x);
+    float right = (READ_input_IMAGE(input, sampler, (float4)(x/Nx, y3_n/Ny, z3_n/Nz, 0.f)).x);
+    float bottom = (READ_input_IMAGE(input, sampler, (float4)(x/Nx, y4_n/Ny, z4_n/Nz, 0.f)).x);
 
 
-    //interpolate z direction
-    float f1 = ((z3_n - z)* pix_3 + (z - z1_n)* pix_1)/(z3_n - z1_n);
-    float f2 = ((y4_n - y)* pix_4 + (y - y2_n)* pix_2)/(y4_n - y2_n);
+    //Fix calculation here
+
+    //bilinear interpolation
+    float f1 = ((z2_n - z)* left + (z - z1_n)* top)/(z2_n - z1_n);
+    float f2 = ((z3_n - z)* right + (z - z4_n)* bottom)/(z3_n - z4_n);
+    pix = ((y4_n - y)* f1 + (y - y2_n)* f2)/(y4_n - y2_n);
     
-    pix = f1+f2;//((y3_n - y)* f1 + (y - y1_n)* f2)/(y3_n - y1_n);
+    //linear interpolation along z and y axes
+    //float f1 = ((z3_n - z)* left + (z - z1_n)* right)/(z3_n - z1_n);
+    //float f2 = ((y4_n - y)* top + (y - y2_n)* bottom)/(y4_n - y2_n);
+    //pix = f1+f2;//f1+f2;
+
 
   }
 
