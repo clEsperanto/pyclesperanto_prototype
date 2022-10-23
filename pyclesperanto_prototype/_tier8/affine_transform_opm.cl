@@ -39,11 +39,12 @@ __kernel void affine_transform_opm(
     IMAGE_input_TYPE input,
 	IMAGE_output_TYPE output,
 	IMAGE_mat_TYPE mat,
+    float pixel_step,
     float tantheta,
     float costheta,
     float sintheta)
 {
- //opencl nearest interpolation
+ //OpenCL nearest interpolation using OPM code
 
 
  
@@ -77,37 +78,39 @@ __kernel void affine_transform_opm(
       x < Nx && y < Ny && z < Nz)
   {
     float virtual_plane = y2 - z2/tantheta;
-    float plane_before = (virtual_plane/0.3);
-    float plane_after = plane_before + 1;
+    float plane_before = virtual_plane/pixel_step +0.5f;
+    float plane_after = plane_before +0.5f;
 
-    float l_before = virtual_plane - plane_before * 0.3;
-    float l_after = 0.3 - l_before;
+    float l_before = virtual_plane - plane_before * pixel_step;
+    float l_after = pixel_step - l_before;
 
     float za = z/sintheta;
-    float virtual_pos_before = za + l_before*costheta;
-    float virtual_pos_after = za - l_after*costheta ;
+    float virtual_pos_before = za + (l_before*costheta);
+    float virtual_pos_after = za - (l_after*costheta);
     
     //determine nearest data points to interpoloated point in raw data
-    float pos_before = floor(virtual_pos_before);
-    float pos_after = floor(virtual_pos_after);
+    float pos_before = round(virtual_pos_before);
+    float pos_after = round(virtual_pos_after);
+
     if  (pos_before>=0 && pos_after >= 0 && pos_before < Ny && pos_after < Ny)
     {
         float dz_before = virtual_pos_before - pos_before;
         float dz_after = virtual_pos_after - pos_after;
-        float y_after = (pos_after+1);
+
+        float y_after = (pos_after+1.0);
         float y_after1 = (pos_after);
 
-        float y_before = (pos_before+1);
+        float y_before = (pos_before+1.0);
         float y_before1 = (pos_before);
 
         //get pixel values at neighbour coordinates
-        float pix_1 = (float)(READ_input_IMAGE(input, sampler, (float4)(x/Nx, y_after/Ny, plane_after/Nz, 0.f)).x);
-        float pix_2 = (float)(READ_input_IMAGE(input, sampler, (float4)(x/Nx, y_after1/Ny, plane_after/Nz, 0.f)).x);
+        float pix_1 = (float)(READ_input_IMAGE(input, sampler, (float4)(x, y_after, plane_after, 0.f)).x);
+        float pix_2 = (float)(READ_input_IMAGE(input, sampler, (float4)(x, y_after1, plane_after, 0.f)).x);
         
-        float pix_3 = (float)(READ_input_IMAGE(input, sampler, (float4)(x/Nx, y_before/Ny, plane_before/Nz, 0.f)).x);
-        float pix_4 = (float)(READ_input_IMAGE(input, sampler, (float4)(x/Nx, y_before/Ny, plane_before/Nz, 0.f)).x);
+        float pix_3 = (float)(READ_input_IMAGE(input, sampler, (float4)(x, y_before, plane_before, 0.f)).x);
+        float pix_4 = (float)(READ_input_IMAGE(input, sampler, (float4)(x, y_before1, plane_before, 0.f)).x);
         
-        pix = l_before*dz_after*pix_1 + l_before*(1-dz_after)*pix_2 + l_after*dz_before*pix_3 + l_after*(1-dz_before)*pix_4;
+        pix = ((l_before*dz_after*pix_1) + (l_before*(1-dz_after)*pix_2) + (l_after*dz_before*pix_3) + (l_after*(1-dz_before)*pix_4))/pixel_step;
     }
 
   }

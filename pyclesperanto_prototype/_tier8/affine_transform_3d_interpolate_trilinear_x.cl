@@ -40,10 +40,8 @@
 
 __kernel void affine_transform_3d_interpolate_trilinear(
     IMAGE_input_TYPE input,
-	IMAGE_output_TYPE output,
+	  IMAGE_output_TYPE output,
     IMAGE_mat_TYPE mat,
-    IMAGE_shear_mat_TYPE shear_mat,
-    IMAGE_shear_mat_inv_TYPE shear_mat_inv,
     IMAGE_translate_mat_xyz1_TYPE translate_mat_xyz1,
     IMAGE_translate_mat_xyz2_TYPE translate_mat_xyz2,
     IMAGE_translate_mat_xyz3_TYPE translate_mat_xyz3,
@@ -54,8 +52,8 @@ __kernel void affine_transform_3d_interpolate_trilinear(
     IMAGE_translate_mat_xyz8_TYPE translate_mat_xyz8)
 {
 
-  const sampler_t sampler = CLK_NORMALIZED_COORDS_TRUE|
-      SAMPLER_ADDRESS;// 
+  const sampler_t sampler = CLK_NORMALIZED_COORDS_FALSE|
+      SAMPLER_ADDRESS;// |	SAMPLER_FILTER ;//siable interpolation as we are doing it manually
 
 
   //dataset ussually divided into N parts, each work item processes on part.
@@ -81,9 +79,9 @@ __kernel void affine_transform_3d_interpolate_trilinear(
 
   //coordinates on intermediate sheared image,  multiply coord from raw skewed raw data with shear matrix
   
-  float zi = (shear_mat[8]*x+shear_mat[9]*y+shear_mat[10]*z+shear_mat[11]);
-  float yi = (shear_mat[4]*x+shear_mat[5]*y+shear_mat[6]*z+shear_mat[7]);
-  float xi = (shear_mat[0]*x+shear_mat[1]*y+shear_mat[2]*z+shear_mat[3]);
+  //float z2 = (shear_mat[8]*x+shear_mat[9]*y+shear_mat[10]*z+shear_mat[11]);
+  //float y2 = (shear_mat[4]*x+shear_mat[5]*y+shear_mat[6]*z+shear_mat[7]);
+  //float x2 = (shear_mat[0]*x+shear_mat[1]*y+shear_mat[2]*z+shear_mat[3]);
 
   //int4 coord_norm = (int4)(x2 * GET_IMAGE_WIDTH(input) / GET_IMAGE_WIDTH(output),y2 * GET_IMAGE_HEIGHT(input) / GET_IMAGE_HEIGHT(output), z2  * GET_IMAGE_DEPTH(input) / GET_IMAGE_DEPTH(output),0.f);
   //int4 coord_norm = (int4)(x,y, z,0.f);
@@ -98,121 +96,123 @@ __kernel void affine_transform_3d_interpolate_trilinear(
     
 
 
-    //get neighbouring vertices by using a translation matrix for x,y and z coordinates
+    //get neighbouring vertices by using a translation affine transform for x,y and z coordinates
     
-    float z_xyz1_shear  = (translate_mat_xyz1[8]*xi+translate_mat_xyz1[9]*yi+translate_mat_xyz1[10]*zi+translate_mat_xyz1[11]);
-    float y_xyz1_shear = (translate_mat_xyz1[4]*xi+translate_mat_xyz1[5]*yi+translate_mat_xyz1[6]*zi+translate_mat_xyz1[7]);
-    float x_xyz1_shear  = (translate_mat_xyz1[0]*xi+translate_mat_xyz1[1]*yi+translate_mat_xyz1[2]*zi+translate_mat_xyz1[3]);
+    float z_xyz1_shear  = (translate_mat_xyz1[8]*x2+translate_mat_xyz1[9]*y2+translate_mat_xyz1[10]*z2+translate_mat_xyz1[11]);
+    float y_xyz1_shear = (translate_mat_xyz1[4]*x2+translate_mat_xyz1[5]*y2+translate_mat_xyz1[6]*z2+translate_mat_xyz1[7]);
+    float x_xyz1_shear  = (translate_mat_xyz1[0]*x2+translate_mat_xyz1[1]*y2+translate_mat_xyz1[2]*z2+translate_mat_xyz1[3]);
     
-    float z_xyz2_shear  = (translate_mat_xyz2[8]*xi+translate_mat_xyz2[9]*yi+translate_mat_xyz2[10]*zi+translate_mat_xyz2[11]);
-    float y_xyz2_shear = (translate_mat_xyz2[4]*xi+translate_mat_xyz2[5]*yi+translate_mat_xyz2[6]*zi+translate_mat_xyz2[7]);
-    float x_xyz2_shear  = (translate_mat_xyz2[0]*xi+translate_mat_xyz2[1]*yi+translate_mat_xyz2[2]*zi+translate_mat_xyz2[3]);
+    float z_xyz2_shear  = (translate_mat_xyz2[8]*x2+translate_mat_xyz2[9]*y2+translate_mat_xyz2[10]*z2+translate_mat_xyz2[11]);
+    float y_xyz2_shear = (translate_mat_xyz2[4]*x2+translate_mat_xyz2[5]*y2+translate_mat_xyz2[6]*z2+translate_mat_xyz2[7]);
+    float x_xyz2_shear  = (translate_mat_xyz2[0]*x2+translate_mat_xyz2[1]*y2+translate_mat_xyz2[2]*z2+translate_mat_xyz2[3]);
 
-    float z_xyz3_shear  = (translate_mat_xyz3[8]*xi+translate_mat_xyz3[9]*yi+translate_mat_xyz3[10]*zi+translate_mat_xyz3[11]);
-    float y_xyz3_shear = (translate_mat_xyz3[4]*xi+translate_mat_xyz3[5]*yi+translate_mat_xyz3[6]*zi+translate_mat_xyz3[7]);
-    float x_xyz3_shear  = (translate_mat_xyz3[0]*xi+translate_mat_xyz3[1]*yi+translate_mat_xyz3[2]*zi+translate_mat_xyz3[3]);
+    float z_xyz3_shear  = (translate_mat_xyz3[8]*x2+translate_mat_xyz3[9]*y2+translate_mat_xyz3[10]*z2+translate_mat_xyz3[11]);
+    float y_xyz3_shear = (translate_mat_xyz3[4]*x2+translate_mat_xyz3[5]*y2+translate_mat_xyz3[6]*z2+translate_mat_xyz3[7]);
+    float x_xyz3_shear  = (translate_mat_xyz3[0]*x2+translate_mat_xyz3[1]*y2+translate_mat_xyz3[2]*z2+translate_mat_xyz3[3]);
 
-    float z_xyz4_shear  = (translate_mat_xyz4[8]*xi+translate_mat_xyz4[9]*yi+translate_mat_xyz4[10]*zi+translate_mat_xyz4[11]);
-    float y_xyz4_shear = (translate_mat_xyz4[4]*xi+translate_mat_xyz4[5]*yi+translate_mat_xyz4[6]*zi+translate_mat_xyz4[7]);
-    float x_xyz4_shear  = (translate_mat_xyz4[0]*xi+translate_mat_xyz4[1]*yi+translate_mat_xyz4[2]*zi+translate_mat_xyz4[3]);
+    float z_xyz4_shear  = (translate_mat_xyz4[8]*x2+translate_mat_xyz4[9]*y2+translate_mat_xyz4[10]*z2+translate_mat_xyz4[11]);
+    float y_xyz4_shear = (translate_mat_xyz4[4]*x2+translate_mat_xyz4[5]*y2+translate_mat_xyz4[6]*z2+translate_mat_xyz4[7]);
+    float x_xyz4_shear  = (translate_mat_xyz4[0]*x2+translate_mat_xyz4[1]*y2+translate_mat_xyz4[2]*z2+translate_mat_xyz4[3]);
 
-    float z_xyz5_shear  = (translate_mat_xyz5[8]*xi+translate_mat_xyz5[9]*yi+translate_mat_xyz5[10]*zi+translate_mat_xyz5[11]);
-    float y_xyz5_shear = (translate_mat_xyz5[4]*xi+translate_mat_xyz5[5]*yi+translate_mat_xyz5[6]*zi+translate_mat_xyz5[7]);
-    float x_xyz5_shear  = (translate_mat_xyz5[0]*xi+translate_mat_xyz5[1]*yi+translate_mat_xyz5[2]*zi+translate_mat_xyz5[3]);
+    float z_xyz5_shear  = (translate_mat_xyz5[8]*x2+translate_mat_xyz5[9]*y2+translate_mat_xyz5[10]*z2+translate_mat_xyz5[11]);
+    float y_xyz5_shear = (translate_mat_xyz5[4]*x2+translate_mat_xyz5[5]*y2+translate_mat_xyz5[6]*z2+translate_mat_xyz5[7]);
+    float x_xyz5_shear  = (translate_mat_xyz5[0]*x2+translate_mat_xyz5[1]*y2+translate_mat_xyz5[2]*z2+translate_mat_xyz5[3]);
 
-    float z_xyz6_shear  = (translate_mat_xyz6[8]*xi+translate_mat_xyz6[9]*yi+translate_mat_xyz6[10]*zi+translate_mat_xyz6[11]);
-    float y_xyz6_shear = (translate_mat_xyz6[4]*xi+translate_mat_xyz6[5]*yi+translate_mat_xyz6[6]*zi+translate_mat_xyz6[7]);
-    float x_xyz6_shear  = (translate_mat_xyz6[0]*xi+translate_mat_xyz6[1]*yi+translate_mat_xyz6[2]*zi+translate_mat_xyz6[3]);
+    float z_xyz6_shear  = (translate_mat_xyz6[8]*x2+translate_mat_xyz6[9]*y2+translate_mat_xyz6[10]*z2+translate_mat_xyz6[11]);
+    float y_xyz6_shear = (translate_mat_xyz6[4]*x2+translate_mat_xyz6[5]*y2+translate_mat_xyz6[6]*z2+translate_mat_xyz6[7]);
+    float x_xyz6_shear  = (translate_mat_xyz6[0]*x2+translate_mat_xyz6[1]*y2+translate_mat_xyz6[2]*z2+translate_mat_xyz6[3]);
 
-    float z_xyz7_shear  = (translate_mat_xyz7[8]*xi+translate_mat_xyz7[9]*yi+translate_mat_xyz7[10]*zi+translate_mat_xyz7[11]);
-    float y_xyz7_shear = (translate_mat_xyz7[4]*xi+translate_mat_xyz7[5]*yi+translate_mat_xyz7[6]*zi+translate_mat_xyz7[7]);
-    float x_xyz7_shear  = (translate_mat_xyz7[0]*xi+translate_mat_xyz7[1]*yi+translate_mat_xyz7[2]*zi+translate_mat_xyz7[3]);
+    float z_xyz7_shear  = (translate_mat_xyz7[8]*x2+translate_mat_xyz7[9]*y2+translate_mat_xyz7[10]*z2+translate_mat_xyz7[11]);
+    float y_xyz7_shear = (translate_mat_xyz7[4]*x2+translate_mat_xyz7[5]*y2+translate_mat_xyz7[6]*z2+translate_mat_xyz7[7]);
+    float x_xyz7_shear  = (translate_mat_xyz7[0]*x2+translate_mat_xyz7[1]*y2+translate_mat_xyz7[2]*z2+translate_mat_xyz7[3]);
 
-    float z_xyz8_shear  = (translate_mat_xyz8[8]*xi+translate_mat_xyz8[9]*yi+translate_mat_xyz8[10]*zi+translate_mat_xyz8[11]);
-    float y_xyz8_shear = (translate_mat_xyz8[4]*xi+translate_mat_xyz8[5]*yi+translate_mat_xyz8[6]*zi+translate_mat_xyz8[7]);
-    float x_xyz8_shear  = (translate_mat_xyz8[0]*xi+translate_mat_xyz8[1]*yi+translate_mat_xyz8[2]*zi+translate_mat_xyz8[3]);
+    float z_xyz8_shear  = (translate_mat_xyz8[8]*x2+translate_mat_xyz8[9]*y2+translate_mat_xyz8[10]*z2+translate_mat_xyz8[11]);
+    float y_xyz8_shear = (translate_mat_xyz8[4]*x2+translate_mat_xyz8[5]*y2+translate_mat_xyz8[6]*z2+translate_mat_xyz8[7]);
+    float x_xyz8_shear  = (translate_mat_xyz8[0]*x2+translate_mat_xyz8[1]*y2+translate_mat_xyz8[2]*z2+translate_mat_xyz8[3]);
  
-    //apply an inverse shear transform to the vertices above to get the coordinates int eh original image
+    //apply an inverse deskew transform to the get the actual neighbouring vertices in the skewed image
     //i.e., get actual neighbours
-    float z_xyz1 = (shear_mat_inv[8]*x_xyz1_shear+shear_mat_inv[9]*y_xyz1_shear+shear_mat_inv[10]*z_xyz1_shear+shear_mat_inv[11]);
-    float y_xyz1 = (shear_mat_inv[4]*x_xyz1_shear+shear_mat_inv[5]*y_xyz1_shear+shear_mat_inv[6]*z_xyz1_shear+shear_mat_inv[7]);
-    float x_xyz1 = (shear_mat_inv[0]*x_xyz1_shear+shear_mat_inv[1]*y_xyz1_shear+shear_mat_inv[2]*z_xyz1_shear+shear_mat_inv[3]);
 
-    float z_xyz2 = (shear_mat_inv[8]*x_xyz2_shear+shear_mat_inv[9]*y_xyz2_shear+shear_mat_inv[10]*z_xyz2_shear+shear_mat_inv[11]);
-    float y_xyz2 = (shear_mat_inv[4]*x_xyz2_shear+shear_mat_inv[5]*y_xyz2_shear+shear_mat_inv[6]*z_xyz2_shear+shear_mat_inv[7]);
-    float x_xyz2 = (shear_mat_inv[0]*x_xyz2_shear+shear_mat_inv[1]*y_xyz2_shear+shear_mat_inv[2]*z_xyz2_shear+shear_mat_inv[3]);
+    float z_xyz1 = (mat[8]*x_xyz1_shear+mat[9]*y_xyz1_shear+mat[10]*z_xyz1_shear+mat[11]);
+    float y_xyz1 = (mat[4]*x_xyz1_shear+mat[5]*y_xyz1_shear+mat[6]*z_xyz1_shear+mat[7]);
+    float x_xyz1 = (mat[0]*x_xyz1_shear+mat[1]*y_xyz1_shear+mat[2]*z_xyz1_shear+mat[3]);
 
-    float z_xyz3 = (shear_mat_inv[8]*x_xyz3_shear+shear_mat_inv[9]*y_xyz3_shear+shear_mat_inv[10]*z_xyz3_shear+shear_mat_inv[11]);
-    float y_xyz3 = (shear_mat_inv[4]*x_xyz3_shear+shear_mat_inv[5]*y_xyz3_shear+shear_mat_inv[6]*z_xyz3_shear+shear_mat_inv[7]);
-    float x_xyz3 = (shear_mat_inv[0]*x_xyz3_shear+shear_mat_inv[1]*y_xyz3_shear+shear_mat_inv[2]*z_xyz3_shear+shear_mat_inv[3]);
+    float z_xyz2 = (mat[8]*x_xyz2_shear+mat[9]*y_xyz2_shear+mat[10]*z_xyz2_shear+mat[11]);
+    float y_xyz2 = (mat[4]*x_xyz2_shear+mat[5]*y_xyz2_shear+mat[6]*z_xyz2_shear+mat[7]);
+    float x_xyz2 = (mat[0]*x_xyz2_shear+mat[1]*y_xyz2_shear+mat[2]*z_xyz2_shear+mat[3]);
 
-    float z_xyz4 = (shear_mat_inv[8]*x_xyz4_shear+shear_mat_inv[9]*y_xyz4_shear+shear_mat_inv[10]*z_xyz4_shear+shear_mat_inv[11]);
-    float y_xyz4 = (shear_mat_inv[4]*x_xyz4_shear+shear_mat_inv[5]*y_xyz4_shear+shear_mat_inv[6]*z_xyz4_shear+shear_mat_inv[7]);
-    float x_xyz4 = (shear_mat_inv[0]*x_xyz4_shear+shear_mat_inv[1]*y_xyz4_shear+shear_mat_inv[2]*z_xyz4_shear+shear_mat_inv[3]);
+    float z_xyz3 = (mat[8]*x_xyz3_shear+mat[9]*y_xyz3_shear+mat[10]*z_xyz3_shear+mat[11]);
+    float y_xyz3 = (mat[4]*x_xyz3_shear+mat[5]*y_xyz3_shear+mat[6]*z_xyz3_shear+mat[7]);
+    float x_xyz3 = (mat[0]*x_xyz3_shear+mat[1]*y_xyz3_shear+mat[2]*z_xyz3_shear+mat[3]);
 
-    float z_xyz5 = (shear_mat_inv[8]*x_xyz5_shear+shear_mat_inv[9]*y_xyz5_shear+shear_mat_inv[10]*z_xyz5_shear+shear_mat_inv[11]);
-    float y_xyz5 = (shear_mat_inv[4]*x_xyz5_shear+shear_mat_inv[5]*y_xyz5_shear+shear_mat_inv[6]*z_xyz5_shear+shear_mat_inv[7]);
-    float x_xyz5 = (shear_mat_inv[0]*x_xyz5_shear+shear_mat_inv[1]*y_xyz5_shear+shear_mat_inv[2]*z_xyz5_shear+shear_mat_inv[3]);
+    float z_xyz4 = (mat[8]*x_xyz4_shear+mat[9]*y_xyz4_shear+mat[10]*z_xyz4_shear+mat[11]);
+    float y_xyz4 = (mat[4]*x_xyz4_shear+mat[5]*y_xyz4_shear+mat[6]*z_xyz4_shear+mat[7]);
+    float x_xyz4 = (mat[0]*x_xyz4_shear+mat[1]*y_xyz4_shear+mat[2]*z_xyz4_shear+mat[3]);
 
-    float z_xyz6 = (shear_mat_inv[8]*x_xyz6_shear+shear_mat_inv[9]*y_xyz6_shear+shear_mat_inv[10]*z_xyz6_shear+shear_mat_inv[11]);
-    float y_xyz6 = (shear_mat_inv[4]*x_xyz6_shear+shear_mat_inv[5]*y_xyz6_shear+shear_mat_inv[6]*z_xyz6_shear+shear_mat_inv[7]);
-    float x_xyz6 = (shear_mat_inv[0]*x_xyz6_shear+shear_mat_inv[1]*y_xyz6_shear+shear_mat_inv[2]*z_xyz6_shear+shear_mat_inv[3]);
+    float z_xyz5 = (mat[8]*x_xyz5_shear+mat[9]*y_xyz5_shear+mat[10]*z_xyz5_shear+mat[11]);
+    float y_xyz5 = (mat[4]*x_xyz5_shear+mat[5]*y_xyz5_shear+mat[6]*z_xyz5_shear+mat[7]);
+    float x_xyz5 = (mat[0]*x_xyz5_shear+mat[1]*y_xyz5_shear+mat[2]*z_xyz5_shear+mat[3]);
 
-    float z_xyz7 = (shear_mat_inv[8]*x_xyz7_shear+shear_mat_inv[9]*y_xyz7_shear+shear_mat_inv[10]*z_xyz7_shear+shear_mat_inv[11]);
-    float y_xyz7 = (shear_mat_inv[4]*x_xyz7_shear+shear_mat_inv[5]*y_xyz7_shear+shear_mat_inv[6]*z_xyz7_shear+shear_mat_inv[7]);
-    float x_xyz7 = (shear_mat_inv[0]*x_xyz7_shear+shear_mat_inv[1]*y_xyz7_shear+shear_mat_inv[2]*z_xyz7_shear+shear_mat_inv[3]);
+    float z_xyz6 = (mat[8]*x_xyz6_shear+mat[9]*y_xyz6_shear+mat[10]*z_xyz6_shear+mat[11]);
+    float y_xyz6 = (mat[4]*x_xyz6_shear+mat[5]*y_xyz6_shear+mat[6]*z_xyz6_shear+mat[7]);
+    float x_xyz6 = (mat[0]*x_xyz6_shear+mat[1]*y_xyz6_shear+mat[2]*z_xyz6_shear+mat[3]);
 
-    float z_xyz8 = (shear_mat_inv[8]*x_xyz8_shear+shear_mat_inv[9]*y_xyz8_shear+shear_mat_inv[10]*z_xyz8_shear+shear_mat_inv[11]);
-    float y_xyz8 = (shear_mat_inv[4]*x_xyz8_shear+shear_mat_inv[5]*y_xyz8_shear+shear_mat_inv[6]*z_xyz8_shear+shear_mat_inv[7]);
-    float x_xyz8 = (shear_mat_inv[0]*x_xyz8_shear+shear_mat_inv[1]*y_xyz8_shear+shear_mat_inv[2]*z_xyz8_shear+shear_mat_inv[3]);
+    float z_xyz7 = (mat[8]*x_xyz7_shear+mat[9]*y_xyz7_shear+mat[10]*z_xyz7_shear+mat[11]);
+    float y_xyz7 = (mat[4]*x_xyz7_shear+mat[5]*y_xyz7_shear+mat[6]*z_xyz7_shear+mat[7]);
+    float x_xyz7 = (mat[0]*x_xyz7_shear+mat[1]*y_xyz7_shear+mat[2]*z_xyz7_shear+mat[3]);
+
+    float z_xyz8 = (mat[8]*x_xyz8_shear+mat[9]*y_xyz8_shear+mat[10]*z_xyz8_shear+mat[11]);
+    float y_xyz8 = (mat[4]*x_xyz8_shear+mat[5]*y_xyz8_shear+mat[6]*z_xyz8_shear+mat[7]);
+    float x_xyz8 = (mat[0]*x_xyz8_shear+mat[1]*y_xyz8_shear+mat[2]*z_xyz8_shear+mat[3]);
 
 
+    //determine orthoganal plane as z_orth ; xyz4-z/tan(theta)
 
     //get pixel values at each coordinate
-    float xyz1 = (READ_input_IMAGE(input, sampler, (float4)(x_xyz1/Nx, y_xyz1/Ny, z_xyz1/Nz, 0.f)).x);
-    float xyz2 = (READ_input_IMAGE(input, sampler, (float4)(x_xyz2/Nx, y_xyz2/Ny, z_xyz1/Nz, 0.f)).x);
+    float xyz1 = (READ_input_IMAGE(input, sampler, (float4)(x_xyz1, y_xyz1, z_xyz1, 0.f)).x);
+    float xyz2 = (READ_input_IMAGE(input, sampler, (float4)(x_xyz2, y_xyz2, z_xyz2, 0.f)).x);
     
-    float xyz3 = (READ_input_IMAGE(input, sampler, (float4)(x_xyz3/Nx, y_xyz3/Ny, z_xyz3/Nz, 0.f)).x);
-    float xyz4 = (READ_input_IMAGE(input, sampler, (float4)(x_xyz4/Nx, y_xyz4/Ny, z_xyz4/Nz, 0.f)).x);
+    float xyz3 = (READ_input_IMAGE(input, sampler, (float4)(x_xyz3, y_xyz3, z_xyz3, 0.f)).x);
+    float xyz4 = (READ_input_IMAGE(input, sampler, (float4)(x_xyz4, y_xyz4, z_xyz4, 0.f)).x);
 
-    float xyz5 = (READ_input_IMAGE(input, sampler, (float4)(x_xyz5/Nx, y_xyz5/Ny, z_xyz5/Nz, 0.f)).x);
-    float xyz6 = (READ_input_IMAGE(input, sampler, (float4)(x_xyz6/Nx, y_xyz6/Ny, z_xyz6/Nz, 0.f)).x);
+    float xyz5 = (READ_input_IMAGE(input, sampler, (float4)(x_xyz5, y_xyz5, z_xyz5, 0.f)).x);
+    float xyz6 = (READ_input_IMAGE(input, sampler, (float4)(x_xyz6, y_xyz6, z_xyz6, 0.f)).x);
     
-    float xyz7 = (READ_input_IMAGE(input, sampler, (float4)(x_xyz7/Nx, y_xyz7/Ny, z_xyz7/Nz, 0.f)).x);
-    float xyz8 = (READ_input_IMAGE(input, sampler, (float4)(x_xyz8/Nx, y_xyz8/Ny, z_xyz8/Nz, 0.f)).x);
+    float xyz7 = (READ_input_IMAGE(input, sampler, (float4)(x_xyz7, y_xyz7, z_xyz7, 0.f)).x);
+    float xyz8 = (READ_input_IMAGE(input, sampler, (float4)(x_xyz8, y_xyz8, z_xyz8, 0.f)).x);
 
 
     
     //trilinear interpolation
 
-    float xd = (x - x_xyz1_shear)/(x_xyz4_shear - x_xyz1_shear);
-    float yd = (y - y_xyz2_shear) /(y_xyz1_shear - y_xyz2_shear);
-    float zd = (z - z_xyz1_shear)/(z_xyz5_shear - z_xyz1_shear);
+    //float xd = (x - x_xyz1)/(x_xyz4 - x_xyz1);
+    //float yd = (y - y_xyz2) /(y_xyz1 - y_xyz2);
+    //float zd = (z - z_xyz1)/(z_xyz5 - z_xyz1);
 
     //interpolate along x
-    float x1_f = (xyz1*(1 - xd)) + xyz4*xd;  //((x_xyz4 - x)* xyz1 + (x - x_xyz1)* xyz4)/(x_xyz4 - x_xyz1);
-    float x2_f =  (xyz2*(1 - xd)) + xyz3*xd;//((x_xyz3 - x)* xyz2 + (x - x_xyz2)* xyz3)/(x_xyz3 - x_xyz2);
-    float x3_f =  (xyz5*(1 - xd)) + xyz5*xd;//((x_xyz8 - x)* xyz5 + (x - x_xyz5)* xyz8)/(x_xyz8 - x_xyz5);
-    float x4_f =  (xyz6*(1 - xd)) + xyz7*xd;//((x_xyz7- x)* xyz6 + (x - x_xyz6)* xyz7)/(x_xyz7 - x_xyz6);
+    float x1_f = ((x_xyz7 - x)* xyz6 + (x - x_xyz6)* xyz7)/(x_xyz7 - x_xyz6);//(xyz1*(1 - xd)) + xyz4*xd;  //
+    float x2_f =  ((x_xyz3 - x)* xyz2 + (x - x_xyz2)* xyz3)/(x_xyz3 - x_xyz2);//(xyz2*(1 - xd)) + xyz3*xd;//
+    float x3_f =  ((x_xyz8 - x)* xyz5 + (x - x_xyz5)* xyz8)/(x_xyz8 - x_xyz5);//(xyz5*(1 - xd)) + xyz5*xd;//
+    float x4_f =  ((x_xyz4 - x)* xyz1 + (x - x_xyz1)* xyz4)/(x_xyz4 - x_xyz1);//(xyz6*(1 - xd)) + xyz7*xd;//
 
     //interpolate along y
-    float y1_f = (x2_f*(1 - yd)) + x1_f*yd;//((y_xyz1 - y)*x2_f  + (y - y_xyz2 )*x1_f )/(y_xyz1 - y_xyz2);
-    float y2_f = (x4_f*(1 - yd)) + x3_f*yd;//((y_xyz5 - y)*x4_f  + (y - y_xyz6 )*x3_f )/(y_xyz5 - y_xyz6);
+    float y1_f = ((y_xyz6 - y)*x2_f  + (y - y_xyz2 )*x1_f )/(y_xyz6 - y_xyz2);//(x2_f*(1 - yd)) + x1_f*yd;//
+    float y2_f = ((y_xyz5 - y)*x4_f  + (y - y_xyz1 )*x3_f )/(y_xyz5 - y_xyz1);//(x4_f*(1 - yd)) + x3_f*yd;//
 
     //interpolate along z
-    pix = (y1_f*(1 - zd)) + y2_f*zd;//((z_xyz5 - z)*y1_f  + (z - z_xyz1)*y2_f)/(z_xyz5 - z_xyz1);
-
+    pix = ((z_xyz6 - z)*y2_f  + (z - z_xyz1)*y1_f)/(z_xyz6 - z_xyz1);//(y1_f*(1 - zd)) + y2_f*zd;//
     
+    //as the planes are tilted, how do we interpolate along them?
+    //float z1_f = ((z_xyz4 - z)*y1_f  + (z - z_xyz3 )*y2_f )/(z_xyz4 - z_xyz3);
+    //float z2_f = ((z_xyz8 - z)*y1_f  + (z - z_xyz7 )*y2_f )/(z_xyz8 - z_xyz7);
 
-
-    //pix = ((y4_zn - y)* f1 + (y - y2_zn)* f2)/(y4_zn - y2_zn);
+    //pix =  z1_f + z2_f;
     
-    //linear interpolation along z and y axes
-    //float f1 = ((z3_zn - z)* left + (z - z1_zn)* right)/(z3_zn - z1_zn);
-    //float f2 = ((y4_zn - y)* top + (y - y2_zn)* bottom)/(y4_zn - y2_zn);
-    //pix = f1+f2;//f1+f2;
-
-
+    
+    //float z_plane1 = (z_xyz2 + z_xyz6)/2;
+    //float z_plane2 = (z_xyz1 + z_xyz5)/2;
+    //pix = ((z_plane2 - z)*y1_f  + (z - z_plane1)*y2_f)/(z_plane2 - z_plane1);//(y1_f*(1 - zd)) + y2_f*zd;//
+    
   }
 
 
