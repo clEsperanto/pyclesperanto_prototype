@@ -38,10 +38,10 @@
 #define SAMPLER_ADDRESS CLK_ADDRESS_CLAMP
 #endif
 
-__kernel void affine_transform_3d(
+__kernel void affine_transform_3d_interpolate(
     IMAGE_input_TYPE input,
-	IMAGE_output_TYPE output,
-	IMAGE_mat_TYPE mat)
+    IMAGE_output_TYPE output,
+    IMAGE_mat_TYPE mat)
 {
 
   const sampler_t sampler = CLK_NORMALIZED_COORDS_TRUE|
@@ -51,9 +51,9 @@ __kernel void affine_transform_3d(
   uint j = get_global_id(1);
   uint k = get_global_id(2);
 
-  uint Nx = get_global_size(0);
-  uint Ny = get_global_size(1);
-  uint Nz = get_global_size(2);
+  uint Nx = GET_IMAGE_WIDTH(input);
+  uint Ny = GET_IMAGE_HEIGHT(input);
+  uint Nz = GET_IMAGE_DEPTH(input);
 
   //float x = (mat[0]*i+mat[1]*j+mat[2]*k+mat[3]);
   //float y = (mat[4]*i+mat[5]*j+mat[6]*k+mat[7]);
@@ -71,22 +71,12 @@ __kernel void affine_transform_3d(
   float y2 = (mat[4]*x+mat[5]*y+mat[6]*z+mat[7]);
   float x2 = (mat[0]*x+mat[1]*y+mat[2]*z+mat[3]);
 
+  //float4 coord_norm = (float4)(x2 * GET_IMAGE_WIDTH(input) / GET_IMAGE_WIDTH(output) / Nx,y2 * GET_IMAGE_HEIGHT(input) / GET_IMAGE_HEIGHT(output) / Ny, z2  * GET_IMAGE_DEPTH(input) / GET_IMAGE_DEPTH(output) / Nz,0.f); 
+  float4 coord_norm = (float4)(x2/Nx,y2/Ny,z2/Nz,0.f);
 
-  //int4 coord_norm = (int4)(x2 * GET_IMAGE_WIDTH(input) / GET_IMAGE_WIDTH(output),y2 * GET_IMAGE_HEIGHT(input) / GET_IMAGE_HEIGHT(output), z2  * GET_IMAGE_DEPTH(input) / GET_IMAGE_DEPTH(output),0.f);
-  int4 coord_norm = (int4)(x2,y2, z2,0.f);
-
-
-
-  float pix = 0;
-  if (x2 >= 0 && y2 >= 0 && z2 >= 0 &&
-      x2 < GET_IMAGE_WIDTH(input) && y2 < GET_IMAGE_HEIGHT(input) && z2 < GET_IMAGE_DEPTH(input)
-  ) {
-    pix = (float)(READ_input_IMAGE(input, sampler, POS_input_INSTANCE(x2, y2, z2, 0)).x);
-  }
-
+  float pix = (float)(READ_input_IMAGE(input, sampler, coord_norm).x);
   int4 pos = (int4){i, j, k,0};
 
-  WRITE_output_IMAGE(output, POS_output_INSTANCE(i, j, k, 0), CONVERT_output_PIXEL_TYPE(pix));
-
-
+  WRITE_output_IMAGE(output, pos, CONVERT_output_PIXEL_TYPE(pix));
+  
 }
