@@ -55,15 +55,15 @@ __kernel void affine_transform_3d_orth_interp_deskew_y(
   uint k = get_global_id(2);
 
   //get the size of the image or total number of work-items
-  long Nx = GET_IMAGE_WIDTH(input);//get_global_size(0);
-  long Ny = GET_IMAGE_HEIGHT(input);//get_global_size(1);
-  long Nz= GET_IMAGE_DEPTH(input);//get_global_size(2);
+  uint Nx = GET_IMAGE_WIDTH(input);//get_global_size(0);
+  uint Ny = GET_IMAGE_HEIGHT(input);//get_global_size(1);
+  uint Nz= GET_IMAGE_DEPTH(input);//get_global_size(2);
 
   //virtual plane coordinates, deskewed coord
   float x = i+0.5f;
   float y = j+0.5f;
   float z = k+0.5f;
-
+  
   //corresponding coordinates on raw data 
   float z_orig = (mat[8]*x+mat[9]*y+mat[10]*z+mat[11]);
   float y_orig = (mat[4]*x+mat[5]*y+mat[6]*z+mat[7]);
@@ -71,11 +71,12 @@ __kernel void affine_transform_3d_orth_interp_deskew_y(
 
   float pix = 0;
   
-  if (x_orig >= 0 && y_orig >= 0 && z_orig >= 0  && x_orig < GET_IMAGE_WIDTH(input) && y_orig < GET_IMAGE_HEIGHT(input) && z_orig < GET_IMAGE_DEPTH(input))
+  if (x_orig >= 0 && y_orig >= 0 && z_orig >= 0  && x_orig < Nx && y_orig < Ny && z_orig < Nz)
   {
         float virtual_plane = (y - z/tantheta);
+        //get plane before
         long plane_before = floor(virtual_plane/pixel_step);
-        //translate by 1
+        //get plane after
         long plane_after = plane_before + 1;
 
         if(plane_before>=0 && plane_after < Nz)
