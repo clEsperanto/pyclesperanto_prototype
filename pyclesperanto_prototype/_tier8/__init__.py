@@ -1,4 +1,4 @@
-from ._affine_transform import affine_transform, affine_transform_deskew
+from ._affine_transform import affine_transform, affine_transform_deskew,affine_transform_linear
 from ._AffineTransform3D import AffineTransform3D
 from ._apply_vector_field import apply_vector_field
 from ._deskew_y import deskew_y
