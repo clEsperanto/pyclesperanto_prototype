@@ -41,7 +41,8 @@ __kernel void affine_transform_3d_interpolate_linear(
   IMAGE_yz1_mat_TYPE yz1_mat,
   IMAGE_yz2_mat_TYPE yz2_mat,
   IMAGE_yz3_mat_TYPE yz3_mat,
-  IMAGE_yz4_mat_TYPE yz4_mat)
+  IMAGE_yz4_mat_TYPE yz4_mat,
+  float pixel_step)
 {
 
   const sampler_t sampler = CLK_NORMALIZED_COORDS_FALSE|
@@ -125,8 +126,10 @@ __kernel void affine_transform_3d_interpolate_linear(
     //interpolate between z and diagonally across planes
     float f1 = ((z4_raw- z)* yz2 +(z-z2_raw)*yz4)/((z4_raw - z2_raw));
     float f2 = ((z3_raw- z)* yz1 +(z-z1_raw)*yz3)/((z3_raw - z1_raw));
-
-    pix = f1 + f2;
+    //float f1 = ((z2_raw- z)* yz1 +(z-z1_raw)*yz2)/((z2_raw - z1_raw));
+    //float f2 = ((z4_raw- z)* yz3 +(z-z3_raw)*yz4)/((z4_raw - z3_raw));     
+    pix = f1 + f2;//((y2_raw- y)* f2 +(y-y3_raw)*f1)/pixel_step;  
+    //f1 + f2;
     
   }
 
