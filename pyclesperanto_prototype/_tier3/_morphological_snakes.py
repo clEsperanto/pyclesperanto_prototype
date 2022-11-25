@@ -117,11 +117,11 @@ def morphological_snakes(input_image: Image,
         add_images_weighted(temp_2, temp_3, destination=temp_1, factor1=1, factor2=1)
         
         # smooth contour
-        if smoothing > 0:
-            opening_sphere(temp_1, destination=temp_2, radius_x=smoothing, radius_y=smoothing, radius_z=smoothing)
-            closing_sphere(temp_2, destination=output_image, radius_x=smoothing, radius_y=smoothing, radius_z=smoothing)
-        else: 
-            copy(temp_1, destination=output_image)
+        for _ in range(smoothing):
+            opening_sphere(temp_1, destination=temp_2, radius_x=1, radius_y=1, radius_z=1)
+            closing_sphere(temp_2, destination=temp_1, radius_x=1, radius_y=1, radius_z=1)
+        
+        copy(temp_1, destination=output_image)
 
     return output_image
 
