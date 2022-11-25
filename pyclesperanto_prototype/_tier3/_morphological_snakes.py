@@ -41,7 +41,7 @@ def morphological_snakes(input_image: Image,
     if contour_image.size == 0:
         contour_image = checkerboard_level_set(input_image.shape)
     
-    greater_constant(contour_image, constant=0, destination=output_image)
+    greater_constant(contour_image, destination=output_image, constant=0)
 
     for _ in range(n_iter):
         
@@ -55,27 +55,24 @@ def morphological_snakes(input_image: Image,
         c1 = inside_image / inside_curve_area
 
         absolute_gradient = create_like(output_image)
-
-        for e in range(input_image.ndim):
-            if e == 0:   
+        for d in range(input_image.ndim):
+            if d == 0:   
                 absolute_gradient += absolute(gradient_x(output_image))
-            if e == 1:
+            if d == 1:
                 absolute_gradient += absolute(gradient_y(output_image))
-            if e == 2:
+            if d == 2:
                 absolute_gradient += absolute(gradient_z(output_image))
 
-
         current_curve = absolute_gradient * (lambda1 * (input_image - c1)**2 - lambda2 * (input_image - c0)**2)
-
         positive_curve = current_curve > 0
         negative_curve = current_curve < 0
 
         combined_mask = binary_or(positive_curve, negative_curve)
         inverted_mask = binary_not(combined_mask)
         masked_curve = mask(output_image, inverted_mask)
-        output_image = masked_curve + negative_curve
+        update_curve = masked_curve + negative_curve
         
-        opening_sphere(output_image, destination=output_image, radius_x=smoothing, radius_y=smoothing, radius_z=smoothing)
+        opening_sphere(update_curve, destination=output_image, radius_x=smoothing, radius_y=smoothing, radius_z=smoothing)
 
     return output_image
 
