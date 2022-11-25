@@ -60,8 +60,8 @@ def morphological_snakes(input_image: Image,
 
         # compute inside contour score
         sum_image_value = mask(input_image, mask=output_image).sum()
-        sum_image_value = output_image.sum() + 1e-8
-        c1 = - (sum_image_value / sum_image_value)
+        sum_contour_value = output_image.sum() + 1e-8
+        c1 = - (sum_image_value / sum_contour_value)
 
         # compute gradient on contour in all direction
         for d in range(input_image.ndim):
