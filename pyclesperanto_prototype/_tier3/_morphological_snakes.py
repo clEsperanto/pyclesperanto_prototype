@@ -1,4 +1,5 @@
 from skimage import morphology
+import numpy as np
 from .._tier0 import Image
 from .._tier0 import plugin_function
 from .._tier0 import create_like
@@ -13,14 +14,37 @@ from .._tier1 import mask
 from .._tier2 import opening_sphere
 
 @plugin_function
-def morphological_snake(input_image: Image, contour_image: Image=None, output_image: Image=None, n_iter: int=100, smoothing: int=1, lambda1: float=1, lambda2: float=1) -> Image:
-    
-    if contour_image is None:
-        contour_image = morphology.disk(int(input_image.shape[0] // 2))
+def morphological_snakes(input_image: Image, 
+                        contour_image : Image = np.zeros((0, 0)), 
+                        output_image : Image = None, 
+                        n_iter : int = 100, 
+                        smoothing : int = 1, 
+                        lambda1 : float = 1, 
+                        lambda2 : float = 1) -> Image:
+    """
+    Parameters
+    ----------
+    input_iamge: Image
+    contour_image: Image, optional
+    output_image: Image, optional
+    n_iter: int, optional
+    smoothing: int, optional
+    lambda1: int, optional
+    lambda2: int, optional
+
+    Returns
+    -------
+    Final segmentation
+
+    """
+
+    if contour_image.size == 0:
+        contour_image = checkerboard_level_set(input_image.shape)
     
     greater_constant(contour_image, constant=0, destination=output_image)
-    
+
     for _ in range(n_iter):
+        
         invert_curve = 1 - output_image
         outside_image = (input_image * invert_curve).sum()
         outside_curve_area = invert_curve.sum() + 1e-8
@@ -54,3 +78,31 @@ def morphological_snake(input_image: Image, contour_image: Image=None, output_im
         opening_sphere(output_image, destination=output_image, radius_x=smoothing, radius_y=smoothing, radius_z=smoothing)
 
     return output_image
+
+
+def checkerboard_level_set(image_shape, square_size=5):
+    """Create a checkerboard level set with binary values.
+    Parameters
+    ----------
+    image_shape : tuple of positive integers
+        Shape of the image.
+    square_size : int, optional
+        Size of the squares of the checkerboard. It defaults to 5.
+    Returns
+    -------
+    out : array with shape `image_shape`
+        Binary level set of the checkerboard.
+    See Also
+    --------
+    disk_level_set
+    """
+
+    grid = np.mgrid[[slice(i) for i in image_shape]]
+    grid = (grid // square_size)
+
+    # Alternate 0/1 for even/odd numbers.
+    grid = grid & 1
+
+    checkerboard = np.bitwise_xor.reduce(grid, axis=0)
+    res = np.int8(checkerboard)
+    return res
