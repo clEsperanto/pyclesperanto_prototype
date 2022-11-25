@@ -8,10 +8,10 @@ from .._tier1 import binary_or
 from .._tier1 import binary_not
 from .._tier1 import gradient_x
 from .._tier1 import gradient_y
-from .._tier1 import gradient_z
-from .._tier1 import greater_constant
-from .._tier1 import mask
-from .._tier2 import opening_sphere
+from .._tier1 import gradient_z, copy, power
+from .._tier1 import greater_constant, smaller_constant
+from .._tier1 import mask, add_image_and_scalar
+from .._tier2 import opening_sphere, closing_sphere
 
 @plugin_function
 def morphological_snakes(input_image: Image, 
@@ -43,36 +43,63 @@ def morphological_snakes(input_image: Image,
     
     greater_constant(contour_image, destination=output_image, constant=0)
 
+    temp_1 = create_like(output_image)
+    temp_2 = create_like(output_image)
+    temp_3 = create_like(output_image)
+    temp_4 = create_like(output_image)
+    temp_5 = create_like(output_image)
+
     for _ in range(n_iter):
-        
-        invert_curve = 1 - output_image
-        outside_image = (input_image * invert_curve).sum()
-        outside_curve_area = invert_curve.sum() + 1e-8
-        c0 = outside_image / outside_curve_area
+        # define invert image
+        temp_1 = 1 - output_image
 
-        inside_image = (input_image * output_image).sum()
-        inside_curve_area = output_image.sum() + 1e-8
-        c1 = inside_image / inside_curve_area
+        # compute outside contour score
+        sum_image_value = (input_image * temp_1).sum()
+        sum_contour_value = temp_1.sum() + 1e-8
+        c0 = - (sum_image_value / sum_contour_value)
 
-        absolute_gradient = create_like(output_image)
+        # compute inside contour score
+        sum_image_value = (input_image * output_image).sum()
+        sum_image_value = output_image.sum() + 1e-8
+        c1 = - (sum_image_value / sum_image_value)
+
+        # compute gradient on contour in all direction
         for d in range(input_image.ndim):
             if d == 0:   
-                absolute_gradient += absolute(gradient_x(output_image))
+                gradient_x(output_image, destination=temp_1)
+                absolute(temp_1, destination=temp_2)
+                temp_3 += temp_2
             if d == 1:
-                absolute_gradient += absolute(gradient_y(output_image))
+                gradient_y(output_image, destination=temp_1)
+                absolute(temp_1, destination=temp_2)
+                temp_3 += temp_2
             if d == 2:
-                absolute_gradient += absolute(gradient_z(output_image))
+                gradient_z(output_image, destination=temp_1)
+                absolute(temp_1, destination=temp_2)
+                temp_3 += temp_2
 
-        current_curve = absolute_gradient * (lambda1 * (input_image - c1)**2 - lambda2 * (input_image - c0)**2)
-        positive_curve = current_curve > 0
-        negative_curve = current_curve < 0
+        # compute contour evolution according to gradient and score on contour
+        add_image_and_scalar(input_image, destination=temp_1, scalar=c1)
+        add_image_and_scalar(input_image, destination=temp_2, scalar=c0)
+        power(temp_1, destination=temp_4)
+        power(temp_2, destination=temp_5)
+        temp_2 = temp_3 * (lambda1 * temp_4 - lambda2 * temp_5)
 
-        combined_mask = binary_or(positive_curve, negative_curve)
-        inverted_mask = binary_not(combined_mask)
-        masked_curve = mask(output_image, inverted_mask)
-        update_curve = masked_curve + negative_curve
+        # apply contour update on contour image
+        greater_constant(temp_2, destination=temp_1, constant=0)
+        smaller_constant(temp_2, destination=temp_3, constant=0)
+
+        temp_4 = binary_or(temp_1, temp_3)
+        temp_1 = binary_not(temp_4)
+        temp_2 = mask(output_image, temp_1)
+        temp_1 = temp_2 + temp_3
         
-        opening_sphere(update_curve, destination=output_image, radius_x=smoothing, radius_y=smoothing, radius_z=smoothing)
+        # smooth contour
+        if smoothing > 0:
+            opening_sphere(temp_1, destination=temp_2, radius_x=smoothing, radius_y=smoothing, radius_z=smoothing)
+            closing_sphere(temp_2, destination=output_image, radius_x=smoothing, radius_y=smoothing, radius_z=smoothing)
+        else: 
+            output_image = copy(temp_1)
 
     return output_image
 
