@@ -51,15 +51,15 @@ def morphological_snakes(input_image: Image,
 
     for _ in range(n_iter):
         # define invert image
-        temp_1 = 1 - output_image
+        binary_not(output_image, destination=temp_1)
 
         # compute outside contour score
-        sum_image_value = (input_image * temp_1).sum()
+        sum_image_value = mask(input_image, mask=temp_1).sum()
         sum_contour_value = temp_1.sum() + 1e-8
         c0 = - (sum_image_value / sum_contour_value)
 
         # compute inside contour score
-        sum_image_value = (input_image * output_image).sum()
+        sum_image_value = mask(input_image, mask=output_image).sum()
         sum_image_value = output_image.sum() + 1e-8
         c1 = - (sum_image_value / sum_image_value)
 
@@ -89,17 +89,17 @@ def morphological_snakes(input_image: Image,
         greater_constant(temp_2, destination=temp_1, constant=0)
         smaller_constant(temp_2, destination=temp_3, constant=0)
 
-        temp_4 = binary_or(temp_1, temp_3)
-        temp_1 = binary_not(temp_4)
-        temp_2 = mask(output_image, temp_1)
-        temp_1 = temp_2 + temp_3
+        binary_or(temp_1, temp_3, destination=temp_4)
+        binary_not(temp_4, destination=temp_1)
+        mask(output_image, mask=temp_1, destination=temp_2)
+        output_image = temp_2 + temp_3
         
-        # smooth contour
-        if smoothing > 0:
-            opening_sphere(temp_1, destination=temp_2, radius_x=smoothing, radius_y=smoothing, radius_z=smoothing)
-            closing_sphere(temp_2, destination=output_image, radius_x=smoothing, radius_y=smoothing, radius_z=smoothing)
-        else: 
-            output_image = copy(temp_1)
+        # # smooth contour
+        # if smoothing > 0:
+        #     opening_sphere(temp_1, destination=temp_2, radius_x=smoothing, radius_y=smoothing, radius_z=smoothing)
+        #     closing_sphere(temp_2, destination=output_image, radius_x=smoothing, radius_y=smoothing, radius_z=smoothing)
+        # else: 
+            # output_image = copy(temp_1)
 
     return output_image
 
