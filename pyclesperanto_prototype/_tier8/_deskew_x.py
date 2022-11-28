@@ -11,11 +11,11 @@ def deskew_x(input_image: Image,
              voxel_size_x: float = 1,
              voxel_size_y: float = 1,
              voxel_size_z: float = 1,
-             scale_factor: float = 1,
-             linear_interpolation: bool = False,
-             ) -> Image:
+             flip_z: bool = False,
+             scale_factor: float = 1) -> Image:
     """
-    Deskew an image stack as acquired with oblique plane light-sheet microscopy.
+    Deskew an image stack as acquired with oblique plane light-sheet microscopy, with skew in the X direction.
+    Uses orthogonal interpolation by default
 
     Parameters
     ----------
@@ -34,22 +34,26 @@ def deskew_x(input_image: Image,
         default: 1
         If the resulting image becomes too huge, it is possible to reduce output image size by this factor.
         The isotropic voxel size of the output image will then be voxel_size_x / scaling_factor.
-    linear_interpolation: bool, optional
-        If true, bi-/tri-linear interpolation will be applied, if hardware supports it.
-        If false, nearest-neighbor interpolation wille be applied.
-
     Returns
     -------
     output_image
     """
 
     from ._AffineTransform3D import AffineTransform3D
-    from ._affine_transform import affine_transform
-    
-    # shear in the X plane towards Y
+    from ._affine_transform_3d_deskew import affine_transform_3d_deskew
+
+    # define affine transformation
     transform = AffineTransform3D()
     transform._deskew_x(angle_in_degrees=angle_in_degrees, voxel_size_x=voxel_size_x, voxel_size_y=voxel_size_y,
                         voxel_size_z=voxel_size_z, scale_factor=scale_factor)
 
     # apply transform
-    return affine_transform(input_image, output_image, transform=transform, auto_size=True,linear_interpolation=linear_interpolation)
+    return affine_transform_3d_deskew(source=input_image, destination=output_image,
+                                      transform=transform,
+                                      deskewing_angle_in_degrees=angle_in_degrees,
+                                      voxel_size_x=voxel_size_x,
+                                      voxel_size_y=voxel_size_y,
+                                      voxel_size_z=voxel_size_z,
+                                      flip_z=flip_z,
+                                      skew_direction="X",
+                                      auto_size=True)
