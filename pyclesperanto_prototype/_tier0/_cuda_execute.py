@@ -6,6 +6,7 @@ preamble = """
 #define sampler_t int
 
 #define FLT_MIN          1.19209e-07
+#define FLT_MAX	         1.fffffe127
 
 #define MAX_ARRAY_SIZE 1000
 
@@ -164,6 +165,10 @@ __device__ inline int get_global_id(int dim) {
     } else { //if (dim == 2) {
         return blockDim.z * blockIdx.z + threadIdx.z;
     } 
+}
+
+__device__ inline unsigned int atomic_add(unsigned int* address, unsigned int value) {
+    return atomicAdd(address, value);
 }
 
 #define get_global_size(dim) global_size_ ## dim ## _size
@@ -449,12 +454,17 @@ def execute(anchor, opencl_kernel_filename, kernel_name, global_size, parameters
     #print("Grid", grid)
     #print("Block", block)
 
-    # load and compile
-    a_kernel = cp.RawKernel(cuda_kernel, kernel_name)
+    try:
+        # load and compile
+        a_kernel = cp.RawKernel(cuda_kernel, kernel_name)
 
-    # run
-    a_kernel(grid, block, tuple(arguments))
-
+        # run
+        a_kernel(grid, block, tuple(arguments))
+    except cp.cuda.compiler.CompileException as ce:
+        print(ce.source)
+        print(ce.get_message())
+        for i, k in enumerate(cuda_kernel.split("\n")):
+            print(i, ":", k)
     #for i, a in enumerate(arguments):
     #    print(i, type(a), a)
 
