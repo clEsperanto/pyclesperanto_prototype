@@ -6,7 +6,7 @@ preamble = """
 #define sampler_t int
 
 #define FLT_MIN          1.19209e-07
-#define FLT_MAX	         1.fffffe127
+#define FLT_MAX	         1e+37
 
 #define MAX_ARRAY_SIZE 1000
 
@@ -461,10 +461,12 @@ def execute(anchor, opencl_kernel_filename, kernel_name, global_size, parameters
         # run
         a_kernel(grid, block, tuple(arguments))
     except cp.cuda.compiler.CompileException as ce:
-        print(ce.source)
-        print(ce.get_message())
+        error = []
         for i, k in enumerate(cuda_kernel.split("\n")):
-            print(i, ":", k)
+            error.append(str(i) + ":" + k)
+        error.append(ce.get_message())
+        error.append("CUDA compilation failed")
+        raise RuntimeError("\n".join(error))
     #for i, a in enumerate(arguments):
     #    print(i, type(a), a)
 
