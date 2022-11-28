@@ -386,10 +386,24 @@ def execute(anchor, opencl_kernel_filename, kernel_name, global_size, parameters
             )
             size_params = ""
             arguments.append(value)
-        elif isinstance(value, int):
+        elif isinstance(value, np.int8):
+            arguments.append(cp.int8(value))
+        elif isinstance(value, np.uint8):
+            arguments.append(cp.uint8(value))
+        elif isinstance(value, np.int16):
+            arguments.append(cp.int16(value))
+        elif isinstance(value, np.uint16):
+            arguments.append(cp.uint16(value))
+        elif isinstance(value, int) or isinstance(value, np.int32):
             arguments.append(cp.int32(value))
-        elif isinstance(value, float):
+        elif isinstance(value, float) or isinstance(value, np.float32):
             arguments.append(cp.float32(value))
+        elif isinstance(value, np.int64):
+            arguments.append(cp.int64(value))
+        elif isinstance(value, np.uint64):
+            arguments.append(cp.uint64(value))
+        elif isinstance(value, np.float64):
+            arguments.append(cp.float64(value))
         else:
             var_type = str(type(value))
             raise TypeError(
