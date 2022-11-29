@@ -38,6 +38,3 @@ def test_deskew_with_passing_destination():
     print(result2)
 
     assert cle.array_equal(result, result2)
-
-test_deskew_y()
-test_deskew_with_passing_destination()
