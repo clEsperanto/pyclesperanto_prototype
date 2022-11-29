@@ -48,24 +48,19 @@ affine_transform_deskew_x_3d(IMAGE_input_TYPE input, IMAGE_output_TYPE output,
   const sampler_t sampler = CLK_NORMALIZED_COORDS_FALSE | SAMPLER_ADDRESS;
 
   // get id for each pixel
-  float i = get_global_id(0);
-  float j = get_global_id(1);
-  float k = get_global_id(2);
+  uint x = get_global_id(0);
+  uint y = get_global_id(1);
+  uint z = get_global_id(2);
 
   // get the size of the image or total number of work-items
   uint Nx = GET_IMAGE_WIDTH(input);  // get_global_size(0);
   uint Ny = GET_IMAGE_HEIGHT(input); // get_global_size(1);
   uint Nz = GET_IMAGE_DEPTH(input);  // get_global_size(2);
 
-  // virtual plane coordinates, deskewed coord
-  float x = i + 0.5f;
-  float y = j + 0.5f;
-  float z = k + 0.5f;
-
   // corresponding coordinates on raw data
-  float z_orig = (mat[8] * x + mat[9] * y + mat[10] * z + mat[11]);
-  float y_orig = (mat[4] * x + mat[5] * y + mat[6] * z + mat[7]);
-  float x_orig = (mat[0] * x + mat[1] * y + mat[2] * z + mat[3]);
+  uint z_orig = (mat[8] * x + mat[9] * y + mat[10] * z + mat[11]);
+  uint y_orig = (mat[4] * x + mat[5] * y + mat[6] * z + mat[7]);
+  uint x_orig = (mat[0] * x + mat[1] * y + mat[2] * z + mat[3]);
 
   float pix = 0;
 
@@ -132,7 +127,7 @@ affine_transform_deskew_x_3d(IMAGE_input_TYPE input, IMAGE_output_TYPE output,
     }
   }
 
-  int4 pos = (int4){i, j, rotate_bool ? (deskewed_Nz - 1 - k) : k, 0};
+  int4 pos = (int4){x, y, rotate_bool ? (deskewed_Nz - 1 - z) : z, 0};
 
   WRITE_output_IMAGE(output, pos, CONVERT_output_PIXEL_TYPE(pix));
 }

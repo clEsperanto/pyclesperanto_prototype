@@ -49,9 +49,9 @@ affine_transform_deskew_y_3d(IMAGE_input_TYPE input, IMAGE_output_TYPE output,
   const sampler_t sampler = CLK_NORMALIZED_COORDS_FALSE | SAMPLER_ADDRESS;
 
   // get id for each pixel
-  uint i = get_global_id(0);
-  uint j = get_global_id(1);
-  uint k = get_global_id(2);
+  uint x = get_global_id(0);
+  uint y = get_global_id(1);
+  uint z = get_global_id(2);
 
   // get the size of the image or total number of work-items
   uint Nx = GET_IMAGE_WIDTH(input);  // get_global_size(0);
@@ -59,21 +59,22 @@ affine_transform_deskew_y_3d(IMAGE_input_TYPE input, IMAGE_output_TYPE output,
   uint Nz = GET_IMAGE_DEPTH(input);  // get_global_size(2);
 
   // virtual plane coordinates, deskewed coord
-  float x = i + 0.5f;
-  float y = j + 0.5f;
-  float z = k + 0.5f;
+  //uint x = i;
+  //uint y = j;
+  //uint z = k;
 
   // corresponding coordinates on raw data
-  float z_orig = (mat[8] * x + mat[9] * y + mat[10] * z + mat[11]);
-  float y_orig = (mat[4] * x + mat[5] * y + mat[6] * z + mat[7]);
-  float x_orig = (mat[0] * x + mat[1] * y + mat[2] * z + mat[3]);
-  //
+  uint z_orig = (mat[8] * x + mat[9] * y + mat[10] * z + mat[11]);
+  uint y_orig = (mat[4] * x + mat[5] * y + mat[6] * z + mat[7]);
+  uint x_orig = (mat[0] * x + mat[1] * y + mat[2] * z + mat[3]);
 
-  float pix = 0;
+   float pix = 0;
+   
+  // ensure within bounds of final image/deskewed image
 
   if (x >= 0 && y >= 0 && z >= 0 && x < deskewed_Nx && y < deskewed_Ny &&
       z < deskewed_Nz) {
-
+    //printf("%d\n,%d\n,%d\n", z,y,x);
     float virtual_plane = (y - z / tantheta);
     // get plane before
     long plane_before = floor(virtual_plane / pixel_step);
@@ -133,7 +134,7 @@ affine_transform_deskew_y_3d(IMAGE_input_TYPE input, IMAGE_output_TYPE output,
   }
 
   // if rotate coverslip, apply flipping on Z axis
-  int4 pos = (int4){i, j, rotate_bool ? (deskewed_Nz - 1 - k) : k, 0};
+  int4 pos = (int4){x, y, rotate_bool ? (deskewed_Nz - 1 - z) : z, 0};
 
   WRITE_output_IMAGE(output, pos, CONVERT_output_PIXEL_TYPE(pix));
 }
