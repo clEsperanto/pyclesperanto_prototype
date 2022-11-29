@@ -11,7 +11,7 @@ import numpy as np
 
 
 @plugin_function(output_creator=create_none)
-def affine_transform_3d_deskew(source: Image, destination: Image = None,
+def affine_transform_deskew_3d(source: Image, destination: Image = None,
                                transform: Union[np.ndarray, AffineTransform3D, AffineTransform] = None,
                                deskewing_angle_in_degrees: float = 30,
                                voxel_size_x: float = 0.1449922,
@@ -22,7 +22,7 @@ def affine_transform_3d_deskew(source: Image, destination: Image = None,
                                auto_size: bool = False) -> Image:
     """
     Applies an affine transform to deskew an image. 
-    Uses orthogonal interpolation
+    Uses orthogonal interpolation (Sapoznik et al. (2020)  https://doi.org/10.7554/eLife.57681)
 
     Parameters
     ----------
@@ -62,7 +62,6 @@ def affine_transform_3d_deskew(source: Image, destination: Image = None,
     import numpy as np
     from .._tier0 import execute
     from .._tier0 import create
-    from .._tier1 import copy_slice
 
     assert len(
         source.shape) == 3, f"Image needs to be 3D, got shape of {len(source.shape)}"
@@ -105,11 +104,11 @@ def affine_transform_3d_deskew(source: Image, destination: Image = None,
     gpu_transform_matrix = push(transform_matrix)
 
     if skew_direction.upper() == "Y":
-        kernel_suffix = '_deskew_y'
+        kernel_suffix = 'deskew_y_'
         # change step size from physical space (nm) to camera space (pixels)
         pixel_step = np.float32(voxel_size_z/voxel_size_y)
     elif skew_direction.upper() == "X":
-        kernel_suffix = '_deskew_x'
+        kernel_suffix = 'deskew_x_'
         # change step size from physical space (nm) to camera space (pixels)
         pixel_step = np.float32(voxel_size_z/voxel_size_x)
 
@@ -129,7 +128,7 @@ def affine_transform_3d_deskew(source: Image, destination: Image = None,
         "sintheta": sintheta
     }
 
-    execute(__file__, './affine_transform_' + str(len(destination.shape)) + 'd' + kernel_suffix + '_x.cl',
-            'affine_transform_' + str(len(destination.shape)) + 'd' + kernel_suffix, destination.shape, parameters)
+    execute(__file__, './affine_transform_' + kernel_suffix + str(len(destination.shape)) + 'd' + '_x.cl',
+            'affine_transform_'  + kernel_suffix + str(len(destination.shape)) + 'd', destination.shape, parameters)
 
-    return original_destination
+    return destination

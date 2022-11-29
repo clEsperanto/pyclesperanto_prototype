@@ -41,7 +41,7 @@ def deskew_y(input_image: Image,
     """
 
     from ._AffineTransform3D import AffineTransform3D
-    from ._affine_transform_3d_deskew import affine_transform_3d_deskew
+    from ._affine_transform_deskew_3d import affine_transform_deskew_3d
 
     # define affine transformation matrix
     transform = AffineTransform3D()
@@ -49,7 +49,7 @@ def deskew_y(input_image: Image,
                         voxel_size_z=voxel_size_z, scale_factor=scale_factor)
 
     # apply transform using special affine transform method for deskewing in the Y direction
-    return affine_transform_3d_deskew(source=input_image, destination=output_image,
+    return affine_transform_deskew_3d(source=input_image, destination=output_image,
                                       transform=transform,
                                       deskewing_angle_in_degrees=angle_in_degrees,
                                       voxel_size_x=voxel_size_x,
