@@ -13,6 +13,7 @@ def deskew_y(input_image: Image,
              voxel_size_z: float = 1,
              scale_factor: float = 1,
              linear_interpolation: bool = False,
+             apply_final_rotation: bool = True
              ) -> Image:
     """
     Deskew an image stack as acquired with oblique plane light-sheet microscopy.
@@ -55,7 +56,7 @@ def deskew_y(input_image: Image,
     # shear in the X plane towards Y
     transform = AffineTransform3D()
     transform._deskew_y(angle_in_degrees=angle_in_degrees, voxel_size_x=voxel_size_x, voxel_size_y=voxel_size_y,
-                        voxel_size_z=voxel_size_z, scale_factor=scale_factor)
+                        voxel_size_z=voxel_size_z, scale_factor=scale_factor, apply_final_rotation=apply_final_rotation)
 
     # apply transform
     return affine_transform(input_image, output_image, transform=transform, auto_size=True,linear_interpolation=linear_interpolation)

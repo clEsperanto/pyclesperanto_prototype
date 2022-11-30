@@ -299,7 +299,7 @@ class AffineTransform3D:
         return self
 
     def _deskew_y(self, angle_in_degrees:float, voxel_size_x: float = 1,
-                  voxel_size_y: float = 1, voxel_size_z: float = 1, scale_factor: float = 1):
+                  voxel_size_y: float = 1, voxel_size_z: float = 1, scale_factor: float = 1, apply_final_rotation=True):
 
         #Defining shear factor 
         #Shear factor calculation here is different from that in utilities
@@ -312,8 +312,9 @@ class AffineTransform3D:
         scale_factor_z = (new_dz / voxel_size_y) * scale_factor
         self.scale(scale_x=scale_factor, scale_y=scale_factor, scale_z=scale_factor_z)
 
-        # correct orientation so that the new Z-plane goes proximal-distal from the objective.
-        self.rotate(angle_in_degrees = 0 - angle_in_degrees, axis=0)
+        if apply_final_rotation:
+            # correct orientation so that the new Z-plane goes proximal-distal from the objective.
+            self.rotate(angle_in_degrees = 0 - angle_in_degrees, axis=0)
 
         return self
 
