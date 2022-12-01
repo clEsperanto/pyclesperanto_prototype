@@ -31,8 +31,6 @@ def deskew_y(input_image: Image,
     voxel_size_z: float, optional
         default: 1 micron
         Voxel size, typically provided in microns
-    flip_z: bool, optional
-        Flip in Z axis, if coverslip rotation required.
     scale_factor: float, optional
         default: 1
         If the resulting image becomes too huge, it is possible to reduce output image size by this factor.
