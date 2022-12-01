@@ -16,7 +16,7 @@ def deskew_y(input_image: Image,
              ) -> Image:
     """
     Deskew an image stack as acquired with oblique plane light-sheet microscopy with skew in the Y direction.
-    Uses orthogonal interpolation by default
+    Uses orthogonal interpolation (Sapoznik et al. (2020)  https://doi.org/10.7554/eLife.57681)
 
     Parameters
     ----------
