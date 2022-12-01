@@ -55,6 +55,6 @@ def deskew_y(input_image: Image,
                                       voxel_size_x=voxel_size_x,
                                       voxel_size_y=voxel_size_y,
                                       voxel_size_z=voxel_size_z,
-                                      skew_direction=DeskewDirection.Y,
+                                      deskew_direction=DeskewDirection.Y,
                                       flip_z=flip_z,
                                       auto_size=True)

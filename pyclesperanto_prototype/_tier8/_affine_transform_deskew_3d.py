@@ -10,6 +10,7 @@ from ._affine_transform import _determine_translation_and_bounding_box
 import numpy as np
 from enum import Enum
 
+
 class DeskewDirection(Enum):
     X = 1
     Y = 2
@@ -21,7 +22,7 @@ def affine_transform_deskew_3d(source: Image, destination: Image = None,
                                voxel_size_x: float = 0.1449922,
                                voxel_size_y: float = 0.1449922,
                                voxel_size_z: float = 0.3,
-                               skew_direction: DeskewDirection = DeskewDirection.Y,
+                               deskew_direction: DeskewDirection = DeskewDirection.Y,
                                flip_z: bool = False,
                                auto_size: bool = False) -> Image:
     """
@@ -44,7 +45,7 @@ def affine_transform_deskew_3d(source: Image, destination: Image = None,
         Pixel size in Y axis in microns
     voxel_size_z: float, optional
         Step size between image planes along coverslip in microns; Voxel size in Z in microns
-    skew_direction: str, optional
+    deskew_direction: str, optional
         Direction of skew, dependent on microscope configuration
     flip_z: bool, optional
         Flip in Z axis, if coverslip rotation required.
@@ -107,7 +108,7 @@ def affine_transform_deskew_3d(source: Image, destination: Image = None,
 
     gpu_transform_matrix = push(transform_matrix)
 
-    if skew_direction == DeskewDirection.Y:
+    if deskew_direction == DeskewDirection.Y:
         kernel_suffix = 'deskew_y_'
         # change step size from physical space (nm) to camera space (pixels)
         pixel_step = np.float32(voxel_size_z/voxel_size_y)
