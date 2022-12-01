@@ -1,4 +1,4 @@
-from numpy import angle
+import warnings
 from .._tier0 import plugin_function
 from .._tier0 import Image
 from .._tier0 import create_none
@@ -11,7 +11,9 @@ def deskew_x(input_image: Image,
              voxel_size_x: float = 1,
              voxel_size_y: float = 1,
              voxel_size_z: float = 1,
-             scale_factor: float = 1) -> Image:
+             scale_factor: float = 1,
+             linear_interpolation: bool = None
+             ) -> Image:
     """
     Deskew an image stack as acquired with oblique plane light-sheet microscopy, with skew in the X direction.
     Uses orthogonal interpolation by default
@@ -33,10 +35,14 @@ def deskew_x(input_image: Image,
         default: 1
         If the resulting image becomes too huge, it is possible to reduce output image size by this factor.
         The isotropic voxel size of the output image will then be voxel_size_x / scaling_factor.
+    linear_interpolation: obsolete
+
     Returns
     -------
     output_image
     """
+    if linear_interpolation is not None:
+        warnings.warn("In function deskew_ the linear_interpolation parameters is obsolete. Orthogonal interpolation will always be used. Please remove it from your code.", DeprecationWarning)
 
     from ._AffineTransform3D import AffineTransform3D
     from ._affine_transform_deskew_3d import affine_transform_deskew_3d, DeskewDirection
