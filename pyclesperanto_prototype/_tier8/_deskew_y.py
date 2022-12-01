@@ -11,7 +11,6 @@ def deskew_y(input_image: Image,
              voxel_size_x: float = 1,
              voxel_size_y: float = 1,
              voxel_size_z: float = 1,
-             flip_z: bool = False,
              scale_factor: float = 1) -> Image:
     """
     Deskew an image stack as acquired with oblique plane light-sheet microscopy with skew in the Y direction.
@@ -58,5 +57,4 @@ def deskew_y(input_image: Image,
                                       voxel_size_y=voxel_size_y,
                                       voxel_size_z=voxel_size_z,
                                       deskew_direction=DeskewDirection.Y,
-                                      flip_z=flip_z,
                                       auto_size=True)

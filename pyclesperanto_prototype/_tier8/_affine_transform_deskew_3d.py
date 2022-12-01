@@ -23,7 +23,6 @@ def affine_transform_deskew_3d(source: Image, destination: Image = None,
                                voxel_size_y: float = 0.1449922,
                                voxel_size_z: float = 0.3,
                                deskew_direction: DeskewDirection = DeskewDirection.Y,
-                               flip_z: bool = False,
                                auto_size: bool = False) -> Image:
     """
     Applies an affine transform to deskew an image. 
@@ -47,8 +46,6 @@ def affine_transform_deskew_3d(source: Image, destination: Image = None,
         Step size between image planes along coverslip in microns; Voxel size in Z in microns
     deskew_direction: str, optional
         Direction of skew, dependent on microscope configuration
-    flip_z: bool, optional
-        Flip in Z axis, if coverslip rotation required.
     auto_size:bool, optional
         If true, modifies the transform and the destination image size will be determined automatically, depending on the provided transform.
         the transform might be modified so that all voxels of the result image have positions x>=0, y>=0, z>=0 and sit
@@ -123,7 +120,7 @@ def affine_transform_deskew_3d(source: Image, destination: Image = None,
         "input": source,
         "output": destination,
         "mat": gpu_transform_matrix,
-        "rotate": int(1 if flip_z else 0),
+        "rotate": int(0),
         "deskewed_Nx": destination.shape[2],
         "deskewed_Ny": destination.shape[1],
         "deskewed_Nz": destination.shape[0],

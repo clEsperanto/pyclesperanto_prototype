@@ -11,7 +11,6 @@ def deskew_x(input_image: Image,
              voxel_size_x: float = 1,
              voxel_size_y: float = 1,
              voxel_size_z: float = 1,
-             flip_z: bool = False,
              scale_factor: float = 1) -> Image:
     """
     Deskew an image stack as acquired with oblique plane light-sheet microscopy, with skew in the X direction.
@@ -30,8 +29,6 @@ def deskew_x(input_image: Image,
     voxel_size_z: float, optional
         default: 1 micron
         Voxel size, typically provided in microns
-    flip_z: bool, optional
-        Flip in Z axis, if coverslip rotation required.
     scale_factor: float, optional
         default: 1
         If the resulting image becomes too huge, it is possible to reduce output image size by this factor.
@@ -56,6 +53,5 @@ def deskew_x(input_image: Image,
                                       voxel_size_x=voxel_size_x,
                                       voxel_size_y=voxel_size_y,
                                       voxel_size_z=voxel_size_z,
-                                      flip_z=flip_z,
                                       deskew_direction=DeskewDirection.X,
                                       auto_size=True)
