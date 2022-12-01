@@ -40,7 +40,7 @@
 
 __kernel void
 affine_transform_deskew_x_3d(IMAGE_input_TYPE input, IMAGE_output_TYPE output,
-                             IMAGE_mat_TYPE mat, const int rotate_bool,
+                             IMAGE_mat_TYPE mat,
                              const int deskewed_Nx, const int deskewed_Ny,
                              const int deskewed_Nz, float pixel_step,
                              float tantheta, float costheta, float sintheta) {
@@ -127,7 +127,7 @@ affine_transform_deskew_x_3d(IMAGE_input_TYPE input, IMAGE_output_TYPE output,
     }
   }
 
-  int4 pos = (int4){x, y, rotate_bool ? (deskewed_Nz - 1 - z) : z, 0};
+  int4 pos = (int4){x, y, z, 0};
 
   WRITE_output_IMAGE(output, pos, CONVERT_output_PIXEL_TYPE(pix));
 }
