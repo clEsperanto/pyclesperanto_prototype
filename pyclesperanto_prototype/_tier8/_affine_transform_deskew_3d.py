@@ -8,7 +8,11 @@ from ._AffineTransform3D import AffineTransform3D
 from skimage.transform import AffineTransform
 from ._affine_transform import _determine_translation_and_bounding_box
 import numpy as np
+from enum import Enum
 
+class DeskewDirection(Enum):
+    X = 1
+    Y = 2
 
 @plugin_function(output_creator=create_none)
 def affine_transform_deskew_3d(source: Image, destination: Image = None,
@@ -17,7 +21,7 @@ def affine_transform_deskew_3d(source: Image, destination: Image = None,
                                voxel_size_x: float = 0.1449922,
                                voxel_size_y: float = 0.1449922,
                                voxel_size_z: float = 0.3,
-                               skew_direction: str = "Y",
+                               skew_direction: DeskewDirection = DeskewDirection.Y,
                                flip_z: bool = False,
                                auto_size: bool = False) -> Image:
     """
@@ -103,11 +107,11 @@ def affine_transform_deskew_3d(source: Image, destination: Image = None,
 
     gpu_transform_matrix = push(transform_matrix)
 
-    if skew_direction.upper() == "Y":
+    if skew_direction == DeskewDirection.Y:
         kernel_suffix = 'deskew_y_'
         # change step size from physical space (nm) to camera space (pixels)
         pixel_step = np.float32(voxel_size_z/voxel_size_y)
-    elif skew_direction.upper() == "X":
+    else:
         kernel_suffix = 'deskew_x_'
         # change step size from physical space (nm) to camera space (pixels)
         pixel_step = np.float32(voxel_size_z/voxel_size_x)
