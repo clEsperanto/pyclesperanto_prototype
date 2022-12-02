@@ -22,8 +22,7 @@ def affine_transform_deskew_3d(source: Image, destination: Image = None,
                                voxel_size_x: float = 0.1449922,
                                voxel_size_y: float = 0.1449922,
                                voxel_size_z: float = 0.3,
-                               deskew_direction: DeskewDirection = DeskewDirection.Y,
-                               auto_size: bool = False) -> Image:
+                               deskew_direction: DeskewDirection = DeskewDirection.Y) -> Image:
     """
     Applies an affine transform to deskew an image. 
     Uses orthogonal interpolation (Sapoznik et al. (2020)  https://doi.org/10.7554/eLife.57681)
@@ -34,7 +33,7 @@ def affine_transform_deskew_3d(source: Image, destination: Image = None,
         image to be transformed
     destination : Image, optional
         image where the transformed image should be written to
-    transform : 4x4 numpy array or AffineTransform3D object or skimage.transform.AffineTransform object or str, optional
+    transform : AffineTransform3D object, optional
         transform matrix or object or string describing the transformation
     deskewing_angle_in_degrees: float, optional
         Oblique plane or deskewing acquisition angle
@@ -65,38 +64,15 @@ def affine_transform_deskew_3d(source: Image, destination: Image = None,
     from .._tier0 import execute
     from .._tier0 import create
 
-    assert len(
-        source.shape) == 3, f"Image needs to be 3D, got shape of {len(source.shape)}"
+    assert len(source.shape) == 3, f"Image needs to be 3D, got shape of {len(source.shape)}"
 
     # handle output creation
-    if auto_size and isinstance(transform, AffineTransform3D):
-        new_size, transform, _ = _determine_translation_and_bounding_box(
-            source, transform)
+    new_size, transform, _ = _determine_translation_and_bounding_box(source, transform)
     if destination is None:
-        if auto_size and isinstance(transform, AffineTransform3D):
-            # This modifies the given transform
-            destination = create(new_size)
-        else:
-            destination = create_like(source)
-
-    if isinstance(transform, str):
-        transform = AffineTransform3D(transform, source)
-
+        destination = create(new_size)
+    
     # we invert the transform because we go from the target image to the source image to read pixels
-    if isinstance(transform, AffineTransform3D):
-        transform_matrix = np.asarray(transform.copy().inverse())
-    elif isinstance(transform, AffineTransform):
-        # Question: Don't we have to invert this one as well? haesleinhuepf
-        matrix = np.asarray(transform.params)
-        matrix = np.asarray([
-            [matrix[0, 0], matrix[0, 1], 0, matrix[0, 2]],
-            [matrix[1, 0], matrix[1, 1], 0, matrix[1, 2]],
-            [0, 0, 1, 0],
-            [matrix[2, 0], matrix[2, 1], 0, matrix[2, 2]]
-        ])
-        transform_matrix = np.linalg.inv(matrix)
-    else:
-        transform_matrix = np.linalg.inv(transform)
+    transform_matrix = np.asarray(transform.copy().inverse())
 
     # precalculate these functions that are dependent on deskewing angle
     tantheta = np.float32(np.tan(deskewing_angle_in_degrees * np.pi/180))

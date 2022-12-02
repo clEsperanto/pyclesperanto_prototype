@@ -59,8 +59,7 @@ def deskew_x(input_image: Image,
                                           voxel_size_x=voxel_size_x,
                                           voxel_size_y=voxel_size_y,
                                           voxel_size_z=voxel_size_z,
-                                          deskew_direction=DeskewDirection.X,
-                                          auto_size=True)
+                                          deskew_direction=DeskewDirection.X)
     else:
         return affine_transform(input_image, output_image, transform=transform, auto_size=True,
                                 linear_interpolation=False)
