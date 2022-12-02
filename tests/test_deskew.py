@@ -8,7 +8,7 @@ source[1, 1, 1] = 1
 
 reference = np.zeros((5, 19, 10),dtype=np.float32)
 #will this change with device used?
-reference[1, 2, 1] = 0.16987294
+reference[3, 2, 1] = 0.16987294
 
 
 def test_deskew_y():
