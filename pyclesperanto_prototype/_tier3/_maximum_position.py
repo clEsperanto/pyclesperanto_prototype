@@ -15,16 +15,12 @@ def maximum_position(source: Image) -> tuple:
 
     Returns
     -------
-    float
+    tuple
 
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
     >>> cle.maximum_position(source)
-
-    References
-    ----------
-
     """
     from .._tier1 import maximum_x_projection
     from .._tier1 import maximum_y_projection
@@ -52,8 +48,8 @@ def maximum_position(source: Image) -> tuple:
         source = temp_max
 
     if len(dimensionality) > 2:
-        # Use z position as input array is 3d
-        pos_z = z_position_of_maximum_z_projection(source)
+        # Use x position as the updated input array is 2d
+        pos_z = x_position_of_maximum_x_projection(source)
 
     # Use calculated max positions to find coordinates of each axis
     if pos_z is not None:

@@ -46,3 +46,16 @@ def test_maximum_position_2d():
     result = cle.maximum_position(gpu_input)
 
     assert (result == reference)
+
+
+def test_maximum_position_2d_2():
+    np_input = np.zeros((10, 11))
+
+    np_input[1, 2] = 1
+    np_input[6, 7] = 1
+
+    reference = ndimage.maximum_position(np_input)
+    gpu_input = cle.push(np_input)
+    result = cle.maximum_position(gpu_input)
+
+    assert (result == reference)
