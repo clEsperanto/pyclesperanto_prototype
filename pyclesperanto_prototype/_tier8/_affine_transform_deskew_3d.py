@@ -8,7 +8,12 @@ from ._AffineTransform3D import AffineTransform3D
 from skimage.transform import AffineTransform
 from ._affine_transform import _determine_translation_and_bounding_box
 import numpy as np
+from enum import Enum
 
+
+class DeskewDirection(Enum):
+    X = 1
+    Y = 2
 
 @plugin_function(output_creator=create_none)
 def affine_transform_deskew_3d(source: Image, destination: Image = None,
@@ -17,8 +22,7 @@ def affine_transform_deskew_3d(source: Image, destination: Image = None,
                                voxel_size_x: float = 0.1449922,
                                voxel_size_y: float = 0.1449922,
                                voxel_size_z: float = 0.3,
-                               skew_direction: str = "Y",
-                               flip_z: bool = False,
+                               deskew_direction: DeskewDirection = DeskewDirection.Y,
                                auto_size: bool = False) -> Image:
     """
     Applies an affine transform to deskew an image. 
@@ -40,10 +44,8 @@ def affine_transform_deskew_3d(source: Image, destination: Image = None,
         Pixel size in Y axis in microns
     voxel_size_z: float, optional
         Step size between image planes along coverslip in microns; Voxel size in Z in microns
-    skew_direction: str, optional
+    deskew_direction: str, optional
         Direction of skew, dependent on microscope configuration
-    flip_z: bool, optional
-        Flip in Z axis, if coverslip rotation required.
     auto_size:bool, optional
         If true, modifies the transform and the destination image size will be determined automatically, depending on the provided transform.
         the transform might be modified so that all voxels of the result image have positions x>=0, y>=0, z>=0 and sit
@@ -103,11 +105,11 @@ def affine_transform_deskew_3d(source: Image, destination: Image = None,
 
     gpu_transform_matrix = push(transform_matrix)
 
-    if skew_direction.upper() == "Y":
+    if deskew_direction == DeskewDirection.Y:
         kernel_suffix = 'deskew_y_'
         # change step size from physical space (nm) to camera space (pixels)
         pixel_step = np.float32(voxel_size_z/voxel_size_y)
-    elif skew_direction.upper() == "X":
+    else:
         kernel_suffix = 'deskew_x_'
         # change step size from physical space (nm) to camera space (pixels)
         pixel_step = np.float32(voxel_size_z/voxel_size_x)
@@ -118,7 +120,6 @@ def affine_transform_deskew_3d(source: Image, destination: Image = None,
         "input": source,
         "output": destination,
         "mat": gpu_transform_matrix,
-        "rotate": int(1 if flip_z else 0),
         "deskewed_Nx": destination.shape[2],
         "deskewed_Ny": destination.shape[1],
         "deskewed_Nz": destination.shape[0],

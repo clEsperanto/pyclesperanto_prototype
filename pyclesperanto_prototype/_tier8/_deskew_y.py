@@ -1,4 +1,4 @@
-from numpy import angle
+import warnings
 from .._tier0 import plugin_function
 from .._tier0 import Image
 from .._tier0 import create_none
@@ -11,11 +11,12 @@ def deskew_y(input_image: Image,
              voxel_size_x: float = 1,
              voxel_size_y: float = 1,
              voxel_size_z: float = 1,
-             flip_z: bool = False,
-             scale_factor: float = 1) -> Image:
+             scale_factor: float = 1,
+             linear_interpolation: bool = None
+             ) -> Image:
     """
     Deskew an image stack as acquired with oblique plane light-sheet microscopy with skew in the Y direction.
-    Uses orthogonal interpolation by default
+    Uses orthogonal interpolation (Sapoznik et al. (2020)  https://doi.org/10.7554/eLife.57681)
 
     Parameters
     ----------
@@ -28,20 +29,23 @@ def deskew_y(input_image: Image,
     voxel_size_x: float, optional
     voxel_size_y: float, optional
     voxel_size_z: float, optional
-         default: 1 micron
-         Voxel size, typically provided in microns
+        default: 1 micron
+        Voxel size, typically provided in microns
     scale_factor: float, optional
         default: 1
         If the resulting image becomes too huge, it is possible to reduce output image size by this factor.
         The isotropic voxel size of the output image will then be voxel_size_y / scaling_factor.
+    linear_interpolation: obsolete
 
     Returns
     -------
     output_image
     """
+    if linear_interpolation is not None:
+        warnings.warn("In function deskew_ the linear_interpolation parameters is obsolete. Orthogonal interpolation will always be used. Please remove it from your code.", DeprecationWarning)
 
     from ._AffineTransform3D import AffineTransform3D
-    from ._affine_transform_deskew_3d import affine_transform_deskew_3d
+    from ._affine_transform_deskew_3d import affine_transform_deskew_3d, DeskewDirection
 
     # define affine transformation matrix
     transform = AffineTransform3D()
@@ -55,6 +59,5 @@ def deskew_y(input_image: Image,
                                       voxel_size_x=voxel_size_x,
                                       voxel_size_y=voxel_size_y,
                                       voxel_size_z=voxel_size_z,
-                                      skew_direction="Y",
-                                      flip_z=flip_z,
+                                      deskew_direction=DeskewDirection.Y,
                                       auto_size=True)
