@@ -21,9 +21,9 @@ test1 = cle.push(np.asarray([
 ]))
 
 reference = cle.push(np.asarray([
-    [2, 3, 2, 1, 2,]
-    [2, 3, 2, 0, 2,]
-    [1, 2, 1, 0, 1,]
+    [2, 3, 2, 1, 2],
+    [2, 3, 2, 0, 2],
+    [1, 2, 1, 0, 1]
 ]))
 
 def test_y_position_of_maximum_y_projection():

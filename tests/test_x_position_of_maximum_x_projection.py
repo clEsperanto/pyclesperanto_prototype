@@ -21,10 +21,10 @@ test1 = cle.push(np.asarray([
 ]))
 
 reference = cle.push(np.asarray([
-    [4, 3, 3,]
-    [3, 4, 4,]
-    [4, 4, 3,]
-    [3, 3, 4,]
+    [4, 3, 3],
+    [3, 4, 4],
+    [4, 4, 3],
+    [3, 3, 4]
 ]))
 
 def test_x_position_of_maximum_x_projection():
