@@ -83,6 +83,14 @@ class CUDAArray(ArrayOperators, np.lib.mixins.NDArrayOperatorsMixin):
     def __repr__(self):
         return "experimental clesperanto CUDAArray(" + str(self.array.get()) + ", dtype=" + str(self.array.dtype) + ")"
 
+    def astype(self, dtype, copy=None):
+        from ._create import create
+        if dtype == float or dtype == np.float64:
+            dtype = np.float32
+        copied = create(self.shape, dtype=dtype)
+        from .._tier1 import copy
+        return copy(self, copied)
+
     def min(self, axis=None, out=None):
         from .._tier2 import minimum_of_all_pixels
         from .._tier1 import minimum_x_projection

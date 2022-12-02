@@ -2,9 +2,6 @@
 def test_statistics_of_labelled_neighbors():
     import numpy as np
     import pyclesperanto_prototype as cle
-    from skimage.io import imread
-    import matplotlib.pyplot as plt
-    import pandas as pd
 
     labels = cle.scale(cle.asarray([
         [1, 1, 2, 2, 3, 3, 3, 3],
@@ -48,3 +45,44 @@ def test_statistics_of_labelled_neighbors():
     assert abs(stats["touch_portion_above_0.33_neighbor_count"].tolist()[-1] - 0) < 0.001
     assert abs(stats["touch_portion_above_0.5_neighbor_count"].tolist()[-1] - 0) < 0.001
     assert abs(stats["touch_portion_above_0.75_neighbor_count"].tolist()[-1] - 0) < 0.001
+
+def test_statistics_of_labelled_neighbors_dilated():
+    import numpy as np
+    import pyclesperanto_prototype as cle
+
+    labels = cle.scale(cle.asarray([
+        [0, 1, 2, 0, 0, 3, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 6, 7, 0, 0, 0, 4, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0],
+        [5, 0, 0, 0, 0, 0, 0, 0],
+    ]), factor_x=2, factor_y=2, auto_size=True).astype(np.uint32)
+
+    stats = cle.statistics_of_labelled_neighbors(labels, dilation_radii=(0, 10))
+
+    assert np.all(stats["touching_neighbor_count_dilated_r_0"] == stats["touching_neighbor_count"])
+    assert np.all(stats["minimum_distance_of_touching_neighbors_dilated_r_0"] == stats["minimum_distance_of_touching_neighbors"])
+    assert np.all(stats["average_distance_of_touching_neighbors_dilated_r_0"] == stats["average_distance_of_touching_neighbors"])
+    assert np.all(stats["maximum_distance_of_touching_neighbors_dilated_r_0"] == stats["maximum_distance_of_touching_neighbors"])
+    for i,j in zip(stats["max_min_distance_ratio_of_touching_neighbors_dilated_r_0"].tolist(), stats["max_min_distance_ratio_of_touching_neighbors"].tolist()):
+        assert i == j or (np.isnan(i) and np.isnan(j))
+
+    assert np.all(stats["touch_count_sum_dilated_r_0"] == stats["touch_count_sum"])
+    assert np.all(stats["minimum_touch_count_dilated_r_0"] == stats["minimum_touch_count"])
+    assert np.all(stats["maximum_touch_count_dilated_r_0"] == stats["maximum_touch_count"])
+    assert np.all(stats["minimum_touch_portion_dilated_r_0"] == stats["minimum_touch_portion"])
+    assert np.all(stats["maximum_touch_portion_dilated_r_0"] == stats["maximum_touch_portion"])
+
+    assert np.any(stats["touching_neighbor_count_dilated_r_10"] > stats["touching_neighbor_count"])
+    assert np.any(stats["minimum_distance_of_touching_neighbors_dilated_r_10"] > stats["minimum_distance_of_touching_neighbors"])
+    assert np.any(stats["average_distance_of_touching_neighbors_dilated_r_10"] > stats["average_distance_of_touching_neighbors"])
+    assert np.any(stats["maximum_distance_of_touching_neighbors_dilated_r_10"] > stats["maximum_distance_of_touching_neighbors"])
+    assert np.any(stats["max_min_distance_ratio_of_touching_neighbors_dilated_r_10"] > stats["max_min_distance_ratio_of_touching_neighbors"])
+    assert np.any(stats["touch_count_sum_dilated_r_10"] > stats["touch_count_sum"])
+    assert np.any(stats["minimum_touch_count_dilated_r_10"] > stats["minimum_touch_count"])
+    assert np.any(stats["maximum_touch_count_dilated_r_10"] > stats["maximum_touch_count"])
+    assert np.any(stats["minimum_touch_portion_dilated_r_10"] != stats["minimum_touch_portion"])
+    assert np.any(stats["maximum_touch_portion_dilated_r_10"] > stats["maximum_touch_portion"])

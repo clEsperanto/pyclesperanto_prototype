@@ -8,6 +8,7 @@ from ._closing_sphere import closing_sphere
 from ._combine_horizontally import combine_horizontally
 from ._combine_vertically import combine_vertically
 from ._concatenate_stacks import concatenate_stacks
+from ._crop_border import crop_border
 from ._distance_matrix_to_mesh import distance_matrix_to_mesh
 from ._flag_existing_labels import flag_existing_labels
 from ._flag_existing_labels import flag_existing_labels as flag_existing_intensities
@@ -47,6 +48,10 @@ from ._symmetric_sum_matrix import symmetric_sum_matrix
 from ._top_hat_box import top_hat_box
 from ._top_hat_sphere import top_hat_sphere
 from ._touch_matrix_to_adjacency_matrix import touch_matrix_to_adjacency_matrix
+from ._x_position_of_maximum_x_projection import x_position_of_maximum_x_projection
+from ._x_position_of_maximum_x_projection import x_position_of_maximum_x_projection as arg_maximum_x_projection
+from ._y_position_of_maximum_y_projection import y_position_of_maximum_y_projection
+from ._y_position_of_maximum_y_projection import y_position_of_maximum_y_projection as arg_maximum_y_projection
 from ._z_position_of_maximum_z_projection import z_position_of_maximum_z_projection
 from ._z_position_of_maximum_z_projection import z_position_of_maximum_z_projection as arg_maximum_z_projection
 from ._z_position_of_minimum_z_projection import z_position_of_minimum_z_projection
