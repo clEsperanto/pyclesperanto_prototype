@@ -20,7 +20,7 @@ def maximum_position(source: Image) -> tuple:
     Examples
     --------
     >>> import pyclesperanto_prototype as cle
-    >>> cle.maximum_of_all_pixels(source)
+    >>> cle.maximum_position(source)
 
     References
     ----------
@@ -28,8 +28,10 @@ def maximum_position(source: Image) -> tuple:
     """
     from .._tier1 import maximum_x_projection
     from .._tier1 import maximum_y_projection
+    from .._tier1 import maximum_z_projection
     from .._tier2 import x_position_of_maximum_x_projection
     from .._tier2 import y_position_of_maximum_y_projection
+    from .._tier2 import z_position_of_maximum_z_projection
 
     # Find maximum projections and positions along each axis, reducing the dimensionality of the array
     # To have the same properties as ndi.maximum_position, find projections in the order X -> Y -> Z
@@ -50,8 +52,8 @@ def maximum_position(source: Image) -> tuple:
         source = temp_max
 
     if len(dimensionality) > 2:
-        # Use x position as input array is 2d
-        pos_z = x_position_of_maximum_x_projection(source)
+        # Use z position as input array is 3d
+        pos_z = z_position_of_maximum_z_projection(source)
 
     # Use calculated max positions to find coordinates of each axis
     if pos_z is not None:
