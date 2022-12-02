@@ -41,9 +41,7 @@
 
 __kernel void
 affine_transform_deskew_y_3d(IMAGE_input_TYPE input, IMAGE_output_TYPE output,
-                             IMAGE_mat_TYPE mat,
-                             const int deskewed_Nx, const int deskewed_Ny,
-                             const int deskewed_Nz, float pixel_step,
+                             IMAGE_mat_TYPE mat, float pixel_step,
                              float tantheta, float costheta, float sintheta) {
 
   const sampler_t sampler = CLK_NORMALIZED_COORDS_FALSE | SAMPLER_ADDRESS;
@@ -72,8 +70,8 @@ affine_transform_deskew_y_3d(IMAGE_input_TYPE input, IMAGE_output_TYPE output,
    
   // ensure within bounds of final image/deskewed image
 
-  if (x >= 0 && y >= 0 && z >= 0 && x < deskewed_Nx && y < deskewed_Ny &&
-      z < deskewed_Nz) {
+  if (x >= 0 && y >= 0 && z >= 0 && x < GET_IMAGE_WIDTH(output) && y < GET_IMAGE_HEIGHT(output) &&
+      z < GET_IMAGE_DEPTH(output)) {
     //printf("%d\n,%d\n,%d\n", z,y,x);
     float virtual_plane = (y - z / tantheta);
     // get plane before
@@ -133,7 +131,7 @@ affine_transform_deskew_y_3d(IMAGE_input_TYPE input, IMAGE_output_TYPE output,
     }
   }
 
-  int4 pos = (int4){x, y, (deskewed_Nz - 1 - z), 0};
+  int4 pos = (int4){x, y, (GET_IMAGE_DEPTH(output) - 1 - z), 0};
 
   WRITE_output_IMAGE(output, pos, CONVERT_output_PIXEL_TYPE(pix));
 }
