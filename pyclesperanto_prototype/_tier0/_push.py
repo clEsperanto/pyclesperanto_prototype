@@ -25,6 +25,10 @@ def push(any_array):
     ----------
     .. [1] https://clij.github.io/clij2-docs/reference_push
     """
+    if hasattr(any_array, "is_cuda") and any_array.is_cuda:
+        # special treatment for pytorch tensors
+        any_array = any_array.cpu()
+
     if isinstance(any_array, Backend.get_instance().get().array_type()):
         return any_array
 

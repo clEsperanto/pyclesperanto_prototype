@@ -1,0 +1,4 @@
+The example image data was kindly provided by
+[Dr Niall Geoghegan](https://imaging.wehi.edu.au/about-us/niall-geoghegan) and
+[Ms Cindy Evelyn](https://imaging.wehi.edu.au/about-us/cindy-evelyn)
+where they used  lattice light sheet microscopy (Zeiss) to capture red blood cells and investigate the malaria parasite invasion process

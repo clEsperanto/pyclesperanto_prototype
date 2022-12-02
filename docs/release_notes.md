@@ -1,3 +1,7 @@
+# 0.18.0 and above/recent
+
+See recent release notes on the [github repository](https://github.com/clEsperanto/pyclesperanto_prototype/releases)
+
 # 0.17.2 - May 7th, 2022
 
 ## Bug fix

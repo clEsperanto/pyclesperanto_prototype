@@ -34,6 +34,36 @@ def test_erode_labels_2d():
 
     assert (np.array_equal(a, b))
 
+
+def test_erode_labels_2d_1():
+
+    gpu_input = cle.push(np.asarray([
+
+            [0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 1, 1, 1, 1, 1, 1, 1, 0],
+            [0, 1, 1, 1, 1, 1, 1, 1, 0],
+            [0, 1, 1, 1, 1, 1, 1, 1, 0],
+            [0, 1, 1, 1, 1, 1, 1, 1, 0],
+            [0, 1, 1, 1, 1, 1, 1, 1, 0],
+            [0, 1, 1, 1, 1, 1, 1, 1, 0],
+            [0, 1, 1, 1, 1, 1, 1, 1, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0],
+
+    ]))
+
+    for r in range(5):
+        print("r", r)
+        gpu_reference = cle.minimum_box(gpu_input, radius_x=r, radius_y=r)
+        gpu_output = cle.erode_labels(gpu_input, radius=r)
+
+        print(gpu_output)
+        print(gpu_reference)
+
+        assert (np.array_equal(gpu_output, gpu_reference))
+
+
+
+
 def test_erode_labels_3d():
     gpu_input = cle.push(np.asarray([
         [

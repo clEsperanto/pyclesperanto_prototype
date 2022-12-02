@@ -9,7 +9,11 @@ def draw_distance_mesh_between_proximal_labels(labels: Image, distance_mesh_dest
     The end points of the lines correspond to the centroids of the labels. The 
     intensity of the lines 
     corresponds to the distance between these labels (in pixels or voxels). 
-    
+
+    Notes
+    -----
+    * This operation assumes input images are isotropic.
+
     Parameters
     ----------
     labels : Image

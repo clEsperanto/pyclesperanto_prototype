@@ -6,6 +6,19 @@ from pyclesperanto_prototype._tier0 import create_none
 def euclidean_distance_from_label_centroid_map(labels:Image, centroids_pointlist:Image = None, distance_map_destination:Image = None) -> Image:
     """Takes a label map, determines the centroids of all labels and writes the distance of all labelled pixels to
     their centroid in the result image. Background pixels stay zero.
+
+    Notes
+    -----
+    * This operation assumes input images are isotropic.
+
+    Parameters
+    ----------
+    labels:Image
+    distance_map_destination:Image, optional
+
+    Returns
+    -------
+    distance_map_destination
     """
     from ._centroids_of_background_and_labels import centroids_of_background_and_labels
     from .._tier0 import create_like

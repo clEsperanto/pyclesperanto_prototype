@@ -43,6 +43,6 @@ def detect_maxima_box(source :Image, destination :Image = None, radius_x : int =
     }
 
     # todo: ensure detect_maxima_2d_x.cl fit to naming convention
-    execute(__file__, '../clij-opencl-kernels/kernels/detect_maxima_' + str(len(destination.shape)) + 'd_x.cl', 'detect_maxima_' + str(len(destination.shape)) + 'd', destination.shape, parameters)
+    execute(__file__, 'detect_maxima_' + str(len(destination.shape)) + 'd_x.cl', 'detect_maxima_' + str(len(destination.shape)) + 'd', destination.shape, parameters)
 
     return destination

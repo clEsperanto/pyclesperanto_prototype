@@ -1,3 +1,5 @@
+import warnings
+
 from pyclesperanto_prototype._tier0 import create_square_matrix_from_labelmap
 from pyclesperanto_prototype._tier0 import execute
 from pyclesperanto_prototype._tier0 import plugin_function
@@ -28,6 +30,8 @@ def touch_matrix_to_adjacency_matrix(touch_matrix :Image, adjacency_matrix_desti
     from .._tier1 import transpose_xy
     from .._tier1 import binary_or
     from .._tier1 import set_where_x_equals_y
+
+    warnings.warn("touch_matrix_to_adjacency_matrix is deprecated, use symmetric_maximum_matrix or symmetric_minimum_matrix or symmetric_mean_matrix instead.", DeprecationWarning)
 
     temp = transpose_xy(touch_matrix)
     adjacency_matrix_destination = binary_or(touch_matrix, temp, adjacency_matrix_destination)

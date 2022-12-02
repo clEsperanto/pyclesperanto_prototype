@@ -25,7 +25,7 @@ def affine_transform(source : Image, destination : Image = None, transform : Uni
         If true, bi-/tri-linear interplation will be applied; if hardware supports it.
         If false, nearest-neighbor interpolation wille be applied.
     auto_size:bool, optional
-        If true, the destination image size will be determined automatically, depending on the provided transform.
+        If true, modifies the transform and the destination image size will be determined automatically, depending on the provided transform.
         the transform might be modified so that all voxels of the result image have positions x>=0, y>=0, z>=0 and sit
         tight to the coordinate origin. No voxels will cropped, the result image will fit in the returned destination.
         Hence, the applied transform may have an additional translation vector that was not explicitly provided. This
@@ -47,10 +47,11 @@ def affine_transform(source : Image, destination : Image = None, transform : Uni
     from .._tier1 import copy_slice
 
     # handle output creation
+    if auto_size and isinstance(transform, AffineTransform3D):
+        new_size, transform, _ = _determine_translation_and_bounding_box(source, transform)
     if destination is None:
         if auto_size and isinstance(transform, AffineTransform3D):
             # This modifies the given transform
-            new_size, transform, _ = _determine_translation_and_bounding_box(source, transform)
             destination = create(new_size)
         else:
             destination = create_like(source)
@@ -154,7 +155,7 @@ def _determine_translation_and_bounding_box(source: Image, affine_transformation
     min_coordinate = transformed_bounding_box.min(axis=0)
     max_coordinate = transformed_bounding_box.max(axis=0)
     # determine the size of the transformed bounding box
-    new_shape = (max_coordinate - min_coordinate)[0:3].astype(int).tolist()[::-1]
+    new_shape = np.around((max_coordinate - min_coordinate)[0:3]).astype(int).tolist()[::-1]
 
     # we make a copy to not modify the original transform
     new_affine_transform = AffineTransform3D()

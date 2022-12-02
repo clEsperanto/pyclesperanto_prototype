@@ -1,5 +1,6 @@
-from .._tier0 import Image
+from .._tier0 import Image, plugin_function
 
+@plugin_function
 def imshow(image : Image, title : str = None, labels : bool = False, min_display_intensity : float = None, max_display_intensity : float = None, color_map = None, plot = None, colorbar:bool = False, colormap = None, alpha:float = None, continue_drawing:bool = False):
     """Visualize an image, e.g. in Jupyter notebooks.
 
@@ -29,6 +30,7 @@ def imshow(image : Image, title : str = None, labels : bool = False, min_display
     continue_drawing: float
         True: the next shown image can be visualized on top of the current one, e.g. with alpha = 0.5
     """
+    import numpy as np
     from .._tier0 import pull
     from .._tier1 import maximum_z_projection
 
@@ -36,6 +38,8 @@ def imshow(image : Image, title : str = None, labels : bool = False, min_display
         image = maximum_z_projection(image)
 
     image = pull(image)
+    if len(image.shape) == 1:
+        image = image[np.newaxis]
 
     if color_map is not None:
         import warnings
@@ -57,11 +61,19 @@ def imshow(image : Image, title : str = None, labels : bool = False, min_display
             rs = RandomState(MT19937(SeedSequence(3)))
             lut = rs.rand(65537, 3)
             lut[0, :] = 0
+            # these are the first four colours from matplotlib's default
+            lut[1] = [1.0, 0.4980392156862745, 0.054901960784313725]
+            lut[2] = [0.12156862745098039, 0.4666666666666667, 0.7058823529411765]
+            lut[3] = [0.17254901960784313, 0.6274509803921569, 0.17254901960784313]
+            lut[4] = [0.8392156862745098, 0.15294117647058825, 0.1568627450980392]
+            
             imshow.labels_cmap = matplotlib.colors.ListedColormap(lut)
         cmap = imshow.labels_cmap
 
         if min_display_intensity is None:
             min_display_intensity = 0
+        if max_display_intensity is None:
+            max_display_intensity = 65536
 
     if plot is None:
         import matplotlib.pyplot as plt
