@@ -8,8 +8,9 @@ from ._AffineTransform3D import AffineTransform3D
 from skimage.transform import AffineTransform
 import numpy as np
 
+
 @plugin_function(output_creator=create_none)
-def affine_transform(source : Image, destination : Image = None, transform : Union[np.ndarray, AffineTransform3D, AffineTransform] = None, linear_interpolation : bool = False, auto_size:bool = False) -> Image:
+def affine_transform(source: Image, destination: Image = None, transform: Union[np.ndarray, AffineTransform3D, AffineTransform] = None, linear_interpolation: bool = False, auto_size: bool = False) -> Image:
     """
     Applies an affine transform to an image.
 
@@ -48,7 +49,8 @@ def affine_transform(source : Image, destination : Image = None, transform : Uni
 
     # handle output creation
     if auto_size and isinstance(transform, AffineTransform3D):
-        new_size, transform, _ = _determine_translation_and_bounding_box(source, transform)
+        new_size, transform, _ = _determine_translation_and_bounding_box(
+            source, transform)
     if destination is None:
         if auto_size and isinstance(transform, AffineTransform3D):
             # This modifies the given transform
@@ -80,10 +82,10 @@ def affine_transform(source : Image, destination : Image = None, transform : Uni
         # Question: Don't we have to invert this one as well? haesleinhuepf
         matrix = np.asarray(transform.params)
         matrix = np.asarray([
-            [matrix[0,0], matrix[0,1], 0, matrix[0,2]],
-            [matrix[1,0], matrix[1,1], 0, matrix[1,2]],
+            [matrix[0, 0], matrix[0, 1], 0, matrix[0, 2]],
+            [matrix[1, 0], matrix[1, 1], 0, matrix[1, 2]],
             [0, 0, 1, 0],
-            [matrix[2,0], matrix[2,1], 0, matrix[2,2]]
+            [matrix[2, 0], matrix[2, 1], 0, matrix[2, 2]]
         ])
         transform_matrix = np.linalg.inv(matrix)
     else:
@@ -147,15 +149,18 @@ def _determine_translation_and_bounding_box(source: Image, affine_transformation
     else:
         nx, ny, nz = source.shape
 
-    original_bounding_box = [list(x) + [1] for x in product((0, nz), (0, ny), (0, nx))]
+    original_bounding_box = [list(x) + [1]
+                             for x in product((0, nz), (0, ny), (0, nx))]
     # transform the corners using the given affine transform
-    transformed_bounding_box = np.asarray(list(map(lambda x: affine_transformation._matrix @ x, original_bounding_box)))
+    transformed_bounding_box = np.asarray(
+        list(map(lambda x: affine_transformation._matrix @ x, original_bounding_box)))
 
     # the min and max coordinates tell us from where to where the image ranges (bounding box)
     min_coordinate = transformed_bounding_box.min(axis=0)
     max_coordinate = transformed_bounding_box.max(axis=0)
     # determine the size of the transformed bounding box
-    new_shape = np.around((max_coordinate - min_coordinate)[0:3]).astype(int).tolist()[::-1]
+    new_shape = np.around((max_coordinate - min_coordinate)
+                          [0:3]).astype(int).tolist()[::-1]
 
     # we make a copy to not modify the original transform
     new_affine_transform = AffineTransform3D()
