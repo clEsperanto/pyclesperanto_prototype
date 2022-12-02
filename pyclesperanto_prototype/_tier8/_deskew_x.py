@@ -42,6 +42,9 @@ def deskew_x(input_image: Image,
     -------
     output_image
     """
+    if not linear_interpolation:
+        warnings.warn("linear_interpolation = False is deprecated due to deskewing artifacts. The linear_interpolation parameter will be removed in a future version.")
+
     from ._AffineTransform3D import AffineTransform3D
     from ._affine_transform import affine_transform
     from ._affine_transform_deskew_3d import affine_transform_deskew_3d, DeskewDirection
