@@ -127,7 +127,7 @@ affine_transform_deskew_x_3d(IMAGE_input_TYPE input, IMAGE_output_TYPE output,
     }
   }
 
-  int4 pos = (int4){x, y, z, 0};
+  int4 pos = (int4){x, y, (deskewed_Nz - 1 - z), 0};
 
   WRITE_output_IMAGE(output, pos, CONVERT_output_PIXEL_TYPE(pix));
 }

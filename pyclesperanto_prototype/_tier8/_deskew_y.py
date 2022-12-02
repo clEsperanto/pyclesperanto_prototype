@@ -12,11 +12,10 @@ def deskew_y(input_image: Image,
              voxel_size_y: float = 1,
              voxel_size_z: float = 1,
              scale_factor: float = 1,
-             linear_interpolation: bool = None
+             linear_interpolation: bool = True
              ) -> Image:
     """
     Deskew an image stack as acquired with oblique plane light-sheet microscopy with skew in the Y direction.
-    Uses orthogonal interpolation (Sapoznik et al. (2020)  https://doi.org/10.7554/eLife.57681)
 
     Parameters
     ----------
@@ -35,16 +34,16 @@ def deskew_y(input_image: Image,
         default: 1
         If the resulting image becomes too huge, it is possible to reduce output image size by this factor.
         The isotropic voxel size of the output image will then be voxel_size_y / scaling_factor.
-    linear_interpolation: obsolete
+    linear_interpolation: bool, optional
+        If True (default), uses orthogonal interpolation (Sapoznik et al. (2020)  https://doi.org/10.7554/eLife.57681)
+        If False, nearest-neighbor interpolation wille be applied.
 
     Returns
     -------
     output_image
     """
-    if linear_interpolation is not None:
-        warnings.warn("In function deskew_ the linear_interpolation parameters is obsolete. Orthogonal interpolation will always be used. Please remove it from your code.", DeprecationWarning)
-
     from ._AffineTransform3D import AffineTransform3D
+    from ._affine_transform import affine_transform
     from ._affine_transform_deskew_3d import affine_transform_deskew_3d, DeskewDirection
 
     # define affine transformation matrix
@@ -53,11 +52,15 @@ def deskew_y(input_image: Image,
                         voxel_size_z=voxel_size_z, scale_factor=scale_factor)
 
     # apply transform using special affine transform method for deskewing in the Y direction
-    return affine_transform_deskew_3d(source=input_image, destination=output_image,
-                                      transform=transform,
-                                      deskewing_angle_in_degrees=angle_in_degrees,
-                                      voxel_size_x=voxel_size_x,
-                                      voxel_size_y=voxel_size_y,
-                                      voxel_size_z=voxel_size_z,
-                                      deskew_direction=DeskewDirection.Y,
-                                      auto_size=True)
+    if linear_interpolation:
+        return affine_transform_deskew_3d(source=input_image, destination=output_image,
+                                          transform=transform,
+                                          deskewing_angle_in_degrees=angle_in_degrees,
+                                          voxel_size_x=voxel_size_x,
+                                          voxel_size_y=voxel_size_y,
+                                          voxel_size_z=voxel_size_z,
+                                          deskew_direction=DeskewDirection.Y,
+                                          auto_size=True)
+    else:
+        return affine_transform(input_image, output_image, transform=transform, auto_size=True,
+                                linear_interpolation=False)
