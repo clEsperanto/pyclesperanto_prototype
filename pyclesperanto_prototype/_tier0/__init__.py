@@ -48,3 +48,14 @@ def _warn_of_interpolation_not_available():
     import warnings
     warnings.warn("Creating an OpenCL image failed on the GPU. Hence, linear interpolation is not possible.\n"
                   "Nearest-neighbor interpolation will be used instead.")
+
+# Prevent an issue with Intel GPUs on MacOS (pre M1/M2)
+from sys import platform
+if platform == "darwin":
+    device_name = str(get_device())
+    print("DEV", device_name)
+    
+    if "Intel" in device_name:
+        select_device("CPU")
+    
+    
