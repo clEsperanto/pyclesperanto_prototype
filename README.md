@@ -50,12 +50,22 @@ OR using pip:
 pip install pyclesperanto-prototype
 ```
 
-Mac-users please also install this:
+## Troubleshooting: Graphics cards drivers
+
+In case error messages contains "ImportError: DLL load failed while importing cl: The specified procedure could not be found" [see also](https://github.com/clEsperanto/pyclesperanto_prototype/issues/55) or ""clGetPlatformIDs failed: PLATFORM_NOT_FOUND_KHR", please install recent drivers for your graphics card and/or OpenCL device. Select the right driver source depending on your hardware from this list:
+
+* [AMD drivers](https://www.amd.com/en/support)
+* [NVidia drivers](https://www.nvidia.com/download/index.aspx)
+* [Intel GPU drivers]()(https://www.intel.com/content/www/us/en/download/726609/intel-arc-graphics-windows-dch-driver.html)
+* [Intel CPU OpenCL drivers](https://www.intel.com/content/www/us/en/developer/articles/tool/opencl-drivers.html#latest_CPU_runtime)
+* [Microsoft Windows OpenCL support](https://www.microsoft.com/en-us/p/opencl-and-opengl-compatibility-pack/9nqpsl29bfff)
+
+Sometimes, mac-users need to install this:
 
     conda install -c conda-forge ocl_icd_wrapper_apple
-    
-Linux users please also install this:
-    
+
+Sometimes, linux users need to install this:
+
     conda install -c conda-forge ocl-icd-system
 
 ## Example code
