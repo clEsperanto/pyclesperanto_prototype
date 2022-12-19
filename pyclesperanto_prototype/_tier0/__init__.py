@@ -53,8 +53,6 @@ def _warn_of_interpolation_not_available():
 from sys import platform
 if platform == "darwin":
     device_name = str(get_device())
-    print("DEV", device_name)
-    
     if "Intel" in device_name:
         select_device("CPU")
     
