@@ -1,4 +1,4 @@
-def test_generate_should_touch_matrix():
+def test_merge_annotated_touching_labels():
     import pyclesperanto_prototype as cle
     from skimage.io import imread
     import numpy as np
@@ -8,8 +8,6 @@ def test_generate_should_touch_matrix():
     annotation = cle.asarray(imread('data/syntetic_cells_merge_annotation.tif')).astype(np.uint32)
     reference = cle.asarray(imread('data/syntetic_cells_merged_test_result.tif')).astype(np.uint32)
 
-    should_touch_matrix = cle.generate_should_touch_matrix(oversegmented, annotation == 1)
-
-    result = cle.merge_labels_according_to_touch_matrix(oversegmented, should_touch_matrix)
+    result = cle.merge_annotated_touching_labels(oversegmented, annotation == 1)
 
     assert cle.array_equal(reference, result)
