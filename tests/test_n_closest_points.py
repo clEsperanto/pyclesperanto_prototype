@@ -21,7 +21,7 @@ def test_n_closest_points():
     centroids = cle.centroids_of_labels(labels)
     distance_matrix = cle.generate_distance_matrix(centroids, centroids)
 
-    max_float = np.finfo(np.float).max
+    max_float = np.finfo(np.float32).max
 
     cle.set_where_x_equals_y(distance_matrix, max_float)
     cle.set_row(distance_matrix, 0, max_float)
@@ -61,7 +61,7 @@ def test_n_closest_points_ignore_background():
     centroids = cle.centroids_of_labels(labels)
     distance_matrix = cle.generate_distance_matrix(centroids, centroids)
 
-    max_float = np.finfo(np.float).max
+    max_float = np.finfo(np.float32).max
 
     cle.set_where_x_equals_y(distance_matrix, max_float)
     cle.set_row(distance_matrix, 0, max_float)

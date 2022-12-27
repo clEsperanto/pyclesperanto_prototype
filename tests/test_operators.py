@@ -781,7 +781,6 @@ def test_ipow_with_types():
         np.asarray([[2]]).astype(np.uint64).max(),
         np.asarray([[2]]).astype(np.float32).max(),
         np.asarray([[2]]).astype(np.float64).max(),
-        np.asarray([[2]]).astype(np.float).max(),
         2
     ]
 
