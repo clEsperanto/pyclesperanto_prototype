@@ -50,6 +50,23 @@ OR using pip:
 pip install pyclesperanto-prototype
 ```
 
+## Troubleshooting: Graphics cards drivers
+
+In case error messages contains "ImportError: DLL load failed while importing cl: The specified procedure could not be found" [see also](https://github.com/clEsperanto/pyclesperanto_prototype/issues/55) or ""clGetPlatformIDs failed: PLATFORM_NOT_FOUND_KHR", please install recent drivers for your graphics card and/or OpenCL device. Select the right driver source depending on your hardware from this list:
+
+* [AMD drivers](https://www.amd.com/en/support)
+* [NVidia drivers](https://www.nvidia.com/download/index.aspx)
+* [Intel GPU drivers]()(https://www.intel.com/content/www/us/en/download/726609/intel-arc-graphics-windows-dch-driver.html)
+* [Microsoft Windows OpenCL support](https://www.microsoft.com/en-us/p/opencl-and-opengl-compatibility-pack/9nqpsl29bfff)
+
+Sometimes, mac-users need to install this:
+
+    conda install -c conda-forge ocl_icd_wrapper_apple
+
+Sometimes, linux users need to install this:
+
+    conda install -c conda-forge ocl-icd-system
+
 ## Computing on Central Processing units (CPUs)
 
 If no OpenCL-compatible GPU is available, pyclesperanto-prototype can make use of CPUs instead. 
@@ -66,23 +83,9 @@ OR
 mamba install  pocl -c conda-forge
 ```
 
-## Troubleshooting: Graphics cards drivers
-
-In case error messages contains "ImportError: DLL load failed while importing cl: The specified procedure could not be found" [see also](https://github.com/clEsperanto/pyclesperanto_prototype/issues/55) or ""clGetPlatformIDs failed: PLATFORM_NOT_FOUND_KHR", please install recent drivers for your graphics card and/or OpenCL device. Select the right driver source depending on your hardware from this list:
-
-* [AMD drivers](https://www.amd.com/en/support)
-* [NVidia drivers](https://www.nvidia.com/download/index.aspx)
-* [Intel GPU drivers]()(https://www.intel.com/content/www/us/en/download/726609/intel-arc-graphics-windows-dch-driver.html)
+Owners of compatible Intel Xeon CPUs can also install a driver to use them for computing:
 * [Intel CPU OpenCL drivers](https://www.intel.com/content/www/us/en/developer/articles/tool/opencl-drivers.html#latest_CPU_runtime)
-* [Microsoft Windows OpenCL support](https://www.microsoft.com/en-us/p/opencl-and-opengl-compatibility-pack/9nqpsl29bfff)
 
-Sometimes, mac-users need to install this:
-
-    conda install -c conda-forge ocl_icd_wrapper_apple
-
-Sometimes, linux users need to install this:
-
-    conda install -c conda-forge ocl-icd-system
 
 ## Example code
 A basic image procressing workflow loads blobs.gif and counts the number of gold particles:
