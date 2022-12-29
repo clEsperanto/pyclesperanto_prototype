@@ -50,6 +50,22 @@ OR using pip:
 pip install pyclesperanto-prototype
 ```
 
+## Computing on Central Processing units (CPUs)
+
+If no OpenCL-compatible GPU is available, pyclesperanto-prototype can make use of CPUs instead. 
+Just install [oclgrind](https://github.com/jrprice/Oclgrind)
+or [pocl](http://portablecl.org/), e.g. using mamba / conda. Oclgrind is recommended for Windows systems, PoCL for Linux. MacOS typically comes with OpenCL support for CPUs.
+
+```
+mamba install  oclgrind -c conda-forge
+```
+
+OR 
+
+```
+mamba install  pocl -c conda-forge
+```
+
 ## Troubleshooting: Graphics cards drivers
 
 In case error messages contains "ImportError: DLL load failed while importing cl: The specified procedure could not be found" [see also](https://github.com/clEsperanto/pyclesperanto_prototype/issues/55) or ""clGetPlatformIDs failed: PLATFORM_NOT_FOUND_KHR", please install recent drivers for your graphics card and/or OpenCL device. Select the right driver source depending on your hardware from this list:
