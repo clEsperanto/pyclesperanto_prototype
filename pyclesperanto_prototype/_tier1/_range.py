@@ -70,12 +70,12 @@ def range(source : Image,
     parameters = {
         "dst":destination,
         "src":source,
-        "start_x": start_x,
-        "step_x": step_x,
-        "start_y": start_y,
-        "step_y": step_y,
-        "start_z": start_z,
-        "step_z": step_z,
+        "start_x": int(start_x),
+        "step_x": int(step_x),
+        "start_y": int(start_y),
+        "step_y": int(step_y),
+        "start_z": int(start_z),
+        "step_z": int(step_z),
     }
 
     execute(__file__, 'range_x.cl', 'range', destination.shape, parameters)
