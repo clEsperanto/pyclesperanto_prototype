@@ -9,7 +9,7 @@ from .._tier0 import create_like, create_labels_like
 import numpy as np
 
 @plugin_function(categories=['label processing', 'in assistant'], priority=1, output_creator=create_labels_like)
-def exclude_labels_on_edges(label_map_input : Image, label_map_destination : Image = None) -> Image:
+def exclude_labels_on_edges(label_map_input : Image, label_map_destination : Image = None, exlude_in_x:bool = True, exlude_in_y:bool = True, exlude_in_z:bool = True) -> Image:
     """Removes all labels from a label map which touch the edges of the image 
     (in X, Y and Z if the image is 3D). 
     
@@ -19,7 +19,13 @@ def exclude_labels_on_edges(label_map_input : Image, label_map_destination : Ima
     ----------
     label_map_input : Image
     label_map_destination : Image, optional
-    
+    exlude_in_x : bool, optional
+        Exclude labels along min and max x (default is True)
+    exlude_in_y : bool, optional
+        Exclude labels along min and max y (default is True)
+    exlude_in_z : bool, optional
+        Exclude labels along min and max z (default is True)
+
     Returns
     -------
     label_map_destination
@@ -56,16 +62,17 @@ def exclude_labels_on_edges(label_map_input : Image, label_map_destination : Ima
             label_map_input.shape[1]
         ]
 
-    if (len(label_map_input.shape) == 3):
+    if (len(label_map_input.shape) == 3 and exlude_in_z):
         global_sizes = [1, dimensions[1], dimensions[2]]
         execute(__file__, "../clij-opencl-kernels/kernels/exclude_labels_on_edges_3d_x.cl", "exclude_on_edges_z_3d", global_sizes, parameters)
 
-    global_sizes = [dimensions[0], 1 ,dimensions[2]]
-    execute(__file__, "../clij-opencl-kernels/kernels/exclude_labels_on_edges_3d_x.cl", "exclude_on_edges_y_3d", global_sizes, parameters)
+    if exlude_in_y:
+        global_sizes = [dimensions[0], 1 ,dimensions[2]]
+        execute(__file__, "../clij-opencl-kernels/kernels/exclude_labels_on_edges_3d_x.cl", "exclude_on_edges_y_3d", global_sizes, parameters)
 
-    global_sizes = [dimensions[0], dimensions[1], 1]
-    execute(__file__, "../clij-opencl-kernels/kernels/exclude_labels_on_edges_3d_x.cl", "exclude_on_edges_x_3d", global_sizes, parameters)
-
+    if exlude_in_x:
+        global_sizes = [dimensions[0], dimensions[1], 1]
+        execute(__file__, "../clij-opencl-kernels/kernels/exclude_labels_on_edges_3d_x.cl", "exclude_on_edges_x_3d", global_sizes, parameters)
 
 
     label_indices = pull(label_index_map)
