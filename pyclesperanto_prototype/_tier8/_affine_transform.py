@@ -110,7 +110,7 @@ def affine_transform(source: Image, destination: Image = None, transform: Union[
         "mat": gpu_transform_matrix
     }
 
-    execute(__file__, '../clij-opencl-kernels/kernels/affine_transform_' + str(len(destination.shape)) + 'd' + kernel_suffix + '_x.cl',
+    execute(__file__, 'affine_transform_' + str(len(destination.shape)) + 'd' + kernel_suffix + '_x.cl',
             'affine_transform_' + str(len(destination.shape)) + 'd' + kernel_suffix, destination.shape, parameters)
 
     # deal with 2D output images
