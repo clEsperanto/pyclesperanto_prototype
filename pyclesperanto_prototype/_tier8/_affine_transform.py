@@ -45,7 +45,6 @@ def affine_transform(source: Image, destination: Image = None, transform: Union[
     from .._tier0 import execute
     from .._tier1 import copy
     from .._tier0 import create
-    from .._tier1 import copy_slice
 
     # handle output creation
     if auto_size and isinstance(transform, AffineTransform3D):
@@ -57,20 +56,6 @@ def affine_transform(source: Image, destination: Image = None, transform: Union[
             destination = create(new_size)
         else:
             destination = create_like(source)
-
-    # deal with 2D input images
-    if len(source.shape) == 2:
-        source_3d = create([1, source.shape[0], source.shape[1]])
-        copy_slice(source, source_3d, 0)
-        source = source_3d
-
-    # deal with 2D output images
-    original_destination = destination
-    copy_back_after_transforming = False
-    if len(destination.shape) == 2:
-        destination = create([1, destination.shape[0], destination.shape[1]])
-        copy_slice(original_destination, destination, 0)
-        copy_back_after_transforming = True
 
     if isinstance(transform, str):
         transform = AffineTransform3D(transform, source)
@@ -110,14 +95,13 @@ def affine_transform(source: Image, destination: Image = None, transform: Union[
         "mat": gpu_transform_matrix
     }
 
-    execute(__file__, 'affine_transform_' + str(len(destination.shape)) + 'd' + kernel_suffix + '_x.cl',
+    cl_filename = 'affine_transform_' + str(len(destination.shape)) + 'd' + kernel_suffix + '_x.cl'
+    print("Executing", cl_filename)
+
+    execute(__file__, cl_filename,
             'affine_transform_' + str(len(destination.shape)) + 'd' + kernel_suffix, destination.shape, parameters)
 
-    # deal with 2D output images
-    if copy_back_after_transforming:
-        copy_slice(destination, original_destination, 0)
-
-    return original_destination
+    return destination
 
 
 def _determine_translation_and_bounding_box(source: Image, affine_transformation: AffineTransform3D):
