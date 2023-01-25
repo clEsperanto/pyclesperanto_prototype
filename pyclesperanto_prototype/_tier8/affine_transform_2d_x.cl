@@ -53,8 +53,8 @@ __kernel void affine_transform_2d(
   uint i = get_global_id(0);
   uint j = get_global_id(1);
 
-  uint Nx = GET_IMAGE_WIDTH(input);
-  uint Ny = GET_IMAGE_HEIGHT(input);
+  uint Nx = GET_IMAGE_WIDTH(output);
+  uint Ny = GET_IMAGE_HEIGHT(output);
 
   float x = i+0.5f;
   float y = j+0.5f;
@@ -64,11 +64,28 @@ __kernel void affine_transform_2d(
 
   int2 coord_norm = (int2)(x2,y2);
 
+  // float2 frac_coord = (float2)(x2-floor(x2),y2-floor(y2));
+  float2 frac_coord = (float2)(x2/Nx,y2/Ny);
+
   float pix = 0;
   if (x2 >= 0 && y2 >= 0 &&
         x2 < GET_IMAGE_WIDTH(input) && y2 < GET_IMAGE_HEIGHT(input)
     ) {
-    pix = (float)(READ_input_IMAGE(input, sampler, POS_input_INSTANCE(x2, y2, 0, 0)).x);
+    
+    // Get the corrdinates and color of the four surrounding pixels
+    int2 top_left_coord = coord_norm;
+    int2 top_right_coord = coord_norm + (int2)(1, 0);
+    int2 bottom_left_coord = coord_norm + (int2)(0, 1);
+    int2 bottom_right_coord = coord_norm + (int2)(1, 1);
+    
+    float top_left_color = (float) (READ_input_IMAGE(input, sampler, POS_input_INSTANCE(top_left_coord.x, top_left_coord.y, 0, 0)).x);
+    float top_right_color = (float) (READ_input_IMAGE(input, sampler, POS_input_INSTANCE(top_right_coord.x, top_right_coord.y, 0, 0)).x);
+    float bottom_left_color = (float) (READ_input_IMAGE(input, sampler, POS_input_INSTANCE(bottom_left_coord.x, bottom_left_coord.y, 0, 0)).x);
+    float bottom_right_color = (float) (READ_input_IMAGE(input, sampler, POS_input_INSTANCE(bottom_right_coord.x, bottom_right_coord.y, 0, 0)).x);
+
+    pix = (float) mix(mix(top_left_color, top_right_color, frac_coord.x), mix(bottom_left_color, bottom_right_color, frac_coord.x), frac_coord.y);
+    // pix = (float) (1 - frac_coord.y) * ((1 - frac_coord.x) * top_left_color + frac_coord.x * top_right_color) + frac_coord.y * ((1 - frac_coord.x) * bottom_left_color + frac_coord.x * bottom_right_color);
+    // pix = (float)(READ_input_IMAGE(input, sampler, POS_input_INSTANCE(x2, y2, 0, 0)).x);
   }
 
   int2 pos = (int2){i, j};
