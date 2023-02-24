@@ -76,3 +76,13 @@ def test_extended_depth_of_focus_variance_projection_creator_passing_none():
 
     assert (np.array_equal(a, b))
 
+def test_extended_depth_of_focus_variance_projection_result_dimensionality():
+    import pyclesperanto_prototype as cle
+    import numpy as np
+
+    image = np.random.random((10, 100, 50))
+
+    result_image = cle.extended_depth_of_focus_variance_projection(image, radius_x=2, radius_y=2, sigma=10)
+
+    assert result_image.shape[-1] == image.shape[-1]
+    assert result_image.shape[-2] == image.shape[-2]
