@@ -1,3 +1,5 @@
+import warnings
+
 import pyopencl as cl
 from typing import Callable, List, Optional
 from functools import lru_cache
@@ -70,6 +72,9 @@ def select_device(name: str = None, dev_type: str = None, score_key=None) -> Dev
 
 
     device = filter_devices(name, dev_type, score_key)[-1]
+    if name is not None and name not in device.name:
+        warnings.warn(f"No OpenCL device found with {name} in their name. Using {device.name} instead.")
+
     if _current_device._instance and device == _current_device._instance.device:
         return _current_device._instance
     context = cl.Context(devices=[device])
