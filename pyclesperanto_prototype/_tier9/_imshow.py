@@ -83,7 +83,10 @@ def imshow(image : Image, title : str = None, labels : bool = False, min_display
         if not continue_drawing:
             plt.show()
     else:
-        plot.imshow(image, cmap=cmap, vmin=min_display_intensity, vmax=max_display_intensity, interpolation='nearest', alpha=alpha)
+        ims = plot.imshow(image, cmap=cmap, vmin=min_display_intensity, vmax=max_display_intensity, interpolation='nearest', alpha=alpha)
         if colorbar:
-            plot.colorbar()
+            fig = plot.get_figure()
+            cax = fig.add_axes([plot.get_position().x1 + 0.01, plot.get_position().y0, 0.005,
+                                 plot.get_position().height])
+            fig.colorbar(ims, cax=cax)
 
