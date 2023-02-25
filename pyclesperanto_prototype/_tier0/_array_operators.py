@@ -20,6 +20,17 @@ cl_buffer_datatype_dict = {
 _supported_numeric_types = tuple(cl_buffer_datatype_dict.keys())
 
 class ArrayOperators():
+
+    @property
+    def T(self):
+        from .._tier1 import transpose_xy, transpose_xz
+        if len(self.shape) == 2:
+            return transpose_xy(self)
+        elif len(self.shape) == 3:
+            return transpose_xz(self)
+        else:
+            raise ValueError("Only 2D and 3D arrays supported.")
+
     def min(self, axis=None, out=None):
         from .._tier2 import minimum_of_all_pixels
         from .._tier1 import minimum_x_projection
