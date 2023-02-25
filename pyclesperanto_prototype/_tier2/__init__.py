@@ -15,6 +15,7 @@ from ._flag_existing_labels import flag_existing_labels as flag_existing_intensi
 from ._degrees_to_radians import degrees_to_radians
 from ._gamma_correction import gamma_correction
 from ._generate_mean_intensity_between_points_matrix import generate_mean_intensity_between_points_matrix
+from ._generate_standard_deviation_intensity_between_points_matrix import generate_standard_deviation_intensity_between_points_matrix
 from ._generate_should_touch_matrix import generate_should_touch_matrix
 from ._invert import invert
 from ._label_spots import label_spots
