@@ -27,8 +27,6 @@ def create_like(*args):
     dimensions = args[0]
     if isinstance(dimensions, Backend.get_instance().get().array_type()):
         dimensions = dimensions.shape
-    elif isinstance(dimensions, np.ndarray):
-        dimensions = dimensions.shape[::-1]
     elif hasattr(dimensions, "shape"):
         dimensions = dimensions.shape
     return create(dimensions)
