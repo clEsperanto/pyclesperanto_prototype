@@ -1,3 +1,5 @@
+import warnings
+
 import pyopencl as cl
 from typing import Callable, List, Optional
 from functools import lru_cache
@@ -43,7 +45,7 @@ def get_device() -> Device:
     return _current_device._instance or select_device()
 
 
-def select_device(name: str = None, dev_type: str = None, score_key=None) -> Device:
+def select_device(name: str = None, dev_type: str = None, score_key=None, device_index: int = -1) -> Device:
     """Set current GPU device based on optional parameters.
 
     :param name: First device that contains ``name`` will be returned, defaults to None
@@ -52,6 +54,7 @@ def select_device(name: str = None, dev_type: str = None, score_key=None) -> Dev
     :type dev_type: str, optional
     :param score_key: scoring function, accepts device and returns int, defaults to None
     :type score_key: callable, optional
+    :device_index: int, per default the last in the list of devices that fit criteria above is used
     :return: The current GPU instance.
     :rtype: GPU
     """
@@ -69,7 +72,10 @@ def select_device(name: str = None, dev_type: str = None, score_key=None) -> Dev
         pass
 
 
-    device = filter_devices(name, dev_type, score_key)[-1]
+    device = filter_devices(name, dev_type, score_key)[device_index]
+    if name is not None and name not in device.name:
+        warnings.warn(f"No OpenCL device found with {name} in their name. Using {device.name} instead.")
+
     if _current_device._instance and device == _current_device._instance.device:
         return _current_device._instance
     context = cl.Context(devices=[device])
