@@ -63,7 +63,6 @@ from ._gradient_x import gradient_x
 from ._gradient_y import gradient_y
 from ._gradient_z import gradient_z
 from ._greater import greater
-from ._greater import greater as local_threshold
 from ._greater_constant import greater_constant
 from ._greater_constant import greater_constant as threshold
 from ._greater_or_equal import greater_or_equal
