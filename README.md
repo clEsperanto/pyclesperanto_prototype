@@ -31,17 +31,18 @@ The preliminary API reference is available [here](https://clesperanto.github.io/
 Furthermore, parts of the [reference](https://clij.github.io/clij2-docs/reference__pyclesperanto) are also available within the CLIJ2 documentation.
 
 ## Installation
-* Get a conda/python environment, e.g. via [mini-conda](https://docs.conda.io/en/latest/miniconda.html). If you never used python/conda environments before, please follow the instructions [here](https://biapol.github.io/blog/johannes_mueller/anaconda_getting_started/) first.
+* Get a conda/python environment, e.g. via [mamba-forge](https://github.com/conda-forge/miniforge#mambaforge). 
+* If you never used python/conda environments before, please follow [these instructions](https://biapol.github.io/blog/mara_lampert/getting_started_with_mambaforge_and_python/readme.html) first.
 
 ```
 conda create --name cle_39 python=3.9
 conda activate cle_39
 ```
 
-* Install pyclesperanto-prototype using conda:
+* Install pyclesperanto-prototype using [mamba / conda](https://focalplane.biologists.com/2022/12/08/managing-scientific-python-environments-using-conda-mamba-and-friends/):
 
 ```
-conda install -c conda-forge pyclesperanto-prototype
+mamba install -c conda-forge pyclesperanto-prototype
 ```
 
 OR using pip:
@@ -61,11 +62,11 @@ In case error messages contains "ImportError: DLL load failed while importing cl
 
 Sometimes, mac-users need to install this:
 
-    conda install -c conda-forge ocl_icd_wrapper_apple
+    mamba install -c conda-forge ocl_icd_wrapper_apple
 
 Sometimes, linux users need to install this:
 
-    conda install -c conda-forge ocl-icd-system
+    mamba install -c conda-forge ocl-icd-system
 
 ## Computing on Central Processing units (CPUs)
 
@@ -88,7 +89,7 @@ Owners of compatible Intel Xeon CPUs can also install a driver to use them for c
 
 
 ## Example code
-A basic image procressing workflow loads blobs.gif and counts the number of gold particles:
+A basic image processing workflow loads blobs.gif and counts the number of gold particles:
 
 ```python
 import pyclesperanto_prototype as cle
@@ -96,7 +97,7 @@ import pyclesperanto_prototype as cle
 from skimage.io import imread, imsave
 
 # initialize GPU
-device = cle.select_device("GTX")
+device = cle.select_device("TX")
 print("Used GPU: ", device)
 
 # load data
@@ -112,7 +113,7 @@ labeled = cle.connected_components_labeling_box(binary)
 num_labels = cle.maximum_of_all_pixels(labeled)
 
 # print out result
-print("Num objects in the image: " + str(num_labels))
+print("Number of objects in the image: " + str(num_labels))
 
 # save image to disc
 imsave("result.tif", labeled)
@@ -223,6 +224,17 @@ imsave("result.tif", labeled)
 </td><td>
 
 [Parametric maps](http://github.com/clEsperanto/pyclesperanto_prototype/tree/master/demo/tissues/parametric_maps.ipynb)
+
+</td></tr>
+
+
+<tr><td>
+
+<img src="https://github.com/clEsperanto/pyclesperanto_prototype/raw/master/docs/images/intensities_along_lines.png" width="300"/>
+
+</td><td>
+
+[Measure intensity along lines](http://github.com/clEsperanto/pyclesperanto_prototype/tree/master/demo/measurement/intensities_along_lines.ipynb)
 
 </td></tr>
 
