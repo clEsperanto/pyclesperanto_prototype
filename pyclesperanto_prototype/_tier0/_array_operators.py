@@ -376,8 +376,8 @@ class ArrayOperators():
                 if not hasattr(self, "_iter_index"):
                     self._iter_index = 0
 
-                if self._iter_index < self.image[0]:
-                    if len(self.image) == 2:
+                if self._iter_index < self.image.shape[0]:
+                    if len(self.image.shape) == 2:
                         result = np.asarray(self.image)[self._iter_index]
                     elif len(self.image.shape) == 3:
                         output = create(self.image.shape[1:])
