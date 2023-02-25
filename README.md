@@ -229,6 +229,17 @@ imsave("result.tif", labeled)
 
 <tr><td>
 
+<img src="https://github.com/clEsperanto/pyclesperanto_prototype/raw/master/docs/images/intensities_along_lines.png" width="300"/>
+
+</td><td>
+
+[Measure intensity along lines](http://github.com/clEsperanto/pyclesperanto_prototype/tree/master/demo/measurement/intensities_along_lines.ipynb)
+
+</td></tr>
+
+
+<tr><td>
+
 <img src="https://github.com/clEsperanto/pyclesperanto_prototype/raw/master/docs/images/screenshot_crop_and_paste_images.png" width="300"/>
 
 </td><td>
