@@ -15,7 +15,7 @@ def test_generate_average_intensity_between_points_matrix():
 
     touch_matrix = cle.generate_distance_matrix(coords, coords) > 0
 
-    average_intensity_matrix = cle.generate_average_intensity_between_points_matrix(image, coords, touch_matrix)
+    average_intensity_matrix = cle.generate_mean_intensity_between_points_matrix(image, coords, touch_matrix)
 
     reference = np.asarray([
         [0.,  0.,  0.,  0.,  0.],
