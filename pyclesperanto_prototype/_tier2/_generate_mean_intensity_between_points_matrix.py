@@ -42,6 +42,6 @@ def generate_mean_intensity_between_points_matrix(intensity_image: Image, pointl
         "num_samples": int(num_samples)
     }
 
-    execute(__file__, 'mean_intensity_along_line_x.cl', 'mean_intensity_along_line', touch_matrix.shape, parameters)
+    execute(__file__, 'mean_intensity_between_points_matrix_x.cl', 'mean_intensity_between_points_matrix', touch_matrix.shape, parameters)
 
     return mean_intensity_matrix_destination

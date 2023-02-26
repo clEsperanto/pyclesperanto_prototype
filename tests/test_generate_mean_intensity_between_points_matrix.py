@@ -1,4 +1,4 @@
-def test_generate_average_intensity_between_points_matrix():
+def test_generate_mean_intensity_between_points_matrix():
     import pyclesperanto_prototype as cle
     import numpy as np
 

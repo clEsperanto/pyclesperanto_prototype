@@ -1,4 +1,4 @@
-__kernel void mean_intensity_along_line (
+__kernel void mean_intensity_between_points_matrix (
     IMAGE_src_touch_matrix_TYPE src_touch_matrix,
     IMAGE_src_pointlist_TYPE src_pointlist,
     IMAGE_src_intensity_TYPE src_intensity,                                            
