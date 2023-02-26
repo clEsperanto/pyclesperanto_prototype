@@ -1,4 +1,4 @@
-def test_generate_mean_intensity_between_points_matrix():
+def test_generate_maximum_intensity_between_points_matrix():
     import pyclesperanto_prototype as cle
     import numpy as np
 
@@ -15,13 +15,13 @@ def test_generate_mean_intensity_between_points_matrix():
 
     touch_matrix = cle.generate_distance_matrix(coords, coords) > 0
 
-    average_intensity_matrix = cle.generate_mean_intensity_between_points_matrix(image, coords, touch_matrix)
+    average_intensity_matrix = cle.generate_maximum_intensity_between_points_matrix(image, coords, touch_matrix)
 
     reference = np.asarray([
-        [0.,  0.,  0.,  0.,  0.],
-        [0.,  0.,  0.,  2.5, 5.],
-        [0.,  0.,  0.,  2.5, 5.],
-        [0.,  2.5, 2.5, 0.,  7.5],
-        [0.,  5.,  5.,  7.5, 0.]])
+        [0.,  0.,  0.,  0., 0.],
+        [0.,  0.,  0.,  5., 10.],
+        [0.,  0.,  0.,  5., 10.],
+        [0.,  5.,  5.,  0., 10],
+        [0.,  10., 10., 10, 0.]])
 
     assert cle.array_equal(reference, average_intensity_matrix)

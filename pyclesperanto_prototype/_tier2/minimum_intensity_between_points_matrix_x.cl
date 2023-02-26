@@ -1,8 +1,8 @@
-__kernel void standard_deviation_intensity_along_line (
+__kernel void minimum_intensity_between_points_matrix (
     IMAGE_src_touch_matrix_TYPE src_touch_matrix,
     IMAGE_src_pointlist_TYPE src_pointlist,
     IMAGE_src_intensity_TYPE src_intensity,                                            
-    IMAGE_dst_standard_deviation_intensity_matrix_TYPE dst_standard_deviation_intensity_matrix,
+    IMAGE_dst_minimum_intensity_matrix_TYPE dst_minimum_intensity_matrix,
     int num_samples
 )
 {
@@ -13,7 +13,7 @@ __kernel void standard_deviation_intensity_along_line (
 
   const int touching = READ_IMAGE(src_touch_matrix, intsampler, POS_src_touch_matrix_INSTANCE(touch_x, touch_y, 0, 0)).x;
   if (touching == 0 || touch_x == 0 || touch_y == 0) {
-    WRITE_IMAGE (dst_standard_deviation_intensity_matrix, POS_dst_standard_deviation_intensity_matrix_INSTANCE(touch_x, touch_y,0,0), 0);
+    WRITE_IMAGE (dst_minimum_intensity_matrix, POS_dst_minimum_intensity_matrix_INSTANCE(touch_x, touch_y,0,0), 0);
     return;
   }
 
@@ -42,26 +42,18 @@ __kernel void standard_deviation_intensity_along_line (
   int depth = GET_IMAGE_DEPTH(src_intensity);
 
   float4 position = (float4){x1, y1, z1, 0};
-
-  // Inspired by https://www.strchr.com/standard_deviation_in_one_pass?allcomments=1
-  float sum = 0;
-  float sq_sum = 0;
+  float minimum = 0;
 
   for (int i = 0; i < num_samples; i++) {
       POS_src_intensity_TYPE pos = POS_src_intensity_INSTANCE((int)(position.x + 0.5), (int)(position.y + 0.5), (int)(position.z + 5), 0);
 
       float value = (float)(READ_IMAGE(src_intensity, intsampler, pos).x);
-      sum = sum + value;
-      sq_sum = sq_sum + value * value;
-
-      if (touch_x == 1 && touch_y == 2) {
-        printf("position %f / %f \n", position.x, position.y);     
-        printf("pos %d / %d \n", pos.x, pos.y);     
+      if (minimum > value || i == 0) {
+        minimum = value;
       }
+
       position = position + directionVector;
   }
-  const float mean = sum / num_samples;
-  const float variance = sq_sum / num_samples - mean * mean;
-  const float stddev = sqrt(variance);
-  WRITE_IMAGE (dst_standard_deviation_intensity_matrix, POS_dst_standard_deviation_intensity_matrix_INSTANCE(touch_x, touch_y,0,0), stddev);
+
+  WRITE_IMAGE (dst_minimum_intensity_matrix, POS_dst_minimum_intensity_matrix_INSTANCE(touch_x, touch_y,0,0), minimum);
 }

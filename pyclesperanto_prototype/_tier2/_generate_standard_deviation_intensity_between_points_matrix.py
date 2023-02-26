@@ -46,6 +46,6 @@ def generate_standard_deviation_intensity_between_points_matrix(intensity_image:
         "num_samples": int(num_samples)
     }
 
-    execute(__file__, 'standard_deviation_intensity_along_line_x.cl', 'standard_deviation_intensity_along_line', touch_matrix.shape, parameters)
+    execute(__file__, 'standard_deviation_intensity_between_points_matrix_x.cl', 'standard_deviation_intensity_between_points_matrix', touch_matrix.shape, parameters)
 
     return standard_deviation_intensity_matrix_destination
