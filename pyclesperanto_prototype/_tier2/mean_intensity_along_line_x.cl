@@ -50,10 +50,6 @@ __kernel void mean_intensity_along_line (
       float value = (float)(READ_IMAGE(src_intensity, intsampler, pos).x);
       sum = sum + value;
 
-      if (touch_x == 1 && touch_y == 2) {
-        printf("position %f / %f \n", position.x, position.y);     
-        printf("pos %d / %d \n", pos.x, pos.y);     
-      }
       position = position + directionVector;
   }
 

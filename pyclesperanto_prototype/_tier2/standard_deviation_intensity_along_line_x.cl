@@ -54,10 +54,6 @@ __kernel void standard_deviation_intensity_along_line (
       sum = sum + value;
       sq_sum = sq_sum + value * value;
 
-      if (touch_x == 1 && touch_y == 2) {
-        printf("position %f / %f \n", position.x, position.y);     
-        printf("pos %d / %d \n", pos.x, pos.y);     
-      }
       position = position + directionVector;
   }
   const float mean = sum / num_samples;
