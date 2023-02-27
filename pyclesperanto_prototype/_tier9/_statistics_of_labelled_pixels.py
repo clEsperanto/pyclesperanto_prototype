@@ -276,6 +276,11 @@ def statistics_of_labelled_pixels(intensity_image : Image = None, label_image : 
     power(sum_dim, result_vector, 0.5)
     region_props['standard_deviation_intensity'] = pull(result_vector)[0]
 
+    # standard error intensity
+    crop(sum_per_label, sum_dim, measurements_start_x, 3, 0) # number of pixels/voxels = area
+    power(sum_dim, result_vector, 0.5)
+    region_props['standard_error_intensity'] = region_props['standard_deviation_intensity'] / pull(result_vector)[0]
+
     crop(max_statistics, result_vector, measurements_start_x, 4, 0)
     region_props['max_distance_to_centroid'] = pull(result_vector)[0]
     crop(max_statistics, result_vector, measurements_start_x, 5, 0)
