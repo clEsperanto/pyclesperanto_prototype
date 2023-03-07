@@ -277,7 +277,7 @@ def statistics_of_labelled_pixels(intensity_image : Image = None, label_image : 
     region_props['standard_deviation_intensity'] = pull(result_vector)[0]
 
     # standard error intensity
-    region_props['standard_error_intensity'] = np.sqrt(region_props['area'])
+    region_props['standard_error_intensity'] = region_props['standard_deviation_intensity'] / np.sqrt(region_props['area'])
 
     crop(max_statistics, result_vector, measurements_start_x, 4, 0)
     region_props['max_distance_to_centroid'] = pull(result_vector)[0]
