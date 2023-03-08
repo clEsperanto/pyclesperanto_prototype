@@ -226,7 +226,7 @@ def test_statistics_of_labelled_pixels_3d():
     assert (np.allclose(a, b, 0.0001))
 
 
-def test_standard_deviation():
+def test_standard_deviation_and_standard_error():
     import numpy as np
 
     image = np.asarray([
@@ -243,11 +243,14 @@ def test_standard_deviation():
 
     print("numpy standard deviation", np.std(image))
     print("numpy variance", np.var(image))
+    print("numpy standard error", np.std(image) / np.sqrt(image.size))
 
     stats = cle.statistics_of_labelled_pixels(image, labels)
 
     print("std", stats['standard_deviation_intensity'][0])
+    print("sterr", stats['standard_error_intensity'][0])
 
     from numpy import testing
     testing.assert_almost_equal(stats['standard_deviation_intensity'][0], 2.58, decimal=1)
+    testing.assert_almost_equal(stats['standard_error_intensity'][0], 0.86, decimal=1)
 
