@@ -43,6 +43,7 @@ For example, in `tier1` the Gaussian blur is implemented. Difference-of-Gaussian
 
 If you program new features, make sure it complies with our coding conventions:
 * Your _new function_ comes in a `_new_function.py` and is called `new_function()`.
+* New functions contain docstrings in the [numpy docstring format](https://numpydoc.readthedocs.io/en/latest/format.html).
 * Add `new_function` to the `__init__.py` of the tier where it is located.
 * If the functions comes with OpenCL code, the corresponding OpenCL file is called `new_function.cl` and contains a function `new_function`. The file is located in the same folder as the corresponding python file.
 * If the OpenCL algorithm implementation differs for 2D and 3D, there should be two OpenCL-files named `new_function_2d.cl` and `new_function_3d.cl`. Only one python file should be provided and the differentiation 2D/3D should be done inside `new_function()`.
