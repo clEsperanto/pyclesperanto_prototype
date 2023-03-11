@@ -4,9 +4,11 @@ This page explains how to contribute to the project. In very general, feedback, 
 
 ## Scope
 
-`pyclesperanto_prototype` is a Python image processing library for processing 2D and 3D fluorescent microscopy imaging data using OpenCL-compatible graphics cards. 
+`pyclesperanto_prototype` is a Python image processing library for processing 2D and 3D fluorescence microscopy imaging data using OpenCL-compatible graphics cards. 
 Typical operations include
 * image filtering
+* spatial transforms
+* matrix operations
 * image segmentation
 * cell neighborhood graph extraction and visualization
 * quantitative feature extraction
@@ -41,8 +43,9 @@ For example, in `tier1` the Gaussian blur is implemented. Difference-of-Gaussian
 
 If you program new features, make sure it complies with our coding conventions:
 * Your _new function_ comes in a `_new_function.py` and is called `new_function()`.
-* The corresponding OpenCL file is called `new_function.cl` and contains a function `new_function`.
-* If the implementation differs for 2D and 3D, there should be two OpenCL-files named `new_function_2d.cl` and `new_function_3d.cl`. Only one python file should be provided and the differentiation 2D/3D should be done inside `new_function()`.
+* Add `new_function` to the `__init__.py` of the tier where it is located.
+* If the functions comes with OpenCL code, the corresponding OpenCL file is called `new_function.cl` and contains a function `new_function`. The file is located in the same folder as the corresponding python file.
+* If the OpenCL algorithm implementation differs for 2D and 3D, there should be two OpenCL-files named `new_function_2d.cl` and `new_function_3d.cl`. Only one python file should be provided and the differentiation 2D/3D should be done inside `new_function()`.
 * Your OpenCL code is image-type agnostic. Do not call OpenCL functions such as `read_imageui()` but `READ_IMAGE` place holders instead. You find a full list of place holders and further explanation [here](https://github.com/clEsperanto/clij-opencl-kernels#why-a-custom-opencl-dialect).
 
 ## How to submit pull-requests
