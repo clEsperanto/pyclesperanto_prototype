@@ -143,6 +143,7 @@ from ._set_row import set_row
 from ._set_non_zero_pixels_to_pixel_index import set_non_zero_pixels_to_pixel_index
 from ._set_non_zero_pixels_to_pixel_index import set_non_zero_pixels_to_pixel_index as set_nonzero_pixels_to_pixelindex
 from ._set_where_x_equals_y import set_where_x_equals_y
+from ._set_where_x_equals_y import set_where_x_equals_y as fill_diagonal
 from ._set_where_x_greater_than_y import set_where_x_greater_than_y
 from ._set_where_x_smaller_than_y import set_where_x_smaller_than_y
 from ._sign import sign
