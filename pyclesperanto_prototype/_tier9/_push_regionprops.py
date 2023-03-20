@@ -97,7 +97,9 @@ def push_regionprops(props : Union[dict, RegionProperties], first_row_index : in
             # MAX_DISTANCE_TO_CENTROID = 34
             props['max_distance_to_centroid'],
             # MAX_MEAN_DISTANCE_TO_CENTROID_RATIO = 35
-            props['mean_max_distance_to_centroid_ratio']
+            props['mean_max_distance_to_centroid_ratio'],
+            # STANDARD_ERROR_INTENSITY = 36
+            props['standard_error_intensity']
         ]
 
         matrix = np.asarray(list).T
