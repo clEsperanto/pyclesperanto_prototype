@@ -90,8 +90,10 @@ def test_statistics_of_labelled_pixels():
         [0.65403885, 0.65403885, 0.6666667],
         #     MAX_DISTANCE_TO_CENTROID(34),
         [0.74535596, 0.745356, 1.],
-        #     MAX_MEAN_DISTANCE_TO_CENTROID_RATIO(35);
-        [1.1396203, 1.1396204, 1.5]
+        #     MAX_MEAN_DISTANCE_TO_CENTROID_RATIO(35),
+        [1.1396203, 1.1396204, 1.5],
+        #     STANDARD_ERROR_INTENSITY(36);
+        [0.27216553, 0.27216551, 0.4714043]
     ]
     ))
 
@@ -205,8 +207,10 @@ def test_statistics_of_labelled_pixels_3d():
         [0.65403885, 0.65403885, 0.6666667],
         #     MAX_DISTANCE_TO_CENTROID(34),
         [0.74535596, 0.745356, 1.],
-        #     MAX_MEAN_DISTANCE_TO_CENTROID_RATIO(35);
-        [1.1396203, 1.1396204, 1.5]
+        #     MAX_MEAN_DISTANCE_TO_CENTROID_RATIO(35),
+        [1.1396203, 1.1396204, 1.5],
+        #     STANDARD_ERROR_INTENSITY(36);
+        [0.27216553, 0.27216551, 0.4714043]
     ]
     ))
 
