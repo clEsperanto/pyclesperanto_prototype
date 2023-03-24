@@ -35,3 +35,22 @@ def test_zip():
         sum_ += y
 
     assert sum_ == 45
+
+def test_iter_centroids():
+    import pyclesperanto_prototype as cle
+
+    labels = cle.asarray([
+        [0, 0, 0, 0, 0],
+        [0, 1, 0, 3, 0],
+        [0, 0, 0, 0, 0],
+        [0, 0, 2, 0, 0],
+        [0, 0, 0, 0, 0],
+    ])
+
+    centroids = cle.centroids_of_labels(labels)
+
+    print(centroids)
+
+    for i, j in zip(centroids[0], centroids[1]):
+        print(i, j)
+
