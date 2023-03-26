@@ -10,8 +10,9 @@ def mode_sphere(source : Image, destination : Image = None, radius_x : int = 1, 
     """Computes the local mode of a pixels sphere shaped neighborhood.
     This can be used to post-process and locally correct semantic segmentation results.
 
-    The box is specified by its half-width and half-height (radius).
+    The sphere is specified by its half-width and half-height (radius).
     For technical reasons, the intensities must lie within a range from 0 to 255.
+    In case multiple values have maximum frequency, the smallest one is returned.
     
     Parameters
     ----------
