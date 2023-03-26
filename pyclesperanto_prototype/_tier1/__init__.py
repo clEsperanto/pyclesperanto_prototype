@@ -99,6 +99,8 @@ from ._minimum_images import minimum_images as minimum
 from ._minimum_x_projection import minimum_x_projection
 from ._minimum_y_projection import minimum_y_projection
 from ._minimum_z_projection import minimum_z_projection
+from ._mode_box import mode_box
+from ._mode_sphere import mode_sphere
 from ._modulo_images import modulo_images
 from ._modulo_images import modulo_images as mod
 from ._modulo_images import modulo_images as remainder
