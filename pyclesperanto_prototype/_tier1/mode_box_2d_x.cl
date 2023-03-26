@@ -13,15 +13,24 @@ __kernel void mode_box_2d
   const int2 coord = (int2){i,j};
 
   long histogram[256];
-  for (int i = 0; i < 256; i++){
-    histogram[i]=0;
+  for (int h = 0; h < 256; h++){
+    histogram[h]=0;
   }
 
   const int4   e = (int4)  { (Nx-1)/2, (Ny-1)/2, 0, 0 };
 
   for (int x = -e.x; x <= e.x; x++) {
     for (int y = -e.y; y <= e.y; y++) {
-      histogram[(int)READ_src_IMAGE(src,sampler,coord+((int2){x,y})).x]++;
+      int x1 = coord.x + x;
+      int x2 = coord.y + y;
+
+      if (x1 < 0 || x2 < 0|| x1 >= GET_IMAGE_WIDTH(src) || x2 >= GET_IMAGE_HEIGHT(src)) {
+        continue;
+      }
+
+      const int2 pos = (int2){x1,x2};
+
+      histogram[(int)READ_src_IMAGE(src,sampler,pos).x]++;
     }
   }
 

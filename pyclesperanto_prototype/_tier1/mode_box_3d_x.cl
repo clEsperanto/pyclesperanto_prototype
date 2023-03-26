@@ -15,8 +15,8 @@ __kernel void mode_box_3d
   const int4 coord = (int4){i,j,k,0};
 
   long histogram[256];
-  for (int i = 0; i < 256; i++){
-    histogram[i]=0;
+  for (int h = 0; h < 256; h++){
+    histogram[h]=0;
   }
 
 
@@ -28,6 +28,11 @@ __kernel void mode_box_3d
         int x1 = coord.x + x;
         int x2 = coord.y + y;
         int x3 = coord.z + z;
+
+        if (x1 < 0 || x2 < 0 || x3 < 0 || x1 >= GET_IMAGE_WIDTH(src) || x2 >= GET_IMAGE_HEIGHT(src) || x3 >= GET_IMAGE_DEPTH(src)) {
+          continue;
+        }
+
         const int4 pos = (int4){x1,x2,x3,0};
         int value_res = (int)READ_src_IMAGE(src,sampler,pos).x;
         histogram[value_res]++;
@@ -38,10 +43,10 @@ __kernel void mode_box_3d
 
   long max_value = 0;
   int max_pos = 0;
-  for (int i = 0; i < 256; i++){
-    if (max_value < histogram[i]){
-      max_value = histogram[i];
-      max_pos = i;
+  for (int h = 0; h < 256; h++){
+    if (max_value < histogram[h]){
+      max_value = histogram[h];
+      max_pos = h;
     }
   }
 
