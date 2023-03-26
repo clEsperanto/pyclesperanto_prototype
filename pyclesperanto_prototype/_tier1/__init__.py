@@ -70,6 +70,7 @@ from ._greater_or_equal_constant import greater_or_equal_constant
 from ._hessian_eigenvalues import hessian_eigenvalues
 from ._laplace_box import laplace_box
 from ._laplace_diamond import laplace_diamond
+from ._above_quantile_box import above_quantile_box
 from ._logarithm import logarithm
 from ._logarithm import logarithm as log
 from ._mask import mask
