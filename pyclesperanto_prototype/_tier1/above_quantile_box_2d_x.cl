@@ -37,7 +37,7 @@ __kernel void above_quantile_box_2d
     }
   }
 
-  WRITE_dst_IMAGE(dst, coord, CONVERT_dst_PIXEL_TYPE((float)count_below * 100.0 / count_all ));
+  WRITE_dst_IMAGE(dst, coord, CONVERT_dst_PIXEL_TYPE((float)count_below / count_all ));
 }
 
 
