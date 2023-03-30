@@ -12,49 +12,60 @@ __kernel void superior_inferior_2d (
 
   float value = READ_src_IMAGE(src, sampler, pos).x;
 
-  if (value != 0) {
+  // if value is already 0, erode will return 0
+  if (value == 0) {
+    WRITE_dst_IMAGE(dst, pos, CONVERT_dst_PIXEL_TYPE(0));
+    return;
+  }
+
     /* Erode with kernel [[1, 0, 0], 
                           [0, 1, 0], 
                           [0, 0, 1]] */
-    value = READ_src_IMAGE(src, sampler, (pos + (int2){1, 1})).x;
-    if (value != 0) {
-        value = READ_src_IMAGE(src, sampler, (pos + (int2){-1, -1})).x;
-    }
-    // continue if value is zero after first erode as we are looking for max after all erodes i.e. value = 1
-    if (value == 0) {
-      /* Erode with kernel [[0, 1, 0], 
-                            [0, 1, 0], 
-                            [0, 1, 0]] */
-      value = READ_src_IMAGE(src, sampler, (pos + (int2){0, 1})).x;
-      if (value != 0) {
-          value = READ_src_IMAGE(src, sampler, (pos + (int2){0, -1})).x;
-      }
-
-      if (value == 0) {
-        /* Erode with kernel [[0, 0, 1], 
-                              [0, 1, 0], 
-                              [1, 0, 0]] */
-        value = READ_src_IMAGE(src, sampler, (pos + (int2){-1, 1})).x;
-        if (value != 0) {
-            value = READ_src_IMAGE(src, sampler, (pos + (int2){1, -1})).x;
-        }
-
-        if (value == 0) {
-          /* Erode with kernel [[0, 0, 0], 
-                                [1, 1, 1], 
-                                [0, 0, 0]] */
-          value = READ_src_IMAGE(src, sampler, (pos + (int2){1, 0})).x;
-          if (value != 0) {
-              value = READ_src_IMAGE(src, sampler, (pos + (int2){-1, 0})).x;
-          }
-        }
-      }
-    }
-  }
-
+  value = READ_src_IMAGE(src, sampler, (pos + (int2){1, 1})).x;
   if (value != 0) {
-    value = 1;
+    value = READ_src_IMAGE(src, sampler, (pos + (int2){-1, -1})).x;
+    if (value != 0) {
+      WRITE_dst_IMAGE(dst, pos, CONVERT_dst_PIXEL_TYPE(1));
+      return;
+    }
   }
 
-  WRITE_dst_IMAGE (dst, pos, CONVERT_dst_PIXEL_TYPE(value));
+  /* Erode with kernel [[0, 1, 0], 
+                        [0, 1, 0], 
+                        [0, 1, 0]] */
+  value = READ_src_IMAGE(src, sampler, (pos + (int2){0, 1})).x;
+    if (value != 0) {
+      value = READ_src_IMAGE(src, sampler, (pos + (int2){0, -1})).x;
+      if (value != 0) {
+        WRITE_dst_IMAGE(dst, pos, CONVERT_dst_PIXEL_TYPE(1));
+        return;
+      }
+    }
+
+  /* Erode with kernel [[0, 0, 1], 
+                        [0, 1, 0], 
+                        [1, 0, 0]] */
+  value = READ_src_IMAGE(src, sampler, (pos + (int2){-1, 1})).x;
+    if (value != 0) {
+      value = READ_src_IMAGE(src, sampler, (pos + (int2){1, -1})).x;
+      if (value != 0) {
+        WRITE_dst_IMAGE(dst, pos, CONVERT_dst_PIXEL_TYPE(1));
+        return;
+      }
+    }
+
+  /* Erode with kernel [[0, 0, 0], 
+                        [1, 1, 1], 
+                        [0, 0, 0]] */
+  value = READ_src_IMAGE(src, sampler, (pos + (int2){1, 0})).x;
+    if (value != 0) {
+      value = READ_src_IMAGE(src, sampler, (pos + (int2){-1, 0})).x;
+      if (value != 0) {
+        WRITE_dst_IMAGE(dst, pos, CONVERT_dst_PIXEL_TYPE(1));
+        return;
+      }
+    }
+
+  // If all erodes are 0 then return 0
+  WRITE_dst_IMAGE(dst, pos, CONVERT_dst_PIXEL_TYPE(0));
 }
