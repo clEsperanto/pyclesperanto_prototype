@@ -161,6 +161,7 @@ from ._subtract_image_from_scalar import subtract_image_from_scalar
 from ._sum_x_projection import sum_x_projection
 from ._sum_y_projection import sum_y_projection
 from ._sum_z_projection import sum_z_projection
+from ._superior_inferior import superior_inferior
 from ._transpose_xy import transpose_xy
 from ._transpose_xz import transpose_xz
 from ._transpose_yz import transpose_yz
