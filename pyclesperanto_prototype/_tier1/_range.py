@@ -35,37 +35,78 @@ def range(source : Image,
     -------
     destination
     """
-
-    if start_x is None:
-        start_x = 0
-    if stop_x is None:
-        stop_x = source.shape[-1]
     if step_x is None:
         step_x = 1
-    if start_y is None:
-        start_y = 0
-    if stop_y is None:
-        stop_y = source.shape[-2]
+    if start_x is None:
+        if step_x >= 0:
+            start_x = 0
+        else:
+            start_x = source.shape[-1]-1
+    if stop_x is None:
+        if step_x >= 0:
+            stop_x = source.shape[-1]
+        else:
+            stop_x = -1
+
     if step_y is None:
         step_y = 1
+    if start_y is None:
+        if step_y >= 0:
+            start_y = 0
+        else:
+            start_y = source.shape[-2]-1
+    if stop_y is None:
+        if step_y >= 0:
+            stop_y = source.shape[-2]
+        else:
+            stop_y = -1
 
     if len(source.shape) > 2:
-        if start_z is None:
-            start_z = 0
-        if stop_z is None:
-            stop_z = source.shape[0]
         if step_z is None:
             step_z = 1
+        if start_z is None:
+            if step_z >= 0:
+                start_z = 0
+            else:
+                start_z = source.shape[-3] - 1
+        if stop_z is None:
+            if step_z >= 0:
+                stop_z = source.shape[-3]
+            else:
+                stop_z = -1
+
     else:
         start_z = 0
         stop_z = 1
         step_z = 1
 
+    # check if ranges make sense
+    if start_x < 0:
+        start_x = source.shape[-1] - start_x
+    if start_y < 0:
+        start_y = source.shape[-1] - start_x
+    if start_x > source.shape[-1] - 1:
+        start_x = source.shape[-1] - 1
+    if start_y > source.shape[-2] - 1:
+        start_y = source.shape[-2] - 1
+    if (start_x > stop_x and step_x > 0) or (start_x < stop_x and step_x < 0):
+        stop_x = start_x
+    if (start_y > stop_y and step_y > 0) or (start_y < stop_y and step_y < 0):
+        stop_y = start_y
+
+    if len(source.shape) > 2:
+        if start_z < 0:
+            start_z = source.shape[-2] - start_z
+        if start_z > source.shape[-3] - 1:
+            start_z = source.shape[-3] - 1
+        if (start_z > stop_z and step_z > 0) or (start_z < stop_z and step_z < 0):
+            stop_z = start_z
+
     if destination is None:
         if len(source.shape) > 2:
-            destination = create((stop_z - start_z, stop_y - start_y, stop_x - start_x), source.dtype)
+            destination = create((abs(stop_z - start_z), abs(stop_y - start_y), abs(stop_x - start_x)), source.dtype)
         else:
-            destination = create((stop_y - start_y, stop_x - start_x), source.dtype)
+            destination = create((abs(stop_y - start_y), abs(stop_x - start_x)), source.dtype)
 
     parameters = {
         "dst":destination,
@@ -79,4 +120,5 @@ def range(source : Image,
     }
 
     execute(__file__, 'range_x.cl', 'range', destination.shape, parameters)
+
     return destination
