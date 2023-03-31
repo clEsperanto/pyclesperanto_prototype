@@ -35,72 +35,14 @@ def range(source : Image,
     -------
     destination
     """
-    if step_x is None:
-        step_x = 1
-    if start_x is None:
-        if step_x >= 0:
-            start_x = 0
-        else:
-            start_x = source.shape[-1]-1
-    if stop_x is None:
-        if step_x >= 0:
-            stop_x = source.shape[-1]
-        else:
-            stop_x = -1
-
-    if step_y is None:
-        step_y = 1
-    if start_y is None:
-        if step_y >= 0:
-            start_y = 0
-        else:
-            start_y = source.shape[-2]-1
-    if stop_y is None:
-        if step_y >= 0:
-            stop_y = source.shape[-2]
-        else:
-            stop_y = -1
-
+    start_x, stop_x, step_x = correct_range(start_x, stop_x, step_x, source.shape[-1])
+    start_y, stop_y, step_y = correct_range(start_y, stop_y, step_y, source.shape[-2])
     if len(source.shape) > 2:
-        if step_z is None:
-            step_z = 1
-        if start_z is None:
-            if step_z >= 0:
-                start_z = 0
-            else:
-                start_z = source.shape[-3] - 1
-        if stop_z is None:
-            if step_z >= 0:
-                stop_z = source.shape[-3]
-            else:
-                stop_z = -1
-
+        start_z, stop_z, step_z = correct_range(start_z, stop_z, step_z, source.shape[-3])
     else:
         start_z = 0
         stop_z = 1
         step_z = 1
-
-    # check if ranges make sense
-    if start_x < 0:
-        start_x = source.shape[-1] - start_x
-    if start_y < 0:
-        start_y = source.shape[-1] - start_x
-    if start_x > source.shape[-1] - 1:
-        start_x = source.shape[-1] - 1
-    if start_y > source.shape[-2] - 1:
-        start_y = source.shape[-2] - 1
-    if (start_x > stop_x and step_x > 0) or (start_x < stop_x and step_x < 0):
-        stop_x = start_x
-    if (start_y > stop_y and step_y > 0) or (start_y < stop_y and step_y < 0):
-        stop_y = start_y
-
-    if len(source.shape) > 2:
-        if start_z < 0:
-            start_z = source.shape[-2] - start_z
-        if start_z > source.shape[-3] - 1:
-            start_z = source.shape[-3] - 1
-        if (start_z > stop_z and step_z > 0) or (start_z < stop_z and step_z < 0):
-            stop_z = start_z
 
     if destination is None:
         if len(source.shape) > 2:
@@ -122,3 +64,43 @@ def range(source : Image,
     execute(__file__, 'range_x.cl', 'range', destination.shape, parameters)
 
     return destination
+
+
+def correct_range(start, stop, step, size):
+    # set in case not set (passed None)
+    if step is None:
+        step = 1
+    if start is None:
+        if step >= 0:
+            start = 0
+        else:
+            start = size - 1
+
+    if stop is None:
+        if step >= 0:
+            stop = size
+        else:
+            stop = -1
+
+    # Check if ranges make sense
+    if start >= size:
+        if step >= 0:
+            start = size
+        else:
+            start = size - 1
+    if start < -size + 1:
+        start = -size + 1
+    if stop > size:
+        stop = size
+    if stop < -size:
+        if start > 0:
+            stop = 0 - 1
+        else:
+            stop = -size
+
+    if start < 0:
+        start = size - start
+    if (start > stop and step > 0) or (start < stop and step < 0):
+        stop = start
+
+    return start, stop, step
