@@ -29,5 +29,8 @@ def array_equal(source1: Image, source2: Image) -> bool:
     from .._tier4 import mean_squared_error
     if not np.array_equal(source1.shape, source2.shape):
         return False
+    if np.prod(source1.shape) == 0 and np.prod(source2.shape) == 0:
+        # both empty arrays
+        return True
 
     return mean_squared_error(source1, source2) == 0

@@ -249,6 +249,8 @@ class ArrayOperators():
 
     def __getitem__(self, index):
         result = None
+        if isinstance(index, slice):
+            index = (index,)
         if isinstance(index, list):
             index = tuple(index)
         if isinstance(index, (tuple, np.ndarray)) and index[0] is not None and isinstance(index[0], (tuple, list, np.ndarray)):
