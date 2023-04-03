@@ -68,6 +68,7 @@ from ._greater_constant import greater_constant as threshold
 from ._greater_or_equal import greater_or_equal
 from ._greater_or_equal_constant import greater_or_equal_constant
 from ._hessian_eigenvalues import hessian_eigenvalues
+from ._inferior_superior import inferior_superior
 from ._laplace_box import laplace_box
 from ._laplace_diamond import laplace_diamond
 from ._logarithm import logarithm
