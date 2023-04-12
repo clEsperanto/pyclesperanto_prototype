@@ -39,7 +39,7 @@ def test_superior_inferior_2d():
     assert (np.array_equal(a, b))
     
     
-def test_inferior_superior_3d():
+def test_superior_inferior_3d():
     test = cle.push(np.asarray([
         [0, 0, 0, 0, 0],
         [0, 1, 1, 1, 0],
