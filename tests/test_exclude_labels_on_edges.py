@@ -157,7 +157,7 @@ def test_exclude_labels_on_edges_blobs_2():
     binary = cle.threshold_otsu(blurred)
     labeled = cle.connected_components_labeling_box(binary)
 
-    wo_edges = cle.exclude_labels_on_edges(labeled, exlude_in_y=False)
+    wo_edges = cle.exclude_labels_on_edges(labeled, exclude_in_y=False)
 
     # The maxmium intensity in a label image corresponds to the number of objects
     num_labels = cle.maximum_of_all_pixels(wo_edges)
@@ -167,7 +167,7 @@ def test_exclude_labels_on_edges_blobs_2():
 
     assert num_labels == 52
 
-    wo_edges = cle.exclude_labels_on_edges(labeled, exlude_in_x=False)
+    wo_edges = cle.exclude_labels_on_edges(labeled, exclude_in_x=False)
 
     # The maxmium intensity in a label image corresponds to the number of objects
     num_labels = cle.maximum_of_all_pixels(wo_edges)
