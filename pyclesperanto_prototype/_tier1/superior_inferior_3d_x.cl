@@ -1,5 +1,17 @@
 __constant sampler_t sampler = CLK_NORMALIZED_COORDS_FALSE | CLK_ADDRESS_CLAMP_TO_EDGE | CLK_FILTER_NEAREST;
 
+#define READ_IMAGE_ZERO_OUTSIDE(a,b,c) read_buffer3duc_zero_outside(GET_IMAGE_WIDTH(a),GET_IMAGE_HEIGHT(a),GET_IMAGE_DEPTH(a),a,b,c)
+
+inline uchar2 read_buffer3duc_zero_outside(int read_buffer_width, int read_buffer_height, int read_buffer_depth, __global uchar * buffer_var, sampler_t sampler, int4 position )
+{
+    int4 pos = (int4){position.x, position.y, position.z, 0};
+    int pos_in_buffer = pos.x + pos.y * read_buffer_width + pos.z * read_buffer_width * read_buffer_height;
+    if (pos.x < 0 || pos.x >= read_buffer_width || pos.y < 0 || pos.y >= read_buffer_height || pos.z < 0 || pos.z >= read_buffer_depth) {
+        return (uchar2){0, 0};
+    }
+    return (uchar2){buffer_var[pos_in_buffer],0};
+}
+
 __kernel void superior_inferior_3d (
     IMAGE_src_TYPE  src,
     IMAGE_dst_TYPE  dst
@@ -25,7 +37,7 @@ __kernel void superior_inferior_3d (
   // P0
   for (int i = -1; i <= 1; i++) {
       for (int j = -1; j <= 1; j++) {
-        value = READ_src_IMAGE(src, sampler, (pos + (int4){i, j, 0, 0})).x;
+        value = READ_IMAGE_ZERO_OUTSIDE(src, sampler, (pos + (int4){i, j, 0, 0})).x;
         // printf("value %i\n", value);
         if (value == 0) {
           break;
@@ -43,7 +55,7 @@ __kernel void superior_inferior_3d (
   // P1
   for (int i = -1; i <= 1; i++) {
       for (int j = -1; j <= 1; j++) {
-        value = READ_src_IMAGE(src, sampler, (pos + (int4){i, 0, j, 0})).x;
+        value = READ_IMAGE_ZERO_OUTSIDE(src, sampler, (pos + (int4){i, 0, j, 0})).x;
         if (value == 0) {
           break;
         }
@@ -60,7 +72,7 @@ __kernel void superior_inferior_3d (
   // P2
   for (int i = -1; i <= 1; i++) {
       for (int j = -1; j <= 1; j++) {
-        value = READ_src_IMAGE(src, sampler, (pos + (int4){0, i, j, 0})).x;
+        value = READ_IMAGE_ZERO_OUTSIDE(src, sampler, (pos + (int4){0, i, j, 0})).x;
         if (value == 0) {
           break;
         }
@@ -77,7 +89,7 @@ __kernel void superior_inferior_3d (
   // P3
   for (int i = -1; i <= 1; i++) {
       for (int j = -1; j <= 1; j++) {
-        value = READ_src_IMAGE(src, sampler, (pos + (int4){i, j, j, 0})).x;
+        value = READ_IMAGE_ZERO_OUTSIDE(src, sampler, (pos + (int4){i, j, j, 0})).x;
         if (value == 0) {
           break;
         }
@@ -94,7 +106,7 @@ __kernel void superior_inferior_3d (
   // P4
   for (int i = -1; i <= 1; i++) {
       for (int j = -1; j <= 1; j++) {
-        value = READ_src_IMAGE(src, sampler, (pos + (int4){j, i, -i, 0})).x;
+        value = READ_IMAGE_ZERO_OUTSIDE(src, sampler, (pos + (int4){j, i, -i, 0})).x;
         if (value == 0) {
           break;
         }
@@ -111,7 +123,7 @@ __kernel void superior_inferior_3d (
   // P5
   for (int i = -1; i <= 1; i++) {
       for (int j = -1; j <= 1; j++) {
-        value = READ_src_IMAGE(src, sampler, (pos + (int4){i, j, i, 0})).x;
+        value = READ_IMAGE_ZERO_OUTSIDE(src, sampler, (pos + (int4){i, j, i, 0})).x;
         if (value == 0) {
           break;
         }
@@ -128,7 +140,7 @@ __kernel void superior_inferior_3d (
   // P6
   for (int i = -1; i <= 1; i++) {
       for (int j = -1; j <= 1; j++) {
-        value = READ_src_IMAGE(src, sampler, (pos + (int4){i, j, -i, 0})).x;
+        value = READ_IMAGE_ZERO_OUTSIDE(src, sampler, (pos + (int4){i, j, -i, 0})).x;
         if (value == 0) {
           break;
         }
@@ -145,7 +157,7 @@ __kernel void superior_inferior_3d (
   // P7
   for (int i = -1; i <= 1; i++) {
       for (int j = -1; j <= 1; j++) {
-        value = READ_src_IMAGE(src, sampler, (pos + (int4){i, i, j, 0})).x;
+        value = READ_IMAGE_ZERO_OUTSIDE(src, sampler, (pos + (int4){i, i, j, 0})).x;
         if (value == 0) {
           break;
         }
@@ -162,7 +174,7 @@ __kernel void superior_inferior_3d (
   // P8
   for (int i = -1; i <= 1; i++) {
       for (int j = -1; j <= 1; j++) {
-        value = READ_src_IMAGE(src, sampler, (pos + (int4){i, -i, j, 0})).x;
+        value = READ_IMAGE_ZERO_OUTSIDE(src, sampler, (pos + (int4){i, -i, j, 0})).x;
         if (value == 0) {
           break;
         }
