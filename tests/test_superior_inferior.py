@@ -41,7 +41,7 @@ def test_superior_inferior_2d():
     
 def test_superior_inferior_3d():
     test = cle.push(np.asarray([
-        [0, 0, 0, 0, 0],
+       [[0, 0, 0, 0, 0],
         [0, 1, 1, 1, 0],
         [0, 1, 1, 1, 0],
         [0, 1, 1, 1, 0],
@@ -57,11 +57,11 @@ def test_superior_inferior_3d():
         [0, 1, 1, 1, 0],
         [0, 1, 1, 1, 0],
         [0, 1, 1, 1, 0],
-        [0, 0, 0, 0, 0]
+        [0, 0, 0, 0, 0]]
     ]))
     
     reference = cle.push(np.asarray([
-        [0, 0, 0, 0, 0],
+       [[0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0],
         [0, 0, 1, 0, 0],
         [0, 0, 0, 0, 0],
@@ -77,7 +77,7 @@ def test_superior_inferior_3d():
         [0, 0, 0, 0, 0],
         [0, 0, 1, 0, 0],
         [0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0]
+        [0, 0, 0, 0, 0]]
     ]))
 
     result = cle.create(test)
