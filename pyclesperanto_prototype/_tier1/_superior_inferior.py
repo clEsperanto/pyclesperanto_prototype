@@ -26,6 +26,10 @@ def superior_inferior(source : Image, destination : Image = None) -> Image:
     Implemented in sup_inf function in scikit morphological snakes:
     .. [1] https://github.com/scikit-image/scikit-image/blob/00177e14097237ef20ed3141ed454bc81b308f82/skimage/segmentation/morphsnakes.py
     """
+    import numpy as np
+    if source.dtype != np.uint8:
+        # the read function in the kernel below is custom and only supports images of type uint8
+        source = source.astype(np.uint8)
 
     parameters = {
         "src":source,
