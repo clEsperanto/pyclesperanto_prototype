@@ -24,20 +24,26 @@ def test_morphological_chan_vese_on_membranes_2d():
     from skimage.data import cells3d
     from skimage.segmentation import morphological_chan_vese
     import pyclesperanto_prototype as cle
-    cle.select_device("TX")
-    print(cle.__version__)
 
     image2d = cells3d()[30, 0, ...]
 
     result_gpu = cle.morphological_chan_vese(image2d, num_iter=20, smoothing=10)
-    result_cpu =     morphological_chan_vese(image2d, num_iter=20, smoothing=10)
-
-    from skimage.io import imsave
-    imsave("test1.tif", result_cpu)
-    imsave("test2.tif", result_gpu)
+    result_cpu = morphological_chan_vese(image2d, num_iter=20, smoothing=10)
 
     assert cle.array_equal(result_cpu, result_gpu)
 
+def test_morphological_chan_vese_on_membranes_3d():
+
+    from skimage.data import cells3d
+    from skimage.segmentation import morphological_chan_vese
+    import pyclesperanto_prototype as cle
+
+    image3d = cells3d()[10:50:, 0, :40, :40]
+
+    result_gpu = cle.morphological_chan_vese(image3d, num_iter=20, smoothing=10)
+    result_cpu = morphological_chan_vese(image3d, num_iter=20, smoothing=10)
+
+    cle.array_equal(result_cpu, result_gpu)
 
 def generate_disk(shape, radius):
     image = np.zeros(shape)
