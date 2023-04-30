@@ -13,31 +13,64 @@ from .._tier1 import mask, add_image_and_scalar, add_images_weighted
 from .._tier2 import opening_sphere, closing_sphere
 
 @plugin_function
-def morphological_snakes(input_image: Image,
-                         contour_image : Image = np.zeros((0, 0)),
-                         output_image : Image = None,
-                         num_iter : int = 100,
-                         smoothing : int = 1,
-                         lambda1 : float = 1,
-                         lambda2 : float = 1) -> Image:
-    """
+def morphological_chan_vese(input_image: Image,
+                            contour_image : Image = np.zeros((0, 0)),
+                            output_image : Image = None,
+                            num_iter : int = 100,
+                            smoothing : int = 1,
+                            lambda1 : float = 1,
+                            lambda2 : float = 1) -> Image:
+    """Morphological Active Contours without Edges (MorphACWE)
+
+    Active contours without edges implemented with morphological operators. It
+    can be used to segment objects in images and volumes without well defined
+    borders. It is required that the inside of the object looks different on
+    average than the outside (i.e., the inner area of the object should be
+    darker or lighter than the outer area on average).
+
+    This is a re-implementation of the algorithm in scikit-image [2].
+
     Parameters
     ----------
     input_image: Image
     contour_image: Image, optional
     output_image: Image, optional
-    num_iter: int, optional
+    num_iter : uint
+        Number of iterations to run
     smoothing: int, optional
-    lambda1: int, optional
-    lambda2: int, optional
+    lambda1 : float, optional
+        Weight parameter for the outer region. If `lambda1` is larger than
+        `lambda2`, the outer region will contain a larger range of values than
+        the inner region.
+    lambda2 : float, optional
+        Weight parameter for the inner region. If `lambda2` is larger than
+        `lambda1`, the inner region will contain a larger range of values than
+        the outer region.
 
     Returns
     -------
     Final segmentation
 
-    See Also
-    --------
-    https://github.com/scikit-image/scikit-image/blob/5e74a4a3a5149a8a14566b81a32bb15499aa3857/skimage/segmentation/morphsnakes.py#L212-L312
+    Notes
+    -----
+    This is a version of the Chan-Vese algorithm that uses morphological
+    operators instead of solving a partial differential equation (PDE) for the
+    evolution of the contour. The set of morphological operators used in this
+    algorithm are proved to be infinitesimally equivalent to the Chan-Vese PDE
+    (see [1]_). However, morphological operators are do not suffer from the
+    numerical stability issues typically found in PDEs (it is not necessary to
+    find the right time step for the evolution), and are computationally
+    faster.
+
+    The algorithm and its theoretical derivation are described in [1]_.
+
+    References
+    ----------
+    .. [1] A Morphological Approach to Curvature-based Evolution of Curves and
+           Surfaces, Pablo Márquez-Neila, Luis Baumela, Luis Álvarez. In IEEE
+           Transactions on Pattern Analysis and Machine Intelligence (PAMI),
+           2014, :DOI:`10.1109/TPAMI.2013.106`
+    .. [2] https://github.com/scikit-image/scikit-image/blob/5e74a4a3a5149a8a14566b81a32bb15499aa3857/skimage/segmentation/morphsnakes.py#L212-L312
     """
     from .._tier1 import superior_inferior, inferior_superior, set
 
@@ -75,7 +108,8 @@ def morphological_snakes(input_image: Image,
 
         # du = np.gradient(u)
         # abs_du = np.abs(du).sum(0)
-        
+
+        # Image attachment
         # compute gradient on contour in all direction
         for d in range(input_image.ndim):
             if d == 0:   
