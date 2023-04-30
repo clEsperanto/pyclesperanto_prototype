@@ -14,20 +14,20 @@ from .._tier1 import mask, add_image_and_scalar, add_images_weighted
 from .._tier2 import opening_sphere, closing_sphere
 
 @plugin_function
-def morphological_snakes(input_image: Image, 
-                        contour_image : Image = np.zeros((0, 0)), 
-                        output_image : Image = None, 
-                        n_iter : int = 100, 
-                        smoothing : int = 1, 
-                        lambda1 : float = 1, 
-                        lambda2 : float = 1) -> Image:
+def morphological_snakes(input_image: Image,
+                         contour_image : Image = np.zeros((0, 0)),
+                         output_image : Image = None,
+                         num_iter : int = 100,
+                         smoothing : int = 1,
+                         lambda1 : float = 1,
+                         lambda2 : float = 1) -> Image:
     """
     Parameters
     ----------
-    input_iamge: Image
+    input_image: Image
     contour_image: Image, optional
     output_image: Image, optional
-    n_iter: int, optional
+    num_iter: int, optional
     smoothing: int, optional
     lambda1: int, optional
     lambda2: int, optional
@@ -53,7 +53,7 @@ def morphological_snakes(input_image: Image,
     temp_4 = create_like(output_image)
     temp_5 = create_like(output_image)
 
-    for _ in range(n_iter):
+    for _ in range(num_iter):
 
         # c0 = (image * (1 - u)).sum() / float((1 - u).sum() + 1e-8)
         # c1 = (image * u).sum() / float(u.sum() + 1e-8)

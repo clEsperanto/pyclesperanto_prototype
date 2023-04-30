@@ -9,7 +9,7 @@ def test_morphological_snakes():
 
     reference = cle.push(segmentation.morphological_chan_vese(image, num_iter=1, smoothing=1, lambda1=1, lambda2=1))
 
-    result = cle.morphological_snakes(image, n_iter=1, smoothing=1, lambda1=1, lambda2=1)
+    result = cle.morphological_snakes(image, num_iter=1, smoothing=1, lambda1=1, lambda2=1)
 
     a = cle.pull(result)
     b = cle.pull(reference)
