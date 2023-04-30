@@ -51,9 +51,10 @@ def morphological_snakes(input_image: Image,
     temp_3 = create_like(output_image)
     temp_4 = create_like(output_image)
     temp_5 = create_like(output_image)
-    set(temp_3, 0)
+
 
     for _ in range(num_iter):
+        set(temp_3, 0)
 
         # c0 = (image * (1 - u)).sum() / float((1 - u).sum() + 1e-8)
         # c1 = (image * u).sum() / float(u.sum() + 1e-8)
