@@ -6,6 +6,7 @@ preamble = """
 #define sampler_t int
 
 #define FLT_MIN          1.19209e-07
+#define FLT_MAX	         1e+37
 
 #define MAX_ARRAY_SIZE 1000
 
@@ -164,6 +165,10 @@ __device__ inline int get_global_id(int dim) {
     } else { //if (dim == 2) {
         return blockDim.z * blockIdx.z + threadIdx.z;
     } 
+}
+
+__device__ inline unsigned int atomic_add(unsigned int* address, unsigned int value) {
+    return atomicAdd(address, value);
 }
 
 #define get_global_size(dim) global_size_ ## dim ## _size
@@ -386,10 +391,24 @@ def execute(anchor, opencl_kernel_filename, kernel_name, global_size, parameters
             )
             size_params = ""
             arguments.append(value)
-        elif isinstance(value, int):
+        elif isinstance(value, np.int8):
+            arguments.append(cp.int8(value))
+        elif isinstance(value, np.uint8):
+            arguments.append(cp.uint8(value))
+        elif isinstance(value, np.int16):
+            arguments.append(cp.int16(value))
+        elif isinstance(value, np.uint16):
+            arguments.append(cp.uint16(value))
+        elif isinstance(value, int) or isinstance(value, np.int32):
             arguments.append(cp.int32(value))
-        elif isinstance(value, float):
+        elif isinstance(value, float) or isinstance(value, np.float32):
             arguments.append(cp.float32(value))
+        elif isinstance(value, np.int64):
+            arguments.append(cp.int64(value))
+        elif isinstance(value, np.uint64):
+            arguments.append(cp.uint64(value))
+        elif isinstance(value, np.float64):
+            arguments.append(cp.float64(value))
         else:
             var_type = str(type(value))
             raise TypeError(
@@ -435,12 +454,19 @@ def execute(anchor, opencl_kernel_filename, kernel_name, global_size, parameters
     #print("Grid", grid)
     #print("Block", block)
 
-    # load and compile
-    a_kernel = cp.RawKernel(cuda_kernel, kernel_name)
+    try:
+        # load and compile
+        a_kernel = cp.RawKernel(cuda_kernel, kernel_name)
 
-    # run
-    a_kernel(grid, block, tuple(arguments))
-
+        # run
+        a_kernel(grid, block, tuple(arguments))
+    except cp.cuda.compiler.CompileException as ce:
+        error = []
+        for i, k in enumerate(cuda_kernel.split("\n")):
+            error.append(str(i) + ":" + k)
+        error.append(ce.get_message())
+        error.append("CUDA compilation failed")
+        raise RuntimeError("\n".join(error))
     #for i, a in enumerate(arguments):
     #    print(i, type(a), a)
 

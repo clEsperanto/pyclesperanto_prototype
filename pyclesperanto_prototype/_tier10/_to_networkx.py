@@ -28,10 +28,9 @@ def to_networkx(adjacency_matrix:Image, centroids:Image=None):
     try:
         import networkx
     except ImportError:
-        raise ImportError("networkx is not installed. Please refer to the documentation https://networkx.org/documentation/stable/install.html")
+        raise ImportError("networkx (version 3 or above) is not installed. Please refer to the documentation https://networkx.org/documentation/stable/install.html")
 
-
-    networkx_graph = networkx.from_numpy_matrix(np.asarray(adjacency_matrix)[1:,1:])
+    networkx_graph = networkx.from_numpy_array(np.asarray(adjacency_matrix)[1:,1:])
 
     if centroids is not None:
         from .._tier1 import transpose_xy

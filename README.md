@@ -31,17 +31,18 @@ The preliminary API reference is available [here](https://clesperanto.github.io/
 Furthermore, parts of the [reference](https://clij.github.io/clij2-docs/reference__pyclesperanto) are also available within the CLIJ2 documentation.
 
 ## Installation
-* Get a conda/python environment, e.g. via [mini-conda](https://docs.conda.io/en/latest/miniconda.html). If you never used python/conda environments before, please follow the instructions [here](https://biapol.github.io/blog/johannes_mueller/anaconda_getting_started/) first.
+* Get a conda/python environment, e.g. via [mamba-forge](https://github.com/conda-forge/miniforge#mambaforge). 
+* If you never used python/conda environments before, please follow [these instructions](https://biapol.github.io/blog/mara_lampert/getting_started_with_mambaforge_and_python/readme.html) first.
 
 ```
 conda create --name cle_39 python=3.9
 conda activate cle_39
 ```
 
-* Install pyclesperanto-prototype using conda:
+* Install pyclesperanto-prototype using [mamba / conda](https://focalplane.biologists.com/2022/12/08/managing-scientific-python-environments-using-conda-mamba-and-friends/):
 
 ```
-conda install -c conda-forge pyclesperanto-prototype
+mamba install -c conda-forge pyclesperanto-prototype
 ```
 
 OR using pip:
@@ -50,24 +51,53 @@ OR using pip:
 pip install pyclesperanto-prototype
 ```
 
-Mac-users please also install this:
+## Troubleshooting: Graphics cards drivers
 
-    conda install -c conda-forge ocl_icd_wrapper_apple
-    
-Linux users please also install this:
-    
-    conda install -c conda-forge ocl-icd-system
+In case error messages contains "ImportError: DLL load failed while importing cl: The specified procedure could not be found" [see also](https://github.com/clEsperanto/pyclesperanto_prototype/issues/55) or "clGetPlatformIDs failed: PLATFORM_NOT_FOUND_KHR", please install recent drivers for your graphics card and/or OpenCL device. Select the right driver source depending on your hardware from this list:
+
+* [AMD drivers](https://www.amd.com/en/support)
+* [NVidia drivers](https://www.nvidia.com/download/index.aspx)
+* [Intel GPU drivers](https://www.intel.com/content/www/us/en/download/726609/intel-arc-graphics-windows-dch-driver.html)
+* [Microsoft Windows OpenCL support](https://www.microsoft.com/en-us/p/opencl-and-opengl-compatibility-pack/9nqpsl29bfff)
+
+Sometimes, mac-users need to install this:
+
+    mamba install -c conda-forge ocl_icd_wrapper_apple
+
+Sometimes, linux users need to install this:
+
+    mamba install -c conda-forge ocl-icd-system
+
+## Computing on Central Processing units (CPUs)
+
+If no OpenCL-compatible GPU is available, pyclesperanto-prototype can make use of CPUs instead. 
+Just install [oclgrind](https://github.com/jrprice/Oclgrind)
+or [pocl](http://portablecl.org/), e.g. using mamba / conda. Oclgrind is recommended for Windows systems, PoCL for Linux. MacOS typically comes with OpenCL support for CPUs.
+
+```
+mamba install  oclgrind -c conda-forge
+```
+
+OR 
+
+```
+mamba install  pocl -c conda-forge
+```
+
+Owners of compatible Intel Xeon CPUs can also install a driver to use them for computing:
+* [Intel CPU OpenCL drivers](https://www.intel.com/content/www/us/en/developer/articles/tool/opencl-drivers.html#latest_CPU_runtime)
+
 
 ## Example code
-A basic image procressing workflow loads blobs.gif and counts the number of gold particles:
+A basic image processing workflow loads blobs.gif and counts the number of objects:
 
 ```python
 import pyclesperanto_prototype as cle
 
 from skimage.io import imread, imsave
 
-# initialize GPU
-device = cle.select_device("GTX")
+# initialize / select GPU with "TX" in their name
+device = cle.select_device("TX")
 print("Used GPU: ", device)
 
 # load data
@@ -79,11 +109,9 @@ blurred = cle.gaussian_blur(inverted, sigma_x=1, sigma_y=1)
 binary = cle.threshold_otsu(blurred)
 labeled = cle.connected_components_labeling_box(binary)
 
-# The maxmium intensity in a label image corresponds to the number of objects
-num_labels = cle.maximum_of_all_pixels(labeled)
-
-# print out result
-print("Num objects in the image: " + str(num_labels))
+# The maximium intensity in a label image corresponds to the number of objects
+num_labels = labeled.max()
+print(f"Number of objects in the image: {num_labels}")
 
 # save image to disc
 imsave("result.tif", labeled)
@@ -194,6 +222,17 @@ imsave("result.tif", labeled)
 </td><td>
 
 [Parametric maps](http://github.com/clEsperanto/pyclesperanto_prototype/tree/master/demo/tissues/parametric_maps.ipynb)
+
+</td></tr>
+
+
+<tr><td>
+
+<img src="https://github.com/clEsperanto/pyclesperanto_prototype/raw/master/docs/images/intensities_along_lines.png" width="300"/>
+
+</td><td>
+
+[Measure intensity along lines](http://github.com/clEsperanto/pyclesperanto_prototype/tree/master/demo/measurement/intensities_along_lines.ipynb)
 
 </td></tr>
 

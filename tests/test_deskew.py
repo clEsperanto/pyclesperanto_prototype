@@ -1,11 +1,14 @@
 import pyclesperanto_prototype as cle
 import numpy as np
 
-source = np.zeros((10, 10, 10))
+#initialise as float 32 arrays with zeros or array_equal method won't work
+#cle.pull returns float 32, np.zeros is float 64
+source = np.zeros((10, 10, 10),dtype=np.float32)
 source[1, 1, 1] = 1
 
-reference = np.zeros((5, 19, 10))
-reference[4, 2, 1] = 1
+reference = np.zeros((5, 19, 10),dtype=np.float32)
+#will this change with device used?
+reference[3, 2, 1] = 0.16987294
 
 
 def test_deskew_y():

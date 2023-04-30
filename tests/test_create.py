@@ -178,4 +178,13 @@ def test_create_int64():
 
     assert np.allclose(target, reference)
 
+def test_create_like_numpy():
+    import pyclesperanto_prototype as cle
+    import numpy
 
+    image = numpy.random.random((10,20))
+
+    cle_image = cle.create_like(image)
+    cle.copy(image, cle_image)
+
+    assert cle.array_equal(image, cle_image)
