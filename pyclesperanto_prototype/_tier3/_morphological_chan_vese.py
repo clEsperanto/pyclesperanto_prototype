@@ -1,16 +1,5 @@
 import numpy as np
-from .._tier0 import Image
-from .._tier0 import plugin_function
-from .._tier0 import create_like
-from .._tier1 import absolute
-from .._tier1 import binary_or
-from .._tier1 import binary_not
-from .._tier1 import gradient_x
-from .._tier1 import gradient_y
-from .._tier1 import gradient_z, copy, power
-from .._tier1 import greater_constant, smaller_constant
-from .._tier1 import mask, add_image_and_scalar, add_images_weighted
-from .._tier2 import opening_sphere, closing_sphere
+from .._tier0 import Image, plugin_function
 
 @plugin_function
 def morphological_chan_vese(input_image: Image,
@@ -72,7 +61,13 @@ def morphological_chan_vese(input_image: Image,
            2014, :DOI:`10.1109/TPAMI.2013.106`
     .. [2] https://github.com/scikit-image/scikit-image/blob/5e74a4a3a5149a8a14566b81a32bb15499aa3857/skimage/segmentation/morphsnakes.py#L212-L312
     """
+    from .._tier0 import create_like
     from .._tier1 import superior_inferior, inferior_superior, set
+
+    from .._tier1 import absolute, binary_or, binary_not, gradient_x, gradient_y
+    from .._tier1 import gradient_z, copy, power
+    from .._tier1 import greater_constant, smaller_constant
+    from .._tier1 import mask, add_image_and_scalar, add_images_weighted
 
     if contour_image.size == 0:
         contour_image = checkerboard_level_set(input_image.shape)
@@ -85,12 +80,8 @@ def morphological_chan_vese(input_image: Image,
     temp_4 = create_like(output_image)
     temp_5 = create_like(output_image)
 
-
     for _ in range(num_iter):
         set(temp_3, 0)
-
-        # c0 = (image * (1 - u)).sum() / float((1 - u).sum() + 1e-8)
-        # c1 = (image * u).sum() / float(u.sum() + 1e-8)
 
         # define invert image
         binary_not(output_image, destination=temp_1)
@@ -104,10 +95,6 @@ def morphological_chan_vese(input_image: Image,
         sum_image_value = mask(input_image, mask=output_image).sum()
         sum_contour_value = output_image.sum() + 1e-8
         c1 = - (sum_image_value / sum_contour_value)
-
-
-        # du = np.gradient(u)
-        # abs_du = np.abs(du).sum(0)
 
         # Image attachment
         # compute gradient on contour in all direction
@@ -126,10 +113,6 @@ def morphological_chan_vese(input_image: Image,
                 temp_3 += temp_2
 
         # compute contour evolution according to gradient and score on contour
-
-        # aux = abs_du * (lambda1 * (image - c1)**2 - lambda2 * (image - c0)**2)
-
-
         add_image_and_scalar(input_image, destination=temp_1, scalar=c1)
         add_image_and_scalar(input_image, destination=temp_2, scalar=c0)
         power(temp_1, destination=temp_4, exponent=2)
@@ -137,16 +120,6 @@ def morphological_chan_vese(input_image: Image,
         temp_2 = temp_3 * (lambda1 * temp_4 - lambda2 * temp_5)
 
         # apply contour update on contour image
-
-        # u[aux < 0] = 1
-        # u[aux > 0] = 0
-
-        # # Smoothing
-        # for _ in range(smoothing):
-        #     u = _curvop(u)
-
-
-
         greater_constant(temp_2, destination=temp_1, constant=0)
         smaller_constant(temp_2, destination=temp_3, constant=0)
 
@@ -158,16 +131,11 @@ def morphological_chan_vese(input_image: Image,
         # smooth contour
         for s in range(smoothing):
             if s % 2 == 0:
-                # sup_inf(inf_sup(u))
                 inferior_superior(temp_1, temp_2)
                 superior_inferior(temp_2, temp_1)
             else:
-                # inf_sup(sup_inf(u))
                 superior_inferior(temp_1, temp_2)
                 inferior_superior(temp_2, temp_1)
-
-            #opening_sphere(temp_1, destination=temp_2, radius_x=1, radius_y=1, radius_z=1)
-            #closing_sphere(temp_2, destination=temp_1, radius_x=1, radius_y=1, radius_z=1)
         
         copy(temp_1, destination=output_image)
 
