@@ -36,7 +36,11 @@ def morphological_snakes(input_image: Image,
     -------
     Final segmentation
 
+    See Also
+    --------
+    https://github.com/scikit-image/scikit-image/blob/5e74a4a3a5149a8a14566b81a32bb15499aa3857/skimage/segmentation/morphsnakes.py#L212-L312
     """
+    from .._tier1 import superior_inferior, inferior_superior
 
     if contour_image.size == 0:
         contour_image = checkerboard_level_set(input_image.shape)
@@ -118,8 +122,16 @@ def morphological_snakes(input_image: Image,
         
         # smooth contour
         for _ in range(smoothing):
-            opening_sphere(temp_1, destination=temp_2, radius_x=1, radius_y=1, radius_z=1)
-            closing_sphere(temp_2, destination=temp_1, radius_x=1, radius_y=1, radius_z=1)
+            # sup_inf(inf_sup(u))
+            inferior_superior(temp_1, temp_2)
+            superior_inferior(temp_2, temp_1)
+
+            # inf_sup(sup_inf(u))
+            superior_inferior(temp_1, temp_2)
+            inferior_superior(temp_2, temp_1)
+
+            #opening_sphere(temp_1, destination=temp_2, radius_x=1, radius_y=1, radius_z=1)
+            #closing_sphere(temp_2, destination=temp_1, radius_x=1, radius_y=1, radius_z=1)
         
         copy(temp_1, destination=output_image)
 
