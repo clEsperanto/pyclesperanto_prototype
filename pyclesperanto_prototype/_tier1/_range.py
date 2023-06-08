@@ -35,27 +35,10 @@ def range(source : Image,
     -------
     destination
     """
-
-    if start_x is None:
-        start_x = 0
-    if stop_x is None:
-        stop_x = source.shape[-1]
-    if step_x is None:
-        step_x = 1
-    if start_y is None:
-        start_y = 0
-    if stop_y is None:
-        stop_y = source.shape[-2]
-    if step_y is None:
-        step_y = 1
-
+    start_x, stop_x, step_x = correct_range(start_x, stop_x, step_x, source.shape[-1])
+    start_y, stop_y, step_y = correct_range(start_y, stop_y, step_y, source.shape[-2])
     if len(source.shape) > 2:
-        if start_z is None:
-            start_z = 0
-        if stop_z is None:
-            stop_z = source.shape[0]
-        if step_z is None:
-            step_z = 1
+        start_z, stop_z, step_z = correct_range(start_z, stop_z, step_z, source.shape[-3])
     else:
         start_z = 0
         stop_z = 1
@@ -63,9 +46,9 @@ def range(source : Image,
 
     if destination is None:
         if len(source.shape) > 2:
-            destination = create((stop_z - start_z, stop_y - start_y, stop_x - start_x), source.dtype)
+            destination = create((abs(stop_z - start_z), abs(stop_y - start_y), abs(stop_x - start_x)), source.dtype)
         else:
-            destination = create((stop_y - start_y, stop_x - start_x), source.dtype)
+            destination = create((abs(stop_y - start_y), abs(stop_x - start_x)), source.dtype)
 
     parameters = {
         "dst":destination,
@@ -79,4 +62,45 @@ def range(source : Image,
     }
 
     execute(__file__, 'range_x.cl', 'range', destination.shape, parameters)
+
     return destination
+
+
+def correct_range(start, stop, step, size):
+    # set in case not set (passed None)
+    if step is None:
+        step = 1
+    if start is None:
+        if step >= 0:
+            start = 0
+        else:
+            start = size - 1
+
+    if stop is None:
+        if step >= 0:
+            stop = size
+        else:
+            stop = -1
+
+    # Check if ranges make sense
+    if start >= size:
+        if step >= 0:
+            start = size
+        else:
+            start = size - 1
+    if start < -size + 1:
+        start = -size + 1
+    if stop > size:
+        stop = size
+    if stop < -size:
+        if start > 0:
+            stop = 0 - 1
+        else:
+            stop = -size
+
+    if start < 0:
+        start = size - start
+    if (start > stop and step > 0) or (start < stop and step < 0):
+        stop = start
+
+    return start, stop, step

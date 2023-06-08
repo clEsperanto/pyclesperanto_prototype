@@ -249,6 +249,8 @@ class ArrayOperators():
 
     def __getitem__(self, index):
         result = None
+        if isinstance(index, slice):
+            index = (index,)
         if isinstance(index, list):
             index = tuple(index)
         if isinstance(index, (tuple, np.ndarray)) and index[0] is not None and isinstance(index[0], (tuple, list, np.ndarray)):
@@ -377,13 +379,13 @@ class ArrayOperators():
                     self._iter_index = 0
 
                 if self._iter_index < self.image.shape[0]:
-                    if len(self.image.shape) == 2:
+                    if len(self.image.shape) < 3:
                         result = np.asarray(self.image)[self._iter_index]
                     elif len(self.image.shape) == 3:
                         output = create(self.image.shape[1:])
                         result = copy_slice(self.image, output, self._iter_index)
                     else:
-                        raise ValueError("Only 2D or 3D array are supported.")
+                        raise ValueError("Only 1D, 2D or 3D array are supported.")
 
                     self._iter_index = self._iter_index + 1
                     return result

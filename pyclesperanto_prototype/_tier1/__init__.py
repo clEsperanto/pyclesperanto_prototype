@@ -99,6 +99,8 @@ from ._minimum_images import minimum_images as minimum
 from ._minimum_x_projection import minimum_x_projection
 from ._minimum_y_projection import minimum_y_projection
 from ._minimum_z_projection import minimum_z_projection
+from ._mode_box import mode_box
+from ._mode_sphere import mode_sphere
 from ._modulo_images import modulo_images
 from ._modulo_images import modulo_images as mod
 from ._modulo_images import modulo_images as remainder
@@ -143,6 +145,7 @@ from ._set_row import set_row
 from ._set_non_zero_pixels_to_pixel_index import set_non_zero_pixels_to_pixel_index
 from ._set_non_zero_pixels_to_pixel_index import set_non_zero_pixels_to_pixel_index as set_nonzero_pixels_to_pixelindex
 from ._set_where_x_equals_y import set_where_x_equals_y
+from ._set_where_x_equals_y import set_where_x_equals_y as fill_diagonal
 from ._set_where_x_greater_than_y import set_where_x_greater_than_y
 from ._set_where_x_smaller_than_y import set_where_x_smaller_than_y
 from ._sign import sign

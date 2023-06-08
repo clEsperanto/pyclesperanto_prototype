@@ -474,6 +474,16 @@ imsave("result.tif", labeled)
 [Using the cupy backend](http://github.com/clEsperanto/pyclesperanto_prototype/tree/master/demo/basics/select_backend.ipynb)
 
 </td></tr>
+<tr><td>
+
+<img src="./docs/images/dask.jpg" width="300"/>
+
+</td><td>
+
+[Big data handling with Dask GPU clusters](./demo/interoperability/dask.ipynb)
+
+
+</td></tr>
 </table>
 
 ## Related projects
