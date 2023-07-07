@@ -53,50 +53,69 @@ __kernel void affine_transform_2d(
   uint i = get_global_id(0);
   uint j = get_global_id(1);
 
-  uint Nx = GET_IMAGE_WIDTH(input);
-  uint Ny = GET_IMAGE_HEIGHT(input);
+  uint Nx = GET_IMAGE_WIDTH(input)-1;
+  uint Ny = GET_IMAGE_HEIGHT(input)-1;
 
-  float x = i+0.5f;
-  float y = j+0.5f;
+  float x = i;
+  float y = j;
 
-  float y2 = (mat[3]*y+mat[4]*x+mat[5]);
-  float x2 = (mat[0]*y+mat[1]*x+mat[2]);
+  float y2 = (mat[3]*x+mat[4]*y+mat[5]);
+  float x2 = (mat[0]*x+mat[1]*y+mat[2]);
 
   int2 coord_norm = (int2)(x2,y2);
+  float2 frac_coord = (float2)(x2-coord_norm.x,y2-coord_norm.y);
 
-  float2 frac_coord = (float2)(x2-floor(x2),y2-floor(y2));
-  // float2 frac_coord = (float2)(x2/Nx,y2/Ny);
-
-  float pix = 0.0;
-
+  float pix = 0;
   if (x2 >= 0 && y2 >= 0 &&
-  x2 < GET_IMAGE_WIDTH(input) && y2 < GET_IMAGE_HEIGHT(input)) {
-    
-    // Get the corrdinates and color of the four surrounding pixels
+        x2 < GET_IMAGE_WIDTH(input) && y2 < GET_IMAGE_HEIGHT(input)
+    ) {
+
+    // float2 top_left_coord = (float2)(coord_norm.x,coord_norm.y);
+    // float2 top_right_coord = (float2)((coord_norm.x+1),(coord_norm.y));
+    // float2 bottom_left_coord = (float2)((coord_norm.x),(coord_norm.y+1));
+    // float2 bottom_right_coord = (float2)((coord_norm.x+1),(coord_norm.y+1));
+
     float2 top_left_coord = (float2)(coord_norm.x,coord_norm.y);
-    float2 top_right_coord = (float2)((coord_norm.x+1),(coord_norm.y));
-    float2 bottom_left_coord = (float2)((coord_norm.x),(coord_norm.y+1));
-    float2 bottom_right_coord = (float2)((coord_norm.x+1),(coord_norm.y+1));
-    
-    // Compute the four input pixel weights for bilinear interpolation
-    // float2 w00 = (float2)(top_right_coord.x - x2, bottom_left_coord.y - y2);
-    // float2 w10 = (float2)(x2 - top_left_coord.x, bottom_right_coord.y - y2);
-    // float2 w01 = (float2)(top_right_coord.x - x2, y2 - top_left_coord.y);
-    // float2 w11 = (float2)(x2 - top_left_coord.x, y2 - top_left_coord.y);
+    float2 top_right_coord =
+      (float2)((coord_norm.x+1) > Nx?(coord_norm.x-1):(coord_norm.x+1),(coord_norm.y));
+    float2 bottom_left_coord =
+      (float2)((coord_norm.x),(coord_norm.y+1)>Ny?(coord_norm.y-1):(coord_norm.y+1));
+    float2 bottom_right_coord =
+      (float2)((coord_norm.x+1)>Nx?(coord_norm.x-1):(coord_norm.x+1),(coord_norm.y+1)>Ny?(coord_norm.y-1):(coord_norm.y+1));
 
     float top_left_color = (float) (READ_input_IMAGE(input, sampler, POS_input_INSTANCE(top_left_coord.x, top_left_coord.y, 0, 0)).x);
     float top_right_color = (float) (READ_input_IMAGE(input, sampler, POS_input_INSTANCE(top_right_coord.x, top_right_coord.y, 0, 0)).x);
     float bottom_left_color = (float) (READ_input_IMAGE(input, sampler, POS_input_INSTANCE(bottom_left_coord.x, bottom_left_coord.y, 0, 0)).x);
     float bottom_right_color = (float) (READ_input_IMAGE(input, sampler, POS_input_INSTANCE(bottom_right_coord.x, bottom_right_coord.y, 0, 0)).x);
 
+    printf("coordinates: (%f,%f),%f  (%f,%f),%f (%f,%f),%f (%f,%f),%f",
+      top_left_coord.x, top_left_coord.y, top_left_color,
+      top_right_coord.x, top_right_coord.y, top_right_color,
+      bottom_left_coord.x, bottom_left_coord.y,bottom_left_color,
+      bottom_right_coord.x, bottom_right_coord.y, bottom_right_color);
+
+    // if(top_left_color == top_right_color){
+    //   top_right_coord = (float2)((coord_norm.x-1),(coord_norm.y));
+    //   top_right_color = (float) (READ_input_IMAGE(input, sampler, POS_input_INSTANCE(top_right_coord.x, top_right_coord.y, 0, 0)).x);
+    // }
+    // if(top_left_color == bottom_left_color){
+    //   bottom_left_coord = (float2)((coord_norm.x),(coord_norm.y-1));
+    //   bottom_left_color = (float) (READ_input_IMAGE(input, sampler, POS_input_INSTANCE(bottom_left_coord.x, bottom_left_coord.y, 0, 0)).x);
+    // }
+    // if(top_left_color == bottom_right_color){
+    //   bottom_right_coord = (float2)((coord_norm.x-1),(coord_norm.y-1));
+    //   bottom_right_color = (float) (READ_input_IMAGE(input, sampler, POS_input_INSTANCE(bottom_right_coord.x, bottom_right_coord.y, 0, 0)).x);
+    // }
+   
     pix = (float) mix(mix(top_left_color, top_right_color, frac_coord.x), mix(bottom_left_color, bottom_right_color, frac_coord.x), frac_coord.y);
-    // pix = (float) w00.x*w00.y*top_left_color + w10.x*w10.y*top_right_color + w01.x*w01.y*bottom_left_color + w11.x*w11.y*bottom_right_color;
-    // pix = frac_coord.x * frac_coord.y * top_right_color +
-    //       (1-frac_coord.x) * frac_coord.y * top_left_color +
+    
+    // pix = frac_coord.x * frac_coord.y * top_left_color +
+    //       (1-frac_coord.x) * frac_coord.y * top_right_color +
     //       frac_coord.x * (1-frac_coord.y) * bottom_right_color +
     //       (1-frac_coord.x) * (1-frac_coord.y) * bottom_left_color;
-    // pix = (float)(READ_input_IMAGE(input, sampler, POS_input_INSTANCE(x2, y2, 0, 0)).x);
   }
+
+  int2 pos = (int2){i, j};
 
   WRITE_output_IMAGE(output, POS_output_INSTANCE(i, j, 0, 0), CONVERT_output_PIXEL_TYPE(pix));
   
