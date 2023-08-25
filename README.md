@@ -53,7 +53,7 @@ pip install pyclesperanto-prototype
 
 ## Troubleshooting: Graphics cards drivers
 
-In case error messages contains "ImportError: DLL load failed while importing cl: The specified procedure could not be found" [see also](https://github.com/clEsperanto/pyclesperanto_prototype/issues/55) or "clGetPlatformIDs failed: PLATFORM_NOT_FOUND_KHR", please install recent drivers for your graphics card and/or OpenCL device. Select the right driver source depending on your hardware from this list:
+In case error messages contain "ImportError: DLL load failed while importing cl: The specified procedure could not be found" [see also](https://github.com/clEsperanto/pyclesperanto_prototype/issues/55) or "clGetPlatformIDs failed: PLATFORM_NOT_FOUND_KHR", please install recent drivers for your graphics card and/or OpenCL device. Select the right driver source depending on your hardware from this list:
 
 * [AMD drivers](https://www.amd.com/en/support)
 * [NVidia drivers](https://www.nvidia.com/download/index.aspx)
@@ -67,6 +67,8 @@ Sometimes, mac-users need to install this:
 Sometimes, linux users need to install this:
 
     mamba install -c conda-forge ocl-icd-system
+
+Linux user may have to install packages such as `intel-opencl-icd` or `rocm-opencl-runtime` depending on their GPU.
 
 ## Computing on Central Processing units (CPUs)
 
@@ -86,7 +88,6 @@ mamba install  pocl -c conda-forge
 
 Owners of compatible Intel Xeon CPUs can also install a driver to use them for computing:
 * [Intel CPU OpenCL drivers](https://www.intel.com/content/www/us/en/developer/articles/tool/opencl-drivers.html#latest_CPU_runtime)
-
 
 ## Example code
 A basic image processing workflow loads blobs.gif and counts the number of objects:
