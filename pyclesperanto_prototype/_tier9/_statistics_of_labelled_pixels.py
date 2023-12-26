@@ -4,7 +4,7 @@ from .._tier0 import Image
 from .._tier0 import create_none
 from .._tier0 import plugin_function
 
-@plugin_function(output_creator=create_none)
+@plugin_function(output_creator=create_none, categories=['bia-bob-suggestion'])
 def statistics_of_labelled_pixels(intensity_image : Image = None, label_image : Image = None):
     """Determines bounding box, area (in pixels/voxels), min, max, mean, standard deviation of the intensity and some
     shape descriptors of labelled objects in a label map and corresponding pixels in the original image.

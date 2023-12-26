@@ -5,7 +5,7 @@ from .._tier0 import plugin_function
 from .._tier0 import Image
 
 
-@plugin_function(categories=['label processing', 'in assistant'], output_creator=create_none)
+@plugin_function(categories=['label processing', 'in assistant', 'bia-bob-suggestion'], output_creator=create_none)
 def mode_sphere(source : Image, destination : Image = None, radius_x : int = 1, radius_y : int = 1, radius_z : int = 1) -> Image:
     """Computes the local mode of a pixels sphere shaped neighborhood.
     This can be used to post-process and locally correct semantic segmentation results.

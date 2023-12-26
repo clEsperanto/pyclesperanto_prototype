@@ -3,7 +3,7 @@ from .._tier0 import create_2d_yx
 from .._tier0 import plugin_function
 from .._tier0 import Image
 
-@plugin_function(output_creator=create_2d_yx, categories=['projection', 'in assistant'])
+@plugin_function(output_creator=create_2d_yx, categories=['projection', 'in assistant', 'bia-bob-suggestion'])
 def maximum_z_projection(source :Image, destination_max :Image = None) -> Image:
     """Determines the maximum intensity projection of an image along Z. 
     

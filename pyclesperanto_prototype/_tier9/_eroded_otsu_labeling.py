@@ -1,6 +1,6 @@
 from .._tier0 import plugin_function, Image, create_labels_like
 
-@plugin_function(categories=['label', 'in assistant'], output_creator=create_labels_like)
+@plugin_function(categories=['label', 'in assistant', 'bia-bob-suggestion'], output_creator=create_labels_like)
 def eroded_otsu_labeling(image: Image, labels_destination: Image = None, number_of_erosions: int = 5, outline_sigma: float = 2) -> Image:
     """Segments and labels an image using blurring, Otsu-thresholding, binary erosion and
     masked Voronoi-labeling.

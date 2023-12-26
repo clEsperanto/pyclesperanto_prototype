@@ -4,7 +4,7 @@ from .._tier0 import execute
 from .._tier0 import plugin_function
 from .._tier0 import Image
 
-@plugin_function(output_creator=create_none)
+@plugin_function(output_creator=create_none, categories=['bia-bob-suggestion'])
 def centroids_of_labels(labels:Image, pointlist_destination :Image = None, include_background :bool = False) -> Image:
     """Determines the centroids of all labels in a label image or image stack. 
     

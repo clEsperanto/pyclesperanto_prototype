@@ -2,7 +2,7 @@ from .._tier0 import execute
 from .._tier0 import plugin_function
 from .._tier0 import Image
 
-@plugin_function(categories=['combine', 'in assistant'])
+@plugin_function(categories=['combine', 'in assistant', 'bia-bob-suggestion'])
 def maximum_images(source1 : Image, source2 : Image, destination : Image = None) -> Image:
     """Computes the maximum of a pair of pixel values x, y from two given 
     images X and Y. 

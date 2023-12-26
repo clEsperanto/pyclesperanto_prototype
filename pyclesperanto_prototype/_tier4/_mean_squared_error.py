@@ -4,7 +4,7 @@ from .._tier0 import Image
 from .._tier3 import squared_difference
 from .._tier3 import mean_of_all_pixels
 
-@plugin_function
+@plugin_function(categories=['in assistant', 'combine', 'bia-bob-suggestion'])
 def mean_squared_error(source1 : Image, source2 : Image) -> float:
     """Determines the mean squared error (MSE) between two images. 
     

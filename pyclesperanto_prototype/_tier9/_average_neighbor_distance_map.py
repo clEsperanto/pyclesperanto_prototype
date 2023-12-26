@@ -2,7 +2,7 @@ from .._tier0 import plugin_function
 from .._tier1 import replace_intensities
 from .._tier0 import Image
 
-@plugin_function(categories=['label measurement', 'in assistant'])
+@plugin_function(categories=['label measurement', 'in assistant', 'bia-bob-suggestion'])
 def average_neighbor_distance_map(labels : Image, distance_map : Image = None) -> Image:
     """Takes a label map, determines which labels touch and replaces every 
     label with the average distance to their neighboring labels.

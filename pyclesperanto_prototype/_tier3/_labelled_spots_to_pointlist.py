@@ -4,7 +4,7 @@ from .._tier0 import execute
 from .._tier0 import plugin_function
 from .._tier0 import Image
 
-@plugin_function(output_creator=create_pointlist_from_labelmap)
+@plugin_function(output_creator=create_pointlist_from_labelmap, categories=['bia-bob-suggestion'])
 def labelled_spots_to_pointlist(input_labelled_spots:Image, destination_pointlist :Image = None) -> Image:
     """Generates a coordinate list of points in a labelled spot image. 
     

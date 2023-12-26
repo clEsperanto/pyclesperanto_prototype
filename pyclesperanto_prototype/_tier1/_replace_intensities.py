@@ -2,7 +2,7 @@ from .._tier0 import execute
 from .._tier0 import plugin_function
 from .._tier0 import Image
 
-@plugin_function
+@plugin_function(categories=['bia-bob-suggestion'])
 def replace_intensities(source : Image, new_values_vector : Image, destination : Image = None) -> Image:
     """Replaces integer intensities specified in a vector image. 
     

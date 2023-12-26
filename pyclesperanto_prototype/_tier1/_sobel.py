@@ -2,7 +2,7 @@ from .._tier0 import execute
 from .._tier0 import plugin_function
 from .._tier0 import Image
 
-@plugin_function(categories=['filter', 'edge detection', 'in assistant'])
+@plugin_function(categories=['filter', 'edge detection', 'in assistant', 'bia-bob-suggestion'])
 def sobel(source : Image, destination : Image = None) -> Image:
     """Convolve the image with the Sobel kernel. 
     

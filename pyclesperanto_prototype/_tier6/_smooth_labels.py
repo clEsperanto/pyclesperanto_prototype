@@ -2,7 +2,7 @@ from .._tier0 import plugin_function, Image
 from .._tier0 import create_labels_like
 
 
-@plugin_function(categories=['label processing', 'in assistant'], output_creator=create_labels_like)
+@plugin_function(categories=['label processing', 'in assistant', 'bia-bob-suggestion'], output_creator=create_labels_like)
 def smooth_labels(labels_input: Image, labels_destination: Image = None, radius: int = 0) -> Image:
     """Apply a morphological opening operation to a label image and afterwards
     fills gaps between the labels using voronoi-labeling. Finally, the result

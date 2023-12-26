@@ -3,7 +3,7 @@ from .._tier0 import execute
 from .._tier0 import plugin_function
 from .._tier0 import Image
 
-@plugin_function(output_creator=create_square_matrix_from_labelmap)
+@plugin_function(output_creator=create_square_matrix_from_labelmap, categories=['bia-bob-suggestion'])
 def generate_touch_matrix(label_map :Image, touch_matrix_destination :Image = None) -> Image:
     """Takes a labelmap with n labels and generates a (n+1)*(n+1) matrix where 
     all pixels are set to 0 exept those where labels are touching. 
