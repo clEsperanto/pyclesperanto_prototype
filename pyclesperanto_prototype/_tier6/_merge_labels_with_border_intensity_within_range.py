@@ -2,7 +2,7 @@ from .._tier0 import plugin_function, Image, create_labels_like, create_none
 import numpy as np
 
 
-@plugin_function(categories=['label processing', 'in assistant'], output_creator=create_labels_like)
+@plugin_function(categories=['label processing', 'in assistant', 'bia-bob-suggestion'], output_creator=create_labels_like)
 def merge_labels_with_border_intensity_within_range(image: Image,
                                                     labels: Image,
                                                     labels_destination: Image = None,

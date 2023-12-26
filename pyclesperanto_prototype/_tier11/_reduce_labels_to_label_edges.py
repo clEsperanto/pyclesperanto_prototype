@@ -2,7 +2,7 @@ from .._tier0 import Image
 from .._tier0 import plugin_function
 from .._tier0 import create_labels_like
 
-@plugin_function(categories=['label processing', 'in assistant'], output_creator=create_labels_like)
+@plugin_function(categories=['label processing', 'in assistant', 'bia-bob-suggestion'], output_creator=create_labels_like)
 def reduce_labels_to_label_edges(source:Image, destination:Image=None) -> Image:
     """Takes a label map and reduces all labels to their edges. Label IDs stay and background will be zero.
 

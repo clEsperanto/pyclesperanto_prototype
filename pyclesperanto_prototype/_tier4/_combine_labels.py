@@ -2,7 +2,7 @@ from .._tier0 import Image
 from .._tier0 import plugin_function
 from .._tier0 import create_labels_like
 
-@plugin_function(categories=['label processing', 'combine labels', 'in assistant'], output_creator=create_labels_like)
+@plugin_function(categories=['label processing', 'combine labels', 'in assistant', 'bia-bob-suggestion'], output_creator=create_labels_like)
 def combine_labels(labels_input1 : Image, labels_input2 : Image, labels_destination : Image = None) -> Image:
     """Combines two label images by adding labels of a given label image to another. Labels in the second image
     overwrite labels in the first passed image. Afterwards, labels are relabeled sequentially.

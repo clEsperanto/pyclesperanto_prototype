@@ -3,7 +3,7 @@ from .._tier0 import plugin_function
 from .._tier0 import Image
 from .._tier0 import create_vector_from_square_matrix
 
-@plugin_function(output_creator=create_vector_from_square_matrix)
+@plugin_function(output_creator=create_vector_from_square_matrix, categories=['bia-bob-suggestion'])
 def count_touching_neighbors(touch_matrix: Image, touching_neighbors_count_destination: Image = None, ignore_background:bool = True) -> Image:
     """Takes a touch matrix as input and delivers a vector with number of 
     touching neighbors per label as a vector.

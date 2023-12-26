@@ -2,7 +2,7 @@ from .._tier0 import Image
 from .._tier0 import plugin_function
 from .._tier0 import create_labels_like
 
-@plugin_function(categories=['label processing', 'combine labels', 'in assistant'], output_creator=create_labels_like)
+@plugin_function(categories=['label processing', 'combine labels', 'in assistant', 'bia-bob-suggestion'], output_creator=create_labels_like)
 def subtract_labels(labels_input1 : Image, labels_input2 : Image, labels_destination : Image = None) -> Image:
     """Combines two label images by removing all labels of a given label image which also exist in another.
     Labels do not have to fit perfectly, if a single pixel overlaps, the label will be removed.

@@ -8,7 +8,7 @@ from .._tier0 import plugin_function
 from .._tier0 import Image
 from .._tier3 import histogram
 
-@plugin_function(categories=['binarize', 'in assistant'], priority=1, output_creator=create_binary_like)
+@plugin_function(categories=['binarize', 'in assistant', 'bia-bob-suggestion'], priority=1, output_creator=create_binary_like)
 def threshold_otsu(source : Image, destination : Image = None) -> Image:
     """Binarizes an image using Otsu's threshold method [3] implemented in scikit-image[2]
     using a histogram determined on the GPU to create binary images.

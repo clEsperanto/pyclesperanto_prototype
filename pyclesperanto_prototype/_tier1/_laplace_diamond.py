@@ -2,7 +2,7 @@ from .._tier0 import execute
 from .._tier0 import plugin_function
 from .._tier0 import Image
 
-@plugin_function(categories=['filter', 'edge detection'])
+@plugin_function(categories=['filter', 'edge detection', 'bia-bob-suggestion'])
 def laplace_diamond(source : Image, destination : Image = None) -> Image:
     """Applies the Laplace operator (Diamond neighborhood) to an image. 
     

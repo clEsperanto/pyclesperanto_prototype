@@ -9,7 +9,7 @@ from .._tier1 import onlyzero_overwrite_maximum_box
 from .._tier1 import onlyzero_overwrite_maximum_diamond
 import numpy as np
 
-@plugin_function(categories=['label processing', 'in assistant'], output_creator=create_labels_like)
+@plugin_function(categories=['label processing', 'in assistant', 'bia-bob-suggestion'], output_creator=create_labels_like)
 def dilate_labels(labeling_source : Image, labeling_destination : Image = None, radius: int = 2) -> Image:
     """Dilates labels to a larger size. No label overwrites another label.
     Similar to the implementation in scikit-image [2] and MorpholibJ[3]

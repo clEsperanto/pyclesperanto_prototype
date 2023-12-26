@@ -4,7 +4,7 @@ from pyclesperanto_prototype._tier0 import create_like
 from pyclesperanto_prototype._tier0 import plugin_function
 from pyclesperanto_prototype._tier2 import subtract_images
 
-@plugin_function(categories=['filter', 'background removal', 'in assistant'])
+@plugin_function(categories=['filter', 'background removal', 'in assistant', 'bia-bob-suggestion'])
 def subtract_gaussian_background(source : Image, destination : Image = None, sigma_x : float = 2, sigma_y : float = 2, sigma_z : float = 2) -> Image:
     """Applies Gaussian blur to the input image and subtracts the result from the original.
     

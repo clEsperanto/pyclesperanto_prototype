@@ -10,7 +10,7 @@ from .._tier1 import replace_intensities
 from .._tier0 import create_like, create_labels_like
 import numpy as np
 
-@plugin_function(categories=['label processing', 'in assistant'], priority=1, output_creator=create_labels_like)
+@plugin_function(categories=['label processing', 'in assistant', 'bia-bob-suggestion'], priority=1, output_creator=create_labels_like)
 def exclude_labels_on_edges(label_map_input : Image, label_map_destination : Image = None, exclude_in_x:bool = True, exclude_in_y:bool = True, exclude_in_z:bool = True, exlude_in_x:bool = None, exlude_in_y:bool = None, exlude_in_z:bool = None) -> Image:
     """Removes all labels from a label map which touch the edges of the image 
     (in X, Y and Z if the image is 3D). 
