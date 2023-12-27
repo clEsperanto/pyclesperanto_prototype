@@ -74,10 +74,10 @@ def affine_transform_deskew_3d(source: Image, destination: Image = None,
     # we invert the transform because we go from the target image to the source image to read pixels
     transform_matrix = np.asarray(transform.copy().inverse())
 
-    # precalculate these functions that are dependent on deskewing angle
-    tantheta = np.float32(np.tan(deskewing_angle_in_degrees * np.pi/180))
-    sintheta = np.float32(np.sin(deskewing_angle_in_degrees * np.pi/180))
-    costheta = np.float32(np.cos(deskewing_angle_in_degrees * np.pi/180))
+    # precalculate these functions that are dependent on deskewing angle and ensure they are positive
+    tantheta = np.float32(np.absolute(np.tan(deskewing_angle_in_degrees * np.pi/180)))
+    sintheta = np.float32(np.absolute(np.sin(deskewing_angle_in_degrees * np.pi/180)))
+    costheta = np.float32(np.absolute(np.cos(deskewing_angle_in_degrees * np.pi/180)))
 
     gpu_transform_matrix = push(transform_matrix)
 
