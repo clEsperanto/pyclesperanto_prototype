@@ -39,7 +39,6 @@ def bounding_box(source : Image):
     multiply_image_and_coordinate(source, temp, 0)
     max_x = maximum_of_all_pixels(temp)
     min_x = minimum_of_masked_pixels(temp, source)
-    print("min_x" + str(min_x))
 
     multiply_image_and_coordinate(source, temp, 1)
     max_y = maximum_of_all_pixels(temp)
