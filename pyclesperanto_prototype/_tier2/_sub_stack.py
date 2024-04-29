@@ -6,7 +6,7 @@ from .._tier0 import create_none
 from .._tier0 import create
 from .._tier1 import copy_slice
 
-@plugin_function(output_creator=create_none, categories=['transform', 'in assistant', 'bia-bob-suggestion'])
+@plugin_function(output_creator=create_none, categories=['transform', 'in assistant'])
 def sub_stack(source : Image, destination : Image = None, start_z : int = 0, end_z : int = 0) -> Image:
     """Crops multiple Z-slices of a 3D stack into a new 3D stack.
     

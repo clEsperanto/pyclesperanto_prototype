@@ -2,7 +2,7 @@ from .._tier0 import execute, create_binary_like
 from .._tier0 import plugin_function
 from .._tier0 import Image
 
-@plugin_function(categories=['filter', 'in assistant', 'bia-bob-suggestion'])
+@plugin_function(categories=['filter', 'in assistant'])
 def opening_sphere(input_image: Image, destination: Image = None, radius_x: int = 1, radius_y: int = 1, radius_z: int = 0) -> Image:
     """Opening operator, sphere-shaped
 

@@ -3,7 +3,7 @@ from .._tier0 import plugin_function
 from .._tier0 import Image
 
 
-@plugin_function(categories=['label', 'in assistant', 'bia-bob-suggestion'], output_creator=create_labels_like)
+@plugin_function(categories=['label', 'in assistant'], output_creator=create_labels_like)
 def gauss_otsu_labeling(source : Image, label_image_destination : Image = None, outline_sigma : float = 2) -> Image:
     """Labels objects directly from grey-value images.
 

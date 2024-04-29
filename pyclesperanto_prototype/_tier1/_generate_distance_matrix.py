@@ -3,7 +3,7 @@ from .._tier0 import execute
 from .._tier0 import plugin_function
 from .._tier0 import Image
 
-@plugin_function(output_creator=create_matrix_from_pointlists, categories=['bia-bob-suggestion'])
+@plugin_function(output_creator=create_matrix_from_pointlists, categories=[])
 def generate_distance_matrix(coordinate_list1 :Image, coordinate_list2 :Image, distance_matrix_destination :Image = None) -> Image:
     """Computes the distance between all point coordinates given in two point lists.
     

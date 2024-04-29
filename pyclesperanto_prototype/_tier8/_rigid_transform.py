@@ -1,7 +1,7 @@
 from .._tier0 import plugin_function
 from .._tier0 import Image, create_none, create_like
 
-@plugin_function(categories=['transform', 'in assistant', 'bia-bob-suggestion'], output_creator=create_none)
+@plugin_function(categories=['transform', 'in assistant'], output_creator=create_none)
 def rigid_transform(
         source: Image,
         destination: Image = None,

@@ -4,7 +4,7 @@ from .._tier0 import create_none
 from .._tier0 import Image
 from .._tier1 import paste
 
-@plugin_function(output_creator=create_none, categories=['combine', 'transform', 'in assistant', 'bia-bob-suggestion'])
+@plugin_function(output_creator=create_none, categories=['combine', 'transform', 'in assistant'])
 def concatenate_stacks(stack1 : Image, stack2 : Image, destination : Image = None) -> Image:
     """Concatenates two stacks in Z. 
     
