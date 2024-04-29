@@ -4,7 +4,7 @@ from .._tier1 import erode_sphere, erode_box, multiply_images, copy
 from .._tier4 import dilate_labels, erode_labels
 
 
-@plugin_function(categories=['label processing', 'in assistant', 'bia-bob-suggestion'], output_creator=create_labels_like)
+@plugin_function(categories=['label processing', 'in assistant'], output_creator=create_labels_like)
 def opening_labels(labels_input: Image, labels_destination: Image = None, radius: int = 0) -> Image:
     """Apply a morphological opening operation to a label image.
 

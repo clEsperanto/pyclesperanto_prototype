@@ -2,7 +2,7 @@ from .._tier0 import execute
 from .._tier0 import plugin_function
 from .._tier0 import Image
 
-@plugin_function(categories=['filter', 'in assistant', 'bia-bob-suggestion'])
+@plugin_function(categories=['filter', 'in assistant'])
 def absolute(source : Image, destination : Image = None) -> Image:
     """Computes the absolute value of every individual pixel x in a given image.
     

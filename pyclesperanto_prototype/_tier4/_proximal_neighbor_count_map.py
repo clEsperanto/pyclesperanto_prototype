@@ -2,7 +2,7 @@ from .._tier0 import plugin_function
 from .._tier0 import Image
 import numpy as np
 
-@plugin_function(categories=['label measurement', 'map', 'in assistant', 'bia-bob-suggestion'], priority=1)
+@plugin_function(categories=['label measurement', 'map', 'in assistant'], priority=1)
 def proximal_neighbor_count_map(source : Image, destination : Image = None, min_distance : float = 0, max_distance : float = np.finfo(np.float32).max) -> Image:
     """Takes a label map, determines which labels are within a give distance range
     and replaces every label with the number of neighboring labels.

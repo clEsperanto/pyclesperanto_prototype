@@ -2,7 +2,7 @@ from .._tier0 import execute
 from .._tier0 import Image
 from .._tier0 import plugin_function
 
-@plugin_function(categories=['bia-bob-suggestion'])
+@plugin_function(categories=[])
 def mask(source : Image, mask : Image, destination : Image = None) -> Image:
     """Computes a masked image by applying a binary mask to an image. 
     
