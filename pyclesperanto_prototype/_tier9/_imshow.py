@@ -1,7 +1,7 @@
 from .._tier0 import Image, plugin_function
 
 @plugin_function
-def imshow(image : Image, title : str = None, labels : bool = False, min_display_intensity : float = None, max_display_intensity : float = None, color_map = None, plot = None, colorbar:bool = False, colormap = None, alpha:float = None, continue_drawing:bool = False):
+def imshow(image : Image, title : str = None, labels : bool = False, min_display_intensity : float = None, max_display_intensity : float = None, color_map = None, plot = None, colorbar:bool = False, colormap = None, alpha:float = None, continue_drawing:bool = False, mute_warning:bool=False):
     """Visualize an image, e.g. in Jupyter notebooks.
 
     Parameters
@@ -30,8 +30,9 @@ def imshow(image : Image, title : str = None, labels : bool = False, min_display
     continue_drawing: float
         True: the next shown image can be visualized on top of the current one, e.g. with alpha = 0.5
     """
-    import warnings
-    warnings.warn("cle.imshow is deprecated, use stackview.imshow instead.")
+    if not mute_warning:
+        import warnings
+        warnings.warn("cle.imshow is deprecated, use stackview.imshow instead.")
     import numpy as np
     from .._tier0 import pull
     from .._tier1 import maximum_z_projection
