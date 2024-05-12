@@ -33,7 +33,7 @@ def stitch_horizontally_linear_blending(image1 : Image, image2 : Image, destinat
     image2_depth = 1 if len(image2.shape) == 2 else image2.shape[-3]
 
     # crop out left, right and the two overlapping parts
-    left_part = crop(image1, width=image1.shape[-1] - num_pixels_overlap, height=image1_height, depth=image1_depth)
+    left_part = crop(image1, width=image1_width - num_pixels_overlap, height=image1_height, depth=image1_depth)
     center_part1 = crop(image1, start_x=image1_width - num_pixels_overlap, width=num_pixels_overlap, height=image1_height, depth=image1_depth)
     center_part2 = crop(image2, width=num_pixels_overlap, height=image2_height, depth=image2_depth)
     right_part = crop(image2, start_x=num_pixels_overlap, width=image2_width - num_pixels_overlap, height=image2_height, depth=image2_depth)
