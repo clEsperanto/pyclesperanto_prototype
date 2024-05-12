@@ -441,7 +441,8 @@ class ArrayOperators():
             imshow(self,
                    labels=labels,
                    continue_drawing=True,
-                   colorbar=not labels)
+                   colorbar=not labels,
+                   mute_warning=True)
             image = self._png_to_html(self._plt_to_png())
         else:
             return "<pre>cle.array(" + str(np.asarray(self)) + ", dtype=" + str(self.dtype) + ")</pre>"
