@@ -24,10 +24,6 @@ def stitch_horizontally_linear_blending(image1 : Image, image2 : Image, destinat
     from .._tier1 import subtract_image_from_scalar
     from .._tier2 import combine_horizontally
 
-    print("npo", num_pixels_overlap)
-    print("i1s", image1.shape)
-    print("i2s", image2.shape)
-
     num_pixels_overlap = int(num_pixels_overlap)
     image1_width = image1.shape[-1]
     image2_width = image2.shape[-1]
@@ -38,26 +34,15 @@ def stitch_horizontally_linear_blending(image1 : Image, image2 : Image, destinat
 
     # crop out left, right and the two overlapping parts
     left_part = crop(image1, width=image1.shape[-1] - num_pixels_overlap, height=image1_height, depth=image1_depth)
-    #image1[:, :-num_pixels_overlap]
     center_part1 = crop(image1, start_x=image1_width - num_pixels_overlap, width=num_pixels_overlap, height=image1_height, depth=image1_depth)
-                       #image1)[:, -num_pixels_overlap:]
     center_part2 = crop(image2, width=num_pixels_overlap, height=image2_height, depth=image2_depth)
-    #image2)[:, :num_pixels_overlap]
     right_part = crop(image2, start_x=num_pixels_overlap, width=image2_width - num_pixels_overlap, height=image2_height, depth=image2_depth)
-                     #image2)[:, num_pixels_overlap:]
-
-    print("lp", left_part.shape)
-    print("cs1", center_part1.shape)
-    print("cs2", center_part2.shape)
-    print("rp", right_part.shape)
 
     # setup a gradient for the blending
     gradient = create(center_part1.shape)
     set_ramp_x(gradient)
     gradient_right_left = (gradient + 1) / (gradient.shape[-1]+1)
     gradient_left_right = subtract_image_from_scalar(gradient_right_left, scalar=1)
-
-    print("gr", gradient)
 
     # compute the overlapping image by multiplying both images with the gradient
     center_part = asarray(center_part1) * gradient_left_right + asarray(center_part2) * gradient_right_left
