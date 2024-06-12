@@ -90,8 +90,10 @@ def test_statistics_of_labelled_pixels():
         [0.65403885, 0.65403885, 0.6666667],
         #     MAX_DISTANCE_TO_CENTROID(34),
         [0.74535596, 0.745356, 1.],
-        #     MAX_MEAN_DISTANCE_TO_CENTROID_RATIO(35);
-        [1.1396203, 1.1396204, 1.5]
+        #     MAX_MEAN_DISTANCE_TO_CENTROID_RATIO(35),
+        [1.1396203, 1.1396204, 1.5],
+        #     STANDARD_ERROR_INTENSITY(36);
+        [0.27216553, 0.27216551, 0.4714043]
     ]
     ))
 
@@ -205,8 +207,10 @@ def test_statistics_of_labelled_pixels_3d():
         [0.65403885, 0.65403885, 0.6666667],
         #     MAX_DISTANCE_TO_CENTROID(34),
         [0.74535596, 0.745356, 1.],
-        #     MAX_MEAN_DISTANCE_TO_CENTROID_RATIO(35);
-        [1.1396203, 1.1396204, 1.5]
+        #     MAX_MEAN_DISTANCE_TO_CENTROID_RATIO(35),
+        [1.1396203, 1.1396204, 1.5],
+        #     STANDARD_ERROR_INTENSITY(36);
+        [0.27216553, 0.27216551, 0.4714043]
     ]
     ))
 
@@ -226,7 +230,7 @@ def test_statistics_of_labelled_pixels_3d():
     assert (np.allclose(a, b, 0.0001))
 
 
-def test_standard_deviation():
+def test_standard_deviation_and_standard_error():
     import numpy as np
 
     image = np.asarray([
@@ -243,11 +247,14 @@ def test_standard_deviation():
 
     print("numpy standard deviation", np.std(image))
     print("numpy variance", np.var(image))
+    print("numpy standard error", np.std(image) / np.sqrt(image.size))
 
     stats = cle.statistics_of_labelled_pixels(image, labels)
 
     print("std", stats['standard_deviation_intensity'][0])
+    print("sterr", stats['standard_error_intensity'][0])
 
     from numpy import testing
     testing.assert_almost_equal(stats['standard_deviation_intensity'][0], 2.58, decimal=1)
+    testing.assert_almost_equal(stats['standard_error_intensity'][0], 0.86, decimal=1)
 
