@@ -230,13 +230,18 @@ def statistics_of_labelled_pixels(intensity_image : Image = None, label_image : 
         region_props['sum_' + dim_names[dim]] = pull(sum_dim)[0]
         divide_images(sum_dim, result_vector, avg_dim)
         region_props['centroid_' + dim_names[dim]] = pull(avg_dim)[0]
-        paste(avg_dim, label_statistics_image, measurements_start_x, dim, 0)
+        paste(avg_dim, label_statistics_image, measurements_start_x, 3 + dim, 0)
 
     # ================================================================
     # second part: determine parmeters which depend on other parameters, such as standard_deviation
 
     label_statistics_stack = create([6, height, num_labels])
     set(label_statistics_stack, 0)
+
+    print("label_statistics_image")
+    for i, d in enumerate(label_statistics_image):
+        print("z", i)
+        print(d)
 
     # accumulate statistics slice-by-slice
     parameters = {
@@ -252,6 +257,11 @@ def statistics_of_labelled_pixels(intensity_image : Image = None, label_image : 
 
         from .._tier0 import execute
         execute(__file__, 'standard_deviation_per_label_x.cl', 'standard_deviation_per_label', dimensions, parameters)
+
+    print("label_statistics_stack")
+    for i, d in enumerate(label_statistics_stack):
+        print("z", i)
+        print(d)
 
     sum_statistics = sum_y_projection(label_statistics_stack)
     max_statistics = maximum_y_projection(label_statistics_stack)
