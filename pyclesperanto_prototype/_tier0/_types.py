@@ -3,7 +3,12 @@ from ._pycl import OCLArray, _OCLImage
 import pyopencl as cl
 from typing import Union
 
-Image = Union[np.ndarray, OCLArray, cl.Image, _OCLImage]
+try:
+    import pyclesperanto
+    Image = Union[np.ndarray, OCLArray, cl.Image, _OCLImage, pyclesperanto._pyclesperanto._Array]
+except ImportError:
+    Image = Union[np.ndarray, OCLArray, cl.Image, _OCLImage]
+
 
 def is_image(object):
     return isinstance(object, np.ndarray) or \
