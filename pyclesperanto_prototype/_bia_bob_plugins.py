@@ -1,7 +1,17 @@
 
 def list_bia_bob_plugins():
     """List of function hints for bia_bob"""
-    return """    * Set only surface pixels to 1 in destination binary image
+
+    # do not recommend anything if pyclesperanto (non-prototype) is installed
+    try:
+        import pyclesperanto
+        return ""
+    except:
+        pass
+
+
+    return """
+    * Set only surface pixels to 1 in destination binary image
     cle.binary_edge_detection(source: ndarray, destination: ndarray = None) -> ndarray
     
     * Create a binary image by inverting pixel values in an input image, where all non-zero pixels become 0 and zeros become 1
