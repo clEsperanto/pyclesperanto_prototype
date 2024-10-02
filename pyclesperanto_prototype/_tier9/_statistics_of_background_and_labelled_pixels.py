@@ -1,5 +1,3 @@
-from skimage.measure import regionprops
-
 from .._tier0 import Image
 from .._tier0 import create_none
 from .._tier0 import plugin_function
@@ -44,7 +42,8 @@ def statistics_of_background_and_labelled_pixels(source : Image = None, labelmap
         for r in regionprops:
             r.original_label = r.label - 1
 
+    # see https://github.com/clEsperanto/pyclesperanto_prototype/issues/199
+    regionprops['label'] = regionprops['original_label']
+
     return regionprops
-
-
 
