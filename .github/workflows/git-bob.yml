@@ -186,7 +186,13 @@ jobs:
           
           * Labels objects in grey-value images using Gaussian blurs, spot detection, Otsu-thresholding, and Voronoi-labeling from isotropic input images.
           cle.voronoi_otsu_labeling(source: ndarray, label_image_destination: ndarray = None, spot_sigma: float = 2, outline_sigma: float = 2) -> ndarray
-                
+
+          * For debugging specifications of available OpenCL-devices / GPUs, you can run this:
+          print(cle.cl_info())
+
+          * For printing out the name of the currently used OpenCL-device / GPU:
+          print(cle.get_device())
+          
           When asked to solve a specific problem, you keep your code changes minimal and only solve the problem at hand.
           You cannot retrieve information from other sources but from github.com.
           Do not claim anything that you don't know.
