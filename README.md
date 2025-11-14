@@ -15,7 +15,7 @@
 [![DOI](https://zenodo.org/badge/248206619.svg)](https://zenodo.org/badge/latestdoi/248206619)
 
 py-clesperanto is a prototype for [clesperanto](http://clesperanto.net) - a multi-platform multi-language framework for GPU-accelerated image processing. 
-We mostly use it in the life sciences for analysing 3- and 4-dimensional microsopy data, e.g. as we face it developmental biology when segmenting cells and studying
+We mostly use it in the life sciences for analysing 3- and 4-dimensional microscopy data, e.g. as we face it developmental biology when segmenting cells and studying
 their individual properties as well as properties of compounds of cells forming tissues.
 
 ![](https://github.com/clEsperanto/pyclesperanto_prototype/raw/master/docs/images/banner.png)
