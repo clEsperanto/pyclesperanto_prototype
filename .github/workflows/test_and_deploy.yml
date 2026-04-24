@@ -65,5 +65,5 @@ jobs:
   #         TWINE_PASSWORD: ${{ secrets.TWINE_API_KEY }}
   #       run: |
   #         git tag
-  #         python setup.py sdist bdist_wheel
+  #         python -m build
   #         twine upload dist/*
