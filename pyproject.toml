@@ -33,8 +33,7 @@ dependencies = [
     "pyopencl",
     "toolz",
     "scikit-image>0.20.0",
-    "matplotlib",
-    "transforms3d"
+    "matplotlib"
 ]
 
 [project.urls]

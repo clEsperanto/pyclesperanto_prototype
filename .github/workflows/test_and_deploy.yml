@@ -37,7 +37,7 @@ jobs:
           python --version
           conda install -y pyopencl
           python -m pip install --upgrade pip
-          pip install setuptools wheel pytest pytest-cov pytest-benchmark dask networkx igraph pandas scikit-image transforms3d
+          pip install setuptools wheel pytest pytest-cov pytest-benchmark dask networkx igraph pandas scikit-image
 
       - name: Test
         shell: bash -l {0}
