@@ -3,4 +3,4 @@ def test_skimage_imsave():
     image = cle.push([1, 2, 3])
 
     from skimage.io import imsave
-    imsave('test.tif', image)
+    imsave('test.tif', image, photometric='minisblack')
