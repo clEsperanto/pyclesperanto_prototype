@@ -37,8 +37,8 @@ jobs:
           python --version
           conda install -y pyopencl
           python -m pip install --upgrade pip
-          pip install setuptools wheel pytest pytest-cov pytest-benchmark dask networkx igraph pandas scikit-image==0.19.3
-          pip install -e .
+          pip install setuptools wheel pytest pytest-cov pytest-benchmark dask networkx igraph pandas scikit-image
+          
       - name: Test
         shell: bash -l {0}
         run: pytest -v --cov=./ --cov-report=xml
