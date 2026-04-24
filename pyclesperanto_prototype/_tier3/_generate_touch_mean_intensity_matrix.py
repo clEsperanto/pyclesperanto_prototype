@@ -26,7 +26,8 @@ def generate_touch_mean_intensity_matrix(intensity_image:Image, label_map:Image,
     -------
     touch_mean_intensity_matrix_destination
     """
-    if intensity_image.dtype not in [np.uint8, np.int8, np.uint16, np.int16, np.uint32, np.int32]:
+    if intensity_image.dtype not in [np.uint8, np.int8, np.uint16, np.int16, np.uint32, np.int32, 
+                                     "uint8", "int8", "uint16", "int16", "uint32", "int32"]:
         warnings.warn("generate_touch_mean_intensity_matrix is supposed to work with images of integer type only.\n" +
                       "Loss of information is possible when passing non-integer images.")
 
