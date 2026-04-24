@@ -1,0 +1,52 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pyclesperanto_prototype"
+version = "0.24.6"
+description = "GPU-accelerated image processing in python using OpenCL"
+readme = { file = "README.md", content-type = "text/markdown" }
+requires-python = ">=3.6"
+license = { text = "BSD-3-Clause" }
+authors = [
+    { name = "Robert Haase", email = "robert.haase@uni-leipzig.de" }
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Science/Research",
+    "Intended Audience :: Developers",
+    "Topic :: Scientific/Engineering :: Image Processing",
+    "Topic :: Scientific/Engineering :: Information Analysis",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Operating System :: OS Independent",
+    "License :: OSI Approved :: BSD License"
+]
+dependencies = [
+    "numpy!=1.19.4,<2.0.0",
+    "pyopencl",
+    "toolz",
+    "scikit-image>=0.18.0,!=0.20.0",
+    "matplotlib",
+    "transforms3d"
+]
+
+[project.urls]
+"Bug Tracker" = "https://github.com/clEsperanto/pyclesperanto_prototype/issues"
+Documentation = "https://github.com/clEsperanto/pyclesperanto_prototype#README.md"
+"Source Code" = "https://github.com/clEsperanto/pyclesperanto_prototype"
+"User Support" = "https://github.com/clEsperanto/pyclesperanto_prototype/issues"
+
+[project.entry-points."bia_bob_plugins"]
+plugin1 = "pyclesperanto_prototype._bia_bob_plugins:list_bia_bob_plugins"
+
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.packages.find]
+include = ["pyclesperanto_prototype*"]
