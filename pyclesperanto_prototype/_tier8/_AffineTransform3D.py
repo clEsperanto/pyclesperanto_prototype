@@ -1,7 +1,6 @@
 from warnings import warn
 
 import numpy as np
-import transforms3d
 import math
 from ._utilities import shear_angle_to_shear_factor
 
@@ -16,9 +15,55 @@ class AffineTransform3D:
 
     """
 
+    @staticmethod
+    def _identity_matrix():
+        return np.eye(4, dtype=float)
+
+    @staticmethod
+    def _scale_matrix(sx=1.0, sy=1.0, sz=1.0):
+        return np.asarray([
+            [sx, 0, 0, 0],
+            [0, sy, 0, 0],
+            [0, 0, sz, 0],
+            [0, 0, 0, 1],
+        ], dtype=float)
+
+    @staticmethod
+    def _rotation_matrix_x(angle_in_rad):
+        c = np.cos(angle_in_rad)
+        s = np.sin(angle_in_rad)
+        return np.asarray([
+            [1, 0, 0, 0],
+            [0, c, -s, 0],
+            [0, s, c, 0],
+            [0, 0, 0, 1],
+        ], dtype=float)
+
+    @staticmethod
+    def _rotation_matrix_y(angle_in_rad):
+        c = np.cos(angle_in_rad)
+        s = np.sin(angle_in_rad)
+        return np.asarray([
+            [c, 0, s, 0],
+            [0, 1, 0, 0],
+            [-s, 0, c, 0],
+            [0, 0, 0, 1],
+        ], dtype=float)
+
+    @staticmethod
+    def _rotation_matrix_z(angle_in_rad):
+        c = np.cos(angle_in_rad)
+        s = np.sin(angle_in_rad)
+        return np.asarray([
+            [c, -s, 0, 0],
+            [s, c, 0, 0],
+            [0, 0, 1, 0],
+            [0, 0, 0, 1],
+        ], dtype=float)
+
     def __init__(self, transform = None, image=None):
         if transform is None:
-            self._matrix = transforms3d.zooms.zfdir2aff(1)
+            self._matrix = self._identity_matrix()
         if isinstance(transform, AffineTransform3D):
             self._matrix = np.copy(transform._matrix)
         if isinstance(transform, str):
@@ -56,11 +101,11 @@ class AffineTransform3D:
             warn('scale_z must not be 0')
             scale_z = 1
         if scale_x is not None:
-            self._concatenate(transforms3d.zooms.zfdir2aff(scale_x, direction=(1, 0, 0), origin=(0, 0, 0)))
+            self._concatenate(self._scale_matrix(sx=scale_x))
         if scale_y is not None:
-            self._concatenate(transforms3d.zooms.zfdir2aff(scale_y, direction=(0, 1, 0), origin=(0, 0, 0)))
+            self._concatenate(self._scale_matrix(sy=scale_y))
         if scale_z is not None:
-            self._concatenate(transforms3d.zooms.zfdir2aff(scale_z, direction=(0, 0, 1), origin=(0, 0, 0)))
+            self._concatenate(self._scale_matrix(sz=scale_z))
 
         return self
 
@@ -83,11 +128,11 @@ class AffineTransform3D:
         angle_in_rad = angle_in_degrees * np.pi / 180.0
 
         if axis == 0:
-            self._concatenate(self._3x3_to_4x4(transforms3d.euler.euler2mat(angle_in_rad, 0, 0)))
+            self._concatenate(self._rotation_matrix_x(angle_in_rad))
         if axis == 1:
-            self._concatenate(self._3x3_to_4x4(transforms3d.euler.euler2mat(0, angle_in_rad, 0)))
+            self._concatenate(self._rotation_matrix_y(angle_in_rad))
         if axis == 2:
-            self._concatenate(self._3x3_to_4x4(transforms3d.euler.euler2mat(0, 0, angle_in_rad)))
+            self._concatenate(self._rotation_matrix_z(angle_in_rad))
 
         return self
 
