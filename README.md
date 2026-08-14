@@ -15,7 +15,7 @@
 [![DOI](https://zenodo.org/badge/248206619.svg)](https://zenodo.org/badge/latestdoi/248206619)
 
 > [!NOTE]
-> When starting a new project, consider using [pyclesperanto](https://github.com/clEsperanto/pyclesperanto) instead of `pyclesperanto_prototype`.
+> When starting a new project, consider using [pyclesperanto](https://github.com/clEsperanto/pyclesperanto) instead of `pyclesperanto_prototype`. Check out the [transition notes](https://github.com/clEsperanto/pyclesperanto-transition-notes/blob/main/transition_notes.md).
 
 py-clesperanto is a prototype for [clesperanto](http://clesperanto.net) - a multi-platform multi-language framework for GPU-accelerated image processing. 
 We mostly use it in the life sciences for analysing 3- and 4-dimensional microsopy data, e.g. as we face it developmental biology when segmenting cells and studying
