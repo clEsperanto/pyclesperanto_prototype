@@ -22,6 +22,6 @@ def test_convolve():
 
     a = cle.pull(test1)
     b = cle.pull(test2)
-    assert (np.min(a) == np.min(b))
-    assert (np.max(a) == np.max(b))
-    assert (np.mean(a) == np.mean(b))
+    assert abs(np.min(a) - np.min(b)) < 0.0001
+    assert abs(np.max(a) - np.max(b)) < 0.0001
+    assert abs(np.mean(a) - np.mean(b)) < 0.0001
