@@ -48,9 +48,14 @@ def deskew_y(input_image: Image,
     from ._AffineTransform3D import AffineTransform3D
     from ._affine_transform import affine_transform
     from ._affine_transform_deskew_3d import affine_transform_deskew_3d, DeskewDirection
+    from ._rotate import rotate
+    
+    if angle_in_degrees<0:
+        input_image = rotate(input_image,angle_around_y_in_degrees=180,auto_size=True)
+        
+    transform = AffineTransform3D()
 
     # define affine transformation matrix
-    transform = AffineTransform3D()
     transform._deskew_y(angle_in_degrees=angle_in_degrees, voxel_size_x=voxel_size_x, voxel_size_y=voxel_size_y,
                         voxel_size_z=voxel_size_z, scale_factor=scale_factor)
 
